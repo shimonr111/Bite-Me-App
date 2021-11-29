@@ -14,60 +14,61 @@ public class User {
 	 * Class members description:
 	 */
 	
+
 	/**
 	 * Each user has its own Id, which means that it's the PK of the entity.
 	 */
-	private String userId;
+	protected String userId;
 	
 	/**
 	 * Each user has password.
 	 */
-	private String password;
+	protected String password;
 	
 	/**
 	 * When user is confirmed he can access the system,
 	 * else, he is still pending for confirmation. 
 	 */
-	private boolean isConfirmedInSystem;
+	protected boolean isConfirmedInSystem;
 	
 	/**
 	 * Each user has a first name.
 	 */
-	private String userFirstName;
+	protected String userFirstName;
 	
 	/**
 	 * Each user has last name
 	 */
-	private String userLastName;
+	protected String userLastName;
 	
 	/**
 	 * Each user has his own default home branch, which 
 	 * can be changed via the Gui.
 	 */
-	private Branch homeBranch;
+	protected Branch homeBranch;
 	
 	/**
 	 * Each user has log in state which says 
 	 * if he can be logged in multiple times.
 	 */
-	private boolean isLoggedIn;
+	protected boolean isLoggedIn;
 	
 	/**
 	 * This injective number defines  
 	 * the user W4C replacement code.
 	 */
-	private int idNumber; 
+	protected int idNumber; 
 	
 	/**
 	 * This is the user registered email
 	 */
-	private String userEmail;
+	protected String userEmail;
 	
 	/**
 	 * This is the user's phone number
 	 * registered in the Bite Me system.
 	 */
-	private String phoneNumber;
+	protected String phoneNumber;
 
 	@Override
 	public int hashCode() {
@@ -94,6 +95,34 @@ public class User {
 		return true;
 	}
 
+	/**
+	 * This is the constructor of the class User
+	 * 
+	 * @param userId
+	 * @param password
+	 * @param isConfirmedInSystem
+	 * @param userFirstName
+	 * @param userLastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param idNumber
+	 * @param userEmail
+	 * @param phoneNumber
+	 */
+	public User(String userId, String password, boolean isConfirmedInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, int idNumber, String userEmail, String phoneNumber) {
+		super();
+		this.userId = userId;
+		this.password = password;
+		this.isConfirmedInSystem = isConfirmedInSystem;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.homeBranch = homeBranch;
+		this.isLoggedIn = isLoggedIn;
+		this.idNumber = idNumber;
+		this.userEmail = userEmail;
+		this.phoneNumber = phoneNumber;
+	}
 	
 	/**
 	 * This section is for the 
