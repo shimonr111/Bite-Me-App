@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="orders/ordergui/" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -11,5 +11,7 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/G3Client"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/G3Server"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
