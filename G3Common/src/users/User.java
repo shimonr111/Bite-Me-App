@@ -21,11 +21,6 @@ public class User {
 	protected String userId;
 	
 	/**
-	 * Each user has password.
-	 */
-	protected String password;
-	
-	/**
 	 * When user is confirmed he can access the system,
 	 * else, he is still pending for confirmation. 
 	 */
@@ -48,7 +43,7 @@ public class User {
 	protected Branch homeBranch;
 	
 	/**
-	 * Each user has log in state which says 
+	 * Each user has login state which says 
 	 * if he can be logged in multiple times.
 	 */
 	protected boolean isLoggedIn;
@@ -57,7 +52,7 @@ public class User {
 	 * This injective number defines  
 	 * the user W4C replacement code.
 	 */
-	protected int idNumber; 
+	protected int privateW4cCodeNumber; 
 	
 	/**
 	 * This is the user registered email
@@ -99,27 +94,25 @@ public class User {
 	 * This is the constructor of the class User
 	 * 
 	 * @param userId
-	 * @param password
 	 * @param isConfirmedInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param idNumber
+	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 */
-	public User(String userId, String password, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int idNumber, String userEmail, String phoneNumber) {
+	public User(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber) {
 		super();
 		this.userId = userId;
-		this.password = password;
 		this.isConfirmedInSystem = isConfirmedInSystem;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.homeBranch = homeBranch;
 		this.isLoggedIn = isLoggedIn;
-		this.idNumber = idNumber;
+		this.privateW4cCodeNumber = privateW4cCodeNumber;
 		this.userEmail = userEmail;
 		this.phoneNumber = phoneNumber;
 	}
@@ -135,14 +128,6 @@ public class User {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public boolean isConfirmedInSystem() {
@@ -186,11 +171,11 @@ public class User {
 	}
 
 	public int getIdNumber() {
-		return idNumber;
+		return privateW4cCodeNumber;
 	}
 
-	public void setIdNumber(int idNumber) {
-		this.idNumber = idNumber;
+	public void setIdNumber(int privateW4cCodeNumber) {
+		this.privateW4cCodeNumber = privateW4cCodeNumber;
 	}
 
 	public String getUserEmail() {
