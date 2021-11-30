@@ -33,7 +33,6 @@ public class BusinessCustomer extends Customer {
 	/**
 	 * Each business customer has a budget that he cannot exceed.
 	 */
-
 	protected int budgetMaxAmount;
 
 	/**
@@ -115,6 +114,6 @@ public class BusinessCustomer extends Customer {
 	 */
 	@Override
 	public String toString() {
-		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name = " + employerName;
+		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name: " + employerName;
 	}	
 }

@@ -49,7 +49,6 @@ public class Customer extends User{
 	 * Setters and Getters of the 
 	 * Class Customer
 	 */
-
 	public CreditCard getPrivateCreditCard() {
 		return privateCreditCard;
 	}

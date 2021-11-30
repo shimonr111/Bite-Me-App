@@ -44,7 +44,7 @@ public class HrManager extends BusinessCustomer {
 	 */
 	@Override
 	public String toString() {
-		return "HrManager: " + userFirstName + ", userLastName= " + userLastName + ", Company name = " + employerName;
+		return "HR Manager: " + userFirstName  + userLastName + ", Company name: " + employerName;
 	}
 
 }
