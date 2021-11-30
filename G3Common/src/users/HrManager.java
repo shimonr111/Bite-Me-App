@@ -11,7 +11,11 @@ package users;
 public class HrManager extends BusinessCustomer {
 
 	/**
-	 * This is the constructor for the class HrManager
+	 * Class members description:
+	 */
+	
+	/**
+	 * This is the constructor of the class.
 	 * 
 	 * @param userId
 	 * @param isConfirmedInSystem
@@ -23,7 +27,7 @@ public class HrManager extends BusinessCustomer {
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
-	 * @param employerName
+	 * @param companyOfBusinessCustomer
 	 * @param budgetOfBusinessCustomer
 	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
@@ -31,12 +35,11 @@ public class HrManager extends BusinessCustomer {
 	 */
 	public HrManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			CreditCard privateCreditCard, String employerName, BudgetType budgetOfBusinessCustomer,
+			CreditCard privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			String businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
-				userEmail, phoneNumber, privateCreditCard, employerName, budgetOfBusinessCustomer,
-				businessCustomerPosition, budgetMaxAmount, businessW4cCodeNumber);
-
+		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber, userEmail,
+				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
+				budgetMaxAmount, businessW4cCodeNumber);
 	}
 
 	/**
@@ -44,7 +47,7 @@ public class HrManager extends BusinessCustomer {
 	 */
 	@Override
 	public String toString() {
-		return "HR Manager: " + userFirstName  + userLastName + ", Company name: " + employerName;
+		return "HR Manager: " + userFirstName  + userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
 	}
 
 }

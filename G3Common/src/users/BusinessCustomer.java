@@ -15,9 +15,9 @@ public class BusinessCustomer extends Customer {
 	 */
 
 	/**
-	 * This is the name of the employer such as Intel and etc.
+	 * This is the data about the company in which the user works in.
 	 */
-	protected String employerName;
+	protected Company companyOfBusinessCustomer;
 
 	/**
 	 * Each Business customer is given a specific type of budget, it can be budget
@@ -42,7 +42,7 @@ public class BusinessCustomer extends Customer {
 	protected int businessW4cCodeNumber;
 
 	/**
-	 * This is the Business customer constructor
+	 * This is the constructor of the class.
 	 * 
 	 * @param userId
 	 * @param isConfirmedInSystem
@@ -54,7 +54,7 @@ public class BusinessCustomer extends Customer {
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
-	 * @param employerName
+	 * @param companyOfBusinessCustomer
 	 * @param budgetOfBusinessCustomer
 	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
@@ -62,11 +62,11 @@ public class BusinessCustomer extends Customer {
 	 */
 	public BusinessCustomer(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			CreditCard privateCreditCard, String employerName, BudgetType budgetOfBusinessCustomer,
+			CreditCard privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			String businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber, privateCreditCard);
-		this.employerName = employerName;
+		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
@@ -77,13 +77,6 @@ public class BusinessCustomer extends Customer {
 	 * This is the section of the setters and getters of the class business
 	 * customer.
 	 */
-	public String getEmployerName() {
-		return employerName;
-	}
-
-	public void setEmployerName(String employerName) {
-		this.employerName = employerName;
-	}
 
 	public BudgetType getBudgetOfBusinessCustomer() {
 		return budgetOfBusinessCustomer;
@@ -114,6 +107,6 @@ public class BusinessCustomer extends Customer {
 	 */
 	@Override
 	public String toString() {
-		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name: " + employerName;
+		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
 	}	
 }
