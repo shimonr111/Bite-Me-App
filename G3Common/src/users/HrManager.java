@@ -26,7 +26,7 @@ public class HrManager extends BusinessCustomer {
 	 * @param budgetOfBusinessCustomer
 	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
-	 * @param businessW4cCode
+	 * @param businessW4cCodeNumber
 	 */
 	public HrManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,

@@ -27,15 +27,15 @@ public class BranchManager extends User {
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param w4cCodeNumber
+	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param branchName
 	 */
 	public BranchManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int w4cCodeNumber, String userEmail, String phoneNumber,
+			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
 			Branch branchName) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, w4cCodeNumber,
+		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber);
 		this.branchName = branchName;
 	}
