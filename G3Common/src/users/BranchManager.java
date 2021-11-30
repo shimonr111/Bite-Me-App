@@ -2,9 +2,10 @@ package users;
 
 /**
  * 
- * @author Lior, Guzovsky. Class description: This class is derived class from
- *         User class which defines the main attributes and functionalities of a
- *         Branch manager in our system.
+ * @author Lior, Guzovsky.
+ *  Class description: This class is derived class from
+ *  User class which defines the main attributes and functionalities of a
+ *  Branch manager in our system.
  * @version 29/11/2021
  */
 public class BranchManager extends User {
@@ -56,6 +57,6 @@ public class BranchManager extends User {
 	 */
 	@Override
 	public String toString() {
-		return "Branch manager: "  + userFirstName + " " + userLastName + ", user ID = " + userId;
+		return  branchName + " manager: " + userFirstName + " " + userLastName;
 	}
 }

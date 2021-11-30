@@ -2,9 +2,10 @@ package users;
 
 /**
  * 
- * @author Lior, Guzovsky. Class description: This class is derived class from
- *         Customer class which defines the main attributes and functionalities
- *         of a Business customer in our system.
+ * @author Lior, Guzovsky.
+ *  Class description: This class is derived class from
+ *  Customer class which defines the main attributes and functionalities
+ *  of a Business customer in our system.
  * @version 29/11/2021
  */
 public class BusinessCustomer extends Customer {
@@ -30,7 +31,7 @@ public class BusinessCustomer extends Customer {
 	protected String businessCustomerPosition;
 
 	/**
-	 * Each Business customer has a budget max that he can use
+	 * Each business customer has a budget that he cannot exceed.
 	 */
 
 	protected int budgetMaxAmount;
@@ -114,7 +115,6 @@ public class BusinessCustomer extends Customer {
 	 */
 	@Override
 	public String toString() {
-		return "Business Customer: "  + userFirstName + " " + userLastName + ", user ID = " + userId;
+		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name = " + employerName;
 	}	
-
 }

@@ -13,7 +13,6 @@ public class User {
 	/**
 	 * Class members description:
 	 */
-	
 
 	/**
 	 * Each user has its own Id, which means that it's the PK of the entity.

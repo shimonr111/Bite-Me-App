@@ -13,7 +13,6 @@ import java.sql.Date;
  */
 public class CreditCard {
 
-
 	/**
 	 * Each credit card has its own credit card number
 	 * which the customer \ Business customer
@@ -31,7 +30,6 @@ public class CreditCard {
 	 * Each credit card has its own CVV code 
 	 */
 	private String creditCardCvvCode;
-
 	
 	/**
 	 * Credit card Constructor

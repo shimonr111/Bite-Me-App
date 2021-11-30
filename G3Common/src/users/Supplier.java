@@ -2,9 +2,10 @@ package users;
 
 /**
  * 
- * @author Lior, Guzovsky. Class description: This class is a class which
- *         defines the main attributes and functionalities of a supplier in our
- *         system.
+ * @author Lior, Guzovsky.
+ * Class description: This class is a class which
+ * defines the main attributes and functionalities of a supplier in our
+ * system.
  * @version 29/11/2021
  */
 public class Supplier extends User {
@@ -20,9 +21,10 @@ public class Supplier extends User {
 
 	/**
 	 * This is the revenue that the supplier gives to the Bite Me company per month
-	 * from their monthly outcomes
+	 * from their monthly outcomes, 
+	 * Please note that this is a number in rage [0,1]
 	 */
-	private double revenueFeeInPercentage;
+	private double revenueFee;
 
 	/**
 	 * This is the constructor of the class Supplier
@@ -37,15 +39,15 @@ public class Supplier extends User {
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param supplierBusinessName
-	 * @param revenueFeeInPercentage
+	 * @param revenueFee
 	 */
 	public Supplier(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			String supplierBusinessName, double revenueFeeInPercentage) {
+			String supplierBusinessName, double revenueFee) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber);
 		this.supplierBusinessName = supplierBusinessName;
-		this.revenueFeeInPercentage = revenueFeeInPercentage;
+		this.revenueFee = revenueFee;
 	}
 
 	/**
@@ -59,12 +61,12 @@ public class Supplier extends User {
 		this.supplierBusinessName = supplierBusinessName;
 	}
 
-	public double getRevenueFeeInPercentage() {
-		return revenueFeeInPercentage;
+	public double getRevenueFee() {
+		return revenueFee;
 	}
 
-	public void setRevenueFeeInPercentage(double revenueFeeInPercentage) {
-		this.revenueFeeInPercentage = revenueFeeInPercentage;
+	public void setRevenueFee(double revenueFee) {
+		this.revenueFee = revenueFee;
 	}
 
 	/**
@@ -72,8 +74,6 @@ public class Supplier extends User {
 	 */
 	@Override
 	public String toString() {
-		return "Supplier: " + userFirstName + " " + userLastName + ", supplier ID: " + userId + " is the owner of: "
-				+ supplierBusinessName;
+		return "Supplier: " + userFirstName + " " + userLastName +  " is the owner of: " + supplierBusinessName;
 	}
-
 }

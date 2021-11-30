@@ -2,9 +2,10 @@ package users;
 
 /**
  * 
- * @author Lior, Guzovsky. Class description: This class is derived class from
- *         Business customer class which defines the main attributes and
- *         functionalities of a HR manager in our system.
+ * @author Lior, Guzovsky.
+ * Class description: This class is derived class from
+ * Business customer class which defines the main attributes and
+ * functionalities of a HR manager in our system.
  * @version 29/11/2021
  */
 public class HrManager extends BusinessCustomer {
@@ -43,7 +44,7 @@ public class HrManager extends BusinessCustomer {
 	 */
 	@Override
 	public String toString() {
-		return "HrManager: " + userFirstName + ", userLastName= " + userLastName + "user ID: " + userId;
+		return "HrManager: " + userFirstName + ", userLastName= " + userLastName + ", Company name = " + employerName;
 	}
 
 }

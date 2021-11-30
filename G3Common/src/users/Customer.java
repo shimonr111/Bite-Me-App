@@ -11,12 +11,9 @@ package users;
  */
 public class Customer extends User{
 
-
 	/**
 	 * Class members description:
-	 */
-	
-	
+	 */	
 	
 	/**
 	 * Each customer has its own Credit 
@@ -53,7 +50,6 @@ public class Customer extends User{
 	 * Class Customer
 	 */
 
-
 	public CreditCard getPrivateCreditCard() {
 		return privateCreditCard;
 	}
@@ -62,12 +58,11 @@ public class Customer extends User{
 		this.privateCreditCard = privateCreditCard;
 	}
 
-	
 	/**
 	 * This is the toString for this class
 	 */
 	@Override
 	public String toString() {
-		return "Customer: "  + userFirstName + " " + userLastName + ", user ID = " + userId;
+		return "Customer: "  + userFirstName + " " + userLastName;
 	}	
 }
