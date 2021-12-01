@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  * of a user in our system.
  * @version 29/11/2021
  */
-public class User {
+public abstract class User implements Serializable{
 
 	/**
 	 * Class members description:

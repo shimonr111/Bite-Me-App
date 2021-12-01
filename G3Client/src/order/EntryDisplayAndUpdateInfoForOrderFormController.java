@@ -1,4 +1,4 @@
-package orders;
+package order;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -20,6 +20,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import orders.Order;
 
 public class EntryDisplayAndUpdateInfoForOrderFormController implements Initializable {
 	private Order orderToDisplay;

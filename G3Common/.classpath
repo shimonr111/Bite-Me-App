@@ -11,7 +11,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/G3Client"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/G3Server"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
