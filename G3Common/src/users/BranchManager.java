@@ -17,11 +17,6 @@ public class BranchManager extends User implements Serializable{
 	 */
 
 	/**
-	 * This is the Branch name: North branch and etc.
-	 */
-	protected Branch branchName;
-
-	/**
 	 * This is the constructor of the class
 	 * 
 	 * @param userId
@@ -33,32 +28,19 @@ public class BranchManager extends User implements Serializable{
 	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
-	 * @param branchName
 	 */
 	public BranchManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			Branch branchName) {
+			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber);
-		this.branchName = branchName;
 	}
 
-	/**
-	 * This section is for the Setters and Getters of the Class Branch manager
-	 */
-	public Branch getBranchName() {
-		return branchName;
-	}
-
-	public void setBranchName(Branch branchName) {
-		this.branchName = branchName;
-	}
 
 	/**
 	 * This is the toString for this class
 	 */
 	@Override
 	public String toString() {
-		return  branchName + " manager: " + userFirstName + " " + userLastName;
+		return  homeBranch + " manager: " + userFirstName + " " + userLastName;
 	}
 }
