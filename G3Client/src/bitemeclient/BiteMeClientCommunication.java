@@ -8,8 +8,8 @@ import java.io.IOException;
 
 import chatifc.ChatIF;
 import ocsf.client.AbstractClient;
-import orders.EntryDisplayAndUpdateInfoForOrderFormController;
-import orders.EntryOrderNumberFormController;
+import ordergui.EntryDisplayAndUpdateInfoForOrderFormController;
+import ordergui.EntryOrderNumberFormController;
 import orders.Order;
 
 
