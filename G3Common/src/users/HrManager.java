@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  * functionalities of a HR manager in our system.
  * @version 29/11/2021
  */
-public class HrManager extends BusinessCustomer {
+public class HrManager extends BusinessCustomer implements Serializable{
 
 	/**
 	 * Class members description:
@@ -35,7 +37,7 @@ public class HrManager extends BusinessCustomer {
 	 */
 	public HrManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			CreditCard privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			String businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber, userEmail,
 				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,

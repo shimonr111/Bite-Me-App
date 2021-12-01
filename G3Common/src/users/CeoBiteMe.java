@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  *  CEO of Bite Me in our system.
  * @version 29/11/2021
  */
-public class CeoBiteMe extends User{
+public class CeoBiteMe extends User implements Serializable{
 
 	/**
 	 * This is the constructor for class CeoBiteMe

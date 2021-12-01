@@ -2,7 +2,7 @@ package bitemeclient;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import orders.EntryIPConfirmationFormController;
+import login.EntryIPConfirmationFormController;
 
 public class BiteMeClientUI extends Application {
 	public static BiteMeClientController biteMeClientController;

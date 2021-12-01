@@ -26,5 +26,11 @@ public enum Branch {
 		public String toString() {
 			return "South Branch";
 		}
-	};
+	},
+	NOT_APPLICABLE{
+		@Override
+		public String toString() {
+			return "N/A";
+		}
+	}
 }

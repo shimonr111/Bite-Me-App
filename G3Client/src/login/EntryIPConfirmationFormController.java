@@ -1,4 +1,4 @@
-package orders;
+package login;
 
 import bitemeclient.BiteMeClientUI;
 import javafx.event.ActionEvent;
@@ -39,7 +39,7 @@ public class EntryIPConfirmationFormController {
 		// replace main screen after connecting to server using IP
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/orders/EntryOrderNumberForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/order/EntryOrderNumberForm.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Order Managment Tool");
 		primaryStage.setScene(scene);
@@ -48,7 +48,7 @@ public class EntryIPConfirmationFormController {
 
 	/* load the IP frame */
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/orders/EntryIPConfirmationForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/login/EntryIPConfirmationForm.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Connect to server");
 		primaryStage.setScene(scene);

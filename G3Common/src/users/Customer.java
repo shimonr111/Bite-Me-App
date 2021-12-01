@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -9,7 +11,7 @@ package users;
  * of a regular customer in our system.
  * @version 29/11/2021
  */
-public class Customer extends User{
+public class Customer extends User implements Serializable{
 
 	/**
 	 * Class members description:
@@ -19,7 +21,7 @@ public class Customer extends User{
 	 * Each customer has its own Credit 
 	 * card.
 	 */
-	protected CreditCard privateCreditCard;
+	protected String privateCreditCard;
 	
 	/**
 	 * This is the constructor for the class Customer
@@ -38,7 +40,7 @@ public class Customer extends User{
 	 */
 	public Customer(String userId, boolean isConfirmedInSystem, String userFirstName,
 			String userLastName, Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail,
-			String phoneNumber, CreditCard privateCreditCard) {
+			String phoneNumber, String privateCreditCard) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber);
 		this.privateCreditCard = privateCreditCard;
@@ -49,11 +51,11 @@ public class Customer extends User{
 	 * Setters and Getters of the 
 	 * Class Customer
 	 */
-	public CreditCard getPrivateCreditCard() {
+	public String getPrivateCreditCard() {
 		return privateCreditCard;
 	}
 
-	public void setPrivateCreditCard(CreditCard privateCreditCard) {
+	public void setPrivateCreditCard(String privateCreditCard) {
 		this.privateCreditCard = privateCreditCard;
 	}
 

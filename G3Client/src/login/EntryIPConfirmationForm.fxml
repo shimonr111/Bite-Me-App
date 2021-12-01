@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="txt" prefHeight="384.0" prefWidth="512.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="orders.EntryIPConfirmationFormController">
+<AnchorPane fx:id="txt" prefHeight="384.0" prefWidth="512.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.EntryIPConfirmationFormController">
    <children>
       <Button id="btnExit" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#exitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>

@@ -1,5 +1,6 @@
 package users;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.sql.Date;
  * HR manger and etc.
  * @version 29/11/2021
  */
-public class CreditCard {
+public class CreditCard implements Serializable{
 
 	/**
 	 * Each credit card has its own credit card number

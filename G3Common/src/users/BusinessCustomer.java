@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  *  of a Business customer in our system.
  * @version 29/11/2021
  */
-public class BusinessCustomer extends Customer {
+public class BusinessCustomer extends Customer implements Serializable{
 
 	/**
 	 * Class members description:
@@ -62,7 +64,7 @@ public class BusinessCustomer extends Customer {
 	 */
 	public BusinessCustomer(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
-			CreditCard privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			String businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber, privateCreditCard);

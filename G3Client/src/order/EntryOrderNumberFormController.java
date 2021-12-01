@@ -1,4 +1,4 @@
-package orders;
+package order;
 
 import bitemeclient.BiteMeClientCommunication;
 import bitemeclient.BiteMeClientUI;
@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import orders.Order;
 
 public class EntryOrderNumberFormController {
 	private EntryDisplayAndUpdateInfoForOrderFormController displayAndUpdateFormController;
@@ -58,14 +59,14 @@ public class EntryOrderNumberFormController {
 				((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 				Stage primaryStage = new Stage();
 				Pane root = loaderOfDisplayAndUpdateForm
-						.load(getClass().getResource("/orders/EntryDisplayAndUpdateInfoForOrderForm.fxml").openStream());
+						.load(getClass().getResource("/order/EntryDisplayAndUpdateInfoForOrderForm.fxml").openStream());
 				EntryDisplayAndUpdateInfoForOrderFormController OrderMainFrameController = loaderOfDisplayAndUpdateForm
 						.getController();
 				OrderMainFrameController.loadOrder(BiteMeClientCommunication.displayedOrder);
 
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(
-						getClass().getResource("/orders/EntryDisplayAndUpdateInfoForOrderForm.css").toExternalForm());
+						getClass().getResource("/order/EntryDisplayAndUpdateInfoForOrderForm.css").toExternalForm());
 				primaryStage.setTitle("Order");
 
 				primaryStage.setScene(scene);
@@ -75,10 +76,10 @@ public class EntryOrderNumberFormController {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("/orders/EntryOrderNumberForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/order/EntryOrderNumberForm.fxml"));
 
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/orders/EntryOrderNumberForm.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/order/EntryOrderNumberForm.css").toExternalForm());
 		primaryStage.setTitle("Order");
 		primaryStage.setScene(scene);
 		primaryStage.show();

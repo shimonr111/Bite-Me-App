@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  * system.
  * @version 29/11/2021
  */
-public class Supplier extends User {
+public class Supplier extends User implements Serializable{
 
 	/**
 	 * Class members description:
