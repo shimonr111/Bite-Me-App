@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: semesterialproject
@@ -32,7 +34,6 @@ CREATE TABLE `branchmanager` (
   `privateW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
-  `branchName` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT NULL,
   PRIMARY KEY (`userID`),
   CONSTRAINT `branchmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -44,7 +45,7 @@ CREATE TABLE `branchmanager` (
 
 LOCK TABLES `branchmanager` WRITE;
 /*!40000 ALTER TABLE `branchmanager` DISABLE KEYS */;
-INSERT INTO `branchmanager` VALUES ('1041',1,'branchmanagerNFirstname','branchmanagerNLastname','NORTH',0,10414,'branchManagerNEmail@BM.com','104104','NORTH'),('1042',1,'branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,10424,'branchManagerSEmail@BM.com','104204','SOUTH'),('1043',1,'branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,10434,'branchManagerCEmail@BM.com','104304','CENTER');
+INSERT INTO `branchmanager` VALUES ('1041',1,'branchmanagerNFirstname','branchmanagerNLastname','NORTH',0,10414,'branchManagerNEmail@BM.com','104104'),('1042',1,'branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,10424,'branchManagerSEmail@BM.com','104204'),('1043',1,'branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,10434,'branchManagerCEmail@BM.com','104304');
 /*!40000 ALTER TABLE `branchmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -318,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-01 21:57:38
+-- Dump completed on 2021-12-01 22:28:33
