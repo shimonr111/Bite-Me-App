@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -8,7 +10,7 @@ package users;
  *  Branch manager in our system.
  * @version 29/11/2021
  */
-public class BranchManager extends User {
+public class BranchManager extends User implements Serializable{
 
 	/**
 	 * Class members description:

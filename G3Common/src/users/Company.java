@@ -1,5 +1,7 @@
 package users;
 
+import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
@@ -9,7 +11,7 @@ package users;
  *  of a Company in our system.
  * @version 29/11/2021
  */
-public class Company {
+public class Company implements Serializable{
 	
 	/**
 	 * Class members description:

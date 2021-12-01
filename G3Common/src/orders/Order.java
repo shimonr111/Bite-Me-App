@@ -1,7 +1,9 @@
 package orders;
 
+import java.io.Serializable;
+
 /*Order entity*/
-public class Order {
+public class Order implements Serializable{
 	
 	private String resturantName;
 	private String orderNumber;
