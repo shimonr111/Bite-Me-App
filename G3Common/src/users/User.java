@@ -10,7 +10,7 @@ import java.io.Serializable;
  * of a user in our system.
  * @version 29/11/2021
  */
-public class User implements Serializable{
+public abstract class User implements Serializable{
 
 	/**
 	 * Class members description:
