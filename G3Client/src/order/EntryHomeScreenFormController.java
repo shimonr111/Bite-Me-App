@@ -46,7 +46,6 @@ public class EntryHomeScreenFormController{
 	private Button btnHelp = null;
 	
 	
-	
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/order/EntryHomeScreenForm.fxml"));
 		Scene scene = new Scene(root);
@@ -72,7 +71,7 @@ public class EntryHomeScreenFormController{
 	
 	/**Using help button in order to show instructions for the current screen */
 	public void getHelpBtn(ActionEvent event) throws Exception {
-		
+		PopUpMessages.helpMessage("Welcome to BiteMe App! press Enter to login your user.");
 	}
 	
 	/**Using exit button in order to exit from the app */
