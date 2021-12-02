@@ -40,9 +40,9 @@ public class EntryIPConfirmationFormController {
 		// replace main screen after connecting to server using IP
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/order/EntryOrderNumberForm.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/order/EntryHomeScreenForm.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Order Managment Tool");
+		primaryStage.setTitle("Welcome to BiteMe App!");
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */
 	}
