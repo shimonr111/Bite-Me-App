@@ -1,12 +1,10 @@
 
 package order;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.BiteMeClientCommunication;
 import bitemeclient.BiteMeClientUI;
 import javafx.application.Platform;
@@ -59,7 +57,7 @@ public class EntryHomeScreenFormController{
 	}
 
 
-	/* using enter button hide window and go login screen */
+	/**Using enter button hide window and go login screen */
 	public void getEnterBtn(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		Stage primaryStage = new Stage();
@@ -72,12 +70,12 @@ public class EntryHomeScreenFormController{
 	}
 
 	
-	/* using help button in order to show instructions for the current screen */
+	/**Using help button in order to show instructions for the current screen */
 	public void getHelpBtn(ActionEvent event) throws Exception {
 		
 	}
 	
-	/* using exit button in order to exit from the app */
+	/**Using exit button in order to exit from the app */
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.exit(0);
 	}
