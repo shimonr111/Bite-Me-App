@@ -75,7 +75,7 @@ public class EntryLoginScreenFormController{
 	
 	/**Using help button in order to show instructions for the current screen */
 	public void getHelpBtn(ActionEvent event) throws Exception {
-		
+		PopUpMessages.helpMessage("Insert your user name and password and then press Login.");
 	}
 	
 	/**Using exit button in order to exit from the app */
