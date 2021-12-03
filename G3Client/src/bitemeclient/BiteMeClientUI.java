@@ -1,10 +1,18 @@
 package bitemeclient;
 
+import gui.EntryIPConfirmationFormController;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import login.EntryIPConfirmationFormController;
 
-
+/**
+ * @author Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This class is used for running the app
+ * from the customers side
+ *
+ * @version 03/12/2021
+ */
 public class BiteMeClientUI extends Application {
 	public static BiteMeClientController biteMeClientController;
 	public EntryIPConfirmationFormController ipFormController;

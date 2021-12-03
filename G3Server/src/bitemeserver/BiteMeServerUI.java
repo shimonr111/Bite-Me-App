@@ -5,7 +5,20 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import jdbc.mySqlConnection;
 
+/**
+ * @author  Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This is a class that works as an
+ * UI for the server.
+ * 
+ * @version 03/12/2021
+ */
 public class BiteMeServerUI extends Application {
+	/**
+	 * Class members description:
+	 */
+	
 	public static BiteMeServerCommunication serverCommunication;
 	public static ServerGuiController serverGuiController;
 	public static mySqlConnection connectionToDB;
@@ -21,8 +34,10 @@ public class BiteMeServerUI extends Application {
 	}
 
 	/*
-	 * This function goes to the EchoServer method of stop listening when button
-	 * Disconnect is clicked in the Server Controller
+	 * This function goes to the 
+	 * EchoServer method of stop listening 
+	 * when button Disconnect is clicked in
+	 *  the Server Controller.
 	 */
 	public static void DisconnectServer() {
 		System.out.println("The server is Disconnected");

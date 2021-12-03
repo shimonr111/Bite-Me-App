@@ -5,7 +5,7 @@ package bitemeclient;
 
 import java.io.IOException;
 
-import chatifc.ChatIF;
+import communication.Message;
 
 /**
  * This class constructs the UI for a chat client. It implements the chat
@@ -17,7 +17,7 @@ import chatifc.ChatIF;
  * @author Dr Robert Lagani&egrave;re
  * @version July 2000
  */
-public class BiteMeClientController implements ChatIF {
+public class BiteMeClientController{
 	// Class variables *************************************************
 	/**
 	 * The default port to connect on.
@@ -41,7 +41,7 @@ public class BiteMeClientController implements ChatIF {
 	 */
 	public BiteMeClientController(String host, int port) {
 		try {
-			client = new BiteMeClientCommunication(host, port, this);
+			client = new BiteMeClientCommunication(host, port);
 		} catch (IOException exception) {
 			System.out.println("Error: Can't setup connection!" + " Terminating client.");
 			System.exit(1);
@@ -54,18 +54,10 @@ public class BiteMeClientController implements ChatIF {
 	 * This method waits for input from the console. Once it is received, it sends
 	 * it to the client's message handler.
 	 */
-	public void accept(String str) {
-		client.handleMessageFromClientUI(str);
+	public void accept(Message message) {
+		client.handleMessageFromClient(message);
 	}
 
-	/**
-	 * This method overrides the method in the ChatIF interface. It displays a
-	 * message onto the screen.
-	 *
-	 * @param message The string to be displayed.
-	 */
-	public void display(String message) {
 
-	}
 }
 //End of ConsoleChat class

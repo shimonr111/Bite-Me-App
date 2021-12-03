@@ -2,8 +2,20 @@ package orders;
 
 import java.io.Serializable;
 
-/*Order entity*/
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This is a class that describes the 
+ * entity of Order Object.
+ * 
+ * @version 03/12/2021
+ */
 public class Order implements Serializable{
+	/**
+	 * Class members description:
+	 */
 	
 	private String resturantName;
 	private String orderNumber;
@@ -11,6 +23,7 @@ public class Order implements Serializable{
 	private String phoneNumber;
 	private String orderAddress;
 	private String orderType;
+	
 	/**
 	 * @param id
 	 * @param private String resturantName;
@@ -20,7 +33,6 @@ public class Order implements Serializable{
 	 * @param orderAddress;
 	 * @param OrderType;
 	 */
-	
 	public Order(String resturantName, String orderNumber, String orderTime, String phoneNumber, String orderAddress, String orderType){
 		super();
 		this.resturantName = resturantName;
@@ -32,6 +44,11 @@ public class Order implements Serializable{
 
 	}
 
+	/**
+	 * This section is for the 
+	 * Setters and Getters of the 
+	 * Class Customer
+	 */
 	public String getResturantName() {
 		return resturantName;
 	}

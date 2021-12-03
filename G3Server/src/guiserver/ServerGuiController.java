@@ -16,7 +16,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * @author Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This is a class for the UI 
+ * server controller.
+ * 
+ * @version 03/12/2021
+ */
 public class ServerGuiController {
+	/**
+	 * Class members description:
+	 */	
+	
 	final public static int DEFAULT_PORT = 5555;
 	final public static String DEFAULT_DB_NAME = "jdbc:mysql://localhost/semesterialproject?serverTimezone=IST";
 	final public static String DEFAULT_DB_USER = "root";
@@ -61,11 +74,11 @@ public class ServerGuiController {
 	/* create main form for the server */
 	public void start(Stage primaryStage) throws Exception {
 		loader = new FXMLLoader();
-		Pane root = loader.load(getClass().getResource("/guiServer/ServerGui.fxml").openStream());
+		Pane root = loader.load(getClass().getResource("/fxmls/ServerGui.fxml").openStream());
 		ServerGuiController serverController = loader.getController();
 		serverController.loadInfo();
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/guiServer/ServerGui.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/css/ServerGui.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -78,7 +91,6 @@ public class ServerGuiController {
 			this.ipTxt.setText(InetAddress.getLocalHost().getHostAddress());
 			this.ipTxt.setDisable(true);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.DbNameTxt.setText(DEFAULT_DB_NAME);

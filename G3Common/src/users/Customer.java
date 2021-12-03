@@ -9,14 +9,16 @@ import java.io.Serializable;
  * This class is derived class from User class
  *  which defines the main attributes and functionalities
  * of a regular customer in our system.
+ * 
  * @version 29/11/2021
  */
 public class Customer extends User implements Serializable{
-
 	/**
 	 * Class members description:
 	 */	
 	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Each customer has its own Credit 
 	 * card.
