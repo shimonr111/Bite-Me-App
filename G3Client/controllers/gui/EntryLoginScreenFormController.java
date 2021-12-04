@@ -96,7 +96,8 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Using login button hide 
 	 * window and go user portal 
-	 * screen. */
+	 * screen. 
+	 */
 	public void getLoginBtn(ActionEvent event) throws Exception {
 		
 	}
@@ -105,7 +106,8 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Using help button
 	 * in order to show instructions
-	 * for the current screen */
+	 * for the current screen 
+	 */
 	public void getHelpBtn(ActionEvent event) throws Exception {
 		PopUpMessages.helpMessage("Insert your user name and password and then press Login.");
 	}
@@ -113,7 +115,8 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Using exit button
 	 * in order to exit from
-	 * the app. */
+	 * the app. 
+	 */
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.exit(0);
 	}
@@ -122,7 +125,8 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Using close button (back button)
 	 * hide window and go 
-	 * backwards */
+	 * backwards 
+	 */
 	public void getCloseBtn(ActionEvent event) throws Exception {
 		Platform.runLater(new Runnable() {
 			@Override
