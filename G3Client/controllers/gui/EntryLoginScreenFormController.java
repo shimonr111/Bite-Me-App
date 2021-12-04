@@ -1,7 +1,6 @@
-
 package gui;
-import java.io.IOException;
 
+import java.io.IOException;
 import bitemeclient.PopUpMessages;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -32,27 +31,31 @@ public class EntryLoginScreenFormController{
 	 */
 	
 	/**
-	 * User name 
-	 * of the user*/
+	 * name 
+	 * of the user
+	 */
 	@FXML
 	private TextField userNameField;
 	
 	/**
 	 * Password field
-	 * of the user */
+	 * of the user 
+	 */
 	@FXML
 	private TextField passwordField;
 	
 	/**
 	 * This button login and move 
 	 * forward to the user portal 
-	 * after we insert user and pass*/
+	 * after we insert user and pass
+	 */
 	@FXML
 	private Button btnLogin = null;
 	
 	/**
 	 * This button exit 
-	 * from the app immediately */
+	 * from the app immediately 
+	 */
 	@FXML
 	private Button btnExit = null;
 	
@@ -60,13 +63,15 @@ public class EntryLoginScreenFormController{
 	 * This button pop
 	 * up message which show
 	 * to us info about the
-	 * current page */
+	 * current page 
+	 */
 	@FXML
 	private Button btnHelp = null;
 	
 	/**
 	 * This button move back
-	 * to the previous screen */
+	 * to the previous screen 
+	 */
 	@FXML
 	private Button btnClose = null;
 	
