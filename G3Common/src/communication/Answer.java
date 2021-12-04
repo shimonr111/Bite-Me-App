@@ -3,6 +3,7 @@ package communication;
 /**
  * 
  *  @author Lior, Guzovsky.
+ *  @author Ori, Malka.
  *  Class description: 
  *  
  *  This is an enum
