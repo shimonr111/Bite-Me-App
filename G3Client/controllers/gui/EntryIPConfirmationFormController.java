@@ -47,7 +47,7 @@ public class EntryIPConfirmationFormController {
 	private Button btnConfirmIP = null;;
 
 	@FXML
-	private TextField enterIPTxt = null;
+	private TextField enterIPTxt;
 
 	/**
 	 * button to exit from
