@@ -1,9 +1,7 @@
-
 package gui;
 
 import java.io.IOException;
 import java.security.Principal;
-
 import analyze.IPConfirmationAnalyze;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,7 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * @author Lior, Guzovsky.
+ * @author Lior, Guzovsky & Ori, Malka. 
  * Class description: 
  * 
  * This is a class for 
@@ -49,11 +47,12 @@ public class EntryIPConfirmationFormController {
 	private Button btnConfirmIP = null;;
 
 	@FXML
-	private TextField enterIPTxt;
+	private TextField enterIPTxt = null;
 
-	/* button for 
-	 * exit from the 
-	 * frame */
+	/**
+	 * button to exit from
+	 * the frame. 
+	 */
 	public void exitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit IP server configuration");
 		System.exit(0);
