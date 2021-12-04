@@ -5,7 +5,6 @@ import bitemeclient.BiteMeClientUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
-import gui.AbstractBiteMeController;
 import gui.EntryIPConfirmationFormController;
 import javafx.event.ActionEvent;
 

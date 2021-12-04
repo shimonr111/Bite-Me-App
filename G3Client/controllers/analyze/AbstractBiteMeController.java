@@ -1,4 +1,4 @@
-package gui;
+package analyze;
 
 import bitemeclient.BiteMeClientUI;
 import communication.Message;
