@@ -1,7 +1,6 @@
 package analyze;
 
 import java.io.IOException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
