@@ -5,96 +5,81 @@
 package bitemeclient;
 
 import java.io.IOException;
-
-import chatifc.ChatIF;
+import analyze.Analyze;
+import communication.Message;
+import communication.Task;
 import ocsf.client.AbstractClient;
-import order.EntryDisplayAndUpdateInfoForOrderFormController;
-import order.EntryOrderNumberFormController;
-import orders.Order;
 
 
 /**
- * This class overrides some of the methods defined in the abstract superclass
- * in order to give more functionality to the client.
+ * @author Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This class overrides some of the methods
+ * defined in the abstract superclass
+ * in order to give more functionality
+ * to the client.
+ * 
+ * @version 03/12/2021
  */
 public class BiteMeClientCommunication extends AbstractClient {
-	// Instance variables **********************************************
+	/**
+	 * Class members description:
+	 */
 
 	/**
 	 * The interface type variable. It allows the implementation of the display
 	 * method in the client.
 	 */
-	ChatIF clientUI;
-	public static Order displayedOrder = new Order(null, null, null, null, null, null); // create new order for sending
-																						// data to server
-	public static boolean awaitResponse = false; // wait for response from server
+	public static BiteMeClientCommunication clientCommunication;
+	
+	/**
+	 * wait for response from server
+	 */
+	public static boolean awaitResponse = false;
 
 	// Constructors ****************************************************
 
 	/**
 	 * Constructs an instance of the chat client.
-	 *
-	 * @param host     The server to connect to.
-	 * @param port     The port number to connect on.
-	 * @param clientUI The interface type variable.
+	 * 
+	 * @param host
+	 * @param port
+	 * @throws IOException
 	 */
-
-	public BiteMeClientCommunication(String host, int port, ChatIF clientUI) throws IOException {
+	public BiteMeClientCommunication(String host, int port) throws IOException {
 		super(host, port); // Call the superclass constructor
-		this.clientUI = clientUI;
+		clientCommunication = this;
 		openConnection(); // create socket and open connection
 	}
 
-	// Instance methods ************************************************
 
 	/**
-	 * This method handles all data that comes in from the server.
-	 *
-	 * @param msg The message from the server.
+	 * This method handles 
+	 * all data that comes in 
+	 * from the server.
+	 * 
+	 * @param message
 	 */
-	public void handleMessageFromServer(Object msg) {
-		awaitResponse = false;
-		String messageFromServer;
-		messageFromServer = msg.toString();
-		String[] parsedMessageFromServer = messageFromServer.split(" ");
-		if (parsedMessageFromServer[0].equals("Error")) { // if the order doesn't exist delete the old one to avoid
-															// garbage data
-			displayedOrder = new Order(null, null, null, null, null, null); // clean the old order one if the order is
-																			// not found
-		} else if (parsedMessageFromServer[0].equals("update")) { // if update button was pressed
-			EntryDisplayAndUpdateInfoForOrderFormController orderIntialFrameController = EntryOrderNumberFormController
-					.getClientMainFrameLoader().getController(); // get the controller of OrderMainForm
-			orderIntialFrameController.displayUpdateMessage(messageFromServer); // display text in GUI
-		} else {
-			setOrderInfoUpdate(parsedMessageFromServer); // set the new info in the GUI screen
+	public void handleMessageFromServer(Object message) throws IOException {
+		if(message instanceof Message ) {
+			awaitResponse = false;
+			Analyze.analyzeMessageFromServer(message);
 		}
 	}
 
-	private void setOrderInfoUpdate(String[] parsedMessageFromServer) {
-		displayedOrder.setResturantName(parsedMessageFromServer[0]); /* Restaurant name */
-		displayedOrder.setOrderNumber(parsedMessageFromServer[1]); /* Order number */
-		displayedOrder.setOrderTime(parsedMessageFromServer[2]); /* Order Time */
-		displayedOrder.setPhoneNumber(parsedMessageFromServer[3]); /* Order Phone number */
-		displayedOrder.setOrderType(parsedMessageFromServer[5]); /* Order Type Delivery */
-		displayedOrder.setOrderAddress(parsedMessageFromServer[4]); /* Order address location */
-	}
-
 	/**
-	 * This method handles all data coming from the UI e
+	 * This method handles all
+	 *  data coming from the UI
 	 *
 	 * @param message The message from the UI.
 	 */
-
-	public void handleMessageFromClientUI(String message) {
+	public void handleMessageFromClient(Message message) {
 		try {
 			awaitResponse = true;
-			String[] parsedMessageFromClientUI = ((String) message).split(" "); /* parse the data */
 			openConnection();// in order to send more than one message
-			if (message.equals("confirm")) // if confirm button pressed
+			if (message.getTask().equals(Task.CONFIRM_IP)) // if confirm button pressed
 				awaitResponse = false;
-			if (parsedMessageFromClientUI[0].equals("update")) { // if the user pressed update button
-				awaitResponse = false;
-			}
 			sendToServer(message); // send the msg to the server
 			// wait for response
 			while (awaitResponse) {
@@ -106,13 +91,13 @@ public class BiteMeClientCommunication extends AbstractClient {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			clientUI.display("Could not send message to server: Terminating client." + e);
 			quit();
 		}
 	}
 
 	/**
-	 * This method terminates the client.
+	 * This method 
+	 * terminates the client.
 	 */
 	public void quit() {
 		try {
@@ -122,4 +107,3 @@ public class BiteMeClientCommunication extends AbstractClient {
 		System.exit(0);
 	}
 }
-//End of ChatClient class

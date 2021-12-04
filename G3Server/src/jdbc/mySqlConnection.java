@@ -4,10 +4,31 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author Lior, Guzovsky.
+ * Class description: 
+ * 
+ * This is a class for the connection to the 
+ * DB.
+ * 
+ * @version 03/12/2021
+ *
+ */
 public class mySqlConnection {
+	/**
+	 * Class members description:
+	 */	
+	
 	private Connection con;
 
-	/*create the connection to the DB */
+	/**
+	 * create the connection to the DB
+	 * 
+	 * @param DBName
+	 * @param DBUserName
+	 * @param DBPassword
+	 * @return
+	 */
 	public boolean connectToDB(String DBName, String DBUserName, String DBPassword) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -18,7 +39,6 @@ public class mySqlConnection {
 			return false;
 
 		}
-
 		try {
 			con = DriverManager.getConnection(DBName, DBUserName, DBPassword);
 			System.out.println("SQL connection succeed");
