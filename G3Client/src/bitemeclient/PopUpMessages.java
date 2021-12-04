@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 /**
  * 
- * @author Shimon, Rubin
+ * @author Shimon, Rubin.
  * Class description: 
  * 
  * This is a class for pop
@@ -24,9 +24,9 @@ public class PopUpMessages {
 	 * This function shows pop
 	 * up messages to the client UI.
 	 * 
-	 * @param msg
+	 * @param message
 	 */
-	public static void helpMessage(String msg) {
+	public static void helpMessage(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");
 		alert.setHeaderText(null);
