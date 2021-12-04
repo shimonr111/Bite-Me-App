@@ -4,7 +4,6 @@ import bitemeclient.BiteMeClientUI;
 import communication.Message;
 
 /**
- * 
  * @author Lior, Guzovsky.
  * Class description: 
  * 
@@ -22,15 +21,14 @@ public abstract class AbstractBiteMeController {
 	 * This method get message from 
 	 * client and send it to the server.
 	 * 
-	 * @param msg
+	 * @param message
 	 */
-	public static void SendToServer(Message msg) {
-		BiteMeClientUI.biteMeClientController.accept(msg);
+	public static void SendToServer(Message message) {
+		BiteMeClientUI.biteMeClientController.accept(message);
 	}
 
 	/**
-	 * Constructor for the
-	 * class.
+	 * Constructor for the class.
 	 */
 	public AbstractBiteMeController() {
 		
