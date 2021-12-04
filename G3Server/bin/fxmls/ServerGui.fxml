@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="894.0" prefWidth="1024.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guiserver.ServerGuiController">
+   <children>
+      <Button fx:id="connectBtn" contentDisplay="CENTER" layoutX="190.0" layoutY="576.0" mnemonicParsing="false" onAction="#connect" prefHeight="55.0" prefWidth="250.0" style="-fx-background-color: #7FBA00;" text="Connect" textAlignment="CENTER" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <Blend mode="BLUE" />
+         </effect></Button>
+      <TextField fx:id="portxt" layoutX="432.0" layoutY="259.0" prefHeight="40.0" prefWidth="360.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button fx:id="disconnectBtn" contentDisplay="CENTER" layoutX="612.0" layoutY="576.0" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="55.0" prefWidth="250.0" style="-fx-background-color: #F25022;" text="Disconnect" textAlignment="CENTER" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect></Button>
+      <Label fx:id="portLbl" layoutX="232.0" layoutY="259.0" prefHeight="35.0" prefWidth="165.0" text="Port:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="49.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <effect>
+            <ColorAdjust />
+         </effect></Button>
+      <Label layoutX="232.0" layoutY="179.0" prefHeight="35.0" prefWidth="165.0" text="IP:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <TextField fx:id="ipTxt" layoutX="432.0" layoutY="179.0" prefHeight="40.0" prefWidth="360.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="DbNameTxt" layoutX="432.0" layoutY="339.0" prefHeight="40.0" prefWidth="360.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="DbUserTxt" layoutX="432.0" layoutY="419.0" prefHeight="40.0" prefWidth="360.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label layoutX="232.0" layoutY="339.0" prefHeight="35.0" prefWidth="165.0" text="DB Name:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="232.0" layoutY="419.0" prefHeight="35.0" prefWidth="165.0" text="DB user:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="232.0" layoutY="499.0" prefHeight="35.0" prefWidth="165.0" text="DB password:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="119.0" layoutY="26.0" style="-fx-background-color: &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;?import javafx.scene.control.Label?&gt;&lt;?import javafx.scene.text.Font?&gt;&lt;Label layoutX=&quot;159.0&quot; layoutY=&quot;26.0&quot; text=&quot;Server Configuration&quot; xmlns=&quot;http://javafx.com/javafx/8.0.171&quot; xmlns:fx=&quot;http://javafx.com/fxml/1&quot;&gt;   &lt;font&gt;      &lt;Font name=&quot;System Bold&quot; size=&quot;72.0&quot; /&gt;   &lt;/font&gt;&lt;/Label&gt;;" text="Server Configuration" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="80.0" />
+         </font>
+      </Label>
+      <PasswordField fx:id="DbPasswordTxt" layoutX="432.0" layoutY="499.0" prefHeight="40.0" prefWidth="360.0">
+         <font>
+            <Font size="18.0" />
+         </font></PasswordField>
+      <Text fx:id="txtMsgToServer" layoutX="443.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <TextArea fx:id="txtConsole" layoutX="157.0" layoutY="692.0" prefHeight="178.0" prefWidth="709.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <Label layoutX="467.0" layoutY="657.0" text="Console" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

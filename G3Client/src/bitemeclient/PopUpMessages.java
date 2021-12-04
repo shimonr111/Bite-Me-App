@@ -30,7 +30,7 @@ public class PopUpMessages {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Message");
 		alert.setHeaderText(null);
-		alert.setContentText(msg);
+		alert.setContentText(message);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 		DialogPane dialogPane = alert.getDialogPane();
 		alert.showAndWait();
