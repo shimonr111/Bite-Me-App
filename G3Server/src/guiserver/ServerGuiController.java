@@ -2,7 +2,6 @@ package guiserver;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import bitemeserver.BiteMeServerUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -30,28 +29,55 @@ public class ServerGuiController {
 	 * Class members description:
 	 */	
 	
+	/**
+	* The default port number we connect to.
+	*/
 	final public static int DEFAULT_PORT = 5555;
+	
+	/**
+	* The default db name.
+	*/
 	final public static String DEFAULT_DB_NAME = "jdbc:mysql://localhost/semesterialproject?serverTimezone=IST";
+	
+	/**
+	* The db user name.
+	*/
 	final public static String DEFAULT_DB_USER = "root";
-	final public static String DEFAULT_DB_PASSWORD = "password";
+	
+	/**
+	* The db password.
+	*/
+	final public static String DEFAULT_DB_PASSWORD = "orimalka789";
+	
+	/**
+	* An FXML loader instance.
+	*/
 	public static FXMLLoader loader;
 
 	@FXML
 	private TextField portxt;
+	
 	@FXML
 	private TextField ipTxt;
+	
 	@FXML
 	private TextField DbNameTxt;
+	
 	@FXML
 	private TextField DbUserTxt;
+	
 	@FXML
 	private PasswordField DbPasswordTxt;
+	
 	@FXML
 	private Button connectBtn;
+	
 	@FXML
 	private Button disconnectBtn;
+	
 	@FXML
 	private Button closeBtn;
+	
 	@FXML
 	private TextArea txtConsole;
 
@@ -71,7 +97,7 @@ public class ServerGuiController {
 		return DbPasswordTxt.getText();
 	}
 
-	/* create main form for the server */
+	
 	public void start(Stage primaryStage) throws Exception {
 		loader = new FXMLLoader();
 		Pane root = loader.load(getClass().getResource("/fxmls/ServerGui.fxml").openStream());
@@ -126,8 +152,10 @@ public class ServerGuiController {
 
 		BiteMeServerUI.DisconnectServer(); // when button Disconnect is clicked than terminate server listening method
 	}
-
-	/* set disability to the server form */
+	
+	/**
+	* @param isVisable to control the visiablity of the UI
+	*/
 	private void setVisabilityForUI(boolean isVisable) {
 		disconnectBtn.setDisable(!isVisable);
 		portxt.setDisable(isVisable);
@@ -137,10 +165,10 @@ public class ServerGuiController {
 		connectBtn.setDisable(isVisable);
 	}
 
-	public void displayToConsoleInServerGui(String msg) {
+	public void displayToConsoleInServerGui(String message) {
 		Platform.runLater(() -> {
 			String currentText = txtConsole.getText();
-			this.txtConsole.setText(currentText + "\n" + msg);
+			this.txtConsole.setText(currentText + "\n" + message);
 		});
 	}
 
