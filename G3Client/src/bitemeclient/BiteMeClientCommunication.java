@@ -5,7 +5,6 @@
 package bitemeclient;
 
 import java.io.IOException;
-
 import analyze.Analyze;
 import communication.Message;
 import communication.Task;
