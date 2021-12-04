@@ -19,8 +19,19 @@ public class BiteMeServerUI extends Application {
 	 * Class members description:
 	 */
 	
+	/**
+	 * BiteMeServerCommunication instance to start to have a communication channel between the serverUI to the server.
+	 */
 	public static BiteMeServerCommunication serverCommunication;
+	
+	/**
+	 * ServerGuiController instance to have an access to the server controller.
+	 */
 	public static ServerGuiController serverGuiController;
+	
+	/**
+	 * mySqlConnection instance to save the SQl connection of the server.
+	 */
 	public static mySqlConnection connectionToDB;
 
 	public static void main(String args[]) throws Exception {
