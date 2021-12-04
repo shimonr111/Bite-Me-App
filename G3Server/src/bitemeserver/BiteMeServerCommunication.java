@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import communication.*;
 import guiserver.ServerGuiController;
 import ocsf.server.AbstractServer;
@@ -25,7 +24,17 @@ import orders.Order;
  * @version 03/12/2021
  */
 public class BiteMeServerCommunication extends AbstractServer {
+	/**
+	 * Class members description:
+	 */
+
+	/**
+	 * Connection instance to save the DB connection.
+	 */
 	private Connection connection;
+	/**
+	 * ServerGuiController instance to have access to the controller.
+	 */
 	private ServerGuiController serverGuiController;
 
 	/*
@@ -40,14 +49,14 @@ public class BiteMeServerCommunication extends AbstractServer {
 	/*
 	 * This method handles any messages received from the client.
 	 *
-	 * @param msg: The message received from the client.
+	 * @param message: The message received from the client.
 	 * 
 	 * @param client: The connection from which the message originated.
 	 */
 
-	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
-		if(msg instanceof Message) {
-		Message recivedMessageFromClient = (Message)msg;
+	public void handleMessageFromClient(Object message, ConnectionToClient client) {
+		if(message instanceof Message) {
+		Message recivedMessageFromClient = (Message)message;
 		Task recieveTask = recivedMessageFromClient.getTask();
 		switch(recieveTask) {
 		case CONFIRM_IP:
@@ -134,11 +143,11 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * client rather than all clients
 	 * 
 	 * @param client
-	 * @param msg
+	 * @param message
 	 */
-	public void sentToSpecificClient(ConnectionToClient client, Object msg) {
+	public void sentToSpecificClient(ConnectionToClient client, Object message) {
 		try {
-			client.sendToClient(msg);
+			client.sendToClient(message);
 		} catch (Exception ex) {
 		}
 	}
