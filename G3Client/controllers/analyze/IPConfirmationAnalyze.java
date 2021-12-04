@@ -1,7 +1,6 @@
 package analyze;
 
 import java.io.IOException;
-
 import bitemeclient.BiteMeClientUI;
 import communication.Answer;
 import communication.Message;
