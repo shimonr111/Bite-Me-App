@@ -3,7 +3,8 @@ package communication;
 import java.io.Serializable;
 
 /** This class present the Home Screen and responsible for the functionality of this screen 
- * @author Ori, Malka & Lior, Guzovsky.
+ * @author Ori, Malka.
+ * @author Lior, Guzovsky.
  * Class description: 
  * 
  * This class is used for sending and 
