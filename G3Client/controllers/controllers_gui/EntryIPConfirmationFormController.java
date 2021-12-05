@@ -79,7 +79,7 @@ public class EntryIPConfirmationFormController {
 	 * @param event
 	 * @throws IOException
 	 */
-	public void setLoginScreen(Stage primaryStage) throws IOException { //should be changed to start method of entry home screen form
+	public void setHomeScreen(Stage primaryStage) throws IOException { //should be changed to start method of entry home screen form
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -138,7 +138,7 @@ public class EntryIPConfirmationFormController {
 		@Override
 		public void clientIpConfirmed() {
 			try {
-				setLoginScreen(primaryStage); //primary stage passed to hide previous window
+				setHomeScreen(primaryStage); //primary stage passed to hide previous window
 				} catch (IOException e) {
 				// TODO Auto-generated catch block
 			}

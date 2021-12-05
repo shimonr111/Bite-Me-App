@@ -107,8 +107,12 @@ public class EntryLoginScreenFormController{
 	 * @param event: the action event sent from the UI.
 	 */
 	public void getLoginBtn(ActionEvent event) throws Exception {
+		//TBD: here we need to check if all the must fields are field correctly to same format"
 		Login login = new Login(userNameField.getText(),passwordField.getText());
 		LoginAnalyze.checkInputFromUser(login);
+		//put here 
+//		Message message = new Message (Task.LOGIN,Answer.WAIT_RESPONSE,login);
+//		SendToServer(message);
 	}
 
 	

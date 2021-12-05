@@ -55,7 +55,7 @@ public class LoginAnalyze extends AbstractBiteMeController {
 		// checking if the username and the password are exist on DB.
 		else { 
 			Message message = new Message (Task.LOGIN,Answer.WAIT_RESPONSE,login);
-			SendToServer(message);
+			sendToClient(message);
 			
 		}
 	}
