@@ -1,7 +1,11 @@
 package gui;
 
 import java.io.IOException;
+import analyze.LoginAnalyze;
 import bitemeclient.PopUpMessages;
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,15 +19,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.Login;
 
 /** 
- * @author Shimon Rubin
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour. 
+ *
  * Class description: 
- * 
  * This class present the Login Screen 
  * and responsible for the functionality
  * of this screen 
- * @version 02/12/2021
+ * @version 04/12/2021
  */
 public class EntryLoginScreenFormController{
 	/**
@@ -96,10 +102,12 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Using login button hide 
 	 * window and go user portal 
-	 * screen. 
+	 * screen.
+	 * @param event: the action event sent from the UI.
 	 */
 	public void getLoginBtn(ActionEvent event) throws Exception {
-		
+		Login login = new Login(userNameField.getText(),passwordField.getText());
+		LoginAnalyze.checkInputFromUser(login);
 	}
 
 	
@@ -107,6 +115,7 @@ public class EntryLoginScreenFormController{
 	 * Using help button
 	 * in order to show instructions
 	 * for the current screen 
+	 * @param event: the action event sent from the UI.
 	 */
 	public void getHelpBtn(ActionEvent event) throws Exception {
 		PopUpMessages.helpMessage("Insert your user name and password and then press Login.");
@@ -116,6 +125,7 @@ public class EntryLoginScreenFormController{
 	 * Using exit button
 	 * in order to exit from
 	 * the app. 
+	 * @param event: the action event sent from the UI.
 	 */
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.exit(0);
@@ -126,6 +136,7 @@ public class EntryLoginScreenFormController{
 	 * Using close button (back button)
 	 * hide window and go 
 	 * backwards 
+	 * @param event: the action event sent from the UI.
 	 */
 	public void getCloseBtn(ActionEvent event) throws Exception {
 		Platform.runLater(new Runnable() {
@@ -154,6 +165,8 @@ public class EntryLoginScreenFormController{
 			}
 		});
 	}
+	
+
 
 
 }

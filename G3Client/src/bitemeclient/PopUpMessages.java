@@ -6,14 +6,15 @@ import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 /**
- * 
+ * @author Mousa, Srour. 
  * @author Shimon, Rubin.
+ *
  * Class description: 
  * 
  * This is a class for pop
  * up messages to the client.
  *
- * @version 02/12/2021
+ * @version 04/12/2021
  */
 public class PopUpMessages {
 	/**
@@ -35,5 +36,19 @@ public class PopUpMessages {
 		DialogPane dialogPane = alert.getDialogPane();
 		alert.showAndWait();
 	}
-
+	
+	/**
+	 * This function show an error pop
+	 * up messages to the client UI.
+	 * @param message
+	 */
+	public static void missingFieldMessage(String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText("Missing fields");
+		alert.setContentText(message);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		DialogPane dialogpane = alert.getDialogPane();
+		alert.showAndWait();
+	}
 }
