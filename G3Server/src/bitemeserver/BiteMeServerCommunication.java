@@ -1,11 +1,6 @@
-// This file contains material supporting section 3.7 of the textbook:
-// "Object Oriented Software Engineering" and is issued under the open-source
-// license found at www.lloseng.com 
 package bitemeserver;
 
 import java.sql.Connection;
-
-
 import analyze.LoginAnalyze;
 import communication.*;
 import guiserver.ServerGuiController;
@@ -17,13 +12,14 @@ import users.Login;
 
 /**
  * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ *
  * Class description: 
- * 
  * This class overrides some of the
  * methods in the abstract superclass in order
  * to give more functionality to the server.
  * 
- * @version 03/12/2021
+ * @version 04/12/2021
  */
 public class BiteMeServerCommunication extends AbstractServer {
 	/**
@@ -170,4 +166,3 @@ public class BiteMeServerCommunication extends AbstractServer {
 	}
 
 }
-//End of EchoServer class
