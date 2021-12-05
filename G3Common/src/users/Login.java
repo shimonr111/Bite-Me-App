@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
  *  Class description:
  *  This class is for login form witch contains the username and password
  *  that the user enters, in addition there are 2 more parameters in this class
