@@ -41,7 +41,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * This injective number defines the business W4C replacement code In addition
 	 * to the User w4c code.
 	 */
-	protected int businessW4cCodeNumber;
+	protected String businessW4cCodeNumber;
 
 	/**
 	 * This is the constructor of the class.
@@ -65,7 +65,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	public BusinessCustomer(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			String businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
+			String businessCustomerPosition, int budgetMaxAmount, String businessW4cCodeNumber) {
 		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
 				userEmail, phoneNumber, privateCreditCard);
 		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
@@ -96,11 +96,11 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.budgetMaxAmount = budgetMaxAmount;
 	}
 
-	public int getBusinessW4cCode() {
+	public String getBusinessW4cCode() {
 		return businessW4cCodeNumber;
 	}
 
-	public void setBusinessW4cCode(int businessW4cCodeNumber) {
+	public void setBusinessW4cCode(String businessW4cCodeNumber) {
 		this.businessW4cCodeNumber = businessW4cCodeNumber;
 	}
 	

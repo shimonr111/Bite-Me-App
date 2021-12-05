@@ -35,5 +35,19 @@ public class PopUpMessages {
 		DialogPane dialogPane = alert.getDialogPane();
 		alert.showAndWait();
 	}
-
+	
+	/**
+	 * This function show an error pop
+	 * up messages to the client UI.
+	 * @param message
+	 */
+	public static void missingFieldMessage(String message) {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle("Error");
+		alert.setHeaderText("Missing fields");
+		alert.setContentText(message);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		DialogPane dialogpane = alert.getDialogPane();
+		alert.showAndWait();
+	}
 }

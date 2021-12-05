@@ -4,14 +4,16 @@
 package bitemeserver;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+
+import analyze.LoginAnalyze;
 import communication.*;
 import guiserver.ServerGuiController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import orders.Order;
+import query.LoginQueries;
+import users.Login;
 
 /**
  * @author Lior, Guzovsky.
@@ -65,12 +67,27 @@ public class BiteMeServerCommunication extends AbstractServer {
 					+ "  " + client.getInetAddress().getHostAddress());
 			recivedMessageFromClient.setAnswer(Answer.SUCCEED);
 			break;
-		default:
-			break;
+			
+		case LOGIN:
+			Login loginResult= LoginQueries.getLogin(((Login)(((Message) message).getObject())).getUserName(), connection);
+			if(loginResult==null) {// if the result still null that means we didn't find the row with the specific username.
+				recivedMessageFromClient.setAnswer(Answer.ERROR_USER_NOT_FOUND);
+				recivedMessageFromClient.setTask(Task.PRINT_ERROR_TO_SCREEN);
+			}
+			// if the password from the DB is not equal to the password that the user entered that means he entered a wrong password.
+			else if (!(loginResult.getPassword().equals(((Login)(((Message) message).getObject())).getPassword()))) {
+				recivedMessageFromClient.setAnswer(Answer.ERROR_WRONG_PASSWORD);
+				recivedMessageFromClient.setTask(Task.PRINT_ERROR_TO_SCREEN);
+			}
+			// in this case we are going to analyze the type of the user and get every parameter using getUserByType method
+			else {
+				message=LoginAnalyze.getUserByType(loginResult.getUserType(), loginResult.getUserId(), connection, (Message)message);
+			}
 		}
 		sentToSpecificClient(client,recivedMessageFromClient);
 		}
 	}
+
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server

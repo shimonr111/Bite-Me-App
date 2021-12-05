@@ -1,7 +1,12 @@
 package gui;
 
 import java.io.IOException;
+
+import analyze.LoginAnalyze;
 import bitemeclient.PopUpMessages;
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.Login;
 
 /** 
  * @author Shimon Rubin
@@ -29,6 +35,8 @@ public class EntryLoginScreenFormController{
 	/**
 	 * Class members description:
 	 */
+	
+	public static EntryLoginScreenFormController entryLoginScreenFormController;
 	
 	/**
 	 * name 
@@ -99,7 +107,8 @@ public class EntryLoginScreenFormController{
 	 * screen. 
 	 */
 	public void getLoginBtn(ActionEvent event) throws Exception {
-		
+		Login login = new Login(userNameField.getText(),passwordField.getText());
+		LoginAnalyze.checkInputFromUser(login);
 	}
 
 	
@@ -154,6 +163,8 @@ public class EntryLoginScreenFormController{
 			}
 		});
 	}
+	
+
 
 
 }
