@@ -1,9 +1,6 @@
 package analyze;
 
 import java.io.IOException;
-
-
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -14,8 +11,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * @author Lior, Guzovsky. Class description: This is a class which is a Wrapper
- *         for handeling all messages from the server.
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ *
+ * Class description:
+ * This is a class which is a Wrapper
+ * for handeling all messages from the server.
  * @version 03/12/2021
  */
 public class Analyze {
@@ -49,7 +50,7 @@ public class Analyze {
 				default:
 					break;
 				}
-				// all the cases below has to be displayed with fxmls !!
+				/* TBD: @Alexander to add listneres and open all the nessacry userportal */
 			case CREATE_USER_PORTAL:
 				switch (recievedAnswerFromServer) {
 				case CREATE_USER_PORTAL_FOR_CUSTOMER:
@@ -70,6 +71,7 @@ public class Analyze {
 				default:
 					break;
 				}
+				/* TBD: @Alexander to add listneres and print to screen*/
 			case PRINT_ERROR_TO_SCREEN:
 				switch(recievedAnswerFromServer) {
 				case ERROR_USER_NOT_FOUND:
