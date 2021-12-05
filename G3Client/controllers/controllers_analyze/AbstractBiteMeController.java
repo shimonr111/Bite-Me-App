@@ -1,4 +1,4 @@
-package analyze;
+package controllers_analyze;
 
 import bitemeclient.BiteMeClientUI;
 import communication.Message;

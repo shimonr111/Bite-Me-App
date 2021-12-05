@@ -2,6 +2,9 @@ package guiserver;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+
+import analyze.Analyze;
+import analyze.AnalyzeListener;
 import bitemeserver.BiteMeServerUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -48,6 +51,8 @@ public class ServerGuiController {
 	* The db password.
 	*/
 	final public static String DEFAULT_DB_PASSWORD = "orimalka789";
+	
+	public static ServerGuiController sgc;
 	
 	/**
 	* An FXML loader instance.
@@ -108,6 +113,13 @@ public class ServerGuiController {
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		//add and implement listener to display connection message
+		Analyze.addServerListener(new AnalyzeListener() {
+			@Override
+			public void serverConfirmIp(String string) {
+				serverController.displayToConsoleInServerGui(string);
+			}
+		});
 	}
 
 	/* insert all the information for the Server configuration screen */
@@ -166,9 +178,12 @@ public class ServerGuiController {
 	}
 
 	public void displayToConsoleInServerGui(String message) {
-		Platform.runLater(() -> {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
 			String currentText = txtConsole.getText();
-			this.txtConsole.setText(currentText + "\n" + message);
+			txtConsole.setText(currentText + "\n" + message);
+			}
 		});
 	}
 

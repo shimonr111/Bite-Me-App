@@ -1,6 +1,6 @@
 package bitemeclient;
 
-import gui.EntryIPConfirmationFormController;
+import controllers_gui.EntryIPConfirmationFormController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

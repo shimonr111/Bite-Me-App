@@ -1,11 +1,11 @@
-package analyze;
+package controllers_analyze;
 
 import java.io.IOException;
 import bitemeclient.BiteMeClientUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
-import gui.EntryIPConfirmationFormController;
+import controllers_gui.EntryIPConfirmationFormController;
 import javafx.event.ActionEvent;
 
 /**
@@ -54,7 +54,8 @@ public class IPConfirmationAnalyze extends AbstractBiteMeController {
 	 * @throws IOException
 	 */
 	public static void userIPRecievedConfirmationSucceeded() throws IOException {
-		EntryIPConfirmationFormController.ipConfirmationFormController.setLoginScreen(event);
+		//EntryIPConfirmationFormController.ipConfirmationFormController.setLoginScreen(event);
+		
 
 	}
 	

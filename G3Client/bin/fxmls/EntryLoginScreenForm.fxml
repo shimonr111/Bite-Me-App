@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EntryLoginScreenFormController">
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryLoginScreenFormController">
    <children>
       <TextField fx:id="userNameField" layoutX="248.0" layoutY="173.0" promptText="ID" />
       <TextField fx:id="passwordField" layoutX="248.0" layoutY="208.0" promptText="Password" />
