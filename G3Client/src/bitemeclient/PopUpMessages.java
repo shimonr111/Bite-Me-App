@@ -6,14 +6,15 @@ import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
 
 /**
- * 
+ * @author Mousa, Srour. 
  * @author Shimon, Rubin.
+ *
  * Class description: 
  * 
  * This is a class for pop
  * up messages to the client.
  *
- * @version 02/12/2021
+ * @version 04/12/2021
  */
 public class PopUpMessages {
 	/**
