@@ -1,4 +1,4 @@
-package analyze;
+package controllers_analyze;
 
 import java.io.IOException;
 import bitemeclient.BiteMeClientUI;
@@ -6,8 +6,8 @@ import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
-import gui.EntryIPConfirmationFormController;
-import gui.EntryLoginScreenFormController;
+import controllers_gui.EntryIPConfirmationFormController;
+import controllers_gui.EntryLoginScreenFormController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

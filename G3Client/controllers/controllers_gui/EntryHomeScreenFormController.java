@@ -1,4 +1,4 @@
-package gui;
+package controllers_gui;
 
 import bitemeclient.PopUpMessages;
 import javafx.event.ActionEvent;

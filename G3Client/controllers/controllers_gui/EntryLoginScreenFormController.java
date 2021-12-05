@@ -1,11 +1,12 @@
-package gui;
+package controllers_gui;
 
 import java.io.IOException;
-import analyze.LoginAnalyze;
+
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+import controllers_analyze.LoginAnalyze;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

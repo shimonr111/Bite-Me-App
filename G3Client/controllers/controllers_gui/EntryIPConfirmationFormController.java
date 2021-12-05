@@ -1,8 +1,10 @@
-package gui;
+package controllers_gui;
 
 import java.io.IOException;
-import java.security.Principal;
-import analyze.IPConfirmationAnalyze;
+
+import analyze.Analyze;
+import analyze.AnalyzeListener;
+import controllers_analyze.IPConfirmationAnalyze;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -78,13 +79,14 @@ public class EntryIPConfirmationFormController {
 	 * @param event
 	 * @throws IOException
 	 */
-	public void setLoginScreen(ActionEvent event) throws IOException {
+	public void setLoginScreen(Stage primaryStage) throws IOException { //should be changed to start method of entry home screen form
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				FXMLLoader loader = new FXMLLoader();
 				Pane root;
 				try {
+					primaryStage.hide(); 
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/EntryHomeScreenForm.fxml").openStream());
@@ -99,10 +101,8 @@ public class EntryIPConfirmationFormController {
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				((Node) event.getSource()).getScene().getWindow().hide();
 			}
 		});
 	}
@@ -127,12 +127,29 @@ public class EntryIPConfirmationFormController {
 	 * @throws Exception
 	 */
 	public void start(Stage primaryStage) throws Exception {
-		ipConfirmationFormController = this;
+		//ipConfirmationFormController = this;
 		Parent root = FXMLLoader.load(getClass().getResource("/fxmls/EntryIPConfirmationForm.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Connect to server");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		//add listener and override relevant methods with implementation
+		Analyze.addClientListener(new AnalyzeListener(){ 
+		@Override
+		public void clientIpConfirmed() {
+			try {
+				setLoginScreen(primaryStage); //primary stage passed to hide previous window
+				} catch (IOException e) {
+				// TODO Auto-generated catch block
+			}
+			
+		}
+
+		@Override
+		public void clientIpNotConfirmed() {
+			
+		}
+		});
 	}
 
 }
