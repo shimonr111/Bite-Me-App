@@ -1,8 +1,6 @@
 package analyze;
 
 import java.sql.Connection;
-
-
 import communication.*;
 import query.LoginQueries;
 import users.BusinessCustomer;
