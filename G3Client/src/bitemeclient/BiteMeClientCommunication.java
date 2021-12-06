@@ -74,12 +74,10 @@ public class BiteMeClientCommunication extends AbstractClient {
 	 *
 	 * @param message The message from the UI.
 	 */
-	public void handleMessageFromClient(Message message) {
+	public void handleMessageFromClientUI(Message message) {
 		try {
 			awaitResponse = true;
 			openConnection();// in order to send more than one message
-			if (message.getTask().equals(Task.CONFIRM_IP)) // if confirm button pressed
-				awaitResponse = false;
 			sendToServer(message); // send the msg to the server
 			// wait for response
 			while (awaitResponse) {

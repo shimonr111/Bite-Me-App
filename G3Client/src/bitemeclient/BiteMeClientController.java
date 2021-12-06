@@ -44,7 +44,7 @@ public class BiteMeClientController{
 	 * @param message the message sent from the client UI to the client logic.
 	 */
 	public void accept(Message message) {
-		client.handleMessageFromClient(message);
+		client.handleMessageFromClientUI(message);
 	}
 
 

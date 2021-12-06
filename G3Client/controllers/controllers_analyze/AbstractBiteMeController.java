@@ -23,7 +23,7 @@ public abstract class AbstractBiteMeController {
 	 * 
 	 * @param message
 	 */
-	public static void SendToServer(Message message) {
+	public static void sendToClient(Message message) {
 		BiteMeClientUI.biteMeClientController.accept(message);
 	}
 

@@ -43,7 +43,7 @@ public class IPConfirmationAnalyze extends AbstractBiteMeController {
 		Answer answer = Answer.WAIT_RESPONSE;
 		Message message = new Message(task, answer, null);
 		BiteMeClientUI.startController(IP); /* get the entered IP by the client */
-		SendToServer(message);
+		sendToClient(message);
 	}
 
 	/**
