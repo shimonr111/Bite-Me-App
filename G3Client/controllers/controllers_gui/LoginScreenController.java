@@ -49,6 +49,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 */
 	public static FXMLLoader loader;
 	public static LoginScreenController loginScreenController;
+
 	
 	/**
 	 * name 

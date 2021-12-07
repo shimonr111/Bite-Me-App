@@ -27,6 +27,7 @@ public enum Answer {
 	 */
 	SUCCEED,
 	ERROR_FAILED,
+	LOGOUT_SUCCEED,
 	
 	/**
 	 * Answer enum related to Login 
