@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBusinessCustomerController">
+   <children>
+      <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLogout" layoutX="235.0" layoutY="354.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="402.0" layoutY="5.0" text="Home Screen -&gt; Login -&gt;" />
+      <Label layoutX="573.0" layoutY="8.0" text="Main Screen">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="119.0" layoutY="29.0" prefHeight="53.0" prefWidth="332.0" text="Welcome customer" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="customerNameLabel" layoutX="454.0" layoutY="29.0" prefHeight="53.0" prefWidth="97.0" text="name" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnStartOrder" layoutX="40.0" layoutY="125.0" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="31.0" prefWidth="190.0" text="Start order" />
+      <Label layoutX="43.0" layoutY="230.0" text="Customer company:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="companyNameLabel" layoutX="164.0" layoutY="230.0" text="name">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="homeBranchCombo" layoutX="40.0" layoutY="180.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="190.0" promptText="Home Branch Name" />
+      <TextArea layoutX="435.0" layoutY="125.0" prefHeight="203.0" prefWidth="180.0" promptText="שימו לב שמה שמוצג ברגע שהמסך עולה זה סניף הבית. ללקוח יש אפשרות לשנות את זה אבל זה משתנה רק להזמנה הזו (היחיד שיכול לשנות את באופן קבוע זה מנהל הסניף)" />
+   </children>
+</Pane>

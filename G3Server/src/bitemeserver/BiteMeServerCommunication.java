@@ -1,13 +1,14 @@
 package bitemeserver;
 
-import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
-import analyze.Analyze;
 import communication.Message;
 import guiserver.ServerGuiController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
+import query.Query;
+import serveranalyze.AnalyzeMessageFromClient;
 
 /**
  * @author Lior, Guzovsky.
@@ -29,6 +30,7 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * Connection instance to save the DB connection.
 	 */
 	private Connection connection;
+	
 	/**
 	 * ServerGuiController instance to have access to the controller.
 	 */
@@ -55,10 +57,10 @@ public class BiteMeServerCommunication extends AbstractServer {
 		if(message instanceof Message) {
 		Message recivedMessageFromClient = (Message)message;
 		try {
-			Analyze.analyzeMessageFromClient(message,client);
-		} catch (IOException e) {
+			sentToSpecificClient(client,AnalyzeMessageFromClient.analyzeMessageFromClient(recivedMessageFromClient,client));
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		sentToSpecificClient(client,recivedMessageFromClient);
 		}
 	}
 
@@ -68,9 +70,9 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * starts listening for connections.
 	 */
 	protected void serverStarted() {
-		ServerGuiController serverGuiController = ServerGuiController.getLoader().getController();
-		serverGuiController.displayToConsoleInServerGui("Server listening for connections on port " + getPort());
+		AnalyzeMessageFromClient.displayToMessageConsole("Server listening for connections on port " + getPort());
 		this.connection = BiteMeServerUI.connectionToDB.getConnection();
+		Query.setConnectionFromServerToDB(connection); //set connection for query Class
 	}
 
 	/**
@@ -78,56 +80,8 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * listening for connections.
 	 */
 	protected void serverStopped() {
-		ServerGuiController serverGuiController = ServerGuiController.getLoader().getController();
-		serverGuiController.displayToConsoleInServerGui("Server has stopped listening for connections.");
+		AnalyzeMessageFromClient.displayToMessageConsole("Server has stopped listening for connections.");
 	}
-
-									/*Dont delete!!! For reference!!!!*/
-	///////////////////////////////////////////////////////////////////////////////////////////////////////
-//	/* query for find the order in the DB */
-//	public Order findOrder(String OrderNumber) {
-//		PreparedStatement stmt;
-//		Order returnedOrderFromDB = null;
-//		try {
-//			stmt = connection.prepareStatement("SELECT * FROM semesterialproject.order WHERE OrderNumber = ?");
-//			stmt.setString(1, OrderNumber);
-//			ResultSet rs = stmt.executeQuery();
-//			if (rs.next()) {
-//				returnedOrderFromDB = new Order(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-//						rs.getString(6), rs.getString(5));
-//				rs.close();
-//				return returnedOrderFromDB;
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
-
-//	/* Update the order in the DB according to the delivery type and the address */
-//	public boolean updateOrder(Order newOrder) {
-//		PreparedStatement stmt;
-//		try {
-//			Order result = findOrder(newOrder.getOrderNumber());
-//			if (result == null) {
-//				System.out.println("Error!, The new OrderNumber doesn't match to the current one.");
-//				System.out.println("No update was done at the DB");
-//				return false;
-//			}
-//			stmt = connection.prepareStatement(
-//					"UPDATE semesterialproject.order SET TypeOfOrder = ?, OrderAddress = ? WHERE OrderNumber = ?");
-//			stmt.setString(1, newOrder.getOrderType());
-//			stmt.setString(2, newOrder.getOrderAddress());
-//			stmt.setString(3, newOrder.getOrderNumber());
-//			stmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//		return true;
-//	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * send message to specific
