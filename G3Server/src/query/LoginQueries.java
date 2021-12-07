@@ -52,7 +52,7 @@ public class LoginQueries {
 		//If the row doesn't exist in login Table
 		if(!rs.isBeforeFirst()) {
 			recivedMessageFromClient.setObject(null);
-			recivedMessageFromClient = setMessageAccordingly(null,recivedMessageFromClient);
+			recivedMessageFromClient = setMessageAccordingly(null,recivedMessageFromClient,null);
 			return recivedMessageFromClient;
 		}
 		//Get the user Type and ID from the statement
@@ -73,42 +73,42 @@ public class LoginQueries {
 			//parse data and put in instance.
 			customerResult = LoginQueries.getCustomer(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient);
+			recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient,"customer");
 			break;
 		case "ceobiteme":
 			CeoBiteMe ceoResult = null;
 			//parse data and put in instance.
 			ceoResult = LoginQueries.getCeo(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient);
+			recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient,"ceobiteme");
 			break;
 		case "hrmanager":
 			HrManager hrManagerResult=null;
 			//parse data and put in instance.
 			hrManagerResult=LoginQueries.getHrManager(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient);
+			recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient,"hrmanager");
 			break;
 		case "businesscustomer":
 			BusinessCustomer businessCustomerResult = null;
 			//parse data and put in instance.
 			businessCustomerResult = LoginQueries.getBusinessCustomer(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient);
+			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient,"businesscustomer");
 			break;
 		case "supplier":
 			Supplier supplierResult = null;
 			//parse data and put in instance.
 			supplierResult = LoginQueries.getSupplier(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient);
+			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplier");
 			break;
 		case "branchmanager":
 			BranchManager branchManagerResult = null;
 			//parse data and put in instance.
 			branchManagerResult = LoginQueries.getBranchManager(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient = setMessageAccordingly(branchManagerResult,recivedMessageFromClient);
+			recivedMessageFromClient = setMessageAccordingly(branchManagerResult,recivedMessageFromClient,"branchmanager");
 		default:
 			break;
 		}
@@ -121,9 +121,10 @@ public class LoginQueries {
 	 * DO NOT CHANGE THE ORDER IN THE LOWER ELSE CASE WHERE WE USE INSTANCEOF!!!!!
 	 * @param user
 	 * @param message
+	 * @param tableName : it is the table name in DB according to the user type .
 	 * @return message with the correct Task and Answer.
 	 */
-	public static Message setMessageAccordingly(User user, Message message) {
+	public static Message setMessageAccordingly(User user, Message message,String tableName) {
 		if (user == null) {
 			message.setAnswer(Answer.ERROR_USER_NOT_FOUND);
 			message.setTask(Task.PRINT_ERROR_TO_SCREEN);
@@ -134,6 +135,9 @@ public class LoginQueries {
 			message.setAnswer(Answer.ERROR_USER_NOT_CONFIRMED);
 			message.setTask(Task.PRINT_ERROR_TO_SCREEN);
 		} else {
+			//set the user status to isLoggedIn=1, we do it here after checking all the conditions up, so we know the user can log in .
+			Query.updateOneColumnForTableInDbByPrimaryKey(tableName,"isLoggedIn"+"="+"1" , "userID="+user.getUserId());
+
 			message.setObject(user);
 			message.setTask(Task.CREATE_USER_PORTAL);
 			if (user instanceof HrManager)
@@ -150,6 +154,26 @@ public class LoginQueries {
 				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER);
 		}
 		return message;
+	}
+	
+	/**
+	 *  This method gets an message that contains the User as object in the message 
+	 *  we check what is the user type and we send query to update the isLoggedIn status accordingly.
+	 * @param message
+	 */
+	public static void logOutUser(Message message) {
+		if (message.getObject() instanceof HrManager)
+			Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof BusinessCustomer)
+			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof Customer)
+			Query.updateOneColumnForTableInDbByPrimaryKey("customer","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof CeoBiteMe)
+			Query.updateOneColumnForTableInDbByPrimaryKey("ceobiteme","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof Supplier)
+			Query.updateOneColumnForTableInDbByPrimaryKey("supplier","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof BranchManager) 
+			Query.updateOneColumnForTableInDbByPrimaryKey("branchmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 	}
 	
 	/**

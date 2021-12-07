@@ -8,6 +8,9 @@ import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+import controllers_gui.AbstractBiteMeController;
+import controllers_gui.UserPortalOfBusinessCustomerController;
+import users.User;
 
 /**
  * @author Lior, Guzovsky.
@@ -67,6 +70,7 @@ public class AnalyzeMessageFromServer {
 				}
 				break;
 			case CREATE_USER_PORTAL:
+				AbstractBiteMeController.connectedUser=((User)recivedMessageFromServer.getObject()); // add the received user into the connected users list.
 				switch (recievedAnswerFromServer) {
 				case CREATE_USER_PORTAL_FOR_CUSTOMER:
 					/*notify all the listeners that 

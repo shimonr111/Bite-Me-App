@@ -49,4 +49,21 @@ public class Query {
 		}
 		return rs;
 	}
+	/**
+	 * 
+	 * @param tableName
+	 * @param columnSet : the name of the column and what we want to set it for example : (isLoggedIn=1)
+	 * @param condition : what is the condition behind the WHERE operand , for example : (userID = 12)
+	 */
+	public static void updateOneColumnForTableInDbByPrimaryKey(String tableName,String columnSet,String condition) {
+		PreparedStatement pstmt=null;
+		//ResultSet rs=null;
+		try {
+			String query = "UPDATE semesterialproject."+ tableName+" SET "+columnSet+" WHERE " +"("+condition+")";
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	}
 }
