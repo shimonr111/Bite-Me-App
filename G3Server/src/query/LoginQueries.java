@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import communication.Answer;
 import communication.Message;
+import communication.Task;
 import users.Branch;
+import users.BranchManager;
 import users.BudgetType;
 import users.BusinessCustomer;
 import users.CeoBiteMe;
@@ -14,60 +18,150 @@ import users.Customer;
 import users.HrManager;
 import users.Login;
 import users.Supplier;
+import users.User;
 
+/**
+ * 
+ * @author Mousa, Srour
+ * @author Lior, Guzovsky
+ * Class description:
+ * This class will contain all the queries to DB
+ * that relate to Login phase.
+ * @version 07/12/2021
+ */
 public class LoginQueries {
-	/**
-	 * 
-	 * @author Mousa, Srour
-	 * Class description:
-	 * This class will contain all the queries to DB
-	 * All queries to DB will run throw this class.
-	 * @version 05/12/2021
-	 */
 	
 	/**
-	 * This method searches for a login object by his userName
-	 * and gets all the parameters and creates a new object from these parameters.
-	 * @param userName
-	 * @param con
-	 * @return loginRsult which contains the specific row from the DB.
+	 * main function for parsing the message and getting the relevant data for login check
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
 	 */
-	public static Login getLogin(String userName,Connection con) {
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		Login loginResult = null;
-		String query ="SELECT * FROM semesterialproject.login WHERE username=?"; // setting the query
-		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userName);
-			rs= pstmt.executeQuery();	
-			if(rs.next()) {
-				loginResult = new Login(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-			}
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static Message createLoginMessageForServer(Message messageFromClient) throws SQLException {
+		Message recivedMessageFromClient = messageFromClient;
+		String userName = ((Login)messageFromClient.getObject()).getUserName();
+		String password = ((Login)messageFromClient.getObject()).getPassword();
+		String userId = null;
+		String userType = null;
+		/**
+		 * get the row from the DB if 
+		 * possible from the login table.
+		 */
+		ResultSet rs = Query.getRowFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
+		//If the row doesn't exist in login Table
+		if(!rs.isBeforeFirst()) {
+			recivedMessageFromClient.setObject(null);
+			recivedMessageFromClient = setMessageAccordingly(null,recivedMessageFromClient);
+			return recivedMessageFromClient;
 		}
-		return loginResult;
+		//Get the user Type and ID from the statement
+		if(rs.next()) {
+		userId = rs.getString(3);
+		userType =  rs.getString(4);
+		}
+		rs.close();
+		/**
+		 * get a row from the 
+		 * DB which is according to the userType table
+		 * for example: "Customer Table.
+		 */
+		rs = Query.getRowFromTableInDB(userType,"userID='"+userId+"'");
+		switch(userType) {
+		case "customer":
+			Customer customerResult = null;
+			//parse data and put in instance.
+			customerResult = LoginQueries.getCustomer(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient);
+			break;
+		case "ceobiteme":
+			CeoBiteMe ceoResult = null;
+			//parse data and put in instance.
+			ceoResult = LoginQueries.getCeo(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient);
+			break;
+		case "hrmanager":
+			HrManager hrManagerResult=null;
+			//parse data and put in instance.
+			hrManagerResult=LoginQueries.getHrManager(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient);
+			break;
+		case "businesscustomer":
+			BusinessCustomer businessCustomerResult = null;
+			//parse data and put in instance.
+			businessCustomerResult = LoginQueries.getBusinessCustomer(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient);
+			break;
+		case "supplier":
+			Supplier supplierResult = null;
+			//parse data and put in instance.
+			supplierResult = LoginQueries.getSupplier(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient);
+			break;
+		case "branchmanager":
+			BranchManager branchManagerResult = null;
+			//parse data and put in instance.
+			branchManagerResult = LoginQueries.getBranchManager(rs);
+			//set the Message to return to the Client side
+			recivedMessageFromClient = setMessageAccordingly(branchManagerResult,recivedMessageFromClient);
+		default:
+			break;
+		}
+		return recivedMessageFromClient;
+	}
+	
+	/**
+	 * This method gets an user object and sets the correct
+	 * Task and answer according to the info.
+	 * DO NOT CHANGE THE ORDER IN THE LOWER ELSE CASE WHERE WE USE INSTANCEOF!!!!!
+	 * @param user
+	 * @param message
+	 * @return message with the correct Task and Answer.
+	 */
+	public static Message setMessageAccordingly(User user, Message message) {
+		if (user == null) {
+			message.setAnswer(Answer.ERROR_USER_NOT_FOUND);
+			message.setTask(Task.PRINT_ERROR_TO_SCREEN);
+		} else if (user.isLoggedIn()) {
+			message.setAnswer(Answer.ERROR_ALREADY_LOGGED_IN);
+			message.setTask(Task.PRINT_ERROR_TO_SCREEN);
+		} else if (!user.isConfirmedInSystem()) {
+			message.setAnswer(Answer.ERROR_USER_NOT_CONFIRMED);
+			message.setTask(Task.PRINT_ERROR_TO_SCREEN);
+		} else {
+			message.setObject(user);
+			message.setTask(Task.CREATE_USER_PORTAL);
+			if (user instanceof HrManager)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_HR_MANAGER);
+			else if (user instanceof BusinessCustomer)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_BUSINESS_CUSTOMER);
+			else if (user instanceof Customer)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_CUSTOMER);
+			else if (user instanceof CeoBiteMe)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_CEO_BITE_ME);
+			else if (user instanceof Supplier)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_SUPPLIER);
+			else if (user instanceof BranchManager)
+				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER);
+		}
+		return message;
 	}
 	
 	/**
 	 * This method searches for a customer object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return customrResult which contains the specific row from the DB.
+	 * 
+	 * @param rs
+	 * @return
 	 */
-	public static Customer getCustomer(String userId,Connection con) {
+	public static Customer getCustomer(ResultSet rs) {
 		Customer customerResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query ="SELECT * FROM semesterialproject.customer WHERE userID=?";
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs= pstmt.executeQuery();	
 			if(rs.next()) {
 				customerResult = new Customer(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10));
@@ -83,19 +177,13 @@ public class LoginQueries {
 	/**
 	 * This method searches for a ceobiteme object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return ceoResult which contains the specific row from the DB.
+	 * 
+	 * @param rs
+	 * @return
 	 */
-	public static CeoBiteMe getCeo(String userId,Connection con) {
+	public static CeoBiteMe getCeo(ResultSet rs) {
 		CeoBiteMe ceoResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query ="SELECT * FROM semesterialproject.ceobiteme WHERE userID=?";
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs= pstmt.executeQuery();	
 			if(rs.next()) {
 				ceoResult = new CeoBiteMe(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9));
@@ -110,23 +198,17 @@ public class LoginQueries {
 	
 	/**
 	 * This method searches for a HrManager object by his userId
-	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return hrManagerResult which contains the specific row from the DB.
+	 * and gets all the parameter and creates a new object from these parameters
+	 * 
+	 * @param rs
+	 * @return
 	 */
-	public static HrManager getHrManager(String userId,Connection con) {
+	public static HrManager getHrManager(ResultSet rs) {
 		HrManager hrManagerResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query ="SELECT * FROM semesterialproject.hrmanager WHERE userID=?";
 		Company company = null;
-		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs= pstmt.executeQuery();	
+		try {	
 			if(rs.next()) {
-				company = getCompany(rs.getString(11),con);
+				company = getCompany(rs.getString(11));
 				hrManagerResult = new HrManager(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),rs.getString(13),rs.getInt(14),
 								rs.getString(15));
@@ -142,22 +224,16 @@ public class LoginQueries {
 	/**
 	 * This method searches for a BusinessCustomer object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return businessCustomerResult which contains the specific row from the DB.
+	 * 
+	 * @param rs
+	 * @return
 	 */
-	public static BusinessCustomer getBusinessCustomer(String userId,Connection con) {
+	public static BusinessCustomer getBusinessCustomer(ResultSet rs) {
 		BusinessCustomer businessCustomerResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query ="SELECT * FROM semesterialproject.businesscustomer WHERE userID=?";
 		Company company = null;
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs= pstmt.executeQuery();	
 			if(rs.next()) {
-				company = getCompany(rs.getString(11),con);
+				company = getCompany(rs.getString(11));
 				businessCustomerResult = new BusinessCustomer(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),rs.getString(13),rs.getInt(14),
 								rs.getString(15));
@@ -173,19 +249,13 @@ public class LoginQueries {
 	/**
 	 * This method searches for a Supplier object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return supplierResult which contains the specific row from the DB.
+	 * 
+	 * @param rs
+	 * @return
 	 */
-	public static Supplier getSupplier(String userId,Connection con) {
+	public static Supplier getSupplier(ResultSet rs) {
 		Supplier supplierResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query ="SELECT * FROM semesterialproject.supplier WHERE userID=?";
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, userId);
-			rs= pstmt.executeQuery();	
 			if(rs.next()) {;
 				supplierResult = new Supplier(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11));
@@ -201,19 +271,14 @@ public class LoginQueries {
 	/**
 	 * This method searches for a Company object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
-	 * @param userId
-	 * @param con
-	 * @return companyResult which contains the specific row from the DB.
+	 * 
+	 * @param companyName
+	 * @return
 	 */
-	public static Company getCompany(String companyName,Connection con) {
+	public static Company getCompany(String companyName) {
 		Company companyResult=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		String query="SELECT * FROM semesterialproject.company WHERE companyNAme=?";
+		ResultSet rs = Query.getRowFromTableInDB("company","companyName='"+companyName+"'");
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1, companyName);
-			rs=pstmt.executeQuery();
 			if(rs.next()) {
 				companyResult = new Company(rs.getString(1),rs.getBoolean(2));
 			}
@@ -222,5 +287,27 @@ public class LoginQueries {
 						e.printStackTrace();
 		}
 		return companyResult;
+	}
+	
+	/**
+	 * This is a function for getting data from DB
+	 * for the Branch Manager
+	 * 
+	 * @param rs
+	 * @return
+	 */
+	public static BranchManager getBranchManager(ResultSet rs) {
+		BranchManager branchManagerResult=null;
+		try {
+			if(rs.next()) {;
+			branchManagerResult = new BranchManager(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return branchManagerResult;
 	}
 }

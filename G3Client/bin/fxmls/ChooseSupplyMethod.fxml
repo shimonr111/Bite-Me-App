@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+   <children>
+      <Label layoutX="11.0" layoutY="121.0" text="Order supply time:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <DatePicker fx:id="supplyDatePicker" layoutX="230.0" layoutY="126.0" onAction="#getSupplyDatePicker" prefHeight="31.0" prefWidth="124.0" promptText="28/11/2021" showWeekNumbers="true" />
+      <ComboBox fx:id="supplyTimeCombo" layoutX="358.0" layoutY="126.0" onAction="#getSupplyTimeCombo" prefHeight="31.0" prefWidth="94.0" promptText="15:00" />
+      <ComboBox fx:id="supplyMethodCombo" layoutX="229.0" layoutY="164.0" onAction="#getSupplyMethodCombo" prefHeight="31.0" prefWidth="223.0" promptText="Choose supply method" />
+      <Label layoutX="147.0" layoutY="40.0" prefHeight="53.0" prefWidth="368.0" text="Supply Configuration" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="159.0" text="Supply method:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBack" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="nextBtn" layoutX="555.0" layoutY="438.0" mnemonicParsing="false" onAction="#getBtnNext" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="95.0" layoutY="6.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt; W4C Identification -&gt; Choose resturant -&gt; Choose items -&gt;">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="544.0" layoutY="6.0" text="Supply Configuration">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

@@ -2,9 +2,12 @@ package controllers_gui;
 
 import java.io.IOException;
 
-import analyze.Analyze;
-import analyze.AnalyzeListener;
-import controllers_analyze.IPConfirmationAnalyze;
+import bitemeclient.BiteMeClientUI;
+import clientanalyze.AnalyzeClientListener;
+import clientanalyze.AnalyzeMessageFromServer;
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,16 +23,19 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
- * @author Lior, Guzovsky & Ori, Malka. 
+ * @author Lior, Guzovsky.
+ * @author Ori, Malka. 
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov
  * Class description: 
  * 
  * This is a class for 
  * controlling the UI IP
  * form.
  * 
- * @version 03/12/2021
+ * @version 06/12/2021
  */
-public class EntryIPConfirmationFormController {
+public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
@@ -39,8 +45,7 @@ public class EntryIPConfirmationFormController {
 	 * working with this controller
 	 * from outside of the class.
 	 */
-	public static EntryIPConfirmationFormController ipConfirmationFormController;
-
+	
 	@FXML
 	private Button btnExit = null;;
 
@@ -51,11 +56,41 @@ public class EntryIPConfirmationFormController {
 	private TextField enterIPTxt;
 
 	/**
+	 * Load the IP form
+	 * 
+	 * @param primaryStage
+	 * @throws Exception
+	 */
+	public void start(Stage primaryStage) throws Exception {
+		Parent root = FXMLLoader.load(getClass().getResource("/fxmls/EntryIPConfirmationForm.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("Connect to server");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		//add listener and override relevant methods with implementation
+		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){ 
+		@Override
+		public void clientIpConfirmed() {
+			try {
+				setHomeScreen(primaryStage); //primary stage passed to hide previous window
+				} catch (IOException e) {
+			}
+		}
+
+		@Override
+		public void clientIpNotConfirmed() {
+			//TBD: add notification to client
+			}
+		});
+	}
+	
+	/**
 	 * button to exit from
 	 * the frame. 
 	 */
 	public void exitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit IP server configuration");
+		//TBD: add sending the client ip to the server (Disconnected)
 		System.exit(0);
 	}
 
@@ -69,7 +104,11 @@ public class EntryIPConfirmationFormController {
 	 * @throws Exception
 	 */
 	public void Confirm(ActionEvent event) throws Exception {
-		IPConfirmationAnalyze.userIPConfirmationRequest(event, enterIPTxt.getText());
+		Task task = Task.CONFIRM_IP;
+		Answer answer = Answer.WAIT_RESPONSE;
+		Message message = new Message(task, answer, null);
+		BiteMeClientUI.startController(enterIPTxt.getText()); /* get the entered IP by the client */
+		sendToClient(message);
 	}
 
 	/**
@@ -118,38 +157,6 @@ public class EntryIPConfirmationFormController {
 	public void setErrorToClientUI(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		return;
-	}
-
-	/**
-	 * Load the IP form
-	 * 
-	 * @param primaryStage
-	 * @throws Exception
-	 */
-	public void start(Stage primaryStage) throws Exception {
-		//ipConfirmationFormController = this;
-		Parent root = FXMLLoader.load(getClass().getResource("/fxmls/EntryIPConfirmationForm.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Connect to server");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		//add listener and override relevant methods with implementation
-		Analyze.addClientListener(new AnalyzeListener(){ 
-		@Override
-		public void clientIpConfirmed() {
-			try {
-				setHomeScreen(primaryStage); //primary stage passed to hide previous window
-				} catch (IOException e) {
-				// TODO Auto-generated catch block
-			}
-			
-		}
-
-		@Override
-		public void clientIpNotConfirmed() {
-			
-		}
-		});
 	}
 
 }

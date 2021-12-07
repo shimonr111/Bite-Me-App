@@ -3,8 +3,6 @@ package guiserver;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import analyze.Analyze;
-import analyze.AnalyzeListener;
 import bitemeserver.BiteMeServerUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,15 +15,20 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import serveranalyze.AnalyzeMessageFromClient;
+import serveranalyze.AnalyzeServerListener;
 
 /**
  * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov
+ * 
  * Class description: 
  * 
  * This is a class for the UI 
  * server controller.
  * 
- * @version 03/12/2021
+ * @version 06/12/2021
  */
 public class ServerGuiController {
 	/**
@@ -50,7 +53,7 @@ public class ServerGuiController {
 	/**
 	* The db password.
 	*/
-	final public static String DEFAULT_DB_PASSWORD = "orimalka789";
+	final public static String DEFAULT_DB_PASSWORD = "S6FW8Ps6fw8p!";
 	
 	public static ServerGuiController sgc;
 	
@@ -114,10 +117,10 @@ public class ServerGuiController {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		//add and implement listener to display connection message
-		Analyze.addServerListener(new AnalyzeListener() {
+		AnalyzeMessageFromClient.addServerListener(new AnalyzeServerListener() {
 			@Override
-			public void serverConfirmIp(String string) {
-				serverController.displayToConsoleInServerGui(string);
+			public void displayToGuiServerConsole(String messageToGuiServerCosole) {
+				serverController.displayToConsoleInServerGui(messageToGuiServerCosole);
 			}
 		});
 	}
@@ -161,7 +164,6 @@ public class ServerGuiController {
 	@FXML
 	public void disconnectBtn(ActionEvent event) throws Exception {
 		setVisabilityForUI(false);
-
 		BiteMeServerUI.DisconnectServer(); // when button Disconnect is clicked than terminate server listening method
 	}
 	
@@ -177,6 +179,12 @@ public class ServerGuiController {
 		connectBtn.setDisable(isVisable);
 	}
 
+	/**
+	 * This is a method used 
+	 * to display to the console of the server.
+	 * 
+	 * @param message
+	 */
 	public void displayToConsoleInServerGui(String message) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -187,6 +195,11 @@ public class ServerGuiController {
 		});
 	}
 
+	/**
+	 * function for getting the loader
+	 * 
+	 * @return
+	 */
 	public static FXMLLoader getLoader() {
 		return loader;
 	}

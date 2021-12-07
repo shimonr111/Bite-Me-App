@@ -51,7 +51,7 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "HR Manager: " + userFirstName  + userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
+		return "HR Manager: " + userFirstName  + " "+userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
 	}
 
 }

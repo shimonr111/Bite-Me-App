@@ -1,14 +1,22 @@
 package controllers_gui;
 
+import java.io.IOException;
+
 import bitemeclient.PopUpMessages;
+import clientanalyze.AnalyzeClientListener;
+import clientanalyze.AnalyzeMessageFromServer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * @author Shimon Rubin
@@ -46,8 +54,9 @@ public class EntryHomeScreenFormController{
 	 */
 	@FXML
 	private Button btnHelp = null;
+
 	
-	
+	private LoginScreenController entryLoginScreenFormController = new LoginScreenController();
 	public void start(Stage primaryStage) throws Exception {
 
 	}
@@ -60,13 +69,7 @@ public class EntryHomeScreenFormController{
 	 */
 	public void getEnterBtn(ActionEvent event) throws Exception {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		Stage primaryStage = new Stage();
-		Parent root = FXMLLoader.load(getClass().getResource("/fxmls/EntryLoginScreenForm.fxml"));
-		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/EntryLoginScreenForm.css").toExternalForm());
-		primaryStage.setTitle("Login");
-		primaryStage.setScene(scene);
-		primaryStage.show();/* show the new screen */
+		entryLoginScreenFormController.initLoginScreen();
 	}
 
 	
@@ -87,8 +90,6 @@ public class EntryHomeScreenFormController{
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.exit(0);
 	}
-	
-
 
 }
 

@@ -5,9 +5,9 @@
 package bitemeclient;
 
 import java.io.IOException;
-import analyze.Analyze;
+
+import clientanalyze.AnalyzeMessageFromServer;
 import communication.Message;
-import communication.Task;
 import ocsf.client.AbstractClient;
 
 
@@ -64,7 +64,7 @@ public class BiteMeClientCommunication extends AbstractClient {
 	public void handleMessageFromServer(Object message) throws IOException {
 		if(message instanceof Message ) {
 			awaitResponse = false;
-			Analyze.analyzeMessageFromServer(message);
+			AnalyzeMessageFromServer.analyzeMessageFromServer(message);
 		}
 	}
 
