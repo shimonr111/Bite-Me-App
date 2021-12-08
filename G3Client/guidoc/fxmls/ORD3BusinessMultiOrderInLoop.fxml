@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+   <children>
+      <Button id="btnExit" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="181.0" layoutY="52.0" prefHeight="53.0" prefWidth="292.0" text="Add participants" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; W4C Identification -&gt; Choose order type (Business customer) -&gt;">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <Label layoutX="566.0" layoutY="8.0" text="Add participants">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="addPartiBtn" layoutX="36.0" layoutY="142.0" mnemonicParsing="false" onAction="#getBtnAddParti" prefHeight="31.0" prefWidth="211.0" text="Add another participant" />
+      <Button fx:id="continueBtn" layoutX="36.0" layoutY="192.0" mnemonicParsing="false" onAction="#getBtnContinue" prefHeight="35.0" prefWidth="211.0" text="Continue Order" />
+      <Text layoutX="279.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="מחזיר ל1" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text layoutX="278.0" layoutY="215.0" strokeType="OUTSIDE" strokeWidth="0.0" text="מעביר ל4" />
+   </children>
+</Pane>
