@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -50,9 +48,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController{
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		//TBD: add logic for updating logged in in DB to logged out
-		Message message= new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
+		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
-		connectedUser=null;
+		connectedUser = null;
 		System.exit(0);
 	}
 	// Event Listener on Button[#btnLogout].onAction
@@ -60,9 +58,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController{
 	public void getLogoutBtn(ActionEvent event) {
 		//TBD: add logic for updating logged in in DB to logged out
 		//System.out.println(connectedUser);
-		Message message= new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);  
+		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);  
 		sendToClient(message);
-		connectedUser=null;  // after we changed the status in DB we set the connectedUser as null so we can get new login from same client.
+		connectedUser = null;  // after we changed the status in DB we set the connectedUser as null so we can get new login from same client.
 		setToLoginScreen(event);  //set the login screen
 	}
 	// Event Listener on Button[#btnHelp].onAction
