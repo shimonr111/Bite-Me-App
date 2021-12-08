@@ -107,6 +107,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.businessW4cCodeNumber = businessW4cCodeNumber;
 	}
 	
+	public Company getcompanyOfBusinessCustomer() {
+		return companyOfBusinessCustomer;
+	}
+	
 	/**
 	 * This is the toString for this class
 	 */

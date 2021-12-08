@@ -2,10 +2,13 @@ package controllers_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -16,11 +19,23 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.HrManager;
 import javafx.scene.control.ComboBox;
 
-public class UserPortalOfHRManagerController extends AbstractBiteMeController {
+/**
+ * 
+ * @author Mousa, Srour
+ * Class description: 
+ * This is a class for 
+ * controlling the UI of hrManager
+ * form.
+ * 
+ * @version 09/12/2021
+ */
+public class UserPortalOfHRManagerController extends AbstractBiteMeController  implements Initializable{
 	@FXML
 	private Button btnStartOrder;
 	@FXML
@@ -38,7 +53,11 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController {
 	@FXML
 	private Label companyNameLabel;
 	@FXML
-	private ComboBox homeBranchCombo;
+	private ComboBox<String> homeBranchCombo;
+    @FXML
+    private Text hrManagerName;
+    @FXML
+    private Text companyName;
 
 	public static FXMLLoader loader;
 	private static UserPortalOfHRManagerController userPortalOfHRManagerController;
@@ -158,5 +177,19 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController {
 				}
 			}
 		});
+	}
+	
+	/**
+	 * This method sets the correct values of the hrManager in portal.
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		hrManagerName.setText(connectedUser.getUserFirstName());
+		homeBranchCombo.setValue(connectedUser.getHomeBranch().toString());
+		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
+		companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		
+		
 	}
 }

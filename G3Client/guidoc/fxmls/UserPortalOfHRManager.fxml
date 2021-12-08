@@ -6,8 +6,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfHRManagerController">
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfHRManagerController">
    <children>
       <Button fx:id="btnStartOrder" layoutX="68.0" layoutY="102.0" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="33.0" prefWidth="232.0" text="Start order" />
       <Button fx:id="btnCompanyReg" layoutX="68.0" layoutY="147.0" mnemonicParsing="false" onAction="#getCompanyReg" prefHeight="33.0" prefWidth="232.0" text="Company registration" />
@@ -33,14 +34,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="108.0" layoutY="32.0" prefHeight="53.0" prefWidth="332.0" text="Welcome customer" textFill="#383838">
+      <Label layoutX="108.0" layoutY="32.0" prefHeight="53.0" prefWidth="104.0" text="Welcome," textFill="#383838">
          <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label fx:id="customerNameLabel" layoutX="443.0" layoutY="32.0" prefHeight="53.0" prefWidth="97.0" text="name" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Label layoutX="68.0" layoutY="292.0" text="Customer company:">
@@ -48,12 +44,17 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="companyNameLabel" layoutX="183.0" layoutY="292.0" text="name">
+      <ComboBox fx:id="homeBranchCombo" layoutX="68.0" layoutY="241.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="232.0" promptText="Home Branch Name" />
+      <TextArea layoutX="421.0" layoutY="119.0" prefHeight="193.0" prefWidth="180.0" promptText="שימו לב שמה שמוצג ברגע שהמסך עולה זה סניף הבית. ללקוח יש אפשרות לשנות את זה אבל זה משתנה רק להזמנה הזו (היחיד שיכול לשנות את באופן קבוע זה מנהל הסניף)" />
+      <Text fx:id="hrManagerName" fill="#383838" layoutX="199.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="331.427734375">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="companyName" layoutX="185.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
-      </Label>
-      <ComboBox fx:id="homeBranchCombo" layoutX="68.0" layoutY="241.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="232.0" promptText="Home Branch Name" />
-      <TextArea layoutX="421.0" layoutY="119.0" prefHeight="193.0" prefWidth="180.0" promptText="שימו לב שמה שמוצג ברגע שהמסך עולה זה סניף הבית. ללקוח יש אפשרות לשנות את זה אבל זה משתנה רק להזמנה הזו (היחיד שיכול לשנות את באופן קבוע זה מנהל הסניף)" />
+      </Text>
    </children>
 </Pane>
