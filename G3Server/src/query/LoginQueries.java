@@ -3,8 +3,7 @@ package query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.SQLException;  
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -184,7 +183,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static Customer getCustomer(ResultSet rs) {
-		Customer customerResult=null;
+		Customer customerResult = null;
 		try {
 			if(rs.next()) {
 				customerResult = new Customer(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
@@ -206,7 +205,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static CeoBiteMe getCeo(ResultSet rs) {
-		CeoBiteMe ceoResult=null;
+		CeoBiteMe ceoResult = null;
 		try {
 			if(rs.next()) {
 				ceoResult = new CeoBiteMe(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
@@ -228,7 +227,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static HrManager getHrManager(ResultSet rs) {
-		HrManager hrManagerResult=null;
+		HrManager hrManagerResult = null;
 		Company company = null;
 		try {	
 			if(rs.next()) {
@@ -253,7 +252,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static BusinessCustomer getBusinessCustomer(ResultSet rs) {
-		BusinessCustomer businessCustomerResult=null;
+		BusinessCustomer businessCustomerResult = null;
 		Company company = null;
 		try {
 			if(rs.next()) {
@@ -278,7 +277,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static Supplier getSupplier(ResultSet rs) {
-		Supplier supplierResult=null;
+		Supplier supplierResult = null;
 		try {
 			if(rs.next()) {;
 				supplierResult = new Supplier(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
@@ -300,7 +299,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static Company getCompany(String companyName) {
-		Company companyResult=null;
+		Company companyResult = null;
 		ResultSet rs = Query.getRowFromTableInDB("company","companyName='"+companyName+"'");
 		try {
 			if(rs.next()) {
@@ -321,7 +320,7 @@ public class LoginQueries {
 	 * @return
 	 */
 	public static BranchManager getBranchManager(ResultSet rs) {
-		BranchManager branchManagerResult=null;
+		BranchManager branchManagerResult = null;
 		try {
 			if(rs.next()) {;
 			branchManagerResult = new BranchManager(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
