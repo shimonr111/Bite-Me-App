@@ -6,11 +6,12 @@ import java.sql.Date;
 /**
  * 
  * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  * Class description: 
  * This class is a class that represents
  * a credit card that belongs to a customer \ Business customer
  * HR manger and etc.
- * @version 29/11/2021
+ * @version 08/12/2021
  */
 public class CreditCard implements Serializable{
 
@@ -25,7 +26,7 @@ public class CreditCard implements Serializable{
 	/**
 	 * Each credit card has its own date of expiration
 	 */
-	private Date creditCardDateOfExpiration;
+	private String creditCardDateOfExpiration;
 	
 	/**
 	 * Each credit card has its own CVV code 
@@ -39,7 +40,7 @@ public class CreditCard implements Serializable{
 	 * @param creditCardDateOfExpiration
 	 * @param creditCardCvvCode
 	 */
-	public CreditCard(String creditCardNumber, Date creditCardDateOfExpiration, String creditCardCvvCode) {
+	public CreditCard(String creditCardNumber, String creditCardDateOfExpiration, String creditCardCvvCode) {
 		super();
 		this.creditCardNumber = creditCardNumber;
 		this.creditCardDateOfExpiration = creditCardDateOfExpiration;
@@ -60,11 +61,11 @@ public class CreditCard implements Serializable{
 		this.creditCardNumber = creditCardNumber;
 	}
 
-	public Date getCreditCardDateOfExpiration() {
+	public String getCreditCardDateOfExpiration() {
 		return creditCardDateOfExpiration;
 	}
 
-	public void setCreditCardDateOfExpiration(Date creditCardDateOfExpiration) {
+	public void setCreditCardDateOfExpiration(String creditCardDateOfExpiration) {
 		this.creditCardDateOfExpiration = creditCardDateOfExpiration;
 	}
 

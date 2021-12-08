@@ -5,11 +5,12 @@ import java.io.Serializable;
 /**
  * 
  * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  *  Class description: This class sets data for
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
- * @version 29/11/2021
+ * @version 08/12/2021
  */
 public class Company implements Serializable{
 	
@@ -26,6 +27,14 @@ public class Company implements Serializable{
 	 * This is the confirmation status of the company in the system 
 	 */
 	private boolean isConfirmedCompanyInSystem;
+	/**
+	 * This is the address of the employer.
+	 */
+	private String address;
+	/**
+	 * This is the email address of the employer.
+	 */
+	private String email;
 	
 	/**
 	 * This is the constructor of the class.
@@ -33,10 +42,12 @@ public class Company implements Serializable{
 	 * @param companyName
 	 * @param isConfirmedCompanyInSystem
 	 */
-	public Company(String companyName, boolean isConfirmedCompanyInSystem) {
+	public Company(String companyName, boolean isConfirmedCompanyInSystem, String address, String email) {
 		super();
 		this.companyName = companyName;
 		this.isConfirmedCompanyInSystem = isConfirmedCompanyInSystem;
+		this.address = address;
+		this.email = email;
 	}
 	
 	/**
@@ -61,6 +72,22 @@ public class Company implements Serializable{
 	@Override
 	public String toString() {
 		return "Company: " + companyName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
