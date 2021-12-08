@@ -69,7 +69,7 @@ public class AnalyzeMessageFromServer {
 				}
 				break;
 			case CREATE_USER_PORTAL:
-				AbstractBiteMeController.connectedUser=((User)recivedMessageFromServer.getObject()); // add the received user into the connected users list.
+				AbstractBiteMeController.connectedUser = ((User)recivedMessageFromServer.getObject()); // add the received user into the connected users list.
 				switch (recievedAnswerFromServer) {
 				case CREATE_USER_PORTAL_FOR_CUSTOMER:
 					/*notify all the listeners that 
