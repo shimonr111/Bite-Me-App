@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
 import java.io.IOException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -49,10 +47,6 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	}
 	// Event Listener on Button[#btnLogout].onAction
 	@FXML
-	/**
-	 * 
-	 * @param event
-	 */
 	public void getLogoutBtn(ActionEvent event) {
 		Message message= new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
