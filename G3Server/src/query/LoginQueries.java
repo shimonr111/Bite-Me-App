@@ -1,9 +1,8 @@
 package query;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;  
+import java.sql.SQLException;
+
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -16,6 +15,7 @@ import users.Company;
 import users.Customer;
 import users.HrManager;
 import users.Login;
+import users.PositionType;
 import users.Supplier;
 import users.User;
 
@@ -23,10 +23,11 @@ import users.User;
  * 
  * @author Mousa, Srour
  * @author Lior, Guzovsky
+ * @author Alexander, Martinov
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Login phase.
- * @version 07/12/2021
+ * @version 08/12/2021
  */
 public class LoginQueries {
 	
@@ -233,8 +234,8 @@ public class LoginQueries {
 			if(rs.next()) {
 				company = getCompany(rs.getString(11));
 				hrManagerResult = new HrManager(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),rs.getString(13),rs.getInt(14),
-								rs.getString(15));
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),(PositionType.valueOf(rs.getString(13))),rs.getInt(14),
+								rs.getInt(15));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -258,8 +259,8 @@ public class LoginQueries {
 			if(rs.next()) {
 				company = getCompany(rs.getString(11));
 				businessCustomerResult = new BusinessCustomer(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),rs.getString(13),rs.getInt(14),
-								rs.getString(15));
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),(PositionType.valueOf(rs.getString(13))),rs.getInt(14),
+								rs.getInt(15));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -303,7 +304,7 @@ public class LoginQueries {
 		ResultSet rs = Query.getRowFromTableInDB("company","companyName='"+companyName+"'");
 		try {
 			if(rs.next()) {
-				companyResult = new Company(rs.getString(1),rs.getBoolean(2));
+				companyResult = new Company(rs.getString(1),rs.getBoolean(2),rs.getString(3),rs.getString(4));
 			}
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block

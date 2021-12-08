@@ -69,9 +69,9 @@ CREATE TABLE `businesscustomer` (
   `privateCreditCard` varchar(256) DEFAULT NULL,
   `companyName` varchar(256) DEFAULT NULL,
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
-  `customerPosition` varchar(256) DEFAULT NULL,
+  `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
-  `businessW4cCodeNumber` varchar(256) DEFAULT NULL,
+  `businessW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
@@ -87,7 +87,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1003',1,'businesscustomerFirstname','businesscustomerLastname','NORTH',0,10033,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','businesscustomerPosition',1003003,'2003');
+INSERT INTO `businesscustomer` VALUES ('1003',1,'businesscustomerFirstname','businesscustomerLastname','NORTH',0,10033,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003,2003);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,6 +133,8 @@ DROP TABLE IF EXISTS `company`;
 CREATE TABLE `company` (
   `companyName` varchar(256) NOT NULL,
   `isConfirmedCompanyInSystem` tinyint(1) DEFAULT NULL,
+  `address` varchar(256) DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`companyName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,7 +145,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Intel',1);
+INSERT INTO `company` VALUES ('Intel',1,'IntelAddress','intel@intel.com');
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +159,7 @@ DROP TABLE IF EXISTS `creditcard`;
 CREATE TABLE `creditcard` (
   `creditCardNumber` varchar(256) NOT NULL,
   `creditCardCvvCode` varchar(256) DEFAULT NULL,
-  `creditCardDateOfExpiration` datetime DEFAULT NULL,
+  `creditCardDateOfExpiration` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`creditCardNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -168,7 +170,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('3000','111','2100-12-31 00:00:00'),('3001','111','2100-12-31 00:00:00'),('3002','111','2100-12-31 00:00:00'),('3003','111','2100-12-31 00:00:00');
+INSERT INTO `creditcard` VALUES ('3000','111','01/35'),('3001','111','01/35'),('3002','111','01/35'),('3003','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,9 +229,9 @@ CREATE TABLE `hrmanager` (
   `privateCreditCard` varchar(256) DEFAULT NULL,
   `companyName` varchar(256) DEFAULT NULL,
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
-  `customerPosition` varchar(256) DEFAULT NULL,
+  `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
-  `businessW4cCodeNumber` varchar(256) DEFAULT NULL,
+  `businessW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
@@ -245,7 +247,7 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002',1,'hrmanagerFirstname','hrmanagerLastname','NORTH',0,10022,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','hrmanagerPosition',1002002,'2002');
+INSERT INTO `hrmanager` VALUES ('1002',1,'hrmanagerFirstname','hrmanagerLastname','NORTH',0,10022,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002,2002);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-01 22:28:33
+-- Dump completed on 2021-12-08 15:34:51
