@@ -3,7 +3,6 @@ package clientanalyze;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
