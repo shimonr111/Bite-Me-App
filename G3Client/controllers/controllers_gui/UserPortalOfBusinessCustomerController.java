@@ -2,10 +2,13 @@ package controllers_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -16,12 +19,25 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.BusinessCustomer;
+import users.HrManager;
 import users.User;
 import javafx.scene.control.ComboBox;
 
-public class UserPortalOfBusinessCustomerController extends AbstractBiteMeController {
+/**
+ * 
+ * @author Mousa, Srour
+ * Class description: 
+ * This is a class for 
+ * controlling the UI of hrManager
+ * form.
+ * 
+ * @version 09/12/2021
+ */
+public class UserPortalOfBusinessCustomerController extends AbstractBiteMeController implements Initializable{
 	@FXML
 	private Button btnExit;
 	@FXML
@@ -35,7 +51,12 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	@FXML
 	private Label companyNameLabel;
 	@FXML
-	private ComboBox homeBranchCombo;
+	private ComboBox<String> homeBranchCombo;
+    @FXML
+    private Text companyName;
+
+    @FXML
+    private Text businessCustomerName;
 	
 	public static FXMLLoader loader;
 	private static UserPortalOfBusinessCustomerController userPortalOfBusinessCustomerController;
@@ -145,5 +166,17 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 				}
 			}
 		});
+	}
+	
+	/**
+	 * This method sets the correct values of the businessCustomer in portal.
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		businessCustomerName.setText(connectedUser.getUserFirstName());
+		homeBranchCombo.setValue(connectedUser.getHomeBranch().toString());
+		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
+		companyName.setText(((BusinessCustomer)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		
 	}
 }

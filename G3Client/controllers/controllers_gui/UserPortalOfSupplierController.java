@@ -2,10 +2,13 @@ package controllers_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -16,10 +19,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.Supplier;
 
-public class UserPortalOfSupplierController extends AbstractBiteMeController {
+/**
+ * 
+ * @author Mousa, Srour
+ * Class description: 
+ * This is a class for 
+ * controlling the UI of supplier
+ * form.
+ * 
+ * @version 09/12/2021
+ */
+public class UserPortalOfSupplierController extends AbstractBiteMeController  implements Initializable {
 	@FXML
 	private Button btnExit;
 	@FXML
@@ -32,6 +47,8 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController {
 	private Label nameLabel;
 	@FXML
 	private Button btnHelp;
+    @FXML
+    private Text resturantName;
 
 	
 	public static FXMLLoader loader;
@@ -141,5 +158,15 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController {
 				}
 			}
 		});
+	}
+	/**
+	 * set the supplier details on the supplierPortal according
+	 * to the connected supplier.
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		resturantName.setText(((Supplier)connectedUser).getSupplierBusinessName());
+		
 	}
 }

@@ -2,10 +2,15 @@ package controllers_gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+
+import java.awt.Label;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -16,20 +21,22 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 /**
  * 
  * @author Lior, Guzovsky
+ * @author Mousa, Srour
  * Class description: 
  * This is a class for 
  * controlling the UI of customer
  * form.
  * 
- * @version 07/12/2021
+ * @version 08/12/2021
  */
-public class UserPortalOfCustomerController extends AbstractBiteMeController{
+public class UserPortalOfCustomerController extends AbstractBiteMeController implements Initializable{
 	@FXML
 	private Button btnStartOrder;
 	@FXML
@@ -39,7 +46,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController{
 	@FXML
 	private Button btnHelp;
 	@FXML
-	private ComboBox homeBranchComboBox;
+	private ComboBox<String> homeBranchComboBox;
+    @FXML
+    private Text userName;
 
 	public static FXMLLoader loader;
 	private static UserPortalOfCustomerController userPortalOfCustomerController;
@@ -146,5 +155,17 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController{
 				}
 			}
 		});
+	}
+	/**
+	 * This method will initialize the values according to 
+	 * connected user.
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		userName.setText(connectedUser.getUserFirstName());
+		homeBranchComboBox.setValue(connectedUser.getHomeBranch().toString());
+		homeBranchComboBox.getItems().addAll("North Branch", "Center Branch", "South Branch");
+		
 	}
 }

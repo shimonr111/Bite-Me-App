@@ -4,17 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfSupplierController">
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfSupplierController">
    <children>
       <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="38.0" layoutY="39.0" prefHeight="53.0" prefWidth="475.0" text="Welcome supplier resturant" textFill="#383838">
+      <Label layoutX="38.0" layoutY="39.0" prefHeight="53.0" prefWidth="475.0" text="Welcome, " textFill="#383838">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Button fx:id="btnLogout" layoutX="235.0" layoutY="414.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
@@ -30,15 +31,15 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label fx:id="nameLabel" layoutX="517.0" layoutY="39.0" prefHeight="53.0" prefWidth="99.0" text="name" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
       <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Text fx:id="resturantName" fill="#383838" layoutX="130.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="342.427734375">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
