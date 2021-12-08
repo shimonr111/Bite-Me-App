@@ -63,6 +63,9 @@ public class AnalyzeMessageFromClient {
 			 case LOGIN:
 				recivedMessageFromClient = LoginQueries.createLoginMessageForServer(recivedMessageFromClient);
 				break;
+			 case LOGOUT:
+				 LoginQueries.logOutUser(recivedMessageFromClient);
+				 break;
 			default:
 				break;
 			}
