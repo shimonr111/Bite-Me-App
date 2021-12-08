@@ -48,9 +48,9 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * Screen.
 	 */
 	public static FXMLLoader loader;
-	public static LoginScreenController loginScreenController;
-
+	private static LoginScreenController loginScreenController;
 	
+
 	/**
 	 * name 
 	 * of the user
@@ -223,41 +223,6 @@ public class LoginScreenController extends AbstractBiteMeController{
 		return true;
 	}
 	 
-	 /**
-	  * This is a functions used to set the 
-	  * relevant user portal in the next screen
-	  * according to data that came from the server.
-	  * 
-	  * @param primaryStage
-	  * @param fxmlPath
-	  */
-	 private void setUserPortalFormByType(Stage primaryStage,String fxmlPath) {
-		 Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					FXMLLoader loader = new FXMLLoader();
-					Pane root;
-					try {
-						primaryStage.hide(); 
-						Stage Stage = new Stage();
-						Stage.setResizable(false);
-						root = loader.load(getClass().getResource(fxmlPath).openStream());
-						Scene scene = new Scene(root);
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
-						});
-						Stage.setScene(scene);
-						Stage.show();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-			});
-	 }
 	
 	 /**
 	  * This is a function which sets all
@@ -303,32 +268,38 @@ public class LoginScreenController extends AbstractBiteMeController{
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){ 
 			@Override
 			public void clientGotCustomerLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfCustomer.fxml"); //primary stage passed to hide previous window
+				UserPortalOfCustomerController userPortalOfCustomerController = new UserPortalOfCustomerController();
+				userPortalOfCustomerController.initCustomerUserPortal(primaryStage, "/fxmls/UserPortalOfCustomer.fxml");
 			}
 			
 			@Override
 			public void clientGotBusinessCustomerLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfBusinessCustomer.fxml"); //primary stage passed to hide previous window
+				UserPortalOfBusinessCustomerController userPortalOfBusinessCustomerController = new UserPortalOfBusinessCustomerController();
+				userPortalOfBusinessCustomerController.initBusinessCustomerUserPortal(primaryStage, "/fxmls/UserPortalOfBusinessCustomer.fxml");
 			}
 			
 			@Override
 			public void clientGotSupplierLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfSupplier.fxml"); //primary stage passed to hide previous window
+				UserPortalOfSupplierController userPortalOfSupplierController = new UserPortalOfSupplierController();
+				userPortalOfSupplierController.initSupplierUserPortal(primaryStage, "/fxmls/UserPortalOfSupplier.fxml");
 			}
 			
 			@Override
 			public void clientGotHRManagerLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfHRManager.fxml"); //primary stage passed to hide previous window
+				UserPortalOfHRManagerController userPortalOfHRManagerController = new UserPortalOfHRManagerController();
+				userPortalOfHRManagerController.initHrManagerUserPortal(primaryStage, "/fxmls/UserPortalOfHRManager.fxml");
 			}
 			
 			@Override
 			public void clientGotBranchManagerLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfBranchManager.fxml"); //primary stage passed to hide previous window
+				UserPortalOfBranchManagerController userPortalOfBranchManagerController = new UserPortalOfBranchManagerController();
+				userPortalOfBranchManagerController.initBranchManagerUserPortal(primaryStage, "/fxmls/UserPortalOfBranchManager.fxml");
 			}
 			
 			@Override
 			public void clientGotCEOLogin() {
-				setUserPortalFormByType(primaryStage,"/fxmls/UserPortalOfCEO.fxml"); //primary stage passed to hide previous window
+				UserPortalOfCEOController userPortalOfCEOController = new UserPortalOfCEOController();
+				userPortalOfCEOController.initCEOUserPortal(primaryStage, "/fxmls/UserPortalOfCEO.fxml");
 			}
 			
 			@Override

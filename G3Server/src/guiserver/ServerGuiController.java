@@ -53,7 +53,7 @@ public class ServerGuiController {
 	/**
 	* The db password.
 	*/
-	final public static String DEFAULT_DB_PASSWORD = "orimalka789";
+	final public static String DEFAULT_DB_PASSWORD = "S6FW8Ps6fw8p!";
 	
 	public static ServerGuiController sgc;
 	
