@@ -8,9 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
 import java.io.IOException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
