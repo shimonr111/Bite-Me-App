@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -55,8 +54,8 @@ public class Query {
 	 * @param columnSet : the name of the column and what we want to set it for example : (isLoggedIn=1)
 	 * @param condition : what is the condition behind the WHERE operand , for example : (userID = 12)
 	 */
-	public static void updateOneColumnForTableInDbByPrimaryKey(String tableName,String columnSet,String condition) {
-		PreparedStatement pstmt=null;
+	public static void updateOneColumnForTableInDbByPrimaryKey(String tableName, String columnSet, String condition) {
+		PreparedStatement pstmt = null;
 		//ResultSet rs=null;
 		try {
 			String query = "UPDATE semesterialproject."+ tableName+" SET "+columnSet+" WHERE " +"("+condition+")";
