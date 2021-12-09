@@ -26,12 +26,11 @@ DROP TABLE IF EXISTS `branchmanager`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `branchmanager` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `privateW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`userID`),
@@ -45,7 +44,7 @@ CREATE TABLE `branchmanager` (
 
 LOCK TABLES `branchmanager` WRITE;
 /*!40000 ALTER TABLE `branchmanager` DISABLE KEYS */;
-INSERT INTO `branchmanager` VALUES ('1041',1,'branchmanagerNFirstname','branchmanagerNLastname','NORTH',0,10414,'branchManagerNEmail@BM.com','104104'),('1042',1,'branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,10424,'branchManagerSEmail@BM.com','104204'),('1043',1,'branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,10434,'branchManagerCEmail@BM.com','104304');
+INSERT INTO `branchmanager` VALUES ('1041','CONFIRMED','branchmanagerNFirstname','branchmanagerNLastname','NORTH',1,'branchManagerNEmail@BM.com','104104'),('1042','CONFIRMED','branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,'branchManagerSEmail@BM.com','104204'),('1043','CONFIRMED','branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,'branchManagerCEmail@BM.com','104304');
 /*!40000 ALTER TABLE `branchmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,12 +57,12 @@ DROP TABLE IF EXISTS `businesscustomer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `businesscustomer` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `privateW4cCodeNumber` int DEFAULT NULL,
+  `businessW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
@@ -71,10 +70,11 @@ CREATE TABLE `businesscustomer` (
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
-  `businessW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
+  KEY `businesscustomer_businessW4cNumber_idx` (`businessW4cCodeNumber`),
+  CONSTRAINT `businesscustomer_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`businessW4cNumber`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -87,7 +87,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1003',1,'businesscustomerFirstname','businesscustomerLastname','NORTH',0,10033,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003,2003);
+INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,12 +100,11 @@ DROP TABLE IF EXISTS `ceobiteme`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ceobiteme` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `privateW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`userID`),
@@ -119,7 +118,7 @@ CREATE TABLE `ceobiteme` (
 
 LOCK TABLES `ceobiteme` WRITE;
 /*!40000 ALTER TABLE `ceobiteme` DISABLE KEYS */;
-INSERT INTO `ceobiteme` VALUES ('1001',1,'ceoFirstname','ceoLastname','NOT_APPLICABLE',0,10011,'ceoEmail@BM.com','100101');
+INSERT INTO `ceobiteme` VALUES ('1001','CONFIRMED','ceoFirstname','ceoLastname','NOT_APPLICABLE',0,'ceoEmail@BM.com','100101');
 /*!40000 ALTER TABLE `ceobiteme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,10 +131,12 @@ DROP TABLE IF EXISTS `company`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `company` (
   `companyName` varchar(256) NOT NULL,
-  `isConfirmedCompanyInSystem` tinyint(1) DEFAULT NULL,
+  `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
-  PRIMARY KEY (`companyName`)
+  `businessW4cNumber` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`companyName`,`businessW4cNumber`),
+  KEY `W4CNUMBER` (`businessW4cNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -145,7 +146,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Intel',1,'IntelAddress','intel@intel.com');
+INSERT INTO `company` VALUES ('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +184,7 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
@@ -205,7 +206,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000',1,'customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000');
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,12 +219,12 @@ DROP TABLE IF EXISTS `hrmanager`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hrmanager` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `privateW4cCodeNumber` int DEFAULT NULL,
+  `businessW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
@@ -231,10 +232,11 @@ CREATE TABLE `hrmanager` (
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
-  `businessW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
+  KEY `hrmanager_businessW4cNumber_idx` (`businessW4cCodeNumber`),
+  CONSTRAINT `hrmanager_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`businessW4cNumber`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -247,7 +249,7 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002',1,'hrmanagerFirstname','hrmanagerLastname','NORTH',0,10022,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002,2002);
+INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,7 +276,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('customer','customer','1000','customer'),('ceobiteme','ceobiteme','1001','ceo'),('hrmanager','hrmanager','1002','hrmanager'),('businesscustomer','businesscustomer','1003','businesscustomer'),('supplier','supplier','1005','supplier'),('branchmanagerN','branchmanagerN','1041','branchmanager'),('branchmanagerS','branchmanagerS','1042','branchmanager'),('branchmanagerC','branchmanagerC','1043','branchmanager');
+INSERT INTO `login` VALUES ('customer','customer','1000','customer'),('ceobiteme','ceobiteme','1001','ceobiteme'),('hrmanager','hrmanager','1002','hrmanager'),('businesscustomer','businesscustomer','1003','businesscustomer'),('supplier','supplier','1005','supplier'),('branchmanagerN','branchmanagerN','1041','branchmanager'),('branchmanagerS','branchmanagerS','1042','branchmanager'),('branchmanagerC','branchmanagerC','1043','branchmanager');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,12 +289,11 @@ DROP TABLE IF EXISTS `supplier`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `supplier` (
   `userID` varchar(256) NOT NULL,
-  `isConfirmedInSystem` tinyint(1) DEFAULT '0',
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `firstName` varchar(256) DEFAULT NULL,
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `privateW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `supplierBusinessName` varchar(256) DEFAULT NULL,
@@ -308,7 +309,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1005',1,'supplierFirstname','supplierLastname','NORTH',0,10055,'supplierEmail@supplies.com','100505','supplierBusinnessname',0.5);
+INSERT INTO `supplier` VALUES ('1005','CONFIRMED','supplierFirstname','supplierLastname','NORTH',0,'supplierEmail@supplies.com','100505','supplierBusinnessname',0.5);
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -321,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-08 15:34:51
+-- Dump completed on 2021-12-09 19:37:10
