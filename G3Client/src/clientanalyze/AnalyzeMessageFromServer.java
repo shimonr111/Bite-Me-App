@@ -19,7 +19,7 @@ import users.User;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 06/12/2021
+ * @version 09/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -157,5 +157,13 @@ public class AnalyzeMessageFromServer {
 	 */
 	public static void addClientListener(AnalyzeClientListener listener) {
 		clientListeners.add(listener);
+	}
+	/**
+	 * remove client listener to the array.
+	 * 
+	 * @param listener every listener is implemented in the class that's "listening"
+	 */
+	public static void removeClientListener(AnalyzeClientListener listener) {
+		clientListeners.remove(listener);
 	}
 }

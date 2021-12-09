@@ -27,6 +27,7 @@ import users.Supplier;
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * controlling the UI of supplier
@@ -93,20 +94,21 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 		PopUpMessages.helpMessage("This is the Main screen of supplier, Please press any button!");
 	}
 	/**
-	 * 
+	 * Returns to login screen
 	 * @param event
 	 */
 	private void setToLoginScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
-				loader = new FXMLLoader();
+				FXMLLoader loader = new FXMLLoader();
 				Pane root;
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
-					Scene scene = new Scene(root);
+					LoginScreenController LSC = loader.getController();
+					LSC.initLoginScreen();
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
@@ -114,8 +116,6 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 							Stage.close();
 						}
 					});
-					Stage.setScene(scene);
-					Stage.show();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

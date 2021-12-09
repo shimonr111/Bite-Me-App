@@ -5,10 +5,11 @@ import java.io.Serializable;
 /**
  * 
  * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  * Class description: This class is a class which
  * defines the main attributes and functionalities of a supplier in our
  * system.
- * @version 29/11/2021
+ * @version 09/12/2021
  */
 public class Supplier extends User implements Serializable{
 
@@ -32,21 +33,20 @@ public class Supplier extends User implements Serializable{
 	 * This is the constructor of the class Supplier
 	 * 
 	 * @param userId
-	 * @param isConfirmedInSystem
+	 * @param statusInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param supplierBusinessName
 	 * @param revenueFee
 	 */
-	public Supplier(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
+	public Supplier(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
 			String supplierBusinessName, double revenueFee) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber);
 		this.supplierBusinessName = supplierBusinessName;
 		this.revenueFee = revenueFee;
@@ -78,4 +78,5 @@ public class Supplier extends User implements Serializable{
 	public String toString() {
 		return "Supplier: " + " " + supplierBusinessName + " belogns to:" + homeBranch;
 	}
+
 }

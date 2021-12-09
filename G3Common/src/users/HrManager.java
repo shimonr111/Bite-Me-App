@@ -22,12 +22,12 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 * This is the constructor of the class.
 	 * 
 	 * @param userId
-	 * @param isConfirmedInSystem
+	 * @param statusInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
+	 * @param businessW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
@@ -35,15 +35,14 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 * @param budgetOfBusinessCustomer
 	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
-	 * @param businessW4cCodeNumber
 	 */
-	public HrManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
+	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, int businessW4cCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber, userEmail,
+			PositionType businessCustomerPosition, int budgetMaxAmount) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, businessW4cCodeNumber, userEmail,
 				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
-				budgetMaxAmount, businessW4cCodeNumber);
+				budgetMaxAmount);
 	}
 
 	/**
