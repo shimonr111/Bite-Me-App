@@ -72,6 +72,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 		@Override
 		public void clientIpConfirmed() {
 			try {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				setHomeScreen(primaryStage); //primary stage passed to hide previous window
 				} catch (IOException e) {
 			}

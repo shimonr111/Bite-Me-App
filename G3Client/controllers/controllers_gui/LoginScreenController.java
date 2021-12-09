@@ -268,36 +268,42 @@ public class LoginScreenController extends AbstractBiteMeController{
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){ 
 			@Override
 			public void clientGotCustomerLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfCustomerController userPortalOfCustomerController = new UserPortalOfCustomerController();
 				userPortalOfCustomerController.initCustomerUserPortal(primaryStage, "/fxmls/UserPortalOfCustomer.fxml");
 			}
 			
 			@Override
 			public void clientGotBusinessCustomerLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfBusinessCustomerController userPortalOfBusinessCustomerController = new UserPortalOfBusinessCustomerController();
 				userPortalOfBusinessCustomerController.initBusinessCustomerUserPortal(primaryStage, "/fxmls/UserPortalOfBusinessCustomer.fxml");
 			}
 			
 			@Override
 			public void clientGotSupplierLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfSupplierController userPortalOfSupplierController = new UserPortalOfSupplierController();
 				userPortalOfSupplierController.initSupplierUserPortal(primaryStage, "/fxmls/UserPortalOfSupplier.fxml");
 			}
 			
 			@Override
 			public void clientGotHRManagerLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfHRManagerController userPortalOfHRManagerController = new UserPortalOfHRManagerController();
 				userPortalOfHRManagerController.initHrManagerUserPortal(primaryStage, "/fxmls/UserPortalOfHRManager.fxml");
 			}
 			
 			@Override
 			public void clientGotBranchManagerLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfBranchManagerController userPortalOfBranchManagerController = new UserPortalOfBranchManagerController();
 				userPortalOfBranchManagerController.initBranchManagerUserPortal(primaryStage, "/fxmls/UserPortalOfBranchManager.fxml");
 			}
 			
 			@Override
 			public void clientGotCEOLogin() {
+				AnalyzeMessageFromServer.removeClientListener(this);
 				UserPortalOfCEOController userPortalOfCEOController = new UserPortalOfCEOController();
 				userPortalOfCEOController.initCEOUserPortal(primaryStage, "/fxmls/UserPortalOfCEO.fxml");
 			}

@@ -25,6 +25,7 @@ import javafx.event.EventHandler;
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * controlling the UI of ceo
@@ -90,7 +91,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	/**
-	 * 
+	 * Returns to login screen
 	 * @param event
 	 */
 	private void setToLoginScreen(ActionEvent event) {
@@ -103,7 +104,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
-					Scene scene = new Scene(root);
+					LoginScreenController LSC = loader.getController();
+					LSC.initLoginScreen();
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
@@ -111,8 +113,6 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 							Stage.close();
 						}
 					});
-					Stage.setScene(scene);
-					Stage.show();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

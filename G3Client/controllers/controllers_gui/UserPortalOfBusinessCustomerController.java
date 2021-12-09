@@ -30,6 +30,7 @@ import javafx.scene.control.ComboBox;
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * controlling the UI of hrManager
@@ -101,7 +102,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	}
 	
 	/**
-	 * 
+	 * Returns to login screen
 	 * @param event
 	 */
 	private void setToLoginScreen(ActionEvent event) {
@@ -114,7 +115,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
-					Scene scene = new Scene(root);
+					LoginScreenController LSC = loader.getController();
+					LSC.initLoginScreen();
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
@@ -122,8 +124,6 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 							Stage.close();
 						}
 					});
-					Stage.setScene(scene);
-					Stage.show();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
