@@ -10,7 +10,7 @@ import java.io.Serializable;
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
- * @version 08/12/2021
+ * @version 09/12/2021
  */
 public class Company implements Serializable{
 	
@@ -26,7 +26,7 @@ public class Company implements Serializable{
 	/**
 	 * This is the confirmation status of the company in the system 
 	 */
-	private boolean isConfirmedCompanyInSystem;
+	private ConfirmationStatus companyStatusInSystem;
 	/**
 	 * This is the address of the employer.
 	 */
@@ -35,19 +35,28 @@ public class Company implements Serializable{
 	 * This is the email address of the employer.
 	 */
 	private String email;
+	/**
+	 * This injective number defines  
+	 * the business W4C replacement code.
+	 */
+	protected int businessW4cCodeNumber; 
 	
 	/**
 	 * This is the constructor of the class.
 	 * 
 	 * @param companyName
-	 * @param isConfirmedCompanyInSystem
+	 * @param companyStatusInSystem
+	 * @param address
+	 * @param email
+	 * @param businessW4cCodeNumber
 	 */
-	public Company(String companyName, boolean isConfirmedCompanyInSystem, String address, String email) {
+	public Company(String companyName, ConfirmationStatus companyStatusInSystem, String address, String email, int businessW4cCodeNumber) {
 		super();
 		this.companyName = companyName;
-		this.isConfirmedCompanyInSystem = isConfirmedCompanyInSystem;
+		this.companyStatusInSystem = companyStatusInSystem;
 		this.address = address;
 		this.email = email;
+		this.businessW4cCodeNumber=businessW4cCodeNumber;
 	}
 	
 	/**
@@ -61,12 +70,12 @@ public class Company implements Serializable{
 		this.companyName = companyName;
 	}
 
-	public boolean isConfirmedCompanyInSystem() {
-		return isConfirmedCompanyInSystem;
+	public ConfirmationStatus getStatusCompanyInSystem() {
+		return companyStatusInSystem;
 	}
 
-	public void setConfirmedCompanyInSystem(boolean isConfirmedCompanyInSystem) {
-		this.isConfirmedCompanyInSystem = isConfirmedCompanyInSystem;
+	public void setCompanyStatusInSystem(ConfirmationStatus newStatusInSystem) {
+		this.companyStatusInSystem = newStatusInSystem;
 	}
 
 	@Override
@@ -88,6 +97,14 @@ public class Company implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getBusinessW4cCodeNumber() {
+		return businessW4cCodeNumber;
+	}
+
+	public void setBusinessW4cCodeNumber(int businessW4cCodeNumber) {
+		this.businessW4cCodeNumber = businessW4cCodeNumber;
 	}
 	
 	

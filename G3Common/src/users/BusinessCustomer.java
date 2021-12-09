@@ -11,7 +11,7 @@ import java.io.Serializable;
  * This class is derived class from
  *  Customer class which defines the main attributes and functionalities
  *  of a Business customer in our system.
- * @version 08/12/2021
+ * @version 09/12/2021
  */
 public class BusinessCustomer extends Customer implements Serializable{
 
@@ -41,21 +41,15 @@ public class BusinessCustomer extends Customer implements Serializable{
 	protected int budgetMaxAmount;
 
 	/**
-	 * This injective number defines the business W4C replacement code In addition
-	 * to the User w4c code.
-	 */
-	protected int businessW4cCodeNumber;
-
-	/**
 	 * This is the constructor of the class.
 	 * 
 	 * @param userId
-	 * @param isConfirmedInSystem
+	 * @param statusInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
+	 * @param businessW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
@@ -63,19 +57,17 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * @param budgetOfBusinessCustomer
 	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
-	 * @param businessW4cCodeNumber
 	 */
-	public BusinessCustomer(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber,
+	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, int businessW4cCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount, int businessW4cCodeNumber) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
+			PositionType businessCustomerPosition, int budgetMaxAmount) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, businessW4cCodeNumber,
 				userEmail, phoneNumber, privateCreditCard);
 		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
-		this.businessW4cCodeNumber = businessW4cCodeNumber;
 	}
 
 	/**
@@ -99,14 +91,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.budgetMaxAmount = budgetMaxAmount;
 	}
 
-	public int getBusinessW4cCode() {
-		return businessW4cCodeNumber;
-	}
-
-	public void setBusinessW4cCode(int businessW4cCodeNumber) {
-		this.businessW4cCodeNumber = businessW4cCodeNumber;
-	}
-	
 	public Company getcompanyOfBusinessCustomer() {
 		return companyOfBusinessCustomer;
 	}

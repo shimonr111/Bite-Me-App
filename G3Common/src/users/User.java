@@ -5,10 +5,11 @@ import java.io.Serializable;
 /**
  * 
  * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  * Class description: 
  * This class is the base class which defines the main attributes and functionalities
  * of a user in our system.
- * @version 29/11/2021
+ * @version 09/12/2021
  */
 public abstract class User implements Serializable{
 
@@ -25,7 +26,7 @@ public abstract class User implements Serializable{
 	 * When user is confirmed he can access the system,
 	 * else, he is still pending for confirmation. 
 	 */
-	protected boolean isConfirmedInSystem;
+	protected ConfirmationStatus statusInSystem;
 	
 	/**
 	 * Each user has a first name.
@@ -48,12 +49,6 @@ public abstract class User implements Serializable{
 	 * if he can be logged in multiple times.
 	 */
 	protected boolean isLoggedIn;
-	
-	/**
-	 * This injective number defines  
-	 * the user W4C replacement code.
-	 */
-	protected int privateW4cCodeNumber; 
 	
 	/**
 	 * This is the user registered email
@@ -95,25 +90,23 @@ public abstract class User implements Serializable{
 	 * This is the constructor of the class User
 	 * 
 	 * @param userId
-	 * @param isConfirmedInSystem
+	 * @param statusInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 */
-	public User(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber) {
+	public User(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber) {
 		super();
 		this.userId = userId;
-		this.isConfirmedInSystem = isConfirmedInSystem;
+		this.statusInSystem = statusInSystem;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.homeBranch = homeBranch;
 		this.isLoggedIn = isLoggedIn;
-		this.privateW4cCodeNumber = privateW4cCodeNumber;
 		this.userEmail = userEmail;
 		this.phoneNumber = phoneNumber;
 	}
@@ -131,12 +124,12 @@ public abstract class User implements Serializable{
 		this.userId = userId;
 	}
 
-	public boolean isConfirmedInSystem() {
-		return isConfirmedInSystem;
+	public ConfirmationStatus getStatusInSystem() {
+		return statusInSystem;
 	}
 
-	public void setConfirmedInSystem(boolean isConfirmedInSystem) {
-		this.isConfirmedInSystem = isConfirmedInSystem;
+	public void setStatusInSystem(ConfirmationStatus newStatus) {
+		this.statusInSystem=newStatus;
 	}
 
 	public String getUserFirstName() {
@@ -169,14 +162,6 @@ public abstract class User implements Serializable{
 
 	public void setLoggedIn(boolean isLoggedIn) {
 		this.isLoggedIn = isLoggedIn;
-	}
-
-	public int getIdNumber() {
-		return privateW4cCodeNumber;
-	}
-
-	public void setIdNumber(int privateW4cCodeNumber) {
-		this.privateW4cCodeNumber = privateW4cCodeNumber;
 	}
 
 	public String getUserEmail() {

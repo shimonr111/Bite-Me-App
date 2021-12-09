@@ -20,18 +20,17 @@ public class BranchManager extends User implements Serializable{
 	 * This is the constructor of the class
 	 * 
 	 * @param userId
-	 * @param isConfirmedInSystem
+	 * @param statusInSystem
 	 * @param userFirstName
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 */
-	public BranchManager(String userId, boolean isConfirmedInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail, String phoneNumber) {
-		super(userId, isConfirmedInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, privateW4cCodeNumber,
+	public BranchManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber);
 	}
 
