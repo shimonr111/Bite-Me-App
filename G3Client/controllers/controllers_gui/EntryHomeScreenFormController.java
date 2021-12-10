@@ -40,6 +40,13 @@ public class EntryHomeScreenFormController{
 	private Button btnEnter = null;
 	
 	/**
+	 * This button import data
+	 * from the simulation
+	 */
+	@FXML
+	private Button importBtn = null;
+	
+	/**
 	 * This button exits
 	 * the application
 	 */
@@ -89,6 +96,15 @@ public class EntryHomeScreenFormController{
 	 */
 	public void getExitBtn(ActionEvent event) throws Exception {
 		System.exit(0);
+	}
+	
+	/**
+	 * Using import button 
+	 * in order to import data 
+	 * from the db 
+	 */
+	public void getImportBtn(ActionEvent event) throws Exception {
+		
 	}
 
 }
