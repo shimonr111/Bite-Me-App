@@ -26,16 +26,6 @@ public class Login implements Serializable{
 	 */
 	private String password;
 	
-	/**
-	 * each user has his own userID , it is the same userID from User's Class 
-	 * witch means it is a FK for User.
-	 */
-	private String userId;
-	
-	/**
-	 * each user has a type.
-	 */
-	private String userType;
 	
 	/**
 	 * This is a constructor for the Login class
@@ -48,23 +38,7 @@ public class Login implements Serializable{
 	public Login(String userName,String password) {
 		this.userName=userName;
 		this.password = password;
-		this.userId=null;
-		this.userType=null;
-	}
-	
-	/**
-	 * This is a constructor for the Login class
-	 * we receive all the parameters from the DB then we use this constructor ( from the server side)
-	 * @param userName
-	 * @param password
-	 * @param userId
-	 * @param userType
-	 */
-	public Login(String userName,String password,String userId,String userType) {
-		this.userName=userName;
-		this.password = password;
-		this.userId=userId;
-		this.userType=userType;
+
 	}
 	
 	
@@ -81,13 +55,6 @@ public class Login implements Serializable{
 		return password;
 	}
 	
-	public String getUserId() {
-		return userId;
-	}
-	
-	public String getUserType() {
-		return userType;
-	}
 	
 	public void setUserName(String userName) {
 		this.userName=userName;
@@ -96,20 +63,13 @@ public class Login implements Serializable{
 	public void setPassword(String password) {
 		this.password=password;
 	}
-	
-	public void setUserId(String userId) {
-		this.userId=userId;
-	}
-	
-	public void setUserType(String userType) {
-		this.userType=userType;
-	}
+
 	
 	/**
 	 * this is a toString for the login class
 	 */
 	@Override
 	public String toString() {
-		return "UserName: " + userName +"\nPassword: " + password + "\nuserId: " + userId + "\nuserType: " + userType;
+		return "UserName: " + userName +"\nPassword: " + password ;
 	}
 }

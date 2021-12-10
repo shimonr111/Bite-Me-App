@@ -12,25 +12,25 @@ public enum Branch {
 	NORTH {
 		@Override
 		public String toString() {
-			return "North Branch";
+			return "NORTH";
 		}
 	},
 	CENTER {
 		@Override
 		public String toString() {
-			return "Center Branch";
+			return "CENTER";
 		}
 	},
 	SOUTH {
 		@Override
 		public String toString() {
-			return "South Branch";
+			return "SOUTH";
 		}
 	},
 	NOT_APPLICABLE{
 		@Override
 		public String toString() {
-			return "N/A";
+			return "NOT_APPLICABLE";
 		}
 	}
 }

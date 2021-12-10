@@ -10,6 +10,7 @@ import communication.Message;
 import communication.Task;
 import ocsf.server.ConnectionToClient;
 import query.LoginQueries;
+import query.RegistrationQueries;
 
 /**
  * @author Lior, Guzovsky.
@@ -66,6 +67,8 @@ public class AnalyzeMessageFromClient {
 			 case LOGOUT:
 				 LoginQueries.logOutUser(recivedMessageFromClient);
 				 break;
+			 case REGISTER_PRIVATE_CUSTOMER:
+				recivedMessageFromClient= RegistrationQueries.getPrivateCustomerRegistration((Message)message);
 			default:
 				break;
 			}

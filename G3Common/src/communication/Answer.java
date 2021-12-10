@@ -11,7 +11,7 @@ package communication;
  *  server according to the 
  *  Task that has been sent.
  *  
- *  @version 03/12/2021
+ *  @version 11/12/2021
  *
  */
 public enum Answer {
@@ -41,7 +41,10 @@ public enum Answer {
 	CREATE_USER_PORTAL_FOR_CEO_BITE_ME,
 	ERROR_USER_NOT_CONFIRMED,
 	ERROR_ALREADY_LOGGED_IN,
-	ERROR_USER_NOT_FOUND
+	ERROR_USER_NOT_FOUND,
+	USER_ID_ALREADY_EXIST,
+	USER_NAME_ALREADY_EXIST,
+	REGISTRATION_SUCCEED
 	
 
 }

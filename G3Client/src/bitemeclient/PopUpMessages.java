@@ -29,7 +29,7 @@ public class PopUpMessages {
 	 */
 	public static void helpMessage(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Message");
+		alert.setTitle("Help?");
 		alert.setHeaderText(null);
 		alert.setContentText(message);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
