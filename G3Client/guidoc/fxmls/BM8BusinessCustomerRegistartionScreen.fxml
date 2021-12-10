@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+   <children>
+      <TextField fx:id="firstNameTxtField" layoutX="212.0" layoutY="59.0" onAction="#getFirstName" prefHeight="31.0" prefWidth="194.0" promptText="Enter first name" />
+      <TextField fx:id="lastNameTxtField" layoutX="211.0" layoutY="93.0" onAction="#getLastName" prefHeight="31.0" prefWidth="194.0" promptText="Enter last name" />
+      <TextField fx:id="idNumTxtField" layoutX="211.0" layoutY="127.0" onAction="#getIdNum" prefHeight="31.0" prefWidth="194.0" promptText="Enter ID" />
+      <TextField fx:id="phoneTxtField" layoutX="211.0" layoutY="162.0" onAction="#getPhone" prefHeight="31.0" prefWidth="194.0" promptText="Enter phone number" />
+      <TextField fx:id="emailTxtField" layoutX="210.0" layoutY="199.0" onAction="#getEmail" prefHeight="31.0" prefWidth="194.0" promptText="Enter email address" />
+      <TextField fx:id="employeeIdTxtField" layoutX="210.0" layoutY="266.0" onAction="#getEmployeeId" prefHeight="31.0" prefWidth="194.0" promptText="Enter Employee ID" />
+      <TextField fx:id="monthlyMaxBudgedTxtField" layoutX="440.0" layoutY="121.0" onAction="#getMonthlyMaxBudget" prefHeight="31.0" prefWidth="186.0" promptText="Enter monthly max budget" />
+      <Button id="btnExit" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="80.0" layoutY="11.0" prefHeight="53.0" prefWidth="540.0" text="Business Customer Registartion" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="108.0" layoutY="58.0" text="First name:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="110.0" layoutY="91.0" text="Last name:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="172.0" layoutY="129.0" text="ID:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="71.0" layoutY="161.0" text="Phone number:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="199.0" text="Email address:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="86.0" layoutY="265.0" text="Employee ID:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="441.0" layoutY="58.0" text="Budget:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="299.0" text="Company name:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveBtn" layoutX="235.0" layoutY="420.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBack" layoutX="-2.0" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="145.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; Customer Registartion -&gt;">
+         <font>
+            <Font size="11.0" />
+         </font></Label>
+      <Label layoutX="477.0" layoutY="8.0" text="Business Customer Registartion">
+         <font>
+            <Font name="System Bold" size="11.0" />
+         </font>
+      </Label>
+      <TextField fx:id="confirmedEmailTxtField" layoutX="210.0" layoutY="232.0" onAction="#getConfirmedEmail" prefHeight="31.0" prefWidth="194.0" promptText="Enter email address" />
+      <Label layoutX="5.0" layoutY="232.0" text="Confirm Email address:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="123.0" layoutY="337.0" text="Position:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="positionCombo" layoutX="209.0" layoutY="337.0" onAction="#getPosition" prefHeight="31.0" prefWidth="194.0" promptText="HR or Regular worker" />
+      <ComboBox fx:id="setHomeBranchCombo" layoutX="209.0" layoutY="375.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="194.0" promptText="Set home branch" />
+      <ComboBox fx:id="companyNameCombo" layoutX="209.0" layoutY="300.0" onAction="#getCompanyName" prefHeight="31.0" prefWidth="194.0" promptText="Confirmed company" />
+      <ComboBox fx:id="budgetTypeCombo" layoutX="440.0" layoutY="85.0" onAction="#getBudgetType" prefHeight="31.0" prefWidth="186.0" promptText="Budget Type" />
+      <TextField fx:id="cvvTxtField" layoutX="440.0" layoutY="252.0" onAction="#getCVV" promptText="CVV" />
+      <TextField fx:id="creditNumTxtField" layoutX="440.0" layoutY="182.0" onAction="#getCreditNum" promptText="Credit number" />
+      <TextField fx:id="expirationTxtField" layoutX="440.0" layoutY="216.0" onAction="#getExpiration" promptText="MM/YY - Expiration" />
+      <Label layoutX="440.0" layoutY="155.0" text="Credit card details:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="77.0" layoutY="378.0" text="Home branch:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="errorText" layoutX="229.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="passwordField" layoutX="441.0" layoutY="326.0" onAction="#getPassword" prefHeight="31.0" prefWidth="194.0" />
+      <Label layoutX="441.0" layoutY="296.0" text="Password:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

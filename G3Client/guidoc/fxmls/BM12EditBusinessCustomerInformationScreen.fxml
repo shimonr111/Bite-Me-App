@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
-      <Label id="title" layoutX="144.0" layoutY="26.0" text="Edit Business Customer" textFill="#383838">
+      <Label id="title" layoutX="144.0" layoutY="13.0" text="Edit Business Customer" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -19,7 +20,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="261.0" layoutY="437.0" mnemonicParsing="false" onAction="#Send" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
+      <Button layoutX="261.0" layoutY="429.0" mnemonicParsing="false" onAction="#Send" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -55,7 +56,7 @@
       <TextField fx:id="phoneTxtField" layoutX="207.0" layoutY="174.0" onAction="#getPhone" prefHeight="31.0" prefWidth="194.0" />
       <TextField fx:id="emailTxtField" layoutX="206.0" layoutY="211.0" onAction="#getEmail" prefHeight="31.0" prefWidth="194.0" />
       <TextField fx:id="employeeIdTxtField" layoutX="206.0" layoutY="278.0" onAction="#getEmployeeId" prefHeight="31.0" prefWidth="194.0" />
-      <TextField fx:id="monthlyMaxBudgedTxtField" layoutX="436.0" layoutY="233.0" onAction="#getMonthlyMaxBudget" prefHeight="31.0" prefWidth="186.0" />
+      <TextField fx:id="monthlyMaxBudgedTxtField" layoutX="436.0" layoutY="134.0" onAction="#getMonthlyMaxBudget" prefHeight="31.0" prefWidth="186.0" />
       <Label layoutX="104.0" layoutY="70.0" text="First name:">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -66,7 +67,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="138.0" text="ID number:">
+      <Label layoutX="170.0" layoutY="138.0" text="ID:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -86,7 +87,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="437.0" layoutY="170.0" text="Budget:">
+      <Label layoutX="437.0" layoutY="71.0" text="Budget:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -109,19 +110,30 @@
       </Label>
       <ComboBox fx:id="positionCombo" layoutX="205.0" layoutY="349.0" onAction="#getPosition" prefHeight="31.0" prefWidth="194.0" promptText="HR or Regular worker" />
       <ComboBox fx:id="setHomeBranchCombo" layoutX="205.0" layoutY="387.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="194.0" promptText="Set home branch" />
-      <TextField fx:id="w4cRegularTxtField" layoutX="439.0" layoutY="98.0" onAction="#getW4cRegular" />
-      <Label layoutX="439.0" layoutY="70.0" text="W4C:">
+      <ComboBox fx:id="companyNameCombo" layoutX="205.0" layoutY="312.0" onAction="#getCompanyName" prefHeight="31.0" prefWidth="194.0" promptText="Confirmed company" />
+      <ComboBox fx:id="budgetTypeCombo" layoutX="436.0" layoutY="98.0" onAction="#getBudgetType" prefHeight="31.0" prefWidth="186.0" promptText="Budget Type" />
+      <TextField fx:id="cvvTxtField" layoutX="436.0" layoutY="255.0" onAction="#getCVV" promptText="cvv" />
+      <TextField fx:id="creditNumTxtField" layoutX="436.0" layoutY="195.0" onAction="#getCreditNum" promptText="number" />
+      <TextField fx:id="expirationTxtField" layoutX="436.0" layoutY="225.0" onAction="#getExpiration" promptText="Expiration - MM/YY" />
+      <Label layoutX="436.0" layoutY="168.0" text="Credit card details:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="companyNameCombo" layoutX="205.0" layoutY="312.0" onAction="#getCompanyName" prefHeight="31.0" prefWidth="194.0" promptText="Confirmed company" />
-      <ComboBox fx:id="budgetTypeCombo" layoutX="436.0" layoutY="197.0" onAction="#getBudgetType" prefHeight="31.0" prefWidth="186.0" promptText="Budget Type" />
-      <TextField fx:id="w4cBusinessTxtField" layoutX="439.0" layoutY="132.0" onAction="#getW4cBusiness" prefHeight="31.0" prefWidth="186.0" />
-      <TextField fx:id="cvvTxtField" layoutX="436.0" layoutY="364.0" onAction="#getCVV" />
-      <TextField fx:id="creditNumTxtField" layoutX="436.0" layoutY="294.0" onAction="#getCreditNum" />
-      <TextField fx:id="expirationTxtField" layoutX="436.0" layoutY="328.0" onAction="#getExpiration" />
-      <Label layoutX="436.0" layoutY="267.0" text="Credit card details:">
+      <Label layoutX="73.0" layoutY="389.0" text="Home branch:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="438.0" layoutY="283.0" text="Status:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="statusComboBox" layoutX="437.0" layoutY="312.0" onAction="#getStatusComboBox" prefHeight="25.0" prefWidth="170.0" promptText="Set status" />
+      <Text fx:id="errorText" layoutX="232.0" layoutY="494.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="passwordField" layoutX="439.0" layoutY="379.0" onAction="#getPassword" prefHeight="31.0" prefWidth="194.0" />
+      <Label layoutX="439.0" layoutY="349.0" text="Password:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
