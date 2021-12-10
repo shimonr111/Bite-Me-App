@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
@@ -13,7 +14,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="chooseResComboBox" layoutX="45.0" layoutY="104.0" onAction="#getResturantComboBox" prefHeight="31.0" prefWidth="172.0" promptText="Choose resturant" />
+      <ComboBox fx:id="chooseResComboBox" layoutX="222.0" layoutY="127.0" onAction="#getResturantComboBox" prefHeight="31.0" prefWidth="190.0" promptText="Choose resturant" />
       <Button fx:id="nextBtn" layoutX="555.0" layoutY="439.0" mnemonicParsing="false" onAction="#getBtnNext" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -29,7 +30,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="120.0" layoutY="5.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt; W4C Identification -&gt;" />
+      <Label layoutX="203.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt; W4C Identification -&gt;" />
       <Label layoutX="541.0" layoutY="8.0" text="Choose Resturant">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -40,5 +41,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
+      <Text fx:id="errorText" layoutX="215.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
    </children>
 </Pane>

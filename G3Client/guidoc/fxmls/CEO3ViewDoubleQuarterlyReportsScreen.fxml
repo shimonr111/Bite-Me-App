@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
@@ -45,5 +46,6 @@
       </Button>
       <TextArea fx:id="report1TextArea" layoutX="31.0" layoutY="102.0" prefHeight="159.0" prefWidth="582.0" promptText="Content of the report here..." />
       <TextArea fx:id="report2TextArea" layoutX="31.0" layoutY="274.0" prefHeight="159.0" prefWidth="582.0" promptText="Content of the report here..." />
+      <Text fx:id="errorText" layoutX="220.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
    </children>
 </Pane>

@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
       <TextField fx:id="firstNameTxtField" layoutX="214.0" layoutY="120.0" onAction="#getFirstName" prefHeight="31.0" prefWidth="170.0" promptText="Enter first name" />
       <TextField fx:id="lastNameTxtField" layoutX="213.0" layoutY="154.0" onAction="#getLastName" prefHeight="31.0" prefWidth="170.0" promptText="Enter last name" />
-      <TextField fx:id="idNumTxtField" layoutX="213.0" layoutY="188.0" onAction="#getIdNum" prefHeight="31.0" prefWidth="170.0" promptText="Enter ID" />
       <TextField fx:id="phoneTxtField" layoutX="213.0" layoutY="223.0" onAction="#getPhoneNum" prefHeight="31.0" prefWidth="170.0" promptText="Enter phone number" />
       <TextField fx:id="emailTxtField" layoutX="212.0" layoutY="260.0" onAction="#getEmail" prefHeight="31.0" prefWidth="170.0" promptText="Enter email address" />
       <Button id="btnExit" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
@@ -34,11 +34,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="107.0" layoutY="187.0" text="ID number:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
       <Label layoutX="73.0" layoutY="222.0" text="Phone number:">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -49,7 +44,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="saveBtn" layoutX="235.0" layoutY="437.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
+      <Button fx:id="saveBtn" layoutX="235.0" layoutY="417.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -80,12 +75,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="w4cTxtField" layoutX="212.0" layoutY="333.0" onAction="#getW4C" prefHeight="31.0" prefWidth="170.0" promptText="Enter the supplier W4C" />
-      <Label layoutX="155.0" layoutY="336.0" text="W4C:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Label>
-      <ComboBox fx:id="setHomeBranchCombo" layoutX="212.0" layoutY="373.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
+      <ComboBox fx:id="setHomeBranchCombo" layoutX="212.0" layoutY="334.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
       <TextField fx:id="cvvTxtField" layoutX="435.0" layoutY="222.0" onAction="#getCVV" promptText="CVV" />
       <TextField fx:id="creditNumTxtField" layoutX="435.0" layoutY="152.0" onAction="#getCreditNum" promptText="Credit number" />
       <TextField fx:id="expirationTxtField" layoutX="435.0" layoutY="186.0" onAction="#getExpiration" promptText="MM/YY - Expiration" />
@@ -93,5 +83,23 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
+      <Label layoutX="81.0" layoutY="336.0" text="Home branch:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Text fx:id="errorText" layoutX="224.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="passwordField" layoutX="435.0" layoutY="297.0" onAction="#getPassword" prefHeight="31.0" prefWidth="194.0" />
+      <Label layoutX="435.0" layoutY="267.0" text="Password:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idNumTxtField" layoutX="212.0" layoutY="186.0" onAction="#getIdNum" prefHeight="31.0" prefWidth="170.0" />
+      <Label layoutX="171.0" layoutY="188.0" text="ID:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

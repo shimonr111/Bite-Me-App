@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -11,9 +9,9 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
-      <TextField fx:id="fullNameTxtField" layoutX="187.0" layoutY="106.0" onAction="#getFullName" promptText="Enter full name" />
-      <TextField fx:id="phoneTxtField" layoutX="187.0" layoutY="142.0" onAction="#getPhone" promptText="Enter a phone number" />
-      <Button fx:id="confirmAndPayBtn" layoutX="218.0" layoutY="399.0" mnemonicParsing="false" onAction="#getConfirmAndPayBtn" prefHeight="51.0" prefWidth="227.0" style="-fx-background-color: #7FBA00;" text="Confirm and pay" textFill="#383838">
+      <TextField fx:id="fullNameTxtField" layoutX="250.0" layoutY="210.0" onAction="#getFullName" promptText="Enter first" />
+      <TextField fx:id="phoneTxtField" layoutX="261.0" layoutY="309.0" onAction="#getPhone" promptText="Enter a phone number" />
+      <Button fx:id="choosePayMethBtn" layoutX="490.0" layoutY="435.0" mnemonicParsing="false" onAction="#getChoosePayMeth" prefHeight="51.0" prefWidth="149.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -23,12 +21,12 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="99.0" text="Full name:" textFill="#383838">
+      <Label layoutX="119.0" layoutY="205.0" text="First Name" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="2.0" layoutY="136.0" text="Phone number:" textFill="#383838">
+      <Label layoutX="76.0" layoutY="304.0" text="Phone number:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -48,7 +46,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Label layoutX="594.0" layoutY="25.0" text="Take away">
+      <Label layoutX="577.0" layoutY="25.0" text="Supply details">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
@@ -58,24 +56,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <TableView fx:id="summaryOrderTable" layoutX="3.0" layoutY="180.0" prefHeight="125.0" prefWidth="371.0">
-         <columns>
-            <TableColumn prefWidth="123.0" text="Partici Name" />
-            <TableColumn prefWidth="108.0" text="Order price" />
-            <TableColumn prefWidth="122.0" text="Delivery Fee" />
-         </columns>
-      </TableView>
-      <Text fill="#383838" layoutX="423.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Discount:">
+      <Text fx:id="errorText" layoutX="210.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="fullNameTxtField1" layoutX="250.0" layoutY="252.0" onAction="#getFullName" promptText="Enter first" text="Enter last" />
+      <Label layoutX="119.0" layoutY="247.0" text="Last" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
-      </Text>
-      <TextField fx:id="discountTxtField" layoutX="540.0" layoutY="105.0" onAction="#getDiscount" prefHeight="25.0" prefWidth="88.0" promptText="0.0" />
-      <TextField fx:id="finalPriceTxtField" layoutX="540.0" layoutY="142.0" onAction="#getFinalPrice" prefHeight="25.0" prefWidth="88.0" promptText="0.0" />
-      <Text fill="#383838" layoutX="407.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Final price:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
+      </Label>
    </children>
 </Pane>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+   <children>
+      <Button fx:id="payBtn" layoutX="187.0" layoutY="444.0" mnemonicParsing="false" onAction="#getPayBtn" prefHeight="51.0" prefWidth="256.0" style="-fx-background-color: #7FBA00;" text="Finish Order" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="129.0" layoutY="33.0" prefHeight="53.0" prefWidth="398.0" text="Payment configuration" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnBack" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Label layoutX="87.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; W4C Identification -&gt; Choose resturant -&gt; Choose items -&gt; Supply configuration -&gt;">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="577.0" layoutY="25.0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="456.0" layoutY="24.0" text="Supply details -&gt; ">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="532.0" layoutY="24.0" text="Payment configuration">
+         <font>
+            <Font name="System Bold" size="10.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="creditCheckBox" layoutX="163.0" layoutY="338.0" mnemonicParsing="false" onAction="#getCreditCheckBox" text="Credit card" />
+      <TextField layoutX="250.0" layoutY="334.0" promptText="Enter amount" />
+      <CheckBox fx:id="employeeBudgetCheckBox" layoutX="177.0" layoutY="189.0" mnemonicParsing="false" onAction="#getEmployeeBudgetCheckBox" text="Employee budget" />
+      <TextField layoutX="193.0" layoutY="209.0" promptText="Enter amount" />
+      <Label layoutX="129.0" layoutY="395.0" text="Total need to pay in cash">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="164.0" text="Only for business customer*" textFill="#8d0b0b" />
+      <Label layoutX="109.0" layoutY="107.0" text="Account Balance:" />
+      <TextField fx:id="totalPriceTextField1" layoutX="208.0" layoutY="103.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
+      <Label layoutX="268.0" layoutY="107.0" text="זה + של זיכוים וכו'" />
+      <Label layoutX="14.0" layoutY="143.0" text="Employee budget available Balance:" />
+      <TextField fx:id="totalPriceTextField11" layoutX="217.0" layoutY="139.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
+      <Label layoutX="268.0" layoutY="143.0" text="זה מראה כמה הוא יכול לשלם היום מהקתציב של המעביד" />
+      <Text layoutX="361.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here print error like he enter more then budget " />
+      <CheckBox fx:id="employeeBudgetCheckBox1" layoutX="163.0" layoutY="250.0" mnemonicParsing="false" onAction="#getEmployeeBudgetCheckBox" text="Use account Balance" />
+      <TextField layoutX="177.0" layoutY="267.0" promptText="Enter amount" />
+      <Text layoutX="350.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here print error like he enter more then balance" />
+      <Label layoutX="29.0" layoutY="213.0" prefHeight="15.0" prefWidth="149.0" text="Only for business customer*" textFill="#8d0b0b" />
+      <TextField fx:id="totalPriceTextField12" layoutX="325.0" layoutY="393.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
+      <Text layoutX="414.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here print error like he put more money then should" wrappingWidth="195.5703125" />
+   </children>
+</Pane>

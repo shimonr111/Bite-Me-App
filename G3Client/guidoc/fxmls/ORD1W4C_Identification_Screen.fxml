@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
-	<children>
-		<Label layoutX="115.0" layoutY="97.0" text="Private account code/employer code:">
-			<font>
-				<Font name="System Bold" size="24.0" />
-			</font>
-		</Label>
-		<TextField fx:id="codeTxtField" layoutX="233.0" layoutY="135.0" onAction="#getCodeTxtField" promptText="Enter your code here" />
-		<Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-			<font>
-				<Font name="System Bold" size="18.0" />
-			</font>
-		</Button>
-		<Label layoutX="156.0" layoutY="19.0" prefHeight="53.0" prefWidth="331.0" text="W4C Identification" textFill="#383838">
-			<font>
-				<Font name="System Bold" size="36.0" />
-			</font>
-		</Label>
-		<Label layoutX="123.0" layoutY="358.0" prefHeight="35.0" prefWidth="410.0" text="Or identify by external QR reader:">
-			<font>
-				<Font name="System Bold" size="24.0" />
-			</font>
-		</Label>
-		<Button fx:id="nextBtn" layoutX="230.0" layoutY="284.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
-			<font>
-				<Font name="System Bold" size="24.0" />
-			</font>
-		</Button>
-		<Button fx:id="qrBtn" layoutX="231.0" layoutY="401.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Click here" textFill="#383838">
-			<font>
-				<Font name="System Bold" size="24.0" />
-			</font>
-		</Button>
+   <children>
+      <Label layoutX="225.0" layoutY="81.0" text="Enter W4C code:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="codeTxtField" layoutX="233.0" layoutY="116.0" onAction="#getCodeTxtField" prefHeight="31.0" prefWidth="160.0" promptText="Enter your code here" />
+      <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="156.0" layoutY="19.0" prefHeight="53.0" prefWidth="331.0" text="W4C Identification" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="128.0" layoutY="180.0" prefHeight="35.0" prefWidth="410.0" text="Or identify by external QR reader:">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="nextBtn" layoutX="448.0" layoutY="444.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="qrBtn" layoutX="223.0" layoutY="226.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Click here" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
       <Button fx:id="btnBack" layoutX="-1.0" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="268.0" layoutY="4.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt;" />
-      <Label layoutX="540.0" layoutY="7.0" text="W4C Identification">
+      <Label layoutX="320.0" layoutY="1.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt;" />
+      <Label layoutX="540.0" layoutY="1.0" text="W4C Identification">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -57,11 +59,14 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="223.0" layoutY="172.0" text="Here we print error in the code " />
-      <ComboBox fx:id="employerComboBox" layoutX="132.0" layoutY="210.0" onAction="#getEmployerComboBox" prefHeight="31.0" prefWidth="361.0" promptText="Choose Employer from approved company list" />
-      <Text layoutX="73.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here he add the company only if he want to pay from the company budget" />
-	</children>
-	<stylesheets>
-		<URL value="@styles.css" />
-	</stylesheets>
+      <Text fx:id="errorText" layoutX="244.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.50781336426735" />
+      <ComboBox fx:id="homeBranchCombo" layoutX="223.0" layoutY="366.0" onAction="#getHomeBranch" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
+      <Label layoutX="237.0" layoutY="331.0" text="Select branch">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="258.0" layoutY="397.0" prefHeight="81.0" prefWidth="124.0" text="by default the home branch shown&#10;" />
+      <ButtonBar layoutX="14.0" layoutY="112.0" prefHeight="40.0" prefWidth="200.0" />
+   </children>
 </Pane>
