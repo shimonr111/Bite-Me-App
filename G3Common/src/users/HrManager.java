@@ -19,7 +19,7 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 */
 	
 	/**
-	 * This is the constructor of the class.
+	 * This is the constructor of the class for login
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -27,7 +27,7 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param businessW4cCodeNumber
+	 * @param W4CCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
@@ -37,10 +37,36 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 * @param budgetMaxAmount
 	 */
 	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int businessW4cCodeNumber, String userEmail, String phoneNumber,
+			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
-		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, businessW4cCodeNumber, userEmail,
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber, userEmail,
+				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
+				budgetMaxAmount);
+	}
+	
+	/**
+	 * This is the constructor of the class for registering.
+	 * 
+	 * @param userId
+	 * @param statusInSystem
+	 * @param userFirstName
+	 * @param userLastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param userEmail
+	 * @param phoneNumber
+	 * @param privateCreditCard
+	 * @param companyOfBusinessCustomer
+	 * @param budgetOfBusinessCustomer
+	 * @param businessCustomerPosition
+	 * @param budgetMaxAmount
+	 */
+	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
+			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			PositionType businessCustomerPosition, int budgetMaxAmount) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, userEmail,
 				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
 				budgetMaxAmount);
 	}
