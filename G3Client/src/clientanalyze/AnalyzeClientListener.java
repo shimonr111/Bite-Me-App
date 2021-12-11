@@ -56,4 +56,13 @@ public interface AnalyzeClientListener {
 	default void clientPrivateCustomerRegistrationSucceed() {
 		return;
 	}
+	default void clientBusinessCustomerRegistrationSucceed() {
+		return;
+	}
+	default void clientBusinessUserIdExist() {
+		return;
+	}
+	default void clientBusinessUserNameExist() {
+		return;
+	}
 }

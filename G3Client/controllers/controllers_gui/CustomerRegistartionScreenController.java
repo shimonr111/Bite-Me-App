@@ -60,7 +60,9 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 
 	    @FXML
 	    void getBusinessCustomer(ActionEvent event) {
-
+	    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+	    	BusinessCustomerRegistartionController BCRC = new BusinessCustomerRegistartionController();
+	    	BCRC.initBusinessCustomerRegistrationScreen();
 	    }
 
 	    @FXML

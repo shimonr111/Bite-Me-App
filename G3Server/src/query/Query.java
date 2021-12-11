@@ -70,6 +70,27 @@ public class Query {
 			}
 			return rs;
 	}
+	
+	/**
+	 * 
+	 * @param tableName
+	 * @param columnName
+	 * @param condition
+	 * @return
+	 */
+	public static ResultSet getColumnWithConditionFromTableInDB(String tableName,String columnName,String condition) {
+		//SELECT companyName FROM semesterialproject.company WHERE companyStatusInSystem='CONFIRMED';
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			String query = "SELECT "+columnName +" FROM semesterialproject."+tableName+" WHERE "+condition;
+			pstmt = con.prepareStatement(query);
+			rs= pstmt.executeQuery();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return rs;
+	}
 	/**
 	 * 
 	 * @param tableName
@@ -151,6 +172,42 @@ public class Query {
 			e.printStackTrace();
 		}
 				
+	}
+	
+	/**
+	 *  at the beginning we get the w4cCode of the company then we add it to the query.
+	 * @param businessCustomer
+	 * @param type
+	 */
+	public static void insertOneRowIntoBusinessCustomerOrHrManagerTable(BusinessCustomer businessCustomer,String type) {
+		int employerID=0;
+		ResultSet rs = null;
+		PreparedStatement pstmt1=null;
+	
+		try {
+			String query1 = "SELECT businessW4cNumber FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
+			pstmt1 = con.prepareStatement(query1);
+			rs= pstmt1.executeQuery();
+			if(rs.next())
+			 employerID = rs.getInt(1);
+			System.out.println(employerID);
+			rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
+				+ "privateCreditCard, companyName, budgetType, customerPosition, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
+				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
+				+  "', '" + businessCustomer.getUserEmail() +  "', '" + businessCustomer.getPhoneNumber() +  "', '" + businessCustomer.getPrivateCreditCard() +  "', '"  + businessCustomer.getCompanyOfBusinessCustomerString() 
+				+ "', '" +  businessCustomer.getBudgetOfBusinessCustomer().toString() + "', '"  + businessCustomer.getPositionType().toString() + "', '"  + businessCustomer.getBudgetMaxAmount() +  "', '" 
+				+ businessCustomer.getPrivateW4cCodeNumber()+"' )";
+		PreparedStatement pstmt2=null;
+		try {
+			pstmt2 = con.prepareStatement(query2);
+			pstmt2.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

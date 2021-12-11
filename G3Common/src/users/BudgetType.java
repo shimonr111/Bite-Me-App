@@ -15,19 +15,19 @@ public enum BudgetType {
 	DAILY{
 		@Override
 		public String toString() {
-			return "Daily budget";
+			return "DAILY";
 		}
 	},
 	WEEKLY{
 		@Override
 		public String toString() {
-			return "Weekly budget";
+			return "WEEKLY";
 		}
 	},
 	MONTHLY{
 		@Override
 		public String toString() {
-			return "Monthly budget";
+			return "MONTHLY";
 		}
 	}
 }

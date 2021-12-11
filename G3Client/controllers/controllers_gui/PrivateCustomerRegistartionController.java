@@ -194,8 +194,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     		list.add(customer);
     		list.add(login);
     		list.add(creditCard);
-    		//System.out.println(customer);
-    		//System.out.println(login);
     		Message message = new Message(Task.REGISTER_PRIVATE_CUSTOMER,Answer.WAIT_RESPONSE,list);
     		sendToClient(message);
     	}
