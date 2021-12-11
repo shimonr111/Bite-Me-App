@@ -41,7 +41,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	protected int budgetMaxAmount;
 
 	/**
-	 * This is the constructor of the class.
+	 * This is the constructor of the class for login
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -49,7 +49,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param businessW4cCodeNumber
+	 * @param W4CCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
@@ -59,10 +59,39 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * @param budgetMaxAmount
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int businessW4cCodeNumber, String userEmail, String phoneNumber,
+			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
-		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, businessW4cCodeNumber,
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber,
+				userEmail, phoneNumber, privateCreditCard);
+		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
+		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
+		this.businessCustomerPosition = businessCustomerPosition;
+		this.budgetMaxAmount = budgetMaxAmount;
+	}
+	
+	/**
+	 * This is the constructor of the class for registration
+	 * 
+	 * @param userId
+	 * @param statusInSystem
+	 * @param userFirstName
+	 * @param userLastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param userEmail
+	 * @param phoneNumber
+	 * @param privateCreditCard
+	 * @param companyOfBusinessCustomer
+	 * @param budgetOfBusinessCustomer
+	 * @param businessCustomerPosition
+	 * @param budgetMaxAmount
+	 */
+	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
+			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
+			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			PositionType businessCustomerPosition, int budgetMaxAmount) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber, privateCreditCard);
 		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;

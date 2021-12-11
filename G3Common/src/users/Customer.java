@@ -32,9 +32,8 @@ public class Customer extends User implements Serializable{
 	 */
 	protected String privateCreditCard;
 	
-	
 	/**
-	 * This is the constructor for the class Customer
+	 * This is the constructor for the class customer for login
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -42,19 +41,42 @@ public class Customer extends User implements Serializable{
 	 * @param userLastName
 	 * @param homeBranch
 	 * @param isLoggedIn
-	 * @param privateW4cCodeNumber
+	 * @param W4CCodeNumber
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param accountCode
 	 * @param privateCreditCard
 	 */
 	public Customer(String userId, ConfirmationStatus statusInSystem, String userFirstName,
-			String userLastName, Branch homeBranch, boolean isLoggedIn, int privateW4cCodeNumber, String userEmail,
+			String userLastName, Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail,
 			String phoneNumber, String privateCreditCard) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber);
 		this.privateCreditCard = privateCreditCard;
-		this.privateW4cCodeNumber=privateW4cCodeNumber;
+		this.privateW4cCodeNumber= generateW4C();
+	}
+	
+	/**
+	 * This is the constructor for the class customer for registering
+	 * 
+	 * @param userId
+	 * @param statusInSystem
+	 * @param userFirstName
+	 * @param userLastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param userEmail
+	 * @param phoneNumber
+	 * @param accountCode
+	 * @param privateCreditCard
+	 */
+	public Customer(String userId, ConfirmationStatus statusInSystem, String userFirstName,
+			String userLastName, Branch homeBranch, boolean isLoggedIn, String userEmail,
+			String phoneNumber, String privateCreditCard) {
+		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
+				userEmail, phoneNumber);
+		this.privateCreditCard = privateCreditCard;
+		this.privateW4cCodeNumber= generateW4C();
 	}
 	
 	/**
@@ -84,5 +106,10 @@ public class Customer extends User implements Serializable{
 
 	public void setPrivateW4cCodeNumber(int privateW4cCodeNumber) {
 		this.privateW4cCodeNumber = privateW4cCodeNumber;
-	}	
+	}
+	
+	/** This method used to generate customer W4C, based on the user id, which is unique */
+	private int generateW4C() {
+		return  31 * Integer.parseInt(userId);
+	}
 }
