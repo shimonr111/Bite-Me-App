@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `semesterialproject`;
--- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: semesterialproject
 -- ------------------------------------------------------
--- Server version	8.0.27
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -70,6 +70,7 @@ CREATE TABLE `businesscustomer` (
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
+  `privateW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
@@ -87,7 +88,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003);
+INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003,NULL);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +212,35 @@ INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerL
 UNLOCK TABLES;
 
 --
+-- Table structure for table `delivery`
+--
+
+DROP TABLE IF EXISTS `delivery`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `delivery` (
+  `supplyId` int NOT NULL,
+  `orderNumber` int DEFAULT NULL,
+  `deliveryType` enum('REGULAR','MULTI','ROBOTIC') DEFAULT NULL,
+  `receiverFirstName` varchar(45) DEFAULT NULL,
+  `receiverLastName` varchar(45) DEFAULT NULL,
+  `receiverAddress` varchar(45) DEFAULT NULL,
+  `receiverPhoneNumber` varchar(45) DEFAULT NULL,
+  `deliveryFee` double DEFAULT NULL,
+  PRIMARY KEY (`supplyId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `delivery`
+--
+
+LOCK TABLES `delivery` WRITE;
+/*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
+/*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hrmanager`
 --
 
@@ -232,6 +262,7 @@ CREATE TABLE `hrmanager` (
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
+  `privateW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
@@ -249,8 +280,61 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002);
+INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002,NULL);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_in_menu`
+--
+
+DROP TABLE IF EXISTS `item_in_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `item_in_menu` (
+  `itemName` varchar(45) NOT NULL,
+  `supplierUserId` varchar(45) DEFAULT NULL,
+  `itemCategory` enum('SALAD','FIRST','MAIN','DESSERT','DRINK') DEFAULT NULL,
+  `itemSize` enum('SMALL','REGULAR','LARGE') DEFAULT NULL,
+  `picturePath` varchar(45) DEFAULT NULL,
+  `itemPrice` double DEFAULT NULL,
+  PRIMARY KEY (`itemName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_in_menu`
+--
+
+LOCK TABLES `item_in_menu` WRITE;
+/*!40000 ALTER TABLE `item_in_menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_in_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `item_in_order`
+--
+
+DROP TABLE IF EXISTS `item_in_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `item_in_order` (
+  `itemName` varchar(45) NOT NULL,
+  `orderNumber` int DEFAULT NULL,
+  `itemSize` enum('SMALL','REGULAR','LARGE') DEFAULT NULL,
+  `itemPrice` double DEFAULT NULL,
+  `comment` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`itemName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `item_in_order`
+--
+
+LOCK TABLES `item_in_order` WRITE;
+/*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -278,6 +362,38 @@ LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
 INSERT INTO `login` VALUES ('customer','customer','1000','customer'),('ceobiteme','ceobiteme','1001','ceobiteme'),('hrmanager','hrmanager','1002','hrmanager'),('businesscustomer','businesscustomer','1003','businesscustomer'),('supplier','supplier','1005','supplier'),('branchmanagerN','branchmanagerN','1041','branchmanager'),('branchmanagerS','branchmanagerS','1042','branchmanager'),('branchmanagerC','branchmanagerC','1043','branchmanager');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order` (
+  `orderNumber` int NOT NULL,
+  `supplierUserId` varchar(45) DEFAULT NULL,
+  `customerUserId` varchar(45) DEFAULT NULL,
+  `branch` enum('NORTH','CENTER','SOUTH') DEFAULT NULL,
+  `timeType` enum('REGULAR','PRE') DEFAULT NULL,
+  `status` enum('PENDING_APPROVAL','APPROVED','UN_APPROVED') DEFAULT NULL,
+  `issueDateTime` datetime DEFAULT NULL,
+  `supplyDateTime` datetime DEFAULT NULL,
+  `supplyType` enum('TAKE_AWAY','DELIVERY') DEFAULT NULL,
+  `supplyId` int DEFAULT NULL,
+  `totalPrice` double DEFAULT NULL,
+  PRIMARY KEY (`orderNumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order`
+--
+
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -312,6 +428,32 @@ LOCK TABLES `supplier` WRITE;
 INSERT INTO `supplier` VALUES ('1005','CONFIRMED','supplierFirstname','supplierLastname','NORTH',0,'supplierEmail@supplies.com','100505','supplierBusinnessname',0.5);
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `take_away`
+--
+
+DROP TABLE IF EXISTS `take_away`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `take_away` (
+  `supplyId` int NOT NULL,
+  `orderNumber` int DEFAULT NULL,
+  `receiverFirstName` varchar(45) DEFAULT NULL,
+  `receiverLastName` varchar(45) DEFAULT NULL,
+  `receiverPhoneNumber` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`supplyId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `take_away`
+--
+
+LOCK TABLES `take_away` WRITE;
+/*!40000 ALTER TABLE `take_away` DISABLE KEYS */;
+/*!40000 ALTER TABLE `take_away` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -322,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-09 19:37:10
+-- Dump completed on 2021-12-12  1:45:31
