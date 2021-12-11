@@ -9,7 +9,7 @@ package clientanalyze;
  * Interface description: 
  * This is an interface which is used to implement the listeners(observable) design pattern
  *         
- * @version 06/12/2021
+ * @version 11/12/2021
  */
 
 public interface AnalyzeClientListener {
@@ -45,6 +45,15 @@ public interface AnalyzeClientListener {
 		return;
 	}
 	default void clientGotCEOLogin() {
+		return;
+	}
+	default void clientUserIdExist() {
+		return;
+	}
+	default void clientUserNameExist() {
+		return;
+	}
+	default void clientPrivateCustomerRegistrationSucceed() {
 		return;
 	}
 }

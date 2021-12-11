@@ -13,19 +13,19 @@ public enum ConfirmationStatus {
 	CONFIRMED{
 		@Override
 		public String toString() {
-			return "Confirmed";
+			return "CONFIRMED";
 		}
 	},
 	PENDING_APPROVAL{
 		@Override
 		public String toString() {
-			return "Pending Approval";
+			return "PENDING_APPROVAL";
 		}
 	},
 	FROZEN{
 			@Override
 			public String toString() {
-				return "Frozen";
+				return "FROZEN";
 			}
 	
 	}

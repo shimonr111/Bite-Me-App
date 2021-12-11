@@ -19,7 +19,7 @@ import users.User;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 09/12/2021
+ * @version 11/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -137,6 +137,26 @@ public class AnalyzeMessageFromServer {
 					needs to know about this action*/
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientIsNotConfirmed();
+					}
+					break;
+				case USER_ID_ALREADY_EXIST:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientUserIdExist();
+					}
+					break;
+				case USER_NAME_ALREADY_EXIST:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientUserNameExist();;
+					}
+					break;
+				default:
+					break;
+				}
+			case DISPLAY_MESSAGE_TO_CLIENT:
+				switch (recievedAnswerFromServer) {
+				case REGISTRATION_SUCCEED:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientPrivateCustomerRegistrationSucceed();;
 					}
 					break;
 				default:
