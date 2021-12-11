@@ -58,7 +58,7 @@ public class RegistrationQueries {
 	 * @return
 	 */
 	private static boolean checkIfCustomerIdExist(Customer customer) {	
-		ResultSet rs = Query.getColumnFromTableInDB("customer", "userID");
+		ResultSet rs = Query.getColumnFromTableInDB("login", "userID");
 		try {
 			while(rs.next()) {
 				if(rs.getString(1).equals(customer.getUserId())) {

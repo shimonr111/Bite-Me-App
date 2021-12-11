@@ -176,8 +176,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
      */
     @FXML
     void getSaveBtn(ActionEvent event) {
-    	//Customer customer = new Customer (idNumTxtField.getText(),false,firstNameTxtField.getText(),lastNameTxtField.getText(),
-    		//	)
     	if(checkAllFields()==true) {
     		Branch homeBranch;
     		if(setHomeBranchCombo.getValue().equals("South Branch")) 
@@ -256,7 +254,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 				loader = new FXMLLoader();
 				Pane root;
 				try {
-				//	primaryStage.hide(); 
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/BM7PrivateCustomerRegistartion.fxml").openStream());
