@@ -9,6 +9,7 @@ import communication.Message;
 import communication.Task;
 import controllers_gui.AbstractBiteMeController;
 import controllers_gui.UserPortalOfBusinessCustomerController;
+import controllers_gui.BusinessCustomerRegistartionController;
 import users.User;
 
 /**
@@ -149,19 +150,37 @@ public class AnalyzeMessageFromServer {
 						listener.clientUserNameExist();;
 					}
 					break;
-				default:
-					break;
-				}
-			case DISPLAY_MESSAGE_TO_CLIENT:
-				switch (recievedAnswerFromServer) {
-				case REGISTRATION_SUCCEED:
+				case USER_ID_ALREADY_EXIST_BUSINESS:
 					for (AnalyzeClientListener listener : clientListeners) {
-						listener.clientPrivateCustomerRegistrationSucceed();;
+						listener.clientBusinessUserIdExist();;
+					}
+					break;
+				case USER_NAME_ALREADY_EXIST_BUSINESS:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientBusinessUserNameExist();;
 					}
 					break;
 				default:
 					break;
 				}
+			case DISPLAY_MESSAGE_TO_CLIENT:
+				switch (recievedAnswerFromServer) {
+				case CUSTOMER_REGISTRATION_SUCCEED:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientPrivateCustomerRegistrationSucceed();;
+					}
+					break;
+				case BUSINESS_CUSTOMER_REGISTRATION_SUCCEED:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientBusinessCustomerRegistrationSucceed();;
+					}
+					break;
+				default:
+					break;
+				}
+				break;
+			case DISPLAY_COMPANIES_INTO_COMBOBOX:
+				BusinessCustomerRegistartionController.companies=(ArrayList<String>)recivedMessageFromServer.getObject();
 				break;
 			default:
 				break;

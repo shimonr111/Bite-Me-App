@@ -64,7 +64,7 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 */
 	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
-			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, String companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, userEmail,
 				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,

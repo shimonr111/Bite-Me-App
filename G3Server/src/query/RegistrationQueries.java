@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+import users.BusinessCustomer;
 import users.CreditCard;
 import users.Customer;
+import users.HrManager;
 import users.Login;
+import users.User;
 
 /**
  * 
@@ -35,7 +38,7 @@ public class RegistrationQueries {
 		Customer customer = (Customer) list.get(0);
 		Login login = (Login) list.get(1);
 		CreditCard creditCard = (CreditCard) list.get(2);
-		if(checkIfCustomerIdExist(customer)) {
+		if(checkIfUserIdExist(customer)) {
 			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_ID_ALREADY_EXIST,null);
 			return messageBackToClient;
 		}
@@ -47,21 +50,65 @@ public class RegistrationQueries {
 			Query.insertOneRowIntoCreditCardTable(creditCard);
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), customer.getUserId(), "customer");
 		Query.insertOneRowIntoCustomerTable(customer);
-		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.REGISTRATION_SUCCEED,null);
+		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
 	}
 	
 	/**
+	 * 	 * In this method we check if all the details are not exist before in db ( userID , username , creditcard)
+	 * in case userID or username already exist we return a relevant message and we do not insert new rows into tables
+	 * in case the credit card number already exist , we do create rows and inesrt them but we dont create a new row for the credit card.
+	 * @param message
+	 * @return
+	 */
+	
+	public static Message getBusinessCustomerRegistration(Message message) {
+		Message messageBackToClient;
+		  @SuppressWarnings("unchecked")
+		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
+		String businessCustomerType=null;
+		if(list.get(0) instanceof HrManager) {
+			businessCustomerType = "hrmanager";
+		}
+		else {
+			businessCustomerType = "businesscustomer";
+		}
+		Login login = (Login) list.get(1);
+		CreditCard creditCard = (CreditCard) list.get(2);
+		if(checkIfUserIdExist((User)list.get(0))) {
+			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_ID_ALREADY_EXIST_BUSINESS,null);
+			return messageBackToClient;
+		}
+		if(checkIfLoginUserNameExist(login)) {
+			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_NAME_ALREADY_EXIST_BUSINESS,null);
+			return messageBackToClient;
+		}
+		if(!checkIfCreditCardNumberExist(creditCard))
+			Query.insertOneRowIntoCreditCardTable(creditCard);
+		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(0)).getUserId(), businessCustomerType);
+		if(businessCustomerType.equals("hrmanger")) {
+			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(0), "hrmanager");
+		}
+		else {
+			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(0), "businesscustomer");
+		}
+		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
+		return messageBackToClient;
+		
+	}
+	
+	
+	/**BUS
 	 * This method checks if the customerID exist in the customer table.
 	 * @param customer
 	 * @return
 	 */
-	private static boolean checkIfCustomerIdExist(Customer customer) {	
+	private static boolean checkIfUserIdExist(User user) {	
 		ResultSet rs = Query.getColumnFromTableInDB("login", "userID");
 		try {
 			while(rs.next()) {
-				if(rs.getString(1).equals(customer.getUserId())) {
+				if(rs.getString(1).equals(user.getUserId())) {
 					return true;
 				}
 			}
@@ -116,6 +163,30 @@ public class RegistrationQueries {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	/**
+	 * This method gets from the db all the confirmed companies and returns them as arraylist.
+	 * @param message
+	 * @return
+	 */
+	public static Message getCompaniesFromDB(Message message) {
+		ArrayList<String> companies = new ArrayList<>();
+		ResultSet rs = Query.getColumnWithConditionFromTableInDB("company", "companyName","companyStatusInSystem='CONFIRMED'" );
+		try {
+			while(rs.next()) {
+				companies.add(rs.getString(1));
+			}
+			rs.close();
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		message.setTask(Task.DISPLAY_COMPANIES_INTO_COMBOBOX);
+		message.setAnswer(Answer.SUCCEED);
+		message.setObject(companies);
+		return message;
 	}
 
 }

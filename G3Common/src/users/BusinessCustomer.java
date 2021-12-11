@@ -23,6 +23,11 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * This is the data about the company in which the user works in.
 	 */
 	protected Company companyOfBusinessCustomer;
+	
+	/**
+	 *  This is the data about the company in which the user works in. for REGISTRATION !.
+	 */
+	protected String companyOfBusinessCustomerString;
 
 	/**
 	 * Each Business customer is given a specific type of budget, it can be budget
@@ -89,11 +94,11 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
-			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, String companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber, privateCreditCard);
-		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
+		this.companyOfBusinessCustomerString = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
@@ -106,6 +111,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 
 	public BudgetType getBudgetOfBusinessCustomer() {
 		return budgetOfBusinessCustomer;
+	}
+	
+	public PositionType getPositionType() {
+		return  businessCustomerPosition;
 	}
 
 	public void setBudgetOfBusinessCustomer(BudgetType budgetOfBusinessCustomer) {
@@ -122,6 +131,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 
 	public Company getcompanyOfBusinessCustomer() {
 		return companyOfBusinessCustomer;
+	}
+	
+	public String getCompanyOfBusinessCustomerString() {
+		return companyOfBusinessCustomerString;
 	}
 	
 	/**

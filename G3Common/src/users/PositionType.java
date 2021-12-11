@@ -15,13 +15,13 @@ public enum PositionType {
 	HR{
 		@Override
 		public String toString() {
-			return "Human Resources";
+			return "HR";
 		}
 	},
 	REGULAR{
 		@Override
 		public String toString() {
-			return "Regular worker";
+			return "REGULAR";
 		}
 	
 	}
