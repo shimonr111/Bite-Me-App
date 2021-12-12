@@ -209,4 +209,23 @@ public class Query {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param customer
+	 */
+	public static void insertOneRowIntoSupplierTable(Supplier supplier) {
+		String query = "INSERT INTO semesterialproject.supplier ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
+				+ "supplierBusinessName, revenueFee ) VALUES( '" + supplier.getUserId() + "', '" + supplier.getStatusInSystem() + "', '" + supplier.getUserFirstName() + "', '" 
+				+ supplier.getUserLastName() + "', '" +  supplier.getHomeBranch() + "', '" +  0 + "', '" +  supplier.getUserEmail() + "', '" +  supplier.getPhoneNumber()
+				+ "', '" +  supplier.getSupplierBusinessName() + "', '" + supplier.getRevenueFee() +"' )";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+				
+	}
+	
 }

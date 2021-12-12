@@ -76,6 +76,8 @@ public class AnalyzeMessageFromClient {
 			 case REGISTER_BUSINESS_CUSTOMER:
 				 recivedMessageFromClient = RegistrationQueries.getBusinessCustomerRegistration((Message)message);
 				 break;
+			 case REGISTER_SUPPLIER:
+				 recivedMessageFromClient = RegistrationQueries.getSupplierRegistration((Message) message);
 			default:
 				break;
 			}

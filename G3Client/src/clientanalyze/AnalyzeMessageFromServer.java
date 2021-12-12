@@ -20,7 +20,7 @@ import users.User;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 11/12/2021
+ * @version 12/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -160,6 +160,21 @@ public class AnalyzeMessageFromServer {
 						listener.clientBusinessUserNameExist();;
 					}
 					break;
+				case USER_ID_ALREADY_EXIST_SUPPLIER:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientSupplierIdExist();
+					}
+					break;
+				case USER_NAME_ALREADY_EXIST_SUPPLIER:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientSupplierUserNameExist();
+					}
+					break;
+				case SUPPLIER_NAME_EXIST:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientSupplierNameExist();
+					}
+					break;
 				default:
 					break;
 				}
@@ -173,6 +188,11 @@ public class AnalyzeMessageFromServer {
 				case BUSINESS_CUSTOMER_REGISTRATION_SUCCEED:
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientBusinessCustomerRegistrationSucceed();;
+					}
+					break;
+				case SUPPLIER_REGISTRATION_SUCCEED:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientSupplierRegistrationSucceed();
 					}
 					break;
 				default:

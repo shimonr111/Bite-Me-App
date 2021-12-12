@@ -12,6 +12,7 @@ import users.CreditCard;
 import users.Customer;
 import users.HrManager;
 import users.Login;
+import users.Supplier;
 import users.User;
 
 /**
@@ -98,6 +99,38 @@ public class RegistrationQueries {
 		
 	}
 	
+	/**
+	 * 	 * In this method we check if all the details are not exist before in db ( userID , username )
+	 * in case userID or username already exist we return a relevant message and we do not insert new rows into tables
+	 * we also check here if the supplier name already exist.
+	 * @param message
+	 * @return
+	 */
+	public static Message getSupplierRegistration(Message message) {
+		Message messageBackToClient;
+		  @SuppressWarnings("unchecked")
+		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
+		Supplier supplier = (Supplier) list.get(0);
+		Login login = (Login) list.get(1);
+		if(checkIfUserIdExist(supplier)) {
+			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_ID_ALREADY_EXIST_SUPPLIER,null);
+			return messageBackToClient;
+		}
+		if(checkIfLoginUserNameExist(login)) {
+			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_NAME_ALREADY_EXIST_SUPPLIER,null);
+			return messageBackToClient;
+		}
+		if(checkIfSupplierNameExsist(supplier)) {
+			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.SUPPLIER_NAME_EXIST,null);
+			return messageBackToClient;
+		}
+		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplier.getUserId(), "supplier");
+		Query.insertOneRowIntoSupplierTable(supplier);
+		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.SUPPLIER_REGISTRATION_SUCCEED,null);
+		return messageBackToClient;
+		
+	}
+
 	
 	/**BUS
 	 * This method checks if the customerID exist in the customer table.
@@ -151,6 +184,30 @@ public class RegistrationQueries {
 		try {
 			while(rs.next()) {
 				if(rs.getString(1).equals(creditCard.getCreditCardNumber())) {
+					return true;
+					
+				}
+			}
+			rs.close();
+				
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	/**
+	 * this method checks if the supplier name already exist in db .
+	 * @param supplier
+	 * @return
+	 */
+	private static boolean checkIfSupplierNameExsist(Supplier supplier) {
+		ResultSet rs = Query.getColumnFromTableInDB("supplier", "supplierBusinessName");
+		try {
+			while(rs.next()) {
+				if(rs.getString(1).equals(supplier.getSupplierBusinessName())) {
 					return true;
 					
 				}

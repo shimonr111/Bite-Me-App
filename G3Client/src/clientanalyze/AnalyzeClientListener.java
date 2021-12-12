@@ -65,4 +65,16 @@ public interface AnalyzeClientListener {
 	default void clientBusinessUserNameExist() {
 		return;
 	}
+	default void clientSupplierRegistrationSucceed() {
+		return;
+	}
+	default void clientSupplierIdExist() {
+		return;
+	}
+	default void clientSupplierUserNameExist() {
+		return;
+	}
+	default void clientSupplierNameExist() {
+		return;
+	}
 }
