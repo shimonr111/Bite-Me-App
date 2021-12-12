@@ -6,11 +6,12 @@ import java.io.Serializable;
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
+ * @author Ori, Malka.
  *  Class description: This class sets data for
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
- * @version 09/12/2021
+ * @version 12/12/2021
  */
 public class Company implements Serializable{
 	
@@ -19,7 +20,7 @@ public class Company implements Serializable{
 	 */
 	
 	/**
-	 * This is the name of the employer such as Intel and etc.
+	 * This is the name of the employer such as Intel and etc, - PK.
 	 */
 	private String companyName;
 	
@@ -37,9 +38,9 @@ public class Company implements Serializable{
 	private String email;
 	/**
 	 * This injective number defines  
-	 * the business W4C replacement code.
+	 * the company code, -PK.
 	 */
-	protected int businessW4cCodeNumber; 
+	protected int companyCode; 
 	
 	/**
 	 * This is the constructor of the class.
@@ -48,15 +49,15 @@ public class Company implements Serializable{
 	 * @param companyStatusInSystem
 	 * @param address
 	 * @param email
-	 * @param businessW4cCodeNumber
+	 * @param companyCode
 	 */
-	public Company(String companyName, ConfirmationStatus companyStatusInSystem, String address, String email, int businessW4cCodeNumber) {
+	public Company(String companyName, ConfirmationStatus companyStatusInSystem, String address, String email, int companyCode) {
 		super();
 		this.companyName = companyName;
 		this.companyStatusInSystem = companyStatusInSystem;
 		this.address = address;
 		this.email = email;
-		this.businessW4cCodeNumber=businessW4cCodeNumber;
+		this.companyCode=companyCode;
 	}
 	
 	/**
@@ -99,12 +100,12 @@ public class Company implements Serializable{
 		this.email = email;
 	}
 
-	public int getBusinessW4cCodeNumber() {
-		return businessW4cCodeNumber;
+	public int getcompanyCode() {
+		return companyCode;
 	}
 
-	public void setBusinessW4cCodeNumber(int businessW4cCodeNumber) {
-		this.businessW4cCodeNumber = businessW4cCodeNumber;
+	public void setcompanyCode(int companyCode) {
+		this.companyCode = companyCode;
 	}
 	
 	
