@@ -44,7 +44,7 @@ CREATE TABLE `branchmanager` (
 
 LOCK TABLES `branchmanager` WRITE;
 /*!40000 ALTER TABLE `branchmanager` DISABLE KEYS */;
-INSERT INTO `branchmanager` VALUES ('1041','CONFIRMED','branchmanagerNFirstname','branchmanagerNLastname','NORTH',1,'branchManagerNEmail@BM.com','104104'),('1042','CONFIRMED','branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,'branchManagerSEmail@BM.com','104204'),('1043','CONFIRMED','branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,'branchManagerCEmail@BM.com','104304');
+INSERT INTO `branchmanager` VALUES ('1041','CONFIRMED','branchmanagerNFirstname','branchmanagerNLastname','NORTH',0,'branchManagerNEmail@BM.com','104104'),('1042','CONFIRMED','branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,'branchManagerSEmail@BM.com','104204'),('1043','CONFIRMED','branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,'branchManagerCEmail@BM.com','104304');
 /*!40000 ALTER TABLE `branchmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +75,7 @@ CREATE TABLE `businesscustomer` (
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
   KEY `businesscustomer_businessW4cNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `businesscustomer_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`businessW4cNumber`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `businesscustomer_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -135,9 +135,9 @@ CREATE TABLE `company` (
   `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
-  `businessW4cNumber` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`companyName`,`businessW4cNumber`),
-  KEY `W4CNUMBER` (`businessW4cNumber`)
+  `companyCode` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`companyName`,`companyCode`),
+  KEY `W4CNUMBER` (`companyCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -267,7 +267,7 @@ CREATE TABLE `hrmanager` (
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
   KEY `hrmanager_businessW4cNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `hrmanager_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`businessW4cNumber`),
+  CONSTRAINT `hrmanager_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -464,4 +464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-12  1:45:31
+-- Dump completed on 2021-12-12 10:22:21

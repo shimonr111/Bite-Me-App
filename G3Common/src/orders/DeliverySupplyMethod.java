@@ -4,8 +4,10 @@ import util.constans;
 
 /**
  * 
- * @author Ori, Malka. Class description: This Abstract class is a base class
- *         for supply method.
+ * @author Ori, Malka.
+ *  Class description: 
+ *  This Abstract class is a base class
+ *  for supply method.
  * @version 11/12/2021
  */
 public class DeliverySupplyMethod extends AbatractSupplyMethod {
