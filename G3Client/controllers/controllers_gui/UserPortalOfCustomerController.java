@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.Branch;
 
 /**
  * 
@@ -170,7 +171,13 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		userName.setText(connectedUser.getUserFirstName());
-		homeBranchComboBox.setValue(connectedUser.getHomeBranch().toString());
+		Branch homeBranch = connectedUser.getHomeBranch();
+		if(homeBranch.equals(Branch.NORTH))
+			homeBranchComboBox.setValue("North Branch");
+		else if(homeBranch.equals(Branch.CENTER))
+			homeBranchComboBox.setValue("Center Branch");
+		else
+			homeBranchComboBox.setValue("South Branch");
 		homeBranchComboBox.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		
 	}
