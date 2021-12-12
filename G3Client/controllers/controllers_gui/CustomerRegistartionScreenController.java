@@ -135,6 +135,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 							root = loader.load(getClass().getResource("/fxmls/UserPortalOfBranchManager.fxml").openStream());
 							UserPortalOfBranchManagerController UOBMC = new UserPortalOfBranchManagerController();
 							UOBMC.initPortalAgain();
+							Scene scene = new Scene(root);
 							Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 								@Override
 								public void handle(WindowEvent event) { 
@@ -142,6 +143,10 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 									Stage.close();
 								}
 							});
+							scene.getStylesheets().add(getClass().getResource("/css/UserPortalOfBranchManager.css").toExternalForm());
+							Stage.setTitle("Main menu");
+							Stage.setScene(scene);
+							Stage.show();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -168,7 +173,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 			}
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("/css/CustomerRegistartionScreen.css").toExternalForm());
-			primaryStage.setTitle("Main menu");
+			primaryStage.setTitle("Customer registration");
 			primaryStage.setScene(scene);
 			primaryStage.show();/* show the new screen */
 		}
