@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.Branch;
 import users.HrManager;
 import javafx.scene.control.ComboBox;
 
@@ -188,7 +189,13 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
-		homeBranchCombo.setValue(connectedUser.getHomeBranch().toString());
+		Branch homeBranch = connectedUser.getHomeBranch();
+		if(homeBranch.equals(Branch.NORTH))
+			homeBranchCombo.setValue("North Branch");
+		else if(homeBranch.equals(Branch.CENTER))
+			homeBranchCombo.setValue("Center Branch");
+		else
+			homeBranchCombo.setValue("South Branch");
 		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 		

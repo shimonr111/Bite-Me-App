@@ -313,7 +313,13 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 	 * Here we initialize also the listeners.
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setHomeBranchCombo.setValue(connectedUser.getHomeBranch().toString());
+		Branch homeBranch = connectedUser.getHomeBranch();
+		if(homeBranch.equals(Branch.NORTH))
+			setHomeBranchCombo.setValue("North Branch");
+		else if(homeBranch.equals(Branch.CENTER))
+			setHomeBranchCombo.setValue("Center Branch");
+		else
+			setHomeBranchCombo.setValue("South Branch");
 		setHomeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		displayMessage.setText("");
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
