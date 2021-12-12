@@ -296,6 +296,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 								Stage.close();
 							}
 						});
+						scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 						Stage.setTitle("Supplier registration");
 						Stage.setScene(scene);
 						Stage.show();
