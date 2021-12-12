@@ -44,7 +44,9 @@ import users.Login;
 public class PrivateCustomerRegistartionController extends AbstractBiteMeController implements Initializable  {
 	private static FXMLLoader loader;
     private static PrivateCustomerRegistartionController privateCustomerRegistrationScreenController;
-
+    
+    private ArrayList<TextField> textFields = new ArrayList<>();
+    private ArrayList<TextField> integerFields = new ArrayList<>();
     @FXML
     private TextField firstNameTxtField;
 
@@ -205,26 +207,57 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     }
     
     /**
+     * 
      * this method checks if all the fields are filled
      * in addition here we check if the input were correct.
+     * @return
      */
- 	public Boolean checkAllFields() {
- 		if(idNumTxtField.getText().equals("") || firstNameTxtField.getText().equals("") || lastNameTxtField.getText().equals("") ||
- 				phoneTxtField.getText().equals("") || emailTxtField.getText().equals("") || confirmedEmailTxtField.getText().equals("") || 
- 				passwordField.getText().equals("") || creditNumTxtField.getText().equals("") || userNameTxtField.getText().equals("") || expirationTxtField.getText().equals("") 
- 				|| cvvTxtField.getText().equals("")) {
+ 	public boolean checkAllFields() {
+ 		boolean returnVal=true;
+ 		for (TextField txt : textFields)
+ 			txt.setStyle(null);
+ 			
+ 		for(TextField txt: textFields) 
+ 			if(txt.getText().equals("")) {
+ 				txt.setStyle("-fx-border-color: red");
+ 				returnVal=false;
+ 			}
+ 		if(returnVal==false) {
  			displayMessage.setText("Please, Fill in all the fields !!");
  			return false;
  		}
- 		else if(emailTxtField.getText().contains("@")==false) {
+ 		for(TextField intTxt : integerFields) {
+ 			if(!isInt(intTxt)) {
+ 				intTxt.setStyle("-fx-border-color: red");
+ 				displayMessage.setText("Marked field must contain only numbers !");
+ 				return false;
+ 			}
+ 		}
+ 		if(emailTxtField.getText().contains("@")==false) {
+ 			emailTxtField.setStyle("-fx-border-color: red");
  			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
  			return false;
  		}
  		else if(emailTxtField.getText().equals(confirmedEmailTxtField.getText())== false) {
+ 			confirmedEmailTxtField.setStyle("-fx-border-color: red");
  			displayMessage.setText("Please, fill the same Email address on both email fields!!");
  			return false;
  		}
  		return true;
+ 	}
+ 	
+ 	/**
+ 	 * this method checks if the textField contains numbers only.
+ 	 * @param txtField
+ 	 * @return true or false according to the input.
+ 	 */
+ 	public boolean isInt(TextField txtField) {
+ 		try {
+ 		int checkIfInt = Integer.parseInt(txtField.getText());
+ 		return true;
+ 		}catch(NumberFormatException e) {
+ 			return false;
+ 		}
  	}
  	
  	/**
@@ -306,13 +339,19 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 			}
 		});
 	
-}
+    }
+    
 
 	@Override
 	/**
 	 * Here we initialize also the listeners.
 	 */
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField) ; textFields.add(emailTxtField); textFields.add(expirationTxtField);
+		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(passwordField); textFields.add(phoneTxtField);
+		textFields.add(userNameTxtField);
+		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField) ; integerFields.add(idNumTxtField); integerFields.add(phoneTxtField); 
+		
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))
 			setHomeBranchCombo.setValue("North Branch");
