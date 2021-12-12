@@ -170,6 +170,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/UserPortalOfHRManager.css").toExternalForm());
+					Stage.setTitle("Main menu");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

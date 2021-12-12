@@ -185,6 +185,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/UserPortalOfBranchManager.css").toExternalForm());
+					Stage.setTitle("Main menu");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

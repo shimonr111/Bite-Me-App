@@ -264,6 +264,8 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/PrivateCustomerRegistartion.css").toExternalForm());
+					Stage.setTitle("Private customer registration");
 					Stage.setScene(scene);
 					Stage.show();
 					

@@ -178,6 +178,8 @@ public class LoginScreenController extends AbstractBiteMeController{
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/EntryHomeScreenForm.css").toExternalForm());
+					Stage.setTitle("Home");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
