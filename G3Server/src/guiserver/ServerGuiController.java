@@ -86,10 +86,6 @@ public class ServerGuiController {
 	@FXML
 	private Button closeBtn;
 	
-	
-	@FXML
-	private Button importBtn;
-	
 	@FXML
 	private TextArea txtConsole;
 
@@ -170,14 +166,6 @@ public class ServerGuiController {
 		setVisabilityForUI(false);
 		BiteMeServerUI.DisconnectServer(); // when button Disconnect is clicked than terminate server listening method
 	}
-	
-	
-	
-	@FXML
-	public void getImportBtn(ActionEvent event) throws Exception {
-		
-	}
-	
 	
 	/**
 	* @param isVisable to control the visiablity of the UI
