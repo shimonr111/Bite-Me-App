@@ -190,7 +190,6 @@ public class Query {
 			rs= pstmt1.executeQuery();
 			if(rs.next())
 			 employerID = rs.getInt(1);
-			System.out.println(employerID);
 			rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
