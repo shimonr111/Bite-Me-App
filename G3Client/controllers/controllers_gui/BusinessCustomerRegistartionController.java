@@ -48,6 +48,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 	private static FXMLLoader loader;
     private static BusinessCustomerRegistartionController businessCustomerRegistrationController;
     public static ArrayList<String> companies;
+    private ArrayList<TextField> textFields = new ArrayList<>();
+    private ArrayList<TextField> integerFields = new ArrayList<>();
 
     @FXML
     private TextField firstNameTxtField;
@@ -367,29 +369,87 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     	sendToClient(message);
     }
     
-    public Boolean checkAllFields() {
-    	if(firstNameTxtField.getText().equals("") || lastNameTxtField.getText().equals("") || idNumTxtField.getText().equals("") || 
-    			phoneTxtField.getText().equals("") || emailTxtField.getText().equals("") || confirmedEmailTxtField.getText().equals("") || 
-    			monthlyMaxBudgedTxtField.getText().equals("") || creditNumTxtField.getText().equals("") || expirationTxtField.getText().equals("") ||
-    					cvvTxtField.getText().equals("") || userNameField.getText().equals("") || passwordField.getText().equals("") || 
-    					companyNameCombo.getValue().equals("Select company:") || positionCombo.getValue().equals("Select position:") ||
-    					budgetTypeCombo.getValue().equals("Select Budget type:") ) {
-    		displayMessage.setText("Please, Fill in all the fields !!");
+    /**
+     * 
+     * this method checks if all the fields are filled
+     * in addition here we check if the input were correct.
+     * @return
+     */
+    public boolean checkAllFields() {
+    	boolean returnVal=true;
+ 		for (TextField txt : textFields)
+ 			txt.setStyle(null);
+ 			
+ 		for(TextField txt: textFields) 
+ 			if(txt.getText().equals("")) {
+ 				txt.setStyle( "-fx-border-color: red");
+ 				returnVal=false;
+ 			}
+ 		if(returnVal==false) {
+ 			displayMessage.setText("Please, Fill in all the marked fields !!");
  			return false;
-    	}
-    	else if(emailTxtField.getText().contains("@")==false) {
+ 		} 
+ 		if(!checkComboBoxInput(companyNameCombo,"Select company:")) {
+ 			displayMessage.setText("Please, pick your choice from the 'Select company' box!");
+ 			return false;
+ 			}
+ 		if(!checkComboBoxInput(positionCombo,"Select position:")) {
+ 			displayMessage.setText("Please, pick your choice from the 'Select position' box!");
+ 			return false;
+ 			}
+ 		if(!checkComboBoxInput(budgetTypeCombo, "Select Budget type:")) {
+ 			displayMessage.setText("Please, pick your choice from the 'Select Budget type' box!");
+ 			return false;
+ 		}
+ 			
+ 		
+ 		for(TextField intTxt : integerFields) {
+ 			if(!isInt(intTxt)) {
+ 				intTxt.setStyle("-fx-border-color: red");
+ 				displayMessage.setText("Marked field must contain only numbers !");
+ 				return false;
+ 			}
+ 		}
+ 		if(emailTxtField.getText().contains("@")==false) {
+ 			emailTxtField.setStyle("-fx-border-color: red");
  			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
  			return false;
  		}
  		else if(emailTxtField.getText().equals(confirmedEmailTxtField.getText())== false) {
+ 			confirmedEmailTxtField.setStyle("-fx-border-color: red");
  			displayMessage.setText("Please, fill the same Email address on both email fields!!");
  			return false;
  		}
  		return true;
     }
+    
+    public boolean checkComboBoxInput(ComboBox comboBox, String message) {
+    	if(comboBox.getValue().equals(message))
+    		return false;
+    	return true;
+    }
+    
+ 	/**
+ 	 * this method checks if the textField contains numbers only.
+ 	 * @param txtField
+ 	 * @return true or false according to the input.
+ 	 */
+ 	public boolean isInt(TextField txtField) {
+ 		try {
+ 		int checkIfInt = Integer.parseInt(txtField.getText());
+ 		return true;
+ 		}catch(NumberFormatException e) {
+ 			return false;
+ 		}
+ 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField); textFields.add(emailTxtField); textFields.add(expirationTxtField);
+		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(monthlyMaxBudgedTxtField); textFields.add(passwordField);
+		textFields.add(phoneTxtField); textFields.add(userNameField);
+		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField); integerFields.add(monthlyMaxBudgedTxtField);
+		integerFields.add(phoneTxtField);
 		getCompanies();
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))
