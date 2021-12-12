@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
       <TextField fx:id="fullNameTxtField" layoutX="250.0" layoutY="210.0" onAction="#getFullName" promptText="Enter first" />
       <TextField fx:id="phoneTxtField" layoutX="261.0" layoutY="309.0" onAction="#getPhone" promptText="Enter a phone number" />

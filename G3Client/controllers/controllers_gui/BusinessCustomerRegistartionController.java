@@ -314,6 +314,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/BusinessCustomerRegistartion.css").toExternalForm());
+					Stage.setTitle("Business customer registration");
 					Stage.setScene(scene);
 					Stage.show();
 					

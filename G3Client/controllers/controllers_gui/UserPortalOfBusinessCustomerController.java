@@ -159,6 +159,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/UserPortalOfBusinessCustomer.css").toExternalForm());
+					Stage.setTitle("Main menu");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

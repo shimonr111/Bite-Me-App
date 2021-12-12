@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" style="-fx-background-color: #7d7d7d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
    <children>
       <Button fx:id="payBtn" layoutX="76.0" layoutY="412.0" mnemonicParsing="false" onAction="#getPayBtn" prefHeight="51.0" prefWidth="540.0" style="-fx-background-color: #7FBA00;" text="Confirm to choose payment method" textFill="#383838">
          <font>
