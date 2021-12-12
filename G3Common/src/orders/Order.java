@@ -55,8 +55,12 @@ public class Order implements Serializable {
 	/**
 	 * The order desired supply date and time - MySql DateTime format.
 	 */
-	public Date supplyDateTime;
+	public Date estimatedSupplyDateTime;
 	
+	/**
+	 * The order actual recive time - MySql DateTime format.
+	 */
+	public Date actualSupplyDateTime;
 	/**
 	 * The order desired supply type.
 	 */
@@ -91,13 +95,14 @@ public class Order implements Serializable {
 	 * @param timeType
 	 * @param status
 	 * @param issueDateTime
-	 * @param supplyDateTime
+	 * @param estimatedSupplyDateTime
+	 * @param actualSupplyDateTime
 	 * @param supplyType
 	 * @param supplyId
 	 * @param totalPrice
 	 */
 	public Order(int orderNumber, String supplierUserId, String customerUserId, Branch branch, OrderTimeType timeType,
-			OrderStatus status, Date issueDateTime, Date supplyDateTime, SupplyType supplyType, int supplyId,
+			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime, SupplyType supplyType, int supplyId,
 			double totalPrice) {
 		super();
 		this.orderNumber = orderNumber;
@@ -107,7 +112,8 @@ public class Order implements Serializable {
 		this.timeType = timeType;
 		this.status = status;
 		this.issueDateTime = issueDateTime;
-		this.supplyDateTime = supplyDateTime;
+		this.estimatedSupplyDateTime = estimatedSupplyDateTime;
+		this.actualSupplyDateTime = actualSupplyDateTime;
 		this.supplyType = supplyType;
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
@@ -132,7 +138,8 @@ public class Order implements Serializable {
 		this.issueDateTime = new Date();
 		
 		//TBD, need to update when getting.
-		this.supplyDateTime = null;
+		this.estimatedSupplyDateTime = null;
+		this.actualSupplyDateTime = null;
 		this.supplyType = null;
 		this.supplyId = 0;
 		this.totalPrice = 0;
@@ -220,17 +227,6 @@ public class Order implements Serializable {
 		this.issueDateTime = issueDateTime;
 	}
 
-
-	public Date getSupplyDateTime() {
-		return supplyDateTime;
-	}
-
-
-	public void setSupplyDateTime(Date supplyDateTime) {
-		this.supplyDateTime = supplyDateTime;
-	}
-
-
 	public SupplyType getSupplyType() {
 		return supplyType;
 	}
@@ -258,6 +254,16 @@ public class Order implements Serializable {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+
+	public Date getEstimatedSupplyDateTime() {
+		return estimatedSupplyDateTime;
+	}
+
+
+	public void setEstimatedSupplyDateTime(Date estimatedSupplyDateTime) {
+		this.estimatedSupplyDateTime = estimatedSupplyDateTime;
 	}
 	
 }
