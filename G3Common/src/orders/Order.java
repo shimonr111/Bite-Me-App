@@ -1,117 +1,263 @@
 package orders;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+
+import users.Branch;
 
 /**
  * 
- * @author Lior, Guzovsky.
- * Class description: 
- * 
- * This is a class that describes the 
- * entity of Order Object.
- * 
- * @version 03/12/2021
+ * @author Ori, Malka.
+ *  Class description:
+ *  This calss describes the Order Entity.
+ * @version 11/12/2021
  */
-public class Order implements Serializable{
+public class Order implements Serializable {
 	/**
-	 * Class members description:
+	 * Class members:
 	 */
 	
-	private String resturantName;
-	private String orderNumber;
-	private String orderTime;
-	private String phoneNumber;
-	private String orderAddress;
-	private String orderType;
+	/**
+	 * The orderNumber, primary key, need to be unique.
+	 */
+	public int orderNumber;
 	
 	/**
-	 * @param id
-	 * @param private String resturantName;
-	 * @param orderNumber;
-	 * @param orderTime
-	 * @param phoneNumber;
-	 * @param orderAddress;
-	 * @param OrderType;
+	 * The Supplier user id, who we order from - FK.
 	 */
-	public Order(String resturantName, String orderNumber, String orderTime, String phoneNumber, String orderAddress, String orderType){
+	public String supplierUserId;
+	
+	/**
+	 * The Customer user id, the one who orders - FK.
+	 */
+	public String customerUserId;
+	
+	/**
+	 * The branch we order from - saved to optimize the reports query. 
+	 */
+	public Branch branch;
+	
+	/**
+	 * The order time type.
+	 */
+	public OrderTimeType timeType;
+	
+	/**
+	 * The order status.
+	 */
+	public OrderStatus status;
+	
+	/**
+	 * The order issue date and time - MySql DateTime format.
+	 */
+	public Date issueDateTime;
+	
+	/**
+	 * The order desired supply date and time - MySql DateTime format.
+	 */
+	public Date supplyDateTime;
+	
+	/**
+	 * The order desired supply type.
+	 */
+	public SupplyType supplyType;
+	
+	/**
+	 * The order supply id - FK, unique to each supply object.
+	 */
+	public int supplyId;
+	
+	/**
+	 * The orders total price;
+	 */
+	public double totalPrice;
+	
+	/**
+	 * The order items
+	 */
+	
+	public ArrayList<Item> itemList;
+	
+	/**
+	 * Constructors:
+	 */
+	
+	/**
+	 * This constructor used only when ~~passing~~ object.
+	 * @param orderNumber
+	 * @param supplierUserId
+	 * @param customerUserId
+	 * @param branch
+	 * @param timeType
+	 * @param status
+	 * @param issueDateTime
+	 * @param supplyDateTime
+	 * @param supplyType
+	 * @param supplyId
+	 * @param totalPrice
+	 */
+	public Order(int orderNumber, String supplierUserId, String customerUserId, Branch branch, OrderTimeType timeType,
+			OrderStatus status, Date issueDateTime, Date supplyDateTime, SupplyType supplyType, int supplyId,
+			double totalPrice) {
 		super();
-		this.resturantName = resturantName;
 		this.orderNumber = orderNumber;
-		this.orderTime = orderTime;
-		this.phoneNumber = phoneNumber;
-		this.orderAddress = orderAddress;
-		this.orderType = orderType;
-
+		this.supplierUserId = supplierUserId;
+		this.customerUserId = customerUserId;
+		this.branch = branch;
+		this.timeType = timeType;
+		this.status = status;
+		this.issueDateTime = issueDateTime;
+		this.supplyDateTime = supplyDateTime;
+		this.supplyType = supplyType;
+		this.supplyId = supplyId;
+		this.totalPrice = totalPrice;
+		
+		//TBD, need to check what to do with items.
 	}
+
 
 	/**
-	 * This section is for the 
-	 * Setters and Getters of the 
-	 * Class Customer
+	 * @param supplierUserId
+	 * @param customerUserId
+	 * @param branch
 	 */
-	public String getResturantName() {
-		return resturantName;
-	}
+	public Order(String supplierUserId, String customerUserId, Branch branch) {
+		super();
+		this.orderNumber = 0; //TBD, Need to create Unique order number
+		this.supplierUserId = supplierUserId;
+		this.customerUserId = customerUserId;
+		this.branch = branch;
+		this.timeType = OrderTimeType.REGULAR; //default, need to update when getting the supply time.
+		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
+		this.issueDateTime = new Date();
+		
+		//TBD, need to update when getting.
+		this.supplyDateTime = null;
+		this.supplyType = null;
+		this.supplyId = 0;
+		this.totalPrice = 0;
+		itemList = new ArrayList<Item>();
+	} 
+	
+	/**
+	 * Methods:
+	 */
+	
+	/**
+	 * TBD, need to add item methods (add, remove...)
+	 */
+	
+	/**
+	 * Getters and Setters:
+	 */
 
-
-	public void setResturantName(String resturantName) {
-		this.resturantName = resturantName;
-	}
-
-
-	public String getOrderNumber() {
+	public int getOrderNumber() {
 		return orderNumber;
 	}
 
 
-	public void setOrderNumber(String orderNumber) {
+	public void setOrderNumber(int orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
 
-	public String getOrderTime() {
-		return orderTime;
+	public String getSupplierUserId() {
+		return supplierUserId;
 	}
 
 
-	public void setOrderTime(String orderTime) {
-		this.orderTime = orderTime;
+	public void setSupplierUserId(String supplierUserId) {
+		this.supplierUserId = supplierUserId;
 	}
 
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getCustomerUserId() {
+		return customerUserId;
 	}
 
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setCustomerUserId(String customerUserId) {
+		this.customerUserId = customerUserId;
 	}
 
 
-	public String getOrderAddress() {
-		return orderAddress;
+	public Branch getBranch() {
+		return branch;
 	}
 
 
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 
 
-	public String getOrderType() {
-		return orderType;
+	public OrderTimeType getTimeType() {
+		return timeType;
 	}
 
 
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
+	public void setTimeType(OrderTimeType timeType) {
+		this.timeType = timeType;
 	}
 
-	
-	@Override
-	public String toString() {
-		return resturantName + " " + orderNumber + " " + orderTime  + " " + phoneNumber + " " + orderAddress  + " " + orderType;
+
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+
+
+	public Date getIssueDateTime() {
+		return issueDateTime;
+	}
+
+
+	public void setIssueDateTime(Date issueDateTime) {
+		this.issueDateTime = issueDateTime;
+	}
+
+
+	public Date getSupplyDateTime() {
+		return supplyDateTime;
+	}
+
+
+	public void setSupplyDateTime(Date supplyDateTime) {
+		this.supplyDateTime = supplyDateTime;
+	}
+
+
+	public SupplyType getSupplyType() {
+		return supplyType;
+	}
+
+
+	public void setSupplyType(SupplyType supplyType) {
+		this.supplyType = supplyType;
+	}
+
+
+	public int getSupplyId() {
+		return supplyId;
+	}
+
+
+	public void setSupplyId(int supplyId) {
+		this.supplyId = supplyId;
+	}
+
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	
 }
