@@ -379,7 +379,8 @@ CREATE TABLE `order` (
   `timeType` enum('REGULAR','PRE') DEFAULT NULL,
   `status` enum('PENDING_APPROVAL','APPROVED','UN_APPROVED') DEFAULT NULL,
   `issueDateTime` datetime DEFAULT NULL,
-  `supplyDateTime` datetime DEFAULT NULL,
+  `estimatedSupplyDateTime` datetime DEFAULT NULL,
+  `actualSupplyDateTime` datetime DEFAULT NULL,
   `supplyType` enum('TAKE_AWAY','DELIVERY') DEFAULT NULL,
   `supplyId` int DEFAULT NULL,
   `totalPrice` double DEFAULT NULL,
@@ -464,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-12 10:22:21
+-- Dump completed on 2021-12-12 15:47:46
