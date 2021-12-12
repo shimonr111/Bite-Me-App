@@ -223,7 +223,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  				returnVal=false;
  			}
  		if(returnVal==false) {
- 			displayMessage.setText("Please, Fill in all the fields !!");
+ 			displayMessage.setText("Please, Fill in all the marked fields !!");
  			return false;
  		}
  		for(TextField intTxt : integerFields) {
