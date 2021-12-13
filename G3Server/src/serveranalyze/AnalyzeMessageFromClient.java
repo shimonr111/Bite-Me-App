@@ -9,6 +9,7 @@ import communication.Answer;
 import communication.Message;
 import communication.Task;
 import ocsf.server.ConnectionToClient;
+import query.EditUsersQueries;
 import query.LoginQueries;
 import query.RegistrationQueries;
 
@@ -78,6 +79,8 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case REGISTER_SUPPLIER:
 				 recivedMessageFromClient = RegistrationQueries.getSupplierRegistration((Message) message);
+			 case GET_CUSTOMERS_FROM_DB:
+				  recivedMessageFromClient = EditUsersQueries.getCustomersListFromDb();
 			default:
 				break;
 			}

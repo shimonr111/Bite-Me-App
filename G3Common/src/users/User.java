@@ -60,6 +60,7 @@ public abstract class User implements Serializable{
 	 * registered in the Bite Me system.
 	 */
 	protected String phoneNumber;
+	
 
 	@Override
 	public int hashCode() {
