@@ -19,7 +19,7 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 */
 	
 	/**
-	 * This is the constructor of the class for login
+	 * This is the constructor used for passing the object.
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -38,10 +38,10 @@ public class HrManager extends BusinessCustomer implements Serializable{
 	 */
 	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
-			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, double balance, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber, userEmail,
-				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
+				phoneNumber, privateCreditCard, balance, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
 				budgetMaxAmount);
 	}
 	

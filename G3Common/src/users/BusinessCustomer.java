@@ -46,7 +46,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	protected int budgetMaxAmount;
 
 	/**
-	 * This is the constructor of the class for login
+	 * This is the constructor used for passing the object.
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -65,10 +65,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
-			String privateCreditCard, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
+			String privateCreditCard, double balance, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
 			PositionType businessCustomerPosition, int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber,
-				userEmail, phoneNumber, privateCreditCard);
+				userEmail, phoneNumber, privateCreditCard, balance);
 		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
@@ -76,7 +76,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	}
 	
 	/**
-	 * This is the constructor of the class for registration
+	 * This is the constructor for first creation;
 	 * 
 	 * @param userId
 	 * @param statusInSystem
