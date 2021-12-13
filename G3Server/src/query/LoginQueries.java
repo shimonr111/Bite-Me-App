@@ -49,7 +49,7 @@ public class LoginQueries {
 		 * get the row from the DB if 
 		 * possible from the login table.
 		 */
-		ResultSet rs = Query.getRowFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
+		ResultSet rs = Query.getRowsFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
 		//If the row doesn't exist in login Table
 		if(!rs.isBeforeFirst()) {
 			recivedMessageFromClient.setObject(null);
@@ -67,7 +67,7 @@ public class LoginQueries {
 		 * DB which is according to the userType table
 		 * for example: "Customer Table.
 		 */
-		rs = Query.getRowFromTableInDB(userType,"userID='"+userId+"'");
+		rs = Query.getRowsFromTableInDB(userType,"userID='"+userId+"'");
 		switch(userType) {
 		case "customer":
 			Customer customerResult = null;
@@ -300,7 +300,7 @@ public class LoginQueries {
 	 */
 	public static Company getCompany(String companyName) {
 		Company companyResult = null;
-		ResultSet rs = Query.getRowFromTableInDB("company","companyName='"+companyName+"'");
+		ResultSet rs = Query.getRowsFromTableInDB("company","companyName='"+companyName+"'");
 		try {
 			if(rs.next()) {
 				companyResult = new Company(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),rs.getInt(5));

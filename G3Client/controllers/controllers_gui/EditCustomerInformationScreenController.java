@@ -215,7 +215,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<User> customers = FXCollections.observableArrayList();
-		Message message = new Message (Task.GET_CUSTOMERS_FROM_DB,Answer.WAIT_RESPONSE,null);
+		Message message = new Message (Task.GET_CUSTOMERS_FROM_DB,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		for(User user : customersList)
 			customers.add(user);

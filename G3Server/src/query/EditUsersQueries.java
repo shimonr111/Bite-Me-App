@@ -29,13 +29,13 @@ import users.User;
 public class EditUsersQueries {
 	
 	
-	public static Message getCustomersListFromDb() {
+	public static Message getCustomersListFromDb(Message message) {
 		Message returnMessageToClient;
 		ArrayList<User> customersList = new ArrayList<>();
 		Company company;
 		ResultSet rs;
-		
-		rs = Query.getTableFromDB("customer");
+		Branch homeBranch = ((User)message.getObject()).getHomeBranch();
+		rs = Query.getRowsFromTableInDB("customer","homeBranch = '"+homeBranch.toString()+"'");
 		try {
 			while(rs.next()) {
 				customersList.add(new Customer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
@@ -47,7 +47,7 @@ public class EditUsersQueries {
 			e.printStackTrace();
 		}
 		
-		rs= Query.getTableFromDB("businesscustomer");
+		rs= Query.getRowsFromTableInDB("businesscustomer","homeBranch = '"+homeBranch.toString()+"'");
 		try {
 			while(rs.next()) {
 				company = LoginQueries.getCompany(rs.getString(12));
@@ -61,7 +61,7 @@ public class EditUsersQueries {
 			e.printStackTrace();
 		}
 		
-		rs = Query.getTableFromDB("hrmanager");
+		rs = Query.getRowsFromTableInDB("hrmanager","homeBranch = '"+homeBranch.toString()+"'");
 		try {
 			while(rs.next()) {
 			company = LoginQueries.getCompany(rs.getString(12));
