@@ -1,36 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&family=Fredoka+One&display=swap');
 
-.button{
-    -fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: #395306;
-    -fx-font-family: 'Bakbak One', cursive;
-    -fx-font-size: 18px;
-}
-
-.button:hover{
-	-fx-border-color: black;
-	-fx-border-radius: 6, 5;
-    -fx-background-radius: 6, 5;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
-    -fx-text-fill: white;
-    -fx-font-family: 'Bakbak One', cursive;
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-}
-
-.import-btn{
-	-fx-font-size: 12px;
-}
-
-.import-btn:hover{
-	-fx-font-size: 12px;
-}
-
-
+/*For all screens*/
 
 .pane{
 	  -fx-background-color:
@@ -68,6 +39,50 @@
         #0093EF,
         #FFFFFF;
 }
+
+
+.button{
+    -fx-background-radius: 6, 5;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: #395306;
+    -fx-font-family: 'Bakbak One', cursive;
+    -fx-font-size: 18px;
+}
+
+.button:hover{
+	-fx-border-color: black;
+	-fx-border-radius: 6, 5;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+/*BM5CustomerRegistrationScreen*/
+/*All the User Portals*/
+
+#button-menu{
+	-fx-background-color: 
+        #c3c4c4,
+        linear-gradient(#d6d6d6 50%, white 100%),
+        radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,1;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 3, 0.0 , 0 , 1 );
+    -fx-font-size: 12px;
+    -fx-font-family:'';
+    -fx-border-color: '';
+	-fx-border-radius: '';
+    
+}
+
+#button-menu:hover{
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
+
+/*For screens with tables*/
 
 .table-view .column-header,
 .table-view .column-header .filler,

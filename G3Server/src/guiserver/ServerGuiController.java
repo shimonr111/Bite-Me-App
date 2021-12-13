@@ -87,6 +87,9 @@ public class ServerGuiController {
 	private Button closeBtn;
 	
 	@FXML
+	private Button importBtn;
+	
+	@FXML
 	private TextArea txtConsole;
 
 	private String getport() {
@@ -165,6 +168,11 @@ public class ServerGuiController {
 	public void disconnectBtn(ActionEvent event) throws Exception {
 		setVisabilityForUI(false);
 		BiteMeServerUI.DisconnectServer(); // when button Disconnect is clicked than terminate server listening method
+	}
+	
+	@FXML
+	public void getImportBtn(ActionEvent event) throws Exception {
+	
 	}
 	
 	/**

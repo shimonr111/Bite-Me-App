@@ -8,7 +8,7 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.CustomerRegistartionScreenController">
    <children>
-      <Button id="other-btns" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -18,19 +18,19 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button id="other-btns" fx:id="backBtn" layoutX="-1.0" layoutY="438.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+      <Button fx:id="backBtn" layoutX="-1.0" layoutY="438.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Label layoutX="275.0" layoutY="7.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; Customer Registration" />
-      <Button id="other-btns" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="privateCustomerBtn" layoutX="93.0" layoutY="112.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="31.0" prefWidth="193.0" text="Private customer" />
-      <Button fx:id="businessCustomerBtn" layoutX="93.0" layoutY="155.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="31.0" prefWidth="193.0" text="Business customer" />
+      <Button id="button-menu" fx:id="privateCustomerBtn" layoutX="93.0" layoutY="112.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="31.0" prefWidth="193.0" text="Private customer" />
+      <Button id="button-menu" fx:id="businessCustomerBtn" layoutX="93.0" layoutY="155.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="31.0" prefWidth="193.0" text="Business customer" />
       <Text fx:id="errorText" layoutX="222.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
    </children>
 </Pane>

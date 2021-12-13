@@ -9,20 +9,20 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfHRManagerController">
    <children>
-      <Button fx:id="btnStartOrder" layoutX="68.0" layoutY="102.0" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="33.0" prefWidth="232.0" text="Start order" />
-      <Button fx:id="btnCompanyReg" layoutX="68.0" layoutY="147.0" mnemonicParsing="false" onAction="#getCompanyReg" prefHeight="33.0" prefWidth="232.0" text="Company registration" />
-      <Button fx:id="btnBusinessCustomerConfirm" layoutX="68.0" layoutY="194.0" mnemonicParsing="false" onAction="#getBusinessCustomerConfirm" prefHeight="33.0" prefWidth="232.0" text="Business customer confirmation" />
-      <Button id="other-btns" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+      <Button id="button-menu" fx:id="btnStartOrder" layoutX="68.0" layoutY="102.0" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="33.0" prefWidth="232.0" text="Start order" />
+      <Button id="button-menu" fx:id="btnCompanyReg" layoutX="68.0" layoutY="147.0" mnemonicParsing="false" onAction="#getCompanyReg" prefHeight="33.0" prefWidth="232.0" text="Company registration" />
+      <Button id="button-menu" fx:id="btnBusinessCustomerConfirm" layoutX="68.0" layoutY="194.0" mnemonicParsing="false" onAction="#getBusinessCustomerConfirm" prefHeight="33.0" prefWidth="232.0" text="Business customer confirmation" />
+      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button id="other-btns" fx:id="btnLogout" layoutX="241.0" layoutY="349.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+      <Button fx:id="btnLogout" layoutX="241.0" layoutY="349.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button id="other-btns" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

@@ -178,7 +178,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/EntryHomeScreenForm.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 					Stage.setTitle("Home");
 					Stage.setScene(scene);
 					Stage.show();
@@ -263,7 +263,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/EntryLoginScreenForm.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */

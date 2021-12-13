@@ -8,7 +8,7 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfSupplierController">
    <children>
-      <Button id="other-btns" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
+      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -18,15 +18,15 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button id="other-btns" fx:id="btnLogout" layoutX="235.0" layoutY="414.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+      <Button fx:id="btnLogout" layoutX="235.0" layoutY="414.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnManageOrders" layoutX="70.0" layoutY="154.0" mnemonicParsing="false" onAction="#getManageOrdersBtn" prefHeight="33.0" prefWidth="187.0" text="Manage orders" />
-      <Button fx:id="btnManageMenu" layoutX="70.0" layoutY="113.0" mnemonicParsing="false" onAction="#getManageMenuBtn" prefHeight="33.0" prefWidth="187.0" text="Manage menu" />
+      <Button id="button-menu" fx:id="btnManageOrders" layoutX="70.0" layoutY="154.0" mnemonicParsing="false" onAction="#getManageOrdersBtn" prefHeight="33.0" prefWidth="187.0" text="Manage orders" />
+      <Button id="button-menu" fx:id="btnManageMenu" layoutX="70.0" layoutY="113.0" mnemonicParsing="false" onAction="#getManageMenuBtn" prefHeight="33.0" prefWidth="187.0" text="Manage menu" />
       <Label layoutX="424.0" layoutY="12.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
-      <Button id="other-btns" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
+      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
