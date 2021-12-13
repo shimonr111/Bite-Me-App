@@ -39,7 +39,7 @@ public class EditUsersQueries {
 		try {
 			while(rs.next()) {
 				customersList.add(new Customer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10)));
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10), rs.getDouble(11)));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -50,10 +50,10 @@ public class EditUsersQueries {
 		rs= Query.getTableFromDB("businesscustomer");
 		try {
 			while(rs.next()) {
-				company = LoginQueries.getCompany(rs.getString(11));
+				company = LoginQueries.getCompany(rs.getString(12));
 				customersList.add( new BusinessCustomer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,(BudgetType.valueOf(rs.getString(12))),
-						(PositionType.valueOf(rs.getString(13))),rs.getInt(14)));
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),
+						(PositionType.valueOf(rs.getString(14))),rs.getInt(15)));
 			}
 			rs.close();
 		}catch (SQLException e) {
@@ -64,10 +64,10 @@ public class EditUsersQueries {
 		rs = Query.getTableFromDB("hrmanager");
 		try {
 			while(rs.next()) {
-			company = LoginQueries.getCompany(rs.getString(11));
+			company = LoginQueries.getCompany(rs.getString(12));
 			customersList.add(new HrManager(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),company,
-						(BudgetType.valueOf(rs.getString(12))),(PositionType.valueOf(rs.getString(13))),rs.getInt(14)));
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company, 
+						(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15)));
 			}
 			rs.close();
 		}catch (SQLException e) {

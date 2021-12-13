@@ -33,7 +33,12 @@ public class Customer extends User implements Serializable{
 	protected String privateCreditCard;
 	
 	/**
-	 * This is the constructor for the class customer for login
+	 * The customer account balance (not negative).
+	 */
+	protected double balance;
+	
+	/**
+	 * This is the constructor used for passing the object.
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -46,18 +51,20 @@ public class Customer extends User implements Serializable{
 	 * @param phoneNumber
 	 * @param accountCode
 	 * @param privateCreditCard
+	 * @param balance
 	 */
 	public Customer(String userId, ConfirmationStatus statusInSystem, String userFirstName,
 			String userLastName, Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail,
-			String phoneNumber, String privateCreditCard) {
+			String phoneNumber, String privateCreditCard, double balance) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber);
 		this.privateCreditCard = privateCreditCard;
-		this.privateW4cCodeNumber= generateW4C();
+		this.privateW4cCodeNumber= W4CCodeNumber;
+		this.balance = balance;
 	}
 	
 	/**
-	 * This is the constructor for the class customer for registering
+	 * This is the constructor for registering a new customer.
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -77,6 +84,7 @@ public class Customer extends User implements Serializable{
 				userEmail, phoneNumber);
 		this.privateCreditCard = privateCreditCard;
 		this.privateW4cCodeNumber= generateW4C();
+		this.balance = 0.0;
 	}
 	
 	/**
@@ -91,6 +99,22 @@ public class Customer extends User implements Serializable{
 	public void setPrivateCreditCard(String privateCreditCard) {
 		this.privateCreditCard = privateCreditCard;
 	}
+	
+	public int getPrivateW4cCodeNumber() {
+		return privateW4cCodeNumber;
+	}
+
+	public void setPrivateW4cCodeNumber(int privateW4cCodeNumber) {
+		this.privateW4cCodeNumber = privateW4cCodeNumber;
+	}
+	
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
 
 	/**
 	 * This is the toString for this class
@@ -100,16 +124,10 @@ public class Customer extends User implements Serializable{
 		return "Customer: "  + userFirstName + " " + userLastName;
 	}
 
-	public int getPrivateW4cCodeNumber() {
-		return privateW4cCodeNumber;
-	}
-
-	public void setPrivateW4cCodeNumber(int privateW4cCodeNumber) {
-		this.privateW4cCodeNumber = privateW4cCodeNumber;
-	}
 	
 	/** This method used to generate customer W4C, based on the user id, which is unique */
 	private int generateW4C() {
 		return  31 * Integer.parseInt(userId);
 	}
+
 }

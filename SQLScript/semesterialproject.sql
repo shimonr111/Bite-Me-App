@@ -66,6 +66,7 @@ CREATE TABLE `businesscustomer` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
+  `balance` double DEFAULT NULL,
   `companyName` varchar(256) DEFAULT NULL,
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
@@ -88,7 +89,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003','Intel','DAILY','REGULAR',1003003,NULL);
+INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003',NULL,'Intel','DAILY','REGULAR',1003003,NULL);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,6 +195,7 @@ CREATE TABLE `customer` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
+  `balance` double DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `privateCreditCard_idx` (`privateCreditCard`),
   CONSTRAINT `customer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -207,7 +209,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000');
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000',NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,6 +265,7 @@ CREATE TABLE `hrmanager` (
   `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
   `privateW4cCodeNumber` int DEFAULT NULL,
+  `balance` double DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
@@ -280,7 +283,7 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002,NULL);
+INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002','Intel','DAILY','HR',1002002,NULL,NULL);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -465,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-12 15:47:46
+-- Dump completed on 2021-12-13  9:58:02
