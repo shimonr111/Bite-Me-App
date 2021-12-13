@@ -10,6 +10,7 @@ import communication.Task;
 import controllers_gui.AbstractBiteMeController;
 import controllers_gui.UserPortalOfBusinessCustomerController;
 import controllers_gui.BusinessCustomerRegistartionController;
+import controllers_gui.EditCustomerInformationScreenController;
 import users.User;
 
 /**
@@ -201,6 +202,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case DISPLAY_COMPANIES_INTO_COMBOBOX:
 				BusinessCustomerRegistartionController.companies=(ArrayList<String>)recivedMessageFromServer.getObject();
+				break;
+			case DISPLAY_CUSTOMERS_INTO_TABLE:
+				EditCustomerInformationScreenController.customersList=(ArrayList<User>)recivedMessageFromServer.getObject();
 				break;
 			default:
 				break;

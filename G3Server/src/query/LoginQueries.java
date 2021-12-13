@@ -28,7 +28,7 @@ import users.User;
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Login phase.
- * @version 08/12/2021
+ * @version 13/12/2021
  */
 public class LoginQueries {
 	

@@ -79,11 +79,28 @@ public class Query {
 	 * @return
 	 */
 	public static ResultSet getColumnWithConditionFromTableInDB(String tableName,String columnName,String condition) {
-		//SELECT companyName FROM semesterialproject.company WHERE companyStatusInSystem='CONFIRMED';
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
 			String query = "SELECT "+columnName +" FROM semesterialproject."+tableName+" WHERE "+condition;
+			pstmt = con.prepareStatement(query);
+			rs= pstmt.executeQuery();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return rs;
+	}
+	
+	/**
+	 * this method gets a table name , and returns all the table.
+	 * @param tableName
+	 * @return
+	 */
+	public static ResultSet getTableFromDB(String tableName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			String query = "SELECT * FROM semesterialproject."+tableName;
 			pstmt = con.prepareStatement(query);
 			rs= pstmt.executeQuery();	
 			} catch (SQLException e) {
