@@ -90,6 +90,9 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Text fx:id="errorText" layoutX="232.0" layoutY="490.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <Text fx:id="displayMessage" fill="#9a0606" layoutX="92.0" layoutY="353.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="374.0703199803829">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Text>
    </children>
 </Pane>

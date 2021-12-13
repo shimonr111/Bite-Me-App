@@ -1,5 +1,4 @@
 package controllers_gui;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,27 +24,31 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Branch;
+import users.BudgetType;
+import users.BusinessCustomer;
 import users.ConfirmationStatus;
-import users.Customer;
-import javafx.fxml.Initializable;
+import users.HrManager;
+import users.PositionType;
+
 /**
  * 
  * @author Mousa, Srour
  * Class description: 
  * This is a class for 
- * controlling the UI of Edit Customer that appears immediately after clicking
- * on Edit while selecting Customer.
+ * controlling the UI of Edit Business Customer that appears immediately after clicking
+ * on Edit while selecting Business Customer.
  * form.
  * 
  * @version 13/12/2021
  */
-public class EditPrivateCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
-	
-	private static FXMLLoader loader;
-    private static EditPrivateCustomerInformationScreenController editPrivateCustomerInformationScreenController;
-    public static Customer customer;
 
-    @FXML
+public class EditBusinessCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
+	private static FXMLLoader loader;
+    private static EditBusinessCustomerInformationScreenController editBusinessCustomerInformationScreenController;
+    public static BusinessCustomer businessCustomer;
+    
+    
+	@FXML
     private Button btnExit;
 
     @FXML
@@ -71,45 +75,58 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     @FXML
     private TextField emailTxtField;
 
+    @FXML
+    private TextField monthlyMaxBudgedTxtField;
+
+    @FXML
+    private ComboBox<PositionType> positionCombo;
 
     @FXML
     private ComboBox<Branch> setHomeBranchCombo;
 
     @FXML
-    private ComboBox<ConfirmationStatus> setStatusComboBox;
+    private ComboBox<String> companyNameCombo;
 
     @FXML
-    private Text displayMessage;
+    private ComboBox<BudgetType> budgetTypeCombo;
 
+    @FXML
+    private ComboBox<ConfirmationStatus> statusComboBox;
+
+    @FXML
+    private Text errorText;
 
     @FXML
     void Send(ActionEvent event) {
-    	ConfirmationStatus oldStatus = customer.getStatusInSystem();
-    	String newStatus = setStatusComboBox.getValue().toString();
+    	ConfirmationStatus oldStatus = businessCustomer.getStatusInSystem();
+    	String newStatus = statusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
-    		displayMessage.setText("There were no changes");
+    		errorText.setText("There were no changes");
     	}
     	else {
     		ArrayList<String> objectToMessage = new ArrayList<>();
-    		objectToMessage.add(customer.getUserId());
+    		objectToMessage.add(businessCustomer.getUserId());
     		objectToMessage.add(newStatus);
-    		objectToMessage.add("customer"); // table name
+    		if(businessCustomer instanceof HrManager)
+    			objectToMessage.add("hrmanager");
+    		else 
+    			objectToMessage.add("businesscustomer"); // table name
     		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
     		sendToClient(message);
     		switch(newStatus) {
     		case "CONFIRMED":
-    			customer.setStatusInSystem(ConfirmationStatus.CONFIRMED);
+    			businessCustomer.setStatusInSystem(ConfirmationStatus.CONFIRMED);
     			break;
     		case "FROZEN" :
-    			customer.setStatusInSystem(ConfirmationStatus.FROZEN);
+    			businessCustomer.setStatusInSystem(ConfirmationStatus.FROZEN);
     			break;
     		case "PENDING_APPROVAL":
-    			customer.setStatusInSystem(ConfirmationStatus.PENDING_APPROVAL);
+    			businessCustomer.setStatusInSystem(ConfirmationStatus.PENDING_APPROVAL);
     			break;
     		default:
     			break;		
     		}
-    		displayMessage.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		errorText.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
     	}
     }
 
@@ -118,6 +135,15 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     	setEditCustomerInformationScreen(event);
     }
 
+    @FXML
+    void getBudgetType(ActionEvent event) {
+
+    }
+
+    @FXML
+    void getCompanyName(ActionEvent event) {
+
+    }
 
     @FXML
     void getEmail(ActionEvent event) {
@@ -138,6 +164,12 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     }
 
     @FXML
+    void getHelpBtn(ActionEvent event) {
+    	PopUpMessages.helpMessage("You can change the customer's Status, change status then clock save and go back to see changes.");
+
+    }
+
+    @FXML
     void getHomeBranch(ActionEvent event) {
 
     }
@@ -153,30 +185,29 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     }
 
     @FXML
-    void getPassword(ActionEvent event) {
+    void getMonthlyMaxBudget(ActionEvent event) {
 
     }
 
     @FXML
-    void getPhoneNum(ActionEvent event) {
+    void getPhone(ActionEvent event) {
 
     }
 
     @FXML
-    void getSetStatusComboBox(ActionEvent event) {
+    void getPosition(ActionEvent event) {
 
     }
-    
+
     @FXML
-    void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("You can change the customer's Status, change status then clock save and go back to see changes.");
+    void getStatusComboBox(ActionEvent event) {
 
     }
     
     /**
      * sets the screen , it will be called from previous screen.
      */
-	public void initEditPrivateCustomerInformationScreen() {
+	public void initEditBusinessCustomerInformationScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -186,8 +217,8 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 				//	primaryStage.hide(); 
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/BM11EditPrivateCustomerInformationScreen.fxml").openStream());
-					editPrivateCustomerInformationScreenController = loader.getController();
+					root = loader.load(getClass().getResource("/fxmls/BM12EditBusinessCustomerInformationScreen.fxml").openStream());
+					editBusinessCustomerInformationScreenController = loader.getController();
 					Scene scene = new Scene(root);
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
@@ -196,7 +227,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 							Stage.close();
 						}
 					});
-					Stage.setTitle("Edit Private Customer");
+					Stage.setTitle("Edit Business Customer");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -238,13 +269,17 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		
 	}
 	
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		firstNameTxtField.setText(customer.getUserFirstName()); lastNameTxtField.setText(customer.getUserLastName()); idNumTxtField.setText(customer.getUserId()); 
-		phoneTxtField.setText(customer.getPhoneNumber());  emailTxtField.setText(customer.getUserEmail()); 
-		setHomeBranchCombo.setValue(customer.getHomeBranch());
-		setStatusComboBox.setValue(customer.getStatusInSystem());
-		setStatusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
+		firstNameTxtField.setText(businessCustomer.getUserFirstName()); lastNameTxtField.setText(businessCustomer.getUserLastName()); idNumTxtField.setText(businessCustomer.getUserId()); 
+		phoneTxtField.setText(businessCustomer.getPhoneNumber());  emailTxtField.setText(businessCustomer.getUserEmail());
+		monthlyMaxBudgedTxtField.setText(Integer.toString(businessCustomer.getBudgetMaxAmount()));
+		setHomeBranchCombo.setValue(businessCustomer.getHomeBranch());
+		positionCombo.setValue(businessCustomer.getPositionType());
+		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
+		statusComboBox.setValue(businessCustomer.getStatusInSystem());
+		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
 		
 	}
 

@@ -20,11 +20,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="saveBtn" layoutX="252.0" layoutY="416.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
       <Button fx:id="btnclose" layoutX="10.0" layoutY="711.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
@@ -57,12 +52,15 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="editCustomerBtn" layoutX="169.0" layoutY="368.0" mnemonicParsing="false" onAction="#getEditCustomer" prefHeight="31.0" prefWidth="146.0" text="Edit customer" />
-      <Button fx:id="removeCustomerBtn" layoutX="321.0" layoutY="368.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="146.0" text="Remove customer" />
+      <Button fx:id="removeCustomerBtn" layoutX="321.0" layoutY="368.0" mnemonicParsing="false" onAction="#getRemoveBtn" prefHeight="31.0" prefWidth="146.0" text="Remove customer" />
       <Button id="btnExit" fx:id="btnHelp" layoutX="41.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="errorText" layoutX="223.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <Text fx:id="errorText" fill="#800b0b" layoutX="69.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="491.0703199803829">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Text>
    </children>
 </Pane>

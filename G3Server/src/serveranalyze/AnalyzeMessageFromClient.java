@@ -79,8 +79,13 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case REGISTER_SUPPLIER:
 				 recivedMessageFromClient = RegistrationQueries.getSupplierRegistration((Message) message);
+				 break;
 			 case GET_CUSTOMERS_FROM_DB:
 				  recivedMessageFromClient = EditUsersQueries.getCustomersListFromDb((Message) message);
+				  break;
+			 case UPDATE_CUSTOMER_STATUS:
+				 EditUsersQueries.setCustomerNewStatus((Message)message);
+				 break;
 			default:
 				break;
 			}
