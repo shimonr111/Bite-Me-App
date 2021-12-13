@@ -108,7 +108,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 								Stage.close();
 							}
 						});
-						scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 						Stage.setTitle("Customer registration");
 						Stage.setScene(scene);
 						Stage.show();
@@ -160,14 +160,13 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 			Pane root = null;
 			try {
 				root = loader.load(getClass().getResource("/fxmls/BM5CustomerRegistartionScreen.fxml").openStream());
-				//root = FXMLLoader.load(getClass().getResource("/fxmls/LoginScreen.fxml"));
 				customerRegistrationScreenController = loader.getController();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+			//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 			primaryStage.setTitle("Main menu");
 			primaryStage.setScene(scene);
 			primaryStage.show();/* show the new screen */

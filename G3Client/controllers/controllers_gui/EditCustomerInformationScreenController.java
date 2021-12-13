@@ -107,6 +107,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     		EditPrivateCustomerInformationScreenController.customer= (Customer) customerListTable.getSelectionModel().getSelectedItem();
     		EditPrivateCustomerInformationScreenController EPCISC = new EditPrivateCustomerInformationScreenController();
     		EPCISC.initEditCustomerInformationScreen();
+    		((Node) event.getSource()).getScene().getWindow().hide();
     	}
     }
 
