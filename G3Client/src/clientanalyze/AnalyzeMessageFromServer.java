@@ -183,7 +183,6 @@ public class AnalyzeMessageFromServer {
 				switch (recievedAnswerFromServer) {
 				case CUSTOMER_REGISTRATION_SUCCEED:
 					for (AnalyzeClientListener listener : clientListeners) {
-						System.out.println("1");
 						listener.clientPrivateCustomerRegistrationSucceed();;
 					}
 					break;
