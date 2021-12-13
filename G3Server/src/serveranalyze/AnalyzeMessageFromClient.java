@@ -86,6 +86,9 @@ public class AnalyzeMessageFromClient {
 			 case UPDATE_CUSTOMER_STATUS:
 				 EditUsersQueries.setCustomerNewStatus((Message)message);
 				 break;
+			 case REMOVE_USER_FROM_DB:
+				 EditUsersQueries.removeUserFromDB((Message)message);
+				 break;
 			default:
 				break;
 			}

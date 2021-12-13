@@ -45,6 +45,10 @@ import users.PositionType;
  * @version 11/12/2021
  */
 public class BusinessCustomerRegistartionController extends AbstractBiteMeController implements Initializable{
+	
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static BusinessCustomerRegistartionController businessCustomerRegistrationController;
     public static ArrayList<String> companies;
@@ -117,46 +121,19 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     @FXML
     private Text displayMessage;
 
+    /**
+     * This method loads the previous screen.
+     * @param event
+     */
     @FXML
     void getBackBtn(ActionEvent event) {
     	setCustomerRegistrationScreen(event);
     }
-
-    @FXML
-    void getBudgetType(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCVV(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCompanyName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getConfirmedEmail(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCreditNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getEmail(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getEmployeeId(ActionEvent event) {
-
-    }
-
+    
+    /**
+     * this method does log out and then exit.
+     * @param event
+     */
     @FXML
     void getExitBtn(ActionEvent event) {
       	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -165,56 +142,20 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
    		System.exit(0);
     }
 
-    @FXML
-    void getExpiration(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getFirstName(ActionEvent event) {
-
-    }
-
+    /**
+     * displaying a popup message to the user.
+     * @param event
+     */
     @FXML
     void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("Please fill in all the fields to complete the registration!");
     }
-
-    @FXML
-    void getHomeBranch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getIdNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getLastName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getMonthlyMaxBudget(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPassword(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPhone(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPosition(ActionEvent event) {
-
-    }
-
+    
+    /**
+     * this method will run after clicking on save button, it checks if all the fields were correctly filled.
+     * and then create a relevant message to the server.
+     * @param event
+     */
     @FXML
     void getSaveBtn(ActionEvent event) {
     	if(checkAllFields()==true) {
@@ -240,7 +181,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     		list.add(creditCard);
     		Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
     		sendToClient(message);
-    		displayMessage.setText("All good !!");
+    		displayMessage.setText("Registration Succeed!");
     	}
     }
     
@@ -442,7 +383,11 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  			return false;
  		}
  	}
-
+ 	
+ 	/**
+ 	 * in this method we initialize all the fields and combo boxes.
+ 	 * in addition we initialize the listeners.
+ 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField); textFields.add(emailTxtField); textFields.add(expirationTxtField);

@@ -43,6 +43,9 @@ import javafx.fxml.Initializable;
  * @version 13/12/2021
  */
 public class EditCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static EditCustomerInformationScreenController editCustomerInformationScreenController;
     public static ArrayList<User> customersList = new ArrayList<>();
@@ -54,10 +57,16 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     private Button saveBtn;
 
     @FXML
-    private Button btnclose;
+    private Button btnBack;
+    
+    @FXML
+    private Button editCustomerBtn;
 
     @FXML
-    private Button btnBack;
+    private Button removeCustomerBtn;
+
+    @FXML
+    private Button btnHelp;
 
     @FXML
     private TableView<User> customerListTable;
@@ -79,27 +88,23 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     private TableColumn<User, String> customerStatusCol;
 
     @FXML
-    private Button editCustomerBtn;
-
-    @FXML
-    private Button removeCustomerBtn;
-
-    @FXML
-    private Button btnHelp;
-
-    @FXML
     private Text errorText;
-
+    
+    /**
+     * this method calls the setBranchManagerPortal to get back the previous screen
+     * this method works immedietly after clicking on back button.
+     * @param event
+     */
     @FXML
     void getBackBtn(ActionEvent event) {
     	setBranchManagerPortal(event);
     }
-
-    @FXML
-    void getCloseBtn(ActionEvent event) {
-
-    }
-
+    
+    /**
+     * this method runs after clicking on edit customer , it checks if the user selected a row from the table and if not so it displays a message
+     * we check if the user is instance of hr manager or business customer and send message to the server accordingly.
+     * @param event
+     */
     @FXML
     void getEditCustomer(ActionEvent event) {
     	if(customerListTable.getSelectionModel().getSelectedItem() != null) {
@@ -121,7 +126,11 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     		errorText.setText("Please, select one customer to edit.");
     	}
     }
-
+    
+    /**
+     * this method does log out and then exit .
+     * @param event
+     */
     @FXML
     void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -129,26 +138,39 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 		connectedUser = null;
 		System.exit(0);
     }
-
+    
+    /**
+     * displays a pop up message to the user .
+     * @param event
+     */
     @FXML
     void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("Please choose which customer you want to Edit or Remove");
     }
-
+    
+    /**
+     * this method runs after clicking on remove button, it creates and sends the revelvant message to the server according to the user type.
+     * @param event
+     */
     @FXML
     void getRemoveBtn(ActionEvent event) {
-    	User selectedUser = customerListTable.getSelectionModel().getSelectedItem();
+    	User selectedUser = customerListTable.getSelectionModel().getSelectedItem();  	
     	if(selectedUser != null) {
-    		
+    		ArrayList<String> objectToMessage = new ArrayList<>();
+    		objectToMessage.add(selectedUser.getUserId());
     		if(selectedUser instanceof HrManager) {
-    			
+    			objectToMessage.add("hrmanager");
     		}
     		else if (selectedUser instanceof BusinessCustomer) {
-    			
+    			objectToMessage.add("businesscustomer");
     		}
     		else {
-    			
+    			objectToMessage.add("customer");
     		}
+    		Message message = new Message(Task.REMOVE_USER_FROM_DB,Answer.WAIT_RESPONSE,objectToMessage);
+    		sendToClient(message);
+    		errorText.setText("Customer ID: "+selectedUser.getUserId()+" were removed.");
+    		initialize(null, null);	
     	}
     	else {
     		errorText.setText("Please, select one customer to remove.");
@@ -156,7 +178,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     }
     
     /**
-     * 
+     * loads the current screen , it will be called from another controller ( previous one).
      */
 	public void initEditCustomerInformationScreen() {
 		Platform.runLater(new Runnable() {
@@ -188,10 +210,10 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 		});
 	}
 	
-	/**
-	 * 
-	 * @param event
-	 */
+	  /**
+     * loads the previous screen after clicking on back button.
+     * @param
+     */
 	public void setBranchManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {
 				@Override
@@ -221,7 +243,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 	}
 	
 	/**
-	 * 
+	 * this method will load this screen after it will be called from the next screen.
 	 */
 	public void initPortalAgain() {
 		loader = new FXMLLoader();
@@ -239,6 +261,12 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */
 	}
+	
+	/**
+	 * initialize the data into this screen :
+	 * first of all we create an observableList with User type , then after getting all the customers from db
+	 * we add them into the observable list , initialize every column of the table and then sets the list into the table.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<User> customers = FXCollections.observableArrayList();
@@ -251,11 +279,6 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 		lastNameCol.setCellValueFactory(new PropertyValueFactory<User,String>("userLastName"));
 		customerStatusCol.setCellValueFactory(new PropertyValueFactory<User,String>("statusInSystem"));
 		customerListTable.setItems(customers);
-		
-		
-		
-
-		
 	}
 
 }

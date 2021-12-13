@@ -29,6 +29,11 @@ import users.User;
 public class EditUsersQueries {
 	
 	
+	/**
+	 * This method gets a branch manager object , and gets all the customers,businesscustomers and hrmanagers that belong to same branch.
+	 * @param message
+	 * @return list of customers .
+	 */
 	public static Message getCustomersListFromDb(Message message) {
 		Message returnMessageToClient;
 		ArrayList<User> customersList = new ArrayList<>();
@@ -92,6 +97,18 @@ public class EditUsersQueries {
 		String tableName = list.get(2);
 		//Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 		Query.updateOneColumnForTableInDbByPrimaryKey(tableName, "statusInSystem = '"+newStatus+"'", "userID='"+userId+"'");
+	}
+	
+	/**
+	 * this method gets a list that contains userId and user type , deletes the user from his table and from login table.
+	 * @param message
+	 */
+	public static void removeUserFromDB(Message message) {
+		ArrayList<String> list = (ArrayList<String>) message.getObject();
+		String userId = list.get(0);
+		String tableName = list.get(1);
+		Query.deleteRowFromTableInDbByPrimaryKey(tableName, "userID='"+userId+"'");
+		Query.deleteRowFromTableInDbByPrimaryKey("login", "userID='"+userId+"'");
 	}
 	
 

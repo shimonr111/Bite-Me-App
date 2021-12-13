@@ -43,6 +43,9 @@ import users.PositionType;
  */
 
 public class EditBusinessCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static EditBusinessCustomerInformationScreenController editBusinessCustomerInformationScreenController;
     public static BusinessCustomer businessCustomer;
@@ -135,20 +138,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     	setEditCustomerInformationScreen(event);
     }
 
-    @FXML
-    void getBudgetType(ActionEvent event) {
 
-    }
-
-    @FXML
-    void getCompanyName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getEmail(ActionEvent event) {
-
-    }
 
     @FXML
     void getExitBtn(ActionEvent event) {
@@ -158,10 +148,6 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		System.exit(0);
     }
 
-    @FXML
-    void getFirstName(ActionEvent event) {
-
-    }
 
     @FXML
     void getHelpBtn(ActionEvent event) {
@@ -169,40 +155,6 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 
     }
 
-    @FXML
-    void getHomeBranch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getIdNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getLastName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getMonthlyMaxBudget(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPhone(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPosition(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getStatusComboBox(ActionEvent event) {
-
-    }
     
     /**
      * sets the screen , it will be called from previous screen.
@@ -269,7 +221,9 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		
 	}
 	
-    
+    /**
+     * this method initialize the fields and combo boxes accordingly.
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		firstNameTxtField.setText(businessCustomer.getUserFirstName()); lastNameTxtField.setText(businessCustomer.getUserLastName()); idNumTxtField.setText(businessCustomer.getUserId()); 
