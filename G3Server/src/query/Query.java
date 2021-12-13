@@ -39,7 +39,7 @@ public class Query {
 	 * @param condition
 	 * @return
 	 */
-	public static ResultSet getRowFromTableInDB(String tableName, String condition) {
+	public static ResultSet getRowsFromTableInDB(String tableName, String condition) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {

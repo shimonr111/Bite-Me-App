@@ -80,7 +80,7 @@ public class AnalyzeMessageFromClient {
 			 case REGISTER_SUPPLIER:
 				 recivedMessageFromClient = RegistrationQueries.getSupplierRegistration((Message) message);
 			 case GET_CUSTOMERS_FROM_DB:
-				  recivedMessageFromClient = EditUsersQueries.getCustomersListFromDb();
+				  recivedMessageFromClient = EditUsersQueries.getCustomersListFromDb((Message) message);
 			default:
 				break;
 			}
