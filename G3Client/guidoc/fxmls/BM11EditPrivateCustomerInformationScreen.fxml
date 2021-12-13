@@ -45,14 +45,14 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <TextField fx:id="firstNameTxtField" disable="true" editable="false" layoutX="201.0" layoutY="102.0" onAction="#getFirstName" prefHeight="31.0" prefWidth="170.0">
+      <TextField fx:id="firstNameTxtField" disable="true" editable="false" layoutX="201.0" layoutY="102.0"  prefHeight="31.0" prefWidth="170.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></TextField>
-      <TextField fx:id="lastNameTxtField" disable="true" editable="false" layoutX="201.0" layoutY="143.0" onAction="#getLastName" prefHeight="31.0" prefWidth="170.0" />
-      <TextField fx:id="idNumTxtField" disable="true" editable="false" layoutX="201.0" layoutY="185.0" onAction="#getIdNum" prefHeight="31.0" prefWidth="170.0" />
-      <TextField fx:id="phoneTxtField" disable="true" editable="false" layoutX="201.0" layoutY="234.0" onAction="#getPhoneNum" prefHeight="31.0" prefWidth="170.0" />
-      <TextField fx:id="emailTxtField" disable="true" editable="false" layoutX="201.0" layoutY="280.0" onAction="#getEmail" prefHeight="31.0" prefWidth="170.0" />
+      <TextField fx:id="lastNameTxtField" disable="true" editable="false" layoutX="201.0" layoutY="143.0" prefHeight="31.0" prefWidth="170.0" />
+      <TextField fx:id="idNumTxtField" disable="true" editable="false" layoutX="201.0" layoutY="185.0"  prefHeight="31.0" prefWidth="170.0" />
+      <TextField fx:id="phoneTxtField" disable="true" editable="false" layoutX="201.0" layoutY="234.0"  prefHeight="31.0" prefWidth="170.0" />
+      <TextField fx:id="emailTxtField" disable="true" editable="false" layoutX="201.0" layoutY="280.0"  prefHeight="31.0" prefWidth="170.0" />
       <Label layoutX="96.0" layoutY="104.0" text="First name:">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -83,8 +83,8 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="setHomeBranchCombo" disable="true" layoutX="426.0" layoutY="295.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
-      <ComboBox fx:id="setStatusComboBox" layoutX="426.0" layoutY="146.0" onAction="#getSetStatusComboBox" prefHeight="25.0" prefWidth="170.0" promptText="Set status" />
+      <ComboBox fx:id="setHomeBranchCombo" disable="true" layoutX="426.0" layoutY="295.0"  prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
+      <ComboBox fx:id="setStatusComboBox" layoutX="426.0" layoutY="146.0"  prefHeight="25.0" prefWidth="170.0" promptText="Set status" />
       <Label layoutX="432.0" layoutY="253.0" text="Home branch:">
          <font>
             <Font name="System Bold" size="18.0" />

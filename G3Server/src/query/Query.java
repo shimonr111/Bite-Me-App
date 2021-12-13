@@ -244,4 +244,22 @@ public class Query {
 				
 	}
 	
+	/**
+	 * this method gets a table name and condition , and deletes the row according to the condition from DB.
+	 * condition must be according to table's primary key !
+	 * @param tableName
+	 * @param condition
+	 */
+	public static void deleteRowFromTableInDbByPrimaryKey(String tableName,String condition) {
+		//DELETE FROM `semesterialproject`.`customer` WHERE (`userID` = '100022');
+		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

@@ -46,7 +46,9 @@ import javafx.fxml.Initializable;
  * @version 12/12/2021
  */
 public class SupplierRegistrationScreenController extends AbstractBiteMeController implements Initializable {
-	
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static SupplierRegistrationScreenController supplierRegistrationScreenController;
     private ArrayList<TextField> textFields = new ArrayList<>();
@@ -81,7 +83,6 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	    @FXML
 	    private TextField userName;
 	    
-
 	    @FXML
 	    private TextField homeBranchtxtField;
 
@@ -96,34 +97,14 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 
 	    @FXML
 	    private Button btnHelp;
-
 	    
 	    @FXML
 	    private Text displayMessage;
 	    
-
-	 
-
-	    @FXML
-	    void getAddress(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getBackBtn(ActionEvent event) {
-	    	setBranchManagerPortal(event);
-	    }
-
-	    @FXML
-	    void getConfirmedEmail(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getEmail(ActionEvent event) {
-
-	    }
-
+	    /**
+	     * log out and then exit.
+	     * @param event
+	     */
 	    @FXML
 	    void getExitBtn(ActionEvent event) {
 	      	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -131,27 +112,21 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	    	connectedUser = null;
 	   		System.exit(0);
 	    }
-
+	    
+	    /**
+	     * displays a message to the user.
+	     * @param event
+	     */
 	    @FXML
 	    void getHelpBtn(ActionEvent event) {
 	    	PopUpMessages.helpMessage("Please fill in all the fields to complete the registration, then click on Save.");
 	    }
-
-	    @FXML
-	    void getPhone(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getResturantName(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getRevenueFee(ActionEvent event) {
-
-	    }
-
+	    
+	    /**
+	     * this method runs after clicking on save button, it checks if all the fields were filled correctly 
+	     * creates a relevant message to the server to insert the data into DB.
+	     * @param event
+	     */
 	    @FXML
 	    void getSaveBtn(ActionEvent event) {
 	    	if(checkAllFields()) {
@@ -174,28 +149,16 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 
 	    	}
 	    }
+	    
+	    /**
+	     * calls the method that loads the previous screen.
+	     * @param event
+	     */
+	    @FXML
+	    void getBackBtn(ActionEvent event) {
+	    	setBranchManagerPortal(event);
+	    }
 	
-
-	    @FXML
-	    void getManagerId(ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void getManagerLastName(ActionEvent event) {
-
-	    }
-
-	 
-
-
-
-	    @FXML
-	    void getUserName(ActionEvent event) {
-
-	    }
-	    
-	    
 	    /**
 	     * 
 	     * this method checks if all the fields are filled
@@ -274,7 +237,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	 	}
 	    
 	    /**
-	     * 
+	     * this method loads the current screen, it will be called from the previous screen.
 	     */
 		public void initSupplierRegistrationScreen() {
 			Platform.runLater(new Runnable() {
@@ -308,7 +271,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 		}
 		
 		/**
-		 * 
+		 * this method loads the previous screen.
 		 * @param event
 		 */
 		public void setBranchManagerPortal(ActionEvent event) {
@@ -352,10 +315,12 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 			});
 			
 		}
-
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	 	
+	 	/**
+	 	 * this method initialize all the fields and boxes and  listeners accordingly.
+	 	 */
+	 	@Override
+	 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(resturantNameTxtField); textFields.add(confirmEmailTxtField); textFields.add(emailTxtField); textFields.add(managerFirstName); textFields.add(managerLastName); textFields.add(managerUserId);
 		textFields.add(phoneTxtField); textFields.add(revenueTxtField); textFields.add(userName); textFields.add(passwordTextField);
 		integerFields.add(phoneTxtField); integerFields.add(managerUserId);

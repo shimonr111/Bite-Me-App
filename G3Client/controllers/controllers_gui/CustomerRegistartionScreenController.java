@@ -33,6 +33,10 @@ import javafx.stage.WindowEvent;
  * @version 10/12/2021
  */
 public class CustomerRegistartionScreenController extends AbstractBiteMeController {
+	
+	/**
+	 * Class members description:
+	 */
 	    private static FXMLLoader loader;
 	    private static CustomerRegistartionScreenController customerRegistrationScreenController;
 	    
@@ -86,7 +90,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    }
 	    
 	    /**
-	     * 
+	     * this method loads the current screen.
 	     */
 		public void initCustomerRegistrationScreen() {
 			Platform.runLater(new Runnable() {
@@ -120,7 +124,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 		}
 		
 		/**
-		 * 
+		 * this method loads the branch manager portal screen ( previous screen)
 		 * @param event
 		 */
 		public void setBranchManagerPortal(ActionEvent event) {
@@ -152,7 +156,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 		}
 		
 		/**
-		 * 
+		 * this method loads this screen after clicking back from next one.
 		 */
 		public void initPortalAgain() {
 			loader = new FXMLLoader();
