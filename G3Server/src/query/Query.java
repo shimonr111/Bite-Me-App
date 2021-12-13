@@ -201,7 +201,7 @@ public class Query {
 		PreparedStatement pstmt1=null;
 	
 		try {
-			String query1 = "SELECT businessW4cNumber FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
+			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
 			pstmt1 = con.prepareStatement(query1);
 			rs= pstmt1.executeQuery();
 			if(rs.next())

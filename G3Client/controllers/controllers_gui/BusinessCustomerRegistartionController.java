@@ -403,10 +403,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 			setHomeBranchCombo.setValue("Center Branch");
 		else
 			setHomeBranchCombo.setValue("South Branch");
-		setHomeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		companyNameCombo.setValue("Select company:");
-		//for(String s: companies)
-			companyNameCombo.getItems().addAll(companies);
+		companyNameCombo.getItems().addAll(companies);
 		positionCombo.setValue("Select position:");
 		positionCombo.getItems().addAll("Regular worker","Human Resources");
 		budgetTypeCombo.setValue("Select Budget type:");
