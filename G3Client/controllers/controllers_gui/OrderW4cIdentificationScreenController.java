@@ -134,6 +134,13 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     			+ " you want to order");
     }
 
+    /**
+     * This function move us to the next screen if
+     * the data recieved form the user 
+     * is ok.
+     * 
+     * @param event
+     */
     @FXML
     void getNextBtn(ActionEvent event) {
     	/*if the user has entered a wrong input set message accordingly*/

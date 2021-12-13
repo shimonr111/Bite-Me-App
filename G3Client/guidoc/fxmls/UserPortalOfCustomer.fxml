@@ -30,7 +30,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="homeBranchComboBox" layoutX="40.0" layoutY="166.0" onAction="#getHomeBranchComboBox" prefHeight="31.0" prefWidth="188.0" promptText="Home Branch Name" />
       <Text fx:id="userName" fill="#383838" layoutX="211.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="338.13671875">
          <font>
             <Font name="System Bold" size="18.0" />

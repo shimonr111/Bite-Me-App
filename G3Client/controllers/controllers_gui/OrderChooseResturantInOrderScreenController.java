@@ -127,11 +127,13 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
     	PopUpMessages.helpMessage("Please choose the resturant from the list below!");
     }
 
-    @FXML
-    void getResturantComboBox(ActionEvent event) {
-
-    }
-
+    /**
+     * This is the init for the current 
+     * screen, in which we load the fxml.
+     * This function is called from the previous 
+     * screen controller.
+     * 
+     */
     public void initChooseRestaurantScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
