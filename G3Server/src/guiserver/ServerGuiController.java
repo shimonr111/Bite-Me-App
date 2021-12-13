@@ -115,7 +115,7 @@ public class ServerGuiController {
 		ServerGuiController serverController = loader.getController();
 		serverController.loadInfo();
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/ServerGui.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/css/ServerGui.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);
 		primaryStage.show();

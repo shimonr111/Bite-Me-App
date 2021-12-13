@@ -64,7 +64,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	public void start(Stage primaryStage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("/fxmls/EntryIPConfirmationForm.fxml"));
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 		primaryStage.setTitle("Connect to server");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -139,7 +139,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 					Stage.setTitle("Home");
 					Stage.setScene(scene);
 					Stage.show();

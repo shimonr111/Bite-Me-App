@@ -191,7 +191,7 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 					Stage.setTitle("Main menu");
 					Stage.setScene(scene);
 					Stage.show();
@@ -215,7 +215,7 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */
 	}

@@ -44,6 +44,7 @@ import users.Login;
 public class PrivateCustomerRegistartionController extends AbstractBiteMeController implements Initializable  {
 	private static FXMLLoader loader;
     private static PrivateCustomerRegistartionController privateCustomerRegistrationScreenController;
+    private static AnalyzeClientListener listener;
     
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
@@ -203,6 +204,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     
     @FXML
     void getBackBtn(ActionEvent event) {
+		AnalyzeMessageFromServer.removeClientListener(listener);
     	setCustomerRegistrationScreen(event);
     }
     
@@ -297,7 +299,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 					Stage.setTitle("Private customer registration");
 					Stage.setScene(scene);
 					Stage.show();
@@ -361,7 +363,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 			setHomeBranchCombo.setValue("South Branch");
 		setHomeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		displayMessage.setText("");
-		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
+		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
 			public void clientUserIdExist() {
 				setRelevantTextToDisplayMessageText("This ID already exist on system");

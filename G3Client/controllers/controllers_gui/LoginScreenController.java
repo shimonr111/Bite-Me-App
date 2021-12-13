@@ -49,6 +49,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 */
 	public static FXMLLoader loader;
 	private static LoginScreenController loginScreenController;
+	private static AnalyzeClientListener listener;
 	
 
 	/**
@@ -169,6 +170,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
+					AnalyzeMessageFromServer.removeClientListener(listener);
 					root = loader.load(getClass().getResource("/fxmls/EntryHomeScreenForm.fxml").openStream());
 					Scene scene = new Scene(root);
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -178,7 +180,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 					Stage.setTitle("Home");
 					Stage.setScene(scene);
 					Stage.show();
@@ -263,11 +265,11 @@ public class LoginScreenController extends AbstractBiteMeController{
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */
-		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){ 
+		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){ 
 			@Override
 			public void clientGotCustomerLogin() {
 				AnalyzeMessageFromServer.removeClientListener(this);
