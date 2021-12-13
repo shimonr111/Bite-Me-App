@@ -80,4 +80,19 @@ public class EditUsersQueries {
 		
 	}
 
+	/**
+	 * This method is general for every user type , in the message we sent the userid,the new status as a string and the table name
+	 * this method calls the update query method and changes the status.
+	 * @param message
+	 */
+	public static void setCustomerNewStatus(Message message) {
+		ArrayList<String> list = (ArrayList<String>) message.getObject();
+		String userId= list.get(0);
+		String newStatus = list.get(1);
+		String tableName = list.get(2);
+		//Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		Query.updateOneColumnForTableInDbByPrimaryKey(tableName, "statusInSystem = '"+newStatus+"'", "userID='"+userId+"'");
+	}
+	
+
 }

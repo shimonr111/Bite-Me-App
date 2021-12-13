@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
 import users.Customer;
+import users.HrManager;
 import users.User;
 import javafx.fxml.Initializable;
 
@@ -101,13 +102,23 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 
     @FXML
     void getEditCustomer(ActionEvent event) {
-    	if(customerListTable.getSelectionModel().getSelectedItem() instanceof BusinessCustomer)
-    		System.out.println(customerListTable.getSelectionModel().getSelectedItem());
+    	if(customerListTable.getSelectionModel().getSelectedItem() != null) {
+    		if(customerListTable.getSelectionModel().getSelectedItem() instanceof BusinessCustomer) {
+    			EditBusinessCustomerInformationScreenController.businessCustomer = (BusinessCustomer)customerListTable.getSelectionModel().getSelectedItem();
+    			EditBusinessCustomerInformationScreenController EBCIS = new EditBusinessCustomerInformationScreenController();
+    			EBCIS.initEditBusinessCustomerInformationScreen();
+    			((Node) event.getSource()).getScene().getWindow().hide();
+    		}
+    
+    		else {
+    			EditPrivateCustomerInformationScreenController.customer= (Customer) customerListTable.getSelectionModel().getSelectedItem();
+    			EditPrivateCustomerInformationScreenController EPCISC = new EditPrivateCustomerInformationScreenController();
+    			EPCISC.initEditPrivateCustomerInformationScreen();
+    			((Node) event.getSource()).getScene().getWindow().hide();
+    			}
+    	}
     	else {
-    		EditPrivateCustomerInformationScreenController.customer= (Customer) customerListTable.getSelectionModel().getSelectedItem();
-    		EditPrivateCustomerInformationScreenController EPCISC = new EditPrivateCustomerInformationScreenController();
-    		EPCISC.initEditCustomerInformationScreen();
-    		((Node) event.getSource()).getScene().getWindow().hide();
+    		errorText.setText("Please, select one customer to edit.");
     	}
     }
 
@@ -121,12 +132,27 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please choose which customer you want to Edit");
+    	PopUpMessages.helpMessage("Please choose which customer you want to Edit or Remove");
     }
 
     @FXML
-    void getSaveBtn(ActionEvent event) {
-
+    void getRemoveBtn(ActionEvent event) {
+    	User selectedUser = customerListTable.getSelectionModel().getSelectedItem();
+    	if(selectedUser != null) {
+    		
+    		if(selectedUser instanceof HrManager) {
+    			
+    		}
+    		else if (selectedUser instanceof BusinessCustomer) {
+    			
+    		}
+    		else {
+    			
+    		}
+    	}
+    	else {
+    		errorText.setText("Please, select one customer to remove.");
+    	}
     }
     
     /**
