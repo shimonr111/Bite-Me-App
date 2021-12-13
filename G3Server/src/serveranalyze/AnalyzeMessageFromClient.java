@@ -11,6 +11,7 @@ import communication.Task;
 import ocsf.server.ConnectionToClient;
 import query.EditUsersQueries;
 import query.LoginQueries;
+import query.OrderQueries;
 import query.RegistrationQueries;
 
 /**
@@ -85,6 +86,9 @@ public class AnalyzeMessageFromClient {
 				  break;
 			 case UPDATE_CUSTOMER_STATUS:
 				 EditUsersQueries.setCustomerNewStatus((Message)message);
+				 break;
+			 case GET_RESTAURANTS_FOR_ORDER:
+				 recivedMessageFromClient = OrderQueries.createRestaurantsForCustomer((Message)message);
 				 break;
 			default:
 				break;

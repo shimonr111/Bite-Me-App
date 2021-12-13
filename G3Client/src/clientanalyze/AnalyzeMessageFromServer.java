@@ -2,15 +2,17 @@ package clientanalyze;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import bitemeclient.PopUpMessages;
+
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import controllers_gui.AbstractBiteMeController;
-import controllers_gui.UserPortalOfBusinessCustomerController;
 import controllers_gui.BusinessCustomerRegistartionController;
 import controllers_gui.EditCustomerInformationScreenController;
+import controllers_gui.OrderChooseResturantInOrderScreenController;
+import users.Supplier;
 import users.User;
 
 /**
@@ -205,6 +207,16 @@ public class AnalyzeMessageFromServer {
 				break;
 			case DISPLAY_CUSTOMERS_INTO_TABLE:
 				EditCustomerInformationScreenController.customersList=(ArrayList<User>)recivedMessageFromServer.getObject();
+				break;
+			case GET_RESTAURANTS_FOR_ORDER:
+				switch(recievedAnswerFromServer) {
+				case RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH:
+					OrderChooseResturantInOrderScreenController.suppliersList = null;
+					break;
+				case RESTAURANTS_EXIST_FOR_THIS_BRANCH:
+					OrderChooseResturantInOrderScreenController.suppliersList=(HashMap<String,String>)recivedMessageFromServer.getObject();
+					break;
+				}
 				break;
 			default:
 				break;
