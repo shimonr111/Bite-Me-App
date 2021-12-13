@@ -116,7 +116,6 @@ public class Query {
 	 */
 	public static void updateOneColumnForTableInDbByPrimaryKey(String tableName, String columnSet, String condition) {
 		PreparedStatement pstmt = null;
-		//ResultSet rs=null;
 		try {
 			String query = "UPDATE semesterialproject."+ tableName+" SET "+columnSet+" WHERE " +"("+condition+")";
 			pstmt = con.prepareStatement(query);

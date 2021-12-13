@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderW4cIdentificationScreenController">
    <children>
       <Label layoutX="225.0" layoutY="81.0" text="Enter W4C code:">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="codeTxtField" layoutX="233.0" layoutY="116.0" onAction="#getCodeTxtField" prefHeight="31.0" prefWidth="160.0" promptText="Enter your code here" />
+      <TextField fx:id="codeTxtField" layoutX="233.0" layoutY="116.0" prefHeight="31.0" prefWidth="160.0" promptText="Enter your code here" />
       <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -59,14 +59,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="errorText" layoutX="244.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="148.50781336426735" />
-      <ComboBox fx:id="homeBranchCombo" layoutX="223.0" layoutY="366.0" onAction="#getHomeBranch" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
+      <Text fx:id="errorText" layoutX="244.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0" />
+      <ComboBox fx:id="homeBranchCombo" layoutX="223.0" layoutY="366.0" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
       <Label layoutX="237.0" layoutY="331.0" text="Select branch">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextArea layoutX="258.0" layoutY="397.0" prefHeight="81.0" prefWidth="124.0" text="by default the home branch shown&#10;" />
-      <ButtonBar layoutX="14.0" layoutY="112.0" prefHeight="40.0" prefWidth="200.0" />
    </children>
 </Pane>
