@@ -11,8 +11,9 @@ import communication.Task;
 import controllers_gui.AbstractBiteMeController;
 import controllers_gui.BusinessCustomerRegistartionController;
 import controllers_gui.EditCustomerInformationScreenController;
+import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
-import users.Supplier;
+import orders.Item;
 import users.User;
 
 /**
@@ -43,6 +44,7 @@ public class AnalyzeMessageFromServer {
 	 * @param message
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	public static void analyzeMessageFromServer(Object message) throws IOException {
 		if (!(message instanceof Message)) {
 			return;
@@ -218,6 +220,18 @@ public class AnalyzeMessageFromServer {
 					break;
 				default:
 					break;	
+				}
+				break;
+			case GET_ITEMS_FOR_ORDER_MENU:
+				switch(recievedAnswerFromServer) {
+				case SUPPLIER_HAS_NO_MENU:
+					OrderChooseItemsScreenController.itemList = null;
+					break;
+				case SUPPLIER_MENU_FOUND:
+					OrderChooseItemsScreenController.itemList = (ArrayList<Item>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;
 				}
 				break;
 			default:
