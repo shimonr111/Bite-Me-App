@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Branch;
+import users.ConfirmationStatus;
 import users.HrManager;
 import javafx.scene.control.ComboBox;
 
@@ -60,6 +61,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
     private Text hrManagerName;
     @FXML
     private Text companyName;
+    @FXML
+    private Text statusText;
 
 	public static FXMLLoader loader;
 	private static UserPortalOfHRManagerController userPortalOfHRManagerController;
@@ -198,6 +201,13 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 			homeBranchCombo.setValue("South Branch");
 		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnBusinessCustomerConfirm.setDisable(true);
+			btnCompanyReg.setDisable(true);
+			btnStartOrder.setDisable(true);
+			homeBranchCombo.setDisable(true);
+		}
 		
 		
 	}

@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Branch;
+import users.ConfirmationStatus;
 
 /**
  * 
@@ -49,6 +50,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	private Button btnHelp;
     @FXML
     private Text userName;
+    @FXML
+    private Text statusText;
 
 	public static FXMLLoader loader;
 	private static UserPortalOfCustomerController userPortalOfCustomerController;
@@ -172,5 +175,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		userName.setText(connectedUser.getUserFirstName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnStartOrder.setDisable(true);
+		}
 	}
 }

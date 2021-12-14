@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.BusinessCustomer;
+import users.ConfirmationStatus;
 import users.HrManager;
 import users.User;
 import javafx.scene.control.ComboBox;
@@ -56,10 +57,11 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	private ComboBox<String> homeBranchCombo;
     @FXML
     private Text companyName;
-
     @FXML
     private Text businessCustomerName;
-	
+    @FXML
+    private Text statusText;
+    
 	public static FXMLLoader loader;
 	private static UserPortalOfBusinessCustomerController userPortalOfBusinessCustomerController;
 	
@@ -186,6 +188,11 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 			homeBranchCombo.setValue("South Branch");
 		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		companyName.setText(((BusinessCustomer)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnStartOrder.setDisable(true);
+			homeBranchCombo.setDisable(true);
+		}
 		
 	}
 }
