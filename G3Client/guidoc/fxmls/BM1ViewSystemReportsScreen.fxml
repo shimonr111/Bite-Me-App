@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ViewSystemReportsScreenController">
    <children>
       <Label id="title" layoutX="167.0" layoutY="33.0" text="View System Reports" textFill="#383838">
          <font>
@@ -18,11 +18,6 @@
       <Button id="btnExit" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnclose" layoutX="10.0" layoutY="711.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Button fx:id="btnBack" layoutX="-2.0" layoutY="439.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
