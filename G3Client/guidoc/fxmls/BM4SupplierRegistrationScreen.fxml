@@ -9,15 +9,15 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierRegistrationScreenController">
    <children>
-      <TextField fx:id="resturantNameTxtField" layoutX="213.0" layoutY="96.0" onAction="#getResturantName" prefHeight="25.0" prefWidth="159.0" promptText="Enter name" />
-      <TextField fx:id="managerFirstName" layoutX="213.0" layoutY="134.0" onAction="#getAddress" prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager First Name" />
-      <TextField fx:id="managerLastName" layoutX="213.0" layoutY="169.0" onAction="#getManagerLastName" prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager Last Name" />
-      <TextField fx:id="managerUserId" layoutX="213.0" layoutY="206.0" onAction="#getManagerId" prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager ID" />
-      <TextField fx:id="emailTxtField" layoutX="213.0" layoutY="242.0" onAction="#getEmail" prefHeight="25.0" prefWidth="159.0" promptText="Enter email" />
-      <TextField fx:id="confirmEmailTxtField" layoutX="213.0" layoutY="282.0" onAction="#getConfirmedEmail" prefHeight="25.0" prefWidth="159.0" promptText="Enter email" />
-      <TextField fx:id="phoneTxtField" layoutX="213.0" layoutY="321.0" onAction="#getPhone" prefHeight="25.0" prefWidth="159.0" promptText="Enter phone number" />
-      <TextField fx:id="revenueTxtField" layoutX="445.0" layoutY="144.0" onAction="#getRevenueFee" prefHeight="31.0" prefWidth="159.0" promptText="Enter revenu fee" />
-      <TextField fx:id="userName" layoutX="445.0" layoutY="203.0" onAction="#getUserName" prefHeight="31.0" prefWidth="159.0" promptText="Enter User Name" />
+      <TextField fx:id="resturantNameTxtField" layoutX="213.0" layoutY="96.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter name" />
+      <TextField fx:id="managerFirstName" layoutX="213.0" layoutY="134.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager First Name" />
+      <TextField fx:id="managerLastName" layoutX="213.0" layoutY="169.0" prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager Last Name" />
+      <TextField fx:id="managerUserId" layoutX="213.0" layoutY="206.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter Manager ID" />
+      <TextField fx:id="emailTxtField" layoutX="213.0" layoutY="242.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter email" />
+      <TextField fx:id="confirmEmailTxtField" layoutX="213.0" layoutY="282.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter email" />
+      <TextField fx:id="phoneTxtField" layoutX="213.0" layoutY="321.0"  prefHeight="25.0" prefWidth="159.0" promptText="Enter phone number" />
+      <TextField fx:id="revenueTxtField" layoutX="445.0" layoutY="144.0"  prefHeight="31.0" prefWidth="159.0" promptText="Enter revenu fee" />
+      <TextField fx:id="userName" layoutX="445.0" layoutY="203.0"  prefHeight="31.0" prefWidth="159.0" promptText="Enter User Name" />
       <TextField fx:id="passwordTextField" layoutX="441.0" layoutY="269.0" prefHeight="31.0" prefWidth="149.0" promptText="Enter Password " />
       <Button fx:id="saveBtn" layoutX="235.0" layoutY="413.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
          <font>

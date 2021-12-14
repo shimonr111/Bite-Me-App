@@ -24,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.ConfirmationStatus;
 
 /**
  * 
@@ -61,6 +62,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	private Button btnHelp;
     @FXML
     private Text branchManagerName;
+    @FXML
+    private Text statusText;
     
 	
 	public static FXMLLoader loader;
@@ -227,6 +230,15 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		branchManagerName.setText(connectedUser.getUserFirstName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnAddQuarterlyReports.setDisable(true);
+			btnCustomerReg.setDisable(true);
+			btnCompanyRegManagement.setDisable(true);
+			btnSupplierReg.setDisable(true);
+			btnEditCustomerInfo.setDisable(true);
+			btnViewSysReports.setDisable(true);
+		}
 		
 		
 	}

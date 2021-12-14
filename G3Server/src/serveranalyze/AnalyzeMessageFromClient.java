@@ -89,6 +89,9 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_RESTAURANTS_FOR_ORDER:
 				 recivedMessageFromClient = OrderQueries.createRestaurantsForCustomer((Message)message);
+         break;
+			 case REMOVE_USER_FROM_DB:
+				 EditUsersQueries.removeUserFromDB((Message)message);
 				 break;
 			default:
 				break;

@@ -3,6 +3,7 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -17,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -39,7 +41,10 @@ import javafx.fxml.Initializable;
  * @version 13/12/2021
  */
 public class EditPrivateCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
-	
+	 
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static EditPrivateCustomerInformationScreenController editPrivateCustomerInformationScreenController;
     public static Customer customer;
@@ -81,7 +86,11 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     @FXML
     private Text displayMessage;
 
-
+    /**
+     * this method runs after clicking on SAVE button , it checks if there were any changes to the customer status
+     * and if yes it sends a relevant message to the server.
+     * @param event
+     */
     @FXML
     void Send(ActionEvent event) {
     	ConfirmationStatus oldStatus = customer.getStatusInSystem();
@@ -90,6 +99,8 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     		displayMessage.setText("There were no changes");
     	}
     	else {
+      		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to save the changes.");
+    		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(customer.getUserId());
     		objectToMessage.add(newStatus);
@@ -110,20 +121,23 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     			break;		
     		}
     		displayMessage.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		}
     	}
     }
-
+    
+    /**
+     * calls the method that loads the previous screen.
+     * @param event
+     */
     @FXML
     void getBackBtn(ActionEvent event) {
     	setEditCustomerInformationScreen(event);
     }
 
 
-    @FXML
-    void getEmail(ActionEvent event) {
-
-    }
-
+    /**
+     * logout then exit.
+     */
     @FXML
     void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -132,41 +146,11 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		System.exit(0);
     }
 
-    @FXML
-    void getFirstName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getHomeBranch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getIdNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getLastName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPassword(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPhoneNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getSetStatusComboBox(ActionEvent event) {
-
-    }
-    
+   
+    /**
+     * display a message to the customer.
+     * @param event
+     */
     @FXML
     void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("You can change the customer's Status, change status then clock save and go back to see changes.");
@@ -238,6 +222,9 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		
 	}
 	
+	/**
+	 * initialize the fields and boxes accordingly.
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		firstNameTxtField.setText(customer.getUserFirstName()); lastNameTxtField.setText(customer.getUserLastName()); idNumTxtField.setText(customer.getUserId()); 

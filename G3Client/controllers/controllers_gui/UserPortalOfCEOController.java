@@ -10,6 +10,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.ConfirmationStatus;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +48,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	private Button btnHelp;
     @FXML
     private Text ceoName;
+    @FXML
+    private Text statusText;
 
 	public static FXMLLoader loader;
 	private static UserPortalOfCEOController userPortalOfCEOController;
@@ -162,6 +166,11 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		ceoName.setText(connectedUser.getUserFirstName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnViewMonthlyReports.setDisable(true);
+			btnViewQuarterlyReports.setDisable(true);
+		}
 		
 	}
 }

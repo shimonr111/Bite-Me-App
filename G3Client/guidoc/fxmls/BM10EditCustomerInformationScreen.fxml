@@ -20,11 +20,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnclose" layoutX="10.0" layoutY="711.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
       <Button fx:id="btnBack" layoutX="-2.0" layoutY="439.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />

@@ -201,7 +201,7 @@ public class Query {
 		PreparedStatement pstmt1=null;
 	
 		try {
-			String query1 = "SELECT businessW4cNumber FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
+			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
 			pstmt1 = con.prepareStatement(query1);
 			rs= pstmt1.executeQuery();
 			if(rs.next())
@@ -242,6 +242,24 @@ public class Query {
 			e.printStackTrace();
 		}
 				
+	}
+	
+	/**
+	 * this method gets a table name and condition , and deletes the row according to the condition from DB.
+	 * condition must be according to table's primary key !
+	 * @param tableName
+	 * @param condition
+	 */
+	public static void deleteRowFromTableInDbByPrimaryKey(String tableName,String condition) {
+		//DELETE FROM `semesterialproject`.`customer` WHERE (`userID` = '100022');
+		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
