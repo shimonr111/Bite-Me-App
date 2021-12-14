@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import bitemeserver.BiteMeServerUI;
+
 /**
  * @author Lior, Guzovsky.
  * Class description: 
@@ -32,7 +34,7 @@ public class mySqlConnection {
 	public boolean connectToDB(String DBName, String DBUserName, String DBPassword) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-			System.out.println("Driver definition succeed");
+			BiteMeServerUI.console.add("Driver definition succeed\n");
 		} catch (Exception ex) {
 			/* handle the error */
 			System.out.println("Driver definition failed");
@@ -41,11 +43,11 @@ public class mySqlConnection {
 		}
 		try {
 			con = DriverManager.getConnection(DBName, DBUserName, DBPassword);
-			System.out.println("SQL connection succeed");
+			BiteMeServerUI.console.add("SQL connection succeed\n");
 		} catch (SQLException ex) {/* handle any errors */
-			System.out.println("SQLException: " + ex.getMessage());
-			System.out.println("SQLState: " + ex.getSQLState());
-			System.out.println("VendorError: " + ex.getErrorCode());
+			BiteMeServerUI.console.add("SQLException: " + ex.getMessage()+"\n");
+			BiteMeServerUI.console.add("SQLState: " + ex.getSQLState()+"\n");
+			BiteMeServerUI.console.add("VendorError: " + ex.getErrorCode()+"\n");
 			return false;
 		}
 		return true;
