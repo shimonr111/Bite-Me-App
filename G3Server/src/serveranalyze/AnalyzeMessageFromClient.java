@@ -99,6 +99,9 @@ public class AnalyzeMessageFromClient {
 			 case REMOVE_USER_FROM_DB:
 				 EditUsersQueries.removeUserFromDB((Message)message);
 				 break;
+			 case GET_ITEMS_FOR_ORDER_MENU:
+				 recivedMessageFromClient = OrderQueries.createMenuForSpecificSupplier((Message)message);
+				 break;
 			default:
 				break;
 			}
