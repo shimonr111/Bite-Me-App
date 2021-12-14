@@ -88,7 +88,7 @@ public class RegistrationQueries {
 		if(!checkIfCreditCardNumberExist(creditCard))
 			Query.insertOneRowIntoCreditCardTable(creditCard);
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(0)).getUserId(), businessCustomerType);
-		if(businessCustomerType.equals("hrmanger")) {
+		if(businessCustomerType.equals("hrmanager")) {
 			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(0), "hrmanager");
 		}
 		else {

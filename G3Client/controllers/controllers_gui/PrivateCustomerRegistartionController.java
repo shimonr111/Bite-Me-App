@@ -361,7 +361,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 			setHomeBranchCombo.setValue("Center Branch");
 		else
 			setHomeBranchCombo.setValue("South Branch");
-		setHomeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		displayMessage.setText("");
 		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
