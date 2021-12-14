@@ -138,7 +138,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	    			homeBranch = Branch.NORTH;
 	    		else
 	    			homeBranch = Branch.CENTER;
-	    		Supplier supplier = new Supplier(managerUserId.getText(),ConfirmationStatus.PENDING_APPROVAL,managerFirstName.getText(),managerLastName.getText(),
+	    		Supplier supplier = new Supplier(managerUserId.getText(),ConfirmationStatus.CONFIRMED,managerFirstName.getText(),managerLastName.getText(),
 	    				homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),resturantNameTxtField.getText(),Double.parseDouble(revenueTxtField.getText()));
 	    		Login login = new Login (userName.getText(),passwordTextField.getText());
 	    		ArrayList<Object> list = new ArrayList<>();

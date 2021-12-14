@@ -142,6 +142,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Business Customer: "  + userFirstName + " " + userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
+		return "Business Customer: "  + userFirstName + " " + userLastName + " " + getCompanyOfBusinessCustomerString()  ;
 	}	
 }

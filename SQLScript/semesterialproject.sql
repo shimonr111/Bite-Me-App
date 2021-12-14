@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `semesterialproject`;
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: semesterialproject
+-- Host: localhost    Database: semesterialproject
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -75,8 +75,8 @@ CREATE TABLE `businesscustomer` (
   PRIMARY KEY (`userID`),
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
-  KEY `businesscustomer_businessW4cNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `businesscustomer_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`) ON DELETE CASCADE ON UPDATE CASCADE,
+  KEY `businesscustomer_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
+  CONSTRAINT `businesscustomer_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `businesscustomer_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -120,7 +120,7 @@ CREATE TABLE `ceobiteme` (
 
 LOCK TABLES `ceobiteme` WRITE;
 /*!40000 ALTER TABLE `ceobiteme` DISABLE KEYS */;
-INSERT INTO `ceobiteme` VALUES ('1001','CONFIRMED','ceoFirstname','ceoLastname','NOT_APPLICABLE',0,'ceoEmail@BM.com','100101');
+INSERT INTO `ceobiteme` VALUES ('1001','FROZEN','ceoFirstname','ceoLastname','NOT_APPLICABLE',0,'ceoEmail@BM.com','100101');
 /*!40000 ALTER TABLE `ceobiteme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001);
+INSERT INTO `company` VALUES ('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001),('Waiting_Registration','FROZEN','Internal','wait@wait.com',0);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,7 +209,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',1,10000,'customerEmail@gmeel.com','100000','3000',0);
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,8 +269,8 @@ CREATE TABLE `hrmanager` (
   PRIMARY KEY (`userID`),
   KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
-  KEY `hrmanager_businessW4cNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `hrmanager_businessW4cNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
+  KEY `hrmanager_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
+  CONSTRAINT `hrmanager_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -283,7 +283,7 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',1,5001,'hrmanagerEmail@Intel.com','10022','3002',NULL,'Intel','DAILY','HR',1002002,NULL);
+INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',NULL,'Intel','DAILY','HR',1002002,NULL);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,4 +468,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-13 14:26:45
+-- Dump completed on 2021-12-14 22:21:43

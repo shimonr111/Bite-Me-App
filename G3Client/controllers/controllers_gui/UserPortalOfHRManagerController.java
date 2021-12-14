@@ -200,13 +200,21 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		else
 			homeBranchCombo.setValue("South Branch");
 		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
-		companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
-		statusText.setText(connectedUser.getStatusInSystem().toString());
-		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName().equals("Waiting_Registration")) {
+			companyName.setText("No Company");
 			btnBusinessCustomerConfirm.setDisable(true);
-			btnCompanyReg.setDisable(true);
 			btnStartOrder.setDisable(true);
-			homeBranchCombo.setDisable(true);
+			statusText.setText("No Registered company");
+		}
+		else {
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+			statusText.setText(connectedUser.getStatusInSystem().toString());
+			if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+				btnBusinessCustomerConfirm.setDisable(true);
+				btnCompanyReg.setDisable(true);
+				btnStartOrder.setDisable(true);
+				homeBranchCombo.setDisable(true);
+			}
 		}
 		
 		

@@ -188,7 +188,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     			homeBranch = Branch.NORTH;
     		else
     			homeBranch = Branch.CENTER;
-    		Customer customer = new Customer(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
+    		Customer customer = new Customer(idNumTxtField.getText(),ConfirmationStatus.CONFIRMED,firstNameTxtField.getText(),
     				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
     				creditNumTxtField.getText());
     		CreditCard creditCard = new CreditCard(creditNumTxtField.getText(),expirationTxtField.getText(),cvvTxtField.getText());
