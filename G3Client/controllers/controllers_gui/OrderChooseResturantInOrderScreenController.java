@@ -195,10 +195,9 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 			//add the relevant suppliers to the combo box
 			List<String> restaurantsNames = new ArrayList<>();
 			for(Entry<String, String> entry: suppliersList.entrySet()) {
-				//chooseResComboBox.setValue(entry.getValue());
 				restaurantsNames.add(entry.getValue());
 			}
-			//String[] restaurantsListForComboBox = (String[]) restaurantsNames.toArray();
+			chooseResComboBox.getItems().addAll(restaurantsNames);
 		}
 			
 	}
