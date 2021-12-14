@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import communication.Message;
-import guiserver.ServerGuiController;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import query.Query;
@@ -34,7 +33,7 @@ public class BiteMeServerCommunication extends AbstractServer {
 	/**
 	 * ServerGuiController instance to have access to the controller.
 	 */
-	private ServerGuiController serverGuiController;
+//	private ServerGuiController serverGuiController;
 
 	/*
 	 * Constructs an instance of the echo server.
@@ -70,7 +69,7 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * starts listening for connections.
 	 */
 	protected void serverStarted() {
-		AnalyzeMessageFromClient.displayToMessageConsole("Server listening for connections on port " + getPort());
+		System.out.println("Server listening for connections on port " + getPort()+"\n");
 		this.connection = BiteMeServerUI.connectionToDB.getConnection();
 		Query.setConnectionFromServerToDB(connection); //set connection for query Class
 	}
@@ -80,7 +79,7 @@ public class BiteMeServerCommunication extends AbstractServer {
 	 * listening for connections.
 	 */
 	protected void serverStopped() {
-		AnalyzeMessageFromClient.displayToMessageConsole("Server has stopped listening for connections.");
+		System.out.println("Server has stopped listening for connections.\n");
 	}
 	
 	/**

@@ -11,7 +11,7 @@ package serveranalyze;
  * @version 06/12/2021
  */
 public interface AnalyzeServerListener {
-	default void displayToGuiServerConsole(String messageToGuiServerCosole) {
+	default void callInitializeMethod() {
 		return;
 	}
 }

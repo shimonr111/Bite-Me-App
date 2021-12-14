@@ -5,9 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import bitemeserver.BiteMeServerUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+import guiserver.ClientDoc;
 import ocsf.server.ConnectionToClient;
 import query.EditUsersQueries;
 import query.LoginQueries;
@@ -55,11 +57,15 @@ public class AnalyzeMessageFromClient {
 			 */
 			switch (recivedTaskFromClient) {
 			case CONFIRM_IP:
-				//changed controller call into listener notification
-				for (AnalyzeServerListener listener : serverListeners) {
-					listener.displayToGuiServerConsole("status: connected " + client.getInetAddress().getHostName() + "  "
-							+ client.getInetAddress().getHostAddress());
+				ClientDoc newClient = new ClientDoc(client.getInetAddress().getHostAddress(),client.getInetAddress().getHostName(),"Connected");
+				boolean checkIfExist=false;
+				for(ClientDoc c : BiteMeServerUI.clients) {
+					if(c.getIpAddress().equals(newClient.getIpAddress())) {
+						checkIfExist=true;
+					}
 				}
+				if(!checkIfExist)
+					BiteMeServerUI.clients.add(newClient);
 				recivedMessageFromClient.setAnswer(Answer.SUCCEED);
 				break;
 				
@@ -108,16 +114,5 @@ public class AnalyzeMessageFromClient {
 		serverListeners.add(listener);
 	}
 	
-	/**
-	 * This is a method for publishing messages to the 
-	 * gui server console.
-	 * 
-	 * @param message
-	 */
-	public static void displayToMessageConsole(String message) {
-		for(AnalyzeServerListener listener : serverListeners) {
-			listener.displayToGuiServerConsole(message);
-		}
-	}
 
 }
