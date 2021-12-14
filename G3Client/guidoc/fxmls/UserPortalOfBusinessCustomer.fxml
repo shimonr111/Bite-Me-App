@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBusinessCustomerController">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBusinessCustomerController">
    <children>
       <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
@@ -47,5 +47,15 @@
          </font>
       </Text>
       <Label layoutX="431.0" layoutY="7.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
+      <Label layoutX="431.0" layoutY="44.0" prefHeight="24.0" prefWidth="67.0" text="STATUS: " textFill="#eb0e0e">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Text fx:id="statusText" fill="#eb0e0e" layoutX="494.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="123.13671875">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

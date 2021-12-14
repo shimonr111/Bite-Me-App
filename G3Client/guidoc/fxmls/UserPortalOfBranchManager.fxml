@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBranchManagerController">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBranchManagerController">
    <children>
       <Button id="button-menu" fx:id="btnViewSysReports" layoutX="47.0" layoutY="98.0" mnemonicParsing="false" onAction="#getViewReports" prefHeight="31.0" prefWidth="255.0" text="View system reports" />
       <Button id="button-menu" fx:id="btnCompanyRegManagement" layoutX="47.0" layoutY="138.0" mnemonicParsing="false" onAction="#getCompRegManagement" prefHeight="25.0" prefWidth="255.0" text="Company registration management" />
@@ -40,5 +40,15 @@
          </font>
       </Text>
       <Label layoutX="428.0" layoutY="9.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
+      <Label layoutX="441.0" layoutY="49.0" prefHeight="31.0" prefWidth="64.0" text="STATUS:" textFill="#eb0e0e">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Text fx:id="statusText" fill="#eb0e0e" layoutX="505.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="113.13671875">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

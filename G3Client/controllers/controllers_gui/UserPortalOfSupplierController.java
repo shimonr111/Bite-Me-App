@@ -22,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.ConfirmationStatus;
 import users.Supplier;
 
 /**
@@ -51,6 +52,8 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
     @FXML
     private Text resturantName;
 
+    @FXML
+    private Text statusText;
 	
 	public static FXMLLoader loader;
 	private static UserPortalOfSupplierController userPortalOfSupplierController;
@@ -169,6 +172,11 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		resturantName.setText(((Supplier)connectedUser).getSupplierBusinessName());
+		statusText.setText(connectedUser.getStatusInSystem().toString());
+		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+			btnManageMenu.setDisable(true);
+			btnManageOrders.setDisable(true);
+		}
 		
 	}
 }
