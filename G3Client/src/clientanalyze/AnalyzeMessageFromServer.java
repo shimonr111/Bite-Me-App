@@ -216,6 +216,8 @@ public class AnalyzeMessageFromServer {
 				case RESTAURANTS_EXIST_FOR_THIS_BRANCH:
 					OrderChooseResturantInOrderScreenController.suppliersList=(HashMap<String,String>)recivedMessageFromServer.getObject();
 					break;
+				default:
+					break;	
 				}
 				break;
 			default:
