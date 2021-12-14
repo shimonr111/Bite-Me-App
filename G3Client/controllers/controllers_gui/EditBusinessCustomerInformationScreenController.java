@@ -2,6 +2,7 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -107,6 +109,8 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     		errorText.setText("There were no changes");
     	}
     	else {
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to save the changes.");
+    		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(businessCustomer.getUserId());
     		objectToMessage.add(newStatus);
@@ -130,6 +134,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     			break;		
     		}
     		errorText.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		}
     	}
     }
 

@@ -3,6 +3,7 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -18,12 +19,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
@@ -156,6 +161,8 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     void getRemoveBtn(ActionEvent event) {
     	User selectedUser = customerListTable.getSelectionModel().getSelectedItem();  	
     	if(selectedUser != null) {
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to remove this customer");
+    		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(selectedUser.getUserId());
     		if(selectedUser instanceof HrManager) {
@@ -171,6 +178,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     		sendToClient(message);
     		errorText.setText("Customer ID: "+selectedUser.getUserId()+" were removed.");
     		initialize(null, null);	
+    		}
     	}
     	else {
     		errorText.setText("Please, select one customer to remove.");
