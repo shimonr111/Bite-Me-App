@@ -33,7 +33,7 @@ import javafx.event.EventHandler;
  * controlling the UI of ceo
  * form.
  * 
- * @version 09/12/2021
+ * @version 14/12/2021
  */
 public class UserPortalOfCEOController extends AbstractBiteMeController implements Initializable{
 	@FXML
@@ -164,7 +164,9 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 			}
 		});
 	}
-	
+	/**
+	 * Initializes the screen again for return from different screen
+	 */
 	public void initCEOUserPortalAgain() {
 		Platform.runLater(new Runnable() {
 			@Override

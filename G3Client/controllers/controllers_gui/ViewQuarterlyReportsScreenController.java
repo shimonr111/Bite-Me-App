@@ -26,7 +26,7 @@ import javafx.stage.WindowEvent;
 * @author Alexander, Martinov
 * Class description: 
 * This is a class for 
-* controlling the UI of viewing system reports 
+* controlling the UI of viewing quarterly reports 
 * form.
 * 
 * @version 14/12/2021
@@ -54,6 +54,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	private static FXMLLoader loader;
 	private static ViewQuarterlyReportsScreenController viewQuarterlyReportsScreenController;
 
+	/**
+     * loads the previous screen after clicking on back button.
+     */
 	@FXML
 	void getBackBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -68,7 +71,10 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		connectedUser = null;
 		System.exit(0);
 	}
-
+	/**
+	 * This is pop message for the help button.
+	 * @param event
+	 */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("Select a report from the list and click view");
