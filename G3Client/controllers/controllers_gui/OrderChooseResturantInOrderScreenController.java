@@ -109,9 +109,37 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 		});
     }
 
+    /**
+     * This function is used for
+     * switching to the next screen and 
+     * presenting the relevant restaurant for the user,
+     * we need to pass the Supplier ID and his restaurant name
+     * for showing the right menu to the user
+     * 
+     * @param event
+     */
     @FXML
     void getBtnNext(ActionEvent event) {
-
+    	String pickedRestaurntName =  chooseResComboBox.getValue(); //Receive the restaurants name from the user
+    	String pickedRestaurantId = null;
+    	if(chooseResComboBox.getValue() == null) {
+    		errorText.setText("Please choose restaurant!");
+    		errorText.setFill(Color.RED);
+    	}
+    	else {
+    	for(Entry<String, String> entry: suppliersList.entrySet()) {
+    	      // if give value is equal to value from entry
+    	      // get the corresponding key
+    	      if(entry.getValue().equals(pickedRestaurntName)) {
+    	    	  pickedRestaurantId = entry.getKey();
+    	        break;
+    	      }
+    	}
+    	//now we need to change this screen to the next one
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderChooseItemsScreenController orderChooseItemsScreenController = new OrderChooseItemsScreenController();
+		orderChooseItemsScreenController.initChooseItemsScreen(pickedRestaurantId,pickedRestaurntName); // call the init of the next screen
+    	}
     }
 
     /**
@@ -190,6 +218,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 		if(suppliersList == null) {
 			errorText.setText("Switch Branch, this one has no restaurants!, go back");
     		errorText.setFill(Color.RED);
+    		nextBtn.setDisable(true);
 		}
 		else {
 			//add the relevant suppliers to the combo box
@@ -198,6 +227,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 				restaurantsNames.add(entry.getValue());
 			}
 			chooseResComboBox.getItems().addAll(restaurantsNames);
+			nextBtn.setDisable(false);
 		}
 			
 	}
