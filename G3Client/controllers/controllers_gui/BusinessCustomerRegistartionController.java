@@ -151,6 +151,18 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     	PopUpMessages.helpMessage("Please fill in all the fields to complete the registration!");
     }
     
+    @FXML
+    void getPositionComboBox(ActionEvent event) {
+    	if(positionCombo.getValue().equals("Human Resources")) {
+    		companyNameCombo.setValue("None");
+    		companyNameCombo.setDisable(true);
+    	}
+    	else {
+    		companyNameCombo.setValue("Select company:");
+    		companyNameCombo.setDisable(false);
+    	}
+    }
+    
     /**
      * this method will run after clicking on save button, it checks if all the fields were correctly filled.
      * and then create a relevant message to the server.
@@ -165,23 +177,28 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     		BudgetType budgetType = getBudgetType();
     		CreditCard creditCard = new CreditCard(creditNumTxtField.getText(),expirationTxtField.getText(),cvvTxtField.getText());
     		Login login = new Login (userNameField.getText(),passwordField.getText());
+    		list.add(login);
+    		list.add(creditCard);
     		if(positionType.equals(PositionType.REGULAR)) {
     			BusinessCustomer businessCustomer = new BusinessCustomer(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
     				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
     				creditNumTxtField.getText(),companyNameCombo.getValue(),budgetType,positionType,Integer.parseInt(monthlyMaxBudgedTxtField.getText()));
     			list.add(businessCustomer);
+    			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
+        		sendToClient(message);
+        		//displayMessage.setText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
     		}
     		else {
-    			HrManager hrManager = new HrManager(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
+    			HrManager hrManager = new HrManager(idNumTxtField.getText(),ConfirmationStatus.CONFIRMED,firstNameTxtField.getText(),
         				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-        				creditNumTxtField.getText(),companyNameCombo.getValue(),budgetType,positionType,Integer.parseInt(monthlyMaxBudgedTxtField.getText()));
+        				creditNumTxtField.getText(),"Waiting_Registration",budgetType,positionType,Integer.parseInt(monthlyMaxBudgedTxtField.getText()));
     			list.add(hrManager);
+    			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
+        		sendToClient(message);
+        		//displayMessage.setText("Registration Succeed,this user can now log in and register his company.");
     		}
-    		list.add(login);
-    		list.add(creditCard);
-    		Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
-    		sendToClient(message);
-    		displayMessage.setText("Registration Succeed!");
+    		
+    		
     	}
     }
     
@@ -419,7 +436,11 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 				setRelevantTextToDisplayMessageText("This User Name already exist on system");
 			}
 			public void clientBusinessCustomerRegistrationSucceed() {
-				setRelevantTextToDisplayMessageText("Registration Succeed!");
+				if(positionCombo.getValue().equals("Regular worker"))
+				  setRelevantTextToDisplayMessageText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
+				else
+					setRelevantTextToDisplayMessageText("Registration Succeed,this user can now log in and register his company.");
+					
 			}
 		});
 	}

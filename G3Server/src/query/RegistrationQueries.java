@@ -69,15 +69,15 @@ public class RegistrationQueries {
 		  @SuppressWarnings("unchecked")
 		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
 		String businessCustomerType=null;
-		if(list.get(0) instanceof HrManager) {
+		if(list.get(2) instanceof HrManager) {
 			businessCustomerType = "hrmanager";
 		}
 		else {
 			businessCustomerType = "businesscustomer";
 		}
-		Login login = (Login) list.get(1);
-		CreditCard creditCard = (CreditCard) list.get(2);
-		if(checkIfUserIdExist((User)list.get(0))) {
+		Login login = (Login) list.get(0);
+		CreditCard creditCard = (CreditCard) list.get(1);
+		if(checkIfUserIdExist((User)list.get(2))) {
 			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_ID_ALREADY_EXIST_BUSINESS,null);
 			return messageBackToClient;
 		}
@@ -87,12 +87,13 @@ public class RegistrationQueries {
 		}
 		if(!checkIfCreditCardNumberExist(creditCard))
 			Query.insertOneRowIntoCreditCardTable(creditCard);
-		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(0)).getUserId(), businessCustomerType);
+		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(2)).getUserId(), businessCustomerType);
 		if(businessCustomerType.equals("hrmanager")) {
-			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(0), "hrmanager");
+			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "hrmanager");
 		}
 		else {
-			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(0), "businesscustomer");
+			 System.out.println("here");
+			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "businesscustomer");
 		}
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;

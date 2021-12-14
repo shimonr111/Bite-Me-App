@@ -199,7 +199,7 @@ public class Query {
 		int employerID=0;
 		ResultSet rs = null;
 		PreparedStatement pstmt1=null;
-	
+		if(type.equals("businesscustomer")) {
 		try {
 			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
 			pstmt1 = con.prepareStatement(query1);
@@ -210,6 +210,7 @@ public class Query {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		}
 		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
 				+ "privateCreditCard, companyName, budgetType, customerPosition, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
 				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
