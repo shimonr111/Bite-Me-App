@@ -2,7 +2,14 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+
+import javax.swing.DefaultComboBoxModel;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -19,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -40,9 +48,13 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 	
 	private static FXMLLoader loader;
     private static OrderChooseResturantInOrderScreenController orderChooseResturantInOrderScreenController;
+    /*This array List will help us to get the data we want 
+     * about the restaurants in the specific
+     *  Branch that the user picked*/
+    public static Map<String,String> suppliersList = new HashMap<>(); 
 
     @FXML
-    private ComboBox<?> chooseResComboBox;
+    private ComboBox<String> chooseResComboBox;
 
     @FXML
     private Button nextBtn;
@@ -164,10 +176,30 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 		});
 	}
 	
+    /**
+     * This is a function for 
+     * initializing the screen.
+     * 
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
+		//prepare message for the server to get the relevant restaurants
+		Message message = new Message (Task.GET_RESTAURANTS_FOR_ORDER,Answer.WAIT_RESPONSE,connectedUser);
+		sendToClient(message);
+		//There are no restaurants for this Branch, set message to user
+		if(suppliersList == null) {
+			errorText.setText("Switch Branch, this one has no restaurants!, go back");
+    		errorText.setFill(Color.RED);
+		}
+		else {
+			//add the relevant suppliers to the combo box
+			List<String> restaurantsNames = new ArrayList<>();
+			for(Entry<String, String> entry: suppliersList.entrySet()) {
+				restaurantsNames.add(entry.getValue());
+			}
+			chooseResComboBox.getItems().addAll(restaurantsNames);
+		}
+			
 	}
 
 }
