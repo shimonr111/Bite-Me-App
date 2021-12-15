@@ -243,10 +243,10 @@ public class AnalyzeMessageFromServer {
 			case GET_ITEMS_FOR_ORDER_MENU:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_HAS_NO_MENU:
-					OrderChooseItemsScreenController.itemList = null;
+					OrderChooseItemsScreenController.itemListOfMenuFromDB = null;
 					break;
 				case SUPPLIER_MENU_FOUND:
-					OrderChooseItemsScreenController.itemList = (ArrayList<Item>)recivedMessageFromServer.getObject();
+					OrderChooseItemsScreenController.itemListOfMenuFromDB = (ArrayList<Item>)recivedMessageFromServer.getObject();
 					break;
 				default:
 					break;
