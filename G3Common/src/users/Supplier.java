@@ -59,7 +59,7 @@ public class Supplier implements Serializable{
 	}
 	
 	/**
-	 * This section is for the Setters and Getters of the Class SupplierWorker
+	 * This section is for the Setters and Getters of the Class Supplier
 	 */
 	public String getSupplierId() {
 		return supplierId;
@@ -111,7 +111,7 @@ public class Supplier implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Supplier: " + supplierName;
+		return "Supplier: " + supplierName + "belongs to:" + homeBranch;
 	}
 	
 

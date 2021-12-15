@@ -32,7 +32,7 @@ import users.ConfirmationStatus;
  * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
- * controlling the UI of hrManager
+ * controlling the UI of Branch Manager
  * form.
  * 
  * @version 15/12/2021
@@ -74,8 +74,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	@FXML
 	public void getViewReports(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		ViewSystemReportsScreenController VSRC = new ViewSystemReportsScreenController();
-		VSRC.initViewSystemReportsScreen();
+		ViewSystemReportsScreenController viewSystemReportsScreenController = new ViewSystemReportsScreenController();
+		viewSystemReportsScreenController.initViewSystemReportsScreen();
 	}
 	// Event Listener on Button[#btnCompanyRegManagement].onAction
 	@FXML
@@ -86,22 +86,22 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	@FXML
 	public void getEditCustomerInfo(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		EditCustomerInformationScreenController ECISC = new EditCustomerInformationScreenController();
-		ECISC.initEditCustomerInformationScreen(); // call the init of the next screen
+		EditCustomerInformationScreenController editCustomerInformationScreenController = new EditCustomerInformationScreenController();
+		editCustomerInformationScreenController.initEditCustomerInformationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnSupplierReg].onAction
 	@FXML
 	public void getSupplierReg(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		SupplierWorkerRegistrationScreenController SRCC = new SupplierWorkerRegistrationScreenController();
-		SRCC.initSupplierRegistrationScreen(); // call the init of the next screen
+		SupplierWorkerRegistrationScreenController supplierWorkerRegistrationScreenController = new SupplierWorkerRegistrationScreenController();
+		supplierWorkerRegistrationScreenController.initSupplierRegistrationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnCustomerReg].onAction
 	@FXML
 	public void getCustomerReg(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		CustomerRegistartionScreenController CRSC = new CustomerRegistartionScreenController();
-		CRSC.initCustomerRegistrationScreen(); // call the init of the next screen
+		CustomerRegistartionScreenController customerRegistartionScreenController = new CustomerRegistartionScreenController();
+		customerRegistartionScreenController.initCustomerRegistrationScreen(); // call the init of the next screen
 		
 		
 	}

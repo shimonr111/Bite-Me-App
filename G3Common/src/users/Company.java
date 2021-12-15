@@ -61,7 +61,7 @@ public class Company implements Serializable{
 	}
 	
 	/**
-	 * This section is for the Setters and Getters of the Class SupplierWorker
+	 * This section is for the Setters and Getters of the Class Company
 	 */
 	public String getCompanyName() {
 		return companyName;
