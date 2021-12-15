@@ -9,12 +9,14 @@ import communication.Answer;
 import communication.Message;
 import communication.Task;
 import controllers_gui.AbstractBiteMeController;
+import controllers_gui.BusinessCustomerConfirmationScreenController;
 import controllers_gui.BusinessCustomerRegistartionController;
 import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import orders.Item;
+import users.BusinessCustomer;
 import users.Supplier;
 import users.User;
 
@@ -206,6 +208,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case DISPLAY_CUSTOMERS_INTO_TABLE:
 				EditCustomerInformationScreenController.customersList=(ArrayList<User>)recivedMessageFromServer.getObject();
+				break;
+			case DISPLAY_BUSINESS_CUSTOMERS_INTO_TABLE:
+				BusinessCustomerConfirmationScreenController.businessCustomersWaitingForConfirmation=(ArrayList<BusinessCustomer>)recivedMessageFromServer.getObject();
 				break;
 			case GET_RESTAURANTS_FOR_ORDER:
 				switch(recievedAnswerFromServer) {
