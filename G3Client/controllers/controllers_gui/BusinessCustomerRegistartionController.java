@@ -139,6 +139,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
       	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
       	sendToClient(message);
     	connectedUser = null;
+		Message disconnectMessage= new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
+		sendToClient(disconnectMessage);
    		System.exit(0);
     }
 

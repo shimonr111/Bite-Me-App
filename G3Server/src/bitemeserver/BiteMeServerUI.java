@@ -242,6 +242,9 @@ public class BiteMeServerUI extends Application implements Initializable {
 	 */
 	public  void DisconnectServer() {
 		console.add("The server is Disconnected\n\n");
+		for(int i=0;i<BiteMeServerUI.clients.size();i++) {
+			clients.remove(i);
+		}
 		serverCommunication.stopListening();
 
 	}

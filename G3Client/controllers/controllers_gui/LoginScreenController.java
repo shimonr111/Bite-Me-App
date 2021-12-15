@@ -133,6 +133,8 @@ public class LoginScreenController extends AbstractBiteMeController{
 	// Event Listener on Button[#btnExit].onAction
 	@FXML
 	public void getExitBtn(ActionEvent event) {
+		Message message= new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
+		sendToClient(message);
 		System.exit(0);
 	}
 	

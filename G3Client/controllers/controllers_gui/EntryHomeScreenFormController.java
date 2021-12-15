@@ -2,9 +2,14 @@ package controllers_gui;
 
 import java.io.IOException;
 
+import com.sun.nio.sctp.SendFailedNotification;
+
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +32,7 @@ import javafx.stage.WindowEvent;
  *
  * @version 02/12/2021
  */
-public class EntryHomeScreenFormController{
+public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
@@ -95,6 +100,8 @@ public class EntryHomeScreenFormController{
 	 * from the App 
 	 */
 	public void getExitBtn(ActionEvent event) throws Exception {
+		Message message= new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
+		sendToClient(message);
 		System.exit(0);
 	}
 	
