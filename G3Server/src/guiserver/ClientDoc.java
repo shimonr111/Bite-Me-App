@@ -1,5 +1,7 @@
 package guiserver;
 
+import users.User;
+
 /**
  * @author  Lior, Guzovsky.
  * Class description: 
@@ -42,4 +44,13 @@ public class ClientDoc {
 		this.hostName=hostName;
 		this.status=status;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof ClientDoc) {
+			return (ipAddress.equals(((ClientDoc) obj).getIpAddress())) && (hostName.equals(((ClientDoc) obj).getHostName()));
+		}
+		return false;
+	}
+
 }
