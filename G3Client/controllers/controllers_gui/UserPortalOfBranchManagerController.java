@@ -35,7 +35,7 @@ import users.ConfirmationStatus;
  * controlling the UI of hrManager
  * form.
  * 
- * @version 10/12/2021
+ * @version 15/12/2021
  */
 public class UserPortalOfBranchManagerController extends AbstractBiteMeController implements Initializable{
 	
@@ -93,7 +93,7 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	@FXML
 	public void getSupplierReg(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		SupplierRegistrationScreenController SRCC = new SupplierRegistrationScreenController();
+		SupplierWorkerRegistrationScreenController SRCC = new SupplierWorkerRegistrationScreenController();
 		SRCC.initSupplierRegistrationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnCustomerReg].onAction

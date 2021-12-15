@@ -34,12 +34,13 @@ import javafx.stage.WindowEvent;
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * controlling the UI of the restaurant 
  * choosing for the private customer.
  * 
- * @version 13/12/2021
+ * @version 15/12/2021
  */
 public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeController implements Initializable{
 	/**
@@ -113,7 +114,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * This function is used for
      * switching to the next screen and 
      * presenting the relevant restaurant for the user,
-     * we need to pass the Supplier ID and his restaurant name
+     * we need to pass the SupplierWorker ID and his restaurant name
      * for showing the right menu to the user
      * 
      * @param event

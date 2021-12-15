@@ -23,7 +23,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.ConfirmationStatus;
-import users.Supplier;
+import users.SupplierWorker;
+import users.WorkerPosition;
 
 /**
  * 
@@ -34,7 +35,7 @@ import users.Supplier;
  * controlling the UI of supplier
  * form.
  * 
- * @version 09/12/2021
+ * @version 15/12/2021
  */
 public class UserPortalOfSupplierController extends AbstractBiteMeController  implements Initializable {
 	@FXML
@@ -171,12 +172,15 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		resturantName.setText(((Supplier)connectedUser).getSupplierBusinessName());
+		resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName());
 		statusText.setText(connectedUser.getStatusInSystem().toString());
 		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 			btnManageMenu.setDisable(true);
 			btnManageOrders.setDisable(true);
+			
 		}
-		
+		if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
+			btnManageMenu.setDisable(true);
 	}
+}
 }

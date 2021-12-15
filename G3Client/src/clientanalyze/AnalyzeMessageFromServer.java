@@ -13,7 +13,9 @@ import controllers_gui.BusinessCustomerRegistartionController;
 import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
+import controllers_gui.SupplierWorkerRegistrationScreenController;
 import orders.Item;
+import users.Supplier;
 import users.User;
 
 /**
@@ -24,7 +26,7 @@ import users.User;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 12/12/2021
+ * @version 15/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -175,11 +177,6 @@ public class AnalyzeMessageFromServer {
 						listener.clientSupplierUserNameExist();
 					}
 					break;
-				case SUPPLIER_NAME_EXIST:
-					for (AnalyzeClientListener listener : clientListeners) {
-						listener.clientSupplierNameExist();
-					}
-					break;
 				default:
 					break;
 				}
@@ -221,6 +218,26 @@ public class AnalyzeMessageFromServer {
 				default:
 					break;	
 				}
+				break;
+			case GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION:
+				switch(recievedAnswerFromServer) {
+				case RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH:
+					SupplierWorkerRegistrationScreenController.suppliersList = null;
+					break;
+				case RESTAURANTS_EXIST_FOR_THIS_BRANCH:
+					SupplierWorkerRegistrationScreenController.suppliersList=(HashMap<String,String>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;	
+				}
+			case GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION:
+				switch(recievedAnswerFromServer) {
+				case SUPPLIER_FOUND_IN_DB:
+					SupplierWorkerRegistrationScreenController.supplier=(Supplier)recivedMessageFromServer.getObject();
+				default:
+				break;
+				}
+				
 				break;
 			case GET_ITEMS_FOR_ORDER_MENU:
 				switch(recievedAnswerFromServer) {

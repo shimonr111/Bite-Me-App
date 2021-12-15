@@ -11,7 +11,7 @@ import java.io.Serializable;
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
- * @version 12/12/2021
+ * @version 15/12/2021
  */
 public class Company implements Serializable{
 	
@@ -61,7 +61,7 @@ public class Company implements Serializable{
 	}
 	
 	/**
-	 * This section is for the Setters and Getters of the Class Supplier
+	 * This section is for the Setters and Getters of the Class SupplierWorker
 	 */
 	public String getCompanyName() {
 		return companyName;

@@ -20,6 +20,7 @@ import users.Customer;
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * order queries which is 
@@ -27,7 +28,7 @@ import users.Customer;
  * related to the DB in the order 
  * process.
  * 
- * @version 13/12/2021
+ * @version 15/12/2021
  */
 public class OrderQueries {
 	
@@ -48,7 +49,7 @@ public class OrderQueries {
 		ConfirmationStatus status = ConfirmationStatus.CONFIRMED;
 		Map<String,String> supplierList = new HashMap<>();
 		
-		ResultSet rs = Query.getRowsFromTableInDB("supplier","homeBranch='"+branchNameForRelevantRestaurants.toString()+"' AND statusInSystem='"+status.toString()+"'");
+		ResultSet rs = Query.getRowsFromTableInDB("supplier","homeBranch='"+branchNameForRelevantRestaurants.toString()+"'");
 		try {
 			//If the row doesn't exist in login Table
 			if(!rs.isBeforeFirst()) {
@@ -57,7 +58,7 @@ public class OrderQueries {
 				return returnMessageToClient;
 			}
 			while(rs.next()) {
-				supplierList.put(rs.getString(1),rs.getString(9));//add to the hashMap all the data we need
+				supplierList.put(rs.getString(1),rs.getString(2));//add to the hashMap all the data we need
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -78,7 +79,7 @@ public class OrderQueries {
 		
 		
 		//create query for getting all the items of the specific supplier for the users menu		
-		ResultSet rs = Query.getRowsFromTableInDB("item_in_menu","supplierUserId='"+supplierId+"'");
+		ResultSet rs = Query.getRowsFromTableInDB("item_in_menu","supplierId='"+supplierId+"'");
 		try {
 			//If the row doesn't exist in login Table
 			if(!rs.isBeforeFirst()) {

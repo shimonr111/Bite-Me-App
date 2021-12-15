@@ -15,14 +15,15 @@ import users.CreditCard;
 import users.Customer;
 import users.HrManager;
 import users.Login;
-import users.Supplier;
+import users.SupplierWorker;
 import users.User;
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description:
  * This class will analyze the login feature from the side of the server
- * @version 10/12/2021
+ * @version 15/12/2021
  */
 public class Query {
 
@@ -230,11 +231,11 @@ public class Query {
 	 * 
 	 * @param customer
 	 */
-	public static void insertOneRowIntoSupplierTable(Supplier supplier) {
-		String query = "INSERT INTO semesterialproject.supplier ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
-				+ "supplierBusinessName, revenueFee ) VALUES( '" + supplier.getUserId() + "', '" + supplier.getStatusInSystem() + "', '" + supplier.getUserFirstName() + "', '" 
-				+ supplier.getUserLastName() + "', '" +  supplier.getHomeBranch() + "', '" +  0 + "', '" +  supplier.getUserEmail() + "', '" +  supplier.getPhoneNumber()
-				+ "', '" +  supplier.getSupplierBusinessName() + "', '" + supplier.getRevenueFee() +"' )";
+	public static void insertOneRowIntoSupplierTable(SupplierWorker supplierWorker) {
+		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
+				+ "supplierId, workerPosition ) VALUES( '" + supplierWorker.getUserId() + "', '" + supplierWorker.getStatusInSystem() + "', '" + supplierWorker.getUserFirstName() + "', '" 
+				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0 + "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
+				+ "', '" +  supplierWorker.getSupplier().getSupplierId() + "', '" + supplierWorker.getWorkerPosition() +"' )";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt = con.prepareStatement(query);

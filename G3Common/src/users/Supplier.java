@@ -1,7 +1,5 @@
 package users;
-
 import java.io.Serializable;
-
 /**
  * 
  * @author Lior, Guzovsky.
@@ -9,58 +7,98 @@ import java.io.Serializable;
  * Class description: This class is a class which
  * defines the main attributes and functionalities of a supplier in our
  * system.
- * @version 09/12/2021
+ * @version 15/12/2021
  */
-public class Supplier extends User implements Serializable{
-
+public class Supplier implements Serializable{
+	
 	/**
 	 * Class members description:
 	 */
-
 	/**
-	 * Each supplier has a supplier business name such as Dominos ,Mcdonalds.
+	 * This is the Id of the supplier
 	 */
-	private String supplierBusinessName;
-
+	private String supplierId;	
 	/**
-	 * This is the revenue that the supplier gives to the Bite Me company per month
-	 * from their monthly outcomes, 
-	 * Please note that this is a number in rage [0,1]
+	 * This is the name of the supplier
 	 */
-	private double revenueFee;
-
+	private String supplierName;
 	/**
-	 * This is the constructor of the class Supplier
-	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
+	 * This is the email address of the supplier.
+	 */
+	private String email;
+	/**
+	 * Each supplier works from a specific branch
+	 */
+	protected Branch homeBranch;
+	/**
+	 * This is the phone number of the supplier.
+	 */
+	private String phoneNumber;
+	/**
+	 * This is the revenue fee of the supplier.
+	 */
+	private double revenueFee; 
+	
+	/**
+	 * This is the constructor of the class.
+	 * @param supplierId
+	 * @param supplierName
 	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param userEmail
+	 * @param email
 	 * @param phoneNumber
-	 * @param supplierBusinessName
 	 * @param revenueFee
 	 */
-	public Supplier(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
-			String supplierBusinessName, double revenueFee) {
-		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
-				userEmail, phoneNumber);
-		this.supplierBusinessName = supplierBusinessName;
-		this.revenueFee = revenueFee;
+	public Supplier(String supplierId, String supplierName,Branch homeBranch, String email, String phoneNumber, double revenueFee) {
+		super();
+		this.supplierId = supplierId;		
+		this.supplierName = supplierName;
+		this.homeBranch = homeBranch;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.revenueFee=revenueFee;
 	}
-
+	
 	/**
-	 * This section is for the Setters and Getters of the Class Supplier
+	 * This section is for the Setters and Getters of the Class SupplierWorker
 	 */
-	public String getSupplierBusinessName() {
-		return supplierBusinessName;
+	public String getSupplierId() {
+		return supplierId;
 	}
 
-	public void setSupplierBusinessName(String supplierBusinessName) {
-		this.supplierBusinessName = supplierBusinessName;
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+	
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+	
+	public Branch getHomeBranch() {
+		return homeBranch;
+	}
+
+	public void setHomeBranch(Branch homeBranch) {
+		this.homeBranch = homeBranch;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public double getRevenueFee() {
@@ -70,13 +108,11 @@ public class Supplier extends User implements Serializable{
 	public void setRevenueFee(double revenueFee) {
 		this.revenueFee = revenueFee;
 	}
-
-	/**
-	 * This is the toString for this class
-	 */
+	
 	@Override
 	public String toString() {
-		return "Supplier: " + " " + supplierBusinessName + " belogns to:" + homeBranch;
+		return "Supplier: " + supplierName;
 	}
+	
 
 }
