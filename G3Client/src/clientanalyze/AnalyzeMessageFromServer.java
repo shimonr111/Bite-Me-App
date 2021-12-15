@@ -234,6 +234,7 @@ public class AnalyzeMessageFromServer {
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_FOUND_IN_DB:
 					SupplierWorkerRegistrationScreenController.supplier=(Supplier)recivedMessageFromServer.getObject();
+					break;
 				default:
 				break;
 				}

@@ -95,6 +95,7 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_RESTAURANTS_FOR_ORDER:
 				 recivedMessageFromClient = OrderQueries.createRestaurantsForCustomer((Message)message);
+				 break;
 			 case GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.createRestaurantsForSupplierRegistration((Message)message);
 				 break;
