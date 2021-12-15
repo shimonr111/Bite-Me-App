@@ -21,9 +21,11 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -54,9 +56,10 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     private static OrderChooseItemsScreenController orderChooseItemsScreenController;
 	private static String restaurantID;
 	private static String restaurantName;
-	public static ArrayList<Item> itemList = new ArrayList<>();
+	public static ArrayList<Item> itemListOfMenuFromDB = new ArrayList<>();
 	private static Order order = new Order(null,null,null); //create empty order and update it during the process
-	private ObservableList<Item> itemsForCart = FXCollections.observableArrayList();
+	private static ObservableList<Item> itemsForCart = FXCollections.observableArrayList();
+	
     @FXML
     private Button btnBack;
 
@@ -129,13 +132,23 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     void getAddToCartBtn(ActionEvent event) {
     	if(menuTable.getSelectionModel().getSelectedItem() != null) {
     		if(menuTable.getSelectionModel().getSelectedItem() instanceof Item) {
-    			Item itemAddToCart = (Item)menuTable.getSelectionModel().getSelectedItem();
+    			Item itemAddToCart = new Item((Item)menuTable.getSelectionModel().getSelectedItem());
     			order.itemList.add(itemAddToCart);//add item to cart
     			order.totalPrice += itemAddToCart.getPrice();
     			//print the new sum to the user
     			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
     			itemsForCart.add(itemAddToCart);
     			cartTable.setItems(itemsForCart);
+    			commentCartColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Item,String>>() {
+    				@Override
+    				public void handle(CellEditEvent<Item, String> event) {
+    					//get the whole object from the row
+    					Item item = event.getRowValue(); 
+    					//get the item from the arraylist
+    					item.setComment(event.getNewValue());
+    					System.out.println(order.itemList.toString());//lior - debug
+    				}
+    			});
     		}
     	}
     }
@@ -148,11 +161,13 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      */
     @FXML
     void getBackBtn(ActionEvent event) {
-    	/*clear all the data in order object*/
-    	order.itemList.clear();//empty the array list in order
     	totalPriceTxtField.setText(String.valueOf(0));//set text to 0
     	order.totalPrice = 0;//set total price in order to 0
-    	
+    	for(Item item : order.itemList) {
+    		cartTable.getItems().remove(item);
+    	}
+    	order.itemList.removeAll(order.itemList);//empty the array list in order
+    	System.out.println(order.itemList.toString());
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -184,7 +199,9 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 
     @FXML
     void getBtnNext(ActionEvent event) {
-    	
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    	OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController = new OrderChooseSupplyMethodScreenController();
+    	orderChooseSupplyMethodScreenController.initChooseSupplyMethodScreen(order); // call the init of the next screen
     }
 
     /**
@@ -227,7 +244,8 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     		if(cartTable.getSelectionModel().getSelectedItem() instanceof Item) {
     			Item itemRemoveFromCart = (Item)cartTable.getSelectionModel().getSelectedItem();
     			order.itemList.remove(itemRemoveFromCart);//remove item from cart
-    			order.totalPrice -= itemRemoveFromCart.getPrice();
+    			System.out.println(order.itemList.toString()); //-debug - lior
+    			order.totalPrice -= itemRemoveFromCart.getPrice(); //update the total bill of the order
     			//print the new total bil to the user
     			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
     			cartTable.getItems().remove(itemRemoveFromCart);
@@ -288,17 +306,19 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		totalPriceTxtField.setDisable(true); //set total price disable so that the user cant edit the price of the order
 		ObservableList<Item> items = FXCollections.observableArrayList();
 		Message message = new Message (Task.GET_ITEMS_FOR_ORDER_MENU,Answer.WAIT_RESPONSE,restaurantID);
 		sendToClient(message);
-		if(itemList == null) {
+		if(itemListOfMenuFromDB == null) {
 			errorText1.setText("There are no Items in this restaurant!");
     		errorText1.setFill(Color.RED);
 		}
 		else {
 			//add all the wrapper items to the table view
-			items.addAll(itemList);
+			items.addAll(itemListOfMenuFromDB);
 		}
+		cartTable.setEditable(true); //enables to add text fields to the comment column
 		
 		menuCategoryColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemCategory>("category"));
 		
@@ -313,8 +333,14 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		priceMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
 		priceCartColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
 		
-		commentCartColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("comment"));
+		commentCartColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		
 		menuTable.setItems(items);
+		
+		/*If the item list is not empty (we got to this screen from the next one, show the old view table*/
+		if(!order.itemList.isEmpty()) {
+			cartTable.setItems(itemsForCart);
+			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
 		}
+	}
 }

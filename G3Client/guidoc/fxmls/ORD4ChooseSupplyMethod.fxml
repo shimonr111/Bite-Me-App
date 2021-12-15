@@ -8,15 +8,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderChooseSupplyMethodScreenController">
    <children>
       <Label layoutX="11.0" layoutY="121.0" text="Order supply time:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Label>
-      <DatePicker fx:id="supplyDatePicker" layoutX="230.0" layoutY="126.0" onAction="#getSupplyDatePicker" prefHeight="31.0" prefWidth="124.0" promptText="28/11/2021" showWeekNumbers="true" />
-      <ComboBox fx:id="supplyTimeCombo" layoutX="358.0" layoutY="126.0" onAction="#getSupplyTimeCombo" prefHeight="31.0" prefWidth="94.0" promptText="15:00" />
-      <ComboBox fx:id="supplyMethodCombo" layoutX="229.0" layoutY="164.0" onAction="#getSupplyMethodCombo" prefHeight="31.0" prefWidth="223.0" promptText="Choose supply method" />
+      <DatePicker fx:id="supplyDatePicker" layoutX="230.0" layoutY="126.0" prefHeight="31.0" prefWidth="124.0" promptText="28/11/2021" showWeekNumbers="true" />
+      <ComboBox fx:id="supplyTimeCombo" layoutX="358.0" layoutY="126.0" prefHeight="31.0" prefWidth="94.0" promptText="15:00" />
+      <ComboBox fx:id="supplyMethodCombo" layoutX="229.0" layoutY="164.0" prefHeight="31.0" prefWidth="223.0" promptText="Choose supply method" />
       <Label layoutX="147.0" layoutY="40.0" prefHeight="53.0" prefWidth="368.0" text="Supply Configuration" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />

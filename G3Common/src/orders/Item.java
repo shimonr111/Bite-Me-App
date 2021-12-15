@@ -75,6 +75,20 @@ public class Item implements Serializable {
 		this.price = price;
 	}
 
+	/**
+	 * Copy constructor
+	 * 
+	 * @param item
+	 */
+	public Item(Item item) {
+		this.SupplierUserId = item.getSupplierUserId();
+		this.ItemName = item.getItemName();
+		this.category = item.getCategory();
+		this.size = item.getSize();
+		this.picturePath = item.getPicturePath();
+		this.price = item.getPrice();
+		this.comment = null;
+	}
 	
 	/**
 	 * Class Methods:
@@ -138,5 +152,13 @@ public class Item implements Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Item [SupplierUserId=" + SupplierUserId + ", ItemName=" + ItemName + ", category=" + category
+				+ ", size=" + size + ", picturePath=" + picturePath + ", price=" + price + ", comment=" + comment + "]";
+	}
+	
 	
 }
