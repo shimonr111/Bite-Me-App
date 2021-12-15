@@ -3,25 +3,32 @@ package query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+import users.Branch;
+import users.BranchManager;
 import users.BusinessCustomer;
+import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
 import users.HrManager;
 import users.Login;
 import users.Supplier;
+import users.SupplierWorker;
 import users.User;
 
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description:
  * This class will contain all the queries to DB and logi
  * that relate to Registration phase.
- * @version 11/12/2021
+ * @version 15/12/2021
  */
 public class RegistrationQueries {
 
@@ -92,7 +99,6 @@ public class RegistrationQueries {
 			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "hrmanager");
 		}
 		else {
-			 System.out.println("here");
 			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "businesscustomer");
 		}
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
@@ -111,9 +117,9 @@ public class RegistrationQueries {
 		Message messageBackToClient;
 		  @SuppressWarnings("unchecked")
 		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
-		Supplier supplier = (Supplier) list.get(0);
+		SupplierWorker supplierWorker = (SupplierWorker) list.get(0);
 		Login login = (Login) list.get(1);
-		if(checkIfUserIdExist(supplier)) {
+		if(checkIfUserIdExist(supplierWorker)) {
 			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_ID_ALREADY_EXIST_SUPPLIER,null);
 			return messageBackToClient;
 		}
@@ -121,17 +127,44 @@ public class RegistrationQueries {
 			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.USER_NAME_ALREADY_EXIST_SUPPLIER,null);
 			return messageBackToClient;
 		}
-		if(checkIfSupplierNameExsist(supplier)) {
-			messageBackToClient = new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.SUPPLIER_NAME_EXIST,null);
-			return messageBackToClient;
-		}
-		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplier.getUserId(), "supplier");
-		Query.insertOneRowIntoSupplierTable(supplier);
+		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplierWorker.getUserId(), "supplierworker");
+		Query.insertOneRowIntoSupplierTable(supplierWorker);
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.SUPPLIER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
 	}
-
+	/**
+	 * This method returns a list of suppliers (by branch) for the supplier registration process
+	 * @param messageFromClient
+	 */
+	public static Message createRestaurantsForSupplierRegistration(Message messageFromClient) throws SQLException{
+		Message returnMessageToClient = messageFromClient;
+		BranchManager manager = (BranchManager) messageFromClient.getObject();
+		Branch branchNameForRelevantRestaurants = manager.getHomeBranch();
+		ConfirmationStatus status = ConfirmationStatus.CONFIRMED;
+		Map<String,String> supplierList = new HashMap<>();
+		
+		ResultSet rs = Query.getRowsFromTableInDB("supplier","homeBranch='"+branchNameForRelevantRestaurants.toString()+"'");
+		try {
+			//If the row doesn't exist in login Table
+			if(!rs.isBeforeFirst()) {
+				returnMessageToClient.setAnswer(Answer.RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH);
+				returnMessageToClient.setObject(null);
+				return returnMessageToClient;
+			}
+			while(rs.next()) {
+				supplierList.put(rs.getString(1),rs.getString(2));//add to the hashMap all the data we need
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//set the message back to the customer
+		returnMessageToClient.setObject(supplierList);
+		returnMessageToClient.setAnswer(Answer.RESTAURANTS_EXIST_FOR_THIS_BRANCH);
+		return returnMessageToClient;
+	}
 	
 	/**BUS
 	 * This method checks if the customerID exist in the customer table.
@@ -201,14 +234,14 @@ public class RegistrationQueries {
 	
 	/**
 	 * this method checks if the supplier name already exist in db .
-	 * @param supplier
+	 * @param supplierWorker
 	 * @return
 	 */
-	private static boolean checkIfSupplierNameExsist(Supplier supplier) {
-		ResultSet rs = Query.getColumnFromTableInDB("supplier", "supplierBusinessName");
+	private static boolean checkIfSupplierNameExsist(SupplierWorker supplierWorker) {
+		ResultSet rs = Query.getColumnFromTableInDB("supplier", "supplierName");
 		try {
 			while(rs.next()) {
-				if(rs.getString(1).equals(supplier.getSupplierBusinessName())) {
+				if(rs.getString(1).equals(supplierWorker.getSupplier().getSupplierName())) {
 					return true;
 					
 				}
@@ -245,6 +278,35 @@ public class RegistrationQueries {
 		message.setAnswer(Answer.SUCCEED);
 		message.setObject(companies);
 		return message;
+	}
+	/**
+	 * This method returns a supplier object on request
+	 * used for new supplier worker registration (needs a supplier object for creation)
+	 * @param messageFromClient
+	 */
+	public static Message getSupplierFromDb(Message messageFromClient) {	
+		Message returnMessageToClient = messageFromClient;
+		String supplierId = (String) messageFromClient.getObject();
+		Supplier supplier = new Supplier(null, null, null, null, null, 0);
+		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
+		try {
+			while(rs.next()) {
+				supplier.setSupplierId(rs.getString(1));
+				supplier.setSupplierName(rs.getString(2));
+				supplier.setHomeBranch(Branch.valueOf(rs.getString(3)));
+				supplier.setEmail(rs.getString(4));
+				supplier.setPhoneNumber(rs.getString(5));
+				supplier.setRevenueFee(rs.getDouble(6));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//set the message back to the customer
+		returnMessageToClient.setObject(supplier);
+		returnMessageToClient.setAnswer(Answer.SUPPLIER_FOUND_IN_DB);
+		return returnMessageToClient;
 	}
 
 }

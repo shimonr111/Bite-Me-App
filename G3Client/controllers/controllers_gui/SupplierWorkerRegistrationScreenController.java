@@ -8,9 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -19,12 +20,19 @@ import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
 import users.Login;
+import users.PositionType;
 import users.Supplier;
+import users.SupplierWorker;
+import users.WorkerPosition;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Map.Entry;
 
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
@@ -37,33 +45,42 @@ import javafx.fxml.Initializable;
 /**
  * 
  * @author Mousa, Srour
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
- * controlling the UI of Supplier registration Screen that appears immediately after clicking
+ * controlling the UI of SupplierWorker registration Screen that appears immediately after clicking
  * on supplier registration from the branch portal.
  * form.
  * 
- * @version 12/12/2021
+ * @version 15/12/2021
  */
-public class SupplierRegistrationScreenController extends AbstractBiteMeController implements Initializable {
+public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeController implements Initializable {
 	/**
 	 * Class members description:
 	 */
 	private static FXMLLoader loader;
-    private static SupplierRegistrationScreenController supplierRegistrationScreenController;
+    private static SupplierWorkerRegistrationScreenController supplierWorkerRegistrationScreenController;
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
+    public static Map<String,String> suppliersList = new HashMap<>(); 
+    public static Supplier supplier = new Supplier(null, null, null, null, null, 0);
 	   @FXML
 	    private TextField resturantNameTxtField;
+	   
+	    @FXML
+	    private ComboBox<String> chooseResComboBox;
+	    
+	    @FXML
+	    private ComboBox<String> workerCombo;
 
 	    @FXML
-	    private TextField managerFirstName;
+	    private TextField FirstName;
 
 	    @FXML
-	    private TextField managerLastName;
+	    private TextField LastName;
 
 	    @FXML
-	    private TextField managerUserId;
+	    private TextField UserId;
 
 	    @FXML
 	    private TextField emailTxtField;
@@ -132,6 +149,17 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	    @FXML
 	    void getSaveBtn(ActionEvent event) {
 	    	if(checkAllFields()) {
+	    		String supplierName=chooseResComboBox.getValue();
+	        	for(Entry<String, String> entry: suppliersList.entrySet()) {
+	      	      // if give value is equal to value from entry
+	      	      // get the corresponding key
+	      	      if(entry.getValue().equals(supplierName)) {
+	      	    	  supplierName = entry.getKey();
+	      	        break;
+	      	      }
+	        	}
+	    		Message message = new Message (Task.GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION,Answer.WAIT_RESPONSE,supplierName);
+	    		sendToClient(message);
 	    		Branch homeBranch;
 	    		if(homeBranchtxtField.getText().equals("South Branch")) 
 	    			homeBranch = Branch.SOUTH;
@@ -140,19 +168,26 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	    			homeBranch = Branch.NORTH;
 	    		else
 	    			homeBranch = Branch.CENTER;
-	    		Supplier supplier = new Supplier(managerUserId.getText(),ConfirmationStatus.CONFIRMED,managerFirstName.getText(),managerLastName.getText(),
-	    				homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),resturantNameTxtField.getText(),Double.parseDouble(revenueTxtField.getText()));
+	    		SupplierWorker supplierWorker = new SupplierWorker(UserId.getText(),ConfirmationStatus.PENDING_APPROVAL,FirstName.getText(),LastName.getText(),
+	    				homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
+	    				new Supplier(supplier.getSupplierId(),supplier.getSupplierName(), supplier.getHomeBranch(),supplier.getEmail(),supplier.getPhoneNumber(), supplier.getRevenueFee()),getWorkerPosition());
 	    		Login login = new Login (userName.getText(),passwordTextField.getText());
 	    		ArrayList<Object> list = new ArrayList<>();
-	    		list.add(supplier);
+	    		list.add(supplierWorker);
 	    		list.add(login);
-	    		Message message = new Message(Task.REGISTER_SUPPLIER,Answer.WAIT_RESPONSE,list);
+	    		message = new Message(Task.REGISTER_SUPPLIER,Answer.WAIT_RESPONSE,list);
 	    		sendToClient(message);
 
 	    	}
 	    }
 	    
-	    /**
+	    private WorkerPosition getWorkerPosition() {
+	    	if(workerCombo.getValue().equals("Certified worker"))
+	    			return WorkerPosition.CERTIFIED;
+	    	return WorkerPosition.REGULAR;
+	    }
+
+		/**
 	     * calls the method that loads the previous screen.
 	     * @param event
 	     */
@@ -189,8 +224,14 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	 				return false;
 	 			}
 	 		}
-	 		if (!checkRevenueFee(revenueTxtField))
+	 		if(!checkComboBoxInput(chooseResComboBox,"Select supplier:")) {
+	 			displayMessage.setText("Please, pick your choice from the 'Select supplier' box!");
 	 			return false;
+	 			}
+	 		if(!checkComboBoxInput(workerCombo,"Select worker type:")) {
+	 			displayMessage.setText("Please, pick your choice from the 'Select worker type' box!");
+	 			return false;
+	 			}
 	 		if(emailTxtField.getText().contains("@")==false) {
 	 			emailTxtField.setStyle("-fx-border-color: red");
 	 			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
@@ -203,6 +244,11 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	 		}
 	 		return true;
 	 	}
+	    public boolean checkComboBoxInput(ComboBox comboBox, String message) {
+	    	if(comboBox.getValue().equals(message))
+	    		return false;
+	    	return true;
+	    }
 	 	
 	 	/**
 	 	 * this method checks if the textField contains numbers only.
@@ -218,25 +264,6 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	 		}
 	 	}
 	 	
-	 	/**
-	 	 * 
-	 	 * @param txtField
-	 	 * @return
-	 	 */
-	 	public boolean checkRevenueFee(TextField txtField) {
-	 		try {
-		 		double checkRevenueFee = Double.parseDouble(txtField.getText());
-		 		if(checkRevenueFee < 7.00 || checkRevenueFee > 12.00) {
-	 				displayMessage.setText("Revenue Fee must be between 7-12.");
-	 				return false;
-		 			
-		 		}
-		 		return true;
-		 		}catch(NumberFormatException e) {
-	 				displayMessage.setText("Revenue Fee must be in the form xx.x (ex: 10.0)");
-		 			return false;
-		 		}
-	 	}
 	    
 	    /**
 	     * this method loads the current screen, it will be called from the previous screen.
@@ -248,11 +275,10 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 					loader = new FXMLLoader();
 					Pane root;
 					try {
-					//	primaryStage.hide(); 
 						Stage Stage = new Stage();
 						Stage.setResizable(false);
-						root = loader.load(getClass().getResource("/fxmls/BM4SupplierRegistrationScreen.fxml").openStream());
-						supplierRegistrationScreenController = loader.getController();
+						root = loader.load(getClass().getResource("/fxmls/BM4SupplierWorkerRegistrationScreen.fxml").openStream());
+						supplierWorkerRegistrationScreenController = loader.getController();
 						Scene scene = new Scene(root);
 						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 							@Override
@@ -262,7 +288,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 							}
 						});
 						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-						Stage.setTitle("Supplier registration");
+						Stage.setTitle("SupplierWorker registration");
 						Stage.setScene(scene);
 						Stage.show();
 					} catch (IOException e) {
@@ -312,7 +338,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					supplierRegistrationScreenController.displayMessage.setText(message);
+					supplierWorkerRegistrationScreenController.displayMessage.setText(message);
 				}
 			});
 			
@@ -323,9 +349,26 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	 	 */
 	 	@Override
 	 	public void initialize(URL arg0, ResourceBundle arg1) {
-		textFields.add(resturantNameTxtField); textFields.add(confirmEmailTxtField); textFields.add(emailTxtField); textFields.add(managerFirstName); textFields.add(managerLastName); textFields.add(managerUserId);
-		textFields.add(phoneTxtField); textFields.add(revenueTxtField); textFields.add(userName); textFields.add(passwordTextField);
-		integerFields.add(phoneTxtField); integerFields.add(managerUserId);
+	 	Message message = new Message (Task.GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION,Answer.WAIT_RESPONSE,connectedUser);
+		sendToClient(message);
+		//There are no restaurants for this Branch, set message to user
+		chooseResComboBox.setValue("Select supplier:");
+		if(suppliersList == null) {
+			setRelevantTextToDisplayMessageText("No suppliers in selected branch");
+		}
+		else {
+			//add the relevant suppliers to the combo box
+			List<String> restaurantsNames = new ArrayList<>();
+			for(Entry<String, String> entry: suppliersList.entrySet()) {
+				restaurantsNames.add(entry.getValue());
+			}
+			chooseResComboBox.getItems().addAll(restaurantsNames);
+		}
+		workerCombo.setValue("Select worker type:");
+		workerCombo.getItems().addAll("Certified worker","Regular worker");
+		textFields.add(confirmEmailTxtField); textFields.add(emailTxtField); textFields.add(FirstName); textFields.add(LastName); textFields.add(UserId);
+		textFields.add(phoneTxtField); textFields.add(userName); textFields.add(passwordTextField);
+		integerFields.add(phoneTxtField); integerFields.add(UserId);
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))
 			homeBranchtxtField.setText("North Branch");
@@ -339,7 +382,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
 			@Override
 			public void clientSupplierRegistrationSucceed() {
-				setRelevantTextToDisplayMessageText("Supplier Registration Succeed!");
+				setRelevantTextToDisplayMessageText("SupplierWorker Registration Succeed!");
 			}
 			@Override
 			public void clientSupplierIdExist() {
@@ -348,10 +391,6 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 			@Override
 			public void clientSupplierUserNameExist() {
 				setRelevantTextToDisplayMessageText("This User Name already exist on system,try again");
-			}
-			@Override
-			public void clientSupplierNameExist() {
-				setRelevantTextToDisplayMessageText("This Resturant Name already exist on system,try again");
 			}
 			
 		});

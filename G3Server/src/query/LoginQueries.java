@@ -18,7 +18,9 @@ import users.HrManager;
 import users.Login;
 import users.PositionType;
 import users.Supplier;
+import users.SupplierWorker;
 import users.User;
+import users.WorkerPosition;
 
 /**
  * 
@@ -28,7 +30,7 @@ import users.User;
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Login phase.
- * @version 13/12/2021
+ * @version 15/12/2021
  */
 public class LoginQueries {
 	
@@ -97,12 +99,12 @@ public class LoginQueries {
 			//set the Message to return to the Client side
 			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient,"businesscustomer");
 			break;
-		case "supplier":
-			Supplier supplierResult = null;
+		case "supplierworker":
+			SupplierWorker supplierResult = null;
 			//parse data and put in instance.
-			supplierResult = LoginQueries.getSupplier(rs);
+			supplierResult = LoginQueries.getSupplierWorker(rs);
 			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplier");
+			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplierworker");
 			break;
 		case "branchmanager":
 			BranchManager branchManagerResult = null;
@@ -149,7 +151,7 @@ public class LoginQueries {
 				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_CUSTOMER);
 			else if (user instanceof CeoBiteMe)
 				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_CEO_BITE_ME);
-			else if (user instanceof Supplier)
+			else if (user instanceof SupplierWorker)
 				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_SUPPLIER);
 			else if (user instanceof BranchManager)
 				message.setAnswer(Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER);
@@ -171,8 +173,8 @@ public class LoginQueries {
 			Query.updateOneColumnForTableInDbByPrimaryKey("customer","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 		else if (message.getObject() instanceof CeoBiteMe)
 			Query.updateOneColumnForTableInDbByPrimaryKey("ceobiteme","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
-		else if (message.getObject() instanceof Supplier)
-			Query.updateOneColumnForTableInDbByPrimaryKey("supplier","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
+		else if (message.getObject() instanceof SupplierWorker)
+			Query.updateOneColumnForTableInDbByPrimaryKey("supplierworker","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 		else if (message.getObject() instanceof BranchManager) 
 			Query.updateOneColumnForTableInDbByPrimaryKey("branchmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 	}
@@ -270,29 +272,50 @@ public class LoginQueries {
 	}
 	
 	/**
-	 * This method searches for a Supplier object by his userId
+	 * This method searches for a SupplierWorker object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param rs
 	 * @return
 	 */
-	public static Supplier getSupplier(ResultSet rs) {
-		Supplier supplierResult = null;
+	public static SupplierWorker getSupplierWorker(ResultSet rs) {
+		SupplierWorker supplierWorkerResult = null;
+		Supplier supplier = null;
 		try {
-			if(rs.next()) {;
-				supplierResult = new Supplier(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getDouble(10));
+			if(rs.next()) {
+				supplier = getSupplier(rs.getString(9));
+				supplierWorkerResult = new SupplierWorker(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
+						rs.getBoolean(6),rs.getString(7),rs.getString(8),supplier,(WorkerPosition.valueOf(rs.getString(10))));
 			}
 			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return supplierWorkerResult;
+	}
+	/**
+	 * This method searches for a Supplier object by his SupplierId
+	 * and gets all the parameter and creates a new object from these parameters.
+	 * 
+	 * @param supplierId
+	 */
+	private static Supplier getSupplier(String supplierId) {
+		Supplier supplierResult = null;
+		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
+		try {
+			if(rs.next()) {
+				supplierResult = new Supplier(rs.getString(1),rs.getString(2),(Branch.valueOf(rs.getString(3))),rs.getString(4),rs.getString(5),rs.getDouble(6));
+			}
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+						e.printStackTrace();
+		}
 		return supplierResult;
 	}
-	
+
 	/**
-	 * This method searches for a Company object by his userId
+	 * This method searches for a Company object by his companyName
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param companyName

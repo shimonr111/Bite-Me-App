@@ -2,13 +2,14 @@ package communication;
 
 /**
  * @author Lior, Guzovsky.
+ * @author Alexander, Martinov
  * Class description: 
  * 
  * This is an enum that
  * helps us to set the operation
  * needed to be done by the server and client.
  *
- * @version 11/12/2021
+ * @version 15/12/2021
  */
 public enum Task {
 	
@@ -30,6 +31,8 @@ public enum Task {
 	UPDATE_CUSTOMER_STATUS,
 	REMOVE_USER_FROM_DB,
 	GET_RESTAURANTS_FOR_ORDER,
-	GET_ITEMS_FOR_ORDER_MENU,
+	GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION,
+	GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION,
+	GET_ITEMS_FOR_ORDER_MENU, 
 	CLIENT_DICONNECT
 }

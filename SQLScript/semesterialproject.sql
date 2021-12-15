@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER S
 USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: localhost    Database: semesterialproject
+-- Host: 127.0.0.1    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -214,35 +214,6 @@ INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerL
 UNLOCK TABLES;
 
 --
--- Table structure for table `delivery`
---
-
-DROP TABLE IF EXISTS `delivery`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `delivery` (
-  `supplyId` int NOT NULL,
-  `orderNumber` int DEFAULT NULL,
-  `deliveryType` enum('REGULAR','MULTI','ROBOTIC') DEFAULT NULL,
-  `receiverFirstName` varchar(45) DEFAULT NULL,
-  `receiverLastName` varchar(45) DEFAULT NULL,
-  `receiverAddress` varchar(45) DEFAULT NULL,
-  `receiverPhoneNumber` varchar(45) DEFAULT NULL,
-  `deliveryFee` double DEFAULT NULL,
-  PRIMARY KEY (`supplyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `delivery`
---
-
-LOCK TABLES `delivery` WRITE;
-/*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
-/*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `hrmanager`
 --
 
@@ -295,13 +266,15 @@ DROP TABLE IF EXISTS `item_in_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `item_in_menu` (
-  `itemName` varchar(45) NOT NULL,
-  `supplierUserId` varchar(45) DEFAULT NULL,
+  `itemName` varchar(256) NOT NULL,
+  `supplierId` varchar(256) NOT NULL,
   `itemCategory` enum('SALAD','FIRST','MAIN','DESSERT','DRINK') DEFAULT NULL,
-  `itemSize` enum('SMALL','REGULAR','LARGE') DEFAULT NULL,
-  `picturePath` varchar(45) DEFAULT NULL,
+  `itemSize` enum('SMALL','REGULAR','LARGE') NOT NULL,
+  `picturePath` varchar(256) DEFAULT NULL,
   `itemPrice` double DEFAULT NULL,
-  PRIMARY KEY (`itemName`)
+  PRIMARY KEY (`itemName`,`itemSize`,`supplierId`),
+  KEY `item_in_menu_supplierId_idx` (`supplierId`),
+  CONSTRAINT `item_in_menu_supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -311,33 +284,8 @@ CREATE TABLE `item_in_menu` (
 
 LOCK TABLES `item_in_menu` WRITE;
 /*!40000 ALTER TABLE `item_in_menu` DISABLE KEYS */;
+INSERT INTO `item_in_menu` VALUES ('burger','5555','MAIN','LARGE','C://pictures',45),('burger','5556','MAIN','LARGE','C://pictures',45),('cola','2222','DRINK','SMALL','C://pictures',14),('cola','2223','DRINK','SMALL','C://pictures',14),('cola','5555','DRINK','LARGE','C://pictures',12),('cola','5556','DRINK','LARGE','C://pictures',12),('fries','2222','FIRST','LARGE','C://pictures',15),('fries','2223','FIRST','LARGE','C://pictures',15),('fries','5555','FIRST','LARGE','C://pictures',15),('fries','5556','FIRST','LARGE','C://pictures',15),('pizza','1111','MAIN','REGULAR','C://pictures',80),('pizza','1112','MAIN','REGULAR','C://pictures',80),('pizza','2222','MAIN','REGULAR','C://pictures',80),('pizza','2223','MAIN','REGULAR','C://pictures',80);
 /*!40000 ALTER TABLE `item_in_menu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `item_in_order`
---
-
-DROP TABLE IF EXISTS `item_in_order`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `item_in_order` (
-  `itemName` varchar(45) NOT NULL,
-  `orderNumber` int DEFAULT NULL,
-  `itemSize` enum('SMALL','REGULAR','LARGE') DEFAULT NULL,
-  `itemPrice` double DEFAULT NULL,
-  `comment` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`itemName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `item_in_order`
---
-
-LOCK TABLES `item_in_order` WRITE;
-/*!40000 ALTER TABLE `item_in_order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `item_in_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -363,7 +311,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('customer','customer','1000','customer'),('ceobiteme','ceobiteme','1001','ceobiteme'),('hrmanager','hrmanager','1002','hrmanager'),('businesscustomer','businesscustomer','1003','businesscustomer'),('supplier','supplier','1005','supplier'),('branchmanagerN','branchmanagerN','1041','branchmanager'),('branchmanagerS','branchmanagerS','1042','branchmanager'),('branchmanagerC','branchmanagerC','1043','branchmanager');
+INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('ceo','ceo','1001','ceobiteme'),('hr','hr','1002','hrmanager'),('bc','bc','1003','businesscustomer'),('sp','sp','1005','supplierworker'),('bmn','bmn','1041','branchmanager'),('bms','bms','1042','branchmanager'),('bmc','bmc','1043','branchmanager');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -376,18 +324,27 @@ DROP TABLE IF EXISTS `order`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
   `orderNumber` int NOT NULL,
-  `supplierUserId` varchar(45) DEFAULT NULL,
-  `customerUserId` varchar(45) DEFAULT NULL,
+  `supplierId` varchar(256) DEFAULT NULL,
+  `customerUserId` varchar(256) DEFAULT NULL,
+  `customerUserType` varchar(256) DEFAULT NULL,
   `branch` enum('NORTH','CENTER','SOUTH') DEFAULT NULL,
   `timeType` enum('REGULAR','PRE') DEFAULT NULL,
   `status` enum('PENDING_APPROVAL','APPROVED','UN_APPROVED') DEFAULT NULL,
   `issueDateTime` datetime DEFAULT NULL,
   `estimatedSupplyDateTime` datetime DEFAULT NULL,
   `actualSupplyDateTime` datetime DEFAULT NULL,
-  `supplyType` enum('TAKE_AWAY','DELIVERY') DEFAULT NULL,
-  `supplyId` int DEFAULT NULL,
+  `supplyType` enum('TAKE_AWAY','REGULAR','MULTI','ROBOTIC') DEFAULT NULL,
   `totalPrice` double DEFAULT NULL,
-  PRIMARY KEY (`orderNumber`)
+  `receiverFirstName` varchar(256) DEFAULT NULL,
+  `receiverLastName` varchar(256) DEFAULT NULL,
+  `receiverAddress` varchar(256) DEFAULT NULL,
+  `receiverPhoneNumber` varchar(256) DEFAULT NULL,
+  `deliveryFee` double DEFAULT NULL,
+  `itemsList` varchar(6000) DEFAULT NULL,
+  `comments` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`orderNumber`),
+  KEY `order_supplierId_idx` (`supplierId`),
+  CONSTRAINT `order_supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -401,6 +358,32 @@ LOCK TABLES `order` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `reports`
+--
+
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `reports` (
+  `reportId` varchar(256) NOT NULL,
+  `supplier` varchar(256) DEFAULT NULL,
+  `reportType` varchar(45) DEFAULT NULL,
+  `issueDate` datetime DEFAULT NULL,
+  `reportPdf` longblob,
+  PRIMARY KEY (`reportId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `reports`
+--
+
+LOCK TABLES `reports` WRITE;
+/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `supplier`
 --
 
@@ -408,18 +391,13 @@ DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `supplier` (
-  `userID` varchar(256) NOT NULL,
-  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
-  `firstName` varchar(256) DEFAULT NULL,
-  `lastName` varchar(256) DEFAULT NULL,
-  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
-  `isLoggedIn` tinyint(1) DEFAULT '0',
+  `supplierId` varchar(256) NOT NULL,
+  `supplierName` varchar(256) DEFAULT NULL,
+  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
-  `supplierBusinessName` varchar(256) DEFAULT NULL,
   `revenueFee` double DEFAULT NULL,
-  PRIMARY KEY (`userID`),
-  CONSTRAINT `supplier_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -429,34 +407,41 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1005','CONFIRMED','supplierFirstname','supplierLastname','NORTH',0,'supplierEmail@supplies.com','100505','supplierBusinnessname',0.5);
+INSERT INTO `supplier` VALUES ('1111','Dominos','CENTER','support@dominos.com','100001111',11.5),('1112','Dominos','NORTH','support@dominos.com','100001111',11.5),('2222','PizzaHut','SOUTH','support@pizzahut.com','100002222',10.2),('2223','PizzaHut','CENTER','support@pizzahut.com','100002222',10.2),('5555','Mcdonalds','NORTH','support@mcdonalds.com','100005555',7.2),('5556','Mcdonalds','CENTER','support@mcdonalds.com','100005555',7.2);
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `take_away`
+-- Table structure for table `supplierworker`
 --
 
-DROP TABLE IF EXISTS `take_away`;
+DROP TABLE IF EXISTS `supplierworker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `take_away` (
-  `supplyId` int NOT NULL,
-  `orderNumber` int DEFAULT NULL,
-  `receiverFirstName` varchar(45) DEFAULT NULL,
-  `receiverLastName` varchar(45) DEFAULT NULL,
-  `receiverPhoneNumber` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`supplyId`)
+CREATE TABLE `supplierworker` (
+  `userID` varchar(256) NOT NULL,
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
+  `firstName` varchar(256) DEFAULT NULL,
+  `lastName` varchar(256) DEFAULT NULL,
+  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
+  `isLoggedIn` tinyint(1) DEFAULT '0',
+  `email` varchar(256) DEFAULT NULL,
+  `phoneNumber` varchar(256) DEFAULT NULL,
+  `supplierId` varchar(256) DEFAULT NULL,
+  `workerPosition` enum('CERTIFIED','REGULAR') DEFAULT NULL,
+  PRIMARY KEY (`userID`),
+  CONSTRAINT `supplierWorker_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `take_away`
+-- Dumping data for table `supplierworker`
 --
 
-LOCK TABLES `take_away` WRITE;
-/*!40000 ALTER TABLE `take_away` DISABLE KEYS */;
-/*!40000 ALTER TABLE `take_away` ENABLE KEYS */;
+LOCK TABLES `supplierworker` WRITE;
+/*!40000 ALTER TABLE `supplierworker` DISABLE KEYS */;
+INSERT INTO `supplierworker` VALUES ('1005','CONFIRMED','supplierFirstname','supplierLastname','NORTH',0,'supplierEmail@supplies.com','100505','5555','REGULAR');
+/*!40000 ALTER TABLE `supplierworker` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -468,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-14 22:21:43
+-- Dump completed on 2021-12-15 15:32:40

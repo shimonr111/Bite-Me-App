@@ -34,12 +34,13 @@ import javafx.stage.WindowEvent;
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * @author Alexander, Martinov
  * Class description: 
  * This is a class for 
  * controlling the UI of the restaurant 
  * choosing for the private customer.
  * 
- * @version 13/12/2021
+ * @version 15/12/2021
  */
 public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeController implements Initializable{
 	/**

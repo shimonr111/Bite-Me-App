@@ -4,6 +4,7 @@ package communication;
  * 
  *  @author Lior, Guzovsky.
  *  @author Ori, Malka.
+ *  @author Alexander, Martinov.
  *  Class description: 
  *  
  *  This is an enum
@@ -11,7 +12,7 @@ package communication;
  *  server according to the 
  *  Task that has been sent.
  *  
- *  @version 11/12/2021
+ *  @version 15/12/2021
  *
  */
 public enum Answer {
@@ -61,6 +62,11 @@ public enum Answer {
 	RESTAURANTS_EXIST_FOR_THIS_BRANCH,
 	RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH,
 	SUPPLIER_HAS_NO_MENU,
-	SUPPLIER_MENU_FOUND
+	SUPPLIER_MENU_FOUND,
+	/**
+	 * Answers related to Registration
+	 * Operation.
+	 */
+	SUPPLIER_FOUND_IN_DB
 	
 }

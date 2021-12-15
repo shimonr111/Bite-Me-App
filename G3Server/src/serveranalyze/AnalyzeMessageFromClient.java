@@ -24,7 +24,7 @@ import query.RegistrationQueries;
  *  Class description:
  *  This is a class which is a Wrapper for handling
  *  all messages from the client.
- * @version 06/12/2021
+ * @version 15/12/2021
  */
 public class AnalyzeMessageFromClient {
 	/**
@@ -105,6 +105,12 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_RESTAURANTS_FOR_ORDER:
 				 recivedMessageFromClient = OrderQueries.createRestaurantsForCustomer((Message)message);
+				 break;
+			 case GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION:
+				 recivedMessageFromClient = RegistrationQueries.createRestaurantsForSupplierRegistration((Message)message);
+				 break;
+			 case GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION:
+				 recivedMessageFromClient = RegistrationQueries.getSupplierFromDb((Message)message);
 				 break;
 			 case REMOVE_USER_FROM_DB:
 				 EditUsersQueries.removeUserFromDB((Message)message);
