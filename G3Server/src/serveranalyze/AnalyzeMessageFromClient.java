@@ -118,6 +118,9 @@ public class AnalyzeMessageFromClient {
 			 case GET_ITEMS_FOR_ORDER_MENU:
 				 recivedMessageFromClient = OrderQueries.createMenuForSpecificSupplier((Message)message);
 				 break;
+			 case GET_BUSINESS_CUSTOMERS_FOR_CONFIRMATION:
+				  recivedMessageFromClient = EditUsersQueries.getBusinessCustomersListFromDb((Message) message);
+				 break;
 			default:
 				break;
 			}

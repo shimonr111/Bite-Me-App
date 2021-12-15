@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.cj.jdbc.SuspendableXAConnection;
+
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -109,6 +111,37 @@ public class EditUsersQueries {
 		String tableName = list.get(1);
 		Query.deleteRowFromTableInDbByPrimaryKey(tableName, "userID='"+userId+"'");
 		Query.deleteRowFromTableInDbByPrimaryKey("login", "userID='"+userId+"'");
+	}
+	
+	/**
+	 * this method will return an arraylist of business customer which not approved yet,
+	 * this method will be called after pressing on business customers confirmation from the HR manager portal.
+	 * @param message
+	 * @return
+	 */
+	public static Message getBusinessCustomersListFromDb(Message message) {
+		Message returnMessageToClient;
+		ArrayList<BusinessCustomer> businessCustomersList = new ArrayList<>();
+		String companyName = ((HrManager)message.getObject()).getcompanyOfBusinessCustomer().getCompanyName();
+		Company company;
+		ResultSet rs;
+		rs= Query.getRowsFromTableInDB("businesscustomer", "companyName= '"+companyName+"' AND (statusInSystem= 'PENDING_APPROVAL')");
+		try {
+			while(rs.next()) {
+				company = LoginQueries.getCompany(rs.getString(12));
+				businessCustomersList.add( new BusinessCustomer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
+						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),
+						(PositionType.valueOf(rs.getString(14))),rs.getInt(15)));
+			}
+			rs.close();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		returnMessageToClient = new Message (Task.DISPLAY_BUSINESS_CUSTOMERS_INTO_TABLE,Answer.SUCCEED,businessCustomersList);
+		return returnMessageToClient;
+		
 	}
 	
 
