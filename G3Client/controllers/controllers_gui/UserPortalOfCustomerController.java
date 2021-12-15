@@ -76,6 +76,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
+		Message disconnectMessage= new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
+		sendToClient(disconnectMessage);
 		System.exit(0);
 	}
 	// Event Listener on Button[#btnLogout].onAction
@@ -83,8 +85,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	public void getLogoutBtn(ActionEvent event) {
 		//TBD: add logic for updating logged in in DB to logged out
 		//System.out.println(connectedUser);
-		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);  
-		sendToClient(message);
+		Message logOutMessage = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);  
+		sendToClient(logOutMessage);
 		connectedUser = null;  // after we changed the status in DB we set the connectedUser as null so we can get new login from same client.
 		setToLoginScreen(event);  //set the login screen
 	}

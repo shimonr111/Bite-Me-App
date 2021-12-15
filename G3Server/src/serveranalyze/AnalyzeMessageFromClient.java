@@ -57,18 +57,28 @@ public class AnalyzeMessageFromClient {
 			 */
 			switch (recivedTaskFromClient) {
 			case CONFIRM_IP:
-				ClientDoc newClient = new ClientDoc(client.getInetAddress().getHostAddress(),client.getInetAddress().getHostName(),"Connected");
-				boolean checkIfExist=false;
-				for(ClientDoc c : BiteMeServerUI.clients) {
-					if(c.getIpAddress().equals(newClient.getIpAddress())) {
-						checkIfExist=true;
+				boolean isExist=false;
+				ClientDoc connectedClient = new ClientDoc(client.getInetAddress().getHostAddress(),client.getInetAddress().getHostName(),"Connected");
+				for(int i=0;i<BiteMeServerUI.clients.size();i++) {
+					if(BiteMeServerUI.clients.get(i).equals(connectedClient)) {
+						BiteMeServerUI.clients.remove(i);
+						BiteMeServerUI.clients.add(connectedClient);
+						isExist=true;
 					}
 				}
-				if(!checkIfExist)
-					BiteMeServerUI.clients.add(newClient);
+				if(!isExist)
+					BiteMeServerUI.clients.add(connectedClient);
 				recivedMessageFromClient.setAnswer(Answer.SUCCEED);
 				break;
-				
+			case CLIENT_DICONNECT:
+				ClientDoc diconnectedClient = new ClientDoc(client.getInetAddress().getHostAddress(),client.getInetAddress().getHostName(),"Disconnected");
+				for(int i=0;i<BiteMeServerUI.clients.size();i++) {
+					if(BiteMeServerUI.clients.get(i).equals(diconnectedClient)) {
+						BiteMeServerUI.clients.remove(i);
+						BiteMeServerUI.clients.add(diconnectedClient);
+					}
+				}
+				break;
 			 case LOGIN:
 				recivedMessageFromClient = LoginQueries.createLoginMessageForServer(recivedMessageFromClient);
 				break;
