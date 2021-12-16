@@ -188,7 +188,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Business Customer Registration");
+					Stage.setTitle("Business Customer Confirmation");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

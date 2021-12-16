@@ -43,7 +43,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text fx:id="companyName" layoutX="185.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.0">
+      <Text fx:id="companyName" layoutX="193.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="434.0">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

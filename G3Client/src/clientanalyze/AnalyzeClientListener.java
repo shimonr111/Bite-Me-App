@@ -74,4 +74,10 @@ public interface AnalyzeClientListener {
 	default void clientSupplierUserNameExist() {
 		return;
 	}
+	default void clientCompanyRegistrationFailed(String message) {
+		return;
+	}
+	default void clientCompanyRegistrationSucceed() {
+		return;
+	}
 }

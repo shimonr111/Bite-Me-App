@@ -1,5 +1,6 @@
 package query;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import communication.Task;
 import users.Branch;
 import users.BranchManager;
 import users.BusinessCustomer;
+import users.Company;
 import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
@@ -132,6 +134,75 @@ public class RegistrationQueries {
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.SUPPLIER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
+	}
+	
+	/**
+	 * In this method we receive a message that contains a company object that we want to register
+	 * and the HrManager that asked for the registration 
+	 * In case the registration succeed we return a relevant answer and update the companyName 
+	 * of the HrManager to the new company that he asked to register.
+	 * @param message
+	 * @return
+	 */
+	public static Message getCompanyRegistration(Message message) {
+		Message messageBackToClient;
+		@SuppressWarnings("unchecked")
+		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
+		Company company = (Company) list.get(0);
+		HrManager hrManager = (HrManager) list.get(1);
+		if(checkIfCompanyNameExist(company.getCompanyName())) {
+			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_NAME_ALREADY_EXIST,null);
+		}
+		else if(checkIfCompanyCodeExist(company.getcompanyCode())) {
+			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_CODE_ALREADY_EXIST,null);
+		}
+		Query.insertOneRowIntoCompanyTable(company);
+		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","companyName='"+company.getCompanyName()+"'" , "userID='"+hrManager.getUserId()+"'");
+		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "businessW4cCodeNumber='"+company.getcompanyCode()+"'" , "userID='"+hrManager.getUserId()+"'");
+		return new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.COMPANY_REGISTRATION_SUCCEED,null);
+		
+		
+	}
+	
+	/**
+	 * In this method we check if the company code already exist in DB.
+	 * @param companyCode
+	 * @return
+	 */
+	public static boolean checkIfCompanyCodeExist(int companyCode) {
+		ResultSet rs = Query.getColumnFromTableInDB("company", "companyCode");
+		try {
+			while(rs.next()) {
+				if(Integer.parseInt(rs.getString(1))==companyCode) {
+					return true;
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	/**
+	 * This method gets a string of company name and checks if the name already exist on DB .
+	 * @param companyName
+	 * @return
+	 */
+	public static boolean checkIfCompanyNameExist(String companyName) {
+		ResultSet rs = Query.getColumnFromTableInDB("company", "companyName");
+		try {
+			while(rs.next()) {
+				if(rs.getString(1).equals(companyName)) {
+					return true;
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 	/**
 	 * This method returns a list of suppliers (by branch) for the supplier registration process
@@ -308,5 +379,7 @@ public class RegistrationQueries {
 		returnMessageToClient.setAnswer(Answer.SUPPLIER_FOUND_IN_DB);
 		return returnMessageToClient;
 	}
+	
+
 
 }

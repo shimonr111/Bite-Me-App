@@ -10,6 +10,7 @@ import communication.Task;
 import users.Branch;
 import users.BusinessCustomer;
 import users.CeoBiteMe;
+import users.Company;
 import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
@@ -244,6 +245,22 @@ public class Query {
 			e.printStackTrace();
 		}
 				
+	}
+	
+	/**
+	 * This method gets a company object and insert it into the company table in DB.
+	 * @param company
+	 */
+	public static void insertOneRowIntoCompanyTable(Company company) {
+		String query = "INSERT INTO semesterialproject.company (companyName, companyStatusInSystem, address, email, companyCode) VALUES ('" +company.getCompanyName()
+		+"', '" + company.getStatusCompanyInSystem() +"', '" + company.getAddress() +"', '" + company.getEmail() +"', '" + company.getcompanyCode() + "' )";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -39,6 +39,8 @@ import javafx.scene.control.ComboBox;
  * @version 09/12/2021
  */
 public class UserPortalOfHRManagerController extends AbstractBiteMeController  implements Initializable{
+	
+	
 	@FXML
 	private Button btnStartOrder;
 	@FXML
@@ -75,7 +77,9 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	// Event Listener on Button[#btnCompanyReg].onAction
 	@FXML
 	public void getCompanyReg(ActionEvent event) {
-		// TODO , waiting for answer from tiran.
+		CompanyRegistartionScreenController companyRegistartionScreenController = new CompanyRegistartionScreenController();
+		companyRegistartionScreenController.initCompanyRegistrationScreen();
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 	// Event Listener on Button[#btnBusinessCustomerConfirm].onAction
 	@FXML
@@ -228,14 +232,22 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 			statusText.setText("No Registered company");
 		}
 		else {
-			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+			btnCompanyReg.setDisable(true);
 			statusText.setText(connectedUser.getStatusInSystem().toString());
 			if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 				btnBusinessCustomerConfirm.setDisable(true);
-				btnCompanyReg.setDisable(true);
 				btnStartOrder.setDisable(true);
 				homeBranchCombo.setDisable(true);
 			}
+			else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
+				btnBusinessCustomerConfirm.setDisable(true);
+				btnStartOrder.setDisable(true);
+				homeBranchCombo.setDisable(true);
+				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() +" ( Waiting for BM confirmation )");
+			}
+			else
+				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 		}
 		
 		
