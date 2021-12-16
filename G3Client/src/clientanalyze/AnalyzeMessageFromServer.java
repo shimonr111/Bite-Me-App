@@ -179,6 +179,16 @@ public class AnalyzeMessageFromServer {
 						listener.clientSupplierUserNameExist();
 					}
 					break;
+				case COMPANY_NAME_ALREADY_EXIST:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientCompanyRegistrationFailed("Company NAME already exist in DB");
+					}
+					break;
+				case COMPANY_CODE_ALREADY_EXIST:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientCompanyRegistrationFailed("Company CODE already exist in DB");
+					}
+					break;
 				default:
 					break;
 				}
@@ -197,6 +207,11 @@ public class AnalyzeMessageFromServer {
 				case SUPPLIER_REGISTRATION_SUCCEED:
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientSupplierRegistrationSucceed();
+					}
+					break;
+				case COMPANY_REGISTRATION_SUCCEED:
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.clientCompanyRegistrationSucceed();
 					}
 					break;
 				default:

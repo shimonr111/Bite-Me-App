@@ -133,6 +133,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 		return companyOfBusinessCustomer;
 	}
 	
+	public void setCompany(Company companyOfBusinessCustomer) {
+		this.companyOfBusinessCustomer=companyOfBusinessCustomer;
+	}
+	
 	public String getCompanyOfBusinessCustomerString() {
 		return companyOfBusinessCustomerString;
 	}
