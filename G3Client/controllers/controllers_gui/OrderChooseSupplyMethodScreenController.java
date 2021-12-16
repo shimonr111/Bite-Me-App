@@ -2,13 +2,11 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Map.Entry;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -16,7 +14,6 @@ import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -176,6 +173,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * 
      */
   public void initChooseSupplyMethodScreen(Order order) {
+	  	this.order=order; // save the order from the previous screen
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -203,8 +201,6 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 				}
 			}
 		});
-		OrderChooseSupplyMethodScreenController.order=order; // save the order from the previous screen
-		
 	}
 
 
@@ -233,18 +229,14 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
                       LocalDate today = LocalDate.now();
                       setDisable(empty || item.compareTo(today) < 0);
                   }
-
               };
           }
-
       };
       supplyDatePicker.setDayCellFactory(disablePreviousDates);
+      /*Add basic data to the supplyTimeCombo*/
       
       /**Compare between the current date to the chosen date in the DatePicker**/
-
       
-      
-    
       supplyDatePicker.setOnAction( (event) -> {
     	  
     	  boolean checkIfCustomerPickedCurrentDayForTheSupply = supplyDatePicker.getValue().equals(LocalDate.now());
@@ -253,30 +245,31 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     	  
       	  /**adding elements to the hour array depending on the current time**/
     	  if (checkIfCustomerPickedCurrentDayForTheSupply) { // if the customer picked the current day
-    			
+    			/*!!!We decided that delivery from all the suppliers are from 8 am and not earlier!!!*/
     			if (hour < 8) { // // the current time is earlier than 8am (but in the current day)
+    				supplyTimeCombo.getItems().removeAll();
+    				hourArray.removeAll(hourArray);
     				for(int i=8; i<23; i++) {
     					hourArray.add(String.valueOf(i)+":00");
     					}
-    				supplyTimeCombo.getItems().removeAll();
     		    	supplyTimeCombo.getItems().addAll(hourArray);
     			}
-    				
     			else {  // the current time is later than 8am (but in the current day)
+    				supplyTimeCombo.getItems().removeAll();
+    				hourArray.removeAll(hourArray);
     				for(int i=hour+1; i<23; i++){ 
     					hourArray.add(String.valueOf(i)+":00");
     					}
-    				supplyTimeCombo.getItems().removeAll();
     		    	supplyTimeCombo.getItems().addAll(hourArray);
     			}
     			
     		}
-    			
-    	    else {  // the customer want the delivery for the next days
+    	  else {  // the customer want the delivery for the next days
+    				hourArray.removeAll(hourArray);
+        			supplyTimeCombo.getItems().removeAll();
     			for(int i=8; i<23; i++){ 
     				hourArray.add(String.valueOf(i)+":00");
     				}
-    			supplyTimeCombo.getItems().removeAll();
     	    	supplyTimeCombo.getItems().addAll(hourArray);
            }
     	  
