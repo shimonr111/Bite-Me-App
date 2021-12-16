@@ -333,6 +333,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		priceMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
 		priceCartColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
 		
+		commentCartColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("comment"));
 		commentCartColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		
 		menuTable.setItems(items);

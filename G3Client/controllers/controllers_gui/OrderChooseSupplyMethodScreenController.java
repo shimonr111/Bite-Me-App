@@ -2,7 +2,13 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Map.Entry;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -10,6 +16,7 @@ import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +25,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import orders.Order;
+import orders.SupplyType;
 
 /**
  * 
@@ -51,10 +61,10 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     private DatePicker supplyDatePicker;
 
     @FXML
-    private ComboBox<?> supplyTimeCombo;
+    private ComboBox<String> supplyTimeCombo;
 
     @FXML
-    private ComboBox<?> supplyMethodCombo;
+    private ComboBox<String> supplyMethodCombo;
 
     @FXML
     private Button btnExit;
@@ -98,7 +108,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Choose restaurant");
+					Stage.setTitle("Choose items");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -119,6 +129,13 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      */
     @FXML
     void getBtnNext(ActionEvent event) {
+    	//order.supplyType = supplyMethodCombo.getValue();
+    	//order.estimatedSupplyDateTime = Date.from(supplyDatePicker.getValue().atStartOfDay().toInstant(null));
+    	//System.out.println(order.estimatedSupplyDateTime);
+    	System.out.println(supplyDatePicker.getValue());
+    	System.out.println(LocalDate.now());
+    	System.out.println(supplyDatePicker.getValue().equals(LocalDate.now()));
+    	
 
 
     }
@@ -186,6 +203,8 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 				}
 			}
 		});
+		OrderChooseSupplyMethodScreenController.order=order; // save the order from the previous screen
+		
 	}
 
 
@@ -196,8 +215,73 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
-	}
+  		
+  		supplyDatePicker.setValue(LocalDate.now()); // set the Current date in the date picker
+  		supplyMethodCombo.getItems().addAll(SupplyType.DELIVERY.toString(), SupplyType.TAKE_AWAY.toString()); //set supply methods in the combo box of supply method
+  		List<String> hourArray = new ArrayList<String>(); // create hour array
+  		Date date = new Date();
+  		int hour = date.getHours();
+  		
+  		//disable the previous dates in the date picker
+  	    Callback<DatePicker, DateCell> disablePreviousDates = new Callback<DatePicker, DateCell>() {
+          @Override
+          public DateCell call(final DatePicker param) {
+              return new DateCell() {
+                  @Override
+                  public void updateItem(LocalDate item, boolean empty) {
+                      super.updateItem(item, empty); 
+                      LocalDate today = LocalDate.now();
+                      setDisable(empty || item.compareTo(today) < 0);
+                  }
 
+              };
+          }
+
+      };
+      supplyDatePicker.setDayCellFactory(disablePreviousDates);
+      
+      /**Compare between the current date to the chosen date in the DatePicker**/
+
+      
+      
+    
+      supplyDatePicker.setOnAction( (event) -> {
+    	  
+    	  boolean checkIfCustomerPickedCurrentDayForTheSupply = supplyDatePicker.getValue().equals(LocalDate.now());
+    	  System.out.println(hour);
+    	  System.out.println(checkIfCustomerPickedCurrentDayForTheSupply);
+    	  
+      	  /**adding elements to the hour array depending on the current time**/
+    	  if (checkIfCustomerPickedCurrentDayForTheSupply) { // if the customer picked the current day
+    			
+    			if (hour < 8) { // // the current time is earlier than 8am (but in the current day)
+    				for(int i=8; i<23; i++) {
+    					hourArray.add(String.valueOf(i)+":00");
+    					}
+    				supplyTimeCombo.getItems().removeAll();
+    		    	supplyTimeCombo.getItems().addAll(hourArray);
+    			}
+    				
+    			else {  // the current time is later than 8am (but in the current day)
+    				for(int i=hour+1; i<23; i++){ 
+    					hourArray.add(String.valueOf(i)+":00");
+    					}
+    				supplyTimeCombo.getItems().removeAll();
+    		    	supplyTimeCombo.getItems().addAll(hourArray);
+    			}
+    			
+    		}
+    			
+    	    else {  // the customer want the delivery for the next days
+    			for(int i=8; i<23; i++){ 
+    				hourArray.add(String.valueOf(i)+":00");
+    				}
+    			supplyTimeCombo.getItems().removeAll();
+    	    	supplyTimeCombo.getItems().addAll(hourArray);
+           }
+    	  
+      });
+	 
+    }
+  	
 }
