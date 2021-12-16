@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="pane" stylesheets="@../../../G3Common/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bitemeserver.BiteMeServerUI">
+   <children>
+      <VBox layoutX="260.0" layoutY="632.0" styleClass="vbox">
+         <children>
+            <HBox styleClass="hbox">
+               <children>
+                  <Button fx:id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connect" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Connect" textAlignment="CENTER" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <effect>
+                        <Blend mode="BLUE" />
+                     </effect>
+                  </Button>
+                  <Button fx:id="disconnectBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="50.0" prefWidth="250.0" text="Disconnect" textAlignment="CENTER" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </Button>
+               </children>
+            </HBox>
+            <Button id="import-btn" fx:id="importBtn" mnemonicParsing="false" onAction="#getImportBtn" prefHeight="50.0" prefWidth="505.0" styleClass="importData" text="Import the Data Management System" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="49.0" styleClass="exit">
+         <effect>
+            <ColorAdjust />
+         </effect></Button>
+      <Label layoutX="267.0" layoutY="31.0" styleClass="headLight" text="Server Configuration" />
+      <Text fx:id="txtMsgToServer" layoutX="443.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <HBox layoutX="31.0" layoutY="152.0" prefHeight="455.0" prefWidth="963.0" spacing="80.0">
+         <children>
+            <HBox spacing="30.0">
+               <children>
+                  <VBox spacing="22.0">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="165.0" text="IP:" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="portLbl" prefHeight="35.0" prefWidth="165.0" text="Port:" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="165.0" text="DB Name:" textFill="#383838">
+                           <font>
+                              <Font name="Rage Italic" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="165.0" text="DB user:" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                        <Label prefHeight="35.0" prefWidth="165.0" text="DB password:" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <VBox prefHeight="518.0" prefWidth="226.0" spacing="15.0">
+                     <children>
+                        <TextField fx:id="ipTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="portxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="DbNameTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="DbUserTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                        <PasswordField fx:id="DbPasswordTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </PasswordField>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="460.0" prefWidth="430.0" spacing="30.0">
+               <children>
+                  <VBox spacing="10.0" styleClass="vbox">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="390.0" styleClass="miniHeadLight" text="Connected clients" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="clientsTable" prefHeight="130.0" prefWidth="390.0">
+                          <columns>
+                            <TableColumn fx:id="ipAddressCol" prefWidth="130.0" text="IP" />
+                            <TableColumn fx:id="hostNameCol" prefWidth="130.0" text="Host" />
+                              <TableColumn fx:id="statusCol" prefWidth="130.0" text="Status" />
+                          </columns>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </padding>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0" styleClass="vbox">
+                     <children>
+                        <Label prefHeight="40.0" prefWidth="390.0" styleClass="miniHeadLight" text="Console" textFill="#383838">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="txtConsole" editable="false" prefHeight="174.0" prefWidth="410.0" style="-fx-background-radius: 5;">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </HBox>
+      <ImageView fitHeight="191.0" fitWidth="200.0" layoutX="14.0" layoutY="563.0" preserveRatio="true">
+         <image>
+            <Image url="@../../../Design/Images/bmlogo.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
