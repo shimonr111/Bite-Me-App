@@ -86,6 +86,7 @@ public class Order implements Serializable {
 	
 	public ArrayList<Item> itemList;
 	
+	
 	/**
 	 * This section is for the attributes
 	 * of the supply process, we need to 
@@ -94,25 +95,6 @@ public class Order implements Serializable {
 	 * 
 	 */
 	
-	/**
-	 * This is the receivers first name
-	 */
-	public String receiverFirstName;
-	
-	/**
-	 * This is the receivers Last name
-	 */
-	public String receiverLastName;
-	
-	/**
-	 * This is the receivers Address
-	 */
-	public String receiverAddress;
-	
-	/**
-	 * This is the receivers phone number
-	 */
-	public String receiverPhoneNumber;
 	
 	/**
 	 * Constructors:
@@ -134,15 +116,10 @@ public class Order implements Serializable {
 	 * @param supplyId
 	 * @param totalPrice
 	 * @param itemList
-	 * @param receiverFirstName
-	 * @param receiverLastName
-	 * @param receiverAddress
-	 * @param receiverPhoneNumber
 	 */
 	public Order(int orderNumber, String supplierUserId, String customerUserId, Branch branch, OrderTimeType timeType,
 			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime,
-			SupplyType supplyType, int supplyId, double totalPrice, ArrayList<Item> itemList, String receiverFirstName,
-			String receiverLastName, String receiverAddress, String receiverPhoneNumber) {
+			SupplyType supplyType, int supplyId, double totalPrice, ArrayList<Item> itemList) {
 		super();
 		this.orderNumber = orderNumber;
 		this.supplierUserId = supplierUserId;
@@ -157,10 +134,6 @@ public class Order implements Serializable {
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
 		this.itemList = itemList;
-		this.receiverFirstName = receiverFirstName;
-		this.receiverLastName = receiverLastName;
-		this.receiverAddress = receiverAddress;
-		this.receiverPhoneNumber = receiverPhoneNumber;
 	}
 
 
@@ -187,10 +160,6 @@ public class Order implements Serializable {
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
 		
-		this.receiverFirstName = null;
-		this.receiverLastName = null;
-		this.receiverAddress = null;
-		this.receiverPhoneNumber = null;
 	} 
 	
 	/**
@@ -322,64 +291,13 @@ public class Order implements Serializable {
 		this.actualSupplyDateTime = actualSupplyDateTime;
 	}
 
-
-
-	public String getReceiverFirstName() {
-		return receiverFirstName;
-	}
-
-
-
-	public void setReceiverFirstName(String receiverFirstName) {
-		this.receiverFirstName = receiverFirstName;
-	}
-
-
-
-	public String getReceiverLastName() {
-		return receiverLastName;
-	}
-
-
-
-	public void setReceiverLastName(String receiverLastName) {
-		this.receiverLastName = receiverLastName;
-	}
-
-
-
-	public String getReceiverAddress() {
-		return receiverAddress;
-	}
-
-
-
-	public void setReceiverAddress(String receiverAddress) {
-		this.receiverAddress = receiverAddress;
-	}
-
-
-
-	public String getReceiverPhoneNumber() {
-		return receiverPhoneNumber;
-	}
-
-
-
-	public void setReceiverPhoneNumber(String receiverPhoneNumber) {
-		this.receiverPhoneNumber = receiverPhoneNumber;
-	}
-
-
 	@Override
 	public String toString() {
 		return "Order [orderNumber=" + orderNumber + ", supplierUserId=" + supplierUserId + ", customerUserId="
 				+ customerUserId + ", branch=" + branch + ", timeType=" + timeType + ", status=" + status
 				+ ", issueDateTime=" + issueDateTime + ", estimatedSupplyDateTime=" + estimatedSupplyDateTime
 				+ ", actualSupplyDateTime=" + actualSupplyDateTime + ", supplyType=" + supplyType + ", supplyId="
-				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + ", receiverFirstName="
-				+ receiverFirstName + ", receiverLastName=" + receiverLastName + ", receiverAddress=" + receiverAddress
-				+ ", receiverPhoneNumber=" + receiverPhoneNumber + "]";
-	}	
+				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + "]";
+	}
 	
 }

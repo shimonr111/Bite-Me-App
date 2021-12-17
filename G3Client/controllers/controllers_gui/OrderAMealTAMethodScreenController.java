@@ -19,10 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import orders.AbatractSupplyMethod;
 import orders.Order;
+import orders.TakeAwaySupplyMethod;
+import util.Constans;
 
 
 /**
@@ -44,6 +48,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 	private static FXMLLoader loader;
     private static OrderAMealTAMethodScreenController orderAMealTAMethodScreenController;
     private static Order order;
+    private static TakeAwaySupplyMethod takeAwayInformation;
     @FXML
     private TextField firstNameTextField;
 
@@ -94,7 +99,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Choose restaurant");
+					Stage.setTitle("Choose supply method");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -146,12 +151,34 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     @FXML
     void getNextBtn(ActionEvent event) {
-
-//  //now we need to change this screen to the next one
-//		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-//		OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-//		orderSummaryScreenController.initOrderSummaryScreen(); // call the init of the next screen
-
+    	if(isEmptyFields()) {
+    		errorText.setText("Please, fill all the fields!");
+    		errorText.setFill(Color.RED);
+    	}
+    	else {
+    		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
+    				phoneTxtField.getText());
+    		//move to next screen
+    		//  now we need to change this screen to the next one
+    		//  ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    		//    		OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
+    		//    		orderSummaryScreenController.initOrderSummaryScreen(); // call the init of the next screen
+    	}
+    }
+    
+    /**
+     * This is a method
+     * for checking all the validity of the 
+     * fields received by the user
+     * 
+     * @return boolean if fields are empty
+     */
+    private boolean isEmptyFields() {
+    	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
+    			phoneTxtField.getText().equals("")) {
+    		return true;
+    	}
+    	return false;
     }
 
    /**
@@ -196,15 +223,14 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 
 
 
-/**
+  	/**
      * This is a function for 
      * initializing the screen.
      * 
      */
-@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
-	}
+  @Override
+  public void initialize(URL arg0, ResourceBundle arg1) {
+
+  }
 
 }

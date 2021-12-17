@@ -56,7 +56,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="choosePayMethBtn" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getChoosePayMeth" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
+      <Button fx:id="btnNext" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

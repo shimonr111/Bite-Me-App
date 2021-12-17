@@ -31,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.OrderTimeType;
 import orders.SupplyType;
@@ -57,6 +58,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 	private static FXMLLoader loader;
     private static OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController;
     private static Order order;
+
 
     @FXML
     private DatePicker supplyDatePicker;
@@ -152,7 +154,6 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         	case TAKE_AWAY:
         		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
         		OrderAMealTAMethodScreenController orderAMealTAMethodScreenController = new OrderAMealTAMethodScreenController();
-        		System.out.println(order.toString()); //debug
         		orderAMealTAMethodScreenController.initTAMethodScreen(order); // call the init of the next screen
         		break;
         	case DELIVERY:
