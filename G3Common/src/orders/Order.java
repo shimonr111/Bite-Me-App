@@ -135,7 +135,7 @@ public class Order implements Serializable {
 		this.branch = branch;
 		this.timeType = OrderTimeType.REGULAR; //default, need to update when getting the supply time.
 		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
-		this.issueDateTime = null;
+		this.issueDateTime = new Date();
 		
 		//TBD, need to update when getting.
 		this.estimatedSupplyDateTime = null;

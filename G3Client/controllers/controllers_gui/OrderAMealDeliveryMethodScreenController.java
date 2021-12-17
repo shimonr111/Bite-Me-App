@@ -50,9 +50,6 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     private static Order order;
 
     @FXML
-    private ComboBox<?> selectDeliveryTypeCombo;
-
-    @FXML
     private TextField addressTextField;
 
     @FXML
