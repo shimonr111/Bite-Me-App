@@ -141,18 +141,15 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This function is used for
      * switching to the next screen and 
      * 
-     * 
-     *
-     * 
      * @param event
      */
     @FXML
     void getChoosePaymenMethodtBtn(ActionEvent event) {
 
-//  //now we need to change this screen to the next one
-//		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-//		OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
-//		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(); // call the init of the next screen
+  //now we need to change this screen to the next one
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
+		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order,supplyMethodInformation); // call the init of the next screen
 
     }
 

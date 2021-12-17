@@ -175,7 +175,6 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         		
         		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
         		OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController = new OrderAMealDeliveryMethodScreenController();
-        		System.out.println(order.toString());//debug
         		orderAMealDeliveryMethodScreenController.initDeliveryMethodScreen(order); // call the init of the next screen
         		break;
         	default:

@@ -257,7 +257,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
   		switch(order.getTimeType()) {
   		case PRE:
-  			order.setTotalPrice(order.getTotalPrice()*Constans.PRE_ORDER_DISCOUNT); //set discount according to the instructions
+  			order.setTotalPrice(order.getTotalPrice()*(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
   			break;
   		default:
   			break;
