@@ -9,6 +9,8 @@ import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,46 +19,44 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
+import orders.Item;
+import orders.ItemCategory;
+import orders.ItemSize;
 import orders.Order;
-import orders.TakeAwaySupplyMethod;
-import util.Constans;
-
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
  * Class description: 
- * This is a class for 
- * 
- * 
+ * This is a class for the summary of the 
+ * order process.
  * 
  * @version 17/12/2021
  */
-public class OrderAMealTAMethodScreenController extends AbstractBiteMeController implements Initializable{
+public class OrderSummaryScreenController extends AbstractBiteMeController implements Initializable{
 	/**
 	 * Class members description:
 	 */
 
 	private static FXMLLoader loader;
-    private static OrderAMealTAMethodScreenController orderAMealTAMethodScreenController;
+    private static OrderSummaryScreenController orderSummaryScreenController;
     private static Order order;
-    private static TakeAwaySupplyMethod takeAwayInformation;
+    private static AbatractSupplyMethod supplyMethodInformation;
+    private String  pathForLastScreen= null;
     @FXML
-    private TextField firstNameTextField;
-
-    @FXML
-    private TextField phoneTxtField;
-
-    @FXML
-    private Button nextBtn;
+    private Button choosePaymentMethodBtn;
 
     @FXML
     private Button btnExit;
@@ -71,9 +71,24 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     private Text errorText;
 
     @FXML
-    private TextField lastNameTextField;
+    private TableView<Item> orderSummaryTable;
 
-     /**
+    @FXML
+    private TableColumn<Item, String> iteamNameColumn;
+
+    @FXML
+    private TableColumn<Item, ItemSize> sizeColumn;
+
+    @FXML
+    private TableColumn<Item, Double> priceColumn;
+
+    @FXML
+    private TableColumn<Item, String> commentColumn;
+
+    @FXML
+    private TextField totalOrderPriceTextField;
+
+    /**
      * Back button for the 
      * 
      * 
@@ -81,6 +96,16 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     @FXML
     void getBackBtn(ActionEvent event) {
+    	switch(order.getSupplyType()){
+		  case TAKE_AWAY:
+			  pathForLastScreen = "/fxmls/ORD5OrderAMealTAMethod.fxml";
+			  break;
+		  case DELIVERY:
+			  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
+			  break;
+		  default:
+			 break;
+	  }
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -89,7 +114,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/ORD4ChooseSupplyMethod.fxml").openStream());
+					root = loader.load(getClass().getResource(pathForLastScreen).openStream());
 					Scene scene = new Scene(root);
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
@@ -99,7 +124,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Choose supply method");
+					Stage.setTitle("Order Summary");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -111,7 +136,24 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 
     }
 
-        /**
+
+     /**
+     * This function is used for
+     * switching to the next screen and 
+     * 
+     * @param event
+     */
+    @FXML
+    void getChoosePaymenMethodtBtn(ActionEvent event) {
+
+  //now we need to change this screen to the next one
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
+		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order,supplyMethodInformation); // call the init of the next screen
+
+    }
+
+      /**
      * Exit from screen and update
      * DB.
      * 
@@ -127,7 +169,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 		System.exit(0);
     }
 
-    /**
+     /**
      * This is a method for getting 
      * information for the user
      * 
@@ -135,50 +177,9 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please insert information for the Take away process");
+    	PopUpMessages.helpMessage("Please confirm the summary of your order and choose payment method (cash / credit card)");
     }
 
-
-
-   /**
-     * This function is used for
-     * switching to the next screen and 
-     * 
-     * 
-     *
-     * 
-     * @param event
-     */
-    @FXML
-    void getNextBtn(ActionEvent event) {
-    	if(isEmptyFields()) {
-    		errorText.setText("Please, fill all the fields!");
-    		errorText.setFill(Color.RED);
-    	}
-    	else {
-    		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
-    				phoneTxtField.getText());
-    		//move to next screen
-    		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-    		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-    		 orderSummaryScreenController.initOrderSummaryScreen(order,takeAwayInformation); // call the init of the next screen
-    	}
-    }
-    
-    /**
-     * This is a method
-     * for checking all the validity of the 
-     * fields received by the user
-     * 
-     * @return boolean if fields are empty
-     */
-    private boolean isEmptyFields() {
-    	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
-    			phoneTxtField.getText().equals("")) {
-    		return true;
-    	}
-    	return false;
-    }
 
    /**
      * This is the init for the current 
@@ -187,7 +188,9 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * screen controller.
      * 
      */
-  public void initTAMethodScreen(Order order) {
+  public void initOrderSummaryScreen(Order order , AbatractSupplyMethod supplyMethodInformation) {
+	  OrderSummaryScreenController.order = order;
+	  OrderSummaryScreenController.supplyMethodInformation = supplyMethodInformation;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -196,8 +199,8 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/ORD5OrderAMealTAMethod.fxml").openStream());
-					orderAMealTAMethodScreenController = loader.getController();
+					root = loader.load(getClass().getResource("/fxmls/ORD6OrderSummary.fxml").openStream());
+					orderSummaryScreenController = loader.getController();
 					Scene scene = new Scene(root);
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
@@ -207,7 +210,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Take Away");
+					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -215,21 +218,26 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 				}
 			}
 		});
-		OrderAMealTAMethodScreenController.order=order; // save the order from the previous screen	
 	}
 
 
-
-
-
-  	/**
+  	 /**
      * This is a function for 
      * initializing the screen.
      * 
      */
-  @Override
-  public void initialize(URL arg0, ResourceBundle arg1) {
-
-  }
+  	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+  	totalOrderPriceTextField.setDisable(true); //set total price disable so that the user can't edit the price of the order
+  	totalOrderPriceTextField.setText(String.valueOf(order.getTotalPrice())); //set total price in screen
+  	/*Set data in the table for the summary*/
+	ObservableList<Item> items = FXCollections.observableArrayList();	
+	items.addAll(order.itemList);
+	iteamNameColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("itemName"));
+	sizeColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemSize>("size"));
+	priceColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
+	commentColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("comment"));
+	orderSummaryTable.setItems(items);
+	}
 
 }

@@ -31,7 +31,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import orders.AbatractSupplyMethod;
 import orders.Order;
+import orders.OrderTimeType;
 import orders.SupplyType;
 import util.DateTimeHandler;
 
@@ -56,6 +58,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 	private static FXMLLoader loader;
     private static OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController;
     private static Order order;
+
 
     @FXML
     private DatePicker supplyDatePicker;
@@ -154,6 +157,22 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         		orderAMealTAMethodScreenController.initTAMethodScreen(order); // call the init of the next screen
         		break;
         	case DELIVERY:
+        		/* check the delivery type */
+        		if (supplyDatePicker.getValue().equals(LocalDate.now())) { // if the customer chose the delivery for the current day
+        			int desiredHourInt = Integer.valueOf(time.substring(0, 2)); // convert String hour to Integer hour
+        			Date currentHourStr = new Date(); // the current hour
+        			int currentHourInt = currentHourStr.getHours(); // convert the current hour to Integer
+        			if(desiredHourInt - currentHourInt > 2) { // if the desired time to get the delivery is more than 2 hours
+        				order.setTimeType(OrderTimeType.PRE);
+        			}
+        			else { // the desired time is to get the delivery in less than 2 hours
+        				order.setTimeType(OrderTimeType.REGULAR);
+        			}
+        		}
+        		else { // the customer chose the delivery for the next days
+        			order.setTimeType(OrderTimeType.PRE);
+        		}
+        		
         		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
         		OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController = new OrderAMealDeliveryMethodScreenController();
         		orderAMealDeliveryMethodScreenController.initDeliveryMethodScreen(order); // call the init of the next screen

@@ -8,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderPaymentConfigurationScreenController">
    <children>
-      <Button fx:id="payBtn" layoutX="187.0" layoutY="444.0" mnemonicParsing="false" onAction="#getPayBtn" prefHeight="51.0" prefWidth="256.0" style="-fx-background-color: #7FBA00;" text="Finish Order" textFill="#383838">
+      <Button fx:id="finishOrderBtn" layoutX="187.0" layoutY="439.0" mnemonicParsing="false" onAction="#getFinishOrderBtn" prefHeight="51.0" prefWidth="256.0" style="-fx-background-color: #7FBA00;" text="Finish Order" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -45,7 +45,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="456.0" layoutY="24.0" text="Supply details -&gt; ">
+      <Label layoutX="367.0" layoutY="24.0" text="Supply details -&gt;  Order summary -&gt;">
          <font>
             <Font size="10.0" />
          </font>
@@ -55,28 +55,39 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Label>
-      <CheckBox fx:id="creditCheckBox" layoutX="163.0" layoutY="338.0" mnemonicParsing="false" onAction="#getCreditCheckBox" text="Credit card" />
-      <TextField layoutX="250.0" layoutY="334.0" promptText="Enter amount" />
-      <CheckBox fx:id="employeeBudgetCheckBox" layoutX="177.0" layoutY="189.0" mnemonicParsing="false" onAction="#getEmployeeBudgetCheckBox" text="Employee budget" />
-      <TextField layoutX="193.0" layoutY="209.0" promptText="Enter amount" />
-      <Label layoutX="129.0" layoutY="395.0" text="Total need to pay in cash">
+      <CheckBox fx:id="creditCheckBox" layoutX="187.0" layoutY="310.0" mnemonicParsing="false" text="Credit card">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></CheckBox>
+      <TextField fx:id="accountBalanceAmountTextField" layoutX="326.0" layoutY="266.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
+      <CheckBox fx:id="employeeBudgetCheckBox" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" text="Employee budget">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></CheckBox>
+      <TextField fx:id="creditCardAmountTextField" layoutX="324.0" layoutY="311.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
+      <Label layoutX="161.0" layoutY="369.0" text="Total need to pay in cash:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="66.0" layoutY="164.0" text="Only for business customer*" textFill="#8d0b0b" />
-      <Label layoutX="109.0" layoutY="107.0" text="Account Balance:" />
-      <TextField fx:id="totalPriceTextField1" layoutX="208.0" layoutY="103.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
-      <Label layoutX="268.0" layoutY="107.0" text="זה + של זיכוים וכו'" />
-      <Label layoutX="14.0" layoutY="143.0" text="Employee budget available Balance:" />
-      <TextField fx:id="totalPriceTextField11" layoutX="217.0" layoutY="139.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
-      <Label layoutX="268.0" layoutY="143.0" text="זה מראה כמה הוא יכול לשלם היום מהקתציב של המעביד" />
-      <Text layoutX="361.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here print error like he enter more then budget " />
-      <CheckBox fx:id="employeeBudgetCheckBox1" layoutX="163.0" layoutY="250.0" mnemonicParsing="false" onAction="#getEmployeeBudgetCheckBox" text="Use account Balance" />
-      <TextField layoutX="177.0" layoutY="267.0" promptText="Enter amount" />
-      <Text layoutX="350.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here print error like he enter more then balance" />
-      <Label layoutX="29.0" layoutY="213.0" prefHeight="15.0" prefWidth="149.0" text="Only for business customer*" textFill="#8d0b0b" />
-      <TextField fx:id="totalPriceTextField12" layoutX="325.0" layoutY="393.0" onAction="#getTotalPriceTextField" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
-      <Text layoutX="414.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="here print error like he put more money then should" wrappingWidth="195.5703125" />
+      <Label layoutX="168.0" layoutY="170.0" text="Only for business customer*" textFill="#8d0b0b" />
+      <Label layoutX="170.0" layoutY="100.0" text="Account Balance:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <TextField fx:id="accountBalanceTextField" layoutX="327.0" layoutY="101.0" prefHeight="25.0" prefWidth="94.0" promptText="0.0" />
+      <Label layoutX="14.0" layoutY="143.0" text="Employee budget available Balance:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <TextField fx:id="employeeBudgetBalanceTextField" layoutX="327.0" layoutY="144.0" prefHeight="25.0" prefWidth="94.0" promptText="0.0" />
+      <CheckBox fx:id="accountBalanceCheckBox" layoutX="107.0" layoutY="266.0" mnemonicParsing="false" text="Use account Balance">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></CheckBox>
+      <TextField fx:id="employeeBudgetAmountTextField" layoutX="327.0" layoutY="209.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
+      <Label layoutX="168.0" layoutY="235.0" prefHeight="15.0" prefWidth="149.0" text="Only for business customer*" textFill="#8d0b0b" />
+      <TextField fx:id="totalToPayInCashTextField" layoutX="346.0" layoutY="367.0" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
+      <Text fx:id="errorText" layoutX="171.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="278.99999959766865" />
    </children>
 </Pane>

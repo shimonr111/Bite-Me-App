@@ -169,7 +169,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     		cartTable.getItems().remove(item);
     	}
     	order.itemList.removeAll(order.itemList);//empty the array list in order
-    	System.out.println(order.itemList.toString());
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

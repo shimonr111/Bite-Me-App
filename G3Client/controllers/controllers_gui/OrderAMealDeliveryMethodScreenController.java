@@ -17,13 +17,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import orders.DeliverySupplyMethod;
+import orders.DeliveryType;
 import orders.Order;
+import util.Constans;
 
 
 /**
@@ -48,10 +51,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 	private static FXMLLoader loader;
     private static OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController;
     private static Order order;
-
-    @FXML
-    private ComboBox<?> selectDeliveryTypeCombo;
-
+    private static DeliverySupplyMethod deliveryInformation;
     @FXML
     private TextField addressTextField;
 
@@ -81,6 +81,9 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 
     @FXML
     private TextField lastNameTextField;
+    
+    @FXML
+    private Button btnNext;
 
  /**
      * Back button for the 
@@ -135,17 +138,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 		sendToClient(disconnectMessage);
 		System.exit(0);
     }
-
-    /**
-     * This is a method for 
-     * choosing the paying method.
-     * 
-     * @param event
-     */
-    @FXML
-    void getChoosePayMeth(ActionEvent event) {
-    	
-    }
+    
     
    /**
      * This is a method for getting 
@@ -170,14 +163,37 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      */
     @FXML
     void getNextBtn(ActionEvent event) {
-
-      //now we need to change this screen to the next one
-      //((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-      //OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-      //orderSummaryScreenController.initOrderSummaryScreen(); // call the init of the next screen
-
+    	if(isEmptyFields()) {
+    		errorText.setText("Please, fill all the fields!");
+    		errorText.setFill(Color.RED);
+    	}
+    	else {
+    		deliveryInformation.setReceiverFirstName(firstNameTextField.getText());
+    		deliveryInformation.setReceiverLastName(lastNameTextField.getText());
+    		deliveryInformation.setReceiverPhoneNumber(phoneTxtField.getText());
+    		deliveryInformation.setReciverAddress(addressTextField.getText());
+    		
+    		//move to next screen
+    		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
+    		 orderSummaryScreenController.initOrderSummaryScreen(order,deliveryInformation); // call the init of the next screen
+    	}
     }
 
+    /**
+     * This is a method
+     * for checking all the validity of the 
+     * fields received by the user
+     * 
+     * @return boolean if fields are empty
+     */
+    private boolean isEmptyFields() {
+    	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
+    			phoneTxtField.getText().equals("") || addressTextField.getText().equals("")){
+    		return true;
+    	}
+    	return false;
+    }
 
     /**
    	* This is the init for the current 
@@ -225,8 +241,27 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+  		deliveryInformation = new DeliverySupplyMethod(order.getSupplyId(),order.getOrderNumber(),null,null,null,DeliveryType.REGULAR,null);
+  		calcTotalBill();
+  		deliveryFeeTextField.setText(String.valueOf(Constans.REGULAR_DELIVERY_FEE_IN_NIS));	
+  		deliveryFeeTextField.setDisable(true);
+  		
 	}
 
+  	/**
+  	 * Calculate the total bill depending on
+  	 * the fee and the time type order (Pre order and Regular)
+  	 * 
+  	 */
+  	private void calcTotalBill() {
+  		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
+  		switch(order.getTimeType()) {
+  		case PRE:
+  			order.setTotalPrice(order.getTotalPrice()*(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+  			break;
+  		default:
+  			break;
+  		
+  		}
+  	}
 }
