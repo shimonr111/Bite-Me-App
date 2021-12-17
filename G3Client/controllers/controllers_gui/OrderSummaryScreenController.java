@@ -9,6 +9,8 @@ import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,11 +22,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
+import orders.Item;
+import orders.ItemCategory;
+import orders.ItemSize;
 import orders.Order;
 
 /**
@@ -63,31 +71,22 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     private Text errorText;
 
     @FXML
-    private TableView<?> orderSummaryTable;
+    private TableView<Item> orderSummaryTable;
 
     @FXML
-    private TableColumn<?, ?> iteamNameColumn;
+    private TableColumn<Item, String> iteamNameColumn;
 
     @FXML
-    private TableColumn<?, ?> sizeColumn;
+    private TableColumn<Item, ItemSize> sizeColumn;
 
     @FXML
-    private TableColumn<?, ?> priceColumn;
+    private TableColumn<Item, Double> priceColumn;
 
     @FXML
-    private TableColumn<?, ?> commentColumn;
+    private TableColumn<Item, String> commentColumn;
 
     @FXML
     private TextField totalOrderPriceTextField;
-
-    @FXML
-    private TextField itemSumTextField;
-
-    @FXML
-    private TextField discountPreOrderTextField;
-
-    @FXML
-    private TextField supplyFeeTextField;
 
     /**
      * Back button for the 
@@ -138,7 +137,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     }
 
 
-/**
+     /**
      * This function is used for
      * switching to the next screen and 
      * 
@@ -185,7 +184,6 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     }
 
 
-
    /**
      * This is the init for the current 
      * screen, in which we load the fxml.
@@ -226,18 +224,23 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 	}
 
 
-
-
-
-/**
+  	 /**
      * This is a function for 
      * initializing the screen.
      * 
      */
-@Override
+  	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+  	totalOrderPriceTextField.setDisable(true); //set total price disable so that the user can't edit the price of the order
+  	totalOrderPriceTextField.setText(String.valueOf(order.getTotalPrice())); //set total price in screen
+  	/*Set data in the table for the summary*/
+	ObservableList<Item> items = FXCollections.observableArrayList();	
+	items.addAll(order.itemList);
+	iteamNameColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("itemName"));
+	sizeColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemSize>("size"));
+	priceColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
+	commentColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("comment"));
+	orderSummaryTable.setItems(items);
 	}
 
 }

@@ -11,7 +11,7 @@
 
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
    <children>
-      <Button fx:id="choosePaymentMethodBtn" layoutX="128.0" layoutY="416.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="51.0" prefWidth="460.0" style="-fx-background-color: #7FBA00;" text="Confirm to choose payment method" textFill="#383838">
+      <Button fx:id="choosePaymentMethodBtn" layoutX="128.0" layoutY="416.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="51.0" prefWidth="460.0" style="-fx-background-color: #7FBA00;" text="Confirm" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -62,24 +62,6 @@
       </TableView>
       <TextField fx:id="totalOrderPriceTextField" layoutX="288.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" promptText="0.0" />
       <Label layoutX="156.0" layoutY="361.0" text="Total order price:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="212.0" layoutY="273.0" text="Item sum:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="122.0" layoutY="304.0" text="Discount for preorder:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="itemSumTextField" layoutX="289.0" layoutY="271.0" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <TextField fx:id="discountPreOrderTextField" layoutX="289.0" layoutY="302.0" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <TextField fx:id="supplyFeeTextField" layoutX="288.0" layoutY="330.0" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <Label layoutX="199.0" layoutY="332.0" text="Supply fee:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
