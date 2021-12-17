@@ -147,6 +147,20 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         	String time = supplyTimeCombo.getValue();
         	Date dateForOrder = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields(date,time);
         	order.setEstimatedSupplyDateTime(dateForOrder);
+        	switch(order.getSupplyType()) {
+        	case TAKE_AWAY:
+        		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+        		OrderAMealTAMethodScreenController orderAMealTAMethodScreenController = new OrderAMealTAMethodScreenController();
+        		orderAMealTAMethodScreenController.initTAMethodScreen(order); // call the init of the next screen
+        		break;
+        	case DELIVERY:
+        		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+        		OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController = new OrderAMealDeliveryMethodScreenController();
+        		orderAMealDeliveryMethodScreenController.initDeliveryMethodScreen(order); // call the init of the next screen
+        		break;
+        	default:
+        		break;
+        	}
     	}
 
     }

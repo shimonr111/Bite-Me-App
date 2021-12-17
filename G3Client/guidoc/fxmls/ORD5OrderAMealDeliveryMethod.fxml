@@ -8,12 +8,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderAMealDeliveryMethodScreenController">
    <children>
-      <ComboBox fx:id="selectDeliveryTypeCombo" layoutX="301.0" layoutY="146.0" onAction="#getDeliveryType" prefHeight="31.0" prefWidth="149.0" promptText="Select delivery type" />
-      <TextField fx:id="addressTxtField" layoutX="301.0" layoutY="217.0" onAction="#getAddress" promptText="Enter an address" />
-      <TextField fx:id="fullNameTxtField" layoutX="301.0" layoutY="187.0" onAction="#getFullName" promptText="Enter full name" />
-      <TextField fx:id="phoneTxtField" layoutX="301.0" layoutY="252.0" onAction="#getPhone" promptText="Enter a phone number" />
+      <ComboBox fx:id="selectDeliveryTypeCombo" layoutX="301.0" layoutY="146.0" prefHeight="31.0" prefWidth="149.0" promptText="Select delivery type" />
+      <TextField fx:id="addressTxtField" layoutX="301.0" layoutY="217.0" promptText="Enter an address" />
+      <TextField fx:id="fullNameTxtField" layoutX="301.0" layoutY="187.0" promptText="Enter full name" />
+      <TextField fx:id="phoneTxtField" layoutX="301.0" layoutY="252.0" promptText="Enter a phone number" />
       <Label layoutX="254.0" layoutY="27.0" prefHeight="53.0" prefWidth="261.0" text="Delivery" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -63,13 +63,13 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="choosePayMethBtn" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getChoosePayMeth" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
+      <Button fx:id="nextBtn" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Text fx:id="errorText" layoutX="220.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <TextField layoutX="347.0" layoutY="299.0" prefHeight="25.0" prefWidth="56.0" text="0.0" />
+      <Text fx:id="errorText" layoutX="220.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="totalPrieTextField" layoutX="347.0" layoutY="299.0" prefHeight="25.0" prefWidth="56.0" text="0.0" />
       <Text fill="#383838" layoutX="191.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery fee:">
          <font>
             <Font name="System Bold" size="24.0" />
