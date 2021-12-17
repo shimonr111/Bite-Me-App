@@ -114,7 +114,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Customer registration");
 						Stage.setScene(scene);
 						Stage.show();
@@ -172,7 +172,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 				e.printStackTrace();
 			}
 			Scene scene = new Scene(root);
-			//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 			primaryStage.setTitle("Main menu");
 			primaryStage.setScene(scene);
 			primaryStage.show();/* show the new screen */

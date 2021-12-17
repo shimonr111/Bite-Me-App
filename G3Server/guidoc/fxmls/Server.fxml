@@ -18,13 +18,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="pane" stylesheets="@../../../G3Common/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bitemeserver.BiteMeServerUI">
+<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="exit" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bitemeserver.BiteMeServerUI">
    <children>
-      <VBox layoutX="260.0" layoutY="632.0" styleClass="vbox">
+      <VBox layoutX="262.0" layoutY="609.0" prefHeight="125.0" prefWidth="501.0" styleClass="vbox">
          <children>
             <HBox styleClass="hbox">
                <children>
-                  <Button fx:id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connect" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Connect" textAlignment="CENTER" textFill="#383838">
+                  <Button fx:id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connect" prefHeight="50.0" prefWidth="250.0" styleClass="connect" text="Connect" textAlignment="CENTER" textFill="#383838">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -32,7 +32,7 @@
                         <Blend mode="BLUE" />
                      </effect>
                   </Button>
-                  <Button fx:id="disconnectBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="50.0" prefWidth="250.0" text="Disconnect" textAlignment="CENTER" textFill="#383838">
+                  <Button fx:id="disconnectBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Disconnect" textAlignment="CENTER" textFill="#383838">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
@@ -41,24 +41,30 @@
                      </effect>
                   </Button>
                </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
             </HBox>
-            <Button id="import-btn" fx:id="importBtn" mnemonicParsing="false" onAction="#getImportBtn" prefHeight="50.0" prefWidth="505.0" styleClass="importData" text="Import the Data Management System" textFill="#383838">
+            <Button id="import-btn" fx:id="importBtn" mnemonicParsing="false" onAction="#getImportBtn" prefHeight="50.0" prefWidth="505.0" styleClass="import" text="Import the Data Management System" textFill="#383838">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
          </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
       </VBox>
-      <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="49.0" styleClass="exit">
+      <Button fx:id="closeBtn" maxHeight="40.0" maxWidth="50.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit">
          <effect>
             <ColorAdjust />
          </effect></Button>
-      <Label layoutX="267.0" layoutY="31.0" styleClass="headLight" text="Server Configuration" />
-      <Text fx:id="txtMsgToServer" layoutX="443.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Label layoutX="267.0" layoutY="24.0" styleClass="headLight" text="Server Configuration" />
+      <Text fx:id="txtMsgToServer" layoutX="305.0" layoutY="567.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.0">
          <font>
             <Font size="14.0" />
          </font></Text>
-      <HBox layoutX="31.0" layoutY="152.0" prefHeight="455.0" prefWidth="963.0" spacing="80.0">
+      <HBox layoutX="31.0" layoutY="131.0" prefHeight="455.0" prefWidth="963.0" spacing="80.0">
          <children>
             <HBox spacing="30.0">
                <children>
@@ -171,7 +177,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="txtConsole" editable="false" prefHeight="174.0" prefWidth="410.0" style="-fx-background-radius: 5;">
+                        <TextArea fx:id="txtConsole" editable="false" prefHeight="174.0" prefWidth="410.0" style="-fx-background-radius: 5; -fx-background-color: #f2eeee;">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -185,9 +191,9 @@
             </VBox>
          </children>
       </HBox>
-      <ImageView fitHeight="191.0" fitWidth="200.0" layoutX="14.0" layoutY="563.0" preserveRatio="true">
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="654.0">
          <image>
-            <Image url="@../../../Design/Images/bmlogo.png" />
+            <Image url="@../../../Design/Images/logo.png" />
          </image>
       </ImageView>
    </children>

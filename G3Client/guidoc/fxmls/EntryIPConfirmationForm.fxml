@@ -13,9 +13,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="txt" prefHeight="384.0" prefWidth="512.0" styleClass="pane" stylesheets="@../../../G3Common/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryIPConfirmationFormController">
+<AnchorPane fx:id="txt" prefHeight="384.0" prefWidth="512.0" styleClass="pane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryIPConfirmationFormController">
    <children>
-      <Button id="btnConfirm" fx:id="btnConfirmIP" layoutX="166.0" layoutY="312.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="51.0" prefWidth="180.0" styleClass="next" textFill="#383838">
+      <Button id="btnConfirm" fx:id="btnConfirmIP" layoutX="182.0" layoutY="273.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="40.0" prefWidth="150.0" styleClass="enter" text="Enter" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Button>
@@ -24,9 +24,9 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <VBox layoutX="112.0" layoutY="123.0" prefHeight="200.0" prefWidth="289.0" spacing="10.0">
+      <VBox layoutX="112.0" layoutY="123.0" prefHeight="92.0" prefWidth="289.0" spacing="10.0">
          <children>
-            <HBox prefHeight="51.0" prefWidth="330.0" spacing="20.0" styleClass="hbox">
+            <HBox prefHeight="51.0" prefWidth="330.0" spacing="25.0" styleClass="hbox">
                <children>
                   <Label prefHeight="30.0" prefWidth="107.0" text="Server IP:">
                      <font>
@@ -49,7 +49,7 @@
                   </TextField>
                </children>
                <padding>
-                  <Insets top="15.0" />
+                  <Insets bottom="5.0" top="15.0" />
                </padding>
             </HBox>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Entering wrong IP will cause termination!">
@@ -64,9 +64,9 @@
             <ColorAdjust />
          </effect>
       </Button>
-      <ImageView fitHeight="80.0" fitWidth="94.0" layoutX="2.0" layoutY="298.0">
+      <ImageView fitHeight="61.0" fitWidth="68.0" layoutX="6.0" layoutY="319.0">
          <image>
-            <Image url="@../../../Design/Images/bmlogo.png" />
+            <Image url="@../../../Design/Images/logo.png" />
          </image>
       </ImageView>
    </children>

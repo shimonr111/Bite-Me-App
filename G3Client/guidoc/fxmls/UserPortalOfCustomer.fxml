@@ -1,49 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfCustomerController">
+<Pane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfCustomerController">
    <children>
-      <Button id="button-menu" fx:id="btnStartOrder" layoutX="40.0" layoutY="113.0" mnemonicParsing="false" onAction="#getStartOrderBtn" prefHeight="31.0" prefWidth="188.0" text="Start order" />
-      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnLogout" layoutX="235.0" layoutY="354.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+      <Button fx:id="btnLogout" layoutX="387.0" layoutY="619.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Logout" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="109.0" layoutY="19.0" prefHeight="53.0" prefWidth="86.0" text="Welcome," textFill="#383838">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Text fx:id="userName" fill="#383838" layoutX="211.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="338.13671875">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <Label layoutX="433.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
-      <Label layoutX="415.0" layoutY="98.0" prefHeight="31.0" prefWidth="62.0" text="STATUS: " textFill="#eb0e0e">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Text fx:id="statusText" fill="#eb0e0e" layoutX="483.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.13671875">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
+      <Label layoutX="731.0" layoutY="14.0" styleClass="miniLabel" text="Home Screen -&gt; Login -&gt; User Portal" />
+      <HBox layoutX="14.0" layoutY="11.0" prefHeight="43.0" prefWidth="106.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="help" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="242.0" layoutY="58.0" prefHeight="154.0" prefWidth="541.0">
+         <children>
+            <HBox prefHeight="74.0" prefWidth="591.0" spacing="10.0" styleClass="spc" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+               <children>
+                  <Label prefHeight="73.0" prefWidth="250.0" styleClass="headLight" text="Welcome," textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-spc" wrappingWidth="261.3098945617676">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="74.0" prefWidth="541.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="230.0" styleClass="miniHeadLight" text="Account Status:" textFill="#eb0e0e">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="statusText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-status" wrappingWidth="219.13671875">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="361.0" layoutY="244.0" prefHeight="400.0" prefWidth="302.0">
+         <children>
+            <Button id="button-menu" fx:id="btnStartOrder" mnemonicParsing="false" onAction="#getStartOrderBtn" prefHeight="60.0" prefWidth="280.0" styleClass="order" text="Start Order" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+         </padding>
+      </VBox>
    </children>
 </Pane>
