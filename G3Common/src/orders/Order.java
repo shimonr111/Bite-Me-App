@@ -135,7 +135,7 @@ public class Order implements Serializable {
 		this.branch = branch;
 		this.timeType = OrderTimeType.REGULAR; //default, need to update when getting the supply time.
 		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
-		this.issueDateTime = new Date();
+		this.issueDateTime = null;
 		
 		//TBD, need to update when getting.
 		this.estimatedSupplyDateTime = null;
@@ -265,5 +265,17 @@ public class Order implements Serializable {
 	public void setEstimatedSupplyDateTime(Date estimatedSupplyDateTime) {
 		this.estimatedSupplyDateTime = estimatedSupplyDateTime;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Order [orderNumber=" + orderNumber + ", supplierUserId=" + supplierUserId + ", customerUserId="
+				+ customerUserId + ", branch=" + branch + ", timeType=" + timeType + ", status=" + status
+				+ ", issueDateTime=" + issueDateTime + ", estimatedSupplyDateTime=" + estimatedSupplyDateTime
+				+ ", actualSupplyDateTime=" + actualSupplyDateTime + ", supplyType=" + supplyType + ", supplyId="
+				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + "]";
+	}
+	
+	
 	
 }

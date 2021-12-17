@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -132,7 +133,9 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     void getAddToCartBtn(ActionEvent event) {
     	if(menuTable.getSelectionModel().getSelectedItem() != null) {
     		if(menuTable.getSelectionModel().getSelectedItem() instanceof Item) {
+    			errorText1.setVisible(false); // if the user added an item to the cart set invisible
     			Item itemAddToCart = new Item((Item)menuTable.getSelectionModel().getSelectedItem());
+    			itemAddToCart.setSupplierUserId(restaurantID);
     			order.itemList.add(itemAddToCart);//add item to cart
     			order.totalPrice += itemAddToCart.getPrice();
     			//print the new sum to the user
@@ -146,7 +149,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     					Item item = event.getRowValue(); 
     					//get the item from the arraylist
     					item.setComment(event.getNewValue());
-    					System.out.println(order.itemList.toString());//lior - debug
     				}
     			});
     		}
@@ -199,9 +201,18 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 
     @FXML
     void getBtnNext(ActionEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-    	OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController = new OrderChooseSupplyMethodScreenController();
-    	orderChooseSupplyMethodScreenController.initChooseSupplyMethodScreen(order); // call the init of the next screen
+    	//first check if the order item array list is not empty, if it is set text to the user and deny going to the next screen
+    	if(order.itemList.size()!=0) {
+    		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+        	OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController = new OrderChooseSupplyMethodScreenController();
+        	orderChooseSupplyMethodScreenController.initChooseSupplyMethodScreen(order); // call the init of the next screen	
+    	}
+    	else {
+    		//set error message to the user
+    		errorText1.setVisible(true); 
+    		errorText1.setText("You didn't choose any items, please choose them first!");
+    		errorText1.setFill(Color.RED);
+    	}
     }
 
     /**
@@ -244,7 +255,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     		if(cartTable.getSelectionModel().getSelectedItem() instanceof Item) {
     			Item itemRemoveFromCart = (Item)cartTable.getSelectionModel().getSelectedItem();
     			order.itemList.remove(itemRemoveFromCart);//remove item from cart
-    			System.out.println(order.itemList.toString()); //-debug - lior
     			order.totalPrice -= itemRemoveFromCart.getPrice(); //update the total bill of the order
     			//print the new total bil to the user
     			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
@@ -311,6 +321,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		Message message = new Message (Task.GET_ITEMS_FOR_ORDER_MENU,Answer.WAIT_RESPONSE,restaurantID);
 		sendToClient(message);
 		if(itemListOfMenuFromDB == null) {
+			errorText1.setVisible(true);
 			errorText1.setText("There are no Items in this restaurant!");
     		errorText1.setFill(Color.RED);
 		}
@@ -337,6 +348,25 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		commentCartColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 		
 		menuTable.setItems(items);
+		
+		/*Add event handlers for distinguishing between cart table view and menu table view upon row selection*/
+		cartTable.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				menuTable.getSelectionModel().clearSelection(); 
+			}
+			
+		});
+		
+		menuTable.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				cartTable.getSelectionModel().clearSelection(); 
+			}
+			
+		});
 		
 		/*If the item list is not empty (we got to this screen from the next one, show the old view table*/
 		if(!order.itemList.isEmpty()) {
