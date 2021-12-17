@@ -135,6 +135,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     		if(menuTable.getSelectionModel().getSelectedItem() instanceof Item) {
     			errorText1.setVisible(false); // if the user added an item to the cart set invisible
     			Item itemAddToCart = new Item((Item)menuTable.getSelectionModel().getSelectedItem());
+    			itemAddToCart.setSupplierUserId(restaurantID);
     			order.itemList.add(itemAddToCart);//add item to cart
     			order.totalPrice += itemAddToCart.getPrice();
     			//print the new sum to the user
