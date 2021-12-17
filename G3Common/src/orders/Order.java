@@ -8,9 +8,13 @@ import users.Branch;
 /**
  * 
  * @author Ori, Malka.
- *  Class description:
- *  This calss describes the Order Entity.
- * @version 11/12/2021
+ * @author Lior, Guzovsky
+ * @author Shimon, Rubin
+ * 
+ * Class description:
+ * This class describes the Order Entity.
+ *  
+ * @version 17/12/2021
  */
 public class Order implements Serializable {
 	/**
@@ -83,11 +87,40 @@ public class Order implements Serializable {
 	public ArrayList<Item> itemList;
 	
 	/**
+	 * This section is for the attributes
+	 * of the supply process, we need to 
+	 * save here all the information about the receiver
+	 * of the supply.
+	 * 
+	 */
+	
+	/**
+	 * This is the receivers first name
+	 */
+	public String receiverFirstName;
+	
+	/**
+	 * This is the receivers Last name
+	 */
+	public String receiverLastName;
+	
+	/**
+	 * This is the receivers Address
+	 */
+	public String receiverAddress;
+	
+	/**
+	 * This is the receivers phone number
+	 */
+	public String receiverPhoneNumber;
+	
+	/**
 	 * Constructors:
 	 */
 	
 	/**
 	 * This constructor used only when ~~passing~~ object.
+	 * 
 	 * @param orderNumber
 	 * @param supplierUserId
 	 * @param customerUserId
@@ -100,10 +133,16 @@ public class Order implements Serializable {
 	 * @param supplyType
 	 * @param supplyId
 	 * @param totalPrice
+	 * @param itemList
+	 * @param receiverFirstName
+	 * @param receiverLastName
+	 * @param receiverAddress
+	 * @param receiverPhoneNumber
 	 */
 	public Order(int orderNumber, String supplierUserId, String customerUserId, Branch branch, OrderTimeType timeType,
-			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime, SupplyType supplyType, int supplyId,
-			double totalPrice) {
+			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime,
+			SupplyType supplyType, int supplyId, double totalPrice, ArrayList<Item> itemList, String receiverFirstName,
+			String receiverLastName, String receiverAddress, String receiverPhoneNumber) {
 		super();
 		this.orderNumber = orderNumber;
 		this.supplierUserId = supplierUserId;
@@ -117,9 +156,13 @@ public class Order implements Serializable {
 		this.supplyType = supplyType;
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
-		
-		//TBD, need to check what to do with items.
+		this.itemList = itemList;
+		this.receiverFirstName = receiverFirstName;
+		this.receiverLastName = receiverLastName;
+		this.receiverAddress = receiverAddress;
+		this.receiverPhoneNumber = receiverPhoneNumber;
 	}
+
 
 
 	/**
@@ -137,22 +180,23 @@ public class Order implements Serializable {
 		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
 		this.issueDateTime = new Date();
 		
-		//TBD, need to update when getting.
 		this.estimatedSupplyDateTime = null;
 		this.actualSupplyDateTime = null;
 		this.supplyType = null;
 		this.supplyId = 0;
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
+		
+		this.receiverFirstName = null;
+		this.receiverLastName = null;
+		this.receiverAddress = null;
+		this.receiverPhoneNumber = null;
 	} 
 	
 	/**
 	 * Methods:
 	 */
 	
-	/**
-	 * TBD, need to add item methods (add, remove...)
-	 */
 	
 	/**
 	 * Getters and Setters:
@@ -266,6 +310,66 @@ public class Order implements Serializable {
 		this.estimatedSupplyDateTime = estimatedSupplyDateTime;
 	}
 
+	
+
+	public Date getActualSupplyDateTime() {
+		return actualSupplyDateTime;
+	}
+
+
+
+	public void setActualSupplyDateTime(Date actualSupplyDateTime) {
+		this.actualSupplyDateTime = actualSupplyDateTime;
+	}
+
+
+
+	public String getReceiverFirstName() {
+		return receiverFirstName;
+	}
+
+
+
+	public void setReceiverFirstName(String receiverFirstName) {
+		this.receiverFirstName = receiverFirstName;
+	}
+
+
+
+	public String getReceiverLastName() {
+		return receiverLastName;
+	}
+
+
+
+	public void setReceiverLastName(String receiverLastName) {
+		this.receiverLastName = receiverLastName;
+	}
+
+
+
+	public String getReceiverAddress() {
+		return receiverAddress;
+	}
+
+
+
+	public void setReceiverAddress(String receiverAddress) {
+		this.receiverAddress = receiverAddress;
+	}
+
+
+
+	public String getReceiverPhoneNumber() {
+		return receiverPhoneNumber;
+	}
+
+
+
+	public void setReceiverPhoneNumber(String receiverPhoneNumber) {
+		this.receiverPhoneNumber = receiverPhoneNumber;
+	}
+
 
 	@Override
 	public String toString() {
@@ -273,9 +377,9 @@ public class Order implements Serializable {
 				+ customerUserId + ", branch=" + branch + ", timeType=" + timeType + ", status=" + status
 				+ ", issueDateTime=" + issueDateTime + ", estimatedSupplyDateTime=" + estimatedSupplyDateTime
 				+ ", actualSupplyDateTime=" + actualSupplyDateTime + ", supplyType=" + supplyType + ", supplyId="
-				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + "]";
-	}
-	
-	
+				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + ", receiverFirstName="
+				+ receiverFirstName + ", receiverLastName=" + receiverLastName + ", receiverAddress=" + receiverAddress
+				+ ", receiverPhoneNumber=" + receiverPhoneNumber + "]";
+	}	
 	
 }
