@@ -174,10 +174,9 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     		deliveryInformation.setReciverAddress(addressTextField.getText());
     		
     		//move to next screen
-    		//  now we need to change this screen to the next one
-    		//  ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-    		//    		OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-    		//    		orderSummaryScreenController.initOrderSummaryScreen(); // call the init of the next screen
+    		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
+    		 orderSummaryScreenController.initOrderSummaryScreen(order,deliveryInformation); // call the init of the next screen
     	}
     }
 
@@ -243,13 +242,18 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
   		deliveryInformation = new DeliverySupplyMethod(order.getSupplyId(),order.getOrderNumber(),null,null,null,DeliveryType.REGULAR,null);
-  		culcTotalBill();
+  		calcTotalBill();
   		deliveryFeeTextField.setText(String.valueOf(Constans.REGULAR_DELIVERY_FEE_IN_NIS));	
   		deliveryFeeTextField.setDisable(true);
   		
 	}
 
-  	private void culcTotalBill() {
+  	/**
+  	 * Calculate the total bill depending on
+  	 * the fee and the time type order (Pre order and Regular)
+  	 * 
+  	 */
+  	private void calcTotalBill() {
   		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
   		switch(order.getTimeType()) {
   		case PRE:
