@@ -53,10 +53,10 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     private ComboBox<?> selectDeliveryTypeCombo;
 
     @FXML
-    private TextField addressTxtField;
+    private TextField addressTextField;
 
     @FXML
-    private TextField fullNameTxtField;
+    private TextField firstNameTextField;
 
     @FXML
     private TextField phoneTxtField;
@@ -71,13 +71,16 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     private Button btnHelp;
 
     @FXML
-    private Button nextBtn;
+    private Button choosePayMethBtn;
 
     @FXML
     private Text errorText;
 
     @FXML
-    private TextField totalPrieTextField;
+    private TextField deliveryFeeTextField;
+
+    @FXML
+    private TextField lastNameTextField;
 
  /**
      * Back button for the 
@@ -133,6 +136,17 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 		System.exit(0);
     }
 
+    /**
+     * This is a method for 
+     * choosing the paying method.
+     * 
+     * @param event
+     */
+    @FXML
+    void getChoosePayMeth(ActionEvent event) {
+    	
+    }
+    
    /**
      * This is a method for getting 
      * information for the user

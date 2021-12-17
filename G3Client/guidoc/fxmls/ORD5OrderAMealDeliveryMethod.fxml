@@ -11,30 +11,30 @@
 <Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderAMealDeliveryMethodScreenController">
    <children>
       <ComboBox fx:id="selectDeliveryTypeCombo" layoutX="301.0" layoutY="146.0" prefHeight="31.0" prefWidth="149.0" promptText="Select delivery type" />
-      <TextField fx:id="addressTxtField" layoutX="301.0" layoutY="217.0" promptText="Enter an address" />
-      <TextField fx:id="fullNameTxtField" layoutX="301.0" layoutY="187.0" promptText="Enter full name" />
-      <TextField fx:id="phoneTxtField" layoutX="301.0" layoutY="252.0" promptText="Enter a phone number" />
+      <TextField fx:id="addressTextField" layoutX="301.0" layoutY="261.0" promptText="Enter an address" />
+      <TextField fx:id="firstNameTextField" layoutX="301.0" layoutY="187.0" promptText="Enter first name" />
+      <TextField fx:id="phoneTxtField" layoutX="301.0" layoutY="296.0" promptText="Enter a phone number" />
       <Label layoutX="254.0" layoutY="27.0" prefHeight="53.0" prefWidth="261.0" text="Delivery" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="126.0" layoutY="135.0" text="Delivery type:" textFill="#383838">
+      <Label layoutX="133.0" layoutY="141.0" text="Delivery type:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="172.0" layoutY="170.0" text="Full name:" textFill="#383838">
+      <Label layoutX="165.0" layoutY="179.0" text="First name:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="172.0" layoutY="212.0" text="Address:" textFill="#383838">
+      <Label layoutX="190.0" layoutY="256.0" text="Address:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="118.0" layoutY="242.0" text="Phone number:" textFill="#383838">
+      <Label layoutX="116.0" layoutY="290.0" text="Phone number:" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -63,17 +63,23 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="nextBtn" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
+      <Button fx:id="choosePayMethBtn" layoutX="502.0" layoutY="436.0" mnemonicParsing="false" onAction="#getChoosePayMeth" prefHeight="51.0" prefWidth="133.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Text fx:id="errorText" layoutX="220.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <TextField fx:id="totalPrieTextField" layoutX="347.0" layoutY="299.0" prefHeight="25.0" prefWidth="56.0" text="0.0" />
-      <Text fill="#383838" layoutX="191.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery fee:">
+      <Text fx:id="errorText" layoutX="230.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TextField fx:id="deliveryFeeTextField" layoutX="347.0" layoutY="343.0" prefHeight="25.0" prefWidth="56.0" text="0.0" />
+      <Text fill="#383838" layoutX="191.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delivery fee:">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <Label layoutX="168.0" layoutY="220.0" text="Last name:" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TextField fx:id="lastNameTextField" layoutX="301.0" layoutY="225.0" promptText="Enter first name" />
    </children>
 </Pane>
