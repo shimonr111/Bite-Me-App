@@ -60,7 +60,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="96.0" layoutY="96.0" text="Account balance:">
+      <Label layoutX="17.0" layoutY="96.0" text="Account balance:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
