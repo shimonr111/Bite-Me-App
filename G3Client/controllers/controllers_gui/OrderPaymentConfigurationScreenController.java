@@ -108,6 +108,13 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    @FXML
 	    private TextField alreadyEmployeeBudgetTextField;
 
+	    /**
+	     * This is a function for 
+	     * adding amount of money payed 
+	     * by the user.
+	     * 
+	     * @param event
+	     */
 	   @FXML
 	    void getAddAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
@@ -129,6 +136,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   if(isPaymentAmountValidForAddAmount(paymentWay)) {
 				   amountLeftToPay -= moneyToPay; //update the amount left to pay
 				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+			   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
 			   case CASH:
 				   double cash;
@@ -179,6 +187,13 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		   }
 	    }
 
+	   /**
+	    * This is a function for removing 
+	    * amount of money from the paying methods
+	    * by the user
+	    * 
+	    * @param event
+	    */
 	   @FXML
 	    void getRemoveAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
@@ -200,6 +215,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   if(isPaymentAmountValidForRemoveAmount(paymentWay)) {
 				   amountLeftToPay += moneyToReturn; //update the amount left to pay
 				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+				   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
 			   case CASH:
 				   double cash;
@@ -305,13 +321,17 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			System.exit(0);
 	    }
 
+	    /**
+	     * This is a function for updating 
+	     * the DB and for letting the customer know he finished his order,
+	     * after the finish we move him to his main user portal 
+	     * UI view.
+	     * 
+	     * @param event
+	     */
 	    @FXML
 	    void getFinishOrderBtn(ActionEvent event) {
-
-	    	//now we need to change this screen to the next one
-	    	//((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-	    	//UserPortalOfCustomerController userPortalOfCustomerController = new UserPortalOfCustomerController();
-	    	//userPortalOfCustomerController.initCustomerUserPortal(); // call the init of the next screen
+	    	
 
 	    }
 
@@ -406,6 +426,14 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
 		}
 
+	/**
+	 * This is a function that is used for checking 
+	 * the validity of the added amount 
+	 * for the payment methods such as credit card and etc.
+	 * 
+	 * @param paymentWay
+	 * @return boolean, true if valid 
+	 */
 	private boolean isPaymentAmountValidForAddAmount(PaymentWay paymentWay) {
 		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());
 		double accountBalance =  Double.parseDouble(availableAccountBalanceTextField.getText());
@@ -436,6 +464,14 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			return true;
 	}
 	
+	/**
+	 * This is a function that is used for checking 
+	 * the validity of the removed amount 
+	 * from the payment methods such as credit card and etc.
+	 * 
+	 * @param paymentWay
+	 * @return boolean, true if valid 
+	 */
 	private boolean isPaymentAmountValidForRemoveAmount(PaymentWay paymentWay) {
 		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());		
 		if(enteredAmount<0) {
