@@ -30,7 +30,7 @@ public class DateTimeHandler {
 		int days = Integer.parseInt(dateArray[0]);
 		
 		//split the time
-		String[] timeArray = date.split(":");
+		String[] timeArray = time.split(":");
 		int hours = Integer.parseInt(timeArray[0]);
 		int minutes = Integer.parseInt(timeArray[1]);
 		int seconds = 0;

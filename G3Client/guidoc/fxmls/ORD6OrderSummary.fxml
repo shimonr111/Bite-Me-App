@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
    <children>
-      <Button fx:id="payBtn" layoutX="76.0" layoutY="412.0" mnemonicParsing="false" onAction="#getPayBtn" prefHeight="51.0" prefWidth="540.0" style="-fx-background-color: #7FBA00;" text="Confirm to choose payment method" textFill="#383838">
+      <Button fx:id="choosePaymentMethodBtn" layoutX="128.0" layoutY="416.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="51.0" prefWidth="460.0" style="-fx-background-color: #7FBA00;" text="Confirm" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -36,55 +36,32 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Label layoutX="577.0" layoutY="25.0">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
       <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Label layoutX="456.0" layoutY="24.0" text="Supply details -&gt; ">
+      <Label layoutX="493.0" layoutY="24.0" text="Supply details -&gt; ">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label layoutX="532.0" layoutY="24.0" text="Payment configuration">
+      <Label layoutX="569.0" layoutY="24.0" text="Order summary">
          <font>
             <Font name="System Bold" size="10.0" />
          </font>
       </Label>
-      <Text fx:id="errorText" layoutX="222.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <TableView fx:id="cartTable" layoutX="145.0" layoutY="86.0" prefHeight="176.0" prefWidth="330.0">
+      <Text fx:id="errorText" layoutX="222.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <TableView fx:id="orderSummaryTable" layoutX="145.0" layoutY="86.0" prefHeight="176.0" prefWidth="330.0">
          <columns>
-            <TableColumn prefWidth="84.0" text="Item" />
-            <TableColumn prefWidth="84.0" text="size" />
-            <TableColumn prefWidth="84.0" text="price" />
-            <TableColumn prefWidth="84.0" text="comment" />
+            <TableColumn fx:id="iteamNameColumn" prefWidth="84.0" text="Item" />
+            <TableColumn fx:id="sizeColumn" prefWidth="84.0" text="size" />
+            <TableColumn fx:id="priceColumn" prefWidth="84.0" text="price" />
+            <TableColumn fx:id="commentColumn" prefWidth="84.0" text="comment" />
          </columns>
       </TableView>
-      <TextField fx:id="totalPriceTxtField" layoutX="280.0" layoutY="359.0" onAction="#getTotalPriceTxtField" prefHeight="43.0" prefWidth="88.0" promptText="0.0" />
-      <Label layoutX="128.0" layoutY="370.0" text="Total order price:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="205.0" layoutY="273.0" text="item sum">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="129.0" layoutY="304.0" text="discount for preorder">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <TextField fx:id="totalPriceTxtField2" layoutX="289.0" layoutY="271.0" onAction="#getTotalPriceTxtField" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <TextField fx:id="totalPriceTxtField21" layoutX="289.0" layoutY="302.0" onAction="#getTotalPriceTxtField" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <TextField fx:id="totalPriceTxtField211" layoutX="294.0" layoutY="330.0" onAction="#getTotalPriceTxtField" prefHeight="17.0" prefWidth="78.0" promptText="0.0" />
-      <Label layoutX="185.0" layoutY="332.0" text="Supply fee">
+      <TextField fx:id="totalOrderPriceTextField" layoutX="288.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" promptText="0.0" />
+      <Label layoutX="156.0" layoutY="361.0" text="Total order price:">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

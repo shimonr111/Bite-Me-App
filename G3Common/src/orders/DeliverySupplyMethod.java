@@ -1,6 +1,6 @@
 package orders;
 
-import util.constans;
+import util.Constans;
 
 /**
  * 
@@ -52,7 +52,7 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod {
 	 * @param deliveryFee
 	 */
 	public DeliverySupplyMethod(int supplyId, int orderNumber, String receiverFirstName, String receiverLastName,
-			String receiverPhoneNumber, DeliveryType deliveryType, String reciverAddress, double deliveryFee) {
+			String receiverPhoneNumber, DeliveryType deliveryType, String reciverAddress) {
 		super(supplyId, orderNumber, receiverFirstName, receiverLastName, receiverPhoneNumber);
 		this.deliveryType = deliveryType;
 		this.reciverAddress = reciverAddress;
@@ -72,8 +72,7 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod {
 	 * @param deliveryFee
 	 */
 	public DeliverySupplyMethod(int supplyId, int orderNumber, String receiverFirstName, String receiverLastName,
-			String receiverPhoneNumber, DeliveryType deliveryType, String reciverAddress, int numberOfParticipants,
-			double deliveryFee) {
+			String receiverPhoneNumber, DeliveryType deliveryType, String reciverAddress, int numberOfParticipants) {
 		super(supplyId, orderNumber, receiverFirstName, receiverLastName, receiverPhoneNumber);
 		this.deliveryType = deliveryType;
 		this.reciverAddress = reciverAddress;
@@ -94,16 +93,16 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod {
 		double fee = 0.0;
 		switch (deliveryType) {
 		case REGULAR:
-			fee = constans.REGULAR_DELIVERY_FEE_IN_NIS;
+			fee = Constans.REGULAR_DELIVERY_FEE_IN_NIS;
 			break;
 		case MULTI:
 			double multiDiscount = numberOfParticipants * 5;
-			fee = constans.REGULAR_DELIVERY_FEE_IN_NIS - multiDiscount;
-			if (fee < constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS)
-				fee = constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS;
+			fee = Constans.REGULAR_DELIVERY_FEE_IN_NIS - multiDiscount;
+			if (fee < Constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS)
+				fee = Constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS;
 			break;
 		case ROBOTIC:
-			fee = constans.ROBOTIC_DELIVERY_FEE_IN_NIS;
+			fee = Constans.ROBOTIC_DELIVERY_FEE_IN_NIS;
 			break;
 		default:
 			break;
@@ -111,4 +110,27 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod {
 		return fee;
 	}
 
+
+	/**
+	 * Getters and Setters functions
+	 */
+	
+	public double getDeliveryFee() {
+		return deliveryFee;
+	}
+
+	public void setDeliveryFee(double deliveryFee) {
+		this.deliveryFee = deliveryFee;
+	}
+
+	public String getReciverAddress() {
+		return reciverAddress;
+	}
+
+	public void setReciverAddress(String reciverAddress) {
+		this.reciverAddress = reciverAddress;
+	}
+	
+	
+	
 }

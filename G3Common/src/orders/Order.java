@@ -8,9 +8,13 @@ import users.Branch;
 /**
  * 
  * @author Ori, Malka.
- *  Class description:
- *  This calss describes the Order Entity.
- * @version 11/12/2021
+ * @author Lior, Guzovsky
+ * @author Shimon, Rubin
+ * 
+ * Class description:
+ * This class describes the Order Entity.
+ *  
+ * @version 17/12/2021
  */
 public class Order implements Serializable {
 	/**
@@ -82,12 +86,23 @@ public class Order implements Serializable {
 	
 	public ArrayList<Item> itemList;
 	
+	
+	/**
+	 * This section is for the attributes
+	 * of the supply process, we need to 
+	 * save here all the information about the receiver
+	 * of the supply.
+	 * 
+	 */
+	
+	
 	/**
 	 * Constructors:
 	 */
 	
 	/**
 	 * This constructor used only when ~~passing~~ object.
+	 * 
 	 * @param orderNumber
 	 * @param supplierUserId
 	 * @param customerUserId
@@ -100,10 +115,11 @@ public class Order implements Serializable {
 	 * @param supplyType
 	 * @param supplyId
 	 * @param totalPrice
+	 * @param itemList
 	 */
 	public Order(int orderNumber, String supplierUserId, String customerUserId, Branch branch, OrderTimeType timeType,
-			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime, SupplyType supplyType, int supplyId,
-			double totalPrice) {
+			OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime, Date actualSupplyDateTime,
+			SupplyType supplyType, int supplyId, double totalPrice, ArrayList<Item> itemList) {
 		super();
 		this.orderNumber = orderNumber;
 		this.supplierUserId = supplierUserId;
@@ -117,9 +133,9 @@ public class Order implements Serializable {
 		this.supplyType = supplyType;
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
-		
-		//TBD, need to check what to do with items.
+		this.itemList = itemList;
 	}
+
 
 
 	/**
@@ -137,22 +153,19 @@ public class Order implements Serializable {
 		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
 		this.issueDateTime = new Date();
 		
-		//TBD, need to update when getting.
 		this.estimatedSupplyDateTime = null;
 		this.actualSupplyDateTime = null;
 		this.supplyType = null;
 		this.supplyId = 0;
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
+		
 	} 
 	
 	/**
 	 * Methods:
 	 */
 	
-	/**
-	 * TBD, need to add item methods (add, remove...)
-	 */
 	
 	/**
 	 * Getters and Setters:
@@ -264,6 +277,27 @@ public class Order implements Serializable {
 
 	public void setEstimatedSupplyDateTime(Date estimatedSupplyDateTime) {
 		this.estimatedSupplyDateTime = estimatedSupplyDateTime;
+	}
+
+	
+
+	public Date getActualSupplyDateTime() {
+		return actualSupplyDateTime;
+	}
+
+
+
+	public void setActualSupplyDateTime(Date actualSupplyDateTime) {
+		this.actualSupplyDateTime = actualSupplyDateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [orderNumber=" + orderNumber + ", supplierUserId=" + supplierUserId + ", customerUserId="
+				+ customerUserId + ", branch=" + branch + ", timeType=" + timeType + ", status=" + status
+				+ ", issueDateTime=" + issueDateTime + ", estimatedSupplyDateTime=" + estimatedSupplyDateTime
+				+ ", actualSupplyDateTime=" + actualSupplyDateTime + ", supplyType=" + supplyType + ", supplyId="
+				+ supplyId + ", totalPrice=" + totalPrice + ", itemList=" + itemList + "]";
 	}
 	
 }
