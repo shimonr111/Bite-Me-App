@@ -30,10 +30,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
+import orders.DeliverySupplyMethod;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.Order;
+import util.Constans;
 
 /**
  * 
@@ -54,7 +56,8 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     private static OrderSummaryScreenController orderSummaryScreenController;
     private static Order order;
     private static AbatractSupplyMethod supplyMethodInformation;
-    private String  pathForLastScreen= null;
+    private String pathForLastScreen= null;
+    private String pageTitle;
     @FXML
     private Button choosePaymentMethodBtn;
 
@@ -99,11 +102,27 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     	switch(order.getSupplyType()){
 		  case TAKE_AWAY:
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealTAMethod.fxml";
+			  pageTitle = "Take away";
 			  break;
 		  case DELIVERY:
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
+			  pageTitle = "Delivery";
+			  //set total price to the price as it was after choose supply method stage
+			  switch(order.getTimeType()) {
+		  		case PRE:
+		  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+		  			if(supplyMethodInformation instanceof DeliverySupplyMethod) {
+		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			}
+		  			break;
+		  		case REGULAR:
+		  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			break;
+		  		default:
+		  			break;
+			  }
 			  break;
-		  default:
+		  	default:
 			 break;
 	  }
       Platform.runLater(new Runnable() {
@@ -124,7 +143,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Order Summary");
+					Stage.setTitle(pageTitle); 
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
@@ -25,7 +25,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="btnBack" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+      <Button fx:id="btnBack" layoutY="438.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -55,39 +55,60 @@
             <Font name="System Bold" size="10.0" />
          </font>
       </Label>
-      <CheckBox fx:id="creditCheckBox" layoutX="187.0" layoutY="310.0" mnemonicParsing="false" text="Credit card">
+      <Label layoutX="173.0" layoutY="371.0" text="Total price to pay:">
          <font>
-            <Font name="System Bold" size="18.0" />
-         </font></CheckBox>
-      <TextField fx:id="accountBalanceAmountTextField" layoutX="326.0" layoutY="266.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
-      <CheckBox fx:id="employeeBudgetCheckBox" layoutX="132.0" layoutY="208.0" mnemonicParsing="false" text="Employee budget">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></CheckBox>
-      <TextField fx:id="creditCardAmountTextField" layoutX="324.0" layoutY="311.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
-      <Label layoutX="161.0" layoutY="369.0" text="Total need to pay in cash:">
-         <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="168.0" layoutY="170.0" text="Only for business customer*" textFill="#8d0b0b" />
-      <Label layoutX="170.0" layoutY="100.0" text="Account Balance:">
+      <Label layoutX="17.0" layoutY="96.0" text="Account balance:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <TextField fx:id="accountBalanceTextField" layoutX="327.0" layoutY="101.0" prefHeight="25.0" prefWidth="94.0" promptText="0.0" />
-      <Label layoutX="14.0" layoutY="143.0" text="Employee budget available Balance:">
+      <TextField fx:id="availableAccountBalanceTextField" layoutX="247.0" layoutY="97.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <Label fx:id="availableBudgetBalanceLabel" layoutX="17.0" layoutY="133.0" text="Employee budget balance:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <TextField fx:id="employeeBudgetBalanceTextField" layoutX="327.0" layoutY="144.0" prefHeight="25.0" prefWidth="94.0" promptText="0.0" />
-      <CheckBox fx:id="accountBalanceCheckBox" layoutX="107.0" layoutY="266.0" mnemonicParsing="false" text="Use account Balance">
+      <TextField fx:id="availableBudgetBalanceTextField" layoutX="247.0" layoutY="134.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <TextField fx:id="enterAmountTextField" layoutX="198.0" layoutY="225.0" prefHeight="25.0" prefWidth="98.0" promptText="Enter amount" />
+      <TextField fx:id="totalToPayTextField" layoutX="350.0" layoutY="374.0" prefHeight="25.0" prefWidth="56.0" promptText="0.0" />
+      <Text fx:id="errorText" layoutX="171.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="278.99999959766865" />
+      <Label layoutX="17.0" layoutY="191.0" text="Payment:">
          <font>
             <Font name="System Bold" size="18.0" />
-         </font></CheckBox>
-      <TextField fx:id="employeeBudgetAmountTextField" layoutX="327.0" layoutY="209.0" prefHeight="25.0" prefWidth="94.0" promptText="Enter amount" />
-      <Label layoutX="168.0" layoutY="235.0" prefHeight="15.0" prefWidth="149.0" text="Only for business customer*" textFill="#8d0b0b" />
-      <TextField fx:id="totalToPayInCashTextField" layoutX="346.0" layoutY="367.0" prefHeight="25.0" prefWidth="46.0" promptText="0.0" />
-      <Text fx:id="errorText" layoutX="171.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="278.99999959766865" />
+         </font>
+      </Label>
+      <ComboBox fx:id="paymentMethodCombo" layoutX="17.0" layoutY="225.0" prefHeight="25.0" prefWidth="178.0" promptText="Choose payment method" />
+      <Button fx:id="addAmountBtn" layoutX="17.0" layoutY="258.0" mnemonicParsing="false" onAction="#getAddAmountBtn" prefHeight="25.0" prefWidth="137.0" text="Add amount" />
+      <Button fx:id="removeAmountBtn" layoutX="159.0" layoutY="258.0" mnemonicParsing="false" onAction="#getRemoveAmountBtn" prefHeight="25.0" prefWidth="137.0" text="Remove amount" />
+      <Label fx:id="employeeBudgetLabel" layoutX="364.0" layoutY="316.0" text="Emloyee budget:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="364.0" layoutY="283.0" text="Account balance:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="364.0" layoutY="250.0" text="Credit card:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="364.0" layoutY="218.0" text="Cash:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="alreadyCashTextField" layoutX="517.0" layoutY="219.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <TextField fx:id="alreadyCreditCardTextField" layoutX="517.0" layoutY="251.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <TextField fx:id="alreadyAccountBalanceTextField" layoutX="517.0" layoutY="284.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <TextField fx:id="alreadyEmployeeBudgetTextField" layoutX="517.0" layoutY="317.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
+      <Label layoutX="364.0" layoutY="183.0" prefHeight="27.0" prefWidth="119.0" text="Already paid:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

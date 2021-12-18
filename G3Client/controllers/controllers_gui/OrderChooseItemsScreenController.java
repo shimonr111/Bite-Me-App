@@ -147,8 +147,12 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     				public void handle(CellEditEvent<Item, String> event) {
     					//get the whole object from the row
     					Item item = event.getRowValue(); 
+    					//remove the item from the order list, because we need to update the comment as well if changed
+    					order.itemList.remove(item);
     					//get the item from the arraylist
     					item.setComment(event.getNewValue());
+    					//add the updated item back to the order
+    					order.itemList.add(item);
     				}
     			});
     		}
@@ -186,7 +190,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose restaurant");
 					Stage.setScene(scene);
 					Stage.show();
@@ -295,7 +299,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 							Stage.close();
 						}
 					});
-					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();
