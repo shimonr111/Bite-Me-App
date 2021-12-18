@@ -5,9 +5,13 @@ import util.Constans;
 /**
  * 
  * @author Ori, Malka.
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * 
  *  Class description: 
  *  This Abstract class is a base class
  *  for supply method.
+ *  
  * @version 11/12/2021
  */
 public class DeliverySupplyMethod extends AbatractSupplyMethod {

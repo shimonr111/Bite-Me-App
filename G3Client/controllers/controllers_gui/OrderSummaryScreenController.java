@@ -30,10 +30,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
+import orders.DeliverySupplyMethod;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.Order;
+import util.Constans;
 
 /**
  * 
@@ -102,8 +104,19 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 			  break;
 		  case DELIVERY:
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
+			  //set total price to the price as it was after choose supply method stage
+			  switch(order.getTimeType()) {
+		  		case PRE:
+		  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+		  			if(supplyMethodInformation instanceof DeliverySupplyMethod) {
+		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			}
+		  			break;
+		  		default:
+		  			break;
+			  }
 			  break;
-		  default:
+		  	default:
 			 break;
 	  }
       Platform.runLater(new Runnable() {

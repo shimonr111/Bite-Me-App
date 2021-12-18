@@ -85,7 +85,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     @FXML
     private Button btnNext;
 
- /**
+	/**
      * Back button for the 
      * 
      * 
@@ -93,6 +93,15 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      */
     @FXML
     void getBackBtn(ActionEvent event) {
+    	//fix the back button so that the price will be without the fee and the discount
+    	switch(order.getTimeType()) {
+  		case PRE:
+  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+  			order.setTotalPrice(order.getTotalPrice()-deliveryInformation.getDeliveryFee()); //update the total cost of the order
+  			break;
+  		default:
+  			break;
+	  }
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
