@@ -115,6 +115,9 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
 		  			}
 		  			break;
+		  		case REGULAR:
+		  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			break;
 		  		default:
 		  			break;
 			  }
