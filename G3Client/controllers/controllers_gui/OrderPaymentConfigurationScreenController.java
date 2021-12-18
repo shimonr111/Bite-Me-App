@@ -2,6 +2,8 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -26,15 +28,17 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
 import orders.Order;
+import orders.PaymentWay;
+import users.BusinessCustomer;
+import users.Customer;
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
  * Class description: 
- * This is a class for 
- * 
- * 
+ * This is a class for the user 
+ * to add all his payment to the system (cash / credit card, etc.)
  * 
  * @version 17/12/2021
  */
@@ -74,13 +78,13 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    private TextField enterAmountTextField;
 
 	    @FXML
-	    private TextField totalToPayInCashTextField;
+	    private TextField totalToPayTextField;
 
 	    @FXML
 	    private Text errorText;
 
 	    @FXML
-	    private ComboBox<?> paymentMethodCombo;
+	    private ComboBox<PaymentWay> paymentMethodCombo;
 
 	    @FXML
 	    private Button addAmountBtn;
@@ -236,7 +240,36 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	*/
 	@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
-			
+			List<PaymentWay> paymentMethods = new ArrayList<>();
+			/*For business customer and hr manager*/
+			if(connectedUser instanceof BusinessCustomer) {
+				for(PaymentWay pay : PaymentWay.values()) {
+					paymentMethods.add(pay);
+				}
+			}
+			else { // if connectedUser is instance of Customer
+				for(PaymentWay pay : PaymentWay.values()) {
+					/*Add only enums that related to regular customer!*/
+					if((pay != PaymentWay.EMPLOYEE_BUDGET)) {
+						paymentMethods.add(pay);
+					}	
+				}
+				employeeBudgetLabel.setVisible(false); //set the employee budget label invisible for regular customer, TBD: add fx:id for the text field next to him!!!!!!
+				alreadyEmployeeBudgetTextField.setVisible(false);//set the employee text field invisible for regular customer
+				availableBudgetBalanceLabel.setVisible(false);//set the employee text field invisible for regular customer
+				availableBudgetBalanceTextField.setVisible(false);//set the employee text field invisible for regular customer
+			}
+			paymentMethodCombo.getItems().addAll(paymentMethods); //set all the relevant enums into the combo box
+			totalToPayTextField.setText(String.valueOf(order.getTotalPrice()));//set the total price
+			availableAccountBalanceTextField.setText((String.valueOf(((Customer) connectedUser).getBalance())));//set the amount of the balance of any customer according to how much the bite me system owe him 
+			/*set all text fields to be not editable*/
+			alreadyEmployeeBudgetTextField.setDisable(true);
+			availableBudgetBalanceTextField.setDisable(true);
+			totalToPayTextField.setDisable(true);
+			alreadyCashTextField.setDisable(true);
+			alreadyCreditCardTextField.setDisable(true);
+			alreadyAccountBalanceTextField.setDisable(true);
+			availableAccountBalanceTextField.setDisable(true);
 		}
 
 	}

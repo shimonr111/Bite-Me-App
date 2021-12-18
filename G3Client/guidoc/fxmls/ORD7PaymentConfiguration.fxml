@@ -71,7 +71,7 @@
          </font></Label>
       <TextField fx:id="availableBudgetBalanceTextField" layoutX="247.0" layoutY="134.0" prefHeight="25.0" prefWidth="79.0" promptText="0.0" />
       <TextField fx:id="enterAmountTextField" layoutX="198.0" layoutY="225.0" prefHeight="25.0" prefWidth="98.0" promptText="Enter amount" />
-      <TextField fx:id="totalToPayInCashTextField" layoutX="350.0" layoutY="374.0" prefHeight="25.0" prefWidth="56.0" promptText="0.0" />
+      <TextField fx:id="totalToPayTextField" layoutX="350.0" layoutY="374.0" prefHeight="25.0" prefWidth="56.0" promptText="0.0" />
       <Text fx:id="errorText" layoutX="171.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="278.99999959766865" />
       <Label layoutX="17.0" layoutY="191.0" text="Payment:">
          <font>
