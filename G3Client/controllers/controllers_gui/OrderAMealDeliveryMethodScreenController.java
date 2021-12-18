@@ -120,7 +120,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 						}
 					});
 					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-					Stage.setTitle("Choose restaurant");
+					Stage.setTitle("Choose supply method");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

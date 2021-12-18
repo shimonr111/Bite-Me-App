@@ -17,7 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -61,28 +62,16 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    private Button btnHelp;
 
 	    @FXML
-	    private CheckBox creditCheckBox;
+	    private TextField availableAccountBalanceTextField;
 
 	    @FXML
-	    private TextField accountBalanceAmountTextField;
+	    private Label availableBudgetBalanceLabel;
 
 	    @FXML
-	    private CheckBox employeeBudgetCheckBox;
+	    private TextField availableBudgetBalanceTextField;
 
 	    @FXML
-	    private TextField creditCardAmountTextField;
-
-	    @FXML
-	    private TextField accountBalanceTextField;
-
-	    @FXML
-	    private TextField employeeBudgetBalanceTextField;
-
-	    @FXML
-	    private CheckBox accountBalanceCheckBox;
-
-	    @FXML
-	    private TextField employeeBudgetAmountTextField;
+	    private TextField enterAmountTextField;
 
 	    @FXML
 	    private TextField totalToPayInCashTextField;
@@ -90,6 +79,41 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    @FXML
 	    private Text errorText;
 
+	    @FXML
+	    private ComboBox<?> paymentMethodCombo;
+
+	    @FXML
+	    private Button addAmountBtn;
+
+	    @FXML
+	    private Button removeAmountBtn;
+
+	    @FXML
+	    private Label employeeBudgetLabel;
+
+	    @FXML
+	    private TextField alreadyCashTextField;
+
+	    @FXML
+	    private TextField alreadyCreditCardTextField;
+
+	    @FXML
+	    private TextField alreadyAccountBalanceTextField;
+
+	    @FXML
+	    private TextField alreadyEmployeeBudgetTextField;
+
+	   @FXML
+	    void getAddAmountBtn(ActionEvent event) {
+
+	    }
+
+	   @FXML
+	    void getRemoveAmountBtn(ActionEvent event) {
+
+	    }
+	   
+	   
 	     /**
 	     * Back button for the 
 	     * 
@@ -194,7 +218,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 							}
 						});
 						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
-						Stage.setTitle("Choose Items");
+						Stage.setTitle("Payment");
 						Stage.setScene(scene);
 						Stage.show();
 					} catch (IOException e) {
