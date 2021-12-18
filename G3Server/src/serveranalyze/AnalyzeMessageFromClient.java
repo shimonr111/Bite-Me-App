@@ -124,6 +124,15 @@ public class AnalyzeMessageFromClient {
 			 case GET_BUSINESS_CUSTOMERS_FOR_CONFIRMATION:
 				  recivedMessageFromClient = EditUsersQueries.getBusinessCustomersListFromDb((Message) message);
 				 break;
+			 case GET_COMPANIES_FOR_CONFIRMATION:
+				 recivedMessageFromClient = EditUsersQueries.getPendingApprovalCompaniesFromDb((Message)message);
+				 break;
+			 case CONFIRM_COMPANY:
+				 EditUsersQueries.confirmCompany((Message)message);
+				 break;
+			 case DENY_COMPANY:
+				 EditUsersQueries.denyCompany((Message) message);
+				 break;
 			default:
 				break;
 			}

@@ -97,7 +97,6 @@ public class EditUsersQueries {
 		String userId= list.get(0);
 		String newStatus = list.get(1);
 		String tableName = list.get(2);
-		//Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","isLoggedIn"+"="+"0", "userID="+((User) (message.getObject())).getUserId());
 		Query.updateOneColumnForTableInDbByPrimaryKey(tableName, "statusInSystem = '"+newStatus+"'", "userID='"+userId+"'");
 	}
 	
@@ -142,6 +141,62 @@ public class EditUsersQueries {
 		returnMessageToClient = new Message (Task.DISPLAY_BUSINESS_CUSTOMERS_INTO_TABLE,Answer.SUCCEED,businessCustomersList);
 		return returnMessageToClient;
 		
+	}
+	
+	/**
+	 * This method returns a list of companies that are not approved yet.
+	 * @param message
+	 * @return
+	 */
+	public static Message getPendingApprovalCompaniesFromDb(Message message) {
+		Message returnMessageToClient;
+		ArrayList<Company> unConfirmedCompanies = new ArrayList<>();
+		ResultSet rs;
+		rs=Query.getRowsFromTableInDB("company", "companyStatusInSystem= 'PENDING_APPROVAL'");
+		try {
+			while(rs.next()) {
+				unConfirmedCompanies.add( new Company(rs.getString(1),ConfirmationStatus.valueOf(rs.getString(2)),rs.getString(3),rs.getString(4),rs.getInt(5)));
+			}
+			rs.close();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message(Task.DISPLAY_UNCONFIRMED_COMPANIES,Answer.SUCCEED,unConfirmedCompanies);
+	}
+	
+	/**
+	 * This method is to confirm company , we change the status of the company to CONFIRMED.
+	 * @param message
+	 */
+	public static void confirmCompany(Message message) {
+		Company company = (Company) message.getObject();
+		String companyName = company.getCompanyName();
+		int companyCode = company.getcompanyCode();
+		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem= 'CONFIRMED'","companyName='"+companyName+"'");
+		
+	}
+	
+	/**
+	 * Before removing a company , we set the change the hrManager of the company to the same status
+	 * here were before registering the company, so the hrManager won't be deleted from DB
+	 * after denying the registration , he can try and register later.
+	 * @param message
+	 */
+	public static void denyCompany(Message message) {
+		Company company = (Company) message.getObject();
+		String hrManagerId="";
+		ResultSet rs=Query.getColumnWithConditionFromTableInDB("hrmanager", "userID", "companyName='"+company.getCompanyName()+"'");
+		try {
+		if(rs.next())
+			hrManagerId=rs.getString(1);
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "companyName='Waiting_Registration'", "userID='"+hrManagerId+"'");
+		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "businessW4cCodeNumber='0'", "userID='"+hrManagerId+"'" );
+		Query.deleteRowFromTableInDbByPrimaryKey("company", "companyName='"+company.getCompanyName()+"'");
 	}
 	
 
