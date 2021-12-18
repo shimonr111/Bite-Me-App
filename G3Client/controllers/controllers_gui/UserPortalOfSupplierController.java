@@ -157,7 +157,7 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Main menu");
 					Stage.setScene(scene);
 					Stage.show();

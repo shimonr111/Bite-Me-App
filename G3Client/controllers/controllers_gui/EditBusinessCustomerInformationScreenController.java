@@ -186,6 +186,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Edit Business Customer");
 					Stage.setScene(scene);
 					Stage.show();

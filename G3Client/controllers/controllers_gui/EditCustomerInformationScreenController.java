@@ -210,6 +210,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Edit Customers");
 					Stage.setScene(scene);
 					Stage.show();
@@ -267,6 +268,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setTitle("Edit Customers");
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */

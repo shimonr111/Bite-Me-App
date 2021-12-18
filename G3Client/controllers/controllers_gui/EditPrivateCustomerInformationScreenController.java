@@ -182,6 +182,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Edit Private Customer");
 					Stage.setScene(scene);
 					Stage.show();
