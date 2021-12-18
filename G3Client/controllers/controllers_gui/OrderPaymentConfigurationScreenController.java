@@ -23,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -51,7 +52,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    private static OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController;
 	    private static Order order;
 	    private static AbatractSupplyMethod supplyMethodInformation;
-	    
+	    private double amountLeftToPay;
 
 	    @FXML
 	    private Button finishOrderBtn;
@@ -109,12 +110,144 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 
 	   @FXML
 	    void getAddAmountBtn(ActionEvent event) {
-
+		   if(paymentMethodCombo.getValue() == null) {
+	    		errorText.setText("Please choose the payment method first!");
+	    		errorText.setFill(Color.RED);
+	    	}
+		   else if(enterAmountTextField.getText() == "") {
+			   errorText.setText("Please enter the payment ammount!");
+	    	   errorText.setFill(Color.RED);
+		   }
+		   else if(amountLeftToPay == 0) {
+			   errorText.setText("Nothing to pay anymore, press finish order!");
+	    	   errorText.setFill(Color.RED);
+		   }
+		   else {
+			   errorText.setText(""); //disable previous error warning
+			   PaymentWay paymentWay = paymentMethodCombo.getValue();
+			   double moneyToPay = Double.parseDouble(enterAmountTextField.getText());
+			   if(isPaymentAmountValidForAddAmount(paymentWay)) {
+				   amountLeftToPay -= moneyToPay; //update the amount left to pay
+				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+			   switch(paymentWay) {
+			   case CASH:
+				   double cash;
+				   if(alreadyCashTextField.getText() == "") {
+					   cash = 0.0;
+				   }else {
+				   cash = Double.parseDouble(alreadyCashTextField.getText());
+				   }
+				   cash += moneyToPay;
+				   alreadyCashTextField.setText(String.valueOf(cash));
+				  break;
+			   case CREDIT_CARD:
+				   double creditCard;
+				   if(alreadyCreditCardTextField.getText() == "") {
+					   creditCard =0.0;
+				   }else {
+				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
+				   }
+				   creditCard += moneyToPay;
+				   alreadyCreditCardTextField.setText(String.valueOf(creditCard));
+				  break;
+			   case ACCOUNT_BALANCE:
+				   double accountBalance;
+				   if(alreadyAccountBalanceTextField.getText() == "") {
+					   accountBalance = 0.0;
+				   }else {
+				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
+				   }
+				   accountBalance += moneyToPay;
+				   availableAccountBalanceTextField.setText(String.valueOf(Double.parseDouble(availableAccountBalanceTextField.getText())-moneyToPay));
+				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
+				   break;
+			   case EMPLOYEE_BUDGET:
+				   double employeeBudget;
+				   if(alreadyEmployeeBudgetTextField.getText() == "") {
+					   employeeBudget = 0.0;
+				   }else {
+				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+				   }
+				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())-moneyToPay));
+				   employeeBudget += moneyToPay;
+				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				   break;
+			   default:
+				   break;
+			   }
+			  }
+		   }
 	    }
 
 	   @FXML
 	    void getRemoveAmountBtn(ActionEvent event) {
-
+		   if(paymentMethodCombo.getValue() == null) {
+	    		errorText.setText("Please choose the payment method first!");
+	    		errorText.setFill(Color.RED);
+	    	}
+		   else if(enterAmountTextField.getText() == "") {
+			   errorText.setText("Please enter the payment ammount!");
+	    	   errorText.setFill(Color.RED);
+		   }
+		   else if(amountLeftToPay == order.getTotalPrice()) {
+			   errorText.setText("Nothing to remove anymore, enter payment method!");
+	    	   errorText.setFill(Color.RED);
+		   }
+		   else {
+			   errorText.setText(""); //disable previous error warning
+			   PaymentWay paymentWay = paymentMethodCombo.getValue();
+			   double moneyToReturn = Double.parseDouble(enterAmountTextField.getText());
+			   if(isPaymentAmountValidForRemoveAmount(paymentWay)) {
+				   amountLeftToPay += moneyToReturn; //update the amount left to pay
+				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+			   switch(paymentWay) {
+			   case CASH:
+				   double cash;
+				   if(alreadyCashTextField.getText() == "") {
+					   cash = 0.0;
+				   }else {
+				   cash = Double.parseDouble(alreadyCashTextField.getText());
+				   }
+				   cash -= moneyToReturn;
+				   alreadyCashTextField.setText(String.valueOf(cash));
+				  break;
+			   case CREDIT_CARD:
+				   double creditCard;
+				   if(alreadyCreditCardTextField.getText() == "") {
+					   creditCard =0.0;
+				   }else {
+				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
+				   }
+				   creditCard -= moneyToReturn;
+				   alreadyCreditCardTextField.setText(String.valueOf(creditCard));
+				  break;
+			   case ACCOUNT_BALANCE:
+				   double accountBalance;
+				   if(alreadyAccountBalanceTextField.getText() == "") {
+					   accountBalance = 0.0;
+				   }else {
+				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
+				   }
+				   accountBalance -= moneyToReturn;
+				   availableAccountBalanceTextField.setText(String.valueOf(Double.parseDouble(availableAccountBalanceTextField.getText())+moneyToReturn));
+				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
+				   break;
+			   case EMPLOYEE_BUDGET:
+				   double employeeBudget;
+				   if(alreadyEmployeeBudgetTextField.getText() == "") {
+					   employeeBudget = 0.0;
+				   }else {
+				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+				   }
+				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())+moneyToReturn));
+				   employeeBudget -= moneyToReturn;
+				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				   break;
+			   default:
+				   break;
+			   }
+			  }
+		   }
 	    }
 	   
 	   
@@ -260,7 +393,6 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				availableBudgetBalanceTextField.setVisible(false);//set the employee text field invisible for regular customer
 			}
 			paymentMethodCombo.getItems().addAll(paymentMethods); //set all the relevant enums into the combo box
-			totalToPayTextField.setText(String.valueOf(order.getTotalPrice()));//set the total price
 			availableAccountBalanceTextField.setText((String.valueOf(((Customer) connectedUser).getBalance())));//set the amount of the balance of any customer according to how much the bite me system owe him 
 			/*set all text fields to be not editable*/
 			alreadyEmployeeBudgetTextField.setDisable(true);
@@ -270,7 +402,109 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			alreadyCreditCardTextField.setDisable(true);
 			alreadyAccountBalanceTextField.setDisable(true);
 			availableAccountBalanceTextField.setDisable(true);
+			amountLeftToPay = order.getTotalPrice();
+			totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
 		}
 
+	private boolean isPaymentAmountValidForAddAmount(PaymentWay paymentWay) {
+		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());
+		double accountBalance =  Double.parseDouble(availableAccountBalanceTextField.getText());
+		double budgetBalance=0;
+		if(enteredAmount<0 || (amountLeftToPay - enteredAmount < 0)) {
+			errorText.setText("You have entered a wrong input value, change it!!");
+    		errorText.setFill(Color.RED);
+			return false;
+		}
+		if(connectedUser instanceof BusinessCustomer) {
+		budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
+		}
+		//double employerBudgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
+		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
+			if((accountBalance < enteredAmount) /*|| (employerBudgetBalance < enteredAmount)*/ ) {
+				errorText.setText("You have entered a wrong input value, change it!!");
+				errorText.setFill(Color.RED);
+				return false;
+			}
+		}
+		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
+			if(budgetBalance < enteredAmount) {
+				errorText.setText("You have entered a wrong input value, change it!!");
+				errorText.setFill(Color.RED);
+				return false;
+			}
+		}
+			return true;
 	}
+	
+	private boolean isPaymentAmountValidForRemoveAmount(PaymentWay paymentWay) {
+		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());		
+		if(enteredAmount<0) {
+			errorText.setText("You have entered a wrong input value, change it!!");
+    		errorText.setFill(Color.RED);
+			return false;
+		}
+		//double employerBudgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
+		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
+			if(alreadyAccountBalanceTextField.getText() == "") {
+				errorText.setText("You have entered a wrong input value, change it!!");
+	    		errorText.setFill(Color.RED);
+				return false;
+			}
+			else {
+				double accountBalanceAlreadyPayed =  Double.parseDouble(alreadyAccountBalanceTextField.getText());
+				if(accountBalanceAlreadyPayed < enteredAmount) {
+					errorText.setText("You have entered a wrong input value, change it!!");
+					errorText.setFill(Color.RED);
+					return false;
+				}
+			}
+		}
+		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
+			if(alreadyEmployeeBudgetTextField.getText() == "") {
+				errorText.setText("You have entered a wrong input value, change it!!");
+	    		errorText.setFill(Color.RED);
+				return false;
+			}
+			else {
+				double alreadyBudgetBalance =  Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+				if(alreadyBudgetBalance < enteredAmount) {
+					errorText.setText("You have entered a wrong input value, change it!!");
+					errorText.setFill(Color.RED);
+					return false;
+				}
+			}
+		}
+		if(paymentWay == PaymentWay.CASH) {
+			if(alreadyCashTextField.getText() == "") {
+				errorText.setText("You have entered a wrong input value, change it!!");
+	    		errorText.setFill(Color.RED);
+				return false;
+			}
+			else {
+				double cashAlreadyPayed =  Double.parseDouble(alreadyCashTextField.getText());
+				if(cashAlreadyPayed < enteredAmount) {
+					errorText.setText("You have entered a wrong input value, change it!!");
+		    		errorText.setFill(Color.RED);
+					return false;
+				}
+			}
+		}
+		if(paymentWay == PaymentWay.CREDIT_CARD) {
+			if(alreadyCreditCardTextField.getText() == "") {
+				errorText.setText("You have entered a wrong input value, change it!!");
+	    		errorText.setFill(Color.RED);
+				return false;
+			}
+			else {
+				double creaditCardAlreadyPayed = Double.parseDouble(alreadyCreditCardTextField.getText());
+				if(creaditCardAlreadyPayed < enteredAmount) {
+					errorText.setText("You have entered a wrong input value, change it!!");
+		    		errorText.setFill(Color.RED);
+					return false;
+				}
+			}
+		}
+			return true;
+	}
+}
 
