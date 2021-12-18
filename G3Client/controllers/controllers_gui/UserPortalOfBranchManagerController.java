@@ -64,6 +64,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
     private Text branchManagerName;
     @FXML
     private Text statusText;
+    @FXML
+    private Text branchName;
     
 	
 	public static FXMLLoader loader;
@@ -237,6 +239,7 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		branchManagerName.setText(connectedUser.getUserFirstName());
 		statusText.setText(connectedUser.getStatusInSystem().toString());
+		branchName.setText(connectedUser.getHomeBranch().toString());
 		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 			btnAddQuarterlyReports.setDisable(true);
 			btnCustomerReg.setDisable(true);

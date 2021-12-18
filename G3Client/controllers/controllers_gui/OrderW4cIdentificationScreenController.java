@@ -2,7 +2,10 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import javax.swing.Popup;
 
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -19,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -186,10 +190,24 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     	}
     	
     }
-
+    
+    /**
+     * This method handles the QR code simulation.
+     * 
+     * @param event
+     */
     @FXML
     void getQrBtn(ActionEvent event) {
-    	
+    	TextInputDialog dialog = new TextInputDialog("Put here your W4C code");
+    	dialog.setHeaderText("Put your W4C (QR Simulation)");
+    	dialog.setTitle("G#3 QR Simulation");
+    	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+    	Optional<String> result = dialog.showAndWait();
+    	  if(result.isPresent()) {
+    		  if (result.get().matches("[0-9]+") && result.get().length() > 2) //check that it contains only numbers
+    			  codeTxtField.setText(result.get());
+    	  }
+    	  
     }
     
     /**
