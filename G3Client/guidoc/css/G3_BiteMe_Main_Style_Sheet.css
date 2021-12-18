@@ -1,0 +1,368 @@
+.root{
+  -fx-max-width: 1024.0px;
+  -fx-max-height: 768.0px;
+  -fx-background-color: linear-gradient(to left, #434343, #000000);
+  -fx-background-radius:0.0;
+}
+
+.vbox{
+   -fx-spacing: 5.0px;
+	
+}
+
+.hbox{
+   -fx-spacing: 5.0px;
+	
+}
+
+.button{
+    -fx-background-radius: 6.0, 5.0;
+    -fx-background-insets: 0.0, 1.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.4) , 5.0, 0.5 , 0.0 , 1.0 );
+    -fx-text-fill: #1A1A1D;
+    -fx-font-family: 'Helvetica', Arial, sans-serif;
+    -fx-font-size: 22.0px;
+    -fx-font-weight: bold;
+    
+}
+
+.button:hover{
+	-fx-border-color: black;
+	-fx-border-radius: 6.0, 5.0;
+    -fx-background-radius: 6.0, 5.0;
+    -fx-background-insets: 0.0, 1.0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
+    -fx-text-fill: #f2eeee;
+    -fx-font-family: 'Helvetica', Arial, sans-serif;
+    -fx-font-size: 22.0px;
+    -fx-font-weight: bold;
+}
+
+.button.exit{
+    -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/X.png");
+    -fx-background-repeat: stretch;   
+    -fx-border-color: black;
+    -fx-background-color: linear-gradient(to top, #eb3941, #f15e64, #e14e53, #e2373f);
+    -fx-background-position: center center;
+}
+
+.button.help{
+   -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/Help.png");
+    -fx-background-repeat: stretch; 
+     -fx-border-color: black;
+      -fx-background-color: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed); 
+    -fx-background-position: center center;
+}
+
+.button.back{
+   	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/back.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+    -fx-background-color: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+
+}
+
+
+.button.back:hover {
+	-fx-background-position: left;
+}
+
+.button.next {
+   	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/next.png");
+    -fx-background-repeat: stretch;   
+    -fx-background-position: center center;
+    -fx-background-color: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+
+}
+
+.button.next:hover {
+	-fx-background-position: right;
+}
+
+.button.enter{
+	   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+}
+
+
+.button.connect{
+	-fx-background-color:
+	   linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+}
+
+.button.disconnect{
+  	-fx-background-color: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+}
+
+
+.button.import{
+		-fx-background-color:
+	linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+}
+
+.button.order{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/cart.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+}
+
+.button.companyRegistration{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+}
+
+.button.customerRegistration{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+}
+
+.button.supplierRegistration{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+-fx-background-color: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+}
+
+.button.ConfirmWorkers{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+}
+
+.button.companyManagement{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+}
+
+.button.customerManagement{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+}
+
+.button.viewSystemReports{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+}
+
+.button.addQuarterlyReports{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/upload.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+}
+
+.button.viewQuarterlyReports{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
+	    -fx-background-repeat: stretch;  
+	    -fx-alignment: top-center; 
+    -fx-background-position: bottom center;
+   -fx-background-color: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+}
+
+
+.label{
+	 -fx-font-family: 'Helvetica', Arial, sans-serif;
+	 -fx-font-weight: bold;
+	 -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
+	 -fx-text-fill: #f2eeee;
+	 -fx-font-size: 20.0px;
+	 -fx-alignment: CENTER ; 
+}
+
+.label.headLight{
+	  -fx-font-size: 50.0px;
+}
+
+.label.miniHeadLight{
+	-fx-font-size: 28.0px;
+}
+
+.label.miniLabel{
+	-fx-font-size: 16.0px;
+}
+
+.text-spc { 
+ -fx-font-smoothing-type: lcd;
+ -fx-fill: #f2eeee;
+ -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
+ -fx-font-size: 20pt;
+}
+
+.text-status { 
+ -fx-font-smoothing-type: lcd;
+ -fx-fill: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+ -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
+ -fx-font-size: 20pt;
+}
+
+.text-companyName { 
+ -fx-font-smoothing-type: lcd;
+ -fx-fill: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+ -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
+ -fx-font-size: 20pt;
+}
+
+.text-field {
+    -fx-background-color:
+        #f2eeee;
+    -fx-background-insets: 0.0, 2.0;
+    -fx-background-radius: 6.0,5.0;
+     -fx-font-family: 'Helvetica', Arial, sans-serif;
+	 -fx-font-weight: bold;
+	 -fx-text-fill: black;
+	 -fx-font-size: 16.0px;
+ }
+
+.text-field:focused {
+    -fx-background-color:
+        #0093EF,
+        #f2eeee;
+}
+
+.text-field:hover {
+    -fx-background-color:
+        #909090,
+        #f2eeee;
+}
+
+.text-field:focused:hover {
+    -fx-background-color:
+        #0093EF,
+        #f2eeee;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Combo BOX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.combo-box .list-cell 
+{
+    -fx-background: white;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-base-color;
+    -fx-padding: 3 0 2 7;
+    -fx-cell-size: 1.66667em; 
+}
+
+.combo-box-popup .list-view 
+{
+    -fx-background-color: white, white;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}    
+
+.combo-box-popup .list-view .list-cell 
+{
+    -fx-padding: 4 0 4 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: -fx-selection-bar;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+.combo-box-base  
+{
+    -fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";
+    -fx-background-color: white, white, white, white;
+    -fx-background-radius: 5, 5, 4, 3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-padding: 0;
+}
+
+.combo-box-base:hover
+{
+    -fx-color: -fx-hover-base;
+}
+
+.combo-box-base:showing 
+{
+    -fx-color: -fx-pressed-base;
+}
+
+.combo-box-base:focused {
+    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-radius: 6.4, 4, 5, 3;
+    -fx-background-insets: -1.4, 0, 1, 2;
+}
+
+.combo-box-base:disabled {
+    -fx-opacity: .4;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {   
+    -fx-stroke: transparent;
+    -fx-size:35.0;
+    -fx-alignment: CENTER ;    
+    -fx-text-alignment: center;
+    -fx-text-fill: #f2eeee;
+    -fx-background-radius: 6.0,5.0;
+
+}
+.table-row-cell:filled:hover {
+    -fx-size:25.0;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+    -fx-background-radius: 6.0,5.0;
+
+}
+.table-view:row-selection {
+    -fx-background-color: transparent;
+    -fx-text-fill: #C3073F;
+    -fx-fixed-cell-size: 30.0;
+    -fx-alignment: CENTER;
+        -fx-background-radius: 6.0,5.0;
+    -fx-text-alignment: center;
+
+}
+
+.table-view .table-column{
+    -fx-text-alignment: center;
+    -fx-alignment: CENTER;
+      -fx-text-fill: 1.0A1A1D;
+          -fx-background-radius: 6.0,5.0;
+}
+
+.text-area{
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	 -fx-font-size: 16.0px;
+	 -fx-alignment: CENTER ; 
+	  -fx-background-color:
+    linear-gradient(to top, #1A1A1D, #C3073F);
+    -fx-background-radius: 6.0,5.0;
+    -fx-background-insets: 0.0, 1.0;
+
+}
+
+

@@ -149,7 +149,7 @@ public class BiteMeServerUI extends Application implements Initializable {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Pane root = FXMLLoader.load(getClass().getResource("/fxmls/ServerGui.fxml"));
+		Pane root = FXMLLoader.load(getClass().getResource("/fxmls/Server.fxml"));
 		Scene scene = new Scene(root);
 		//scene.getStylesheets().add(getClass().getResource("/css/ServerGui.css").toExternalForm());
 		primaryStage.setTitle("Server");

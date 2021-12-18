@@ -1,54 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBranchManagerController">
+<Pane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfBranchManagerController">
    <children>
-      <Button id="button-menu" fx:id="btnViewSysReports" layoutX="47.0" layoutY="98.0" mnemonicParsing="false" onAction="#getViewReports" prefHeight="31.0" prefWidth="255.0" text="View system reports" />
-      <Button id="button-menu" fx:id="btnCompanyRegManagement" layoutX="47.0" layoutY="138.0" mnemonicParsing="false" onAction="#getCompRegManagement" prefHeight="25.0" prefWidth="255.0" text="Company registration management" />
-      <Button id="button-menu" fx:id="btnEditCustomerInfo" layoutX="46.0" layoutY="299.0" mnemonicParsing="false" onAction="#getEditCustomerInfo" prefHeight="31.0" prefWidth="255.0" text="Edit customer information" />
-      <Button id="button-menu" fx:id="btnSupplierReg" layoutX="47.0" layoutY="178.0" mnemonicParsing="false" onAction="#getSupplierReg" prefHeight="31.0" prefWidth="255.0" text="Supplier registartion" />
-      <Button id="button-menu" fx:id="btnCustomerReg" layoutX="47.0" layoutY="219.0" mnemonicParsing="false" onAction="#getCustomerReg" prefHeight="31.0" prefWidth="255.0" text="Customer registration" />
-      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnLogout" layoutX="235.0" layoutY="360.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+      <Button fx:id="btnLogout" layoutX="388.0" layoutY="634.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Logout" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="38.0" layoutY="38.0" prefHeight="53.0" prefWidth="93.0" text="Welcome," textFill="#383838">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button id="button-menu" fx:id="btnAddQuarterlyReports" layoutX="47.0" layoutY="259.0" mnemonicParsing="false" onAction="#getAddQuarterlyReports" prefHeight="31.0" prefWidth="255.0" text="Add quarterly Reports" />
-      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Text fx:id="branchManagerName" fill="#383838" layoutX="142.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="351.427734375">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <Label layoutX="428.0" layoutY="9.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
-      <Label layoutX="441.0" layoutY="49.0" prefHeight="31.0" prefWidth="64.0" text="STATUS:" textFill="#eb0e0e">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Text fx:id="statusText" fill="#eb0e0e" layoutX="505.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="113.13671875">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
+      <Label layoutX="731.0" layoutY="26.0" styleClass="miniLabel" text="Home Screen -&gt; Login -&gt; User Portal" />
+      <HBox layoutX="14.0" layoutY="14.0" prefHeight="43.0" prefWidth="106.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="help" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="242.0" layoutY="51.0" prefHeight="154.0" prefWidth="541.0">
+         <children>
+            <HBox prefHeight="74.0" prefWidth="591.0" spacing="10.0" styleClass="spc" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+               <children>
+                  <Label prefHeight="73.0" prefWidth="250.0" styleClass="headLight" text="Welcome," textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="branchManagerName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-spc" wrappingWidth="261.3098945617676">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="660.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="250.0" styleClass="miniHeadLight" text="Account Status:" textFill="#eb0e0e">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="statusText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-status" wrappingWidth="219.13671875">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="660.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="320.0" styleClass="miniHeadLight" text="Branch Name:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-companyName" text="add here branch name" wrappingWidth="245.13671875">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox layoutX="210.0" layoutY="319.0" prefHeight="247.0" prefWidth="605.0">
+         <children>
+            <VBox prefHeight="241.0" prefWidth="302.0" spacing="15.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+               </padding>
+               <children>
+                  <Button id="button-menu" fx:id="btnViewSysReports" mnemonicParsing="false" onAction="#getViewReports" prefHeight="60.0" prefWidth="280.0" styleClass="viewSystemReports" text="View System Reports" />
+                  <Button id="button-menu" fx:id="btnAddQuarterlyReports" mnemonicParsing="false" onAction="#getAddQuarterlyReports" prefHeight="60.0" prefWidth="280.0" styleClass="addQuarterlyReports" text="Add Quarterly Reports" />
+                  <Button id="button-menu" fx:id="btnCustomerReg" mnemonicParsing="false" onAction="#getCustomerReg" prefHeight="60.0" prefWidth="280.0" styleClass="customerRegistration" text="Customer Registration" />
+               </children>
+            </VBox>
+            <VBox prefHeight="291.0" prefWidth="303.0" spacing="15.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+               </padding>
+               <children>
+                  <Button id="button-menu" fx:id="btnSupplierReg" mnemonicParsing="false" onAction="#getSupplierReg" prefHeight="60.0" prefWidth="280.0" styleClass="supplierRegistration" text="Supplier Registration" />
+                  <Button id="button-menu" fx:id="btnCompanyRegManagementbtnCompanyRegManagement" mnemonicParsing="false" onAction="#getCompRegManagement" prefHeight="60.0" prefWidth="280.0" styleClass="companyManagement" text="Company Managment" />
+                  <Button id="button-menu" fx:id="btnEditCustomerInfo" mnemonicParsing="false" onAction="#getEditCustomerInfo" prefHeight="60.0" prefWidth="280.0" styleClass="customerManagement" text="Customer Managment" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
    </children>
 </Pane>

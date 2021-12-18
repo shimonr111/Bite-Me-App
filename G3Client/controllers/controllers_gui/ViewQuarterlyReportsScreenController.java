@@ -106,6 +106,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 							Stage.close();
 						}
 					});
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("View Reports");
 					Stage.setScene(scene);
 					Stage.show();

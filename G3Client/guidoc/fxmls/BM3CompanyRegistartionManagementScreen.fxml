@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.CompanyRegistartionManagementScreenController">
    <children>
       <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
          <font>
@@ -41,9 +41,9 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TableView fx:id="companyNamesTable" layoutX="193.0" layoutY="103.0" prefHeight="242.0" prefWidth="249.0">
+      <TableView fx:id="companiesTable" layoutX="202.0" layoutY="95.0" prefHeight="252.0" prefWidth="204.0">
          <columns>
-            <TableColumn prefWidth="243.0" text="Companys pending for approval" />
+            <TableColumn fx:id="companyNameCol" prefWidth="217.0" text="Company Name" />
          </columns>
       </TableView>
       <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
@@ -51,7 +51,10 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="saveBtn" layoutX="278.0" layoutY="429.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="25.0" prefWidth="94.0" text="Save" />
-      <Text fx:id="errorText" layoutX="222.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <Text fx:id="displayText" fill="#8a0606" layoutX="120.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="450.13671875">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

@@ -1,63 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfHRManagerController">
+<Pane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfHRManagerController">
    <children>
-      <Button id="button-menu" fx:id="btnStartOrder" layoutX="68.0" layoutY="102.0" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="33.0" prefWidth="232.0" text="Start order" />
-      <Button id="button-menu" fx:id="btnCompanyReg" layoutX="68.0" layoutY="147.0" mnemonicParsing="false" onAction="#getCompanyReg" prefHeight="33.0" prefWidth="232.0" text="Company registration" />
-      <Button id="button-menu" fx:id="btnBusinessCustomerConfirm" layoutX="68.0" layoutY="194.0" mnemonicParsing="false" onAction="#getBusinessCustomerConfirm" prefHeight="33.0" prefWidth="232.0" text="Business customer confirmation" />
-      <Button fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnLogout" layoutX="241.0" layoutY="349.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Logout" textFill="#383838">
+      <Button fx:id="btnLogout" layoutX="387.0" layoutY="631.0" mnemonicParsing="false" onAction="#getLogoutBtn" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Logout" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="108.0" layoutY="32.0" prefHeight="53.0" prefWidth="104.0" text="Welcome," textFill="#383838">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="68.0" layoutY="292.0" text="Customer company:">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="homeBranchCombo" layoutX="68.0" layoutY="241.0" prefHeight="31.0" prefWidth="232.0" promptText="Home Branch Name" />
-      <Text fx:id="hrManagerName" fill="#383838" layoutX="208.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="331.427734375">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Text>
-      <Text fx:id="companyName" layoutX="193.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="434.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
-      <Label layoutX="429.0" layoutY="7.0" text="Home Screen -&gt; Login -&gt; Main Screen" />
-      <Label layoutX="448.0" layoutY="58.0" prefHeight="24.0" prefWidth="58.0" text="STATUS:" textFill="#eb0e0e">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Text fx:id="statusText" fill="#eb0e0e" layoutX="506.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="137.13671875">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Text>
+      <ComboBox fx:id="homeBranchCombo" layoutX="731.0" layoutY="305.0" prefHeight="40.0" prefWidth="250.0" promptText="Home Branch Name" />
+      <VBox layoutX="361.0" layoutY="291.0" prefHeight="284.0" prefWidth="302.0" spacing="15.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+         </padding>
+         <children>
+            <Button id="button-menu" fx:id="btnStartOrder" mnemonicParsing="false" onAction="#getStartOrder" prefHeight="60.0" prefWidth="280.0" styleClass="order" text="Start Order" />
+            <Button id="button-menu" fx:id="btnCompanyReg" mnemonicParsing="false" onAction="#getCompanyReg" prefHeight="60.0" prefWidth="280.0" styleClass="companyRegistration" text="Company Registration" />
+            <Button id="button-menu" fx:id="btnBusinessCustomerConfirm" mnemonicParsing="false" onAction="#getBusinessCustomerConfirm" prefHeight="60.0" prefWidth="280.0" styleClass="ConfirmWorkers" text="Confirm Workers" />
+         </children>
+      </VBox>
+      <VBox layoutX="268.0" layoutY="71.0" prefHeight="154.0" prefWidth="541.0">
+         <children>
+            <HBox prefHeight="74.0" prefWidth="591.0" spacing="10.0" styleClass="spc" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+               <children>
+                  <Label prefHeight="73.0" prefWidth="250.0" styleClass="headLight" text="Welcome," textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="hrManagerName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-spc" wrappingWidth="261.3098945617676">
+                     <HBox.margin>
+                        <Insets top="25.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="660.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="250.0" styleClass="miniHeadLight" text="Account Status:" textFill="#eb0e0e">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="statusText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-status" wrappingWidth="219.13671875">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="660.0">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="320.0" styleClass="miniHeadLight" text="Customer company:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Text fx:id="companyName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-companyName" wrappingWidth="245.13671875">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="731.0" layoutY="14.0" styleClass="miniLabel" text="Home Screen -&gt; Login -&gt; User Portal" />
+      <HBox layoutX="15.0" layoutY="15.0" prefHeight="43.0" prefWidth="106.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="help" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </Pane>

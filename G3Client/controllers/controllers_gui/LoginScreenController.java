@@ -22,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -182,7 +183,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Home");
 					Stage.setScene(scene);
 					Stage.show();
@@ -267,7 +268,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */
