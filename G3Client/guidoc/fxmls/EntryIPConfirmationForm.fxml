@@ -1,73 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="txt" prefHeight="384.0" prefWidth="512.0" styleClass="pane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryIPConfirmationFormController">
+<AnchorPane fx:id="txt" maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="ipExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryIPConfirmationFormController">
    <children>
-      <Button id="btnConfirm" fx:id="btnConfirmIP" layoutX="182.0" layoutY="273.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="40.0" prefWidth="150.0" styleClass="enter" text="Enter" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font></Button>
-      <Label layoutX="64.0" layoutY="14.0" prefHeight="80.0" prefWidth="374.0" styleClass="headLight" text="Enter server IP" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <VBox layoutX="112.0" layoutY="123.0" prefHeight="92.0" prefWidth="289.0" spacing="10.0">
-         <children>
-            <HBox prefHeight="51.0" prefWidth="330.0" spacing="25.0" styleClass="hbox">
-               <children>
-                  <Label prefHeight="30.0" prefWidth="107.0" text="Server IP:">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </Label>
-                  <TextField id="lblEnterIpTxt" fx:id="enterIPTxt" alignment="CENTER" prefHeight="35.0" prefWidth="150.0" text="localhost">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets bottom="5.0" top="5.0" />
-                     </padding>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </TextField>
-               </children>
-               <padding>
-                  <Insets bottom="5.0" top="15.0" />
-               </padding>
-            </HBox>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Entering wrong IP will cause termination!">
-               <VBox.margin>
-                  <Insets left="20.0" />
-               </VBox.margin>
-            </Text>
-         </children>
-      </VBox>
-      <Button fx:id="btnExit" mnemonicParsing="false" onAction="#exitBtn" prefHeight="40.0" prefWidth="49.0" styleClass="exit">
+      <Button fx:id="btnExit" layoutX="14.0" layoutY="24.0" mnemonicParsing="false" onAction="#exitBtn" prefHeight="40.0" prefWidth="49.0" styleClass="exitButton" text="✖">
          <effect>
             <ColorAdjust />
          </effect>
       </Button>
-      <ImageView fitHeight="61.0" fitWidth="68.0" layoutX="6.0" layoutY="319.0">
-         <image>
-            <Image url="@../../../Design/Images/logo.png" />
-         </image>
-      </ImageView>
+      <AnchorPane layoutX="342.0" layoutY="184.0" prefHeight="400.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <VBox layoutX="71.0" layoutY="145.0" prefHeight="135.0" prefWidth="203.0">
+               <children>
+                  <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="Server IP *" />
+                        <TextField fx:id="enterIPTxt" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" styleClass="text-field" text="localhost" />
+                     </children>
+                  </VBox>
+                  <Label prefHeight="35.0" prefWidth="200.0" styleClass="errorText" text="Incorrect Ip will cause termination!" />
+               </children>
+            </VBox>
+            <Button id="ipConfirmButton" fx:id="btnConfirmIP" layoutX="47.0" layoutY="311.0" mnemonicParsing="false" onAction="#Confirm" prefHeight="50.0" prefWidth="250.0" styleClass="ipConfirmButton" text="Confirm" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+            <Label layoutX="36.0" layoutY="40.0" prefHeight="80.0" prefWidth="273.0" styleClass="ipConfirmHeadLight" text="Connect to Server" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
