@@ -6,31 +6,32 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryHomeScreenFormController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="homeExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EntryHomeScreenFormController">
    <children>
-      <Label layoutX="233.0" layoutY="24.0" prefHeight="73.0" prefWidth="560.0" styleClass="headLight" text="Welcome to Bite-Me!" textFill="#383838">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="86.0" prefHeight="100.0" prefWidth="600.0" styleClass="homeHeadLight" text="Welcome to Bite Me 🍴" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnEnter" layoutX="337.0" layoutY="625.0" mnemonicParsing="false" onAction="#getEnterBtn" prefHeight="50.0" prefWidth="350.0" styleClass="enter" text="I am Hungry" textFill="#383838">
+      <Button fx:id="btnEnter" layoutX="338.0" layoutY="620.0" mnemonicParsing="false" onAction="#getEnterBtn" prefHeight="60.0" prefWidth="350.0" styleClass="homeEnterButton" text="I am Hungry" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="189.0" layoutY="176.0" prefHeight="53.0" prefWidth="649.0" text="We will link you to the best resturant in you'r area :)" textFill="#383838">
+      <Label layoutX="243.0" layoutY="186.0" prefHeight="53.0" prefWidth="539.0" styleClass="homeMiniHeadLight" text="We will link you to the best resturant in you'r area!" textFill="#383838">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <HBox prefHeight="43.0" prefWidth="106.0" spacing="5.0">
+      <HBox prefHeight="43.0" prefWidth="106.0" spacing="5.0" />
+      <HBox layoutX="24.0" layoutY="34.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
-            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit" textFill="WHITE">
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
-            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="help" textFill="WHITE">
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

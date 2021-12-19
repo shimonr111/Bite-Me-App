@@ -10,191 +10,187 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.ColorAdjust?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="exit" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bitemeserver.BiteMeServerUI">
+<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="serverExternalPane" stylesheets="@../../../G3Client/guidoc/css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bitemeserver.BiteMeServerUI">
    <children>
-      <VBox layoutX="262.0" layoutY="609.0" prefHeight="125.0" prefWidth="501.0" styleClass="vbox">
-         <children>
-            <HBox styleClass="hbox">
-               <children>
-                  <Button fx:id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connect" prefHeight="50.0" prefWidth="250.0" styleClass="connect" text="Connect" textAlignment="CENTER" textFill="#383838">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <effect>
-                        <Blend mode="BLUE" />
-                     </effect>
-                  </Button>
-                  <Button fx:id="disconnectBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="50.0" prefWidth="250.0" styleClass="disconnect" text="Disconnect" textAlignment="CENTER" textFill="#383838">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </Button>
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <Button id="import-btn" fx:id="importBtn" mnemonicParsing="false" onAction="#getImportBtn" prefHeight="50.0" prefWidth="505.0" styleClass="import" text="Import the Data Management System" textFill="#383838">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children>
-         <padding>
-            <Insets bottom="10.0" />
-         </padding>
-      </VBox>
-      <Button fx:id="closeBtn" maxHeight="40.0" maxWidth="50.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exit">
-         <effect>
-            <ColorAdjust />
-         </effect></Button>
-      <Label layoutX="267.0" layoutY="24.0" styleClass="headLight" text="Server Configuration" />
       <Text fx:id="txtMsgToServer" layoutX="305.0" layoutY="567.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="138.0">
          <font>
             <Font size="14.0" />
          </font></Text>
-      <HBox layoutX="31.0" layoutY="131.0" prefHeight="455.0" prefWidth="963.0" spacing="80.0">
+      <Button fx:id="closeBtn" layoutX="24.0" layoutY="34.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="40.0" prefWidth="49.0" styleClass="exitButton" text="✖">
+         <effect>
+            <ColorAdjust />
+         </effect>
+      </Button>
+      <AnchorPane layoutX="49.0" layoutY="133.0" prefHeight="550.0" prefWidth="450.0" styleClass="loginMainPane" stylesheets="@../../../G3Client/guidoc/css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <HBox spacing="30.0">
+            <HBox layoutX="30.0" layoutY="107.0" prefHeight="280.0" prefWidth="390.0">
                <children>
-                  <VBox spacing="22.0">
+                  <VBox prefHeight="280.0" prefWidth="185.0" spacing="15.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="165.0" text="IP:" textFill="#383838">
+                        <Label prefHeight="40.0" prefWidth="154.0" styleClass="serverLabels" text="IP:" textFill="#383838">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="portLbl" prefHeight="35.0" prefWidth="165.0" text="Port:" textFill="#383838">
+                        <Label fx:id="portLbl" prefHeight="40.0" prefWidth="153.0" styleClass="serverLabels" text="Port:" textFill="#383838">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label prefHeight="35.0" prefWidth="165.0" text="DB Name:" textFill="#383838">
-                           <font>
-                              <Font name="Rage Italic" size="24.0" />
-                           </font>
+                        <Label prefHeight="40.0" prefWidth="152.0" styleClass="serverLabels" text="DB Name:" textFill="#383838">
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label prefHeight="35.0" prefWidth="165.0" text="DB user:" textFill="#383838">
+                        <Label prefHeight="40.0" prefWidth="164.0" styleClass="serverLabels" text="DB user:" textFill="#383838">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label prefHeight="35.0" prefWidth="165.0" text="DB password:" textFill="#383838">
+                        <Label prefHeight="40.0" prefWidth="181.0" styleClass="serverLabels" text="DB password:" textFill="#383838">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
                            <padding>
-                              <Insets top="5.0" />
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </Label>
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <padding>
+                        <Insets right="15.0" />
+                     </padding>
                   </VBox>
-                  <VBox prefHeight="518.0" prefWidth="226.0" spacing="15.0">
+                  <VBox prefHeight="280.0" prefWidth="216.0" spacing="15.0">
                      <children>
-                        <TextField fx:id="ipTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                        <TextField fx:id="ipTxt" maxHeight="35.0" maxWidth="200.0" minHeight="35.0" minWidth="200.0" prefHeight="35.0" prefWidth="200.0" styleClass="text-field">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="portxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                        <TextField fx:id="portxt" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" styleClass="text-field">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="DbNameTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                        <TextField fx:id="DbNameTxt" maxWidth="200.0" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="DbUserTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                        <TextField fx:id="DbUserTxt" maxWidth="200.0" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
-                        <PasswordField fx:id="DbPasswordTxt" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
+                        <PasswordField fx:id="DbPasswordTxt" maxWidth="200.0" prefHeight="35.0" prefWidth="250.0" styleClass="text-field">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </PasswordField>
                      </children>
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="460.0" prefWidth="430.0" spacing="30.0">
+            <VBox layoutX="20.0" layoutY="411.0" prefHeight="125.0" prefWidth="410.0" spacing="10.0" styleClass="vbox">
                <children>
-                  <VBox spacing="10.0" styleClass="vbox">
+                  <HBox spacing="10.0">
                      <children>
-                        <Label prefHeight="40.0" prefWidth="390.0" styleClass="miniHeadLight" text="Connected clients" textFill="#383838">
+                        <Button fx:id="connectBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connect" prefHeight="50.0" prefWidth="200.0" styleClass="serverConnectButton" text="Connect" textAlignment="CENTER" textFill="#383838">
+                           <font>
+                              <Font name="Berlin Sans FB Bold" size="24.0" />
+                           </font>
+                           <effect>
+                              <Blend mode="BLUE" />
+                           </effect>
+                        </Button>
+                        <Button fx:id="disconnectBtn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#disconnectBtn" prefHeight="50.0" prefWidth="200.0" styleClass="serverDisconnectButton" text="Disconnect" textAlignment="CENTER" textFill="#383838">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
-                        </Label>
-                        <TableView fx:id="clientsTable" prefHeight="130.0" prefWidth="390.0">
-                          <columns>
-                            <TableColumn fx:id="ipAddressCol" prefWidth="130.0" text="IP" />
-                            <TableColumn fx:id="hostNameCol" prefWidth="130.0" text="Host" />
-                              <TableColumn fx:id="statusCol" prefWidth="130.0" text="Status" />
-                          </columns>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" />
-                           </padding>
-                        </TableView>
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Button>
                      </children>
-                  </VBox>
-                  <VBox spacing="10.0" styleClass="vbox">
-                     <children>
-                        <Label prefHeight="40.0" prefWidth="390.0" styleClass="miniHeadLight" text="Console" textFill="#383838">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </Label>
-                        <TextArea fx:id="txtConsole" editable="false" prefHeight="174.0" prefWidth="410.0" style="-fx-background-radius: 5; -fx-background-color: #f2eeee;">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </TextArea>
-                     </children>
-                  </VBox>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+                  <Button id="import-btn" fx:id="importBtn" mnemonicParsing="false" onAction="#getImportBtn" prefHeight="50.0" prefWidth="410.0" styleClass="serverImportButton" text="Import the Data Management System" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" />
                </padding>
             </VBox>
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="58.0" prefWidth="400.0" styleClass="serverHeadLight" text="Server Configuration" />
          </children>
-      </HBox>
-      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="654.0">
-         <image>
-            <Image url="@../../../Design/Images/logo.png" />
-         </image>
-      </ImageView>
+      </AnchorPane>
+      <AnchorPane layoutX="523.0" layoutY="164.0" prefHeight="220.0" prefWidth="450.0" styleClass="loginMainPane" stylesheets="@../../../G3Client/guidoc/css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <VBox layoutX="30.0" layoutY="26.0" spacing="10.0" styleClass="vbox">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="390.0" styleClass="serverConsoleClinetsLabels" text="Connected clients" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TableView fx:id="clientsTable" prefHeight="130.0" prefWidth="410.0">
+                    <columns>
+                      <TableColumn fx:id="ipAddressCol" prefWidth="130.0" text="IP" />
+                      <TableColumn fx:id="hostNameCol" prefWidth="130.0" text="Host" />
+                        <TableColumn fx:id="statusCol" prefWidth="130.0" text="Status" />
+                    </columns>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </padding>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="523.0" layoutY="442.0" prefHeight="220.0" prefWidth="450.0" styleClass="loginMainPane" stylesheets="@../../../G3Client/guidoc/css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <VBox layoutX="25.0" layoutY="14.0" prefHeight="180.0" prefWidth="390.0" spacing="10.0" styleClass="vbox">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="390.0" styleClass="serverConsoleClinetsLabels" text="Console" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="txtConsole" editable="false" prefHeight="130.0" prefWidth="390.0" style="-fx-background-radius: 5; -fx-background-color: #f2eeee;">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </TextArea>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

@@ -1,368 +1,383 @@
-.root{
-  -fx-max-width: 1024.0px;
-  -fx-max-height: 768.0px;
-  -fx-background-color: linear-gradient(to left, #434343, #000000);
-  -fx-background-radius:0.0;
+
+/**Font */
+@font-face {
+    src: url("Montserrat-ExtraBoldItalic.ttf"),
 }
 
-.vbox{
-   -fx-spacing: 5.0px;
-	
+.root {
+    -fx-font-family: 'Montserrat', sans-serif;
+}
+.text{
+	-fx-text-alignment: center;
 }
 
-.hbox{
-   -fx-spacing: 5.0px;
-	
+
+/** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Layouts ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+/**~~~~@@@@~ Common ~@@@~~~~~*/
+
+.backButton{
+    -fx-background-color: white;
+    -fx-background-position: center center;
+    -fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.backButton:hover {
+	-fx-text-alignment: right;
+}
+.exitButton{
+    -fx-background-color: white;
+    -fx-background-position: center center;
+    -fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    -fx-font-size: 20px;
+   	-fx-font-weight: bold;
+}
+
+.helpButton{
+    -fx-background-color: white;
+    -fx-background-position: center center;
+    -fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.errorText{
+	-fx-text-alignment: center;
+	-fx-font-size: 12px;
+	-fx-background-position: center center;
 }
 
 .button{
-    -fx-background-radius: 6.0, 5.0;
-    -fx-background-insets: 0.0, 1.0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.4) , 5.0, 0.5 , 0.0 , 1.0 );
-    -fx-text-fill: #1A1A1D;
-    -fx-font-family: 'Helvetica', Arial, sans-serif;
-    -fx-font-size: 22.0px;
-    -fx-font-weight: bold;
-    
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 2.0, 2.0, 2.0);
+	-fx-background-radius: 6,5;
 }
 
 .button:hover{
-	-fx-border-color: black;
-	-fx-border-radius: 6.0, 5.0;
+    -fx-border-color: black;
+    -fx-border-radius: 6.0, 5.0;
     -fx-background-radius: 6.0, 5.0;
     -fx-background-insets: 0.0, 1.0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0.0,0.0,0.0,0.4) , 5.0, 0.0 , 0.0 , 1.0 );
-    -fx-text-fill: #f2eeee;
-    -fx-font-family: 'Helvetica', Arial, sans-serif;
-    -fx-font-size: 22.0px;
     -fx-font-weight: bold;
 }
 
-.button.exit{
-    -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/X.png");
-    -fx-background-repeat: stretch;   
-    -fx-border-color: black;
-    -fx-background-color: linear-gradient(to top, #eb3941, #f15e64, #e14e53, #e2373f);
-    -fx-background-position: center center;
+.topMenuLabel{
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size: 16px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 2.0, 3.0, 3.5);
 }
 
-.button.help{
-   -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/Help.png");
-    -fx-background-repeat: stretch; 
-     -fx-border-color: black;
-      -fx-background-color: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed); 
-    -fx-background-position: center center;
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/**~~~~~@@@@ Server @@@@~~~~~*/
+.serverExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 52% 2%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+.serverMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
 }
 
-.button.back{
-   	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/back.png");
-    -fx-background-repeat: stretch;   
-    -fx-background-position: center center;
-    -fx-background-color: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+.serverConnectButton{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
 
 }
 
-
-.button.back:hover {
-	-fx-background-position: left;
-}
-
-.button.next {
-   	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/next.png");
-    -fx-background-repeat: stretch;   
-    -fx-background-position: center center;
-    -fx-background-color: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+.serverDisconnectButton{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
 
 }
 
-.button.next:hover {
-	-fx-background-position: right;
+.serverImportButton{
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/import.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center;
+    -fx-background-position: 1.5% 50%;
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
 }
 
-.button.enter{
-	   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+.serverHeadLight{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 40px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
 }
 
-
-.button.connect{
-	-fx-background-color:
-	   linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+.serverLabels{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 18px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-underline: true;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 1.0, 1.0, 0);
+ 	
 }
 
-.button.disconnect{
-  	-fx-background-color: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
+.serverConsoleClinetsLabels{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 24px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-underline: true;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 1.0, 1.0, 0);
+ 	
+}
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/**~~@@ IP Confirmation @@~~*/
+.ipExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 52% 2%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+.ipMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
 }
 
+.ipConfirmButton{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/key.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center;
+    -fx-background-position: 25% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
 
-.button.import{
-		-fx-background-color:
-	linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
 }
 
-.button.order{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/cart.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+.ipConfirmHeadLight{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 32px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
+}
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+/**~~@@ Home Screen @@~~*/
+.homeExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 55% 55%;
+	-fx-background-size: 450 300;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
 }
 
-.button.companyRegistration{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+.homeEnterButton{
+	-fx-background-color: white;
+
+	-fx-alignment: center;
+    -fx-background-position: 25% 50%;
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+
+}
+.homeMiniHeadLight{
+	-fx-text-fill: white;
+	-fx-font-size: 24px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
+}
+.homeHeadLight{
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size: 50px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
+}
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/**~~~~@@ Login Screen @@~~~~*/
+
+.loginExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 52% 2%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+.loginMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
 }
 
-.button.customerRegistration{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+.loginButton{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/outline_login_white_24dp.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 30% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
 }
 
-.button.supplierRegistration{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/register.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
--fx-background-color: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+.loginLabels{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 14px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-underline: true;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 1.0, 1.0, 0);
+ 	
 }
 
-.button.ConfirmWorkers{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+.loginHeadLight{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 32px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
 }
 
-.button.companyManagement{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+.loginBundleVBOX{
+	-fx-spacing: 0;
+	-fx-alignment: top-left;
+	-fx-fill-width: true;
 }
 
-.button.customerManagement{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/approve.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Buttons ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~ Text ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+							/** Text, Text-fields, Text-area, labels... */
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Combo-Box ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Table-View ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+.table-view{
+    
+    -fx-table-cell-border-color: white;
+	-fx-text-alignment: center;
+    -fx-font-size: 16px;
+    -fx-text-weight: Bold;
+    -fx-background-insets: 0,0 0 0 0;
+    -fx-padding: 10;
+
 }
 
-.button.viewSystemReports{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+.table-view:focused{
+
+    -fx-border-Width: 0;
+    -fx-table-cell-border-color: black;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0;
+
 }
 
-.button.addQuarterlyReports{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/upload.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+/* TableView Column Header */
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+     -fx-table-cell-border-color: white;
 }
 
-.button.viewQuarterlyReports{
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
-	    -fx-background-repeat: stretch;  
-	    -fx-alignment: top-center; 
-    -fx-background-position: bottom center;
-   -fx-background-color: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
-}
+.table-view .column-header-background .label{
 
-
-.label{
-	 -fx-font-family: 'Helvetica', Arial, sans-serif;
-	 -fx-font-weight: bold;
-	 -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
-	 -fx-text-fill: #f2eeee;
-	 -fx-font-size: 20.0px;
-	 -fx-alignment: CENTER ; 
-}
-
-.label.headLight{
-	  -fx-font-size: 50.0px;
-}
-
-.label.miniHeadLight{
-	-fx-font-size: 28.0px;
-}
-
-.label.miniLabel{
-	-fx-font-size: 16.0px;
-}
-
-.text-spc { 
- -fx-font-smoothing-type: lcd;
- -fx-fill: #f2eeee;
- -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
- -fx-font-size: 20pt;
-}
-
-.text-status { 
- -fx-font-smoothing-type: lcd;
- -fx-fill: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);
- -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
- -fx-font-size: 20pt;
-}
-
-.text-companyName { 
- -fx-font-smoothing-type: lcd;
- -fx-fill: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
- -fx-effect: dropshadow( three-pass-box , rgba(2.0,2.0,2.0,2.0) , 5.0, 0.8 , 0.0 , 1.0 );
- -fx-font-size: 20pt;
-}
-
-.text-field {
-    -fx-background-color:
-        #f2eeee;
-    -fx-background-insets: 0.0, 2.0;
-    -fx-background-radius: 6.0,5.0;
-     -fx-font-family: 'Helvetica', Arial, sans-serif;
-	 -fx-font-weight: bold;
-	 -fx-text-fill: black;
-	 -fx-font-size: 16.0px;
- }
-
-.text-field:focused {
-    -fx-background-color:
-        #0093EF,
-        #f2eeee;
-}
-
-.text-field:hover {
-    -fx-background-color:
-        #909090,
-        #f2eeee;
-}
-
-.text-field:focused:hover {
-    -fx-background-color:
-        #0093EF,
-        #f2eeee;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Combo BOX~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.combo-box .list-cell 
-{
-    -fx-background: white;
     -fx-background-color: transparent;
-    -fx-text-fill: -fx-text-base-color;
-    -fx-padding: 3 0 2 7;
-    -fx-cell-size: 1.66667em; 
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-font-weight: Bold;
+
 }
 
-.combo-box-popup .list-view 
-{
-    -fx-background-color: white, white;
-    -fx-background-insets: 0, 1;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
-}    
-
-.combo-box-popup .list-view .list-cell 
-{
-    -fx-padding: 4 0 4 5;
-
-    /* No alternate highlighting */
-    -fx-background-color: white;
+.table-view .column-header {
+    -fx-table-cell-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
-.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
-{
-    -fx-background: -fx-accent;
-    -fx-background-color: -fx-selection-bar;
-    -fx-text-fill: -fx-selection-bar-text;
+.table-view .table-cell{
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: #a2a2a2;
+    -fx-text-fill:linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    -fx-font-size: 12px;
+
 }
 
-.combo-box-popup .list-view .list-cell:filled:hover 
-{
-    -fx-background-color: white;
-    -fx-text-fill: -fx-text-inner-color;
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, white;
+	-fx-text-fill: white;
+    -fx-background-insets: 0, 0 0 0 0;
+    -fx-padding: 0;
+    -fx-cell-size: 16px;
 }
 
-.combo-box-base  
-{
-    -fx-skin: "com.sun.javafx.scene.control.skin.ComboBoxBaseSkin";
-    -fx-background-color: white, white, white, white;
-    -fx-background-radius: 5, 5, 4, 3;
-    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+.table-row-cell:odd{
+    -fx-background-color: -fx-table-cell-border-color, white;
+	-fx-text-fill: white;
+    -fx-background-insets: 0, 0 0 0 0;
     -fx-padding: 0;
 }
 
-.combo-box-base:hover
-{
-    -fx-color: -fx-hover-base;
-}
-
-.combo-box-base:showing 
-{
-    -fx-color: -fx-pressed-base;
-}
-
-.combo-box-base:focused {
-    -fx-background-color: -fx-focus-color, -fx-outer-border, -fx-inner-border, -fx-body-color;
-    -fx-background-radius: 6.4, 4, 5, 3;
-    -fx-background-insets: -1.4, 0, 1, 2;
-}
-
-.combo-box-base:disabled {
-    -fx-opacity: .4;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.table-view .column-header,
-.table-view .column-header .filler,
-.table-view .column-header-background .filler {   
-    -fx-stroke: transparent;
-    -fx-size:35.0;
-    -fx-alignment: CENTER ;    
-    -fx-text-alignment: center;
-    -fx-text-fill: #f2eeee;
-    -fx-background-radius: 6.0,5.0;
-
-}
-.table-row-cell:filled:hover {
-    -fx-size:25.0;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: center;
-    -fx-background-radius: 6.0,5.0;
-
-}
-.table-view:row-selection {
-    -fx-background-color: transparent;
-    -fx-text-fill: #C3073F;
-    -fx-fixed-cell-size: 30.0;
-    -fx-alignment: CENTER;
-        -fx-background-radius: 6.0,5.0;
-    -fx-text-alignment: center;
+.table-row-cell:selected {
 
 }
 
-.table-view .table-column{
-    -fx-text-alignment: center;
-    -fx-alignment: CENTER;
-      -fx-text-fill: 1.0A1A1D;
-          -fx-background-radius: 6.0,5.0;
-}
-
-.text-area{
-	-fx-font-family: 'Helvetica', Arial, sans-serif;
-	 -fx-font-size: 16.0px;
-	 -fx-alignment: CENTER ; 
-	  -fx-background-color:
-    linear-gradient(to top, #1A1A1D, #C3073F);
-    -fx-background-radius: 6.0,5.0;
-    -fx-background-insets: 0.0, 1.0;
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-table-cell-border-color: #24243e;
 
 }
-
-
+/** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
