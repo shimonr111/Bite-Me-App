@@ -57,8 +57,6 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	private Label customerNameLabel;
 	@FXML
 	private Label companyNameLabel;
-	@FXML
-	private ComboBox<String> homeBranchCombo;
     @FXML
     private Text hrManagerName;
     @FXML
@@ -217,14 +215,6 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
-		Branch homeBranch = connectedUser.getHomeBranch();
-		if(homeBranch.equals(Branch.NORTH))
-			homeBranchCombo.setValue("North Branch");
-		else if(homeBranch.equals(Branch.CENTER))
-			homeBranchCombo.setValue("Center Branch");
-		else
-			homeBranchCombo.setValue("South Branch");
-		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName().equals("Waiting_Registration")) {
 			companyName.setText("No Company");
 			btnBusinessCustomerConfirm.setDisable(true);
@@ -238,12 +228,10 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 				btnBusinessCustomerConfirm.setDisable(true);
 				btnStartOrder.setDisable(true);
-				homeBranchCombo.setDisable(true);
 			}
 			else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
 				btnBusinessCustomerConfirm.setDisable(true);
 				btnStartOrder.setDisable(true);
-				homeBranchCombo.setDisable(true);
 				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() +" ( Waiting for BM confirmation )");
 			}
 			else

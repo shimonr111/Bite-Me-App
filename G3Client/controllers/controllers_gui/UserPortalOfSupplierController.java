@@ -47,12 +47,11 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	@FXML
 	private Button btnManageMenu;
 	@FXML
-	private Label nameLabel;
+	private Text supplierName;
 	@FXML
 	private Button btnHelp;
     @FXML
     private Text resturantName;
-
     @FXML
     private Text statusText;
 	
@@ -176,6 +175,7 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 		// TODO Auto-generated method stub
 		resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName());
 		statusText.setText(connectedUser.getStatusInSystem().toString());
+		supplierName.setText(connectedUser.getUserFirstName());
 		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 			btnManageMenu.setDisable(true);
 			btnManageOrders.setDisable(true);
