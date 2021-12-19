@@ -53,8 +53,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	private Button btnStartOrder;
 	@FXML
 	private Label companyNameLabel;
-	@FXML
-	private ComboBox<String> homeBranchCombo;
+	
     @FXML
     private Text companyName;
     @FXML
@@ -181,19 +180,10 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		businessCustomerName.setText(connectedUser.getUserFirstName());
-		Branch homeBranch = connectedUser.getHomeBranch();
-		if(homeBranch.equals(Branch.NORTH))
-			homeBranchCombo.setValue("North Branch");
-		else if(homeBranch.equals(Branch.CENTER))
-			homeBranchCombo.setValue("Center Branch");
-		else
-			homeBranchCombo.setValue("South Branch");
-		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");
 		companyName.setText(((BusinessCustomer)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 		statusText.setText(connectedUser.getStatusInSystem().toString());
 		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 			btnStartOrder.setDisable(true);
-			homeBranchCombo.setDisable(true);
 		}
 		
 	}

@@ -290,6 +290,180 @@
 
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
+/**~~~~@@ User Portals @@~~~~*/
+
+.userPortalExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 52% 2%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+
+.userPortalLeftPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+}
+
+.userPortalTopPane{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 0%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/account.png");
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+}
+
+.userPortalLogoutButton{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logout.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 20% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.userPortalMainButtonsManage{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/manage.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: top-center; 
+    -fx-background-position: 50% 90%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalMainButtonsRegister{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addUser.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: top-center; 
+    -fx-background-position: 50% 90%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalMainButtonsOrder{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/cart.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: top-center; 
+    -fx-background-position: 50% 90%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalMainButtonsView{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: top-center; 
+    -fx-background-position: 50% 90%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:18px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalMainButtonsAddReport{
+	-fx-background-color: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addNote.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: top-center; 
+    -fx-background-position: 50% 90%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:18px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+.userPortalsBundleVBOX{
+	-fx-spacing: 15;
+	-fx-padding: 15;
+	-fx-alignment: top-left;
+	-fx-fill-width: true;
+}
+
+.userPortalLabel{
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalWelcomeLabel{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalStatusLabel{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 16px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+}
+
+.userPortalStatusTypeLabel{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size: 12px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.22), 0.1, 4.0, 3.0, 4.0);
+}
+
+.userPortaluserNameLabel{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size:22px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.22), 0.1, 4.0, 3.0, 4.0);
+	-fx-text-alignment: center;
+}
+
+.userPortalRetsturantNameLabel{
+	-fx-text-fill: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+	-fx-font-weight:bold;
+	-fx-font-size:22px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.22), 0.1, 4.0, 3.0, 4.0);
+	-fx-text-alignment: center;
+}
+
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Buttons ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
