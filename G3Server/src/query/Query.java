@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import bitemeserver.BiteMeServerUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import users.Branch;
+import users.BranchManager;
 import users.BusinessCustomer;
 import users.CeoBiteMe;
 import users.Company;
@@ -29,11 +32,68 @@ import users.User;
 public class Query {
 
 	private static Connection con;
+	private static Connection externalCon;
 	public static void setConnectionFromServerToDB(Connection connection) {
 		con = connection;
 	}
+	public static void setConnectionFromServerToExternalDB(Connection connection) {
+		externalCon=connection;
+	}
 	
 	
+	
+	/**
+	 * This method will be called once to import the data of users management from the external DB.
+	 * @return
+	 */
+	public static ResultSet getExternalDB() {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String query = "SELECT * FROM externaldb.usersmanagement";
+		try {
+		pstmt = externalCon.prepareStatement(query);
+		rs= pstmt.executeQuery();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;	
+	}
+	
+	/**
+	 * This method  will get the external data and insert it into our registration table .
+	 * @param userType
+	 * @param userID
+	 * @param statusInSystem
+	 * @param firstName
+	 * @param lastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param email
+	 * @param phoneNumber
+	 * @param creditCardNumber
+	 * @param creditCardCvvCode
+	 * @param creditCardDateOfExpiration
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public static boolean insertRowIntoRegistrationTable(String userType, String userID, String statusInSystem, String firstName,String lastName,
+			String homeBranch,int isLoggedIn,String email, String phoneNumber, String creditCardNumber,String creditCardCvvCode,String creditCardDateOfExpiration,
+			String username,String password) {
+		String query = "INSERT INTO semesterialproject.registration ( userType, userID, statusInSystem, firstName,lastName,homeBranch,isLoggedIn,email, phoneNumber, creditCardNumber,"
+				+ " creditCardCvvCode,creditCardDateOfExpiration,username,  password  ) VALUES( '"+ userType +"' , '" +userID  +"' , '"+ statusInSystem  +"' , '" + firstName  +"' , '"  + lastName
+				+"' , '"  + homeBranch +"' , '"  + isLoggedIn +"' , '"  + email +"' , '"  + phoneNumber +"' , '"  + creditCardNumber +"' , '"  + creditCardCvvCode +"' , '"  + creditCardDateOfExpiration 
+				+"' , '"  + username +"' , '"  +password +"' )";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			BiteMeServerUI.console.add("Data Already Imported.\n");
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * General methods for getting Data from DB
 	 * 
@@ -255,6 +315,32 @@ public class Query {
 		String query = "INSERT INTO semesterialproject.company (companyName, companyStatusInSystem, address, email, companyCode) VALUES ('" +company.getCompanyName()
 		+"', '" + company.getStatusCompanyInSystem() +"', '" + company.getAddress() +"', '" + company.getEmail() +"', '" + company.getcompanyCode() + "' )";
 		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
+		String query = "INSERT INTO semesterialproject.ceobiteme (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + ceo.getUserId()
+		+ "' , '" + ceo.getStatusInSystem().toString() 	+ "' , '" + ceo.getUserFirstName() + "' , '" + ceo.getUserLastName() + "' , '" + ceo.getHomeBranch().toString() + "' , '" + 0 
+		+ "' , '" + ceo.getUserEmail() + "' , '" + ceo.getPhoneNumber() +"' )";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertOneRowIntoBranchManagerTable(BranchManager bm) {
+		String query = "INSERT INTO semesterialproject.branchmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + bm.getUserId()
+		+ "' , '" + bm.getStatusInSystem().toString() 	+ "' , '" + bm.getUserFirstName() + "' , '" + bm.getUserLastName() + "' , '" + bm.getHomeBranch().toString() + "' , '" + 0 
+		+ "' , '" + bm.getUserEmail() + "' , '" + bm.getPhoneNumber() +"' )";
+		PreparedStatement pstmt = null;
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
