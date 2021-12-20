@@ -1,4 +1,7 @@
 package orders;
+
+import java.io.Serializable;
+
 /**
  * 
  * @author Ori, Malka.
@@ -7,7 +10,12 @@ package orders;
  *  for supply method.
  * @version 11/12/2021
  */
-public class TakeAwaySupplyMethod extends AbatractSupplyMethod {
+public class TakeAwaySupplyMethod extends AbatractSupplyMethod implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Class members description:
 	 */

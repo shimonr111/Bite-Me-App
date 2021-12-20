@@ -9,10 +9,15 @@ import java.io.Serializable;
  *  This Abstract class is a base class for supply method.
  * @version 11/12/2021
  */	
-public abstract class AbatractSupplyMethod {
+public abstract class AbatractSupplyMethod implements Serializable{
 	/**
 	 * Class members:
 	 */
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * This supply id, unique identifier - PK.

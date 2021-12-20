@@ -55,7 +55,6 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 	private static FXMLLoader loader;
     private static OrderSummaryScreenController orderSummaryScreenController;
     private static Order order;
-    private static AbatractSupplyMethod supplyMethodInformation;
     private String pathForLastScreen= null;
     private String pageTitle;
     @FXML
@@ -111,12 +110,12 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 			  switch(order.getTimeType()) {
 		  		case PRE:
 		  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
-		  			if(supplyMethodInformation instanceof DeliverySupplyMethod) {
-		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			if(order.getSupplyMethodInformation() instanceof DeliverySupplyMethod) {
+		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
 		  			}
 		  			break;
 		  		case REGULAR:
-		  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+		  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
 		  			break;
 		  		default:
 		  			break;
@@ -168,7 +167,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
   //now we need to change this screen to the next one
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
-		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order,supplyMethodInformation); // call the init of the next screen
+		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order); // call the init of the next screen
 
     }
 
@@ -207,9 +206,8 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * screen controller.
      * 
      */
-  public void initOrderSummaryScreen(Order order , AbatractSupplyMethod supplyMethodInformation) {
+  public void initOrderSummaryScreen(Order order) {
 	  OrderSummaryScreenController.order = order;
-	  OrderSummaryScreenController.supplyMethodInformation = supplyMethodInformation;
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

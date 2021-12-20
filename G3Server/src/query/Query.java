@@ -5,22 +5,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import bitemeserver.BiteMeServerUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import orders.DeliveryType;
+import orders.OrderStatus;
+import orders.OrderTimeType;
+import orders.SupplyType;
+
 import users.Branch;
 import users.BranchManager;
 import users.BusinessCustomer;
-import users.CeoBiteMe;
 import users.Company;
-import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
-import users.HrManager;
-import users.Login;
 import users.SupplierWorker;
-import users.User;
+import util.DateTimeHandler;
 /**
  * 
  * @author Mousa, Srour
@@ -197,6 +204,56 @@ public class Query {
 	
 	public static void insertOneRowIntoLoginTable(String userName,String Password,String userId, String userType) {
 		String query = "INSERT INTO semesterialproject.login ( username, password, userID, userType) VALUES( '" + userName +"' , '"+Password +"' , '" + userId+"' , '" + userType+"' )";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This is a query for entering a full row into the Order table in the DB
+	 * 
+	 * @param orderNumber
+	 * @param supplierId
+	 * @param customerUserId
+	 * @param customerUserType
+	 * @param branch
+	 * @param timeType
+	 * @param status
+	 * @param issueDateTime
+	 * @param estimatedSupplyDateTime
+	 * @param actualSupplyDateTime
+	 * @param supplyType
+	 * @param totalPrice
+	 * @param receiverFirstName
+	 * @param receiverLastName
+	 * @param receiverAddress
+	 * @param receiverPhoneNumber
+	 * @param deliveryFee
+	 * @param itemList
+	 * @param comments
+	 */
+	public static void insertOneRowIntoOrderTable(int orderNumber, String supplierId, String customerUserId, String customerUserType,
+			Branch branch, OrderTimeType timeType, OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime,
+			Date actualSupplyDateTime, SupplyType supplyType, double totalPrice, String receiverFirstName,
+			String receiverLastName, String receiverAddress, String receiverPhoneNumber, double deliveryFee, String itemList, String comments, DeliveryType deliveryType) {
+		
+		String issueDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(issueDateTime);
+		String estimatedSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime);
+		String actualSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(actualSupplyDateTime);
+
+				
+		String query = "INSERT INTO semesterialproject.order ( orderNumber, supplierId, customerUserId, customerUserType, branch,"
+				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,"
+				+ " totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber, deliveryFee,"
+				+ " itemsList, comments, deliveryType) VALUES( '" + orderNumber +"' , '"+supplierId +"' , '" + customerUserId+"' , '" + customerUserType+"' , '" + branch+"' ,"
+						+ " '" + timeType+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '" + actualSupplyDateAndTime+"' , '" + supplyType.name()+"' ,"
+								+ " '" + totalPrice+"' , '" + receiverFirstName+"' , '" + receiverLastName+"' , '" + receiverAddress+"' , '" + receiverPhoneNumber+"' ,"
+										+ " '" + deliveryFee+"' , '" + itemList+"' , '" + comments+"' , '" +deliveryType.name() +"' )";
+
 		PreparedStatement pstmt=null;
 		try {
 			pstmt = con.prepareStatement(query);
