@@ -3,15 +3,23 @@ package query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import communication.Answer;
 import communication.Message;
+import communication.Task;
+import orders.DeliverySupplyMethod;
+import orders.DeliveryType;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
+import orders.Order;
+import orders.OrderStatus;
+import orders.OrderTimeType;
+import orders.SupplyType;
 import users.Branch;
 import users.ConfirmationStatus;
 import users.Customer;
@@ -126,7 +134,51 @@ public class OrderQueries {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	/**
+	 * This is a query for adding a new order to the DB.
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Message addOrderToDbAndUpdateCustomer(Message messageFromClient) throws SQLException{
+		Order orderIntoDb = (Order) messageFromClient.getObject();
 		
-		//new Item(rs.getString(2),,rs.getString(6))
+		int orderNumber = orderIntoDb.getOrderNumber();
+		String supplierId = orderIntoDb.getSupplierUserId();
+		String customerUserId = orderIntoDb.getCustomerUserId();
+		String customerUserType = orderIntoDb.getCustomerUserType();
+		Branch branch = orderIntoDb.getBranch();
+		OrderTimeType timeType = orderIntoDb.getTimeType();
+		OrderStatus status = orderIntoDb.getStatus();
+		Date issueDateTime = orderIntoDb.getIssueDateTime();
+		Date estimatedSupplyDateTime = orderIntoDb.getEstimatedSupplyDateTime();
+		Date actualSupplyDateTime = orderIntoDb.getActualSupplyDateTime();
+		SupplyType supplyType = orderIntoDb.getSupplyType();
+		double totalPrice = orderIntoDb.getTotalPrice();
+		String receiverFirstName = orderIntoDb.getSupplyMethodInformation().getReceiverFirstName();
+		String receiverLastName = orderIntoDb.getSupplyMethodInformation().getReceiverLastName();
+		String receiverAddress = "";
+		String receiverPhoneNumber = orderIntoDb.getSupplyMethodInformation().getReceiverPhoneNumber();
+		double deliveryFee = 0;
+		String itemList = orderIntoDb.turnItemListIntoStringForDB();
+		String comments = orderIntoDb.turnCommentsIntoStringForDB();
+		DeliveryType deliveryType = DeliveryType.NA;//only for TA
+		if(supplyType == SupplyType.DELIVERY){
+			receiverAddress = ((DeliverySupplyMethod)orderIntoDb.getSupplyMethodInformation()).getReciverAddress();
+			deliveryFee = ((DeliverySupplyMethod)orderIntoDb.getSupplyMethodInformation()).getDeliveryFee();
+			deliveryType = ((DeliverySupplyMethod)orderIntoDb.getSupplyMethodInformation()).getDeliveryType();
+		}
+		/*Send to to query for setting value in the whole row of order Table*/
+		Query.insertOneRowIntoOrderTable(orderNumber, supplierId, customerUserId, customerUserType, branch,
+				timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,
+				totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber,
+				deliveryFee, itemList, comments,deliveryType);
+		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, null);
+		return messageToClient;
+		
+		
 	}
 }

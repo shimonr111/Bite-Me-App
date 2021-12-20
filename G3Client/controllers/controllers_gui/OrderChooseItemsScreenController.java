@@ -36,6 +36,9 @@ import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.Order;
+import users.BusinessCustomer;
+import users.Customer;
+import users.HrManager;
 
 /**
  * 
@@ -58,7 +61,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 	private static String restaurantID;
 	private static String restaurantName;
 	public static ArrayList<Item> itemListOfMenuFromDB = new ArrayList<>();
-	private static Order order = new Order(null,null,null); //create empty order and update it during the process
+	static Order order = new Order(null,null,null); //create empty order and update it during the process
 	private static ObservableList<Item> itemsForCart = FXCollections.observableArrayList();
 	
     @FXML
@@ -206,6 +209,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     void getBtnNext(ActionEvent event) {
     	//first check if the order item array list is not empty, if it is set text to the user and deny going to the next screen
     	if(order.itemList.size()!=0) {
+    		addCustomerUserTypeToOrderObj(); //set the customer type
     		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
         	OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController = new OrderChooseSupplyMethodScreenController();
         	orderChooseSupplyMethodScreenController.initChooseSupplyMethodScreen(order); // call the init of the next screen	
@@ -246,6 +250,22 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     }
 
     /**
+     * Set the customer type into the order 
+     * object for the DB - Table order.
+     */
+    private void addCustomerUserTypeToOrderObj() {
+    	String customerType = null;
+    	if(connectedUser instanceof HrManager) {
+    		customerType = "hrmanager";
+    	}
+    	else if(connectedUser instanceof BusinessCustomer) {
+    		customerType = "businesscustomer";
+    	}else {
+    		customerType = "customer";
+    	}
+    	order.setCustomerUserType(customerType);
+    }
+    /**
      * Remove item from cart
      * and update price and order 
      * Object.
@@ -276,6 +296,10 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     public void initChooseItemsScreen(String pickedRestaurantId, String pickedRestaurntName ) {
     	restaurantID = pickedRestaurantId;
     	restaurantName = pickedRestaurntName;
+    	if(order == null) { //in case the user entered another round of order process
+			order =new Order(null,null,null); //create empty order and update it during the process
+			itemsForCart.removeAll(itemsForCart);
+		}
     	//set data for the order here because the user can change to different screen if he wants!
     	order.setBranch(connectedUser.getHomeBranch()); //set to the branch the user chose in W4C identification stage
     	order.setSupplierUserId(restaurantID);

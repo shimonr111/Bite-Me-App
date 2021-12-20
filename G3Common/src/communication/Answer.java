@@ -66,6 +66,7 @@ public enum Answer {
 	RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH,
 	SUPPLIER_HAS_NO_MENU,
 	SUPPLIER_MENU_FOUND,
+	ORDER_SUCCEEDED_WRITING_INTO_DB,
 	/**
 	 * Answers related to Registration
 	 * Operation.

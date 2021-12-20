@@ -8,6 +8,13 @@ package orders;
  *  @version 11/12/2021
  */
 public enum DeliveryType {
+
+	NA {
+		@Override
+		public String toString() {
+			return "Not applicable";
+		}
+	},
 	REGULAR {
 		@Override
 		public String toString() {

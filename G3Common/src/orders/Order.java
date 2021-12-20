@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import users.Branch;
+import util.DateTimeHandler;
 
 /**
  * 
@@ -92,6 +93,12 @@ public class Order implements Serializable {
 	 */
 	public AbatractSupplyMethod supplyMethodInformation;
 	
+	/**
+	 * This is an attribute that
+	 * tells us the users type:
+	 * customer, businesscustomer or hrmanager
+	 */
+	public String customerUserType;
 	
 	/**
 	 * This section is for the attributes
@@ -141,6 +148,7 @@ public class Order implements Serializable {
 		this.totalPrice = totalPrice;
 		this.itemList = itemList;
 		this.supplyMethodInformation = null;
+		this.customerUserType =null;
 	}
 
 
@@ -161,12 +169,13 @@ public class Order implements Serializable {
 		this.issueDateTime = new Date();
 		
 		this.estimatedSupplyDateTime = null;
-		this.actualSupplyDateTime = null;
+		this.actualSupplyDateTime = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields("1970/01/01", "00:00"); //set default
 		this.supplyType = null;
 		this.supplyId = 0;
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
 		this.supplyMethodInformation = null;
+		this.customerUserType = null;
 		
 	} 
 	
@@ -309,8 +318,72 @@ public class Order implements Serializable {
 	public void setSupplyMethodInformation(AbatractSupplyMethod supplyMethodInformation) {
 		this.supplyMethodInformation = supplyMethodInformation;
 	}
+	
+
+	public String getCustomerUserType() {
+		return customerUserType;
+	}
 
 
+
+	public void setCustomerUserType(String customerUserType) {
+		this.customerUserType = customerUserType;
+	}
+
+
+
+	/**
+	 * Help method for returning the items as Sting rather than
+	 * ArrayList in Specific way (thats why we didn't use toString();
+	 * 
+	 * @return String of items
+	 */
+	public String turnItemListIntoStringForDB() {
+		String res = null;
+		int itemLen = itemList.size();
+		for(Item item : itemList) {
+			if(itemLen == itemList.size())//first item in list
+			{
+				res = item.getItemName()+ ",";
+				itemLen--;
+			}
+			else if(itemLen != 0) {
+			res = res + item.getItemName() + ",";
+			itemLen--;
+			}
+			else {
+				res = res + item.getItemName();
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Help method for returning comments 
+	 * as a string into the DB.
+	 * 
+	 * @return String of comments
+	 */
+	public String turnCommentsIntoStringForDB() {
+		String res = null;
+		int itemLen = itemList.size();
+		for(Item item : itemList) {
+			if(itemLen == itemList.size())//first item in list
+			{
+				res = item.getComment() + ",";
+				itemLen--;
+			}
+			else if(itemLen != 0) {
+			res = res + item.getComment() + ",";
+			itemLen--;
+			}
+			else {
+				res = res + item.getComment();
+				itemLen--;
+			}
+		}
+		return res;
+	}
 
 	@Override
 	public String toString() {

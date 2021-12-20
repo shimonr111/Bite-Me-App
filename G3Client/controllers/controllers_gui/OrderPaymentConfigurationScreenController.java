@@ -27,7 +27,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.PaymentWay;
 import users.BusinessCustomer;
@@ -41,7 +40,7 @@ import users.Customer;
  * This is a class for the user 
  * to add all his payment to the system (cash / credit card, etc.)
  * 
- * @version 17/12/2021
+ * @version 20/12/2021
  */
 public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeController implements Initializable{
 		/**
@@ -330,8 +329,49 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     */
 	    @FXML
 	    void getFinishOrderBtn(ActionEvent event) {
+	    	if(amountLeftToPay!=0) {
+	    		errorText.setText("Finish paying first!!");
+	    		errorText.setFill(Color.RED);
+	    	}
+	    	else {
+	    	errorText.setText("");
+	    	Message message = new Message(Task.ORDER_FINISHED,Answer.WAIT_RESPONSE,order);
+	    	sendToClient(message);//send message to the server telling the order is finished and than push into DB
 	    	
-
+	    	/*Give notice for the user that the order is ok*/
+    		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
+    		
+	    	/*After saving the order in the DB send the customer back to login screen*/
+	    	message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
+			sendToClient(message);
+			connectedUser = null;
+			/*Update order object to be null for another entrance to order process by the same user*/
+			OrderChooseItemsScreenController.order= null; 
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						Stage Stage = new Stage();
+						Stage.setResizable(false);
+						root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
+						LoginScreenController LSC = loader.getController();
+						LSC.initLoginScreen();
+						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+							@Override
+							public void handle(WindowEvent event) { 
+								event.consume();
+								Stage.close();
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+			});
+	    	}
 	    }
 
 	       /**
