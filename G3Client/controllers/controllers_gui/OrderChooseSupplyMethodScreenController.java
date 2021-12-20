@@ -146,7 +146,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         		order.setSupplyType(SupplyType.DELIVERY);
         	}
         	/*save the desired time of the supply (date and time)*/
-        	String date = supplyDatePicker.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        	String date = supplyDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         	String time = supplyTimeCombo.getValue();
         	Date dateForOrder = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields(date,time);
         	order.setEstimatedSupplyDateTime(dateForOrder);
@@ -285,13 +285,13 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
       supplyDatePicker.setDayCellFactory(disablePreviousDates);
       /* Set the times in the combo box for the default date we show first , which is the current date */
         if (hour < 11) { // the current time is earlier than 11am (but in the current day)
-			for(int i=11; i<23; i++) {
+			for(int i=11; i<24; i++) { //change to 23
 				hourArray.add(String.valueOf(i)+":00");
 				}
 		}
 			
 		else {  // the current time is later than 11am (but in the current day)
-			for(int i=hour+1; i<23; i++){ 
+			for(int i=hour+1; i<24; i++){ //change to 23
 				hourArray.add(String.valueOf(i)+":00");
 				}
 		}
@@ -315,7 +315,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     			}
     				
     			else {  // the current time is later than 11am (but in the current day)
-    				for(int i=hour+1; i<23; i++){ 
+    				for(int i=hour+1; i<24; i++){ //change to 23
     					hourArray.add(String.valueOf(i)+":00");
     					}
     			}
@@ -323,7 +323,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     		}
     			
     	    else {  // the customer want the delivery for the next days
-    			for(int i=11; i<23; i++){ 
+    			for(int i=11; i<24; i++){  //change to 23
     				hourArray.add(String.valueOf(i)+":00");
     				}
            }

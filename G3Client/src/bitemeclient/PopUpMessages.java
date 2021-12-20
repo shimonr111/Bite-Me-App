@@ -12,13 +12,14 @@ import javafx.stage.Stage;
 /**
  * @author Mousa, Srour. 
  * @author Shimon, Rubin.
+ * @author Lior, Guzovsky.
  *
  * Class description: 
  * 
  * This is a class for pop
  * up messages to the client.
  *
- * @version 14/12/2021
+ * @version 20/12/2021
  */
 public class PopUpMessages {
 	/**
@@ -56,6 +57,22 @@ public class PopUpMessages {
 		alert.getDialogPane().setHeaderText(message);
 		return alert.showAndWait();
 		
+	}
+	
+	/**
+	 * This is a message for the user to that
+	 * informs him about something (such as finishing the order
+	 * process).
+	 * 
+	 * @param message
+	 * @return
+	 */
+	public static Optional<ButtonType> updateMessage(String message ){
+		Alert.AlertType type = Alert.AlertType.INFORMATION;
+		Alert alert = new Alert (type,"");
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.getDialogPane().setHeaderText(message);
+		return alert.showAndWait();
 	}
 	
 }

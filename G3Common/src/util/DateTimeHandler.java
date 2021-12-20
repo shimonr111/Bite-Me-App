@@ -1,6 +1,7 @@
 package util;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 public class DateTimeHandler {
 
+
 	/**
 	 * 
 	 * @param date: Expected date in DD/MM/YYYY format, received from the JavaFX
@@ -22,26 +24,17 @@ public class DateTimeHandler {
 	 */
 	public static Date buildMySqlDateTimeFormatFromTextFields(String date, String time) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date d;
+		try {
+			d = dateFormat.parse(date + " " + time + ":00");
+			return d;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//split the date
-		String[] dateArray = date.split("/");
-		int years = Integer.parseInt(dateArray[2]);
-		int months = Integer.parseInt(dateArray[1]);
-		int days = Integer.parseInt(dateArray[0]);
+		return null;
 		
-		//split the time
-		String[] timeArray = time.split(":");
-		int hours = Integer.parseInt(timeArray[0]);
-		int minutes = Integer.parseInt(timeArray[1]);
-		int seconds = 0;
-		
-		//set the new date
-		Date d = new Date (years - 1900, months - 1, days);
-		d.setHours(hours);
-		d.setMinutes(minutes);
-		d.setSeconds(seconds);
-		
-		return d;
 	}
 
 	/**
@@ -49,7 +42,7 @@ public class DateTimeHandler {
 	 * @return String: returns the date in string in MySql DateTime format.
 	 */
 	public static String convertMySqlDateTimeFormatToString(Date date) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return dateFormat.format(date);
 	}
 

@@ -1,5 +1,7 @@
 package orders;
 
+import java.io.Serializable;
+
 import util.Constans;
 
 /**
@@ -14,7 +16,12 @@ import util.Constans;
  *  
  * @version 11/12/2021
  */
-public class DeliverySupplyMethod extends AbatractSupplyMethod {
+public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Class members:
 	 */
@@ -133,6 +140,14 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod {
 
 	public void setReciverAddress(String reciverAddress) {
 		this.reciverAddress = reciverAddress;
+	}
+
+	public DeliveryType getDeliveryType() {
+		return deliveryType;
+	}
+
+	public void setDeliveryType(DeliveryType deliveryType) {
+		this.deliveryType = deliveryType;
 	}
 	
 	
