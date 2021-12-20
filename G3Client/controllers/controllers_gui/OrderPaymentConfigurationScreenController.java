@@ -51,7 +51,6 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		private static FXMLLoader loader;
 	    private static OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController;
 	    private static Order order;
-	    private static AbatractSupplyMethod supplyMethodInformation;
 	    private double amountLeftToPay;
 
 	    @FXML
@@ -353,9 +352,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * screen controller.
 	     * 
 	     */
-	  public void initPaymentConfigurationScreen(Order order, AbatractSupplyMethod supplyMethodInformation) {
+	  public void initPaymentConfigurationScreen(Order order) {
 		  OrderPaymentConfigurationScreenController.order = order;
-		  OrderPaymentConfigurationScreenController.supplyMethodInformation = supplyMethodInformation;
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {

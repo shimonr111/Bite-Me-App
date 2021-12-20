@@ -14,7 +14,7 @@ import users.Branch;
  * Class description:
  * This class describes the Order Entity.
  *  
- * @version 17/12/2021
+ * @version 20/12/2021
  */
 public class Order implements Serializable {
 	/**
@@ -83,8 +83,14 @@ public class Order implements Serializable {
 	/**
 	 * The order items
 	 */
-	
 	public ArrayList<Item> itemList;
+	
+	/**
+	 * This is the information given for the supply method,
+	 * such as the name of the , his phone and in case of 
+	 * delivery an address. 
+	 */
+	public AbatractSupplyMethod supplyMethodInformation;
 	
 	
 	/**
@@ -134,6 +140,7 @@ public class Order implements Serializable {
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
 		this.itemList = itemList;
+		this.supplyMethodInformation = null;
 	}
 
 
@@ -159,6 +166,7 @@ public class Order implements Serializable {
 		this.supplyId = 0;
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
+		this.supplyMethodInformation = null;
 		
 	} 
 	
@@ -290,6 +298,19 @@ public class Order implements Serializable {
 	public void setActualSupplyDateTime(Date actualSupplyDateTime) {
 		this.actualSupplyDateTime = actualSupplyDateTime;
 	}
+	
+	
+
+	public AbatractSupplyMethod getSupplyMethodInformation() {
+		return supplyMethodInformation;
+	}
+
+
+	public void setSupplyMethodInformation(AbatractSupplyMethod supplyMethodInformation) {
+		this.supplyMethodInformation = supplyMethodInformation;
+	}
+
+
 
 	@Override
 	public String toString() {
