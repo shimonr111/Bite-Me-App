@@ -38,6 +38,10 @@ public class Supplier implements Serializable{
 	 * This is the revenue fee of the supplier.
 	 */
 	private double revenueFee; 
+	/**
+	 * Every Supplier has a status
+	 */
+	private ConfirmationStatus statusInSystem;
 	
 	/**
 	 * This is the constructor of the class.
@@ -48,7 +52,7 @@ public class Supplier implements Serializable{
 	 * @param phoneNumber
 	 * @param revenueFee
 	 */
-	public Supplier(String supplierId, String supplierName,Branch homeBranch, String email, String phoneNumber, double revenueFee) {
+	public Supplier(String supplierId, String supplierName,Branch homeBranch, String email, String phoneNumber, double revenueFee, ConfirmationStatus statusInSystem) {
 		super();
 		this.supplierId = supplierId;		
 		this.supplierName = supplierName;
@@ -56,8 +60,10 @@ public class Supplier implements Serializable{
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.revenueFee=revenueFee;
+		this.statusInSystem=statusInSystem;
 	}
 	
+
 	/**
 	 * This section is for the Setters and Getters of the Class Supplier
 	 */
@@ -108,6 +114,15 @@ public class Supplier implements Serializable{
 	public void setRevenueFee(double revenueFee) {
 		this.revenueFee = revenueFee;
 	}
+	
+	public ConfirmationStatus getStatusInSystem() {
+		return statusInSystem;
+	}
+
+	public void setStatusInSystem(ConfirmationStatus statusInSystem) {
+		this.statusInSystem = statusInSystem;
+	}
+
 	
 	@Override
 	public String toString() {

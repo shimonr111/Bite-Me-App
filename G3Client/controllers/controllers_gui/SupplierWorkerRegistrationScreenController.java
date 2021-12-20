@@ -63,7 +63,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
     public static Map<String,String> suppliersList = new HashMap<>(); 
-    public static Supplier supplier = new Supplier(null, null, null, null, null, 0);
+    public static Supplier supplier = new Supplier(null, null, null, null, null, 0,null);
 	   @FXML
 	    private TextField resturantNameTxtField;
 	   
@@ -170,7 +170,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    			homeBranch = Branch.CENTER;
 	    		SupplierWorker supplierWorker = new SupplierWorker(UserId.getText(),ConfirmationStatus.PENDING_APPROVAL,FirstName.getText(),LastName.getText(),
 	    				homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-	    				new Supplier(supplier.getSupplierId(),supplier.getSupplierName(), supplier.getHomeBranch(),supplier.getEmail(),supplier.getPhoneNumber(), supplier.getRevenueFee()),getWorkerPosition());
+	    				new Supplier(supplier.getSupplierId(),supplier.getSupplierName(), supplier.getHomeBranch(),supplier.getEmail(),supplier.getPhoneNumber(), supplier.getRevenueFee(),supplier.getStatusInSystem()),getWorkerPosition());
 	    		Login login = new Login (userName.getText(),passwordTextField.getText());
 	    		ArrayList<Object> list = new ArrayList<>();
 	    		list.add(supplierWorker);

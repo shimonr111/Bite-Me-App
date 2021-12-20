@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 
 import bitemeserver.BiteMeServerUI;
-import communication.Answer;
-import communication.Message;
-import communication.Task;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,9 +20,11 @@ import orders.SupplyType;
 import users.Branch;
 import users.BranchManager;
 import users.BusinessCustomer;
+import users.CeoBiteMe;
 import users.Company;
 import users.CreditCard;
 import users.Customer;
+import users.Supplier;
 import users.SupplierWorker;
 import util.DateTimeHandler;
 /**
@@ -349,7 +348,7 @@ public class Query {
 	 * 
 	 * @param customer
 	 */
-	public static void insertOneRowIntoSupplierTable(SupplierWorker supplierWorker) {
+	public static void insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
 		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
 				+ "supplierId, workerPosition ) VALUES( '" + supplierWorker.getUserId() + "', '" + supplierWorker.getStatusInSystem() + "', '" + supplierWorker.getUserFirstName() + "', '" 
 				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0 + "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
@@ -380,6 +379,10 @@ public class Query {
 		}
 	}
 	
+	/**
+	 * This method gets a ceo user and insert him into ceoBiteMe table.
+	 * @param ceo
+	 */
 	public static void inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
 		String query = "INSERT INTO semesterialproject.ceobiteme (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + ceo.getUserId()
 		+ "' , '" + ceo.getStatusInSystem().toString() 	+ "' , '" + ceo.getUserFirstName() + "' , '" + ceo.getUserLastName() + "' , '" + ceo.getHomeBranch().toString() + "' , '" + 0 
@@ -393,6 +396,10 @@ public class Query {
 		}
 	}
 	
+	/**
+	 * this method gets a branch manager and insert it into branch manager table.
+	 * @param bm
+	 */
 	public static void insertOneRowIntoBranchManagerTable(BranchManager bm) {
 		String query = "INSERT INTO semesterialproject.branchmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + bm.getUserId()
 		+ "' , '" + bm.getStatusInSystem().toString() 	+ "' , '" + bm.getUserFirstName() + "' , '" + bm.getUserLastName() + "' , '" + bm.getHomeBranch().toString() + "' , '" + 0 
@@ -407,13 +414,30 @@ public class Query {
 	}
 	
 	/**
+	 * This method gets a supplier , and inserts the supplier object into the supplier table in DB.
+	 * @param supplier
+	 */
+	public static void insertOneRowIntoSupplierTable(Supplier supplier) {
+		String query = "INSERT INTO semesterialproject.supplier (supplierId, supplierName, homeBranch, email, phoneNumber, revenueFee, statusInSystem ) VALUES ('" + supplier.getSupplierId() 
+		+ "' , '" + supplier.getSupplierName() + "' , '" +  supplier.getHomeBranch() + "' , '" +  supplier.getEmail() + "' , '" +  supplier.getPhoneNumber() + "' , '" +  supplier.getRevenueFee()
+		+ "' , '" +  supplier.getStatusInSystem() +"' )";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
 	 * this method gets a table name and condition , and deletes the row according to the condition from DB.
 	 * condition must be according to table's primary key !
 	 * @param tableName
 	 * @param condition
 	 */
 	public static void deleteRowFromTableInDbByPrimaryKey(String tableName,String condition) {
-		//DELETE FROM `semesterialproject`.`customer` WHERE (`userID` = '100022');
 		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
 		PreparedStatement pstmt=null;
 		try {

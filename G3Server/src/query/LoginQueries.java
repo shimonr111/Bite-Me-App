@@ -305,7 +305,8 @@ public class LoginQueries {
 		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
 		try {
 			if(rs.next()) {
-				supplierResult = new Supplier(rs.getString(1),rs.getString(2),(Branch.valueOf(rs.getString(3))),rs.getString(4),rs.getString(5),rs.getDouble(6));
+				supplierResult = new Supplier(rs.getString(1),rs.getString(2),(Branch.valueOf(rs.getString(3))),rs.getString(4),rs.getString(5),rs.getDouble(6),
+						(ConfirmationStatus.valueOf(rs.getString(7))));
 			}
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block
