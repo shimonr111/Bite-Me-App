@@ -190,7 +190,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose restaurant");
 					Stage.setScene(scene);
 					Stage.show();
@@ -299,7 +299,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();

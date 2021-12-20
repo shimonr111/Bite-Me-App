@@ -142,7 +142,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle(pageTitle); 
 					Stage.setScene(scene);
 					Stage.show();
@@ -228,7 +228,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();

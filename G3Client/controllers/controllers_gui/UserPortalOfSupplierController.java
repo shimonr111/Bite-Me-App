@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -17,7 +16,6 @@ import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;

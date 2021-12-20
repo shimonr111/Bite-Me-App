@@ -110,7 +110,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose items");
 					Stage.setScene(scene);
 					Stage.show();
@@ -239,7 +239,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose Supply method");
 					Stage.setScene(scene);
 					Stage.show();
