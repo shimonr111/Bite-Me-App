@@ -215,11 +215,17 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
-		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName().equals("Waiting_Registration")) {
-			companyName.setText("No Company");
+		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - not registered yet");
 			btnBusinessCustomerConfirm.setDisable(true);
 			btnStartOrder.setDisable(true);
-			statusText.setText("No Registered company");
+			statusText.setText(connectedUser.getStatusInSystem().toString());
+		}
+		else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - waiting for approval");
+			btnBusinessCustomerConfirm.setDisable(true);
+			btnStartOrder.setDisable(true);
+			statusText.setText(connectedUser.getStatusInSystem().toString());
 		}
 		else {
 			btnCompanyReg.setDisable(true);

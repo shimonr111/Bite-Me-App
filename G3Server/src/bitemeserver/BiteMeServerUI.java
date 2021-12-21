@@ -30,11 +30,17 @@ import jdbc.mySqlConnection;
 import query.Query;
 import users.Branch;
 import users.BranchManager;
+import users.BudgetType;
 import users.CeoBiteMe;
 import users.Company;
 import users.ConfirmationStatus;
+import users.CreditCard;
+import users.HrManager;
 import users.Login;
+import users.PositionType;
 import users.Supplier;
+import users.SupplierWorker;
+import users.WorkerPosition;
 
 /**
  * @author  Lior, Guzovsky.
@@ -312,7 +318,8 @@ public class BiteMeServerUI extends Application implements Initializable {
 		try {
 		while(rs.next()) {
 			isImported=Query.insertRowIntoRegistrationTable(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-					rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14));
+					rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14),rs.getString(15),
+					rs.getInt(16),rs.getDouble(17));
 			if(isImported)
 				break;
 		}
@@ -326,6 +333,9 @@ public class BiteMeServerUI extends Application implements Initializable {
 			console.add("Ceo BiteMe added\n");
 			getSuppliers();
 			getCompanies();
+			getHrManagers();
+			getSupplierWorkers();
+			
 			displayToConsoleInServerGui();
 		}
 		}catch (SQLException e) {
@@ -333,6 +343,66 @@ public class BiteMeServerUI extends Application implements Initializable {
 		}
 	
 
+	}
+	
+	/**
+	 * get all the workers of the registered suppliers.
+	 */
+	public void getSupplierWorkers() {
+		ArrayList<SupplierWorker> workers = new ArrayList<>();
+		ArrayList<Login> workersLogin = new ArrayList<>();
+		ResultSet rs;
+		rs = Query.getRowsFromTableInDB("registration", "userType= 'supplierworker'");
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'supplierworker'");
+		try {
+			while(rs.next()) {
+				Supplier supplier = new Supplier(rs.getString(10),null,Branch.NORTH,null,null,0,ConfirmationStatus.PENDING_APPROVAL);
+				workers.add(new SupplierWorker(rs.getString(2),ConfirmationStatus.valueOf(rs.getString(3)), rs.getString(4),rs.getString(5),Branch.valueOf(rs.getString(6)), 
+						false, rs.getString(8),rs.getString(9),supplier,WorkerPosition.valueOf(rs.getString(11))));
+				workersLogin.add(new Login(rs.getString(13),rs.getString(14)));
+			}
+			rs.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		for(int i=0;i<workers.size();i++) {
+			Login login = workersLogin.get(i);
+			SupplierWorker supplierWorker = workers.get(i);
+			Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplierWorker.getUserId(), "supplierworker");
+			Query.insertOneRowIntoSupplierWorkerTable(supplierWorker);
+		}
+	}
+	/**
+	 * get all the HR managers of the companies .
+	 */
+	public void getHrManagers() {
+		ArrayList<HrManager> hrManagers = new ArrayList<>();
+		ArrayList<Login> hrLogin = new ArrayList<>();
+		ResultSet rs;
+		rs = Query.getRowsFromTableInDB("registration", "userType= 'hrmanager'");
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'hrmanager'");
+		try {
+			while(rs.next()) {
+				CreditCard card= new CreditCard(rs.getString(10),rs.getString(11),rs.getString(12));
+				Query.insertOneRowIntoCreditCardTable(card);
+				hrManagers.add(new HrManager(rs.getString(2),ConfirmationStatus.valueOf(rs.getString(3
+						)), rs.getString(4),rs.getString(5),Branch.valueOf(rs.getString(6)), 
+						false, rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(15), BudgetType.MONTHLY,PositionType.HR,
+						0));
+				System.out.println(rs.getString(15));
+				hrLogin.add(new Login(rs.getString(13),rs.getString(14)));
+			}
+			rs.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		for(int i=0;i<hrManagers.size();i++) {
+			Login login = hrLogin.get(i);
+			HrManager hr = hrManagers.get(i);
+			System.out.println(hr.getCompanyOfBusinessCustomerString());
+			Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), hr.getUserId(), "hrmanager");
+			Query.insertOneRowIntoHrManagerTable(hr);
+		}
 	}
 	
 	/**
@@ -345,8 +415,6 @@ public class BiteMeServerUI extends Application implements Initializable {
 		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'company'");
 		try {
 			while(rs.next()) {
-				//# userType, userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, creditCardNumber, creditCardCvvCode, creditCardDateOfExpiration, username, password
-				//'company', '5001', 'PENDING_REGISTRATION', 'Intel', 'IntelAddress', 'NOT_APPLICABLE', '0', 'intel@intel.com', 'null', 'null', 'null', 'null', 'null', 'null'
 
 				companiesList.add(new Company(rs.getString(4),ConfirmationStatus.valueOf(rs.getString(3)),rs.getString(5),rs.getString(8),Integer.parseInt(rs.getString(2))));
 			}
@@ -371,7 +439,7 @@ public class BiteMeServerUI extends Application implements Initializable {
 		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'supplier'");
 		try {
 		while(rs.next()) {
-			suppliersList.add(new Supplier(rs.getString(2),rs.getString(4),Branch.valueOf(rs.getString(6)),rs.getString(8),rs.getString(9),-1,ConfirmationStatus.valueOf(rs.getString(3))));
+			suppliersList.add(new Supplier(rs.getString(2),rs.getString(4),Branch.valueOf(rs.getString(6)),rs.getString(8),rs.getString(9),rs.getDouble(17),ConfirmationStatus.valueOf(rs.getString(3))));
 		}
 		rs.close();
 		}catch (SQLException e) {

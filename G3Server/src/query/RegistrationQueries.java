@@ -151,20 +151,8 @@ public class RegistrationQueries {
 	 * @return
 	 */
 	public static Message getCompanyRegistration(Message message) {
-		Message messageBackToClient;
-		@SuppressWarnings("unchecked")
-		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
-		Company company = (Company) list.get(0);
-		HrManager hrManager = (HrManager) list.get(1);
-		if(checkIfCompanyNameExist(company.getCompanyName())) {
-			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_NAME_ALREADY_EXIST,null);
-		}
-		else if(checkIfCompanyCodeExist(company.getcompanyCode())) {
-			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_CODE_ALREADY_EXIST,null);
-		}
-		Query.insertOneRowIntoCompanyTable(company);
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","companyName='"+company.getCompanyName()+"'" , "userID='"+hrManager.getUserId()+"'");
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "businessW4cCodeNumber='"+company.getcompanyCode()+"'" , "userID='"+hrManager.getUserId()+"'");
+		Company company = (Company) message.getObject();
+		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem='PENDING_APPROVAL'","companyName ='" + company.getCompanyName()+"'");
 		return new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.COMPANY_REGISTRATION_SUCCEED,null);
 		
 		

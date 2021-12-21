@@ -53,7 +53,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     private static CompanyRegistartionScreenController companyRegistartionScreenController;
     private static AnalyzeClientListener listener;
     private ArrayList<TextField> textFields = new ArrayList<>();
-    private Company company;
+    private Company companyAfterRegistration;
     
     @FXML
     private TextField companyNameTxtField;
@@ -126,12 +126,9 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     @FXML
     void getBtnSave(ActionEvent event) {
     	if(checkAllFields()==true) {
-    		 company = new Company(companyNameTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,companyAddTxtField.getText()
+    		companyAfterRegistration = new Company(companyNameTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,companyAddTxtField.getText()
     				,companyEmailTxtField.getText(),Integer.parseInt(companyNameTxtField1.getText()));
-    		ArrayList<Object> list = new ArrayList<>();
-    		list.add(company);
-    		list.add(connectedUser);
-    		Message message = new Message(Task.REGISTER_COMPANY,Answer.WAIT_RESPONSE,list);
+    		Message message = new Message(Task.REGISTER_COMPANY,Answer.WAIT_RESPONSE,companyAfterRegistration);
     		sendToClient(message);
     	}
     }
@@ -295,6 +292,11 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(companyNameTxtField); textFields.add(companyNameTxtField1); textFields.add(companyEmailTxtField); textFields.add(confirmEmailTxtField); textFields.add(companyAddTxtField);
 		errorText.setText("");
+		Company company = ((HrManager)connectedUser).getcompanyOfBusinessCustomer();
+		companyNameTxtField.setText(company.getCompanyName()); companyNameTxtField1.setText(Integer.toString(company.getcompanyCode())); companyEmailTxtField.setText(company.getEmail());
+		confirmEmailTxtField.setText(company.getEmail()); companyAddTxtField.setText(company.getAddress());
+		companyNameTxtField.setEditable(false); companyNameTxtField.setDisable(true);
+		companyNameTxtField1.setEditable(false); companyNameTxtField1.setDisable(true);
 		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
 			public void clientCompanyRegistrationFailed(String message) {
@@ -302,7 +304,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 			}
 			@Override
 			public void clientCompanyRegistrationSucceed() {
-				((HrManager) connectedUser).setCompany(company);
+				((HrManager) connectedUser).setCompany(companyAfterRegistration);
 				setRelevantTextToDisplayMessageText("Registration succeed, you have to wait for Confirmation from the Branch Manager");
 			}
 		});

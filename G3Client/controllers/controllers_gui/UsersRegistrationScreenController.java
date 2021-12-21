@@ -60,8 +60,6 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     @FXML
     private Button privateCustomerButton;
 
-    @FXML
-    private Button supplierWorkerButton;
 
     @FXML
     private TableColumn<UserForRegistration, String> userFirstNameCol;
@@ -124,19 +122,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     	}
     }
 
-    @FXML
-    void getSupplierWorker(ActionEvent event) {
-    	UserForRegistration selectedUser = usersTable.getSelectionModel().getSelectedItem();
-    	if(selectedUser != null) {
-    		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-    		 userForRegistration=selectedUser;
-    		 SupplierWorkerRegistrationScreenController supplierWorkerRegistrationScreenController = new SupplierWorkerRegistrationScreenController();
-    		 supplierWorkerRegistrationScreenController.initSupplierRegistrationScreen(); // call the init of the next screen
-    	}
-    	else {
-    		displayMessage.setText("Select a user to register as a supplier worker");
-    	}
-    }
+
     
     /**
      * this method loads the current screen.
