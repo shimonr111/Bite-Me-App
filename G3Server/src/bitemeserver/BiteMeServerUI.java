@@ -31,8 +31,10 @@ import query.Query;
 import users.Branch;
 import users.BranchManager;
 import users.CeoBiteMe;
+import users.Company;
 import users.ConfirmationStatus;
 import users.Login;
+import users.Supplier;
 
 /**
  * @author  Lior, Guzovsky.
@@ -225,12 +227,10 @@ public class BiteMeServerUI extends Application implements Initializable {
 			isImportButtonClicked=true;
 			connectionToExternalDB = new mySqlConnection();
 			if (connectionToExternalDB.connectToDB(EXTERNAL_DB_NAME, getDbUserTxt(), getPassword(),false)) {
-				System.out.println("yes");
 				getDataFromExternalDB();
 				importBtn.setDisable(true);
 			}
-			else
-				System.out.println("no");
+			
 		}
 	}
 	
@@ -324,6 +324,8 @@ public class BiteMeServerUI extends Application implements Initializable {
 			console.add("Branch managers added\n");
 			getCeoBiteMe();
 			console.add("Ceo BiteMe added\n");
+			getSuppliers();
+			getCompanies();
 			displayToConsoleInServerGui();
 		}
 		}catch (SQLException e) {
@@ -331,6 +333,54 @@ public class BiteMeServerUI extends Application implements Initializable {
 		}
 	
 
+	}
+	
+	/**
+	 * get all the companies from the registration table , and move them into the company table on DB.
+	 */
+	public void getCompanies() {
+		ArrayList<Company> companiesList = new ArrayList<>();
+		ResultSet rs;
+		rs = Query.getRowsFromTableInDB("registration", "userType= 'company'");
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'company'");
+		try {
+			while(rs.next()) {
+				//# userType, userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, creditCardNumber, creditCardCvvCode, creditCardDateOfExpiration, username, password
+				//'company', '5001', 'PENDING_REGISTRATION', 'Intel', 'IntelAddress', 'NOT_APPLICABLE', '0', 'intel@intel.com', 'null', 'null', 'null', 'null', 'null', 'null'
+
+				companiesList.add(new Company(rs.getString(4),ConfirmationStatus.valueOf(rs.getString(3)),rs.getString(5),rs.getString(8),Integer.parseInt(rs.getString(2))));
+			}
+			rs.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		for(int i=0;i<companiesList.size();i++) {
+			Company company = companiesList.get(i);
+			Query.insertOneRowIntoCompanyTable(company);
+		}
+		
+	}
+	
+	/**
+	 * get all the suppliers from the registration table , and move them into the supplier table on DB.
+	 */
+	public void getSuppliers() {
+		ArrayList<Supplier> suppliersList= new ArrayList<>();
+		ResultSet rs;
+		rs = Query.getRowsFromTableInDB("registration", "userType= 'supplier'");
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'supplier'");
+		try {
+		while(rs.next()) {
+			suppliersList.add(new Supplier(rs.getString(2),rs.getString(4),Branch.valueOf(rs.getString(6)),rs.getString(8),rs.getString(9),-1,ConfirmationStatus.valueOf(rs.getString(3))));
+		}
+		rs.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(int i=0;i<suppliersList.size();i++) {
+			Supplier supplier = suppliersList.get(i);
+			Query.insertOneRowIntoSupplierTable(supplier);	
+		}
 	}
 	
 	/**

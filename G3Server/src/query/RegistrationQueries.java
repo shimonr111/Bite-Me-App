@@ -130,7 +130,7 @@ public class RegistrationQueries {
 			return messageBackToClient;
 		}
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplierWorker.getUserId(), "supplierworker");
-		Query.insertOneRowIntoSupplierTable(supplierWorker);
+		Query.insertOneRowIntoSupplierWorkerTable(supplierWorker);
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.SUPPLIER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
@@ -358,7 +358,7 @@ public class RegistrationQueries {
 	public static Message getSupplierFromDb(Message messageFromClient) {	
 		Message returnMessageToClient = messageFromClient;
 		String supplierId = (String) messageFromClient.getObject();
-		Supplier supplier = new Supplier(null, null, null, null, null, 0);
+		Supplier supplier = new Supplier(null, null, null, null, null, 0,null);
 		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
 		try {
 			while(rs.next()) {
@@ -368,6 +368,7 @@ public class RegistrationQueries {
 				supplier.setEmail(rs.getString(4));
 				supplier.setPhoneNumber(rs.getString(5));
 				supplier.setRevenueFee(rs.getDouble(6));
+				supplier.setStatusInSystem(ConfirmationStatus.valueOf(rs.getString(7)));
 			}
 			rs.close();
 		} catch (SQLException e) {
