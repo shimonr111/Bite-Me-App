@@ -249,7 +249,7 @@ public class Query {
 				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,"
 				+ " totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber, deliveryFee,"
 				+ " itemsList, comments, deliveryType) VALUES( '" + orderNumber +"' , '"+supplierId +"' , '" + customerUserId+"' , '" + customerUserType+"' , '" + branch+"' ,"
-						+ " '" + timeType+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '" + actualSupplyDateAndTime+"' , '" + supplyType.name()+"' ,"
+						+ " '" + timeType.name()+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '" + actualSupplyDateAndTime+"' , '" + supplyType.name()+"' ,"
 								+ " '" + totalPrice+"' , '" + receiverFirstName+"' , '" + receiverLastName+"' , '" + receiverAddress+"' , '" + receiverPhoneNumber+"' ,"
 										+ " '" + deliveryFee+"' , '" + itemList+"' , '" + comments+"' , '" +deliveryType.name() +"' )";
 
