@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="">
+<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierWorkerManageOrders">
    <children>
       <Label id="title" layoutX="202.0" layoutY="33.0" text="Manage Orders" textFill="#383838">
          <font>
@@ -20,12 +20,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="saveBtn" layoutX="248.0" layoutY="414.0" mnemonicParsing="false" onAction="#getBtnSave" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnclose" layoutX="10.0" layoutY="711.0" mnemonicParsing="false" onAction="#getCloseBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+      <Button fx:id="saveBtn" layoutX="338.0" layoutY="402.0" mnemonicParsing="false" onAction="#getBtnSave" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -43,12 +38,12 @@
       </Label>
       <TableView fx:id="manageOrdersTable" layoutX="9.0" layoutY="90.0" prefHeight="266.0" prefWidth="631.0" style="-fx-background-color: #F5F5DC;">
          <columns>
-            <TableColumn prefWidth="75.0" text="Order num." />
-            <TableColumn prefWidth="75.0" text="Order Type" />
-            <TableColumn prefWidth="75.0" text="Order Date" />
-            <TableColumn prefWidth="144.0" text="EST. supply time" />
-            <TableColumn prefWidth="66.0" text="Custome phone" />
-            <TableColumn prefWidth="66.0" text="Status - combo" />
+            <TableColumn fx:id="orderNumColum" prefWidth="75.0" text="Order number" />
+            <TableColumn fx:id="orderTypeColumn" prefWidth="75.0" text="Order Type" />
+            <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="estSupplyTimeColumn" prefWidth="144.0" text="EST. Supply time" />
+            <TableColumn fx:id="customerPhoneColumn" prefWidth="66.0" text="Phone number" />
+            <TableColumn fx:id="statusColumn" prefWidth="66.0" text="Status" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -59,9 +54,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Text layoutX="445.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="לוחצים על שורה מסוימת ואז הסטטוס שלה מתעדכן פה בקומבו בוקס. " />
-      <Text layoutX="530.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ברגע שלוחצים על set מה שמופיע בקומבו מתעדכן בטבלה לוקאלית" wrappingWidth="241.4296875" />
-      <Text layoutX="478.0" layoutY="485.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ברגע שלוחצים על save כל מה שיש פה לוקאלית נשמר בDB" />
-      <Text fx:id="errorText" layoutX="219.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <Text fx:id="errorText" layoutX="236.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+      <Button fx:id="refreshBtn" layoutX="179.0" layoutY="402.0" mnemonicParsing="false" onAction="#getBtnRefresh" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Refresh" textFill="#383838">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

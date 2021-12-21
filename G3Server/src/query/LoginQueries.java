@@ -306,7 +306,7 @@ public class LoginQueries {
 		try {
 			if(rs.next()) {
 				supplierResult = new Supplier(rs.getString(1),rs.getString(2),(Branch.valueOf(rs.getString(3))),rs.getString(4),rs.getString(5),rs.getDouble(6),
-						(ConfirmationStatus.valueOf(rs.getString(7))));
+						ConfirmationStatus.valueOf(rs.getString(7))); //TBD: change back to ConfirmationStatus.valueOf(rs.getString(7))) from ConfirmationStatus.CONFIRMED !!!!!!!!
 			}
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block
