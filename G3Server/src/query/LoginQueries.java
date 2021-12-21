@@ -237,7 +237,7 @@ public class LoginQueries {
 			if(rs.next()) {
 				company = getCompany(rs.getString(12));
 				hrManagerResult = new HrManager(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15));
+						rs.getBoolean(6),rs.getInt(16),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -261,7 +261,7 @@ public class LoginQueries {
 			if(rs.next()) {
 				company = getCompany(rs.getString(12));
 				businessCustomerResult = new BusinessCustomer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15));
+						rs.getBoolean(6),rs.getInt(16),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company,(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15));
 			}
 			rs.close();
 		} catch (SQLException e) {

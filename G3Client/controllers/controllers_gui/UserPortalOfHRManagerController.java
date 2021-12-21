@@ -70,7 +70,9 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	// Event Listener on Button[#btnStartOrder].onAction
 	@FXML
 	public void getStartOrder(ActionEvent event) {
-		// TODO Lior and Shimon.
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderW4cIdentificationScreenController w4cIdentificationController = new OrderW4cIdentificationScreenController();
+		w4cIdentificationController.initW4cIdentificationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnCompanyReg].onAction
 	@FXML

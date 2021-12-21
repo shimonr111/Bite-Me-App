@@ -21,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -29,7 +30,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Branch;
+import users.BusinessCustomer;
 import users.Customer;
+import users.HrManager;
 
 /**
  * 
@@ -73,6 +76,12 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 
     @FXML
     private ComboBox<String> homeBranchCombo;
+    
+    @FXML
+    private Label companyCodeLabel;
+    
+    @FXML
+    private TextField companyCodeTextField;
 
     /**
      * This is a function for returning
@@ -142,7 +151,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 
     /**
      * This function move us to the next screen if
-     * the data recieved form the user 
+     * the data received form the user 
      * is ok.
      * 
      * @param event
@@ -168,28 +177,86 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     	    		errorText.setFill(Color.RED);
     	    		codeTxtField.setStyle("-fx-border-color: red");
     			}
-    			else { 
+    			else {
+    				//check if the user is business user and than check if he enters with the company code number if so check validity
+    				if(connectedUser instanceof HrManager) {
+    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
+    						//check validity of the company code number
+    						if(((HrManager) connectedUser).getcompanyOfBusinessCustomer().getcompanyCode() ==  Integer.parseInt(companyCodeTextField.getText())) {
+        						((HrManager) connectedUser).setLoggedInAsBusinessAccount(true);
+    						}
+    						else {
+    							errorText.setText("Wrong company code number, please enter other one!!");
+    		    	    		errorText.setFill(Color.RED);
+    		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
+    						}
+    					}
+    				} else if(connectedUser instanceof BusinessCustomer) {
+    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
+    						if(((BusinessCustomer) connectedUser).getcompanyOfBusinessCustomer().getcompanyCode() ==  Integer.parseInt(companyCodeTextField.getText())) {
+    							((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(true); 
+    						}
+    						else {
+    							errorText.setText("Wrong company code number, please enter other one!!");
+    		    	    		errorText.setFill(Color.RED);
+    		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
+    						}
+    					}
+    				}
+    				//check if the user is a businessCustomer or HR and tried to enter company code with wrong input else continue
+    				if(connectedUser instanceof HrManager) {
+    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
+    						if(((HrManager) connectedUser).getLoggedInAsBusinessAccount()) { 
+    							setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
+    						}
+    					}
+    					else {
+    						setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
+    					}
+    				}
+    				else if(connectedUser instanceof BusinessCustomer){
+    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
+    						if(((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount()) { 
+    							setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
+    						}
+    					}else {
+							setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
+						}
+    				}
+    				else {
     				//The w4c code is right, now we need to update if necessary the branch 
     				//from which the customer wants to order
-    				Branch homeBranch;
-    	    		if(homeBranchCombo.getValue().equals("South Branch")) 
-    	    			homeBranch = Branch.SOUTH;
-    	    		
-    	    		else if(homeBranchCombo.getValue().equals("North Branch"))
-    	    			homeBranch = Branch.NORTH;
-    	    		else
-    	    			homeBranch = Branch.CENTER;
-    	    		connectedUser.setHomeBranch(homeBranch); //set the new branch and don't change it in the DB
-    	    		
-    	    		//now we need to change this screen to the next one
-    	    		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-    	    		OrderChooseResturantInOrderScreenController orderChooseResturantInOrderScreenController = new OrderChooseResturantInOrderScreenController();
-    	    		orderChooseResturantInOrderScreenController.initChooseRestaurantScreen(); // call the init of the next screen
+    				setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
+    				}
     			}
     		}
     	}
     	
     }
+
+    /**
+     * This is a method for changing the screen
+     * and putting the relevant branch according the the users
+     * choise.
+     * 
+     * @param event
+     */
+	private void setHomeBranchAccordingToUsersChoiseAndChangeScreen(ActionEvent event) {
+		Branch homeBranch;
+		if(homeBranchCombo.getValue().equals("South Branch")) 
+			homeBranch = Branch.SOUTH;
+		
+		else if(homeBranchCombo.getValue().equals("North Branch"))
+			homeBranch = Branch.NORTH;
+		else
+			homeBranch = Branch.CENTER;
+		connectedUser.setHomeBranch(homeBranch); //set the new branch and don't change it in the DB
+		
+		//now we need to change this screen to the next one
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderChooseResturantInOrderScreenController orderChooseResturantInOrderScreenController = new OrderChooseResturantInOrderScreenController();
+		orderChooseResturantInOrderScreenController.initChooseRestaurantScreen(); // call the init of the next screen
+	}
     
     /**
      * This method handles the QR code simulation.
@@ -259,6 +326,9 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 		/*check if the connected user is type of customer only for 
 		protection*/
 		if(connectedUser instanceof Customer) {
+			/*make the company code text and label invisible for customer*/
+			companyCodeLabel.setVisible(false);
+			companyCodeTextField.setVisible(false);
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))
 			homeBranchCombo.setValue("North Branch");
@@ -267,6 +337,12 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 		else
 			homeBranchCombo.setValue("South Branch");
 		homeBranchCombo.getItems().addAll("North Branch", "Center Branch", "South Branch");	
+		}
+		
+		/*make the company code text and label visible for business and HR*/
+		if(connectedUser instanceof BusinessCustomer) {
+			companyCodeLabel.setVisible(true);
+			companyCodeTextField.setVisible(true);
 		}
 	}
     
@@ -284,6 +360,22 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * This function is used for
+	 * Identifying  if the user (business customer \ hr manager) 
+	 * has entered an empty input 
+	 * for the company Code Number.
+	 * 
+	 * @param companyCodeNumber
+	 * @return
+	 */
+	public boolean isCompanyCodeNumberEmpty(String companyCodeNumber) {
+		if(companyCodeNumber.equals("")) {
+			return true;
+		}
+		return false;
 	}
     
 }

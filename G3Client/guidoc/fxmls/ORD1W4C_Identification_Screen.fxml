@@ -38,6 +38,8 @@
                      <children>
                         <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="Enter W4C Code:" />
                         <TextField fx:id="codeTxtField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="W4C Code" styleClass="text-field" />
+						<Label fx:id="companyCodeLabel" prefHeight="20.0" prefWidth="143.0" styleClass="loginLabels" text="Enter company code:" />
+                        <TextField fx:id="companyCodeTextField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="Company code" styleClass="text-field" />
                      </children>
                   </VBox>
                   <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="200.0" />
