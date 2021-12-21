@@ -31,6 +31,7 @@ import orders.Order;
 import orders.PaymentWay;
 import users.BusinessCustomer;
 import users.Customer;
+import users.HrManager;
 
 /**
  * 
@@ -168,15 +169,24 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
 				   break;
 			   case EMPLOYEE_BUDGET:
-				   double employeeBudget;
-				   if(alreadyEmployeeBudgetTextField.getText() == "") {
-					   employeeBudget = 0.0;
-				   }else {
-				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
-				   }
-				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())-moneyToPay));
-				   employeeBudget += moneyToPay;
-				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				    boolean isLoggedInAsBusinessAccount = false;
+					if(connectedUser instanceof HrManager) {
+						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					else if(connectedUser instanceof BusinessCustomer) {
+						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					if(isLoggedInAsBusinessAccount) {
+						double employeeBudget;
+						if(alreadyEmployeeBudgetTextField.getText() == "") {
+							employeeBudget = 0.0;
+						}else {
+							employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+						}
+						availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())-moneyToPay)); //bug?
+						employeeBudget += moneyToPay;
+						alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+					}
 				   break;
 			   default:
 				   break;
@@ -247,15 +257,24 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
 				   break;
 			   case EMPLOYEE_BUDGET:
-				   double employeeBudget;
-				   if(alreadyEmployeeBudgetTextField.getText() == "") {
-					   employeeBudget = 0.0;
-				   }else {
-				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
-				   }
-				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())+moneyToReturn));
-				   employeeBudget -= moneyToReturn;
-				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				   boolean isLoggedInAsBusinessAccount = false;
+					if(connectedUser instanceof HrManager) {
+						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					else if(connectedUser instanceof BusinessCustomer) {
+						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+					}
+						if(isLoggedInAsBusinessAccount) {
+							double employeeBudget;
+							if(alreadyEmployeeBudgetTextField.getText() == "") {
+								employeeBudget = 0.0;
+							}else {
+								employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+							}
+							availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())+moneyToReturn));
+							employeeBudget -= moneyToReturn;
+							alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+						}	
 				   break;
 			   default:
 				   break;
@@ -433,9 +452,22 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			List<PaymentWay> paymentMethods = new ArrayList<>();
 			/*For business customer and hr manager*/
-			if(connectedUser instanceof BusinessCustomer) {
+			boolean isLoggedInAsBusinessAccount = false;
+			if(connectedUser instanceof HrManager) {
+				isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+			}
+			else if(connectedUser instanceof BusinessCustomer) {
+				isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+			}
+			if(connectedUser instanceof BusinessCustomer && (isLoggedInAsBusinessAccount)) {
 				for(PaymentWay pay : PaymentWay.values()) {
 					paymentMethods.add(pay);
+				}
+				if(connectedUser instanceof HrManager) {
+					availableBudgetBalanceTextField.setText(String.valueOf(((HrManager) connectedUser).getBudgetMaxAmount()));
+				}
+				else {
+					availableBudgetBalanceTextField.setText(String.valueOf(((BusinessCustomer) connectedUser).getBudgetMaxAmount()));
 				}
 			}
 			else { // if connectedUser is instance of Customer
@@ -481,18 +513,17 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
     		errorText.setFill(Color.RED);
 			return false;
 		}
-		if(connectedUser instanceof BusinessCustomer) {
-		budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
-		}
-		//double employerBudgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
+
 		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
-			if((accountBalance < enteredAmount) /*|| (employerBudgetBalance < enteredAmount)*/ ) {
+			if((accountBalance < enteredAmount)) {
 				errorText.setText("You have entered a wrong input value, change it!!");
 				errorText.setFill(Color.RED);
 				return false;
 			}
 		}
+		
 		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
+			budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText()); 
 			if(budgetBalance < enteredAmount) {
 				errorText.setText("You have entered a wrong input value, change it!!");
 				errorText.setFill(Color.RED);
