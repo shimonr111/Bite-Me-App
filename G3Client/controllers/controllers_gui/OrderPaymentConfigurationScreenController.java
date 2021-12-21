@@ -290,7 +290,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Choose restaurant");
 						Stage.setScene(scene);
 						Stage.show();
@@ -412,7 +412,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Payment");
 						Stage.setScene(scene);
 						Stage.show();

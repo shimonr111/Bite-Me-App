@@ -1,70 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane styleClass="pane" prefHeight="503.0" prefWidth="649.0"  xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderW4cIdentificationScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="W4CExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderW4cIdentificationScreenController">
    <children>
-      <Label layoutX="225.0" layoutY="81.0" text="Enter W4C code:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="codeTxtField" layoutX="233.0" layoutY="116.0" prefHeight="31.0" prefWidth="160.0" promptText="Enter your code here" />
-      <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="156.0" layoutY="19.0" prefHeight="53.0" prefWidth="331.0" text="W4C Identification" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="128.0" layoutY="180.0" prefHeight="35.0" prefWidth="410.0" text="Or identify by external QR reader:">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <Button fx:id="nextBtn" layoutX="448.0" layoutY="444.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Next" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="qrBtn" layoutX="223.0" layoutY="226.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Click here" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBack" layoutX="-1.0" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Label layoutX="320.0" layoutY="1.0" text="Home Screen -&gt; Login -&gt; Main Screen-&gt;" />
-      <Label layoutX="540.0" layoutY="1.0" text="W4C Identification">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Text fx:id="errorText" layoutX="244.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="200.0" />
-            <ComboBox fx:id="homeBranchCombo" layoutX="223.0" layoutY="366.0" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
-      <Label layoutX="237.0" layoutY="331.0" text="Select branch">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="35.0" maxHeight="50.0" maxWidth="317.0" prefHeight="50.0" prefWidth="317.0" styleClass="W4CHeadLight" text="W4C Identification" />
+            <VBox layoutX="69.0" layoutY="117.0" prefHeight="166.0" prefWidth="203.0">
+               <children>
+                  <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="Enter W4C Code:" />
+                        <TextField fx:id="codeTxtField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="W4C Code" styleClass="text-field" />
+                     </children>
+                  </VBox>
+                  <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="200.0" />
+                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="203.0" styleClass="W4CLabels" text="OR" />
+                  <VBox fillWidth="false" prefHeight="30.0" prefWidth="203.0" styleClass="loginBundleVBOX">
+                     <children>
+                        <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="Scan QR Code:" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Button fx:id="qrBtn" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="50.0" maxWidth="200.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="50.0" prefWidth="100.0" styleClass="QRButton" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Button fx:id="nextBtn" layoutX="807.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
+      <AnchorPane layoutX="342.0" layoutY="575.0" prefHeight="100.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label layoutX="86.0" layoutY="8.0" styleClass="W4CBranchLabel" text="Choose Branch">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+                  <ComboBox fx:id="homeBranchCombo" layoutX="80.0" layoutY="49.0" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
+         </children>
+      </AnchorPane>
    </children>
 </Pane>
