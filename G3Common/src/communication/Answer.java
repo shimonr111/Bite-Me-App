@@ -12,7 +12,7 @@ package communication;
  *  server according to the 
  *  Task that has been sent.
  *  
- *  @version 15/12/2021
+ *  @version 21/12/2021
  *
  */
 public enum Answer {
@@ -70,6 +70,11 @@ public enum Answer {
 	 * Answers related to Registration
 	 * Operation.
 	 */
-	SUPPLIER_FOUND_IN_DB
+	SUPPLIER_FOUND_IN_DB,
+	/**
+	 * Answers related to Report
+	 * Operation.
+	 */
+	SENT_REPORT_SUPPLIERS_LIST
 	
 }

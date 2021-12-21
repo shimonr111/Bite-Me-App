@@ -16,11 +16,13 @@ import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
+import controllers_gui.ViewSystemReportsScreenController;
 import orders.Item;
 import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
 import users.User;
+import util.SupplierByReport;
 
 /**
  * @author Lior, Guzovsky.
@@ -30,7 +32,7 @@ import users.User;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 15/12/2021
+ * @version 21/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -276,6 +278,15 @@ public class AnalyzeMessageFromServer {
 					break;
 				default:
 					break;
+				}
+				break;
+			case GET_SYSTEM_REPORTS:
+				switch(recievedAnswerFromServer) {
+				case SENT_REPORT_SUPPLIERS_LIST:
+					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					break;
+					default:
+						break;
 				}
 				break;
 			default:
