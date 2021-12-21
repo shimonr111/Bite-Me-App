@@ -34,6 +34,7 @@ import users.Customer;
 import users.HrManager;
 import users.Login;
 import users.PositionType;
+import users.UserForRegistration;
 
 /**
  * 
@@ -127,7 +128,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
      */
     @FXML
     void getBackBtn(ActionEvent event) {
-    	setCustomerRegistrationScreen(event);
+    	setUserRegistrationScreen(event);
     }
     
     /**
@@ -293,7 +294,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
      * This method sets the previous screen .
      * @param event
      */
-    public void setCustomerRegistrationScreen(ActionEvent event) {
+    public void setUserRegistrationScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -302,9 +303,9 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/BM5CustomerRegistartionScreen.fxml").openStream());
-					CustomerRegistartionScreenController CRSC = new CustomerRegistartionScreenController();
-					CRSC.initPortalAgain();
+					root = loader.load(getClass().getResource("/fxmls/BM13UsersRegistrationScreen.fxml").openStream());
+					UsersRegistrationScreenController URSC = new UsersRegistrationScreenController();
+					URSC.initPortalAgain();
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
@@ -429,6 +430,12 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		budgetTypeCombo.setValue("Select Budget type:");
 		budgetTypeCombo.getItems().addAll("Daily budget","Weekly budget","Monthly budget");
 		displayMessage.setText("");
+		
+		UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
+		confirmedEmailTxtField.setText(userForRegistration.getEmail()); creditNumTxtField.setText(userForRegistration.getCreditCardNumber()); cvvTxtField.setText(userForRegistration.getCreditCardCvvCode());
+		emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
+		idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
+		phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameField.setText(userForRegistration.getUsername());
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
 			@Override
 			public void clientBusinessUserIdExist() {

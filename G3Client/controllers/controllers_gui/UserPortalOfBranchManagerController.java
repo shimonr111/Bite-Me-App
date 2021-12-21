@@ -82,9 +82,9 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	// Event Listener on Button[#btnCompanyRegManagement].onAction
 	@FXML
 	public void getCompRegManagement(ActionEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		CompanyRegistartionManagementScreenController companyRegistartionManagementScreenController = new CompanyRegistartionManagementScreenController();
-		companyRegistartionManagementScreenController.initSupplierRegistrationScreen();
+//		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+//		CompanyRegistartionManagementScreenController companyRegistartionManagementScreenController = new CompanyRegistartionManagementScreenController();
+//		companyRegistartionManagementScreenController.initSupplierRegistrationScreen();
 	}
 	// Event Listener on Button[#btnEditCustomerInfo].onAction
 	@FXML
@@ -96,16 +96,16 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	// Event Listener on Button[#btnSupplierReg].onAction
 	@FXML
 	public void getSupplierReg(ActionEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		SupplierWorkerRegistrationScreenController supplierWorkerRegistrationScreenController = new SupplierWorkerRegistrationScreenController();
-		supplierWorkerRegistrationScreenController.initSupplierRegistrationScreen(); // call the init of the next screen
+//		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+//		SupplierWorkerRegistrationScreenController supplierWorkerRegistrationScreenController = new SupplierWorkerRegistrationScreenController();
+//		supplierWorkerRegistrationScreenController.initSupplierRegistrationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnCustomerReg].onAction
 	@FXML
 	public void getCustomerReg(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		CustomerRegistartionScreenController customerRegistartionScreenController = new CustomerRegistartionScreenController();
-		customerRegistartionScreenController.initCustomerRegistrationScreen(); // call the init of the next screen
+		UsersRegistrationScreenController usersRegistrationScreenController = new UsersRegistrationScreenController();
+		usersRegistrationScreenController.initUserRegistrationScreen();; // call the init of the next screen
 		
 		
 	}

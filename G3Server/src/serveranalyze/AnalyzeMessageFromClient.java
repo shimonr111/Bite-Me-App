@@ -133,6 +133,9 @@ public class AnalyzeMessageFromClient {
 			 case DENY_COMPANY:
 				 EditUsersQueries.denyCompany((Message) message);
 				 break;
+			 case GET_USERS_FOR_REGISTRATION:
+				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
+				 break;
 			 case ORDER_FINISHED:
 				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateCustomer((Message)message);
 				 break;

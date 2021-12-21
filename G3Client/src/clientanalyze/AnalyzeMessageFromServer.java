@@ -16,11 +16,13 @@ import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
+import controllers_gui.UsersRegistrationScreenController;
 import orders.Item;
 import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
 import users.User;
+import users.UserForRegistration;
 
 /**
  * @author Lior, Guzovsky.
@@ -231,7 +233,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case DISPLAY_UNCONFIRMED_COMPANIES:
 				CompanyRegistartionManagementScreenController.companiesWaitingForConfirmation = (ArrayList<Company>)recivedMessageFromServer.getObject();
-				System.out.println((ArrayList<Company>)recivedMessageFromServer.getObject());
+				break;
+			case DISPLAY_USERS_ON_REGISTRATION_LIST:
+				UsersRegistrationScreenController.usersList=(ArrayList<UserForRegistration>)recivedMessageFromServer.getObject();
 				break;
 			case GET_RESTAURANTS_FOR_ORDER:
 				switch(recievedAnswerFromServer) {
