@@ -15,9 +15,11 @@ import controllers_gui.CompanyRegistartionManagementScreenController;
 import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
+import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.UsersRegistrationScreenController;
 import orders.Item;
+import orders.Order;
 import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
@@ -277,6 +279,18 @@ public class AnalyzeMessageFromServer {
 					break;
 				case SUPPLIER_MENU_FOUND:
 					OrderChooseItemsScreenController.itemListOfMenuFromDB = (ArrayList<Item>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;
+				}
+				break;
+			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
+				switch(recievedAnswerFromServer) {
+				case SUPPLIER_WORKER_NO_ORDERS_FOUND:
+					SupplierWorkerManageOrders.orderListFromDB = null;
+					break;
+				case SUPPLIER_WORKER_ORDERS_FOUND:
+					SupplierWorkerManageOrders.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();
 					break;
 				default:
 					break;

@@ -63,7 +63,7 @@ public class Order implements Serializable {
 	public Date estimatedSupplyDateTime;
 	
 	/**
-	 * The order actual recive time - MySql DateTime format.
+	 * The order actual receive time - MySql DateTime format.
 	 */
 	public Date actualSupplyDateTime;
 	/**
@@ -160,7 +160,7 @@ public class Order implements Serializable {
 	 */
 	public Order(String supplierUserId, String customerUserId, Branch branch) {
 		super();
-		this.orderNumber = 0; //TBD, Need to create Unique order number
+		this.orderNumber = 0; //order unique number is created in the DB 
 		this.supplierUserId = supplierUserId;
 		this.customerUserId = customerUserId;
 		this.branch = branch;

@@ -67,10 +67,18 @@ public enum Answer {
 	SUPPLIER_HAS_NO_MENU,
 	SUPPLIER_MENU_FOUND,
 	ORDER_SUCCEEDED_WRITING_INTO_DB,
+	
 	/**
 	 * Answers related to Registration
 	 * Operation.
 	 */
-	SUPPLIER_FOUND_IN_DB
+	SUPPLIER_FOUND_IN_DB,
+	
+	/**
+	 * Answers related to manage 
+	 * menu operation.
+	 */
+	SUPPLIER_WORKER_NO_ORDERS_FOUND,
+	SUPPLIER_WORKER_ORDERS_FOUND
 	
 }

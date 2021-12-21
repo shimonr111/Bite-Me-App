@@ -139,6 +139,9 @@ public class AnalyzeMessageFromClient {
 			 case ORDER_FINISHED:
 				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateCustomer((Message)message);
 				 break;
+			 case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
+				 recivedMessageFromClient = OrderQueries.getOrdersFromOrderTableForSpecificRestaurant((Message) message);
+				 break;
 			default:
 				break;
 			}
