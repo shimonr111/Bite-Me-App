@@ -139,7 +139,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   switch(paymentWay) {
 			   case CASH:
 				   double cash;
-				   if(alreadyCashTextField.getText() == "") {
+				   if(alreadyCashTextField.getText().equals("")){
 					   cash = 0.0;
 				   }else {
 				   cash = Double.parseDouble(alreadyCashTextField.getText());
@@ -149,7 +149,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				  break;
 			   case CREDIT_CARD:
 				   double creditCard;
-				   if(alreadyCreditCardTextField.getText() == "") {
+				   if(alreadyCreditCardTextField.getText().equals("")) {
 					   creditCard =0.0;
 				   }else {
 				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
@@ -159,7 +159,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				  break;
 			   case ACCOUNT_BALANCE:
 				   double accountBalance;
-				   if(alreadyAccountBalanceTextField.getText() == "") {
+				   if(alreadyAccountBalanceTextField.getText().equals("")) {
 					   accountBalance = 0.0;
 				   }else {
 				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
@@ -178,7 +178,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 					}
 					if(isLoggedInAsBusinessAccount) {
 						double employeeBudget;
-						if(alreadyEmployeeBudgetTextField.getText() == "") {
+						if(alreadyEmployeeBudgetTextField.getText().equals("")) {
 							employeeBudget = 0.0;
 						}else {
 							employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());

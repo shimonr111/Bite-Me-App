@@ -21,13 +21,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.converter.DefaultStringConverter;
+import orders.Item;
+import orders.ItemCategory;
 import orders.Order;
 import orders.OrderStatus;
 import orders.SupplyType;
@@ -83,7 +90,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     private TableColumn<Order, String> customerPhoneColumn;
 
     @FXML
-    private TableColumn<Order, OrderStatus> statusColumn;
+    private TableColumn<Order, String> statusColumn; // it was OrderStatus instead of String
 
     @FXML
     private Button btnHelp;
@@ -93,7 +100,10 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private Button refreshBtn;
-
+    
+    private ObservableList<String> statusData;
+    
+    
     /**
      * This is a function for going back
      * to the previous screen.
@@ -225,7 +235,14 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		String supplierId =((SupplierWorker) connectedUser).getSupplier().getSupplierId(); 
+		
+		/* this is for the combo box of status column */
+		statusData = FXCollections.observableArrayList();
+		statusData.add(OrderStatus.APPROVED.toString());
+		statusData.add(OrderStatus.UN_APPROVED.toString());
+		/* this is for the combo box of status column */
+		
+		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
 		/*send message to server to get all orders for this supplier worker that works in specific restaurant*/
 		Message message = new Message (Task.SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS,Answer.WAIT_RESPONSE,supplierId); 
 		sendToClient(message);
@@ -236,8 +253,38 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			errorText.setText("There are no orders for this restaurant!");
 			errorText.setFill(Color.RED);
 		}
+		else {
+			//add all the wrapper orders to the table view
+			ordersForManageOrderTable.addAll(orderListFromDB);
+		}
+		
+		/*Set data in the table */
+		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
+		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
+		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
+	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
+		customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("receiverPhoneNumber"));
+		
+		/* I have changed the column of status from <Order, OrderStatus> to <Order, String> just for check, to see if we get statusData values inside the combo box */
+		statusColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("status"));
+		
+		/* from here is the code to set combo box on this column after we double click on some cell in this column*/
+		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), statusData));
+		statusColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Order, String>>(){
+
+			@Override
+			public void handle(TableColumn.CellEditEvent<Order, String> event) {
+				System.out.println("Value: " + event.getNewValue());
+			}
+			
+		});
+		
+		manageOrdersTable.setItems(ordersForManageOrderTable);
+		
+		manageOrdersTable.setEditable(true); // so we can double click on one of the cells of status column, and then change status from the combo box
 		
 		
-	}
+	} 
+
 
 }
