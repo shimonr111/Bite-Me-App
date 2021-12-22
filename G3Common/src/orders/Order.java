@@ -325,13 +325,16 @@ public class Order implements Serializable {
 	}
 
 
-
 	public void setCustomerUserType(String customerUserType) {
 		this.customerUserType = customerUserType;
 	}
 
 
+	public String getReceiverPhoneNumber() {
+		return supplyMethodInformation.getReceiverPhoneNumber();
+	}
 
+	
 	/**
 	 * Help method for returning the items as Sting rather than
 	 * ArrayList in Specific way (thats why we didn't use toString();

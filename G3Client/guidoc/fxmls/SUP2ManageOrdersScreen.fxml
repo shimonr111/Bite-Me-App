@@ -40,7 +40,7 @@
          <columns>
             <TableColumn fx:id="orderNumColum" prefWidth="75.0" text="Order number" />
             <TableColumn fx:id="orderTypeColumn" prefWidth="75.0" text="Order Type" />
-            <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Date" />
+            <TableColumn fx:id="orderDateColumn" prefWidth="75.0" text="Issued Date" />
             <TableColumn fx:id="estSupplyTimeColumn" prefWidth="144.0" text="EST. Supply time" />
             <TableColumn fx:id="customerPhoneColumn" prefWidth="66.0" text="Phone number" />
             <TableColumn fx:id="statusColumn" prefWidth="66.0" text="Status" />
