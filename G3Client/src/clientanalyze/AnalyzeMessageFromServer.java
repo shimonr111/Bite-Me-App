@@ -15,6 +15,7 @@ import controllers_gui.CompanyRegistartionManagementScreenController;
 import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
+import controllers_gui.SupplierRegistrationScreenController;
 import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.UsersRegistrationScreenController;
@@ -239,6 +240,9 @@ public class AnalyzeMessageFromServer {
 			case DISPLAY_USERS_ON_REGISTRATION_LIST:
 				UsersRegistrationScreenController.usersList=(ArrayList<UserForRegistration>)recivedMessageFromServer.getObject();
 				break;
+			case DISPLAY_SUPPLIERS_INTO_TABLE:
+				SupplierRegistrationScreenController.suppliersWaitingForConfirmation = (ArrayList<Supplier>)recivedMessageFromServer.getObject();
+				break;
 			case GET_RESTAURANTS_FOR_ORDER:
 				switch(recievedAnswerFromServer) {
 				case RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH:
@@ -262,7 +266,7 @@ public class AnalyzeMessageFromServer {
 				default:
 					break;	
 				}
-			case GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION:
+			case GET_SUPPLIER_FOR_SUPPLIER_WORKER_REGISTRATION:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_FOUND_IN_DB:
 					SupplierWorkerRegistrationScreenController.supplier=(Supplier)recivedMessageFromServer.getObject();

@@ -283,7 +283,7 @@ public class LoginQueries {
 		Supplier supplier = null;
 		try {
 			if(rs.next()) {
-				supplier = getSupplier(rs.getString(9));
+				supplier = getSupplierForWorker(rs.getString(9));
 				supplierWorkerResult = new SupplierWorker(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
 						rs.getBoolean(6),rs.getString(7),rs.getString(8),supplier,(WorkerPosition.valueOf(rs.getString(10))));
 			}
@@ -300,13 +300,13 @@ public class LoginQueries {
 	 * 
 	 * @param supplierId
 	 */
-	private static Supplier getSupplier(String supplierId) {
+	private static Supplier getSupplierForWorker(String supplierId) {
 		Supplier supplierResult = null;
 		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
 		try {
 			if(rs.next()) {
 				supplierResult = new Supplier(rs.getString(1),rs.getString(2),(Branch.valueOf(rs.getString(3))),rs.getString(4),rs.getString(5),rs.getDouble(6),
-						ConfirmationStatus.valueOf(rs.getString(7))); //TBD: change back to ConfirmationStatus.valueOf(rs.getString(7))) from ConfirmationStatus.CONFIRMED !!!!!!!!
+						ConfirmationStatus.valueOf(rs.getString(7)));
 			}
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block

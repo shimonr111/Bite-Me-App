@@ -112,7 +112,7 @@ public class AnalyzeMessageFromClient {
 			 case GET_RESTAURANTS_FOR_SUPPLIER_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.createRestaurantsForSupplierRegistration((Message)message);
 				 break;
-			 case GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION:
+			 case GET_SUPPLIER_FOR_SUPPLIER_WORKER_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.getSupplierFromDb((Message)message);
 				 break;
 			 case REMOVE_USER_FROM_DB:
@@ -135,6 +135,12 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_USERS_FOR_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
+				 break;
+			 case GET_SUPPLIERS_FOR_REGISTRATION:
+				 recivedMessageFromClient = RegistrationQueries.getSuppliersWaitingForRegistration((Message) message);
+				 break;
+			 case CONFIRM_SUPPLIER:
+				 RegistrationQueries.getSupplierConfirmation((Message)message);
 				 break;
 			 case ORDER_FINISHED:
 				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateCustomer((Message)message);

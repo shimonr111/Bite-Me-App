@@ -159,7 +159,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	      	        break;
 	      	      }
 	        	}
-	    		Message message = new Message (Task.GET_SUPPLIER_FOR_SUPPLIER_REGISTRATION,Answer.WAIT_RESPONSE,supplierName);
+	    		Message message = new Message (Task.GET_SUPPLIER_FOR_SUPPLIER_WORKER_REGISTRATION,Answer.WAIT_RESPONSE,supplierName);
 	    		sendToClient(message);
 	    		Branch homeBranch;
 	    		if(homeBranchtxtField.getText().equals("South Branch")) 
