@@ -136,6 +136,7 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_SYSTEM_REPORTS:
 				 recivedMessageFromClient = ReportsController.getSuppliersByBranch((Message) message,"monthly");
+				 break;
 			 case GET_USERS_FOR_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
 				 break;

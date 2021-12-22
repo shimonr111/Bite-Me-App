@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER S
 USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: localhost    Database: semesterialproject
+-- Host: 127.0.0.1    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -392,11 +392,12 @@ DROP TABLE IF EXISTS `reports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reports` (
-  `reportId` varchar(256) NOT NULL,
+  `reportId` int NOT NULL AUTO_INCREMENT,
   `supplier` varchar(256) DEFAULT NULL,
   `reportType` varchar(45) DEFAULT NULL,
+  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT NULL,
   `issueDate` datetime DEFAULT NULL,
-  `reportPdf` longblob,
+  `report` longblob,
   PRIMARY KEY (`reportId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -479,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-22 11:23:22
+-- Dump completed on 2021-12-22 14:56:37
