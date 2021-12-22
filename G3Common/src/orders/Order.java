@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import users.Branch;
+import util.DateTimeHandler;
 
 /**
  * 
@@ -14,7 +15,7 @@ import users.Branch;
  * Class description:
  * This class describes the Order Entity.
  *  
- * @version 17/12/2021
+ * @version 20/12/2021
  */
 public class Order implements Serializable {
 	/**
@@ -62,7 +63,7 @@ public class Order implements Serializable {
 	public Date estimatedSupplyDateTime;
 	
 	/**
-	 * The order actual recive time - MySql DateTime format.
+	 * The order actual receive time - MySql DateTime format.
 	 */
 	public Date actualSupplyDateTime;
 	/**
@@ -83,9 +84,21 @@ public class Order implements Serializable {
 	/**
 	 * The order items
 	 */
-	
 	public ArrayList<Item> itemList;
 	
+	/**
+	 * This is the information given for the supply method,
+	 * such as the name of the , his phone and in case of 
+	 * delivery an address. 
+	 */
+	public AbatractSupplyMethod supplyMethodInformation;
+	
+	/**
+	 * This is an attribute that
+	 * tells us the users type:
+	 * customer, businesscustomer or hrmanager
+	 */
+	public String customerUserType;
 	
 	/**
 	 * This section is for the attributes
@@ -134,6 +147,8 @@ public class Order implements Serializable {
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
 		this.itemList = itemList;
+		this.supplyMethodInformation = null;
+		this.customerUserType =null;
 	}
 
 
@@ -145,7 +160,7 @@ public class Order implements Serializable {
 	 */
 	public Order(String supplierUserId, String customerUserId, Branch branch) {
 		super();
-		this.orderNumber = 0; //TBD, Need to create Unique order number
+		this.orderNumber = 0; //order unique number is created in the DB 
 		this.supplierUserId = supplierUserId;
 		this.customerUserId = customerUserId;
 		this.branch = branch;
@@ -154,11 +169,13 @@ public class Order implements Serializable {
 		this.issueDateTime = new Date();
 		
 		this.estimatedSupplyDateTime = null;
-		this.actualSupplyDateTime = null;
+		this.actualSupplyDateTime = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields("1970/01/01", "00:00"); //set default
 		this.supplyType = null;
 		this.supplyId = 0;
 		this.totalPrice = 0;
 		itemList = new ArrayList<Item>();
+		this.supplyMethodInformation = null;
+		this.customerUserType = null;
 		
 	} 
 	
@@ -289,6 +306,83 @@ public class Order implements Serializable {
 
 	public void setActualSupplyDateTime(Date actualSupplyDateTime) {
 		this.actualSupplyDateTime = actualSupplyDateTime;
+	}
+	
+	
+
+	public AbatractSupplyMethod getSupplyMethodInformation() {
+		return supplyMethodInformation;
+	}
+
+
+	public void setSupplyMethodInformation(AbatractSupplyMethod supplyMethodInformation) {
+		this.supplyMethodInformation = supplyMethodInformation;
+	}
+	
+
+	public String getCustomerUserType() {
+		return customerUserType;
+	}
+
+
+
+	public void setCustomerUserType(String customerUserType) {
+		this.customerUserType = customerUserType;
+	}
+
+
+
+	/**
+	 * Help method for returning the items as Sting rather than
+	 * ArrayList in Specific way (thats why we didn't use toString();
+	 * 
+	 * @return String of items
+	 */
+	public String turnItemListIntoStringForDB() {
+		String res = null;
+		int itemLen = itemList.size();
+		for(Item item : itemList) {
+			if(itemLen == itemList.size())//first item in list
+			{
+				res = item.getItemName()+ ",";
+				itemLen--;
+			}
+			else if(itemLen != 0) {
+			res = res + item.getItemName() + ",";
+			itemLen--;
+			}
+			else {
+				res = res + item.getItemName();
+			}
+		}
+		return res;
+	}
+	
+	/**
+	 * Help method for returning comments 
+	 * as a string into the DB.
+	 * 
+	 * @return String of comments
+	 */
+	public String turnCommentsIntoStringForDB() {
+		String res = null;
+		int itemLen = itemList.size();
+		for(Item item : itemList) {
+			if(itemLen == itemList.size())//first item in list
+			{
+				res = item.getComment() + ",";
+				itemLen--;
+			}
+			else if(itemLen != 0) {
+			res = res + item.getComment() + ",";
+			itemLen--;
+			}
+			else {
+				res = res + item.getComment();
+				itemLen--;
+			}
+		}
+		return res;
 	}
 
 	@Override

@@ -98,7 +98,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose supply method");
 					Stage.setScene(scene);
 					Stage.show();
@@ -158,10 +158,11 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     	else {
     		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
     				phoneTxtField.getText());
+    		order.setSupplyMethodInformation(takeAwayInformation);
     		//move to next screen
     		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
     		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-    		 orderSummaryScreenController.initOrderSummaryScreen(order,takeAwayInformation); // call the init of the next screen
+    		 orderSummaryScreenController.initOrderSummaryScreen(order); // call the init of the next screen
     	}
     }
     
@@ -206,7 +207,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Take Away");
 					Stage.setScene(scene);
 					Stage.show();

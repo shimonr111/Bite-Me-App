@@ -15,14 +15,19 @@ import controllers_gui.CompanyRegistartionManagementScreenController;
 import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
+import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
+import controllers_gui.UsersRegistrationScreenController;
 import orders.Item;
+import orders.Order;
 import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
 import users.User;
 import util.SupplierByReport;
+import users.UserForRegistration;
+
 
 /**
  * @author Lior, Guzovsky.
@@ -233,7 +238,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case DISPLAY_UNCONFIRMED_COMPANIES:
 				CompanyRegistartionManagementScreenController.companiesWaitingForConfirmation = (ArrayList<Company>)recivedMessageFromServer.getObject();
-				System.out.println((ArrayList<Company>)recivedMessageFromServer.getObject());
+				break;
+			case DISPLAY_USERS_ON_REGISTRATION_LIST:
+				UsersRegistrationScreenController.usersList=(ArrayList<UserForRegistration>)recivedMessageFromServer.getObject();
 				break;
 			case GET_RESTAURANTS_FOR_ORDER:
 				switch(recievedAnswerFromServer) {
@@ -280,6 +287,7 @@ public class AnalyzeMessageFromServer {
 					break;
 				}
 				break;
+
 			case GET_SYSTEM_REPORTS:
 				switch(recievedAnswerFromServer) {
 				case SENT_REPORT_SUPPLIERS_LIST:
@@ -287,6 +295,17 @@ public class AnalyzeMessageFromServer {
 					break;
 					default:
 						break;
+
+			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
+				switch(recievedAnswerFromServer) {
+				case SUPPLIER_WORKER_NO_ORDERS_FOUND:
+					SupplierWorkerManageOrders.orderListFromDB = null;
+					break;
+				case SUPPLIER_WORKER_ORDERS_FOUND:
+					SupplierWorkerManageOrders.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;
 				}
 				break;
 			default:

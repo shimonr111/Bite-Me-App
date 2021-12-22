@@ -23,6 +23,7 @@ import users.Login;
 import users.PositionType;
 import users.Supplier;
 import users.SupplierWorker;
+import users.UserForRegistration;
 import users.WorkerPosition;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
     public static Map<String,String> suppliersList = new HashMap<>(); 
-    public static Supplier supplier = new Supplier(null, null, null, null, null, 0);
+    public static Supplier supplier = new Supplier(null, null, null, null, null, 0,null);
 	   @FXML
 	    private TextField resturantNameTxtField;
 	   
@@ -170,7 +171,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    			homeBranch = Branch.CENTER;
 	    		SupplierWorker supplierWorker = new SupplierWorker(UserId.getText(),ConfirmationStatus.PENDING_APPROVAL,FirstName.getText(),LastName.getText(),
 	    				homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-	    				new Supplier(supplier.getSupplierId(),supplier.getSupplierName(), supplier.getHomeBranch(),supplier.getEmail(),supplier.getPhoneNumber(), supplier.getRevenueFee()),getWorkerPosition());
+	    				new Supplier(supplier.getSupplierId(),supplier.getSupplierName(), supplier.getHomeBranch(),supplier.getEmail(),supplier.getPhoneNumber(), supplier.getRevenueFee(),supplier.getStatusInSystem()),getWorkerPosition());
 	    		Login login = new Login (userName.getText(),passwordTextField.getText());
 	    		ArrayList<Object> list = new ArrayList<>();
 	    		list.add(supplierWorker);
@@ -193,7 +194,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	     */
 	    @FXML
 	    void getBackBtn(ActionEvent event) {
-	    	setBranchManagerPortal(event);
+	    	setUserRegistrationScreen(event);
 	    }
 	
 	    /**
@@ -298,37 +299,37 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 			});
 		}
 		
-		/**
-		 * this method loads the previous screen.
-		 * @param event
-		 */
-		public void setBranchManagerPortal(ActionEvent event) {
-				Platform.runLater(new Runnable() {
-					@Override
-					public void run() {
-						FXMLLoader loader = new FXMLLoader();
-						Pane root;
-						try {
-							Stage Stage = new Stage();
-							Stage.setResizable(false);
-							root = loader.load(getClass().getResource("/fxmls/UserPortalOfBranchManager.fxml").openStream());
-							UserPortalOfBranchManagerController UOBMC = new UserPortalOfBranchManagerController();
-							UOBMC.initPortalAgain();
-							Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-								@Override
-								public void handle(WindowEvent event) { 
-									event.consume();
-									Stage.close();
-								}
-							});
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						((Node) event.getSource()).getScene().getWindow().hide();
+	    /**
+	     * This method sets the previous screen .
+	     * @param event
+	     */
+	    public void setUserRegistrationScreen(ActionEvent event) {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						Stage Stage = new Stage();
+						Stage.setResizable(false);
+						root = loader.load(getClass().getResource("/fxmls/BM13UsersRegistrationScreen.fxml").openStream());
+						UsersRegistrationScreenController URSC = new UsersRegistrationScreenController();
+						URSC.initPortalAgain();
+						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+							@Override
+							public void handle(WindowEvent event) { 
+								event.consume();
+								Stage.close();
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
 					}
-				});
-			
-		}
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+			});
+		
+	    }
 		
 	 	/**
 	 	 * this method sets a message from the listeners to the displayMessage .
@@ -379,6 +380,10 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 		homeBranchtxtField.setEditable(false);
 		homeBranchtxtField.setDisable(true);
 		displayMessage.setText("");
+		UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
+		confirmEmailTxtField.setText(userForRegistration.getEmail()); emailTxtField.setText(userForRegistration.getEmail()); FirstName.setText(userForRegistration.getFirstName());
+		UserId.setText(userForRegistration.getUserID()); LastName.setText(userForRegistration.getLastName()); passwordTextField.setText(userForRegistration.getPassword());
+		phoneTxtField.setText(userForRegistration.getPhoneNumber()); userName.setText(userForRegistration.getUsername());
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
 			@Override
 			public void clientSupplierRegistrationSucceed() {

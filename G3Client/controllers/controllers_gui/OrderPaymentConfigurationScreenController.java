@@ -27,11 +27,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.PaymentWay;
 import users.BusinessCustomer;
 import users.Customer;
+import users.HrManager;
 
 /**
  * 
@@ -41,7 +41,7 @@ import users.Customer;
  * This is a class for the user 
  * to add all his payment to the system (cash / credit card, etc.)
  * 
- * @version 17/12/2021
+ * @version 20/12/2021
  */
 public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeController implements Initializable{
 		/**
@@ -51,7 +51,6 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		private static FXMLLoader loader;
 	    private static OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController;
 	    private static Order order;
-	    private static AbatractSupplyMethod supplyMethodInformation;
 	    private double amountLeftToPay;
 
 	    @FXML
@@ -140,7 +139,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   switch(paymentWay) {
 			   case CASH:
 				   double cash;
-				   if(alreadyCashTextField.getText() == "") {
+				   if(alreadyCashTextField.getText().equals("")){
 					   cash = 0.0;
 				   }else {
 				   cash = Double.parseDouble(alreadyCashTextField.getText());
@@ -150,7 +149,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				  break;
 			   case CREDIT_CARD:
 				   double creditCard;
-				   if(alreadyCreditCardTextField.getText() == "") {
+				   if(alreadyCreditCardTextField.getText().equals("")) {
 					   creditCard =0.0;
 				   }else {
 				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
@@ -160,7 +159,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				  break;
 			   case ACCOUNT_BALANCE:
 				   double accountBalance;
-				   if(alreadyAccountBalanceTextField.getText() == "") {
+				   if(alreadyAccountBalanceTextField.getText().equals("")) {
 					   accountBalance = 0.0;
 				   }else {
 				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
@@ -170,15 +169,24 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
 				   break;
 			   case EMPLOYEE_BUDGET:
-				   double employeeBudget;
-				   if(alreadyEmployeeBudgetTextField.getText() == "") {
-					   employeeBudget = 0.0;
-				   }else {
-				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
-				   }
-				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())-moneyToPay));
-				   employeeBudget += moneyToPay;
-				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				    boolean isLoggedInAsBusinessAccount = false;
+					if(connectedUser instanceof HrManager) {
+						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					else if(connectedUser instanceof BusinessCustomer) {
+						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					if(isLoggedInAsBusinessAccount) {
+						double employeeBudget;
+						if(alreadyEmployeeBudgetTextField.getText().equals("")) {
+							employeeBudget = 0.0;
+						}else {
+							employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+						}
+						availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())-moneyToPay)); //bug?
+						employeeBudget += moneyToPay;
+						alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+					}
 				   break;
 			   default:
 				   break;
@@ -249,15 +257,24 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
 				   break;
 			   case EMPLOYEE_BUDGET:
-				   double employeeBudget;
-				   if(alreadyEmployeeBudgetTextField.getText() == "") {
-					   employeeBudget = 0.0;
-				   }else {
-				   employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
-				   }
-				  availableBudgetBalanceLabel.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceLabel.getText())+moneyToReturn));
-				   employeeBudget -= moneyToReturn;
-				   alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+				   boolean isLoggedInAsBusinessAccount = false;
+					if(connectedUser instanceof HrManager) {
+						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+					}
+					else if(connectedUser instanceof BusinessCustomer) {
+						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+					}
+						if(isLoggedInAsBusinessAccount) {
+							double employeeBudget;
+							if(alreadyEmployeeBudgetTextField.getText() == "") {
+								employeeBudget = 0.0;
+							}else {
+								employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
+							}
+							availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())+moneyToReturn));
+							employeeBudget -= moneyToReturn;
+							alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+						}	
 				   break;
 			   default:
 				   break;
@@ -292,7 +309,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Choose restaurant");
 						Stage.setScene(scene);
 						Stage.show();
@@ -331,8 +348,49 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     */
 	    @FXML
 	    void getFinishOrderBtn(ActionEvent event) {
+	    	if(amountLeftToPay!=0) {
+	    		errorText.setText("Finish paying first!!");
+	    		errorText.setFill(Color.RED);
+	    	}
+	    	else {
+	    	errorText.setText("");
+	    	Message message = new Message(Task.ORDER_FINISHED,Answer.WAIT_RESPONSE,order);
+	    	sendToClient(message);//send message to the server telling the order is finished and than push into DB
 	    	
-
+	    	/*Give notice for the user that the order is ok*/
+    		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
+    		
+	    	/*After saving the order in the DB send the customer back to login screen*/
+	    	message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
+			sendToClient(message);
+			connectedUser = null;
+			/*Update order object to be null for another entrance to order process by the same user*/
+			OrderChooseItemsScreenController.order= null; 
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						Stage Stage = new Stage();
+						Stage.setResizable(false);
+						root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
+						LoginScreenController LSC = loader.getController();
+						LSC.initLoginScreen();
+						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+							@Override
+							public void handle(WindowEvent event) { 
+								event.consume();
+								Stage.close();
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+			});
+	    	}
 	    }
 
 	       /**
@@ -353,9 +411,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * screen controller.
 	     * 
 	     */
-	  public void initPaymentConfigurationScreen(Order order, AbatractSupplyMethod supplyMethodInformation) {
+	  public void initPaymentConfigurationScreen(Order order) {
 		  OrderPaymentConfigurationScreenController.order = order;
-		  OrderPaymentConfigurationScreenController.supplyMethodInformation = supplyMethodInformation;
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -374,7 +431,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Payment");
 						Stage.setScene(scene);
 						Stage.show();
@@ -395,9 +452,22 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			List<PaymentWay> paymentMethods = new ArrayList<>();
 			/*For business customer and hr manager*/
-			if(connectedUser instanceof BusinessCustomer) {
+			boolean isLoggedInAsBusinessAccount = false;
+			if(connectedUser instanceof HrManager) {
+				isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
+			}
+			else if(connectedUser instanceof BusinessCustomer) {
+				isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
+			}
+			if(connectedUser instanceof BusinessCustomer && (isLoggedInAsBusinessAccount)) {
 				for(PaymentWay pay : PaymentWay.values()) {
 					paymentMethods.add(pay);
+				}
+				if(connectedUser instanceof HrManager) {
+					availableBudgetBalanceTextField.setText(String.valueOf(((HrManager) connectedUser).getBudgetMaxAmount()));
+				}
+				else {
+					availableBudgetBalanceTextField.setText(String.valueOf(((BusinessCustomer) connectedUser).getBudgetMaxAmount()));
 				}
 			}
 			else { // if connectedUser is instance of Customer
@@ -422,6 +492,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			alreadyCreditCardTextField.setDisable(true);
 			alreadyAccountBalanceTextField.setDisable(true);
 			availableAccountBalanceTextField.setDisable(true);
+			order.setTotalPrice(Math.round(order.getTotalPrice())); //done for treating a behavioral bug that started in numbers with a few figures after the dot.
 			amountLeftToPay = order.getTotalPrice();
 			totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
 		}
@@ -443,18 +514,17 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
     		errorText.setFill(Color.RED);
 			return false;
 		}
-		if(connectedUser instanceof BusinessCustomer) {
-		budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
-		}
-		//double employerBudgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
+
 		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
-			if((accountBalance < enteredAmount) /*|| (employerBudgetBalance < enteredAmount)*/ ) {
+			if((accountBalance < enteredAmount)) {
 				errorText.setText("You have entered a wrong input value, change it!!");
 				errorText.setFill(Color.RED);
 				return false;
 			}
 		}
+		
 		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
+			budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText()); 
 			if(budgetBalance < enteredAmount) {
 				errorText.setText("You have entered a wrong input value, change it!!");
 				errorText.setFill(Color.RED);

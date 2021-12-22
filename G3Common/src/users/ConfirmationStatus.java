@@ -28,5 +28,11 @@ public enum ConfirmationStatus {
 				return "FROZEN";
 			}
 	
+	},
+	PENDING_REGISTRATION{
+		@Override
+		public String toString() {
+			return "PENDING_REGISTRATION";
+		}
 	}
 }

@@ -5,21 +5,33 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import communication.Answer;
-import communication.Message;
-import communication.Task;
+
+
+import bitemeserver.BiteMeServerUI;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import orders.DeliveryType;
+import orders.OrderStatus;
+import orders.OrderTimeType;
+import orders.SupplyType;
+
 import users.Branch;
+import users.BranchManager;
 import users.BusinessCustomer;
 import users.CeoBiteMe;
 import users.Company;
-import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
 import users.HrManager;
-import users.Login;
+import users.Supplier;
 import users.SupplierWorker;
 import users.User;
 import util.SupplierByReport;
+import util.DateTimeHandler;
+
 /**
  * 
  * @author Mousa, Srour
@@ -31,11 +43,68 @@ import util.SupplierByReport;
 public class Query {
 
 	private static Connection con;
+	private static Connection externalCon;
 	public static void setConnectionFromServerToDB(Connection connection) {
 		con = connection;
 	}
+	public static void setConnectionFromServerToExternalDB(Connection connection) {
+		externalCon=connection;
+	}
 	
 	
+	
+	/**
+	 * This method will be called once to import the data of users management from the external DB.
+	 * @return
+	 */
+	public static ResultSet getExternalDB() {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String query = "SELECT * FROM externaldb.usersmanagement";
+		try {
+		pstmt = externalCon.prepareStatement(query);
+		rs= pstmt.executeQuery();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;	
+	}
+	
+	/**
+	 * This method  will get the external data and insert it into our registration table .
+	 * @param userType
+	 * @param userID
+	 * @param statusInSystem
+	 * @param firstName
+	 * @param lastName
+	 * @param homeBranch
+	 * @param isLoggedIn
+	 * @param email
+	 * @param phoneNumber
+	 * @param creditCardNumber
+	 * @param creditCardCvvCode
+	 * @param creditCardDateOfExpiration
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public static boolean insertRowIntoRegistrationTable(String userType, String userID, String statusInSystem, String firstName,String lastName,
+			String homeBranch,int isLoggedIn,String email, String phoneNumber, String creditCardNumber,String creditCardCvvCode,String creditCardDateOfExpiration,
+			String username,String password,String companyName, int companyCode, double revenueFee) {
+		String query = "INSERT INTO semesterialproject.registration ( userType, userID, statusInSystem, firstName,lastName,homeBranch,isLoggedIn,email, phoneNumber, creditCardNumber,"
+				+ " creditCardCvvCode,creditCardDateOfExpiration,username,  password,companyName ,companyCode, revenueFee  ) VALUES( '"+ userType +"' , '" +userID  +"' , '"+ statusInSystem  +"' , '" + firstName  +"' , '"  + lastName
+				+"' , '"  + homeBranch +"' , '"  + isLoggedIn +"' , '"  + email +"' , '"  + phoneNumber +"' , '"  + creditCardNumber +"' , '"  + creditCardCvvCode +"' , '"  + creditCardDateOfExpiration 
+				+"' , '"  + username +"' , '"  +password +"' , '"  + companyName +"' , '"  + companyCode +"' , '"  +  revenueFee +"' )";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			BiteMeServerUI.console.add("Data Already Imported.\n");
+			return true;
+		}
+		return false;
+	}
 	/**
 	 * General methods for getting Data from DB
 	 * 
@@ -188,6 +257,56 @@ public class Query {
 	}
 	
 	/**
+	 * This is a query for entering a full row into the Order table in the DB
+	 * 
+	 * @param orderNumber
+	 * @param supplierId
+	 * @param customerUserId
+	 * @param customerUserType
+	 * @param branch
+	 * @param timeType
+	 * @param status
+	 * @param issueDateTime
+	 * @param estimatedSupplyDateTime
+	 * @param actualSupplyDateTime
+	 * @param supplyType
+	 * @param totalPrice
+	 * @param receiverFirstName
+	 * @param receiverLastName
+	 * @param receiverAddress
+	 * @param receiverPhoneNumber
+	 * @param deliveryFee
+	 * @param itemList
+	 * @param comments
+	 */
+	public static void insertOneRowIntoOrderTable(int orderNumber, String supplierId, String customerUserId, String customerUserType,
+			Branch branch, OrderTimeType timeType, OrderStatus status, Date issueDateTime, Date estimatedSupplyDateTime,
+			Date actualSupplyDateTime, SupplyType supplyType, double totalPrice, String receiverFirstName,
+			String receiverLastName, String receiverAddress, String receiverPhoneNumber, double deliveryFee, String itemList, String comments, DeliveryType deliveryType) {
+		
+		String issueDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(issueDateTime);
+		String estimatedSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime);
+		String actualSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(actualSupplyDateTime);
+
+				
+		String query = "INSERT INTO semesterialproject.order ( orderNumber, supplierId, customerUserId, customerUserType, branch,"
+				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,"
+				+ " totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber, deliveryFee,"
+				+ " itemsList, comments, deliveryType) VALUES( '" + orderNumber +"' , '"+supplierId +"' , '" + customerUserId+"' , '" + customerUserType+"' , '" + branch+"' ,"
+						+ " '" + timeType.name()+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '" + actualSupplyDateAndTime+"' , '" + supplyType.name()+"' ,"
+								+ " '" + totalPrice+"' , '" + receiverFirstName+"' , '" + receiverLastName+"' , '" + receiverAddress+"' , '" + receiverPhoneNumber+"' ,"
+										+ " '" + deliveryFee+"' , '" + itemList+"' , '" + comments+"' , '" +deliveryType.name() +"' )";
+
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * 
 	 * @param creditCardNumber
 	 * @param expDate
@@ -242,7 +361,6 @@ public class Query {
 		int employerID=0;
 		ResultSet rs = null;
 		PreparedStatement pstmt1=null;
-		if(type.equals("businesscustomer")) {
 		try {
 			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
 			pstmt1 = con.prepareStatement(query1);
@@ -253,7 +371,6 @@ public class Query {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
 		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
 				+ "privateCreditCard, companyName, budgetType, customerPosition, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
 				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
@@ -273,10 +390,10 @@ public class Query {
 	 * 
 	 * @param customer
 	 */
-	public static void insertOneRowIntoSupplierTable(SupplierWorker supplierWorker) {
+	public static void insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
 		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
 				+ "supplierId, workerPosition ) VALUES( '" + supplierWorker.getUserId() + "', '" + supplierWorker.getStatusInSystem() + "', '" + supplierWorker.getUserFirstName() + "', '" 
-				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0 + "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
+				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0+ "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
 				+ "', '" +  supplierWorker.getSupplier().getSupplierId() + "', '" + supplierWorker.getWorkerPosition() +"' )";
 		PreparedStatement pstmt=null;
 		try {
@@ -305,13 +422,95 @@ public class Query {
 	}
 	
 	/**
+	 * This method gets a ceo user and insert him into ceoBiteMe table.
+	 * @param ceo
+	 */
+	public static void inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
+		String query = "INSERT INTO semesterialproject.ceobiteme (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + ceo.getUserId()
+		+ "' , '" + ceo.getStatusInSystem().toString() 	+ "' , '" + ceo.getUserFirstName() + "' , '" + ceo.getUserLastName() + "' , '" + ceo.getHomeBranch().toString() + "' , '" + 0 
+		+ "' , '" + ceo.getUserEmail() + "' , '" + ceo.getPhoneNumber() +"' )";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * this method gets a branch manager and insert it into branch manager table.
+	 * @param bm
+	 */
+	public static void insertOneRowIntoBranchManagerTable(BranchManager bm) {
+		String query = "INSERT INTO semesterialproject.branchmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + bm.getUserId()
+		+ "' , '" + bm.getStatusInSystem().toString() 	+ "' , '" + bm.getUserFirstName() + "' , '" + bm.getUserLastName() + "' , '" + bm.getHomeBranch().toString() + "' , '" + 0 
+		+ "' , '" + bm.getUserEmail() + "' , '" + bm.getPhoneNumber() +"' )";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * This method gets a supplier , and inserts the supplier object into the supplier table in DB.
+	 * @param supplier
+	 */
+	public static void insertOneRowIntoSupplierTable(Supplier supplier) {
+		String query = "INSERT INTO semesterialproject.supplier (supplierId, supplierName, homeBranch, email, phoneNumber, revenueFee, statusInSystem ) VALUES ('" + supplier.getSupplierId() 
+		+ "' , '" + supplier.getSupplierName() + "' , '" +  supplier.getHomeBranch() + "' , '" +  supplier.getEmail() + "' , '" +  supplier.getPhoneNumber() + "' , '" +  supplier.getRevenueFee()
+		+ "' , '" +  supplier.getStatusInSystem() +"' )";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void insertOneRowIntoHrManagerTable(HrManager hr) {
+		//INSERT INTO `semesterialproject`.`hrmanager` (`userID`, `statusInSystem`, `firstName`, `lastName`, `homeBranch`, `isLoggedIn`
+		//, `businessW4cCodeNumber`, `email`, `phoneNumber`, `privateCreditCard`, `balance`, `companyName`, `budgetType`, `customerPosition`, `budgetMaxAmount`, `privateW4cCodeNumber`) 
+		//VALUES ('2222', '222', '222', '22', '22', '22', '2', '2', '22', '2', '2', '2', '2', '2', '2', '2');
+		int employerID=0;
+		ResultSet rs = null;
+		PreparedStatement pstmt1=null;
+		try {
+			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+hr.getCompanyOfBusinessCustomerString()+"'";
+			pstmt1 = con.prepareStatement(query1);
+			rs= pstmt1.executeQuery();
+			if(rs.next())
+			 employerID = rs.getInt(1);
+			rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		String query = "INSERT INTO semesterialproject.hrmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, "
+				+ "phoneNumber, privateCreditCard, balance, companyName, budgetType, customerPosition, budgetMaxAmount, privateW4cCodeNumber) VALUES ('" + hr.getUserId() 
+				+ "' , '" + hr.getStatusInSystem() + "' , '" + hr.getUserFirstName() + "' , '" +  hr.getUserLastName() + "' , '" + hr.getHomeBranch() + "' , '" + 0
+				+ "' , '" + employerID+ "' , '" + hr.getUserEmail() + "' , '" + hr.getPhoneNumber() + "' , '" + hr.getPrivateW4cCodeNumber() 
+				+ "' , '" + hr.getBalance() + "' , '" + hr.getCompanyOfBusinessCustomerString() + "' , '" + hr.getBudgetOfBusinessCustomer() + "' , '" + hr.getPositionType()
+				+ "' , '" + hr.getBudgetMaxAmount() + "' , '" + hr.getPrivateW4cCodeNumber() +"')";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * this method gets a table name and condition , and deletes the row according to the condition from DB.
 	 * condition must be according to table's primary key !
 	 * @param tableName
 	 * @param condition
 	 */
 	public static void deleteRowFromTableInDbByPrimaryKey(String tableName,String condition) {
-		//DELETE FROM `semesterialproject`.`customer` WHERE (`userID` = '100022');
 		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
 		PreparedStatement pstmt=null;
 		try {

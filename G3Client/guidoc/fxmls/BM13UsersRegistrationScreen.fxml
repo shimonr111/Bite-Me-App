@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
+   <children>
+      <Label layoutX="240.0" layoutY="7.0" prefHeight="70.0" prefWidth="191.0" text="User Registration">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="usersTable" layoutX="114.0" layoutY="77.0" prefHeight="200.0" prefWidth="384.0">
+        <columns>
+          <TableColumn fx:id="userIdCol" prefWidth="105.0" text="User ID" />
+          <TableColumn fx:id="userFirstNameCol" prefWidth="148.0" text="First Name" />
+            <TableColumn fx:id="userLastName" prefWidth="130.0" text="Last Name" />
+        </columns>
+      </TableView>
+      <Button fx:id="businessCustomerButton" layoutX="336.0" layoutY="312.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="33.0" prefWidth="117.0" text="Business Customer" />
+      <Button fx:id="privateCustomerButton" layoutX="173.0" layoutY="312.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="33.0" prefWidth="117.0" text="Private Customer" />
+      <Label layoutX="56.0" layoutY="306.0" prefHeight="46.0" prefWidth="91.0" text="Register as :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" text="Exit" />
+      <Button fx:id="helpBtn" layoutX="35.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="25.0" prefWidth="41.0" text="?" />
+      <Button fx:id="backButton" layoutY="361.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="33.0" prefWidth="78.0" text="Back" />
+      <Text fx:id="displayMessage" fill="#901010" layoutX="123.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="402.13671875">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

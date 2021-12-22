@@ -22,6 +22,7 @@ import users.Login;
 import users.Supplier;
 import users.SupplierWorker;
 import users.User;
+import users.UserForRegistration;
 
 /**
  * 
@@ -60,6 +61,7 @@ public class RegistrationQueries {
 			Query.insertOneRowIntoCreditCardTable(creditCard);
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), customer.getUserId(), "customer");
 		Query.insertOneRowIntoCustomerTable(customer);
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+customer.getUserId()+"'");
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
@@ -99,10 +101,13 @@ public class RegistrationQueries {
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(2)).getUserId(), businessCustomerType);
 		if(businessCustomerType.equals("hrmanager")) {
 			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "hrmanager");
+			Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+((BusinessCustomer)list.get(2)).getUserId()+"'");
 		}
 		else {
 			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "businesscustomer");
+			Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+((BusinessCustomer)list.get(2)).getUserId()+"'");
 		}
+		
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
@@ -130,7 +135,8 @@ public class RegistrationQueries {
 			return messageBackToClient;
 		}
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplierWorker.getUserId(), "supplierworker");
-		Query.insertOneRowIntoSupplierTable(supplierWorker);
+		Query.insertOneRowIntoSupplierWorkerTable(supplierWorker);
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+supplierWorker.getUserId()+"'");
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.SUPPLIER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
 		
@@ -145,20 +151,8 @@ public class RegistrationQueries {
 	 * @return
 	 */
 	public static Message getCompanyRegistration(Message message) {
-		Message messageBackToClient;
-		@SuppressWarnings("unchecked")
-		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
-		Company company = (Company) list.get(0);
-		HrManager hrManager = (HrManager) list.get(1);
-		if(checkIfCompanyNameExist(company.getCompanyName())) {
-			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_NAME_ALREADY_EXIST,null);
-		}
-		else if(checkIfCompanyCodeExist(company.getcompanyCode())) {
-			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.COMPANY_CODE_ALREADY_EXIST,null);
-		}
-		Query.insertOneRowIntoCompanyTable(company);
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","companyName='"+company.getCompanyName()+"'" , "userID='"+hrManager.getUserId()+"'");
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "businessW4cCodeNumber='"+company.getcompanyCode()+"'" , "userID='"+hrManager.getUserId()+"'");
+		Company company = (Company) message.getObject();
+		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem='PENDING_APPROVAL'","companyName ='" + company.getCompanyName()+"'");
 		return new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.COMPANY_REGISTRATION_SUCCEED,null);
 		
 		
@@ -358,7 +352,7 @@ public class RegistrationQueries {
 	public static Message getSupplierFromDb(Message messageFromClient) {	
 		Message returnMessageToClient = messageFromClient;
 		String supplierId = (String) messageFromClient.getObject();
-		Supplier supplier = new Supplier(null, null, null, null, null, 0);
+		Supplier supplier = new Supplier(null, null, null, null, null, 0,null);
 		ResultSet rs = Query.getRowsFromTableInDB("supplier","supplierId='"+supplierId+"'");
 		try {
 			while(rs.next()) {
@@ -368,6 +362,7 @@ public class RegistrationQueries {
 				supplier.setEmail(rs.getString(4));
 				supplier.setPhoneNumber(rs.getString(5));
 				supplier.setRevenueFee(rs.getDouble(6));
+				supplier.setStatusInSystem(ConfirmationStatus.valueOf(rs.getString(7)));
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -380,6 +375,34 @@ public class RegistrationQueries {
 		return returnMessageToClient;
 	}
 	
+	/**
+	 * this method looks for all the users in the registration table and returns them into array list to the client.
+	 * @param message
+	 * @return
+	 */
+	public static Message getUsersFromRegistrationTable(Message message) {
+		Message returnMessageToClient = message;
+		User bm = (User)message.getObject();
+		Branch homeBranch = bm.getHomeBranch();
+		ArrayList<UserForRegistration> usersList = new ArrayList<>();
+		ResultSet rs =Query.getRowsFromTableInDB("registration", "userType= 'user' AND (homeBranch='" + bm.getHomeBranch().toString() +"')");
+		try {
+			while(rs.next()) {
+				usersList.add(new UserForRegistration(rs.getString(2),ConfirmationStatus.valueOf(rs.getString(3)), rs.getString(4),rs.getString(5),
+						Branch.valueOf(rs.getString(6)),false,rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),
+						rs.getString(13),rs.getString(14)));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		returnMessageToClient.setTask(Task.DISPLAY_USERS_ON_REGISTRATION_LIST);
+		returnMessageToClient.setAnswer(Answer.SUCCEED);
+		returnMessageToClient.setObject(usersList);
+		return returnMessageToClient;
+		
+	}
 
 
 }

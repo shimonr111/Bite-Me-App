@@ -44,6 +44,15 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * Each business customer has a budget that he cannot exceed.
 	 */
 	protected int budgetMaxAmount;
+	
+	/**
+	 * This is a field for understanding if the user 
+	 * logged in with his company code number in addition 
+	 * to the W4C and this is relevant for the Payment stage
+	 * in the order process.
+	 * 
+	 */
+	protected boolean isLoggedInAsBusinessAccount;
 
 	/**
 	 * This is the constructor used for passing the object.
@@ -73,6 +82,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
+		this.isLoggedInAsBusinessAccount = false;
 	}
 	
 	/**
@@ -102,6 +112,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
+		this.isLoggedInAsBusinessAccount = false;
 	}
 
 	/**
@@ -141,6 +152,18 @@ public class BusinessCustomer extends Customer implements Serializable{
 		return companyOfBusinessCustomerString;
 	}
 	
+	public boolean isLoggedInAsBusinessAccount() {
+		return isLoggedInAsBusinessAccount;
+	}
+
+	public void setLoggedInAsBusinessAccount(boolean isLoggedInAsBusinessAccount) {
+		this.isLoggedInAsBusinessAccount = isLoggedInAsBusinessAccount;
+	}
+	
+	public boolean getLoggedInAsBusinessAccount() {
+		return isLoggedInAsBusinessAccount;
+	}
+
 	/**
 	 * This is the toString for this class
 	 */

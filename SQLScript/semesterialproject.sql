@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: semesterialproject
+-- Host: localhost    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -44,7 +42,6 @@ CREATE TABLE `branchmanager` (
 
 LOCK TABLES `branchmanager` WRITE;
 /*!40000 ALTER TABLE `branchmanager` DISABLE KEYS */;
-INSERT INTO `branchmanager` VALUES ('1041','CONFIRMED','branchmanagerNFirstname','branchmanagerNLastname','NORTH',0,'branchManagerNEmail@BM.com','104104'),('1042','CONFIRMED','branchmanagerSFirstname','branchmanagerSLastname','SOUTH',0,'branchManagerSEmail@BM.com','104204'),('1043','CONFIRMED','branchmanagerCFirstname','branchmanagerCLastname','CENTER',0,'branchManagerCEmail@BM.com','104304');
 /*!40000 ALTER TABLE `branchmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +86,6 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1003','CONFIRMED','businesscustomerFirstname','businesscustomerLastname','NORTH',0,5001,'businesscustomerEmail@Intel.com','100303','3003',NULL,'Intel','DAILY','REGULAR',1003003,NULL);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +116,6 @@ CREATE TABLE `ceobiteme` (
 
 LOCK TABLES `ceobiteme` WRITE;
 /*!40000 ALTER TABLE `ceobiteme` DISABLE KEYS */;
-INSERT INTO `ceobiteme` VALUES ('1001','FROZEN','ceoFirstname','ceoLastname','NOT_APPLICABLE',0,'ceoEmail@BM.com','100101');
 /*!40000 ALTER TABLE `ceobiteme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +128,7 @@ DROP TABLE IF EXISTS `company`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `company` (
   `companyName` varchar(256) NOT NULL,
-  `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
+  `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN','PENDING_REGISTRATION') DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `companyCode` int NOT NULL DEFAULT '0',
@@ -148,7 +143,6 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001),('Waiting_Registration','FROZEN','Internal','wait@wait.com',0);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -173,7 +167,6 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('3000','111','01/35'),('3001','111','01/35'),('3002','111','01/35'),('3003','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -209,7 +202,6 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,10000,'customerEmail@gmeel.com','100000','3000',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,12 +230,10 @@ CREATE TABLE `hrmanager` (
   `budgetMaxAmount` int DEFAULT NULL,
   `privateW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
-  KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
   KEY `hrmanager_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
   CONSTRAINT `hrmanager_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `hrmanager_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -254,7 +244,6 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',NULL,'Intel','DAILY','HR',1002002,NULL);
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +273,6 @@ CREATE TABLE `item_in_menu` (
 
 LOCK TABLES `item_in_menu` WRITE;
 /*!40000 ALTER TABLE `item_in_menu` DISABLE KEYS */;
-INSERT INTO `item_in_menu` VALUES ('burger','5555','MAIN','LARGE','C://pictures',45),('burger','5556','MAIN','LARGE','C://pictures',45),('cola','2222','DRINK','SMALL','C://pictures',14),('cola','2223','DRINK','SMALL','C://pictures',14),('cola','5555','DRINK','LARGE','C://pictures',12),('cola','5556','DRINK','LARGE','C://pictures',12),('fries','2222','FIRST','LARGE','C://pictures',15),('fries','2223','FIRST','LARGE','C://pictures',15),('fries','5555','FIRST','LARGE','C://pictures',15),('fries','5556','FIRST','LARGE','C://pictures',15),('pizza','1111','MAIN','REGULAR','C://pictures',80),('pizza','1112','MAIN','REGULAR','C://pictures',80),('pizza','2222','MAIN','REGULAR','C://pictures',80),('pizza','2223','MAIN','REGULAR','C://pictures',80);
 /*!40000 ALTER TABLE `item_in_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -311,7 +299,6 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('ceo','ceo','1001','ceobiteme'),('hr','hr','1002','hrmanager'),('bc','bc','1003','businesscustomer'),('sp','sp','1005','supplierworker'),('bmn','bmn','1041','branchmanager'),('bms','bms','1042','branchmanager'),('bmc','bmc','1043','branchmanager');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,6 +345,44 @@ LOCK TABLES `order` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `registration`
+--
+
+DROP TABLE IF EXISTS `registration`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `registration` (
+  `userType` varchar(256) NOT NULL,
+  `userID` varchar(256) NOT NULL,
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN','PENDING_REGISTRATION') DEFAULT NULL,
+  `firstName` varchar(256) DEFAULT NULL,
+  `lastName` varchar(256) DEFAULT NULL,
+  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT NULL,
+  `isLoggedIn` tinyint DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
+  `phoneNumber` varchar(256) DEFAULT NULL,
+  `creditCardNumber` varchar(256) DEFAULT NULL,
+  `creditCardCvvCode` varchar(256) DEFAULT NULL,
+  `creditCardDateOfExpiration` varchar(256) DEFAULT NULL,
+  `username` varchar(256) NOT NULL,
+  `password` varchar(256) DEFAULT NULL,
+  `companyName` varchar(256) DEFAULT NULL,
+  `companyCode` int DEFAULT NULL,
+  `revenueFee` double DEFAULT NULL,
+  PRIMARY KEY (`userID`,`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `registration`
+--
+
+LOCK TABLES `registration` WRITE;
+/*!40000 ALTER TABLE `registration` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registration` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `reports`
 --
 
@@ -397,6 +422,7 @@ CREATE TABLE `supplier` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `revenueFee` double DEFAULT NULL,
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN','PENDING_REGISTRATION') DEFAULT 'PENDING_REGISTRATION',
   PRIMARY KEY (`supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -407,7 +433,6 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1111','Dominos','CENTER','support@dominos.com','100001111',11.5),('1112','Dominos','NORTH','support@dominos.com','100001111',11.5),('2222','PizzaHut','SOUTH','support@pizzahut.com','100002222',10.2),('2223','PizzaHut','CENTER','support@pizzahut.com','100002222',10.2),('5555','Mcdonalds','NORTH','support@mcdonalds.com','100005555',7.2),('5556','Mcdonalds','CENTER','support@mcdonalds.com','100005555',7.2);
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -440,7 +465,6 @@ CREATE TABLE `supplierworker` (
 
 LOCK TABLES `supplierworker` WRITE;
 /*!40000 ALTER TABLE `supplierworker` DISABLE KEYS */;
-INSERT INTO `supplierworker` VALUES ('1005','CONFIRMED','supplierFirstname','supplierLastname','NORTH',0,'supplierEmail@supplies.com','100505','5555','REGULAR');
 /*!40000 ALTER TABLE `supplierworker` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -453,4 +477,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 15:32:40
+-- Dump completed on 2021-12-21 21:36:48

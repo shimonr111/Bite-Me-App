@@ -31,6 +31,7 @@ import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
 import users.Login;
+import users.UserForRegistration;
 
 /**
  * 
@@ -48,6 +49,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
+    
     @FXML
     private TextField firstNameTxtField;
 
@@ -207,8 +209,9 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     @FXML
     void getBackBtn(ActionEvent event) {
 		AnalyzeMessageFromServer.removeClientListener(listener);
-    	setCustomerRegistrationScreen(event);
+		setUserRegistrationScreen(event);
     }
+    
     
     /**
      * 
@@ -317,7 +320,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
      * This method sets the previous screen .
      * @param event
      */
-    public void setCustomerRegistrationScreen(ActionEvent event) {
+    public void setUserRegistrationScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -326,9 +329,9 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/BM5CustomerRegistartionScreen.fxml").openStream());
-					CustomerRegistartionScreenController CRSC = new CustomerRegistartionScreenController();
-					CRSC.initPortalAgain();
+					root = loader.load(getClass().getResource("/fxmls/BM13UsersRegistrationScreen.fxml").openStream());
+					UsersRegistrationScreenController URSC = new UsersRegistrationScreenController();
+					URSC.initPortalAgain();
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
@@ -355,6 +358,11 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(passwordField); textFields.add(phoneTxtField);
 		textFields.add(userNameTxtField);
 		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField) ; integerFields.add(idNumTxtField); integerFields.add(phoneTxtField); 
+		 UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
+		confirmedEmailTxtField.setText(userForRegistration.getEmail()); creditNumTxtField.setText(userForRegistration.getCreditCardNumber()); cvvTxtField.setText(userForRegistration.getCreditCardCvvCode());
+		emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
+		idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
+		phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameTxtField.setText(userForRegistration.getUsername());
 		
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))

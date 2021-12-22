@@ -97,10 +97,10 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     	switch(order.getTimeType()) {
   		case PRE:
   			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
-  			order.setTotalPrice(order.getTotalPrice()-deliveryInformation.getDeliveryFee()); //update the total cost of the order
+  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
   			break;
   		case REGULAR:
-  			order.setTotalPrice(order.getTotalPrice()-deliveryInformation.getDeliveryFee()); //update the total cost of the order
+  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
   			break;
   		default:
   			break;
@@ -122,7 +122,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose supply method");
 					Stage.setScene(scene);
 					Stage.show();
@@ -188,7 +188,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     		//move to next screen
     		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
     		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
-    		 orderSummaryScreenController.initOrderSummaryScreen(order,deliveryInformation); // call the init of the next screen
+    		 orderSummaryScreenController.initOrderSummaryScreen(order); // call the init of the next screen
     	}
     }
 
@@ -233,7 +233,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/styles.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Delivery");
 					Stage.setScene(scene);
 					Stage.show();
@@ -254,6 +254,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
   		deliveryInformation = new DeliverySupplyMethod(order.getSupplyId(),order.getOrderNumber(),null,null,null,DeliveryType.REGULAR,null);
+  		order.setSupplyMethodInformation(deliveryInformation);
   		calcTotalBill();
   		deliveryFeeTextField.setText(String.valueOf(Constans.REGULAR_DELIVERY_FEE_IN_NIS));	
   		deliveryFeeTextField.setDisable(true);

@@ -70,7 +70,9 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	// Event Listener on Button[#btnStartOrder].onAction
 	@FXML
 	public void getStartOrder(ActionEvent event) {
-		// TODO Lior and Shimon.
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		OrderW4cIdentificationScreenController w4cIdentificationController = new OrderW4cIdentificationScreenController();
+		w4cIdentificationController.initW4cIdentificationScreen(); // call the init of the next screen
 	}
 	// Event Listener on Button[#btnCompanyReg].onAction
 	@FXML
@@ -215,11 +217,17 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
-		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName().equals("Waiting_Registration")) {
-			companyName.setText("No Company");
+		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - not registered yet");
 			btnBusinessCustomerConfirm.setDisable(true);
 			btnStartOrder.setDisable(true);
-			statusText.setText("No Registered company");
+			statusText.setText(connectedUser.getStatusInSystem().toString());
+		}
+		else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - waiting for approval");
+			btnBusinessCustomerConfirm.setDisable(true);
+			btnStartOrder.setDisable(true);
+			statusText.setText(connectedUser.getStatusInSystem().toString());
 		}
 		else {
 			btnCompanyReg.setDisable(true);

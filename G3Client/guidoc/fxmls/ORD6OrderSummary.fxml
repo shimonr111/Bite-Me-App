@@ -5,66 +5,58 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="supplyExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
    <children>
-      <Button fx:id="choosePaymentMethodBtn" layoutX="128.0" layoutY="416.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="51.0" prefWidth="460.0" style="-fx-background-color: #7FBA00;" text="Confirm" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Label layoutX="159.0" layoutY="33.0" prefHeight="53.0" prefWidth="398.0" text="Order summary" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBack" layoutY="437.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Label layoutX="87.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; W4C Identification -&gt; Choose resturant -&gt; Choose items -&gt; Supply configuration -&gt;">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="493.0" layoutY="24.0" text="Supply details -&gt; ">
-         <font>
-            <Font size="10.0" />
-         </font>
-      </Label>
-      <Label layoutX="569.0" layoutY="24.0" text="Order summary">
-         <font>
-            <Font name="System Bold" size="10.0" />
-         </font>
-      </Label>
-      <Text fx:id="errorText" layoutX="222.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <TableView fx:id="orderSummaryTable" layoutX="145.0" layoutY="86.0" prefHeight="176.0" prefWidth="330.0">
-         <columns>
-            <TableColumn fx:id="iteamNameColumn" prefWidth="84.0" text="Item" />
-            <TableColumn fx:id="sizeColumn" prefWidth="84.0" text="size" />
-            <TableColumn fx:id="priceColumn" prefWidth="84.0" text="price" />
-            <TableColumn fx:id="commentColumn" prefWidth="84.0" text="comment" />
-         </columns>
-      </TableView>
-      <TextField fx:id="totalOrderPriceTextField" layoutX="288.0" layoutY="359.0" prefHeight="25.0" prefWidth="78.0" promptText="0.0" />
-      <Label layoutX="156.0" layoutY="361.0" text="Total order price:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="292.0" layoutY="164.0" prefHeight="440.0" prefWidth="440.0" styleClass="itemSelectionCartPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label layoutX="109.0" layoutY="31.0" styleClass="itemSelectionCartHeadLight" text="Order Summary" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <TableView fx:id="orderSummaryTable" layoutX="25.0" layoutY="85.0" prefHeight="230.0" prefWidth="392.0">
+               <columns>
+                  <TableColumn fx:id="iteamNameColumn" prefWidth="100.0" text="Item Name" />
+                  <TableColumn fx:id="sizeColumn" text="Size" />
+                  <TableColumn fx:id="priceColumn" prefWidth="60.0" text="Price" />
+                  <TableColumn fx:id="commentColumn" prefWidth="150.0" text="Comments" />
+               </columns>
+            </TableView>
+            <Button fx:id="choosePaymentMethodBtn" layoutX="95.0" layoutY="331.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="50.0" prefWidth="250.0" styleClass="proceedToPaymentButton" text="Proceed to Payment" />
+            <Text fx:id="errorText" layoutX="119.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="402.0" layoutY="564.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
+         <children>
+            <Label layoutX="30.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Total Order Price">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="totalOrderPriceTextField" alignment="CENTER" layoutX="80.0" layoutY="29.0" prefHeight="30.0" prefWidth="60.0" promptText="0.0" styleClass="itemPriceTextField" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection ➝ Item Selection ➝ Choose Supply Method ➝ Supply Method ➝ Order Summary" />
    </children>
 </Pane>

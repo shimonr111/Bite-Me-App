@@ -30,6 +30,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import users.BusinessCustomer;
+import users.HrManager;
 /**
  * 
  * @author Lior, Guzovsky
@@ -81,6 +83,11 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      */
     @FXML
     void getBackBtn(ActionEvent event) {
+    	if(connectedUser instanceof HrManager) {
+    		((HrManager) connectedUser).setLoggedInAsBusinessAccount(false);
+    	}else if(connectedUser instanceof BusinessCustomer) {
+    		((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(false);
+    	}
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -98,7 +105,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("W4C Identification");
 					Stage.setScene(scene);
 					Stage.show();
@@ -196,7 +203,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose restaurant");
 					Stage.setScene(scene);
 					Stage.show();

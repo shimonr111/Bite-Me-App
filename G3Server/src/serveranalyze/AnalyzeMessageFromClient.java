@@ -136,6 +136,14 @@ public class AnalyzeMessageFromClient {
 				 break;
 			 case GET_SYSTEM_REPORTS:
 				 recivedMessageFromClient = ReportsController.getSuppliersByBranch((Message) message,"monthly");
+			 case GET_USERS_FOR_REGISTRATION:
+				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
+				 break;
+			 case ORDER_FINISHED:
+				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateCustomer((Message)message);
+				 break;
+			 case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
+				 recivedMessageFromClient = OrderQueries.getOrdersFromOrderTableForSpecificRestaurant((Message) message);
 				 break;
 			default:
 				break;
