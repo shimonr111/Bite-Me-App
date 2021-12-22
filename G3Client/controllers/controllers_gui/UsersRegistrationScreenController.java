@@ -2,7 +2,6 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -12,6 +11,8 @@ import communication.Task;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,16 +21,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import users.BusinessCustomer;
-import users.User;
 import users.UserForRegistration;
 
 public class UsersRegistrationScreenController extends AbstractBiteMeController implements Initializable {
@@ -59,7 +58,10 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 
     @FXML
     private Button privateCustomerButton;
+    
 
+    @FXML
+    private TextField searchField;
 
     @FXML
     private TableColumn<UserForRegistration, String> userFirstNameCol;
@@ -223,6 +225,37 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 		userLastName.setCellValueFactory(new PropertyValueFactory<UserForRegistration,String>("lastName"));
 		userObservableList.addAll(usersList);
 		usersTable.setItems(userObservableList);
+		
+		FilteredList<UserForRegistration> filteredData = new FilteredList<UserForRegistration>(userObservableList , b -> true);
+		searchField.textProperty().addListener((observable, oldValue, newValue)->{
+			filteredData.setPredicate(UserForRegistration ->{//newValue.isBlank() ||
+				if(newValue.isEmpty() ||  newValue == null) {
+					return true;
+				}
+				
+				String searchKeyWord = newValue.toLowerCase();
+				
+				if(UserForRegistration.getUserID().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(UserForRegistration.getFirstName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(UserForRegistration.getLastName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else
+					return false; // nothing to display
+				
+				
+			});
+		});
+		
+		SortedList<UserForRegistration>  sortedData = new SortedList<>(filteredData);
+		
+		sortedData.comparatorProperty().bind(usersTable.comparatorProperty());
+		
+		usersTable.setItems(sortedData);
 		
 	}
 }

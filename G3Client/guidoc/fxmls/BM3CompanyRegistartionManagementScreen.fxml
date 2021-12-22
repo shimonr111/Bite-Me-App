@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -20,7 +21,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="confirmBtn" layoutX="65.0" layoutY="361.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="51.0" prefWidth="249.0" style="-fx-background-color: #7FBA00;" text="Confirm Company" textFill="#383838">
+      <Button fx:id="confirmBtn" layoutX="76.0" layoutY="378.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="51.0" prefWidth="249.0" style="-fx-background-color: #7FBA00;" text="Confirm Company" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -36,14 +37,14 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="denyBtn" layoutX="336.0" layoutY="361.0" mnemonicParsing="false" onAction="#getDenyBtn" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: #F25022;" text="Deny Company" textFill="#383838">
+      <Button fx:id="denyBtn" layoutX="334.0" layoutY="378.0" mnemonicParsing="false" onAction="#getDenyBtn" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: #F25022;" text="Deny Company" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <TableView fx:id="companiesTable" layoutX="202.0" layoutY="95.0" prefHeight="252.0" prefWidth="204.0">
+      <TableView fx:id="companiesTable" layoutX="136.0" layoutY="126.0" prefHeight="237.0" prefWidth="326.0">
          <columns>
-            <TableColumn fx:id="companyNameCol" prefWidth="217.0" text="Company Name" />
+            <TableColumn fx:id="companyNameCol" prefWidth="325.0" text="Company Name" />
          </columns>
       </TableView>
       <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
@@ -51,10 +52,16 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="displayText" fill="#8a0606" layoutX="120.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="450.13671875">
+      <Text fx:id="displayText" fill="#8a0606" layoutX="119.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="450.13671875">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Text>
+      <Label layoutX="136.0" layoutY="101.0" text="Search Company: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchField" layoutX="242.0" layoutY="97.0" prefHeight="25.0" prefWidth="204.0" promptText="Search Keywords..." />
    </children>
 </Pane>

@@ -225,6 +225,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		}
 		else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
 			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - waiting for approval");
+			btnCompanyReg.setDisable(true);
 			btnBusinessCustomerConfirm.setDisable(true);
 			btnStartOrder.setDisable(true);
 			statusText.setText(connectedUser.getStatusInSystem().toString());

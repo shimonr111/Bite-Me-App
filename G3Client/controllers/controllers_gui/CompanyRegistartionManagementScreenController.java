@@ -3,6 +3,8 @@ package controllers_gui;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -20,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
 import users.Company;
+import users.Supplier;
 import users.User;
 
 import java.io.IOException;
@@ -76,6 +80,9 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
 
     @FXML
     private Text displayText;
+    
+    @FXML
+    private TextField searchField;
     
 	/**
      * calls the method that loads the previous screen.
@@ -227,6 +234,31 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
 			companies.add(company);
 		companyNameCol.setCellValueFactory(new PropertyValueFactory<Company,String>("companyName"));
 		companiesTable.setItems(companies);
+		
+		FilteredList<Company> filteredData = new FilteredList<Company>(companies , b -> true);
+		searchField.textProperty().addListener((observable, oldValue, newValue)->{
+			filteredData.setPredicate(Company ->{//newValue.isBlank() ||
+				if(newValue.isEmpty() ||  newValue == null) {
+					return true;
+				}
+				
+				String searchKeyWord = newValue.toLowerCase();
+				
+				if(Company.getCompanyName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else
+					return false; // nothing to display
+				
+				
+			});
+		});
+		
+		SortedList<Company>  sortedData = new SortedList<>(filteredData);
+		
+		sortedData.comparatorProperty().bind(companiesTable.comparatorProperty());
+		
+		companiesTable.setItems(sortedData);
 		
 	}
 
