@@ -129,10 +129,10 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	
 	public void displaySingleReport(String report) {
-		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
-		displayReportScreenController.initDisplayReportScreen();
-		displayReportScreenController.setReport(report);
-		displayReportScreenController.showReport();
+		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
+		displayHistogramReportController.initDisplayReportScreen(suppliers);
+//		displayHistogramReportController.setReport(suppliers);
+//		displayHistogramReportController.showReport();
 }
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
@@ -149,8 +149,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
+//							event.consume();
+//							Stage.close();
+							getExitBtn(new ActionEvent());
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
