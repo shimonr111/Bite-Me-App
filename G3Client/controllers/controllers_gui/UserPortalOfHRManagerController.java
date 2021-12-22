@@ -62,6 +62,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
     @FXML
     private Text companyName;
     @FXML
+    private Text companyStatus;
+    @FXML
     private Text statusText;
 
 	public static FXMLLoader loader;
@@ -218,13 +220,15 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
 		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
-			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - not registered yet");
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+			companyStatus.setText("Not Registered");
 			btnBusinessCustomerConfirm.setDisable(true);
 			btnStartOrder.setDisable(true);
 			statusText.setText(connectedUser.getStatusInSystem().toString());
 		}
 		else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
-			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() + " - waiting for approval");
+			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+			companyStatus.setText("Pending Approval");
 			btnCompanyReg.setDisable(true);
 			btnBusinessCustomerConfirm.setDisable(true);
 			btnStartOrder.setDisable(true);
@@ -233,6 +237,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		else {
 			btnCompanyReg.setDisable(true);
 			statusText.setText(connectedUser.getStatusInSystem().toString());
+			companyStatus.setText("Confirmed");
 			if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 				btnBusinessCustomerConfirm.setDisable(true);
@@ -241,7 +246,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 			else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
 				btnBusinessCustomerConfirm.setDisable(true);
 				btnStartOrder.setDisable(true);
-				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName() +" ( Waiting for BM confirmation )");
+				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
 			}
 			else
 				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
