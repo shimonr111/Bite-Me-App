@@ -21,9 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,8 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.DefaultStringConverter;
-import orders.Item;
-import orders.ItemCategory;
+import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.OrderStatus;
 import orders.SupplyType;
@@ -87,10 +84,10 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     private TableColumn<Order, Date> estSupplyTimeColumn;
 
     @FXML
-    private TableColumn<Order, String> customerPhoneColumn;
+    private TableColumn<AbatractSupplyMethod, String> customerPhoneColumn;
 
     @FXML
-    private TableColumn<Order, String> statusColumn; // it was OrderStatus instead of String
+    private TableColumn<Order, OrderStatus> statusColumn; // it was OrderStatus instead of String
 
     @FXML
     private Button btnHelp;
@@ -191,7 +188,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("This is a screen for managing the status (Pending / Approved , ...) of the orders!");
+    	PopUpMessages.helpMessage("This is a screen for managing the status (Pending / Approved ) of the orders!");
     }
 
 	
@@ -256,30 +253,31 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		else {
 			//add all the wrapper orders to the table view
 			ordersForManageOrderTable.addAll(orderListFromDB);
+			System.out.println(ordersForManageOrderTable);
 		}
 		
-		/*Set data in the table */
-		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
-		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
-		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
-	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
-		customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("receiverPhoneNumber"));
-		
-		/* I have changed the column of status from <Order, OrderStatus> to <Order, String> just for check, to see if we get statusData values inside the combo box */
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("status"));
-		
-		/* from here is the code to set combo box on this column after we double click on some cell in this column*/
-		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), statusData));
-		statusColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Order, String>>(){
-
-			@Override
-			public void handle(TableColumn.CellEditEvent<Order, String> event) {
-				System.out.println("Value: " + event.getNewValue());
-			}
-			
-		});
-		
-		manageOrdersTable.setItems(ordersForManageOrderTable);
+//		/*Set data in the table */
+//		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
+//		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
+//		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
+//	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
+//		customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<AbatractSupplyMethod,String>("receiverPhoneNumber"));
+//		
+//		/* I have changed the column of status from <Order, OrderStatus> to <Order, String> just for check, to see if we get statusData values inside the combo box */
+//		statusColumn.setCellValueFactory(new PropertyValueFactory<Order,OrderStatus>("status"));
+//		
+//		/* from here is the code to set combo box on this column after we double click on some cell in this column*/
+//		statusColumn.setCellValueFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), statusData));
+//		statusColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Order, OrderStatus>>(){
+//
+//			@Override
+//			public void handle(TableColumn.CellEditEvent<Order, OrderStatus> event) {
+//				System.out.println("Value: " + event.getNewValue());
+//			}
+//			
+//		});
+//		
+//		manageOrdersTable.setItems(ordersForManageOrderTable);
 		
 		manageOrdersTable.setEditable(true); // so we can double click on one of the cells of status column, and then change status from the combo box
 		
