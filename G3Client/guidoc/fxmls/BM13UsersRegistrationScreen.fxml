@@ -8,7 +8,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
    <children>
       <Label layoutX="240.0" layoutY="7.0" prefHeight="70.0" prefWidth="191.0" text="User Registration">
@@ -23,10 +22,9 @@
             <TableColumn fx:id="userLastName" prefWidth="130.0" text="Last Name" />
         </columns>
       </TableView>
-      <Button fx:id="businessCustomerButton" layoutX="248.0" layoutY="312.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="33.0" prefWidth="117.0" text="Business Customer" />
-      <Button fx:id="privateCustomerButton" layoutX="123.0" layoutY="312.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="33.0" prefWidth="117.0" text="Private Customer" />
-      <Button fx:id="supplierWorkerButton" layoutX="380.0" layoutY="312.0" mnemonicParsing="false" onAction="#getSupplierWorker" prefHeight="33.0" prefWidth="117.0" text="Supplier Worker" />
-      <Label layoutX="26.0" layoutY="299.0" prefHeight="46.0" prefWidth="91.0" text="Register as :">
+      <Button fx:id="businessCustomerButton" layoutX="336.0" layoutY="312.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="33.0" prefWidth="117.0" text="Business Customer" />
+      <Button fx:id="privateCustomerButton" layoutX="173.0" layoutY="312.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="33.0" prefWidth="117.0" text="Private Customer" />
+      <Label layoutX="56.0" layoutY="306.0" prefHeight="46.0" prefWidth="91.0" text="Register as :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

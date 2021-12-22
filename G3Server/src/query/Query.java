@@ -24,6 +24,7 @@ import users.CeoBiteMe;
 import users.Company;
 import users.CreditCard;
 import users.Customer;
+import users.HrManager;
 import users.Supplier;
 import users.SupplierWorker;
 import util.DateTimeHandler;
@@ -85,11 +86,11 @@ public class Query {
 	 */
 	public static boolean insertRowIntoRegistrationTable(String userType, String userID, String statusInSystem, String firstName,String lastName,
 			String homeBranch,int isLoggedIn,String email, String phoneNumber, String creditCardNumber,String creditCardCvvCode,String creditCardDateOfExpiration,
-			String username,String password) {
+			String username,String password,String companyName, int companyCode, double revenueFee) {
 		String query = "INSERT INTO semesterialproject.registration ( userType, userID, statusInSystem, firstName,lastName,homeBranch,isLoggedIn,email, phoneNumber, creditCardNumber,"
-				+ " creditCardCvvCode,creditCardDateOfExpiration,username,  password  ) VALUES( '"+ userType +"' , '" +userID  +"' , '"+ statusInSystem  +"' , '" + firstName  +"' , '"  + lastName
+				+ " creditCardCvvCode,creditCardDateOfExpiration,username,  password,companyName ,companyCode, revenueFee  ) VALUES( '"+ userType +"' , '" +userID  +"' , '"+ statusInSystem  +"' , '" + firstName  +"' , '"  + lastName
 				+"' , '"  + homeBranch +"' , '"  + isLoggedIn +"' , '"  + email +"' , '"  + phoneNumber +"' , '"  + creditCardNumber +"' , '"  + creditCardCvvCode +"' , '"  + creditCardDateOfExpiration 
-				+"' , '"  + username +"' , '"  +password +"' )";
+				+"' , '"  + username +"' , '"  +password +"' , '"  + companyName +"' , '"  + companyCode +"' , '"  +  revenueFee +"' )";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -317,7 +318,6 @@ public class Query {
 		int employerID=0;
 		ResultSet rs = null;
 		PreparedStatement pstmt1=null;
-		if(type.equals("businesscustomer")) {
 		try {
 			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+businessCustomer.getCompanyOfBusinessCustomerString()+"'";
 			pstmt1 = con.prepareStatement(query1);
@@ -328,7 +328,6 @@ public class Query {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
 		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
 				+ "privateCreditCard, companyName, budgetType, customerPosition, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
 				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
@@ -351,7 +350,7 @@ public class Query {
 	public static void insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
 		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
 				+ "supplierId, workerPosition ) VALUES( '" + supplierWorker.getUserId() + "', '" + supplierWorker.getStatusInSystem() + "', '" + supplierWorker.getUserFirstName() + "', '" 
-				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0 + "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
+				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0+ "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
 				+ "', '" +  supplierWorker.getSupplier().getSupplierId() + "', '" + supplierWorker.getWorkerPosition() +"' )";
 		PreparedStatement pstmt=null;
 		try {
@@ -430,6 +429,37 @@ public class Query {
 		}
 	}
 	
+	public static void insertOneRowIntoHrManagerTable(HrManager hr) {
+		//INSERT INTO `semesterialproject`.`hrmanager` (`userID`, `statusInSystem`, `firstName`, `lastName`, `homeBranch`, `isLoggedIn`
+		//, `businessW4cCodeNumber`, `email`, `phoneNumber`, `privateCreditCard`, `balance`, `companyName`, `budgetType`, `customerPosition`, `budgetMaxAmount`, `privateW4cCodeNumber`) 
+		//VALUES ('2222', '222', '222', '22', '22', '22', '2', '2', '22', '2', '2', '2', '2', '2', '2', '2');
+		int employerID=0;
+		ResultSet rs = null;
+		PreparedStatement pstmt1=null;
+		try {
+			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+hr.getCompanyOfBusinessCustomerString()+"'";
+			pstmt1 = con.prepareStatement(query1);
+			rs= pstmt1.executeQuery();
+			if(rs.next())
+			 employerID = rs.getInt(1);
+			rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		String query = "INSERT INTO semesterialproject.hrmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, "
+				+ "phoneNumber, privateCreditCard, balance, companyName, budgetType, customerPosition, budgetMaxAmount, privateW4cCodeNumber) VALUES ('" + hr.getUserId() 
+				+ "' , '" + hr.getStatusInSystem() + "' , '" + hr.getUserFirstName() + "' , '" +  hr.getUserLastName() + "' , '" + hr.getHomeBranch() + "' , '" + 0
+				+ "' , '" + employerID+ "' , '" + hr.getUserEmail() + "' , '" + hr.getPhoneNumber() + "' , '" + hr.getPrivateW4cCodeNumber() 
+				+ "' , '" + hr.getBalance() + "' , '" + hr.getCompanyOfBusinessCustomerString() + "' , '" + hr.getBudgetOfBusinessCustomer() + "' , '" + hr.getPositionType()
+				+ "' , '" + hr.getBudgetMaxAmount() + "' , '" + hr.getPrivateW4cCodeNumber() +"')";
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * this method gets a table name and condition , and deletes the row according to the condition from DB.

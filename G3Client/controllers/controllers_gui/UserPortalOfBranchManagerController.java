@@ -82,9 +82,9 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	// Event Listener on Button[#btnCompanyRegManagement].onAction
 	@FXML
 	public void getCompRegManagement(ActionEvent event) {
-//		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-//		CompanyRegistartionManagementScreenController companyRegistartionManagementScreenController = new CompanyRegistartionManagementScreenController();
-//		companyRegistartionManagementScreenController.initSupplierRegistrationScreen();
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		CompanyRegistartionManagementScreenController companyRegistartionManagementScreenController = new CompanyRegistartionManagementScreenController();
+		companyRegistartionManagementScreenController.initSupplierRegistrationScreen();
 	}
 	// Event Listener on Button[#btnEditCustomerInfo].onAction
 	@FXML

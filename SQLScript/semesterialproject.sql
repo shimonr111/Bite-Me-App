@@ -128,7 +128,7 @@ DROP TABLE IF EXISTS `company`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `company` (
   `companyName` varchar(256) NOT NULL,
-  `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN') DEFAULT NULL,
+  `companyStatusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN','PENDING_REGISTRATION') DEFAULT NULL,
   `address` varchar(256) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `companyCode` int NOT NULL DEFAULT '0',
@@ -230,12 +230,10 @@ CREATE TABLE `hrmanager` (
   `budgetMaxAmount` int DEFAULT NULL,
   `privateW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
-  KEY `hrmanager_privateCreditCard_idx` (`privateCreditCard`),
   KEY `hrmanager_companyName_idx` (`companyName`),
   KEY `hrmanager_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
   CONSTRAINT `hrmanager_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `hrmanager_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -275,7 +273,6 @@ CREATE TABLE `item_in_menu` (
 
 LOCK TABLES `item_in_menu` WRITE;
 /*!40000 ALTER TABLE `item_in_menu` DISABLE KEYS */;
-INSERT INTO `item_in_menu` VALUES ('burger','5555','MAIN','LARGE','C://pictures',45),('burger','5556','MAIN','LARGE','C://pictures',45),('cola','2222','DRINK','SMALL','C://pictures',14),('cola','2223','DRINK','SMALL','C://pictures',14),('cola','5555','DRINK','LARGE','C://pictures',12),('cola','5556','DRINK','LARGE','C://pictures',12),('fries','2222','FIRST','LARGE','C://pictures',15),('fries','2223','FIRST','LARGE','C://pictures',15),('fries','5555','FIRST','LARGE','C://pictures',15),('fries','5556','FIRST','LARGE','C://pictures',15),('pizza','1111','MAIN','REGULAR','C://pictures',80),('pizza','1112','MAIN','REGULAR','C://pictures',80),('pizza','2222','MAIN','REGULAR','C://pictures',80),('pizza','2223','MAIN','REGULAR','C://pictures',80);
 /*!40000 ALTER TABLE `item_in_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,6 +366,9 @@ CREATE TABLE `registration` (
   `creditCardDateOfExpiration` varchar(256) DEFAULT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) DEFAULT NULL,
+  `companyName` varchar(256) DEFAULT NULL,
+  `companyCode` int DEFAULT NULL,
+  `revenueFee` double DEFAULT NULL,
   PRIMARY KEY (`userID`,`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -422,6 +422,7 @@ CREATE TABLE `supplier` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `revenueFee` double DEFAULT NULL,
+  `statusInSystem` enum('CONFIRMED','PENDING_APPROVAL','FROZEN','PENDING_REGISTRATION') DEFAULT 'PENDING_REGISTRATION',
   PRIMARY KEY (`supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -432,7 +433,6 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1111','Dominos','CENTER','support@dominos.com','100001111',11.5),('1112','Dominos','NORTH','support@dominos.com','100001111',11.5),('2222','PizzaHut','SOUTH','support@pizzahut.com','100002222',10.2),('2223','PizzaHut','CENTER','support@pizzahut.com','100002222',10.2),('5555','Mcdonalds','NORTH','support@mcdonalds.com','100005555',7.2),('5556','Mcdonalds','CENTER','support@mcdonalds.com','100005555',7.2);
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,4 +477,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-20 18:12:20
+-- Dump completed on 2021-12-21 21:36:48
