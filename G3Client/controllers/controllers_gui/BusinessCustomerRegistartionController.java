@@ -447,6 +447,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 			emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
 			idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
 			phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameField.setText(userForRegistration.getUsername());
+			idNumTxtField.setDisable(true); idNumTxtField.setEditable(false); 
 			AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
 				@Override
 				public void clientBusinessUserIdExist() {

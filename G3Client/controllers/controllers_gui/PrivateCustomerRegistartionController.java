@@ -363,6 +363,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 		emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
 		idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
 		phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameTxtField.setText(userForRegistration.getUsername());
+		idNumTxtField.setDisable(true); idNumTxtField.setEditable(false);
 		
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))
