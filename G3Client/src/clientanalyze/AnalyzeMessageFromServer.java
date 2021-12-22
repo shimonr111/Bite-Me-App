@@ -20,6 +20,7 @@ import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
 import controllers_gui.UsersRegistrationScreenController;
+import controllers_gui.ViewQuarterlyReportsScreenController;
 import controllers_gui.ViewSystemReportsScreenCEOController;
 import orders.Item;
 import orders.Order;
@@ -298,6 +299,7 @@ public class AnalyzeMessageFromServer {
 				case SENT_REPORT_SUPPLIERS_LIST:
 					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					ViewSystemReportsScreenCEOController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					break;
 					default:
 						break;

@@ -168,9 +168,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 				public void run() {
 					viewSystemReportsScreenCEOController.MessageLabel.setText(message);
 				}
-			});
-			
-		
+			});	
 	}
 	  /**
      * loads the previous screen after clicking on back button.
