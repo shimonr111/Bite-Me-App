@@ -3,6 +3,7 @@ package query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -182,6 +183,35 @@ public class OrderQueries {
 		
 		
 	}
+	
+	/**
+	 * This is a query for adding a new order to the DB.
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Message updateMenuOnDb(Message messageFromClient) throws SQLException{
+		ArrayList<Item> items = new ArrayList<>();
+		items = new ArrayList<Item>((Collection<? extends Item>)messageFromClient.getObject());
+		
+		for(int i=0; i<items.size(); i++) {
+			ItemCategory category = items.get(i).getCategory();
+			String name = items.get(i).getItemName();
+			String picture = items.get(i).getPicturePath();
+			ItemSize size = items.get(i).getSize();
+			double price = items.get(i).getPrice();
+			
+			//System.out.println(category +" "+ name +" "+ picture+" "+  size +" "+ price+" "+ items.get(i).getSupplierUserId());
+			
+			
+			/*Send to to query for setting value in the whole row of order Table*/
+			Query.insertOneRowIntoMenuTable(name, items.get(i).getSupplierUserId(), category, size, picture, price);
+		}
+		Message messageToClient = new Message(Task.MANAGE_MENU_FINISHED, Answer.MANAGE_MENU_SUCCEEDED_WRITING_INTO_DB, null);
+        return messageToClient;
+	}
+	
 	
 	public static Message getOrdersFromOrderTableForSpecificRestaurant(Message messageFromClient) throws SQLException{
 		Message returnMessageToClient = messageFromClient;

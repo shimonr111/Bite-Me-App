@@ -14,6 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import orders.DeliveryType;
+import orders.ItemCategory;
+import orders.ItemSize;
 import orders.OrderStatus;
 import orders.OrderTimeType;
 import orders.SupplyType;
@@ -305,6 +307,44 @@ public class Query {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This is a query for entering a full row into the Order table in the DB
+	 * 
+	 * @param name
+	 * @param supplierId
+	 * @param category
+	 * @param size
+	 * @param picture
+	 * @param price
+	 * @param itemList
+	 */
+	public static void insertOneRowIntoMenuTable(String name, String supplierId, ItemCategory category, ItemSize size, 
+			String picture, double price) {
+			
+		String query = "INSERT INTO semesterialproject.item_in_menu ( itemName, supplierId, itemCategory, itemSize, picturePath,"
+				+ " itemPrice) VALUES( '" + name +"' , '"+supplierId +"' , '" + category+"' , '" + size+"' , '" + picture+"' ,"
+						+ " '" + price + "' )";
+
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+//	public static void deleteDuplicateRowBeforeUpdateDb() {
+//		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
+//		PreparedStatement pstmt=null;
+//		try {
+//			pstmt = con.prepareStatement(query);
+//			pstmt.executeUpdate(); 
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	/**
 	 * 
