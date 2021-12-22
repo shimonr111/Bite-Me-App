@@ -47,6 +47,7 @@ public class LoginQueries {
 		String password = ((Login)messageFromClient.getObject()).getPassword();
 		String userId = null;
 		String userType = null;
+		
 		/**
 		 * get the row from the DB if 
 		 * possible from the login table.
