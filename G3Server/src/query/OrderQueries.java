@@ -214,6 +214,7 @@ public class OrderQueries {
 				return returnMessageToClient;
 			}
 			while(rs.next()) {
+				if(OrderStatus.valueOf(rs.getString(7)) != OrderStatus.APPROVED) { //if the order is approved go for the next one
 				Order orderFromDb= null;
 				orderFromDb = new Order(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),
 						Branch.valueOf(rs.getString(5)),OrderTimeType.valueOf(rs.getString(6)), OrderStatus.valueOf(rs.getString(7)),
@@ -230,6 +231,7 @@ public class OrderQueries {
 
 				if(orderFromDb != null) {
 					orderList.add(orderFromDb);
+				}
 				}
 			}
 			rs.close();
