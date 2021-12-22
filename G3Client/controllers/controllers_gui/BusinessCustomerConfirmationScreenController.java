@@ -3,6 +3,8 @@ package controllers_gui;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -20,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
 import users.HrManager;
+import users.Supplier;
 import users.User;
 
 import java.io.IOException;
@@ -86,6 +90,9 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 
     @FXML
     private Text errorText;
+    
+    @FXML
+    private TextField searchField;
     
     /**
      * after pressing on back button we will call the method that loads the previous screen.
@@ -245,6 +252,37 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 		employeeLastNameCol.setCellValueFactory(new PropertyValueFactory<BusinessCustomer,String>("userLastName"));
 		businessCustomers.addAll(businessCustomersWaitingForConfirmation);
 		businessCustomerTable.setItems(businessCustomers);
+		
+		FilteredList<BusinessCustomer> filteredData = new FilteredList<BusinessCustomer>(businessCustomers , b -> true);
+		searchField.textProperty().addListener((observable, oldValue, newValue)->{
+			filteredData.setPredicate(BusinessCustomer ->{//newValue.isBlank() ||
+				if(newValue.isEmpty() ||  newValue == null) {
+					return true;
+				}
+				
+				String searchKeyWord = newValue.toLowerCase();
+				
+				if(BusinessCustomer.getUserId().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(BusinessCustomer.getUserFirstName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(BusinessCustomer.getUserLastName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else
+					return false; // nothing to display
+				
+				
+			});
+		});
+		
+		SortedList<BusinessCustomer>  sortedData = new SortedList<>(filteredData);
+		
+		sortedData.comparatorProperty().bind(businessCustomerTable.comparatorProperty());
+		
+		businessCustomerTable.setItems(sortedData);
 		
 		
 	}

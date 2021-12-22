@@ -3,6 +3,8 @@ package controllers_gui;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -20,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.Company;
 import users.Supplier;
+import users.UserForRegistration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,6 +69,9 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 
     @FXML
     private Button helpBtn;
+    
+    @FXML
+    private TextField searchField;
 
     @FXML
     private TableColumn<Supplier, String> supllierIdCol;
@@ -199,6 +206,43 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 		supplierRevenueFeeCol.setCellValueFactory(new PropertyValueFactory<Supplier,Double>("revenueFee"));
 		supplierPhoneCol.setCellValueFactory(new PropertyValueFactory<Supplier,String>("phoneNumber"));
 		suppliersTable.setItems(suppliersObservable);
+		
+		FilteredList<Supplier> filteredData = new FilteredList<Supplier>(suppliersObservable , b -> true);
+		searchField.textProperty().addListener((observable, oldValue, newValue)->{
+			filteredData.setPredicate(Supplier ->{//newValue.isBlank() ||
+				if(newValue.isEmpty() ||  newValue == null) {
+					return true;
+				}
+				
+				String searchKeyWord = newValue.toLowerCase();
+				
+				if(Supplier.getSupplierId().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(Supplier.getSupplierName().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(Supplier.getEmail().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(Supplier.getPhoneNumber().toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else if(Double.toString(Supplier.getRevenueFee()).toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				else
+					return false; // nothing to display
+				
+				
+			});
+		});
+		
+		SortedList<Supplier>  sortedData = new SortedList<>(filteredData);
+		
+		sortedData.comparatorProperty().bind(suppliersTable.comparatorProperty());
+		
+		suppliersTable.setItems(sortedData);
 
 		
 		
