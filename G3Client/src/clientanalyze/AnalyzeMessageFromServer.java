@@ -300,7 +300,7 @@ public class AnalyzeMessageFromServer {
 					default:
 						break;
 				}
-
+				break;
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_WORKER_NO_ORDERS_FOUND:
