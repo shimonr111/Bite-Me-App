@@ -78,7 +78,7 @@ public enum Answer {
 	 * Answers related to Report
 	 * Operation.
 	 */
-	SENT_REPORT_SUPPLIERS_LIST
+	SENT_REPORT_SUPPLIERS_LIST,
 	
 	/**
 	 * Answers related to manage 

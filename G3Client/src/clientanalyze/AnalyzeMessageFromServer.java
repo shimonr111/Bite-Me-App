@@ -299,6 +299,7 @@ public class AnalyzeMessageFromServer {
 					break;
 					default:
 						break;
+				}
 
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
