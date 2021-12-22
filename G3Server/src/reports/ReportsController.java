@@ -56,10 +56,10 @@ public class ReportsController {
      *@param messageFromClient message received from client
      *@param type report type being sent
      */
-	public static Message getSuppliersByBranch(Message messageFromClient,String type) {
+	public static Message getSuppliersByBranch(Message messageFromClient) {
 		Message returnMessageToClient = messageFromClient;
 		String[] branchAndDate = (String[])messageFromClient.getObject();
-		SupplierByReport[] sentSuppliers=ReportQueries.getSuppliersFromDb(branchAndDate[1],branchAndDate[0], type);
+		SupplierByReport[] sentSuppliers=ReportQueries.getSuppliersFromDb(branchAndDate[1],branchAndDate[0], branchAndDate[2]);
 		returnMessageToClient.setObject(sentSuppliers);
 		returnMessageToClient.setAnswer(Answer.SENT_REPORT_SUPPLIERS_LIST);
 		return returnMessageToClient;

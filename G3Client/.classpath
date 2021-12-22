@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="pdfbox"/>
 	<classpathentry kind="src" path="guidoc"/>
 	<classpathentry kind="src" path="controllers"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/liorfx">
@@ -23,5 +24,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mosaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx"/>
+	<classpathentry kind="lib" path="C:/G3BiteMe/G3Client/pdfbox/pdfbox-app-2.0.25.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

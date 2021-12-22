@@ -1,9 +1,10 @@
 package controllers_gui;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.Year;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,7 +31,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import util.SupplierByReport;
-
+import org.apache.pdfbox.pdmodel.PDDocument;  
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
+import org.apache.pdfbox.pdmodel.font.PDType1CFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;  
 /**
  * 
  * @author Alexander, Martinov
@@ -105,6 +111,44 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("Select a date and a type to view a report");
 	}
+    @FXML
+    void getQuarterly(ActionEvent event) {
+    		Year y = Year.now();
+    		LocalDate myLocal = LocalDate.now();
+    		String date="";
+    		int quarter = myLocal.get(IsoFields.QUARTER_OF_YEAR);
+    		switch(quarter) {
+    		case 1:
+    			date=""+y+"-01-01";
+    			break;
+    		case 2:
+    			date=""+y+"-04-01";
+    			break;
+    		case 3:
+    			date=""+y+"-07-01";
+    			break;
+    		case 4:
+    			date=""+y+"-10-01";
+    			break;
+    			default:
+    				break;
+    		}
+			String[] branchAndDate=new String[3];
+			branchAndDate[0]=connectedUser.getHomeBranch().toString();
+			branchAndDate[1]=date; //prepare message to server, report date and branch
+			branchAndDate[2]="quarterly";
+			Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
+			sendToClient(message);
+			if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
+				setRelevantTextToDisplayMessageText("No quarterly reports found");
+			}
+			else {//otherwise primes report generator, and generates reports by selected type
+				ReportGenerator.setSuppliers(suppliers);
+				saveQuarterlyReport(date);
+				setRelevantTextToDisplayMessageText("PDF created in C:\\G3BiteMe\\Reports");
+				suppliers=null;
+				}
+    }
 	/**
 	 * Asks server for selected report by date and type and displays it to the user
 	 */
@@ -112,9 +156,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	void getViewReport(ActionEvent event) {
 		if(checkDateAndType()) {
 			String date=ReportYear.getValue()+"-"+ReportMonth.getValue()+"-01";
-			String[] branchAndDate=new String[2];
+			String[] branchAndDate=new String[3];
 			branchAndDate[0]=connectedUser.getHomeBranch().toString();
 			branchAndDate[1]=date; //prepare message to server, report date and branch
+			branchAndDate[2]="monthly";
 			Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
 			sendToClient(message);
 			if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
@@ -125,19 +170,22 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 				String type=ReportType.getValue();
 				switch(type) {
 				case "Incomes":
-					PopUpMessages.helpMessage(ReportGenerator.generateIncomeReport());
+					displaySingleReport(ReportGenerator.generateIncomeReport());
+					//PopUpMessages.helpMessage(ReportGenerator.generateIncomeReport());
 					setRelevantTextToDisplayMessageText("");
 					//System.out.print(ReportGenerator.generateIncomeReport());
 					suppliers=null;//flushes supplier reports list to recieve next report
 				break;
 				case "Orders":
-					PopUpMessages.helpMessage(ReportGenerator.generateOrderReport());
+					displaySingleReport(ReportGenerator.generateOrderReport());
+					//PopUpMessages.helpMessage(ReportGenerator.generateOrderReport());
 					setRelevantTextToDisplayMessageText("");
 					//System.out.print(ReportGenerator.generateOrderReport());
 					suppliers=null;
 					break;
 				case "Performance":
-					PopUpMessages.helpMessage(ReportGenerator.generatePerformanceReport());
+					displaySingleReport(ReportGenerator.generatePerformanceReport());
+					//PopUpMessages.helpMessage(ReportGenerator.generatePerformanceReport());
 					setRelevantTextToDisplayMessageText("");
 					//System.out.print(ReportGenerator.generatePerformanceReport());
 					suppliers=null;
@@ -221,7 +269,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		ReportMonth.setValue("Month");
 		ReportType.setValue("Report Type");
 		 Year y = Year.now();
-		for(int i=2000;i<=y.getValue();i++) 
+		for(int i=y.getValue();i>2000;i--) 
 			ReportYear.getItems().add(""+i);
 		for(int i=1;i<13;i++) {
 			if(i<10)
@@ -265,7 +313,64 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			}
 		});
 	}
-
+	public void displaySingleReport(String report) {
+		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
+		displayReportScreenController.initDisplayReportScreen();
+		displayReportScreenController.setReport(report);
+		displayReportScreenController.showReport();
 }
-
+	public void saveQuarterlyReport(String date) {
+		String replacer;
+		try {
+		PDDocument report= new PDDocument();
+		PDPage incomePage = new PDPage();
+		PDPage orderPage = new PDPage();
+		PDPage performancePage = new PDPage();
+		report.addPage(incomePage);
+		report.addPage(orderPage);
+		report.addPage(performancePage);
+		PDPageContentStream contentStream = new PDPageContentStream(report, incomePage);
+		contentStream.beginText();
+		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+		contentStream.newLineAtOffset(25, 500);
+		contentStream.showText("Income Report By Supplier");
+		contentStream.newLineAtOffset(0, -15);
+		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
+		contentStream.newLineAtOffset(0, -15);
+		for(SupplierByReport supplier:suppliers) {
+			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Total Income: "+supplier.getIncome()+"");
+			contentStream.newLineAtOffset(0, -15);
+		}
+		replacer=ReportGenerator.generateIncomeReport();
+		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
+		contentStream.showText(replacer);
+	    contentStream.endText();
+	    contentStream.close();
+	    contentStream = new PDPageContentStream(report, orderPage);
+	    contentStream.beginText();
+		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+		contentStream.newLineAtOffset(25, 100);
+		replacer=ReportGenerator.generateOrderReport();
+		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
+		contentStream.showText(replacer);      
+	    contentStream.endText();
+	    contentStream.close();
+	    contentStream = new PDPageContentStream(report, performancePage);
+	    contentStream.beginText();
+		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
+		contentStream.newLineAtOffset(25, 100);
+		replacer=ReportGenerator.generatePerformanceReport();
+		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
+		contentStream.showText(replacer);      
+	    contentStream.endText();
+	    contentStream.close();
+		report.save("C:\\G3BiteMe\\Reports\\"+date+".pdf");    
+		report.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+	}
+}
 
