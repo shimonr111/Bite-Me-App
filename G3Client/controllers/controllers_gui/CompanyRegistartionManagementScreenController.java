@@ -103,7 +103,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     void getConfirmBtn(ActionEvent event) {
     	Company selectedCompany = companiesTable.getSelectionModel().getSelectedItem();
     	if(selectedCompany != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you are sure you want to confirm "+ selectedCompany.getcompanyCode());
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you are sure you want to confirm "+ selectedCompany.getCompanyName());
     		if(result.get() == ButtonType.OK) {
     			ArrayList<Object> objectToMessage = new ArrayList<>();
     			objectToMessage.add(selectedCompany);
@@ -153,7 +153,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
      * this method loads the current screen, it will be called from the previous screen.
      */
-	public void initSupplierRegistrationScreen() {
+	public void initCompanyRegistrationManagementScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

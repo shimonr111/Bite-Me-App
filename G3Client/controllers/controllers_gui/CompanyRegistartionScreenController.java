@@ -295,8 +295,9 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 		Company company = ((HrManager)connectedUser).getcompanyOfBusinessCustomer();
 		companyNameTxtField.setText(company.getCompanyName()); companyNameTxtField1.setText(Integer.toString(company.getcompanyCode())); companyEmailTxtField.setText(company.getEmail());
 		confirmEmailTxtField.setText(company.getEmail()); companyAddTxtField.setText(company.getAddress());
-		companyNameTxtField.setEditable(false); companyNameTxtField.setDisable(true);
-		companyNameTxtField1.setEditable(false); companyNameTxtField1.setDisable(true);
+		for(TextField txt : textFields) {
+			txt.setDisable(true); txt.setEditable(false);
+		}
 		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
 			public void clientCompanyRegistrationFailed(String message) {

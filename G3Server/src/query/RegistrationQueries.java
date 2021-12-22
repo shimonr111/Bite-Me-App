@@ -403,6 +403,38 @@ public class RegistrationQueries {
 		return returnMessageToClient;
 		
 	}
+	
+	/**
+	 * This method gets all the suppliers from specific branch that are not registered yet
+	 * and returns them into arrayList to the branch manager .
+	 * @param message
+	 * @return
+	 */
+	public static Message getSuppliersWaitingForRegistration(Message message) {
+		Message returnMessageToClient = message;
+		Branch homeBranch = (Branch)message.getObject();
+		ArrayList<Supplier> suppliersWaitingForRegistration = new ArrayList<>();
+		ResultSet rs = Query.getRowsFromTableInDB("supplier", "statusInSystem='PENDING_REGISTRATION' AND (homeBranch='"+homeBranch.toString()+"')");
+		try {
+			while(rs.next()) {
+				suppliersWaitingForRegistration.add(new Supplier(rs.getString(1),rs.getString(2),Branch.valueOf(rs.getString(3)), rs.getString(4), rs.getString(5),
+						rs.getDouble(6), ConfirmationStatus.valueOf(rs.getString(7))));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		returnMessageToClient.setTask(Task.DISPLAY_SUPPLIERS_INTO_TABLE);
+		returnMessageToClient.setAnswer(Answer.SUCCEED);
+		returnMessageToClient.setObject(suppliersWaitingForRegistration);
+		return returnMessageToClient;
+	}
+	
+	public static void getSupplierConfirmation(Message message) {
+		Supplier supplier = (Supplier)message.getObject();
+		Query.updateOneColumnForTableInDbByPrimaryKey("supplier", "statusInSystem='CONFIRMED'", "supplierId='"+supplier.getSupplierId()+"'");
+	}
 
 
 }

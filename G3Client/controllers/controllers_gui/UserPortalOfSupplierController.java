@@ -178,16 +178,23 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		//resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName());  -TBD: fix bug
-		statusText.setText(connectedUser.getStatusInSystem().toString());
-		supplierName.setText(connectedUser.getUserFirstName());
-		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+		if(((SupplierWorker)connectedUser).getSupplier().getStatusInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
+			resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName()+" - Pending for Approval"); 
 			btnManageMenu.setDisable(true);
 			btnManageOrders.setDisable(true);
-			
 		}
-		if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
-			btnManageMenu.setDisable(true);
+		else {
+			resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName()); 
+			statusText.setText(connectedUser.getStatusInSystem().toString());
+			supplierName.setText(connectedUser.getUserFirstName());
+			if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
+				btnManageMenu.setDisable(true);
+				btnManageOrders.setDisable(true);
+			
+			}
+			if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
+				btnManageMenu.setDisable(true);
+			}
+		}
 	}
-}
 }
