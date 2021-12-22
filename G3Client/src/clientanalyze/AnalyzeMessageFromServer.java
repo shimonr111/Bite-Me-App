@@ -17,6 +17,7 @@ import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
+import controllers_gui.ViewSystemReportsScreenController;
 import controllers_gui.UsersRegistrationScreenController;
 import orders.Item;
 import orders.Order;
@@ -24,7 +25,9 @@ import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
 import users.User;
+import util.SupplierByReport;
 import users.UserForRegistration;
+
 
 /**
  * @author Lior, Guzovsky.
@@ -34,7 +37,7 @@ import users.UserForRegistration;
  * Class description:
  * This is a class which is a Wrapper for handeling
  * all messages from the server.
- * @version 15/12/2021
+ * @version 21/12/2021
  */
 public class AnalyzeMessageFromServer {
 	/**
@@ -284,6 +287,15 @@ public class AnalyzeMessageFromServer {
 					break;
 				}
 				break;
+
+			case GET_SYSTEM_REPORTS:
+				switch(recievedAnswerFromServer) {
+				case SENT_REPORT_SUPPLIERS_LIST:
+					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					break;
+					default:
+						break;
+
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_WORKER_NO_ORDERS_FOUND:

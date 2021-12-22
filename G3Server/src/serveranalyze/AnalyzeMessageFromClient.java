@@ -15,6 +15,7 @@ import query.EditUsersQueries;
 import query.LoginQueries;
 import query.OrderQueries;
 import query.RegistrationQueries;
+import reports.ReportsController;
 
 /**
  * @author Lior, Guzovsky.
@@ -24,7 +25,7 @@ import query.RegistrationQueries;
  *  Class description:
  *  This is a class which is a Wrapper for handling
  *  all messages from the client.
- * @version 15/12/2021
+ * @version 21/12/2021
  */
 public class AnalyzeMessageFromClient {
 	/**
@@ -133,6 +134,8 @@ public class AnalyzeMessageFromClient {
 			 case DENY_COMPANY:
 				 EditUsersQueries.denyCompany((Message) message);
 				 break;
+			 case GET_SYSTEM_REPORTS:
+				 recivedMessageFromClient = ReportsController.getSuppliersByBranch((Message) message,"monthly");
 			 case GET_USERS_FOR_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
 				 break;

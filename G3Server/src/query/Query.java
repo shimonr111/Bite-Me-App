@@ -1,5 +1,6 @@
 package query;
 
+import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,10 @@ import users.Customer;
 import users.HrManager;
 import users.Supplier;
 import users.SupplierWorker;
+import users.User;
+import util.SupplierByReport;
 import util.DateTimeHandler;
+
 /**
  * 
  * @author Mousa, Srour
@@ -119,6 +123,45 @@ public class Query {
 			e.printStackTrace();
 		}
 		return rs;
+	}
+	/**
+	 * general method for getting specific data from db
+	 * @param resultName
+	 * @param condition
+	 * @return
+	 */
+	public static ResultSet getBasicQuery(String source, String fields) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+		String query = "SELECT "+fields+"FROM "+source;
+		pstmt = con.prepareStatement(query);
+		rs= pstmt.executeQuery();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	/**
+	 * method for inserting reports into db
+	 * @param supplierReport
+	 * @return
+	 */
+	public static void saveReportToDb(SupplierByReport supplier) {
+		PreparedStatement pstmt=null;
+		try {
+		String query = "INSERT INTO `semesterialproject`.`reports` (`supplier`, `reportType`,`homeBranch`, `issueDate`,report) VALUES (?,?,?,?,?);";
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1,supplier.getSupplierId());
+		pstmt.setString(2,supplier.getReportType());
+		pstmt.setString(3,supplier.getSupplierBranch());
+		pstmt.setString(4,supplier.getIssueDate());
+		pstmt.setObject(5,supplier);
+		pstmt.executeUpdate();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
