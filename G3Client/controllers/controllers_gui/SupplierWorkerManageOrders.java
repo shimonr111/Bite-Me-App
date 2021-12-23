@@ -31,6 +31,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.StringConverter;
+import orders.Item;
 import orders.ItemCategory;
 import orders.Order;
 import orders.OrderStatus;
@@ -57,7 +58,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	private static FXMLLoader loader;
     private static SupplierWorkerManageOrders supplierWorkerManageOrders;
 	public static ArrayList<Order> orderListFromDB = new ArrayList<>();
-	private static ObservableList<Order> ordersForManageOrderTable = FXCollections.observableArrayList();
+	public static ArrayList<Order> updateOrders = new ArrayList<>();
 
 	@FXML
     private Button btnExit;
@@ -95,8 +96,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     @FXML
     private Text errorText;
 
-    @FXML
-    private Button refreshBtn;
+   
         
     
     /**
@@ -108,6 +108,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     @FXML
     void getBackBtn(ActionEvent event) {
     	/*TBD: delete observable list*/
+    	updateOrders.clear();// clear this array for the next time we come back for this screen
+    	
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -137,18 +139,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		});
     }
 
-    /**
-     * This is a button for getting new 
-     * orders that might have been added 
-     * to the order table inside the DB during the 
-     * time the screen is already up.
-     * 
-     * @param event
-     */
-    @FXML
-    void getBtnRefresh(ActionEvent event) {
-
-    }
 
     /**
      * This button is for updating  
@@ -160,6 +150,19 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      */
     @FXML
     void getBtnSave(ActionEvent event) {
+    	 // if the table is empty 
+        if(updateOrders.isEmpty()) {
+     	   errorText.setVisible(true);
+     	   errorText.setText("There is no orders!");
+     	   errorText.setFill(Color.RED);
+        }
+        else {
+     	   Message message = new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders);
+           sendToClient(message);//send message to the server telling the manage order is finished and then push into DB
+        	   
+           /*Give notice for the user that the changes have been saved*/
+     	   PopUpMessages.updateMessage("Order changes saved successfully!");
+        }
 
     }
 
@@ -232,6 +235,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
+		ObservableList<Order> ordersForManageOrderTable = FXCollections.observableArrayList();
 		/*send message to server to get all orders for this supplier worker that works in specific restaurant*/
 		Message message = new Message (Task.SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS,Answer.WAIT_RESPONSE,supplierId); 
 		sendToClient(message);
@@ -246,6 +250,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			//add all the wrapper orders to the table view
 			ordersForManageOrderTable.addAll(orderListFromDB);
 		}
+		
+		 updateOrders = new ArrayList<Order>(orderListFromDB); //copy the orders we got from DB to our updateOrders array
 		
 		/*Set data in the table */
 		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
@@ -271,6 +277,18 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	    
 	    manageOrdersTable.setItems(ordersForManageOrderTable);
 	    manageOrdersTable.setEditable(true); // set the table editable in order to edit items
+	    
+	    
+	    /*Save changes in the table view in the local memory*/
+	    statusColumn.setOnEditCommit(
+	            event ->
+	    {
+			Order order = event.getRowValue();  // create new object of item get the specific row where we made the change in the status column
+			updateOrders.remove(order); // remove this row from updateOrders array
+			order.setStatus(event.getNewValue()); // set the new status in the order array
+			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
+	    	
+	    });
 		
 	} 
 

@@ -158,6 +158,9 @@ public class AnalyzeMessageFromClient {
 			 case MANAGE_MENU_FINISHED:
 				 recivedMessageFromClient = OrderQueries.updateMenuOnDb((Message)message);
 				 break;
+			 case MANAGE_ORDER_FINISHED:
+				 recivedMessageFromClient = OrderQueries.updateOrdersStatusOnDb((Message)message);
+				 break;
 			default:
 				break;
 			}

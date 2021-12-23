@@ -371,7 +371,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    		errorText.setText("Wrong price! enter positive number please");
 	    		errorText.setFill(Color.RED);
 	    	}
-	    	
+	    		    	
 	    	else { // the user enter positive price
 	    		updateItems.remove(event.getRowValue());
 	    		event.getRowValue().setPrice(event.getNewValue());
@@ -379,6 +379,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	}
 	    	
 	    });
+		
+		
 	}
 
 }
