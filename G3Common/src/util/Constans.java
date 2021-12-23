@@ -9,4 +9,5 @@ public class Constans {
 	public static final double REGULAR_TAKE_AWAY_SUPPLY_TIME_IN_MINUTES = 60.0;
 	public static final double PRE_ORDER_TAKE_AWAY_SUPPLY_TIME_IN_MINUTES = 20.0;
 	public static final double PRE_ORDER_DISCOUNT = 0.1;
+	public static final long TEN_MINUTES_IN_MILLESECONDS = 600000;
 }
