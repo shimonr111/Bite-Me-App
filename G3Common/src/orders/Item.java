@@ -1,5 +1,6 @@
 package orders;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * 
@@ -48,8 +49,7 @@ public class Item implements Serializable {
 	 * ~~Need to be not more then 45 characters~~
 	 */
 	public String comment;
-
-
+	
 	
 	/**
 	 * Constructors:
@@ -159,6 +159,7 @@ public class Item implements Serializable {
 		return "Item [SupplierUserId=" + SupplierUserId + ", ItemName=" + ItemName + ", category=" + category
 				+ ", size=" + size + ", picturePath=" + picturePath + ", price=" + price + ", comment=" + comment + "]";
 	}
+	
 	
 	
 }

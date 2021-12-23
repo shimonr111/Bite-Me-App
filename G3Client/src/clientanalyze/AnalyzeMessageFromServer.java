@@ -16,6 +16,7 @@ import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierRegistrationScreenController;
+import controllers_gui.SupplierWorkerManageMenuController;
 import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
@@ -293,7 +294,20 @@ public class AnalyzeMessageFromServer {
 					break;
 				}
 				break;
-
+				
+			case GET_ITEMS_FOR_MANAGE_MENU:
+				switch(recievedAnswerFromServer) {
+				case SUPPLIER_HAS_NO_MENU:
+					SupplierWorkerManageMenuController.itemListOfMenuFromDB = null;
+					break;
+				case SUPPLIER_MENU_FOUND:
+					SupplierWorkerManageMenuController.itemListOfMenuFromDB = (ArrayList<Item>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;
+				}
+				break;
+			
 			case GET_SYSTEM_REPORTS:
 				switch(recievedAnswerFromServer) {
 				case SENT_REPORT_SUPPLIERS_LIST:

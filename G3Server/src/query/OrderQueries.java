@@ -3,6 +3,7 @@ package query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -188,6 +189,37 @@ public class OrderQueries {
 				deliveryFee, itemList, comments,deliveryType);
 		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, null);
 		return messageToClient;
+	}
+	
+	/**
+	 * This is a query for update the menu in DB.
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Message updateMenuOnDb(Message messageFromClient) throws SQLException{
+		ArrayList<Item> items = new ArrayList<>();
+		items = new ArrayList<Item>((Collection<? extends Item>)messageFromClient.getObject());//copy the array that we got from the controller
+		String supplierId = items.get(0).getSupplierUserId();//get the supplier id
+		
+		//first delete rows with same supplier id , in order to prevent duplicates after we updated the DB
+		Query.deleteDuplicateRowBeforeUpdateDb("item_in_menu", "supplierId='"+supplierId+"'");
+		
+		
+		//add in loop all the rows that we got from the updateItems array in the controller
+		for(int i=0; i<items.size(); i++) {
+			ItemCategory category = items.get(i).getCategory();
+			String name = items.get(i).getItemName();
+			String picture = items.get(i).getPicturePath();
+			ItemSize size = items.get(i).getSize();
+			double price = items.get(i).getPrice();
+			
+			/*Send to to query for setting value in the whole row of order Table*/
+			Query.insertOneRowIntoMenuTable(name, items.get(i).getSupplierUserId(), category, size, picture, price);
+		}
+		Message messageToClient = new Message(Task.MANAGE_MENU_FINISHED, Answer.MANAGE_MENU_SUCCEEDED_WRITING_INTO_DB, null);
+        return messageToClient;
 	}
 	
 	/**
