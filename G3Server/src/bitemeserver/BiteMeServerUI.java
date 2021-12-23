@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import guiserver.ClientDoc;
 import javafx.application.Application;
@@ -27,8 +28,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jdbc.mySqlConnection;
-import query.ImportDataAnalyze;
+import query.ImportDataQueries;
 import query.Query;
+import serveranalyze.Scheduler;
 import users.Branch;
 import users.BranchManager;
 import users.BudgetType;
@@ -42,6 +44,7 @@ import users.PositionType;
 import users.Supplier;
 import users.SupplierWorker;
 import users.WorkerPosition;
+import util.Constans;
 
 /**
  * @author  Lior, Guzovsky.
@@ -235,7 +238,7 @@ public class BiteMeServerUI extends Application implements Initializable {
 			connectionToExternalDB = new mySqlConnection();
 			if (connectionToExternalDB.connectToDB(EXTERNAL_DB_NAME, getDbUserTxt(), getPassword(),false)) {
 				Query.setConnectionFromServerToExternalDB(connectionToExternalDB.getConnection());
-				ImportDataAnalyze.getDataFromExternalDB();
+				ImportDataQueries.getDataFromExternalDB();
 				displayToConsoleInServerGui();
 				importBtn.setDisable(true);
 				
@@ -298,8 +301,12 @@ public class BiteMeServerUI extends Application implements Initializable {
 		if (serverCommunication == null)
 			serverCommunication = new BiteMeServerCommunication(port);
 		connectionToDB = new mySqlConnection();
-		if (connectionToDB.connectToDB(dbName, dbUserTxt, password,true))
+		if (connectionToDB.connectToDB(dbName, dbUserTxt, password,true)) {
 			 returnMsgFromServer=("Connection to server succeed\n");
+			 Timer timer = new Timer();
+			 Scheduler scheduler = new Scheduler();
+			 timer.scheduleAtFixedRate(scheduler, 0, Constans.TEN_MINUTES_IN_MILLESECONDS);
+		}
 		try {
 			serverCommunication.listen(); // Start listening for connections
 		} catch (Exception ex) {

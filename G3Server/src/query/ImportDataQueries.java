@@ -29,7 +29,7 @@ import users.WorkerPosition;
  * @version 22/12/2021
  *
  */
-public class ImportDataAnalyze {
+public class ImportDataQueries {
 	
 	/**
 	 * we create a new connection , to the external DB , 
