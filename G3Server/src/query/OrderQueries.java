@@ -185,7 +185,7 @@ public class OrderQueries {
 	}
 	
 	/**
-	 * This is a query for adding a new order to the DB.
+	 * This is a query for update the menu in DB.
 	 * 
 	 * @param messageFromClient
 	 * @return
@@ -193,17 +193,20 @@ public class OrderQueries {
 	 */
 	public static Message updateMenuOnDb(Message messageFromClient) throws SQLException{
 		ArrayList<Item> items = new ArrayList<>();
-		items = new ArrayList<Item>((Collection<? extends Item>)messageFromClient.getObject());
+		items = new ArrayList<Item>((Collection<? extends Item>)messageFromClient.getObject());//copy the array that we got from the controller
+		String supplierId = items.get(0).getSupplierUserId();//get the supplier id
 		
+		//first delete rows with same supplier id , in order to prevent duplicates after we updated the DB
+		Query.deleteDuplicateRowBeforeUpdateDb("item_in_menu", "supplierId='"+supplierId+"'");
+		
+		
+		//add in loop all the rows that we got from the updateItems array in the controller
 		for(int i=0; i<items.size(); i++) {
 			ItemCategory category = items.get(i).getCategory();
 			String name = items.get(i).getItemName();
 			String picture = items.get(i).getPicturePath();
 			ItemSize size = items.get(i).getSize();
 			double price = items.get(i).getPrice();
-			
-			//System.out.println(category +" "+ name +" "+ picture+" "+  size +" "+ price+" "+ items.get(i).getSupplierUserId());
-			
 			
 			/*Send to to query for setting value in the whole row of order Table*/
 			Query.insertOneRowIntoMenuTable(name, items.get(i).getSupplierUserId(), category, size, picture, price);

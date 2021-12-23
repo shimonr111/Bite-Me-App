@@ -48,7 +48,7 @@ import javafx.scene.text.Text;
  * Class description: This is a class for managing the menu for the
  * supplier. In this screen the supplier worker edit the menu.
  * 
- * @version 22/12/2021
+ * @version 23/12/2021
  */
 public class SupplierWorkerManageMenuController extends AbstractBiteMeController implements Initializable {
 	/**
@@ -106,7 +106,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	 */
 	@FXML
 	void getBackBtn(ActionEvent event) {
-		/* TBD: delete observable list */
+		updateItems.clear();// clear this array for the next time we come back for this screen
+		
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -171,16 +172,20 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	 */
 	@FXML
 	void getSaveBtn(ActionEvent event) {
-       //System.out.println(updateItems);
+       // if the menu is empty or the user added new items but did not edit them, it will not let him to save the changes.
+       if(updateItems.isEmpty()) {
+    	   errorText.setVisible(true);
+    	   errorText.setText("The menu is empty! insert values or add new items");
+    	   errorText.setFill(Color.RED);
+       }
+       else {
+    	   Message message = new Message(Task.MANAGE_MENU_FINISHED,Answer.WAIT_RESPONSE,updateItems);
+       	   sendToClient(message);//send message to the server telling the manage menu is finished and than push into DB
+       	   
+       	   /*Give notice for the user that the changes have been saved*/
+    	   PopUpMessages.updateMessage("Menu changes saved successfully!");
+       }
        
-       Message message = new Message(Task.MANAGE_MENU_FINISHED,Answer.WAIT_RESPONSE,updateItems);
-   	   sendToClient(message);//send message to the server telling the manage menu is finished and than push into DB
-   	   
-   	   /*Give notice for the user that the changes have been saved*/
-	   PopUpMessages.updateMessage("You have saved the menu!");
-	   
-	   
-	   
 	   
 	}
 	
@@ -192,7 +197,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	@FXML
 	void getAddItemBtn(ActionEvent event) {
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
-		Item addNewRow = new Item(supplierId, "Item name", ItemCategory.FIRST, ItemSize.REGULAR, "picture path", 0.0);
+		Item addNewRow = new Item(supplierId, "Item name", ItemCategory.FIRST, ItemSize.REGULAR, "picture path", 10.0);
 		manageMenuTable.getItems().add(addNewRow);
 	}
 	
@@ -250,6 +255,13 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 			});
 		}
 
+	/**
+     * This function will upload all
+     * the menu of the restaurant
+     * to the screen in the Table View 
+     * for showing it to the user.
+     * and it will save the changes locally
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();

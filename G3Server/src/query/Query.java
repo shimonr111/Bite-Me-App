@@ -335,16 +335,22 @@ public class Query {
 		}
 	}
 	
-//	public static void deleteDuplicateRowBeforeUpdateDb() {
-//		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
-//		PreparedStatement pstmt=null;
-//		try {
-//			pstmt = con.prepareStatement(query);
-//			pstmt.executeUpdate(); 
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	/**
+	 * This is a query for delete rows before we update the db
+	 * in order to prevent duplicates
+	 * @param supplierId
+	 */
+	public static void deleteDuplicateRowBeforeUpdateDb(String tableName, String condition) {
+		String query = "DELETE FROM semesterialproject."+tableName+" WHERE ("+condition+")";
+		
+		PreparedStatement pstmt=null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 
