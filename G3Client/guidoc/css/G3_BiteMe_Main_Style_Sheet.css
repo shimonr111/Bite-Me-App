@@ -89,7 +89,7 @@
 	-fx-alignment: center; 
     -fx-background-position: 75% 50%;
    	-fx-background-size: 24 24;
-	-fx-text-fill: inear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
 	-fx-font-smoothing-type: lcd;
