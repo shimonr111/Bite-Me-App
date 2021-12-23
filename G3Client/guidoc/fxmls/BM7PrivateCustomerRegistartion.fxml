@@ -1,103 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.PrivateCustomerRegistartionController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.PrivateCustomerRegistartionController">
    <children>
-      <TextField fx:id="firstNameTxtField" layoutX="214.0" layoutY="120.0" onAction="#getFirstName" prefHeight="31.0" prefWidth="170.0" promptText="Enter first name" />
-      <TextField fx:id="lastNameTxtField" layoutX="213.0" layoutY="154.0" onAction="#getLastName" prefHeight="31.0" prefWidth="170.0" promptText="Enter last name" />
-      <TextField fx:id="phoneTxtField" layoutX="212.0" layoutY="223.0" onAction="#getPhoneNum" prefHeight="31.0" prefWidth="170.0" promptText="Enter phone number" />
-      <TextField fx:id="emailTxtField" layoutX="212.0" layoutY="260.0" onAction="#getEmail" prefHeight="31.0" prefWidth="170.0" promptText="Enter email address" />
-      <Label layoutX="56.0" layoutY="47.0" prefHeight="53.0" prefWidth="540.0" text="Private Customer Registartion" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="110.0" layoutY="119.0" text="First name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="112.0" layoutY="152.0" text="Last name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="73.0" layoutY="222.0" text="Phone number:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="81.0" layoutY="260.0" text="Email address:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Button id="other-btns" fx:id="saveBtn" layoutX="235.0" layoutY="417.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
+      <Button id="other-btns" fx:id="saveBtn" layoutX="422.0" layoutY="620.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" styleClass="saveWhiteButton" text="Save" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button id="other-btns" fx:id="btnBack" layoutX="-2.0" layoutY="438.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
+      <Text fx:id="displayMessage" fill="#9a1212" layoutX="311.0" layoutY="692.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="423.89892578125">
          <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Label layoutX="128.0" layoutY="7.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; Customer Registartion -&gt; Private Customer Registartion">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
-      <TextField fx:id="confirmedEmailTxtField" layoutX="212.0" layoutY="297.0" onAction="#getConfirmedEmail" prefHeight="31.0" prefWidth="170.0" promptText="Enter email address" />
-      <Label layoutX="7.0" layoutY="298.0" text="Confirm Email address:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="setHomeBranchCombo" disable="true" layoutX="212.0" layoutY="334.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
-      <TextField fx:id="cvvTxtField" layoutX="435.0" layoutY="210.0" onAction="#getCVV" promptText="CVV" />
-      <TextField fx:id="creditNumTxtField" layoutX="435.0" layoutY="134.0" onAction="#getCreditNum" promptText="Credit number" />
-      <TextField fx:id="expirationTxtField" layoutX="435.0" layoutY="174.0" onAction="#getExpiration" promptText="MM/YY - Expiration" />
-      <Label layoutX="430.0" layoutY="107.0" text="Credit card details:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Label>
-      <Label layoutX="81.0" layoutY="336.0" text="Home branch:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Text fx:id="errorText" layoutX="224.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <TextField fx:id="passwordField" layoutX="435.0" layoutY="334.0" onAction="#getPassword" prefHeight="31.0" prefWidth="194.0" promptText="Enter password" />
-      <Label layoutX="436.0" layoutY="311.0" text="Password:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="idNumTxtField" layoutX="212.0" layoutY="188.0" onAction="#getIdNum" prefHeight="31.0" prefWidth="170.0" promptText="Enter ID" />
-      <Label layoutX="178.0" layoutY="188.0" text="ID:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Text fx:id="displayMessage" fill="#960808" layoutX="92.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="531.5634765625">
-         <font>
-            <Font name="Calibri Bold" size="15.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Label layoutX="436.0" layoutY="245.0" prefHeight="31.0" prefWidth="121.0" text="User Name:" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TextField fx:id="userNameTxtField" layoutX="435.0" layoutY="272.0" prefHeight="31.0" prefWidth="194.0" promptText="Enter user name" />
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="621.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
             <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
@@ -112,5 +42,194 @@
             </Button>
          </children>
       </HBox>
+      <GridPane hgap="10.0" layoutX="208.0" layoutY="134.0" prefHeight="423.0" prefWidth="609.0" vgap="30.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="291.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="288.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="250.0" minHeight="10.0" prefHeight="240.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="153.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="11.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane maxHeight="200.0" maxWidth="280.0" minHeight="200.0" minWidth="280.0" prefHeight="200.0" prefWidth="280.0" styleClass="personalInfoPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+               <children>
+                  <VBox layoutX="11.0" layoutY="49.0" prefHeight="128.0" prefWidth="254.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="First Name:" />
+                                    <TextField fx:id="firstNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="First name" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Last Name:" />
+                                    <TextField fx:id="lastNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="Last name" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="ID:" />
+                                    <TextField fx:id="idNumTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="ID" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Home Branch:" />
+                                    <ComboBox fx:id="setHomeBranchCombo" disable="true" prefHeight="30.0" prefWidth="100.0" promptText="Branch" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="200.0" maxWidth="280.0" minHeight="191.0" minWidth="280.0" prefHeight="191.0" prefWidth="280.0" styleClass="credentialsPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.rowIndex="1">
+               <children>
+                  <VBox layoutX="44.0" layoutY="49.0" prefHeight="137.0" prefWidth="213.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="59.0" prefWidth="251.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="User Name:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="userNameTxtField" maxHeight="30.0" maxWidth="130.0" prefHeight="30.0" prefWidth="130.0" promptText="User name" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="59.0" prefWidth="251.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="198.0" styleClass="employeeLabels" text="Password:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="passwordField" maxHeight="30.0" maxWidth="130.0" prefHeight="30.0" prefWidth="130.0" promptText="Password" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="200.0" maxWidth="280.0" minHeight="200.0" minWidth="280.0" prefHeight="200.0" prefWidth="280.0" styleClass="personalContanctInfoPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.columnIndex="1">
+               <children>
+                  <VBox layoutX="13.0" layoutY="51.0" prefHeight="128.0" prefWidth="254.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="85.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Phone Number:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="37.0" prefWidth="205.0" spacing="5.0">
+                                 <children>
+                                    <ComboBox prefHeight="30.0" prefWidth="90.0" promptText="05X" />
+                                    <TextField fx:id="phoneTxtField" maxHeight="30.0" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="123-4567" styleClass="text-field" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="100.0" prefWidth="247.0" spacing="5.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
+                                    <TextField fx:id="emailTxtField" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Confirm Email:" />
+                                    <TextField fx:id="confirmedEmailTxtField" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Confirm Email" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="200.0" maxWidth="280.0" minHeight="190.0" minWidth="280.0" prefHeight="190.0" prefWidth="280.0" styleClass="creditCardPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <VBox layoutX="5.0" layoutY="49.0" prefHeight="137.0" prefWidth="271.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="59.0" prefWidth="251.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Credit Card Number:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="creditNumTxtField" maxHeight="30.0" maxWidth="200.0" prefHeight="30.0" prefWidth="200.0" promptText="Credit Card Number" />
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="83.0" prefWidth="236.0" spacing="5.0">
+                           <children>
+                              <VBox maxHeight="80.0" prefHeight="80.0" prefWidth="120.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Expiration Date:" />
+                                    <TextField fx:id="expirationTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="MM/YY" styleClass="text-field">
+                                       <font>
+                                          <Font size="8.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <VBox maxHeight="80.0" prefHeight="80.0" prefWidth="120.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="CVV:" />
+                                    <HBox prefHeight="24.0" prefWidth="137.0">
+                                       <children>
+                                          <TextField fx:id="cvvTxtField" maxWidth="80.0" prefHeight="30.0" prefWidth="80.0" promptText="e.g - 123" styleClass="text-field" />
+                                          <Pane maxHeight="30.0" maxWidth="50.0" prefHeight="30.0" prefWidth="50.0" styleClass="cvvPane" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ User Registration ➝ Private Customer Registration  " />
    </children>
 </Pane>

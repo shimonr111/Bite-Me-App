@@ -1,124 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditBusinessCustomerInformationScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditBusinessCustomerInformationScreenController">
    <children>
-      <Label id="title" layoutX="144.0" layoutY="13.0" text="Edit Business Customer" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Button layoutX="261.0" layoutY="429.0" mnemonicParsing="false" onAction="#Send" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
+      <Button id="other-btns" fx:id="btnSave" layoutX="422.0" layoutY="620.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" styleClass="saveWhiteButton" text="Save" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Label layoutX="128.0" layoutY="4.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt; Edit Customer Information -&gt;">
+      <Text fx:id="displayMessage" fill="#9a1212" layoutX="301.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="423.89892578125">
          <font>
-            <Font size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
-      </Label>
-      <Label layoutX="511.0" layoutY="4.0" text="Edit Business Customer">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="firstNameTxtField" disable="true" editable="false" layoutX="208.0" layoutY="71.0" prefHeight="31.0" prefWidth="194.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="lastNameTxtField" disable="true" editable="false" layoutX="207.0" layoutY="105.0" prefHeight="31.0" prefWidth="194.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="idNumTxtField" disable="true" editable="false" layoutX="207.0" layoutY="139.0" prefHeight="31.0" prefWidth="194.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="phoneTxtField" disable="true" editable="false" layoutX="207.0" layoutY="174.0" prefHeight="31.0" prefWidth="194.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="emailTxtField" disable="true" editable="false" layoutX="206.0" layoutY="211.0" prefHeight="31.0" prefWidth="194.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <TextField fx:id="monthlyMaxBudgedTxtField" disable="true" editable="false" layoutX="429.0" layoutY="171.0" prefHeight="31.0" prefWidth="186.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></TextField>
-      <Label layoutX="104.0" layoutY="70.0" text="First name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="106.0" layoutY="103.0" text="Last name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="170.0" layoutY="138.0" text="ID:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="67.0" layoutY="173.0" text="Phone number:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="75.0" layoutY="211.0" text="Email address:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="437.0" layoutY="71.0" text="Budget:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="63.0" layoutY="256.0" text="Company name:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="98.0" layoutY="299.0" text="Position:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="positionCombo" disable="true" layoutX="197.0" layoutY="297.0" prefHeight="31.0" prefWidth="194.0" promptText="HR or Regular worker" />
-      <ComboBox fx:id="setHomeBranchCombo" disable="true" layoutX="432.0" layoutY="252.0" prefHeight="31.0" prefWidth="194.0" promptText="Set home branch" />
-      <ComboBox fx:id="companyNameCombo" disable="true" layoutX="208.0" layoutY="254.0" prefHeight="31.0" prefWidth="194.0" promptText="Confirmed company" />
-      <ComboBox fx:id="budgetTypeCombo" disable="true" layoutX="436.0" layoutY="98.0" prefHeight="31.0" prefWidth="186.0" promptText="Budget Type" />
-      <Label layoutX="435.0" layoutY="211.0" text="Home branch:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="441.0" layoutY="286.0" text="Status:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="statusComboBox" layoutX="437.0" layoutY="316.0" prefHeight="25.0" prefWidth="170.0" promptText="Set status" />
-      <Text fx:id="errorText" fill="#9a0b0b" layoutX="98.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="472.0703199803829">
-         <font>
-            <Font size="14.0" />
-         </font></Text>
-      <Label layoutX="431.0" layoutY="129.0" prefHeight="51.0" prefWidth="211.0" text="Budget Max Amount:">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
+      </Text>
+      <Button fx:id="btnclose1" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
             <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
@@ -133,6 +42,181 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="btnclose1" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <GridPane hgap="10.0" layoutX="208.0" layoutY="117.0" prefHeight="492.0" prefWidth="609.0" vgap="30.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="291.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="288.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="273.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="153.0" minHeight="0.0" prefHeight="78.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="144.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <AnchorPane maxHeight="250.0" maxWidth="280.0" minHeight="250.0" minWidth="280.0" prefHeight="250.0" prefWidth="280.0" styleClass="personalInfoPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+               <children>
+                  <VBox layoutX="11.0" layoutY="49.0" prefHeight="188.0" prefWidth="254.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="First Name:" />
+                                    <TextField fx:id="firstNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="First name" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Last Name:" />
+                                    <TextField fx:id="lastNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="Last name" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="ID:" />
+                                    <TextField fx:id="idNumTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="ID" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Home Branch:" />
+                                    <ComboBox fx:id="setHomeBranchCombo" disable="true" prefHeight="30.0" prefWidth="100.0" promptText="Branch" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="68.0" prefWidth="254.0" spacing="5.0">
+                           <children>
+                              <VBox prefHeight="47.0" prefWidth="139.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Status:" />
+                                    <ComboBox fx:id="statusComboBox" prefHeight="25.0" prefWidth="170.0" promptText="Status" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="75.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="250.0" maxWidth="280.0" minHeight="250.0" minWidth="280.0" prefHeight="250.0" prefWidth="280.0" styleClass="personalContanctInfoPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.columnIndex="1">
+               <children>
+                  <VBox layoutX="13.0" layoutY="51.0" prefHeight="128.0" prefWidth="254.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="85.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Phone Number:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="37.0" prefWidth="205.0" spacing="5.0">
+                                 <children>
+                                    <ComboBox fx:id="supplyTimeCombo" prefHeight="30.0" prefWidth="90.0" promptText="05X" />
+                                    <TextField fx:id="phoneTxtField" maxHeight="30.0" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="123-4567" styleClass="text-field" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="40.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox prefHeight="100.0" prefWidth="247.0" spacing="5.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
+                                    <TextField fx:id="emailTxtField" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets left="75.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="120.0" maxWidth="280.0" minHeight="120.0" minWidth="280.0" prefHeight="120.0" prefWidth="280.0" styleClass="companyPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <VBox layoutX="9.0" layoutY="41.0" prefHeight="72.0" prefWidth="262.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="123.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Company Name:" />
+                                    <ComboBox fx:id="companyNameCombo" prefHeight="30.0" prefWidth="111.0" promptText="Companies" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="72.0" prefWidth="116.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Position" />
+                                    <ComboBox fx:id="positionCombo" prefHeight="30.0" prefWidth="114.0" promptText="Position" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="120.0" maxWidth="280.0" minHeight="120.0" minWidth="280.0" prefHeight="120.0" prefWidth="280.0" styleClass="budgetPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.rowIndex="1">
+               <children>
+                  <VBox layoutX="13.0" layoutY="48.0" prefHeight="72.0" prefWidth="254.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                           <children>
+                              <VBox prefHeight="100.0" prefWidth="123.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="125.0" styleClass="loginLabels" text="Budget Amount:" />
+                                    <TextField fx:id="monthlyMaxBudgedTxtField" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Monthly Max" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="100.0" prefWidth="107.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Budget Type:" />
+                                    <ComboBox fx:id="budgetTypeCombo" prefHeight="30.0" prefWidth="130.0" promptText="Type" />
+                                 </children>
+                              </VBox>
+                           </children>
+                           <padding>
+                              <Insets left="25.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </GridPane>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Customer Management ➝ Edit Business Customer Information " />
    </children>
 </Pane>

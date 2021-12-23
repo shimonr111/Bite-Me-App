@@ -60,6 +60,9 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 
     @FXML
     private Button btnHelp;
+    
+    @FXML
+    private Button btnSave;
 
     @FXML
     private TextField firstNameTxtField;
@@ -92,7 +95,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
      * @param event
      */
     @FXML
-    void Send(ActionEvent event) {
+    void getSaveBtn(ActionEvent event) {
     	ConfirmationStatus oldStatus = customer.getStatusInSystem();
     	String newStatus = setStatusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
