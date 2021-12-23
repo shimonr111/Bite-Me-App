@@ -39,11 +39,6 @@
             </Label>
             <HBox layoutX="201.0" layoutY="406.0" prefHeight="50.0" prefWidth="300.0" spacing="25.0">
                <children>
-                  <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#getBtnRefresh" prefHeight="40.0" prefWidth="150.0" styleClass="refreshButton" text="Refresh" textFill="#383838">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#getBtnSave" prefHeight="40.0" prefWidth="150.0" styleClass="saveButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="Save" textFill="#383838">
                      <font>
                         <Font name="System Bold" size="24.0" />
