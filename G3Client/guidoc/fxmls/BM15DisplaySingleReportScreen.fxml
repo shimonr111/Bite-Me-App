@@ -3,8 +3,8 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.DisplayReportScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="reportsSmallExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.DisplayReportScreenController">
    <children>
-      <TextArea fx:id="TextField" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="376.0" prefWidth="576.0" />
+      <TextArea fx:id="TextField" editable="false" layoutX="50.0" layoutY="86.0" prefHeight="300.0" prefWidth="500.0" />
    </children>
 </Pane>

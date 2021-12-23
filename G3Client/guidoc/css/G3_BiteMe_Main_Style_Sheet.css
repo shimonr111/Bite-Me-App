@@ -61,12 +61,19 @@
 	-fx-background-position: center center;
 }
 
+.errorTextWhite{
+	-fx-text-alignment: center;
+	-fx-font-size: 12px;
+	  -fx-text-fill: white;
+	-fx-background-position: center center;
+}
+
 .saveButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/save.png");
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/disc.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
-    -fx-background-position: 75% 50%;
+    -fx-background-position: 80% 50%;
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -75,9 +82,37 @@
 
 }
 
+.saveWhiteButton{
+	-fx-background-color: white;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/savecolor.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 75% 50%;
+   	-fx-background-size: 24 24;
+	-fx-text-fill: inear-gradient(to bottom, #141e30, #243b55);
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.refreshButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/refresh.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 90% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
 .confirmButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/save.png");
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/confirm.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
     -fx-background-position: 50% 50%;
@@ -881,6 +916,83 @@
 	-fx-background-radius: 6,5;
 
 }
+
+.creditCardPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/card.png");
+}
+
+.cvvPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 0%;
+	-fx-background-size: 30 30;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/cvv.png");
+}
+
+.budgetPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/budget.png");
+}
+
+.companyPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/company.png");
+}
+
+.credentialsPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/credentials.png");
+}
+
+.personalContanctInfoPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/contactInfo.png");
+}
+
+.personalInfoPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 2%;
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/pInfo.png");
+}
+
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /**~~~~@@ Employees Confirmation @@~~~~*/
@@ -893,6 +1005,58 @@
 	-fx-underline: true;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 1.0, 1.0, 0);
  	
+}
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/**~~~~@@ Reports @@~~~~*/
+.reportsSmallExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 5%;
+	-fx-background-size: 130 65;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+
+.reportsBigExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 6%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+
+
+.regiViewButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.uploadReportButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/upload2.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:14px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.viewHeadLight{
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-font-weight:bold;
+	-fx-font-size: 28px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
 }
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 

@@ -213,7 +213,6 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 				if(newValue.isEmpty() ||  newValue == null) {
 					return true;
 				}
-				
 				String searchKeyWord = newValue.toLowerCase();
 				
 				if(Supplier.getSupplierId().toLowerCase().indexOf(searchKeyWord)>-1) {

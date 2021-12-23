@@ -147,5 +147,6 @@
          </children>
       </AnchorPane>
       <Button fx:id="finishOrderBtn" layoutX="419.0" layoutY="516.0" mnemonicParsing="false" onAction="#getFinishOrderBtn" prefHeight="50.0" prefWidth="250.0" styleClass="finishOrderButton" text="Finish Order" />
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection ➝ Item Selection ➝ Choose Supply Method ➝ Supply Method ➝ Order Summary ➝ Payment" />
    </children>
 </Pane>
