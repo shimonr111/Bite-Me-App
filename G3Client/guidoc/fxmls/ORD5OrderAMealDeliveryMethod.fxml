@@ -49,8 +49,8 @@
                         <Label prefHeight="43.0" prefWidth="206.0" styleClass="loginLabels" text="Delivery Address:" />
                         <HBox prefHeight="44.0" prefWidth="211.0" spacing="5.0">
                            <children>
-                              <ComboBox fx:id="supplyTimeCombo1" prefHeight="31.0" prefWidth="94.0" promptText="City" />
-                              <ComboBox fx:id="supplyTimeCombo11" prefHeight="31.0" prefWidth="94.0" promptText="Street">
+                              <ComboBox fx:id="supplyTimeCombo1" prefHeight="30.0" prefWidth="90.0" promptText="City" />
+                              <ComboBox fx:id="supplyTimeCombo11" prefHeight="30.0" prefWidth="90.0" promptText="Street">
                                  <padding>
                                     <Insets bottom="5.0" />
                                  </padding>
