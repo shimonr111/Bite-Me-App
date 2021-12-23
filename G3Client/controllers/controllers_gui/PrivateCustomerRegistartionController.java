@@ -104,59 +104,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     @FXML
     private TextField userNameTxtField;
     
-    @FXML
-    void getCVV(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getConfirmedEmail(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCreditNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getEmail(ActionEvent event) {
-
-    }
-    @FXML
-    void getExpiration(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getFirstName(ActionEvent event) {
-
-    }
-    @FXML
-    void getHomeBranch(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getIdNum(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getLastName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPassword(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getPhoneNum(ActionEvent event) {
-
-    }
-
 
     @FXML
     void getExitBtn(ActionEvent event) {

@@ -13,7 +13,7 @@
 
 <Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ViewQuarterlyReportsScreenController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ View System Quarterly Reports" />
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ View Branch Manager Quarterly Reports" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
             <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
@@ -62,7 +62,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" layoutX="16.0" layoutY="20.0" prefHeight="50.0" prefWidth="412.0" styleClass="viewHeadLight" text="View System Quarterly Reports" textFill="#383838">
+            <Label alignment="CENTER" layoutX="16.0" layoutY="20.0" prefHeight="50.0" prefWidth="412.0" styleClass="viewHeadLight" text="View Branch Quarterly Reports" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
