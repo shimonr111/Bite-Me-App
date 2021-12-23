@@ -4,18 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
    <children>
       <Label layoutX="240.0" layoutY="7.0" prefHeight="70.0" prefWidth="191.0" text="User Registration">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="usersTable" layoutX="114.0" layoutY="77.0" prefHeight="200.0" prefWidth="384.0">
+      <TableView fx:id="usersTable" layoutX="108.0" layoutY="100.0" prefHeight="200.0" prefWidth="384.0">
         <columns>
           <TableColumn fx:id="userIdCol" prefWidth="105.0" text="User ID" />
           <TableColumn fx:id="userFirstNameCol" prefWidth="148.0" text="First Name" />
@@ -37,5 +38,11 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
+      <Label layoutX="114.0" layoutY="68.0" prefHeight="19.0" prefWidth="78.0" text="Search User: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="searchField" layoutX="192.0" layoutY="65.0" prefHeight="26.0" prefWidth="265.0" promptText="Seach Keywords.." />
    </children>
 </Pane>

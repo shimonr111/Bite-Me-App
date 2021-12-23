@@ -25,6 +25,7 @@ import orders.TakeAwaySupplyMethod;
 import users.Branch;
 import users.ConfirmationStatus;
 import users.Customer;
+import util.DateTimeHandler;
 
 /**
  * 
@@ -38,7 +39,7 @@ import users.Customer;
  * related to the DB in the order 
  * process.
  * 
- * @version 15/12/2021
+ * @version 22/12/2021
  */
 public class OrderQueries {
 	
@@ -81,6 +82,14 @@ public class OrderQueries {
 		return returnMessageToClient;
 	}
 	
+	/**
+	 * This is a function for creating menu for 
+	 * specific supplier, used in the order process.
+	 * 
+	 * @param messageFromClient
+	 * @return Message containing answer for the creation of the menu for the Order process.
+	 * @throws SQLException
+	 */
 	public static Message createMenuForSpecificSupplier(Message messageFromClient) throws SQLException{
 		Message returnMessageToClient = messageFromClient;
 		String supplierId = (String) messageFromClient.getObject();	
@@ -180,8 +189,6 @@ public class OrderQueries {
 				deliveryFee, itemList, comments,deliveryType);
 		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, null);
 		return messageToClient;
-		
-		
 	}
 	
 	/**
@@ -215,7 +222,15 @@ public class OrderQueries {
         return messageToClient;
 	}
 	
-	
+	/**
+	 * This is a function for getting 
+	 * all the orders from the DB and 
+	 * sending it to the supplier worker screen.
+	 * 
+	 * @param messageFromClient
+	 * @return Message contains answer and object for the supplier Worker.
+	 * @throws SQLException
+	 */
 	public static Message getOrdersFromOrderTableForSpecificRestaurant(Message messageFromClient) throws SQLException{
 		Message returnMessageToClient = messageFromClient;
 		String supplierId = (String) messageFromClient.getObject();	
@@ -231,9 +246,24 @@ public class OrderQueries {
 				return returnMessageToClient;
 			}
 			while(rs.next()) {
-				Order orderFromDb = convertToOrder(rs);
+				if(OrderStatus.valueOf(rs.getString(7)) != OrderStatus.APPROVED) { //if the order is approved go for the next one
+				Order orderFromDb= null;
+				orderFromDb = new Order(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),
+						Branch.valueOf(rs.getString(5)),OrderTimeType.valueOf(rs.getString(6)), OrderStatus.valueOf(rs.getString(7)),
+						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(8)), DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9)),
+						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(10)),SupplyType.valueOf(rs.getString(11)),0,rs.getDouble(12),
+						null);
+				SupplyType supplyType = SupplyType.valueOf(rs.getString(11));
+				if(supplyType == SupplyType.DELIVERY) {
+					orderFromDb.setSupplyMethodInformation(new DeliverySupplyMethod(0, Integer.parseInt(rs.getString(1)), rs.getString(13), rs.getString(14), rs.getString(16), DeliveryType.valueOf(rs.getString(20)), rs.getString(15)));
+				}
+				else {
+					orderFromDb.setSupplyMethodInformation(new TakeAwaySupplyMethod(0, Integer.parseInt(rs.getString(1)), rs.getString(13), rs.getString(14), rs.getString(16)));
+				}
+
 				if(orderFromDb != null) {
 					orderList.add(orderFromDb);
+				}
 				}
 			}
 			rs.close();
@@ -246,55 +276,4 @@ public class OrderQueries {
 		return returnMessageToClient;
 	}
 	
-	/**
-	 * This is a function used for converting
-	 * Sql Object into Order Object
-	 * 
-	 * @param rs
-	 * @return
-	 */
-	private static Order convertToOrder(ResultSet rs) {
-		try {
-			int orderNumber = Integer.parseInt(rs.getString(1));
-			String supplierId = rs.getString(2);
-			String customerUserId = rs.getString(3);
-			String customerUserType = rs.getString(4); //Currently not in use
-			Branch branch = Branch.valueOf(rs.getString(5));
-			OrderTimeType timeType = OrderTimeType.valueOf(rs.getString(6));
-			OrderStatus status = OrderStatus.valueOf(rs.getString(7));
-			Date issueDateTime = rs.getDate(8);
-			Date estimatedSupplyDateTime =  rs.getDate(9);
-			Date actualSupplyDateTime =  rs.getDate(10);
-			SupplyType supplyType = SupplyType.valueOf(rs.getString(11));
-			double totalPrice = rs.getDouble(12);
-			String receiverFirstName = rs.getString(13);
-			String receiverLastName = rs.getString(14);
-			String receiverAddress = rs.getString(15);
-			String receiverPhoneNumber = rs.getString(16);
-			double deliveryFee =  rs.getDouble(17); //Currently not in use
-			String itemList = rs.getString(18); //Currently not in use
-			String comments = rs.getString(19); //Currently not in use
-			DeliveryType deliveryType = DeliveryType.valueOf(rs.getString(20));
-			
-			/**
-			 * public Order(
-			*,  
-			 int supplyId, double totalPrice, ArrayList<Item> itemList) {
-			 * 
-			 */
-			Order returnedOrder =  new Order(orderNumber,supplierId,customerUserId,branch,timeType,status,issueDateTime,estimatedSupplyDateTime,actualSupplyDateTime,
-					supplyType,0,totalPrice,null);
-			if(supplyType == SupplyType.DELIVERY) {
-				returnedOrder.setSupplyMethodInformation(new DeliverySupplyMethod(0, orderNumber, receiverFirstName, receiverLastName, receiverPhoneNumber, deliveryType, receiverAddress));
-			}
-			else {
-				returnedOrder.setSupplyMethodInformation(new TakeAwaySupplyMethod(0, orderNumber, receiverFirstName, receiverLastName, receiverPhoneNumber));
-			}
-			return returnedOrder;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

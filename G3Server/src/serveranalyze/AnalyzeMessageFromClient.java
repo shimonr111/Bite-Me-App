@@ -138,7 +138,8 @@ public class AnalyzeMessageFromClient {
 				 EditUsersQueries.denyCompany((Message) message);
 				 break;
 			 case GET_SYSTEM_REPORTS:
-				 recivedMessageFromClient = ReportsController.getSuppliersByBranch((Message) message,"monthly");
+				 recivedMessageFromClient = ReportsController.getSuppliersByBranch((Message) message);
+				 break;
 			 case GET_USERS_FOR_REGISTRATION:
 				 recivedMessageFromClient = RegistrationQueries.getUsersFromRegistrationTable((Message) message);
 				 break;

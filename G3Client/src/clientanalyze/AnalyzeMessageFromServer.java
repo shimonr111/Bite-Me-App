@@ -21,6 +21,8 @@ import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
 import controllers_gui.UsersRegistrationScreenController;
+import controllers_gui.ViewQuarterlyReportsScreenController;
+import controllers_gui.ViewSystemReportsScreenCEOController;
 import orders.Item;
 import orders.Order;
 import users.BusinessCustomer;
@@ -310,11 +312,13 @@ public class AnalyzeMessageFromServer {
 				switch(recievedAnswerFromServer) {
 				case SENT_REPORT_SUPPLIERS_LIST:
 					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					ViewSystemReportsScreenCEOController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					break;
 					default:
 						break;
 				}
-
+				break;
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_WORKER_NO_ORDERS_FOUND:

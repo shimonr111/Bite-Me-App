@@ -152,7 +152,24 @@ public class Query {
 	 */
 	public static void saveReportToDb(SupplierByReport supplier) {
 		PreparedStatement pstmt=null;
+		PreparedStatement check=null;
+		PreparedStatement delete=null;
+		ResultSet rs=null;
 		try {
+		String search = "SELECT * FROM semesterialproject.reports WHERE supplier=? AND reportType=? AND issueDate=?;";
+		check = con.prepareStatement(search);
+		check.setString(1,supplier.getSupplierId());
+		check.setString(2,supplier.getReportType());
+		check.setString(3,supplier.getIssueDate());
+		rs = check.executeQuery();
+		if(rs.next()) {
+			String deleteString = "DELETE FROM `semesterialproject`.`reports` WHERE supplier=? AND reportType=? AND issueDate=?;";
+			delete = con.prepareStatement(deleteString);
+			delete.setString(1,supplier.getSupplierId());
+			delete.setString(2,supplier.getReportType());
+			delete.setString(3,supplier.getIssueDate());
+			delete.executeUpdate();
+		}
 		String query = "INSERT INTO `semesterialproject`.`reports` (`supplier`, `reportType`,`homeBranch`, `issueDate`,report) VALUES (?,?,?,?,?);";
 		pstmt = con.prepareStatement(query);
 		pstmt.setString(1,supplier.getSupplierId());
@@ -292,10 +309,10 @@ public class Query {
 
 				
 		String query = "INSERT INTO semesterialproject.order ( orderNumber, supplierId, customerUserId, customerUserType, branch,"
-				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,"
+				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, supplyType,"
 				+ " totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber, deliveryFee,"
 				+ " itemsList, comments, deliveryType) VALUES( '" + orderNumber +"' , '"+supplierId +"' , '" + customerUserId+"' , '" + customerUserType+"' , '" + branch+"' ,"
-						+ " '" + timeType.name()+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '" + actualSupplyDateAndTime+"' , '" + supplyType.name()+"' ,"
+						+ " '" + timeType.name()+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '"+ supplyType.name()+"' ,"
 								+ " '" + totalPrice+"' , '" + receiverFirstName+"' , '" + receiverLastName+"' , '" + receiverAddress+"' , '" + receiverPhoneNumber+"' ,"
 										+ " '" + deliveryFee+"' , '" + itemList+"' , '" + comments+"' , '" +deliveryType.name() +"' )";
 

@@ -21,9 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -32,8 +30,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.converter.DefaultStringConverter;
-import orders.Item;
+import javafx.util.StringConverter;
 import orders.ItemCategory;
 import orders.Order;
 import orders.OrderStatus;
@@ -90,7 +87,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     private TableColumn<Order, String> customerPhoneColumn;
 
     @FXML
-    private TableColumn<Order, String> statusColumn; // it was OrderStatus instead of String
+    private TableColumn<Order, OrderStatus> statusColumn; 
 
     @FXML
     private Button btnHelp;
@@ -100,9 +97,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private Button refreshBtn;
-    
-    private ObservableList<String> statusData;
-    
+        
     
     /**
      * This is a function for going back
@@ -191,7 +186,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("This is a screen for managing the status (Pending / Approved , ...) of the orders!");
+    	PopUpMessages.helpMessage("This is a screen for managing the status (Pending / Approved ) of the orders!");
     }
 
 	
@@ -236,12 +231,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		/* this is for the combo box of status column */
-		statusData = FXCollections.observableArrayList();
-		statusData.add(OrderStatus.APPROVED.toString());
-		statusData.add(OrderStatus.UN_APPROVED.toString());
-		/* this is for the combo box of status column */
-		
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
 		/*send message to server to get all orders for this supplier worker that works in specific restaurant*/
 		Message message = new Message (Task.SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS,Answer.WAIT_RESPONSE,supplierId); 
@@ -263,26 +252,25 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
 		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
 	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
-		customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("receiverPhoneNumber"));
-		
-		/* I have changed the column of status from <Order, OrderStatus> to <Order, String> just for check, to see if we get statusData values inside the combo box */
-		statusColumn.setCellValueFactory(new PropertyValueFactory<Order,String>("status"));
-		
-		/* from here is the code to set combo box on this column after we double click on some cell in this column*/
-		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(new DefaultStringConverter(), statusData));
-		statusColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Order, String>>(){
+	    customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("receiverPhoneNumber"));
+	    statusColumn.setCellValueFactory(new PropertyValueFactory<Order,OrderStatus>("status"));
+	    
+	    statusColumn.setCellFactory((param) -> new ComboBoxTableCell<>(new StringConverter<OrderStatus>() {
 
 			@Override
-			public void handle(TableColumn.CellEditEvent<Order, String> event) {
-				System.out.println("Value: " + event.getNewValue());
+			public String toString(OrderStatus object) {
+				return object.toString();
+			}
+
+			@Override
+			public OrderStatus fromString(String string) {
+				return OrderStatus.valueOf(string);
 			}
 			
-		});
-		
-		manageOrdersTable.setItems(ordersForManageOrderTable);
-		
-		manageOrdersTable.setEditable(true); // so we can double click on one of the cells of status column, and then change status from the combo box
-		
+		}, OrderStatus.values()));
+	    
+	    manageOrdersTable.setItems(ordersForManageOrderTable);
+	    manageOrdersTable.setEditable(true); // set the table editable in order to edit items
 		
 	} 
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ViewSystemReportsScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="pane" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ViewSystemReportsScreenController">
    <children>
       <Label id="title" layoutX="167.0" layoutY="33.0" text="View System Reports" textFill="#383838">
          <font>
@@ -45,7 +45,7 @@
       <ComboBox fx:id="ReportMonth" layoutX="324.0" layoutY="101.0" prefHeight="25.0" prefWidth="81.0" promptText="Month" />
       <Label layoutX="50.0" layoutY="147.0" prefHeight="17.0" prefWidth="148.0" text="Select report type" />
       <ComboBox fx:id="ReportType" layoutX="242.0" layoutY="143.0" prefHeight="25.0" prefWidth="162.0" promptText="Report Type" />
-      <Button fx:id="quarterlyBtn" layoutX="417.0" layoutY="340.0" mnemonicParsing="false" text="Generate Quarterly PDF" />
+      <Button fx:id="quarterlyBtn" layoutX="417.0" layoutY="340.0" mnemonicParsing="false" onAction="#getQuarterly" text="Generate Quarterly PDF" />
       <Label fx:id="MessageLabel" layoutX="194.0" layoutY="290.0" />
    </children>
 </Pane>

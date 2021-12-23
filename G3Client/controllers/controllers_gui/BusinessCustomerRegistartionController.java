@@ -189,7 +189,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     			list.add(businessCustomer);
     			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
         		sendToClient(message);
-        		//displayMessage.setText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
     		}
     		else {
     			HrManager hrManager = new HrManager(idNumTxtField.getText(),ConfirmationStatus.CONFIRMED,firstNameTxtField.getText(),
@@ -198,7 +197,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     			list.add(hrManager);
     			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
         		sendToClient(message);
-        		//displayMessage.setText("Registration Succeed,this user can now log in and register his company.");
     		}
     		
     		
@@ -423,35 +421,49 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 			setHomeBranchCombo.setValue("Center Branch");
 		else
 			setHomeBranchCombo.setValue("South Branch");
-		companyNameCombo.setValue("Select company:");
-		companyNameCombo.getItems().addAll(companies);
-		positionCombo.setValue("Select position:");
-		positionCombo.getItems().addAll("Regular worker","Human Resources");
-		budgetTypeCombo.setValue("Select Budget type:");
-		budgetTypeCombo.getItems().addAll("Daily budget","Weekly budget","Monthly budget");
-		displayMessage.setText("");
+		if(companies.isEmpty()) {
+			for(TextField txt : textFields) {
+				txt.setDisable(true);
+				txt.setEditable(false);
+				positionCombo.setDisable(true);
+				companyNameCombo.setDisable(true);
+				budgetTypeCombo.setDisable(true);
+				saveBtn.setDisable(true);
+				displayMessage.setText("You can not register an employer, no confirmed companies");
+			}
+		}
+		else {
+			companyNameCombo.setValue("Select company:");
+			companyNameCombo.getItems().addAll(companies);
+			positionCombo.setValue("Regular worker");
+			positionCombo.getItems().addAll("Regular worker","Human Resources");
+			positionCombo.setDisable(true);
+			budgetTypeCombo.setValue("Select Budget type:");
+			budgetTypeCombo.getItems().addAll("Daily budget","Weekly budget","Monthly budget");
+			displayMessage.setText("");
 		
-		UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
-		confirmedEmailTxtField.setText(userForRegistration.getEmail()); creditNumTxtField.setText(userForRegistration.getCreditCardNumber()); cvvTxtField.setText(userForRegistration.getCreditCardCvvCode());
-		emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
-		idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
-		phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameField.setText(userForRegistration.getUsername());
-		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
-			@Override
-			public void clientBusinessUserIdExist() {
-				setRelevantTextToDisplayMessageText("This ID already exist on system");
-			}
-			public void clientBusinessUserNameExist() {
-				setRelevantTextToDisplayMessageText("This User Name already exist on system");
-			}
-			public void clientBusinessCustomerRegistrationSucceed() {
-				if(positionCombo.getValue().equals("Regular worker"))
-				  setRelevantTextToDisplayMessageText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
-				else
-					setRelevantTextToDisplayMessageText("Registration Succeed,this user can now log in and register his company.");
-					
-			}
-		});
+			UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
+			confirmedEmailTxtField.setText(userForRegistration.getEmail()); creditNumTxtField.setText(userForRegistration.getCreditCardNumber()); cvvTxtField.setText(userForRegistration.getCreditCardCvvCode());
+			emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
+			idNumTxtField.setText(userForRegistration.getUserID()); lastNameTxtField.setText(userForRegistration.getLastName()); passwordField.setText(userForRegistration.getPassword());
+			phoneTxtField.setText(userForRegistration.getPhoneNumber()); userNameField.setText(userForRegistration.getUsername());
+			idNumTxtField.setDisable(true); idNumTxtField.setEditable(false); 
+			AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
+				@Override
+				public void clientBusinessUserIdExist() {
+					setRelevantTextToDisplayMessageText("This ID already exist on system");
+				}
+				public void clientBusinessUserNameExist() {
+					setRelevantTextToDisplayMessageText("This User Name already exist on system");
+				}
+				public void clientBusinessCustomerRegistrationSucceed() {
+					if(positionCombo.getValue().equals("Regular worker"))
+						setRelevantTextToDisplayMessageText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
+					else
+						setRelevantTextToDisplayMessageText("Registration Succeed,this user can now log in and register his company.");			
+				}
+			});
+		}
 	}
 	
 
