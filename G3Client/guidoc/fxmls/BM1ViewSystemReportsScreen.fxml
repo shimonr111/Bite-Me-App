@@ -9,11 +9,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="reportsBigExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ViewSystemReportsScreenController">
    <children>
-      <Label fx:id="MessageLabel" layoutX="194.0" layoutY="290.0" />
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ View System Monthly Reports" />
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
@@ -71,7 +69,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+                        <Label fx:id="MessageLabel" prefHeight="17.0" prefWidth="174.0" />
                      </children>
                   </HBox>
                </children>
