@@ -59,7 +59,6 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     @FXML
     private Button privateCustomerButton;
     
-
     @FXML
     private TextField searchField;
 

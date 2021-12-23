@@ -4,21 +4,17 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.PrivateCustomerRegistartionController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.PrivateCustomerRegistartionController">
    <children>
       <TextField fx:id="firstNameTxtField" layoutX="214.0" layoutY="120.0" onAction="#getFirstName" prefHeight="31.0" prefWidth="170.0" promptText="Enter first name" />
       <TextField fx:id="lastNameTxtField" layoutX="213.0" layoutY="154.0" onAction="#getLastName" prefHeight="31.0" prefWidth="170.0" promptText="Enter last name" />
       <TextField fx:id="phoneTxtField" layoutX="212.0" layoutY="223.0" onAction="#getPhoneNum" prefHeight="31.0" prefWidth="170.0" promptText="Enter phone number" />
       <TextField fx:id="emailTxtField" layoutX="212.0" layoutY="260.0" onAction="#getEmail" prefHeight="31.0" prefWidth="170.0" promptText="Enter email address" />
-      <Button id="other-btns" fx:id="btnExit" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
       <Label layoutX="56.0" layoutY="47.0" prefHeight="53.0" prefWidth="540.0" text="Private Customer Registartion" textFill="#383838">
          <font>
             <Font name="System Bold" size="36.0" />
@@ -65,11 +61,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button id="other-btns" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
       <ComboBox fx:id="setHomeBranchCombo" disable="true" layoutX="212.0" layoutY="334.0" onAction="#getHomeBranch" prefHeight="31.0" prefWidth="170.0" promptText="Set home branch" />
       <TextField fx:id="cvvTxtField" layoutX="435.0" layoutY="210.0" onAction="#getCVV" promptText="CVV" />
       <TextField fx:id="creditNumTxtField" layoutX="435.0" layoutY="134.0" onAction="#getCreditNum" promptText="Credit number" />
@@ -107,5 +98,19 @@
          </font>
       </Label>
       <TextField fx:id="userNameTxtField" layoutX="435.0" layoutY="272.0" prefHeight="31.0" prefWidth="194.0" promptText="Enter user name" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </Pane>

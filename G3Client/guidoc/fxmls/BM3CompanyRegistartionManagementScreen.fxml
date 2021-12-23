@@ -5,63 +5,73 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.CompanyRegistartionManagementScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.CompanyRegistartionManagementScreenController">
    <children>
-      <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="19.0" layoutY="42.0" prefHeight="53.0" prefWidth="629.0" text="Company Registration Management" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Button fx:id="confirmBtn" layoutX="76.0" layoutY="378.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="51.0" prefWidth="249.0" style="-fx-background-color: #7FBA00;" text="Confirm Company" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Label layoutX="214.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt;" />
-      <Label layoutX="441.0" layoutY="8.0" text="Company Registration Management">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnBack" layoutY="439.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="denyBtn" layoutX="334.0" layoutY="378.0" mnemonicParsing="false" onAction="#getDenyBtn" prefHeight="51.0" prefWidth="255.0" style="-fx-background-color: #F25022;" text="Deny Company" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <TableView fx:id="companiesTable" layoutX="136.0" layoutY="126.0" prefHeight="237.0" prefWidth="326.0">
-         <columns>
-            <TableColumn fx:id="companyNameCol" prefWidth="325.0" text="Company Name" />
-         </columns>
-      </TableView>
-      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Text fx:id="displayText" fill="#8a0606" layoutX="119.0" layoutY="476.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="450.13671875">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Text>
-      <Label layoutX="136.0" layoutY="101.0" text="Search Company: ">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="searchField" layoutX="242.0" layoutY="97.0" prefHeight="25.0" prefWidth="204.0" promptText="Search Keywords..." />
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Company Registration Management" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="630.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <AnchorPane layoutX="293.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="Company Registration" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <HBox layoutX="107.0" layoutY="387.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
+               <children>
+                  <Button fx:id="confirmBtn" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="40.0" prefWidth="100.0" styleClass="confirmButton" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="denyBtn" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getDenyBtn" prefHeight="40.0" prefWidth="100.0" styleClass="denyButton" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" layoutX="133.0" layoutY="83.0" prefHeight="59.0" prefWidth="180.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Search Company:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
+               </children>
+            </VBox>
+            <TableView fx:id="companiesTable" layoutX="74.0" layoutY="157.0" prefHeight="200.0" prefWidth="300.0">
+               <columns>
+                  <TableColumn fx:id="companyNameCol" maxWidth="300.0" prefWidth="300.0" text="Company Name" />
+               </columns>
+            </TableView>
+            <Text fx:id="displayText" layoutX="98.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="244.13671875">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

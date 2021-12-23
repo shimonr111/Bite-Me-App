@@ -5,44 +5,75 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UsersRegistrationScreenController">
    <children>
-      <Label layoutX="240.0" layoutY="7.0" prefHeight="70.0" prefWidth="191.0" text="User Registration">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <TableView fx:id="usersTable" layoutX="108.0" layoutY="100.0" prefHeight="200.0" prefWidth="384.0">
-        <columns>
-          <TableColumn fx:id="userIdCol" prefWidth="105.0" text="User ID" />
-          <TableColumn fx:id="userFirstNameCol" prefWidth="148.0" text="First Name" />
-            <TableColumn fx:id="userLastName" prefWidth="130.0" text="Last Name" />
-        </columns>
-      </TableView>
-      <Button fx:id="businessCustomerButton" layoutX="336.0" layoutY="312.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="33.0" prefWidth="117.0" text="Business Customer" />
-      <Button fx:id="privateCustomerButton" layoutX="173.0" layoutY="312.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="33.0" prefWidth="117.0" text="Private Customer" />
-      <Label layoutX="56.0" layoutY="306.0" prefHeight="46.0" prefWidth="91.0" text="Register as :">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" text="Exit" />
-      <Button fx:id="helpBtn" layoutX="35.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="25.0" prefWidth="41.0" text="?" />
-      <Button fx:id="backButton" layoutY="361.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="33.0" prefWidth="78.0" text="Back" />
-      <Text fx:id="displayMessage" fill="#901010" layoutX="123.0" layoutY="365.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="402.13671875">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
-      <Label layoutX="114.0" layoutY="68.0" prefHeight="19.0" prefWidth="78.0" text="Search User: ">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <TextField fx:id="searchField" layoutX="192.0" layoutY="65.0" prefHeight="26.0" prefWidth="265.0" promptText="Seach Keywords.." />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button fx:id="backButton" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <AnchorPane layoutX="293.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="User Registration" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <HBox layoutX="107.0" layoutY="387.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
+               <children>
+                  <Button fx:id="privateCustomerButton" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="40.0" prefWidth="100.0" styleClass="regiRegularButton" text="Private" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="businessCustomerButton" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getBusinessCustomer" prefHeight="40.0" prefWidth="100.0" styleClass="regiRegularButton" text="Business" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" layoutX="132.0" layoutY="82.0" prefHeight="59.0" prefWidth="180.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Search Users:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
+               </children>
+            </VBox>
+            <TableView fx:id="usersTable" layoutX="72.0" layoutY="157.0" prefHeight="200.0" prefWidth="300.0">
+              <columns>
+                <TableColumn fx:id="userIdCol" prefWidth="100.0" text="User ID" />
+                <TableColumn fx:id="userFirstNameCol" prefWidth="100.0" text="First Name" />
+                  <TableColumn fx:id="userLastName" prefWidth="100.0" text="Last Name" />
+              </columns>
+            </TableView>
+            <Text fx:id="displayMessage" layoutX="99.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="242.13671875">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ User Registration" />
    </children>
 </Pane>

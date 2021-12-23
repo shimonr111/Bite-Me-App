@@ -61,6 +61,63 @@
 	-fx-background-position: center center;
 }
 
+.saveButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/save.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 75% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.confirmButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/save.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.denyButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/close.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+.editButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/edit.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
+
 .button{
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 2.0, 2.0, 2.0);
 	-fx-background-radius: 6,5;
@@ -806,7 +863,37 @@
 }
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-/**~~~~@@ User Portals @@~~~~*/
+/**~~~~@@ Registration @@~~~~*/
+.regiExternalPane{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 6%;
+	-fx-background-size: 150 75;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
+}
+
+.regiRegularButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:16px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+/**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/**~~~~@@ Employees Confirmation @@~~~~*/
+.employeeLabels{
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-font-weight:bold;
+	-fx-font-size: 14px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-underline: true;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 1.0, 1.0, 0);
+ 	
+}
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Combo-Box ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
