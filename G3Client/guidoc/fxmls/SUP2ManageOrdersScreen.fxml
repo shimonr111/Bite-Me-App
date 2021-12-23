@@ -55,10 +55,5 @@
          </font>
       </Button>
       <Text fx:id="errorText" layoutX="236.0" layoutY="484.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <Button fx:id="refreshBtn" layoutX="179.0" layoutY="402.0" mnemonicParsing="false" onAction="#getBtnRefresh" prefHeight="51.0" prefWidth="146.0" style="-fx-background-color: #7FBA00;" text="Refresh" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
    </children>
 </Pane>

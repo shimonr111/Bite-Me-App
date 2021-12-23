@@ -223,6 +223,46 @@ public class OrderQueries {
 	}
 	
 	/**
+	 * This is a query for update the orders status in DB.
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
+	 */
+	public static Message updateOrdersStatusOnDb(Message messageFromClient) throws SQLException{
+		ArrayList<Order> orders = new ArrayList<>();
+		orders = new ArrayList<Order>((Collection<? extends Order>)messageFromClient.getObject());//copy the array that we got from the controller
+		String orderStatus=null;
+		
+		for (Order order : orders) {
+			switch(order.getStatus()) {
+			case PENDING_APPROVAL:
+				orderStatus="PENDING_APPROVAL";
+				break;
+				
+			case APPROVED:
+				orderStatus="APPROVED";
+				break;
+				
+			case UN_APPROVED:
+				orderStatus="UN_APPROVED";
+				break;
+				
+				default:
+					break;
+			}
+			
+			Query.updateOneColumnForTableInDbByPrimaryKey("order", "status='"+orderStatus+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // update the status column in DB according to supplyId
+		}
+		
+		
+				
+		Message messageToClient = new Message(Task.MANAGE_ORDER_FINISHED, Answer.MANAGE_ORDER_SUCCEEDED_WRITING_INTO_DB, null);
+        return messageToClient;
+	}
+	
+	
+	/**
 	 * This is a function for getting 
 	 * all the orders from the DB and 
 	 * sending it to the supplier worker screen.
@@ -246,7 +286,7 @@ public class OrderQueries {
 				return returnMessageToClient;
 			}
 			while(rs.next()) {
-				if(OrderStatus.valueOf(rs.getString(7)) != OrderStatus.APPROVED) { //if the order is approved go for the next one
+				if(OrderStatus.valueOf(rs.getString(7)) == OrderStatus.PENDING_APPROVAL) { //if the order is approved go for the next one
 				Order orderFromDb= null;
 				orderFromDb = new Order(Integer.parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),
 						Branch.valueOf(rs.getString(5)),OrderTimeType.valueOf(rs.getString(6)), OrderStatus.valueOf(rs.getString(7)),

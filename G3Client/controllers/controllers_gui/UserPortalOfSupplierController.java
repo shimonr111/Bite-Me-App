@@ -197,9 +197,9 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 				btnManageOrders.setDisable(true);
 			
 			}
-//			if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
-//				btnManageMenu.setDisable(true);
-//			}
+			if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
+				btnManageMenu.setDisable(true);
+			}
 		}
 	}
 }
