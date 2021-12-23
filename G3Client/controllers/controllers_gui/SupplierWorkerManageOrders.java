@@ -95,9 +95,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private Text errorText;
-
-   
-        
+  
     
     /**
      * This is a function for going back
