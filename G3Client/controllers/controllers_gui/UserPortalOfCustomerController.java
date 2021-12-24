@@ -169,6 +169,28 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 			}
 		});
 	}
+	
+	/**
+	 * Init customer portal again.
+	 */
+	public void initPortalAgain() {
+		loader = new FXMLLoader();
+		Stage primaryStage = new Stage();
+		Pane root = null;
+		try {
+			root = loader.load(getClass().getResource("/fxmls/UserPortalOfCustomer.fxml").openStream());
+			userPortalOfCustomerController = loader.getController();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();/* show the new screen */
+	}
+	
+	
 	/**
 	 * This method will initialize the values according to 
 	 * connected user.
