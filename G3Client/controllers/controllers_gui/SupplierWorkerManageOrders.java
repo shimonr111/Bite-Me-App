@@ -33,8 +33,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.StringConverter;
-import orders.Item;
-import orders.ItemCategory;
 import orders.Order;
 import orders.OrderStatus;
 import orders.SupplyType;
@@ -192,7 +190,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("This is a screen for managing the status (Pending / Approved ) of the orders!");
+    	PopUpMessages.helpMessage("This is a screen for managing the status of the orders!");
     }
 
 	
@@ -303,6 +301,11 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			updateOrders.remove(order); // remove this row from updateOrders array
 			order.setStatus(event.getNewValue()); // set the new status in the order array
 			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
+			/*Simulation for sending an email to the user with his details*/
+	           sendToClient(new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders));//send message to the server telling the manage order is finished and then push into DB
+			if(event.getNewValue() == OrderStatus.APPROVED) {
+				PopUpMessages.simulationMessage("Simulation","Simulation SMS to the user!","SMS sent to : " + order.getReceiverPhoneNumber());
+			}
 	    	
 	    });
 		
