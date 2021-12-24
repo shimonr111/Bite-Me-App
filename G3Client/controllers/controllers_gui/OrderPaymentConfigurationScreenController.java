@@ -359,37 +359,13 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    	
 	    	/*Give notice for the user that the order is ok*/
     		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
-    		
-	    	/*After saving the order in the DB send the customer back to login screen*/
-	    	message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
-			sendToClient(message);
-			connectedUser = null;
-			/*Update order object to be null for another entrance to order process by the same user*/
-			OrderChooseItemsScreenController.order= null; 
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					FXMLLoader loader = new FXMLLoader();
-					Pane root;
-					try {
-						Stage Stage = new Stage();
-						Stage.setResizable(false);
-						root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
-						LoginScreenController LSC = loader.getController();
-						LSC.initLoginScreen();
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
-						});
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					((Node) event.getSource()).getScene().getWindow().hide();
-				}
-			});
+    		OrderChooseItemsScreenController.order= null; 
+	    	/*After saving the order in the DB send the customer back to his home screen*/ 
+    		if(connectedUser instanceof BusinessCustomer)
+    			setBusinessCustomerPortal(event);
+    		else
+    			setPrivateCustomerPortal(event);
+
 	    	}
 	    }
 
@@ -440,6 +416,70 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 					}
 				}
 			});
+		}
+	  
+		/**
+		 * this method loads the customer portal
+		 * @param event
+		 */
+		public void setPrivateCustomerPortal(ActionEvent event) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						FXMLLoader loader = new FXMLLoader();
+						Pane root;
+						try {
+							Stage Stage = new Stage();
+							Stage.setResizable(false);
+							root = loader.load(getClass().getResource("/fxmls/UserPortalOfCustomer.fxml").openStream());
+							UserPortalOfCustomerController UPOCC = new UserPortalOfCustomerController();
+							UPOCC.initPortalAgain();
+							Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+								@Override
+								public void handle(WindowEvent event) { 
+									event.consume();
+									Stage.close();
+								}
+							});
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						((Node) event.getSource()).getScene().getWindow().hide();
+					}
+				});
+			
+		}
+		
+		/**
+		 * this method loads the customer portal
+		 * @param event
+		 */
+		public void setBusinessCustomerPortal(ActionEvent event) {
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						FXMLLoader loader = new FXMLLoader();
+						Pane root;
+						try {
+							Stage Stage = new Stage();
+							Stage.setResizable(false);
+							root = loader.load(getClass().getResource("/fxmls/UserPortalOfBusinessCustomer.fxml").openStream());
+							UserPortalOfBusinessCustomerController UPOBCC = new UserPortalOfBusinessCustomerController();
+							UPOBCC.initPortalAgain();
+							Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+								@Override
+								public void handle(WindowEvent event) { 
+									event.consume();
+									Stage.close();
+								}
+							});
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						((Node) event.getSource()).getScene().getWindow().hide();
+					}
+				});
+			
 		}
 
 

@@ -219,7 +219,6 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 		Pane root = null;
 		try {
 			root = loader.load(getClass().getResource("/fxmls/UserPortalOfBranchManager.fxml").openStream());
-			//root = FXMLLoader.load(getClass().getResource("/fxmls/LoginScreen.fxml"));
 			userPortalOfBranchManagerController = loader.getController();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

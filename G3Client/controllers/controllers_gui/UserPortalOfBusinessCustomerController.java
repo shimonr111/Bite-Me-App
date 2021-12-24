@@ -182,6 +182,26 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	}
 	
 	/**
+	 * Init customer portal again.
+	 */
+	public void initPortalAgain() {
+		loader = new FXMLLoader();
+		Stage primaryStage = new Stage();
+		Pane root = null;
+		try {
+			root = loader.load(getClass().getResource("/fxmls/UserPortalOfBusinessCustomer.fxml").openStream());
+			userPortalOfBusinessCustomerController = loader.getController();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();/* show the new screen */
+	}
+	
+	/**
 	 * This method sets the correct values of the businessCustomer in portal.
 	 */
 	@Override
