@@ -161,6 +161,9 @@ public class AnalyzeMessageFromClient {
 			 case MANAGE_ORDER_FINISHED:
 				 recivedMessageFromClient = OrderQueries.updateOrdersStatusOnDb((Message)message);
 				 break;
+			 case GET_ORDERS_FOR_USER:
+				 recivedMessageFromClient = OrderQueries.getOrdersForUser((Message)message);
+				 break;
 			default:
 				break;
 			}

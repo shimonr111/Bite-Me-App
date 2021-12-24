@@ -2,6 +2,12 @@ package query;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -26,6 +32,7 @@ import users.Branch;
 import users.ConfirmationStatus;
 import users.Customer;
 import util.DateTimeHandler;
+import util.OrderForView;
 
 /**
  * 
@@ -321,6 +328,89 @@ public class OrderQueries {
 		returnMessageToClient.setObject(orderList);
 		returnMessageToClient.setAnswer(Answer.SUPPLIER_WORKER_ORDERS_FOUND);
 		return returnMessageToClient;
+	}
+	
+	/**
+	 * Get the orders of a specific user to set them into the table 
+	 * according to the wanted format.
+	 * @param message
+	 * @return
+	 */
+	public static Message getOrdersForUser(Message message) {
+		String customerId = (String)message.getObject();
+		ArrayList<OrderForView> orderList = new ArrayList<>();
+		String resturantName="", orderDate="", orderTime="",orderDetails="",orderStatus="";
+		ResultSet rs = Query.getRowsFromTableInDB("order", "customerUserId='"+customerId+"' AND ( status= 'PENDING_APPROVAL' OR (status = 'APPROVED'))");
+		try {
+			while(rs.next()) {
+				// get the supplier string .
+				String supplierId= rs.getString(2);
+				String supplierStatus = "";
+				ResultSet rs2 = Query.getRowsFromTableInDB("supplier","supplierId='" + supplierId +"'");
+				if(rs2.next()) {
+					resturantName = rs2.getString(2);
+					supplierStatus = rs2.getString(3);
+				}
+				rs2.close();
+				switch(supplierStatus) {
+				case "NORTH":
+					resturantName= resturantName + ", North Branch";
+					break;
+				case "CENTER":
+					resturantName= resturantName + ", Center Branch";
+					break;
+				case "SOUTH":
+					resturantName= resturantName + ", South Branch";
+					break;
+				default:
+					break;
+				}
+				// get the date with the wanted format without the time
+				Date date = DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(8));
+				ZoneId defaultZoneId = ZoneId.systemDefault();
+				Instant instant = date.toInstant();
+				LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
+				orderDate = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+				//get the time with the wanted format without date
+				LocalTime localTime = instant.atZone(defaultZoneId).toLocalTime();
+				orderTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+				// get the order items with comments
+				String items = rs.getString(18);
+				String comments = rs.getString(19);
+				String [] itemsParts = items.split(",");
+				String [] commentsParts = comments.split(",");
+				orderDetails = "Items: ";
+				for(int i=0;i<itemsParts.length;i++) {
+					orderDetails = orderDetails + itemsParts[i];	
+					if(i==itemsParts.length -1) 
+						orderDetails += "\nComments: ";
+					else
+						orderDetails+= ", ";
+					
+				}
+				for(int i=0;i<commentsParts.length;i++) {
+					if(!commentsParts[i].equals("null")) {
+						orderDetails = orderDetails+ commentsParts[i];
+						if(i<commentsParts.length-1)
+							orderDetails += ", ";
+					}
+				}
+				// get the status
+				String status = rs.getString(7);
+				if(status.equals("APPROVED"))
+					orderStatus = "Approved, In progress";
+				else
+					orderStatus = "Pending for resturant approval";
+				// add to the list
+				orderList.add(new OrderForView(resturantName, orderDate, orderTime, orderDetails, orderStatus));	
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return new Message(Task.DISPLAY_ORDERS_INTO_TABLE,Answer.SUCCEED,orderList);
 	}
 	
 }

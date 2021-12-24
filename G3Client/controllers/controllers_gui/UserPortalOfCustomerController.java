@@ -42,6 +42,8 @@ import users.ConfirmationStatus;
 public class UserPortalOfCustomerController extends AbstractBiteMeController implements Initializable{
 	@FXML
 	private Button btnStartOrder;
+    @FXML
+    private Button viewOrdersBtn;
 	@FXML
 	private Button btnExit;
 	@FXML
@@ -83,7 +85,6 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	// Event Listener on Button[#btnLogout].onAction
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
-		//TBD: add logic for updating logged in in DB to logged out
 		//System.out.println(connectedUser);
 		Message logOutMessage = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);  
 		sendToClient(logOutMessage);
@@ -100,6 +101,14 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is the Main screen of the Customer, Please press any button!");	
 		}
+	
+
+    @FXML
+    void getViewOrdersBtn(ActionEvent event) {
+    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    	WatchOrderHistoryScreenController watchOrderHistoryScreenController = new WatchOrderHistoryScreenController();
+    	watchOrderHistoryScreenController.initOrderHistoryScreen(); // call the init of the next screen
+    }
 
 	/**
 	 * Returns to login screen
