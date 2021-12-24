@@ -1,5 +1,7 @@
 package clientanalyze;
 
+import orders.Order;
+
 /**
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
@@ -78,6 +80,9 @@ public interface AnalyzeClientListener {
 		return;
 	}
 	default void clientCompanyRegistrationSucceed() {
+		return;
+	}
+	default void addOrderToSupplierTable(Order order) {
 		return;
 	}
 }

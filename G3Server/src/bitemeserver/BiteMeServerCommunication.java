@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import communication.Message;
+import communication.Task;
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 import query.Query;
@@ -56,7 +57,12 @@ public class BiteMeServerCommunication extends AbstractServer {
 		if(message instanceof Message) {
 		Message recivedMessageFromClient = (Message)message;
 		try {
-			sentToSpecificClient(client,AnalyzeMessageFromClient.analyzeMessageFromClient(recivedMessageFromClient,client));
+			if(recivedMessageFromClient.getTask() == Task.ORDER_FINISHED) { //used only for broadcast messages between users
+				sendToAllClients(AnalyzeMessageFromClient.analyzeMessageFromClient(recivedMessageFromClient,client));
+			}else {
+				sentToSpecificClient(client,AnalyzeMessageFromClient.analyzeMessageFromClient(recivedMessageFromClient,client));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

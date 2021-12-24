@@ -154,7 +154,7 @@ public class OrderQueries {
 	 * @return
 	 * @throws SQLException
 	 */
-	public static Message addOrderToDbAndUpdateCustomer(Message messageFromClient) throws SQLException{
+	public static Message addOrderToDbAndUpdateSupplier(Message messageFromClient) throws SQLException{
 		Order orderIntoDb = (Order) messageFromClient.getObject();
 		
 		int orderNumber = orderIntoDb.getOrderNumber();
@@ -187,7 +187,14 @@ public class OrderQueries {
 				timeType, status, issueDateTime, estimatedSupplyDateTime, actualSupplyDateTime, supplyType,
 				totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber,
 				deliveryFee, itemList, comments,deliveryType);
-		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, null);
+		
+		/*get the order number as written in the DB*/
+		ResultSet result = Query.getRowsFromTableInDB("order","supplierId= '"+supplierId+"' AND (customerUserId= '"+customerUserId+"')"
+				+ "AND (branch= '"+branch+"') AND (issueDateTime= '"+DateTimeHandler.convertMySqlDateTimeFormatToString(issueDateTime)+"') " ); 
+		while(result.next()) {
+			orderIntoDb.setOrderNumber(Integer.valueOf(result.getString(1)));
+			}
+		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, orderIntoDb);
 		return messageToClient;
 	}
 	

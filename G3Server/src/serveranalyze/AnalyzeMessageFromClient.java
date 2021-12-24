@@ -150,7 +150,7 @@ public class AnalyzeMessageFromClient {
 				 RegistrationQueries.getSupplierConfirmation((Message)message);
 				 break;
 			 case ORDER_FINISHED:
-				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateCustomer((Message)message);
+				 recivedMessageFromClient = OrderQueries.addOrderToDbAndUpdateSupplier((Message)message);
 				 break;
 			 case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				 recivedMessageFromClient = OrderQueries.getOrdersFromOrderTableForSpecificRestaurant((Message) message);

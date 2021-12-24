@@ -209,12 +209,12 @@ public class AnalyzeMessageFromServer {
 				switch (recievedAnswerFromServer) {
 				case CUSTOMER_REGISTRATION_SUCCEED:
 					for (AnalyzeClientListener listener : clientListeners) {
-						listener.clientPrivateCustomerRegistrationSucceed();;
+						listener.clientPrivateCustomerRegistrationSucceed();
 					}
 					break;
 				case BUSINESS_CUSTOMER_REGISTRATION_SUCCEED:
 					for (AnalyzeClientListener listener : clientListeners) {
-						listener.clientBusinessCustomerRegistrationSucceed();;
+						listener.clientBusinessCustomerRegistrationSucceed();
 					}
 					break;
 				case SUPPLIER_REGISTRATION_SUCCEED:
@@ -326,6 +326,18 @@ public class AnalyzeMessageFromServer {
 					break;
 				case SUPPLIER_WORKER_ORDERS_FOUND:
 					SupplierWorkerManageOrders.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();
+					break;
+				default:
+					break;
+				}
+				break;
+			case ORDER_FINISHED:
+				switch(recievedAnswerFromServer) {
+				case ORDER_SUCCEEDED_WRITING_INTO_DB:
+				Order order = ((Order)(recivedMessageFromServer.getObject()));
+					for (AnalyzeClientListener listener : clientListeners) {
+						listener.addOrderToSupplierTable(order);
+					}
 					break;
 				default:
 					break;
