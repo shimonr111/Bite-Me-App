@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
+import clientanalyze.AnalyzeClientListener;
+import clientanalyze.AnalyzeMessageFromServer;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -59,7 +61,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     private static SupplierWorkerManageOrders supplierWorkerManageOrders;
 	public static ArrayList<Order> orderListFromDB = new ArrayList<>();
 	public static ArrayList<Order> updateOrders = new ArrayList<>();
-
+	private static AnalyzeClientListener listener;
+	public static ObservableList<Order> ordersForManageOrderTable;
 	@FXML
     private Button btnExit;
 
@@ -107,7 +110,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     void getBackBtn(ActionEvent event) {
     	/*TBD: delete observable list*/
     	updateOrders.clear();// clear this array for the next time we come back for this screen
-    	
+    	AnalyzeMessageFromServer.removeClientListener(listener); //delete listener from listener list
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -160,6 +163,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
         	   
            /*Give notice for the user that the changes have been saved*/
      	   PopUpMessages.updateMessage("Order changes saved successfully!");
+     	   
+     	   //add call to initialize method for updating need functionality
         }
 
     }
@@ -199,9 +204,22 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	 * @param fxmlPath
 	 */
 	public void initSupplierWorkerManageOrdersScreen() {
+		/*Add listener for */
+		AnalyzeMessageFromServer.addClientListener(listener = new AnalyzeClientListener(){ 
+			
+			@Override
+			public void addOrderToSupplierTable(Order order) {
+				/*check if the supplier worker that is connected in the system is working in the same restaurant that is in the order received*/
+				if(((SupplierWorker)connectedUser).getSupplier().getSupplierId().equals(order.getSupplierUserId())) {
+				orderListFromDB.add(order); //add the new order received from the user to the array list 
+				ordersForManageOrderTable.add(order); //add to the observable list as well
+				}
+			}
+		});
+		
 		Platform.runLater(new Runnable() {
 			@Override
-			public void run() {
+			public void run() {				
 				loader = new FXMLLoader();
 				Pane root;
 				try {
@@ -231,9 +249,9 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
-		ObservableList<Order> ordersForManageOrderTable = FXCollections.observableArrayList();
+		ordersForManageOrderTable = FXCollections.observableArrayList();
 		/*send message to server to get all orders for this supplier worker that works in specific restaurant*/
 		Message message = new Message (Task.SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS,Answer.WAIT_RESPONSE,supplierId); 
 		sendToClient(message);
