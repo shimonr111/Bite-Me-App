@@ -42,14 +42,16 @@ public class DateTimeHandler {
 	 * @return Date: - MySql Format.
 	 */
 	public static Date buildMySqlDateTimeFormatFromDateTimeString(String datetime) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d;
-		try {
-			d = dateFormat.parse(datetime);
-			return d;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(datetime != null) {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Date d;
+			try {
+				d = dateFormat.parse(datetime);
+				return d;
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return null;
