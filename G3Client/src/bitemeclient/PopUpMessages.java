@@ -3,8 +3,8 @@ package bitemeclient;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -73,6 +73,26 @@ public class PopUpMessages {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.getDialogPane().setHeaderText(message);
 		return alert.showAndWait();
+	}
+	
+
+	/**
+	 * Simulation Model for sending Email \ SMS 
+	 * from the Supplier to the client about his 
+	 * Order status
+	 * 
+	 * @param title
+	 * @param message
+	 * @param bodyMessage
+	 */
+	public static void simulationMessage(String title ,String Headermessage, String bodyMessage) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(Headermessage);
+		alert.setContentText(bodyMessage);
+		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		DialogPane dialogPane = alert.getDialogPane();
+		alert.showAndWait();
 	}
 	
 }
