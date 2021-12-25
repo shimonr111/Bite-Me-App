@@ -164,6 +164,9 @@ public class AnalyzeMessageFromClient {
 			 case GET_ORDERS_FOR_USER:
 				 recivedMessageFromClient = OrderQueries.getOrdersForUser((Message)message);
 				 break;
+			 case CUSTOMER_UPDATE_DB_AFTER_PAYMENT:
+				 recivedMessageFromClient = OrderQueries.updatePaymentBalanceAndBudgetBalance((Message)message);
+				 break;
 			default:
 				break;
 			}
