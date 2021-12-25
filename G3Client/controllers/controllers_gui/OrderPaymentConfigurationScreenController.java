@@ -31,7 +31,7 @@ import orders.Order;
 import orders.PaymentWay;
 import users.BusinessCustomer;
 import users.Customer;
-import users.HrManager;
+import util.OrderBusinessBudgetCalculation;
 
 /**
  * 
@@ -351,6 +351,25 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    	Message message = new Message(Task.ORDER_FINISHED,Answer.WAIT_RESPONSE,order);
 	    	sendToClient(message);//send message to the server telling the order is finished and than push into DB
 	    	
+	    	/*send to the server the customers data for updating the balance and update the users budget balance in case of businessCustomer*/
+	    	/*decrement the amount balance used by the user (customer \ business customer*/
+	    	if(connectedUser instanceof BusinessCustomer){
+	    		/*In case the connected user is business customer update his budget balance accordingly*/
+	    		if(!alreadyEmployeeBudgetTextField.getText().equals("")) {
+		    	((BusinessCustomer)connectedUser).setBudgetUsed(((BusinessCustomer)connectedUser).getBudgetUsed()+Double.valueOf(alreadyEmployeeBudgetTextField.getText())); //set new budget used after use
+	    		}
+	    		if(!alreadyAccountBalanceTextField.getText().equals("")) {
+			    	((BusinessCustomer)connectedUser).setBalance(((BusinessCustomer)connectedUser).getBalance()-Double.valueOf(alreadyAccountBalanceTextField.getText())); //set new balance after reduce
+		    		}
+	    	}else {
+	    		if(!alreadyAccountBalanceTextField.getText().equals("")) {
+		    	((Customer)connectedUser).setBalance(((Customer)connectedUser).getBalance()-Double.valueOf(alreadyAccountBalanceTextField.getText())); //set new balance after reduce
+	    		}
+	    	}
+	    	
+	    	/*TBD: Send to server for updating customers balance and company budget*/
+	    	
+	    	
 	    	/*Give notice for the user that the order is ok*/
     		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
     		OrderChooseItemsScreenController.order= null; 
@@ -495,7 +514,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 					paymentMethods.add(pay);
 				}
 				if(connectedUser instanceof BusinessCustomer) {
-					availableBudgetBalanceTextField.setText(String.valueOf(((BusinessCustomer) connectedUser).getBudgetMaxAmount()));
+					availableBudgetBalanceTextField.setText(String.valueOf(OrderBusinessBudgetCalculation.calculateBusinessBudgetLeftForUser(((BusinessCustomer) connectedUser))));
 				}
 			}
 			else { // if connectedUser is instance of Customer
