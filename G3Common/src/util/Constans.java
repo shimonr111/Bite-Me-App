@@ -10,4 +10,6 @@ public class Constans {
 	public static final double PRE_ORDER_TAKE_AWAY_SUPPLY_TIME_IN_MINUTES = 20.0;
 	public static final double PRE_ORDER_DISCOUNT = 0.1;
 	public static final long TEN_MINUTES_IN_MILLESECONDS = 600000;
+	public static final double DAYS_IN_MONTH = 31.0;
+	public static final double WEEKS_IN_MONTH = 4.0;
 }

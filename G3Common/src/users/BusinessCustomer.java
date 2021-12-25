@@ -53,6 +53,14 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * 
 	 */
 	protected boolean isLoggedInAsBusinessAccount;
+	
+	/**
+	 * This is a field for the amount 
+	 * of budget that the Business customer 
+	 * had used according to the budget type.
+	 * 
+	 */
+	protected double budgetUsed;
 
 	/**
 	 * This is the constructor used for passing the object.
@@ -83,6 +91,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
 		this.isLoggedInAsBusinessAccount = false;
+		this.budgetUsed = 0;
 	}
 	
 	/**
@@ -113,6 +122,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
 		this.isLoggedInAsBusinessAccount = false;
+		this.budgetUsed = 0;
 	}
 
 	/**
@@ -164,6 +174,13 @@ public class BusinessCustomer extends Customer implements Serializable{
 		return isLoggedInAsBusinessAccount;
 	}
 
+	public double getBudgetUsed() {
+		return budgetUsed;
+	}
+
+	public void setBudgetUsed(double budgetUsed) {
+		this.budgetUsed = budgetUsed;
+	}
 	/**
 	 * This is the toString for this class
 	 */
