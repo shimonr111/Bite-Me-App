@@ -131,6 +131,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		   else {
 			   errorText.setText(""); //disable previous error warning
 			   PaymentWay paymentWay = paymentMethodCombo.getValue();
+			   try {
 			   double moneyToPay = Double.parseDouble(enterAmountTextField.getText());
 			   if(isPaymentAmountValidForAddAmount(paymentWay)) {
 				   amountLeftToPay -= moneyToPay; //update the amount left to pay
@@ -189,6 +190,11 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   break;
 			   }
 			  }
+			   }catch(NumberFormatException e) {
+				   errorText.setText("You have entered invalid amount to pay, Please change it!");
+		    	   errorText.setFill(Color.RED);
+			   }
+			   
 		   }
 	    }
 
@@ -216,6 +222,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		   else {
 			   errorText.setText(""); //disable previous error warning
 			   PaymentWay paymentWay = paymentMethodCombo.getValue();
+			   try {
 			   double moneyToReturn = Double.parseDouble(enterAmountTextField.getText());
 			   if(isPaymentAmountValidForRemoveAmount(paymentWay)) {
 				   amountLeftToPay += moneyToReturn; //update the amount left to pay
@@ -274,6 +281,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   break;
 			   }
 			  }
+			   }catch(NumberFormatException e) {
+				   errorText.setText("You have entered invalid amount to pay, Please change it!");
+		    	   errorText.setFill(Color.RED);
+			   }
 		   }
 	    }
 	   

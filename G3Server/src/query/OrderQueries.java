@@ -77,12 +77,19 @@ public class OrderQueries {
 				return returnMessageToClient;
 			}
 			while(rs.next()) {
+				/*Check if the supplier is confirmed if not than don't add it*/
+				if(ConfirmationStatus.valueOf(rs.getString(7)) == ConfirmationStatus.CONFIRMED) {
 				supplierList.put(rs.getString(1),rs.getString(2));//add to the hashMap all the data we need
+				}
 			}
 			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		/*In case the list is empty needed to be null for the message update to the UI*/
+		if(supplierList.size()==0) {
+			supplierList=null;
 		}
 		//set the message back to the customer
 		returnMessageToClient.setObject(supplierList);
