@@ -29,6 +29,7 @@ import orders.OrderTimeType;
 import orders.SupplyType;
 import orders.TakeAwaySupplyMethod;
 import users.Branch;
+import users.BusinessCustomer;
 import users.ConfirmationStatus;
 import users.Customer;
 import util.DateTimeHandler;
@@ -272,6 +273,21 @@ public class OrderQueries {
 		
 				
 		Message messageToClient = new Message(Task.MANAGE_ORDER_FINISHED, Answer.MANAGE_ORDER_SUCCEEDED_WRITING_INTO_DB, null);
+        return messageToClient;
+	}
+	
+	public static Message updatePaymentBalanceAndBudgetBalance(Message messageFromClient) throws SQLException{
+		if(messageFromClient.getObject() instanceof BusinessCustomer) {
+			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","budgetUsed='"+(((BusinessCustomer)messageFromClient.getObject()).getBudgetUsed())+"'",
+					"userID='"+(((BusinessCustomer)messageFromClient.getObject()).getUserId())+"'");
+			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","balance='"+(((BusinessCustomer)messageFromClient.getObject()).getBalance())+"'",
+					"userID='"+(((BusinessCustomer)messageFromClient.getObject()).getUserId())+"'");
+		}else if(messageFromClient.getObject() instanceof Customer) {
+			Query.updateOneColumnForTableInDbByPrimaryKey("customer","balance='"+(((Customer)messageFromClient.getObject()).getBalance())+"'",
+					"userID='"+(((Customer)messageFromClient.getObject()).getUserId())+"'");
+		}
+		
+		Message messageToClient = new Message(Task.CUSTOMER_UPDATE_DB_AFTER_PAYMENT, Answer.SUCCEED, null);
         return messageToClient;
 	}
 	

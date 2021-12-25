@@ -367,8 +367,9 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    		}
 	    	}
 	    	
-	    	/*TBD: Send to server for updating customers balance and company budget*/
-	    	
+	    	/*Send to server for updating customers balance and company budget*/
+	    	Message messageForUpdateBalance = new Message(Task.CUSTOMER_UPDATE_DB_AFTER_PAYMENT,Answer.WAIT_RESPONSE,connectedUser);
+	    	sendToClient(messageForUpdateBalance);//send message to the server telling the balance and budget update and than push into DB
 	    	
 	    	/*Give notice for the user that the order is ok*/
     		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
