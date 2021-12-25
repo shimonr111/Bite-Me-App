@@ -13,19 +13,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import users.Branch;
 import users.Company;
 import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
 import users.HrManager;
 import users.Login;
-
+import util.DataLists;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -133,26 +131,6 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     	}
     }
 
-    @FXML
-    void getCompanyAdd(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCompanyEmail(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getCompanyName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getConfirmEmail(ActionEvent event) {
-
-    }
-
     
     /**
      * 
@@ -171,23 +149,23 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  				returnVal=false;
  			}
  		if(returnVal==false) {
- 			errorText.setText("Please, Fill in all the marked fields !!");
+ 			errorText.setText("Please fill all the marked fields!");
  			return false;
  		}
  		if(!isInt(companyNameTxtField1)) {
  			companyNameTxtField1.setStyle("-fx-border-color: red");
- 			errorText.setText("Marked field must contain only numbers !");
+ 			errorText.setText("Marked field must contain only numbers!");
  			return false;
  			}
  		
  		if(companyEmailTxtField.getText().contains("@")==false) {
  			companyEmailTxtField.setStyle("-fx-border-color: red");
- 			errorText.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
+ 			errorText.setText("Please use a correct Email format (E-mail must contain a '@')!");
  			return false;
  		}
  		else if(companyEmailTxtField.getText().equals(confirmEmailTxtField.getText())== false) {
  			confirmEmailTxtField.setStyle("-fx-border-color: red");
- 			errorText.setText("Please, fill the same Email address on both email fields!!");
+ 			errorText.setText("Please fill the same Email address on both email fields!");
  			return false;
  		}
  		return true;

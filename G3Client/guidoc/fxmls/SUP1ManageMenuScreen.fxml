@@ -4,57 +4,70 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="503.0" prefWidth="649.0" styleClass="pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierWorkerManageMenuController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierWorkerManageMenuController">
    <children>
-      <Button id="btnExit" fx:id="btnExit" layoutX="-1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #F25022;" text="X" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Label layoutX="208.0" layoutY="9.0" prefHeight="53.0" prefWidth="253.0" text="Manage menu" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Label layoutX="339.0" layoutY="8.0" text="Home Screen -&gt; Login -&gt; Main Screen -&gt;" />
-      <Label layoutX="562.0" layoutY="8.0" text="Manage menu">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Button id="btnExit" fx:id="btnHelp" layoutX="40.0" layoutY="-1.0" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="43.0" prefWidth="36.0" style="-fx-background-color: #00BFFF;" text="?" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnBack" layoutX="-3.0" layoutY="438.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="64.0" prefWidth="94.0" style="-fx-background-color: #F25022;" text="Back" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <TableView fx:id="manageMenuTable" layoutX="56.0" layoutY="56.0" prefHeight="238.0" prefWidth="545.0" style="-fx-background-color: #F5F5DC;">
-         <columns>
-            <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
-            <TableColumn fx:id="itemNameColumn" prefWidth="156.0" text="Item name" />
-            <TableColumn fx:id="pictureColumn" prefWidth="115.0" text="Picture" />
-            <TableColumn fx:id="sizeColumn" prefWidth="75.0" text="Size" />
-            <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <Button fx:id="saveBtn" layoutX="264.0" layoutY="402.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="31.0" prefWidth="131.0" style="-fx-background-color: #7FBA00;" text="Save" textFill="#383838">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Text fx:id="errorText" layoutX="228.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
-      <Button fx:id="addItemBtn" layoutX="195.0" layoutY="315.0" mnemonicParsing="false" onAction="#getAddItemBtn" prefHeight="25.0" prefWidth="120.0" text="Add item" />
-      <Button fx:id="removeItemBtn" layoutX="319.0" layoutY="315.0" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="25.0" prefWidth="120.0" text="Remove item" />
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Manage Menu" />
+      <AnchorPane layoutX="162.0" layoutY="126.0" prefHeight="470.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label alignment="CENTER" layoutX="248.0" layoutY="14.0" prefHeight="50.0" prefWidth="204.0" styleClass="deliveryHeadLight" text="Manage Menu" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <TableView fx:id="manageMenuTable" layoutX="78.0" layoutY="86.0" prefHeight="238.0" prefWidth="545.0">
+               <columns>
+                  <TableColumn fx:id="categoryColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Category" />
+                  <TableColumn fx:id="itemNameColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Item name" />
+                  <TableColumn fx:id="pictureColumn" prefWidth="115.0" text="Picture" />
+                  <TableColumn fx:id="sizeColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Size" />
+                  <TableColumn fx:id="priceColumn" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" text="Price" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Text fx:id="errorText" layoutX="248.0" layoutY="344.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+            <HBox layoutX="250.0" layoutY="353.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="saveBtn1" mnemonicParsing="false" onAction="#getAddItemBtn" prefHeight="40.0" prefWidth="100.0" styleClass="addOrRemoveAmountButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="Add" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="removeItemBtn" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="40.0" prefWidth="100.0" styleClass="addOrRemoveAmountButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="Remove" textFill="#383838">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Button fx:id="saveBtn" layoutX="275.0" layoutY="403.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="40.0" prefWidth="150.0" styleClass="saveButton" text="Save" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

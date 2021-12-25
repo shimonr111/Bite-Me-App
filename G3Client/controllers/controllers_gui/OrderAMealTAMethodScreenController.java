@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -27,6 +28,7 @@ import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.TakeAwaySupplyMethod;
 import util.Constans;
+import util.DataLists;
 
 
 /**
@@ -72,6 +74,9 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 
     @FXML
     private TextField lastNameTextField;
+    
+    @FXML
+    private ComboBox<String> phonePrefixCombo;
 
      /**
      * Back button for the 
@@ -175,7 +180,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     private boolean isEmptyFields() {
     	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
-    			phoneTxtField.getText().equals("")) {
+    			phoneTxtField.getText().equals("") || (phonePrefixCombo.getValue() == null)) {
     		return true;
     	}
     	return false;
@@ -230,7 +235,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
-
+	phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
   }
 
 }

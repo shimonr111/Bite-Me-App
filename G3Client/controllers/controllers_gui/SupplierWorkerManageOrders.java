@@ -233,7 +233,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 							Stage.close();
 						}
 					});
-					//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();

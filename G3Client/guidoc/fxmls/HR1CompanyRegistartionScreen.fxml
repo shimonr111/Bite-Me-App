@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -45,13 +44,13 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Name:" />
-                                    <TextField fx:id="companyNameTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" onAction="#getCompanyName" prefHeight="35.0" prefWidth="120.0" promptText="Company name" styleClass="text-field" />
+                                    <TextField fx:id="companyNameTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" prefHeight="35.0" prefWidth="120.0" promptText="Company name" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Code:" />
-                                    <TextField fx:id="companyNameTxtField1" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" onAction="#getCompanyName" prefHeight="35.0" prefWidth="135.0" promptText="Company code" styleClass="text-field" />
+                                    <TextField fx:id="companyNameTxtField1" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" prefHeight="35.0" prefWidth="135.0" promptText="Company code" styleClass="text-field" />
                                  </children>
                               </VBox>
                            </children>
@@ -65,13 +64,13 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Email:" />
-                                    <TextField fx:id="companyEmailTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" onAction="#getCompanyEmail" prefHeight="35.0" prefWidth="120.0" promptText="Company Email" styleClass="text-field" />
+                                    <TextField fx:id="companyEmailTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" prefHeight="35.0" prefWidth="120.0" promptText="Company Email" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Confirm Email:" />
-                                    <TextField fx:id="confirmEmailTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" onAction="#getConfirmEmail" prefHeight="35.0" prefWidth="120.0" promptText="Confirm Email" styleClass="text-field" />
+                                    <TextField fx:id="confirmEmailTxtField" maxHeight="35.0" maxWidth="120.0" minHeight="35.0" minWidth="135.0" prefHeight="35.0" prefWidth="120.0" promptText="Confirm Email" styleClass="text-field" />
                                  </children>
                               </VBox>
                            </children>
@@ -85,25 +84,12 @@
                   </VBox>
                   <VBox maxHeight="120.0" maxWidth="300.0" prefHeight="112.0" prefWidth="300.0" spacing="5.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="35.0" maxWidth="300.0" minHeight="20.0" minWidth="300.0" prefHeight="20.0" prefWidth="300.0" styleClass="loginLabels" text="Delivery Address:">
+                        <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="35.0" maxWidth="300.0" minHeight="20.0" minWidth="300.0" prefHeight="20.0" prefWidth="300.0" styleClass="loginLabels" text="Company Address:">
                            <padding>
                               <Insets right="10.0" />
                            </padding>
                         </Label>
-                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="300.0" spacing="15.0">
-                           <children>
-                              <ComboBox fx:id="supplyTimeCombo1" prefHeight="30.0" prefWidth="90.0" promptText="City" />
-                              <ComboBox fx:id="supplyTimeCombo11" prefHeight="31.0" prefWidth="94.0" promptText="Street">
-                                 <padding>
-                                    <Insets bottom="5.0" />
-                                 </padding>
-                              </ComboBox>
-                           </children>
-                           <padding>
-                              <Insets left="10.0" />
-                           </padding>
-                        </HBox>
-                        <TextField fx:id="companyAddTxtField" alignment="CENTER" maxHeight="35.0" maxWidth="200.0" minHeight="35.0" minWidth="200.0" onAction="#getCompanyAdd" prefHeight="35.0" prefWidth="200.0" promptText="Street #, APT#, FLOOR#" styleClass="text-field">
+                        <TextField fx:id="companyAddTxtField" alignment="CENTER" maxHeight="35.0" maxWidth="200.0" minHeight="35.0" minWidth="200.0" prefHeight="35.0" prefWidth="200.0" styleClass="text-field">
                            <VBox.margin>
                               <Insets left="50.0" />
                            </VBox.margin>

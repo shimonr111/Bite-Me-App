@@ -45,7 +45,7 @@
                   <TableColumn fx:id="priceMenuColumn" prefWidth="60.0" text="Price" />
               </columns>
             </TableView>
-            <Button fx:id="addToCartBtn" layoutX="170.0" layoutY="336.0" mnemonicParsing="false" onAction="#getAddToCartBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionAddToCartButton" />
+            <Button fx:id="addToCartBtn" layoutX="170.0" layoutY="331.0" mnemonicParsing="false" onAction="#getAddToCartBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionAddToCartButton" />
             <Text fx:id="errorText" layoutX="119.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
          </children>
       </AnchorPane>
@@ -64,7 +64,7 @@
                   <TableColumn fx:id="commentCartColumn" prefWidth="150.0" text="Comments" />
               </columns>
             </TableView>
-            <Button fx:id="removeItemBtn" layoutX="171.0" layoutY="336.0" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionRemoveFromCartButton" />
+            <Button fx:id="removeItemBtn" layoutX="172.0" layoutY="331.0" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionRemoveFromCartButton" />
             <Text fx:id="errorText1" layoutX="118.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
          </children>
       </AnchorPane>

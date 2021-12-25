@@ -125,8 +125,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 							Stage.close();
 						}
 					});
-					scene.getStylesheets()
-							.add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Main Screen");
 					Stage.setScene(scene);
 					Stage.show();
@@ -244,7 +243,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 								Stage.close();
 							}
 						});
-						//scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Manage Menu");
 						Stage.setScene(scene);
 						Stage.show();

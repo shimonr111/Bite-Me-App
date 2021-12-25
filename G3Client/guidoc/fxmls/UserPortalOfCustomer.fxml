@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="userPortalExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfCustomerController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="userPortalExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.UserPortalOfCustomerController">
    <children>
       <AnchorPane layoutX="24.0" layoutY="116.0" maxHeight="700.0" maxWidth="250.0" minHeight="350.0" minWidth="150.0" prefHeight="580.0" prefWidth="250.0" styleClass="userPortalLeftPane">
          <children>
@@ -60,7 +60,7 @@
             <VBox layoutX="120.0" layoutY="15.0" prefHeight="440.0" prefWidth="320.0" styleClass="userPortalsBundleVBOX">
                <children>
                   <Button id="button-menu" fx:id="btnStartOrder" mnemonicParsing="false" onAction="#getStartOrderBtn" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsOrder" text="Start Order" />
-                  <Button fx:id="viewOrdersBtn" mnemonicParsing="false" onAction="#getViewOrdersBtn" prefHeight="52.0" prefWidth="290.0" text="View Orders" />
+                  <Button id="button-menu" fx:id="viewOrdersBtn" mnemonicParsing="false" onAction="#getViewOrdersBtn" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View Orders" />
                </children>
             </VBox>
          </children>

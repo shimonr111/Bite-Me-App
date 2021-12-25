@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -26,7 +27,9 @@ import javafx.stage.WindowEvent;
 import orders.DeliverySupplyMethod;
 import orders.DeliveryType;
 import orders.Order;
+import users.Branch;
 import util.Constans;
+import util.DataLists;
 
 
 /**
@@ -84,6 +87,15 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     
     @FXML
     private Button btnNext;
+    
+    @FXML
+    private ComboBox<String> cityCombo;
+    
+    @FXML
+    private ComboBox<String> streetCombo;
+    
+    @FXML
+    private ComboBox<String> phonePrefixCombo;
 
 	/**
      * Back button for the 
@@ -182,8 +194,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     	else {
     		deliveryInformation.setReceiverFirstName(firstNameTextField.getText());
     		deliveryInformation.setReceiverLastName(lastNameTextField.getText());
-    		deliveryInformation.setReceiverPhoneNumber(phoneTxtField.getText());
-    		deliveryInformation.setReciverAddress(addressTextField.getText());
+    		deliveryInformation.setReceiverPhoneNumber(phonePrefixCombo.getValue() + phoneTxtField.getText());
+    		deliveryInformation.setReciverAddress(cityCombo.getValue() + streetCombo.getValue() + addressTextField.getText());
     		
     		//move to next screen
     		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -201,7 +213,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      */
     private boolean isEmptyFields() {
     	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
-    			phoneTxtField.getText().equals("") || addressTextField.getText().equals("")){
+    			phoneTxtField.getText().equals("") || addressTextField.getText().equals("") || 
+    			(cityCombo.getValue() == null) || (streetCombo.getValue() == null) || (phonePrefixCombo.getValue() == null)){
     		return true;
     	}
     	return false;
@@ -258,8 +271,24 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   		calcTotalBill();
   		deliveryFeeTextField.setText(String.valueOf(Constans.REGULAR_DELIVERY_FEE_IN_NIS));	
   		deliveryFeeTextField.setDisable(true);
-  		
-	}
+  		switch(order.getBranch()) {
+  		case NORTH:
+  	  		cityCombo.getItems().addAll(DataLists.getNorthCitys());
+  			break;
+  		case CENTER:
+  	  		cityCombo.getItems().addAll(DataLists.getCenterCitys());
+  			break;
+  		case SOUTH:
+  	  		cityCombo.getItems().addAll(DataLists.getSouthCitys());
+  			break;
+  		default:
+  		break;
+  			
+  		}
+  		streetCombo.getItems().addAll(DataLists.getStreets());
+  		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
+		}
+		
 
   	/**
   	 * Calculate the total bill depending on
