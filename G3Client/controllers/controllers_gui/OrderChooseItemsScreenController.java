@@ -255,10 +255,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      */
     private void addCustomerUserTypeToOrderObj() {
     	String customerType = null;
-    	if(connectedUser instanceof HrManager) {
-    		customerType = "hrmanager";
-    	}
-    	else if(connectedUser instanceof BusinessCustomer) {
+    	if(connectedUser instanceof BusinessCustomer) {
     		customerType = "businesscustomer";
     	}else {
     		customerType = "customer";
