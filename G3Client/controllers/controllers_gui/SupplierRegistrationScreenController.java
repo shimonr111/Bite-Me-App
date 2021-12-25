@@ -151,7 +151,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Company Confirmation");
+					Stage.setTitle("Supplier Registration");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

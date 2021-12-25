@@ -110,7 +110,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     
     @FXML
     void getRefreshBtn(ActionEvent event) {
-
+    	initialize(null, null);
     }
     
     /**

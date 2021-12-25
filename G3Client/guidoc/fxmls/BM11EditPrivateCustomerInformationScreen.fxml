@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditPrivateCustomerInformationScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditPrivateCustomerInformationScreenController">
    <children>
       <Button id="other-btns" fx:id="btnSave" layoutX="422.0" layoutY="620.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" styleClass="saveWhiteButton" text="Save" textFill="#383838">
          <font>
@@ -63,13 +63,13 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="First Name:" />
-                                    <TextField fx:id="firstNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="First name" styleClass="text-field" />
+                                    <TextField fx:id="firstNameTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="First name" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Last Name:" />
-                                    <TextField fx:id="lastNameTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="Last name" styleClass="text-field" />
+                                    <TextField fx:id="lastNameTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="Last name" styleClass="text-field" />
                                  </children>
                               </VBox>
                            </children>
@@ -85,7 +85,7 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="ID:" />
-                                    <TextField fx:id="idNumTxtField" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="ID" styleClass="text-field" />
+                                    <TextField fx:id="idNumTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="ID" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
@@ -129,8 +129,8 @@
                               </Label>
                               <HBox prefHeight="37.0" prefWidth="205.0" spacing="5.0">
                                  <children>
-                                    <ComboBox fx:id="phonePrefixCombo" prefHeight="30.0" prefWidth="90.0" promptText="Prefix" />
-                                    <TextField fx:id="phoneTxtField" maxHeight="30.0" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="123-4567" styleClass="text-field" />
+                                    <ComboBox fx:id="phonePrefixCombo" disable="true" prefHeight="30.0" prefWidth="90.0" promptText="Prefix" />
+                                    <TextField fx:id="phoneTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="123-4567" styleClass="text-field" />
                                  </children>
                                  <padding>
                                     <Insets left="40.0" />
@@ -143,7 +143,7 @@
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
-                                    <TextField fx:id="emailTxtField" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
+                                    <TextField fx:id="emailTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
                                  </children>
                               </VBox>
                            </children>

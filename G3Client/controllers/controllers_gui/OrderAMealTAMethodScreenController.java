@@ -104,7 +104,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Choose supply method");
+					Stage.setTitle("Fill Take-Away details");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

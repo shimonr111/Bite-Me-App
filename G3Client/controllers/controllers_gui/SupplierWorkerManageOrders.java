@@ -15,6 +15,8 @@ import communication.Task;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -37,6 +40,7 @@ import orders.Order;
 import orders.OrderStatus;
 import orders.SupplyType;
 import users.SupplierWorker;
+import users.UserForRegistration;
 
 /**
  * 
@@ -96,7 +100,10 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private Text errorText;
-  
+    
+
+    @FXML
+    private TextField searchTextField;
     
     /**
      * This is a function for going back
@@ -234,7 +241,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Choose Items");
+					Stage.setTitle("Manage Orders");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -308,6 +315,32 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			}
 	    	
 	    });
+	    
+	    FilteredList<Order> filteredData = new FilteredList<Order>(ordersForManageOrderTable , b -> true);
+		searchTextField.textProperty().addListener((observable, oldValue, newValue)->{
+			filteredData.setPredicate(Order ->{
+				if(newValue.isEmpty() ||  newValue == null) {
+					return true;
+				}
+				
+				String searchKeyWord = newValue.toLowerCase();
+				
+				if(Integer.toString(Order.getOrderNumber()).toLowerCase().indexOf(searchKeyWord)>-1) {
+					return true;
+				}
+				
+				else
+					return false; // nothing to display
+				
+				
+			});
+		});
+		
+		SortedList<Order>  sortedData = new SortedList<>(filteredData);
+		
+		sortedData.comparatorProperty().bind(manageOrdersTable.comparatorProperty());
+		
+		manageOrdersTable.setItems(sortedData);
 		
 	} 
 
