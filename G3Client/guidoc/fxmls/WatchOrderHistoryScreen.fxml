@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.WatchOrderHistoryScreenController">
+   <children>
+      <Label layoutX="399.0" layoutY="27.0" prefHeight="49.0" prefWidth="203.0" text="Orders Progress">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="ordersTable" layoutX="16.0" layoutY="121.0" prefHeight="230.0" prefWidth="879.0">
+        <columns>
+          <TableColumn fx:id="resturantNameCol" prefWidth="165.0" text="Resturant" />
+          <TableColumn fx:id="dateCol" prefWidth="115.0" text="Date" />
+            <TableColumn fx:id="timeCol" prefWidth="65.0" text="Time" />
+            <TableColumn fx:id="orderDetailsCol" prefWidth="275.0" text="Order Details" />
+            <TableColumn fx:id="statusCol" prefWidth="258.0" text="Status" />
+        </columns>
+      </TableView>
+      <Text fx:id="nameTxt" layoutX="14.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="631.13671875">
+         <font>
+            <Font name="Arial Black" size="12.0" />
+         </font>
+      </Text>
+      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" text="Exit" />
+      <Button fx:id="helpBtn" layoutX="35.0" layoutY="2.0" mnemonicParsing="false" onAction="#getHelpBtn" text="?" />
+      <Button fx:id="backBtn" layoutX="1.0" layoutY="416.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="25.0" prefWidth="101.0" text="Back" />
+      <Button fx:id="refreshBtn" layoutX="391.0" layoutY="365.0" mnemonicParsing="false" onAction="#getRefreshBtn" prefHeight="25.0" prefWidth="109.0" text="Refresh" />
+   </children>
+</Pane>

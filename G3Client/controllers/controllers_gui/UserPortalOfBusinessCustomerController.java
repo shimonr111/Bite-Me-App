@@ -51,6 +51,9 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	private Button btnHelp;
 	@FXML
 	private Button btnStartOrder;
+
+    @FXML
+    private Button viewOrdersBtn;
 	@FXML
 	private Label companyNameLabel;
 	
@@ -109,7 +112,16 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 		OrderW4cIdentificationScreenController w4cIdentificationController = new OrderW4cIdentificationScreenController();
 		w4cIdentificationController.initW4cIdentificationScreen(); // call the init of the next screen
 	}
-	// Event Listener on ComboBox[#homeBranchCombo].onAction
+	/**
+	 * 
+	 * @param event
+	 */
+    @FXML
+    void getViewOrdersBtn(ActionEvent event) {
+     	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    	WatchOrderHistoryScreenController watchOrderHistoryScreenController = new WatchOrderHistoryScreenController();
+    	watchOrderHistoryScreenController.initOrderHistoryScreen(); // call the init of the next screen
+    }
 	
 	
 	/**

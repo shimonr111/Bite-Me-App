@@ -20,6 +20,7 @@ import controllers_gui.SupplierWorkerManageMenuController;
 import controllers_gui.SupplierWorkerManageOrders;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
+import controllers_gui.WatchOrderHistoryScreenController;
 import controllers_gui.UsersRegistrationScreenController;
 import controllers_gui.ViewQuarterlyReportsScreenController;
 import controllers_gui.ViewSystemReportsScreenCEOController;
@@ -29,6 +30,7 @@ import users.BusinessCustomer;
 import users.Company;
 import users.Supplier;
 import users.User;
+import util.OrderForView;
 import util.SupplierByReport;
 import users.UserForRegistration;
 
@@ -249,6 +251,9 @@ public class AnalyzeMessageFromServer {
 			case DISPLAY_SUPPLIERS_INTO_TABLE:
 				SupplierRegistrationScreenController.suppliersWaitingForConfirmation = (ArrayList<Supplier>)recivedMessageFromServer.getObject();
 				break;
+			case DISPLAY_ORDERS_INTO_TABLE:
+				WatchOrderHistoryScreenController.ordersForCustomer = (ArrayList<OrderForView>)recivedMessageFromServer.getObject();
+				break;
 			case GET_RESTAURANTS_FOR_ORDER:
 				switch(recievedAnswerFromServer) {
 				case RESTAURANTS_NOT_EXIST_IN_THIS_BRANCH:
@@ -343,6 +348,7 @@ public class AnalyzeMessageFromServer {
 					break;
 				}
 				break;
+				
 			default:
 				break;
 			}
