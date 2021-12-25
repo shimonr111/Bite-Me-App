@@ -276,6 +276,14 @@ public class OrderQueries {
         return messageToClient;
 	}
 	
+	/**
+	 * This function updates in the DB the balance
+	 * and budget balance of the user
+	 * 
+	 * @param messageFromClient
+	 * @return
+	 * @throws SQLException
+	 */
 	public static Message updatePaymentBalanceAndBudgetBalance(Message messageFromClient) throws SQLException{
 		if(messageFromClient.getObject() instanceof BusinessCustomer) {
 			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","budgetUsed='"+(((BusinessCustomer)messageFromClient.getObject()).getBudgetUsed())+"'",
