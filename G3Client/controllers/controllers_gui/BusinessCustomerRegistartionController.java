@@ -35,6 +35,7 @@ import users.HrManager;
 import users.Login;
 import users.PositionType;
 import users.UserForRegistration;
+import util.DataLists;
 
 /**
  * 
@@ -100,6 +101,9 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 
     @FXML
     private ComboBox<String> budgetTypeCombo;
+    
+    @FXML
+    private ComboBox<String> phonePrefixCombo;
 
     @FXML
     private TextField cvvTxtField;
@@ -360,8 +364,11 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  			displayMessage.setText("Please, pick your choice from the 'Select Budget type' box!");
  			return false;
  		}
- 			
  		
+ 		if(phonePrefixCombo.getValue() == null) {
+ 			displayMessage.setText("Please, pick your choice from the 'Prefix' box!");
+ 			return false;
+ 		}
  		for(TextField intTxt : integerFields) {
  			if(!isInt(intTxt)) {
  				intTxt.setStyle("-fx-border-color: red");
@@ -413,6 +420,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		textFields.add(phoneTxtField); textFields.add(userNameField);
 		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField); integerFields.add(monthlyMaxBudgedTxtField);
 		integerFields.add(phoneTxtField);
+		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		getCompanies();
 		Branch homeBranch = connectedUser.getHomeBranch();
 		if(homeBranch.equals(Branch.NORTH))

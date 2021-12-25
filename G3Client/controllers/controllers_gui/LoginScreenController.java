@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -64,8 +65,9 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * Password field
 	 * of the user 
 	 */
+	
 	@FXML
-	private TextField passwordField;
+	private PasswordField passwordField;
 	
 	/**
 	 * This button exit 

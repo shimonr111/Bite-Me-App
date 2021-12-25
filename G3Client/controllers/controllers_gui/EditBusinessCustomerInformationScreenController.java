@@ -31,6 +31,7 @@ import users.BusinessCustomer;
 import users.ConfirmationStatus;
 import users.HrManager;
 import users.PositionType;
+import util.DataLists;
 
 /**
  * 
@@ -100,7 +101,10 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 
     @FXML
     private ComboBox<ConfirmationStatus> statusComboBox;
-
+    
+    @FXML
+    private ComboBox<String> phonePrefixCombo;
+    
     @FXML
     private Text errorText;
 
@@ -245,6 +249,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
 		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
+		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		
 	}
 
