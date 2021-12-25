@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.bouncycastle.cms.bc.BcPasswordEnvelopedRecipient;
+
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -150,6 +152,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	// Event Listener on Button[#btnLogin].onAction
 	@FXML
 	public void getLoginBtn(ActionEvent event) {
+		passwordField.setStyle(null); userNameField.setStyle(null);
 		Login login = new Login(userNameField.getText(),passwordField.getText());
 		//check validity of Login content
 		if(isLoginDataValidFromUser(login)) {
@@ -225,11 +228,17 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * @return
 	 */
 	 private boolean isLoginDataValidFromUser(Login login) {
-		if(login.getUserName().equals("") || login.getPassword().equals("")) { // checking if the user didn't enter both username and password.
+		if(login.getUserName().equals(""))
+			userNameField.setStyle("-fx-border-color: red");
+		if(login.getPassword().equals("")) { // checking if the user didn't enter both username and password.
+			passwordField.setStyle("-fx-border-color: red");
+		}
+		if(login.getUserName().equals("") || login.getPassword().equals("")) {
 			setRelevantTextToErrorLable("Please fill all the required fields (*)",true);
 			return false;
 		}
-		return true;
+		else
+			return true;
 	}
 	 
 	
@@ -263,7 +272,6 @@ public class LoginScreenController extends AbstractBiteMeController{
 		setRelevantTextToErrorLable("",false);
 		try {
 			root = loader.load(getClass().getResource("/fxmls/LoginScreen.fxml").openStream());
-			//root = FXMLLoader.load(getClass().getResource("/fxmls/LoginScreen.fxml"));
 			loginScreenController = loader.getController();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

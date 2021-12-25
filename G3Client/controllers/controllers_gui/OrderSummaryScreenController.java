@@ -227,7 +227,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Choose Items");
+					Stage.setTitle("Order Summary");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

@@ -194,7 +194,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 						}
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Choose restaurant");
+					Stage.setTitle("Choose Items");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {

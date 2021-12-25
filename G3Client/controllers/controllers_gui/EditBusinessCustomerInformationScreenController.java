@@ -106,14 +106,14 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     private ComboBox<String> phonePrefixCombo;
     
     @FXML
-    private Text errorText;
+    private Text displayMessage;
 
     @FXML
     void getSaveBtn(ActionEvent event) {
     	ConfirmationStatus oldStatus = businessCustomer.getStatusInSystem();
     	String newStatus = statusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
-    		errorText.setText("There were no changes");
+    		displayMessage.setText("There were no changes");
     	}
     	else {
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to save the changes.");
@@ -140,7 +140,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     		default:
     			break;		
     		}
-    		errorText.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		displayMessage.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
     		}
     	}
     }
@@ -241,6 +241,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		displayMessage.setText("");
 		firstNameTxtField.setText(businessCustomer.getUserFirstName()); lastNameTxtField.setText(businessCustomer.getUserLastName()); idNumTxtField.setText(businessCustomer.getUserId()); 
 		phoneTxtField.setText(businessCustomer.getPhoneNumber());  emailTxtField.setText(businessCustomer.getUserEmail());
 		monthlyMaxBudgedTxtField.setText(Integer.toString(businessCustomer.getBudgetMaxAmount()));
@@ -248,6 +249,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		positionCombo.setValue(businessCustomer.getPositionType());
 		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
+		budgetTypeCombo.setValue(businessCustomer.getBudgetOfBusinessCustomer());
 		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
 		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		

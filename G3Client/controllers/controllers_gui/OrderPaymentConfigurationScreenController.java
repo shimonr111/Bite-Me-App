@@ -304,7 +304,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 							}
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-						Stage.setTitle("Choose restaurant");
+						Stage.setTitle("Payment Method");
 						Stage.setScene(scene);
 						Stage.show();
 					} catch (IOException e) {
