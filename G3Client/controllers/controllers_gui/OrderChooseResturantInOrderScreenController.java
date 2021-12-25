@@ -83,9 +83,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      */
     @FXML
     void getBackBtn(ActionEvent event) {
-    	if(connectedUser instanceof HrManager) {
-    		((HrManager) connectedUser).setLoggedInAsBusinessAccount(false);
-    	}else if(connectedUser instanceof BusinessCustomer) {
+    	if(connectedUser instanceof BusinessCustomer) {
     		((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(false);
     	}
     	Platform.runLater(new Runnable() {

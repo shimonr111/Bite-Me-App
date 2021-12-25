@@ -170,10 +170,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   break;
 			   case EMPLOYEE_BUDGET:
 				    boolean isLoggedInAsBusinessAccount = false;
-					if(connectedUser instanceof HrManager) {
-						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
-					}
-					else if(connectedUser instanceof BusinessCustomer) {
+				    if(connectedUser instanceof BusinessCustomer) {
 						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
 					}
 					if(isLoggedInAsBusinessAccount) {
@@ -258,10 +255,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   break;
 			   case EMPLOYEE_BUDGET:
 				   boolean isLoggedInAsBusinessAccount = false;
-					if(connectedUser instanceof HrManager) {
-						isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
-					}
-					else if(connectedUser instanceof BusinessCustomer) {
+				   if(connectedUser instanceof BusinessCustomer) {
 						isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
 					}
 						if(isLoggedInAsBusinessAccount) {
@@ -493,20 +487,14 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			List<PaymentWay> paymentMethods = new ArrayList<>();
 			/*For business customer and hr manager*/
 			boolean isLoggedInAsBusinessAccount = false;
-			if(connectedUser instanceof HrManager) {
-				isLoggedInAsBusinessAccount = ((HrManager) connectedUser).getLoggedInAsBusinessAccount();
-			}
-			else if(connectedUser instanceof BusinessCustomer) {
+			if(connectedUser instanceof BusinessCustomer) {
 				isLoggedInAsBusinessAccount = ((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount();
 			}
 			if(connectedUser instanceof BusinessCustomer && (isLoggedInAsBusinessAccount)) {
 				for(PaymentWay pay : PaymentWay.values()) {
 					paymentMethods.add(pay);
 				}
-				if(connectedUser instanceof HrManager) {
-					availableBudgetBalanceTextField.setText(String.valueOf(((HrManager) connectedUser).getBudgetMaxAmount()));
-				}
-				else {
+				if(connectedUser instanceof BusinessCustomer) {
 					availableBudgetBalanceTextField.setText(String.valueOf(((BusinessCustomer) connectedUser).getBudgetMaxAmount()));
 				}
 			}

@@ -179,19 +179,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     			}
     			else {
     				//check if the user is business user and than check if he enters with the company code number if so check validity
-    				if(connectedUser instanceof HrManager) {
-    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
-    						//check validity of the company code number
-    						if(((HrManager) connectedUser).getcompanyOfBusinessCustomer().getcompanyCode() ==  Integer.parseInt(companyCodeTextField.getText())) {
-        						((HrManager) connectedUser).setLoggedInAsBusinessAccount(true);
-    						}
-    						else {
-    							errorText.setText("Wrong company code number, please enter other one!!");
-    		    	    		errorText.setFill(Color.RED);
-    		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
-    						}
-    					}
-    				} else if(connectedUser instanceof BusinessCustomer) {
+    				if(connectedUser instanceof BusinessCustomer) {
     					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
     						if(((BusinessCustomer) connectedUser).getcompanyOfBusinessCustomer().getcompanyCode() ==  Integer.parseInt(companyCodeTextField.getText())) {
     							((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(true); 
@@ -203,18 +191,8 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     						}
     					}
     				}
-    				//check if the user is a businessCustomer or HR and tried to enter company code with wrong input else continue
-    				if(connectedUser instanceof HrManager) {
-    					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
-    						if(((HrManager) connectedUser).getLoggedInAsBusinessAccount()) { 
-    							setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
-    						}
-    					}
-    					else {
-    						setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
-    					}
-    				}
-    				else if(connectedUser instanceof BusinessCustomer){
+    				//check if the user is a businessCustomer and if he tried to enter company code with wrong input, else continue
+    				if(connectedUser instanceof BusinessCustomer){
     					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
     						if(((BusinessCustomer) connectedUser).getLoggedInAsBusinessAccount()) { 
     							setHomeBranchAccordingToUsersChoiseAndChangeScreen(event);
