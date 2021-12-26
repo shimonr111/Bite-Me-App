@@ -1140,8 +1140,8 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Table-View ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+
 .table-view{
-    
     -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
     -fx-border-color: linear-gradient(to bottom, #141e30, #243b55);
     -fx-font-size: 14px;
@@ -1155,7 +1155,9 @@
 
 .table-view .column-header-background{
     -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-     -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-background-radius: 5px 5px 0px 0px;
+    -fx-background-insets: 0 5px 0 0;
 }
 
 .table-view .column-header-background .label{
@@ -1165,7 +1167,7 @@
     -fx-font-weight: Bold;
 }
 .table-view .table-cell{
-    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-table-cell-border-color: transparent;
     -fx-text-fill:linear-gradient(to bottom, #141e30, #243b55);
     -fx-font-size: 12px;
 
@@ -1173,14 +1175,26 @@
 .table-row-cell:selected {
 	
 }
-.table-view > .virtual-flow > .scroll-bar:vertical,
-.table-view > .virtual-flow > .scroll-bar:vertical > .track,
-.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
-.table-view > .virtual-flow > .scroll-bar:horizontal,
-.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
-.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
-     -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
 
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, #141e30, #243b55);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to bottom, #141e30, #243b55);
 }
 
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

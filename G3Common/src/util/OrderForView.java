@@ -2,7 +2,7 @@ package util;
 
 import java.io.Serializable;
 
-public class OrderForView  implements Serializable{
+public class OrderForView implements Serializable{
 	
 	private String resturantName;
 	private String orderDate;

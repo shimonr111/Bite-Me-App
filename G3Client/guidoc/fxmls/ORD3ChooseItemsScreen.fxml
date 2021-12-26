@@ -29,57 +29,57 @@
       </HBox>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <Button fx:id="nextBtn" layoutX="805.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBtnNext" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
-      <AnchorPane layoutX="50.0" layoutY="184.0" prefHeight="400.0" prefWidth="440.0" styleClass="itemSelectionMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="67.0" layoutY="128.0" prefHeight="480.0" prefWidth="540.0" styleClass="itemSelectionMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label layoutX="180.0" layoutY="24.0" styleClass="itemSelectionMenuHeadLight" text="Menu" textFill="#383838">
+            <Label layoutX="236.0" layoutY="14.0" styleClass="itemSelectionMenuHeadLight" text="Menu" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="menuTable" layoutX="24.0" layoutY="85.0" prefHeight="230.0" prefWidth="392.0">
+            <TableView fx:id="menuTable" layoutX="27.0" layoutY="59.0" prefHeight="320.0" prefWidth="486.0">
               <columns>
-                <TableColumn fx:id="menuCategoryColumn" text="Category" />
-                <TableColumn fx:id="itemMenuColumn" prefWidth="90.0" text="Item Name" />
-                  <TableColumn fx:id="pictureMenuColumn" text="Picture" />
+                <TableColumn fx:id="pictureMenuColumn" prefWidth="138.0" text="Picture" />
+                <TableColumn fx:id="menuCategoryColumn" prefWidth="100.0" text="Category" />
+                  <TableColumn fx:id="itemMenuColumn" prefWidth="100.0" text="Item Name" />
                   <TableColumn fx:id="sizeMenuColumn" text="Size" />
-                  <TableColumn fx:id="priceMenuColumn" prefWidth="60.0" text="Price" />
+                  <TableColumn fx:id="priceMenuColumn" prefWidth="65.0" text="Price" />
               </columns>
             </TableView>
-            <Button fx:id="addToCartBtn" layoutX="170.0" layoutY="331.0" mnemonicParsing="false" onAction="#getAddToCartBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionAddToCartButton" />
-            <Text fx:id="errorText" layoutX="119.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <Button fx:id="addToCartBtn" layoutX="242.0" layoutY="416.0" mnemonicParsing="false" onAction="#getAddToCartBtn" prefHeight="45.0" prefWidth="70.0" styleClass="itemSelectionAddToCartButton" />
+            <Text fx:id="errorText" layoutX="175.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="535.0" layoutY="184.0" prefHeight="400.0" prefWidth="440.0" styleClass="itemSelectionCartPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="615.0" layoutY="233.0" prefHeight="270.0" prefWidth="380.0" styleClass="itemSelectionCartPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label layoutX="192.0" layoutY="24.0" styleClass="itemSelectionCartHeadLight" text="Cart" textFill="#383838">
+            <Label layoutX="161.0" layoutY="7.0" styleClass="itemSelectionCartHeadLight" text="Cart" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="cartTable" layoutX="25.0" layoutY="85.0" prefHeight="230.0" prefWidth="392.0">
+            <TableView fx:id="cartTable" layoutX="23.0" layoutY="52.0" prefHeight="124.0" prefWidth="341.0">
               <columns>
                   <TableColumn fx:id="itemCartColumn" prefWidth="100.0" text="Item Name" />
                   <TableColumn fx:id="sizeCartColumn" text="Size" />
                   <TableColumn fx:id="priceCartColumn" prefWidth="60.0" text="Price" />
-                  <TableColumn fx:id="commentCartColumn" prefWidth="150.0" text="Comments" />
+                  <TableColumn fx:id="commentCartColumn" prefWidth="100.0" text="Comments" />
               </columns>
             </TableView>
-            <Button fx:id="removeItemBtn" layoutX="172.0" layoutY="331.0" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="50.0" prefWidth="100.0" styleClass="itemSelectionRemoveFromCartButton" />
-            <Text fx:id="errorText1" layoutX="118.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <Button fx:id="removeItemBtn" layoutX="158.0" layoutY="200.0" mnemonicParsing="false" onAction="#getRemoveItemBtn" prefHeight="45.0" prefWidth="70.0" styleClass="itemSelectionRemoveFromCartButton" />
+            <Text fx:id="errorText1" layoutX="91.0" layoutY="197.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="402.0" layoutY="135.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionCartAndOrderPane">
+      <AnchorPane layoutX="655.0" layoutY="155.0" prefHeight="80.0" prefWidth="300.0" styleClass="itemSelectionCartAndOrderPane">
          <children>
-            <Label layoutX="7.0" layoutY="16.0" styleClass="itemSelectionMainHeadLight" text="Item Selection" textFill="#383838">
+            <Label contentDisplay="CENTER" layoutX="48.0" layoutY="18.0" styleClass="itemSelectionMainHeadLight" text="Item Selection" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="402.0" layoutY="540.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
+      <AnchorPane layoutX="655.0" layoutY="491.0" prefHeight="80.0" prefWidth="300.0" styleClass="itemSelectionPricePane">
          <children>
-            <Label layoutX="60.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Total Price">
+            <Label layoutX="100.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Total Price">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

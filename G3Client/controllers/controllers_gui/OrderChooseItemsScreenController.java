@@ -25,20 +25,27 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.StringConverter;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
+import orders.ItemWithPicture;
 import orders.Order;
+import orders.OrderStatus;
 import users.BusinessCustomer;
 import users.Customer;
 import users.HrManager;
+
 
 /**
  * 
@@ -55,7 +62,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 	/**
 	 * Class members description:
 	 */
-	
 	private static FXMLLoader loader;
     private static OrderChooseItemsScreenController orderChooseItemsScreenController;
 	private static String restaurantID;
@@ -95,22 +101,22 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     private Button removeItemBtn;
 
     @FXML
-    private TableView<Item> menuTable;
+    private TableView<ItemWithPicture> menuTable;
+    
+    @FXML
+    private TableColumn<ItemWithPicture, ImageView> pictureMenuColumn;
+    
+    @FXML
+    private TableColumn<ItemWithPicture, ItemCategory> menuCategoryColumn;
 
     @FXML
-    private TableColumn<Item, ItemCategory> menuCategoryColumn;
+    private TableColumn<ItemWithPicture, String> itemMenuColumn;
 
     @FXML
-    private TableColumn<Item, String> itemMenuColumn;
+    private TableColumn<ItemWithPicture, ItemSize> sizeMenuColumn;
 
     @FXML
-    private TableColumn<Item, String> pictureMenuColumn;
-
-    @FXML
-    private TableColumn<Item, ItemSize> sizeMenuColumn;
-
-    @FXML
-    private TableColumn<Item, Double> priceMenuColumn;
+    private TableColumn<ItemWithPicture, Double> priceMenuColumn;
 
     @FXML
     private TextField totalPriceTxtField;
@@ -135,9 +141,9 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     @FXML
     void getAddToCartBtn(ActionEvent event) {
     	if(menuTable.getSelectionModel().getSelectedItem() != null) {
-    		if(menuTable.getSelectionModel().getSelectedItem() instanceof Item) {
+    		if(menuTable.getSelectionModel().getSelectedItem() instanceof ItemWithPicture) {
     			errorText1.setVisible(false); // if the user added an item to the cart set invisible
-    			Item itemAddToCart = new Item((Item)menuTable.getSelectionModel().getSelectedItem());
+    			Item itemAddToCart = new Item((Item)menuTable.getSelectionModel().getSelectedItem().getItem());
     			itemAddToCart.setSupplierUserId(restaurantID);
     			order.itemList.add(itemAddToCart);//add item to cart
     			order.totalPrice += itemAddToCart.getPrice();
@@ -341,7 +347,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		totalPriceTxtField.setDisable(true); //set total price disable so that the user cant edit the price of the order
-		ObservableList<Item> items = FXCollections.observableArrayList();
+		ObservableList<ItemWithPicture> items = FXCollections.observableArrayList();
 		Message message = new Message (Task.GET_ITEMS_FOR_ORDER_MENU,Answer.WAIT_RESPONSE,restaurantID);
 		sendToClient(message);
 		if(itemListOfMenuFromDB == null) {
@@ -351,21 +357,24 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		}
 		else {
 			//add all the wrapper items to the table view
-			items.addAll(itemListOfMenuFromDB);
+			for(Item i : itemListOfMenuFromDB) {
+				items.add(new ItemWithPicture(i));
+			}
 		}
 		cartTable.setEditable(true); //enables to add text fields to the comment column
+
+		pictureMenuColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,ImageView>("picture"));
 		
-		menuCategoryColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemCategory>("category"));
+		menuCategoryColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,ItemCategory>("category"));
 		
-		itemMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("itemName"));
+		itemMenuColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,String>("itemName"));
 		itemCartColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("itemName"));
 		
-		pictureMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("picturePath"));
 		
-		sizeMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemSize>("size"));
+		sizeMenuColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,ItemSize>("size"));
 		sizeCartColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemSize>("size"));
 		
-		priceMenuColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
+		priceMenuColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,Double>("price"));
 		priceCartColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
 		
 		commentCartColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("comment"));
