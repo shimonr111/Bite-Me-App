@@ -271,7 +271,10 @@ public class Query {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
-		}catch(SQLException e) {
+		}catch(java.sql.SQLIntegrityConstraintViolationException e) {
+			BiteMeServerUI.console.add("User name already Imported.\n");
+		}
+		catch(SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -384,7 +387,7 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
-			e.printStackTrace();
+			
 		}
 	}
 	
@@ -454,7 +457,7 @@ public class Query {
 	 * 
 	 * @param customer
 	 */
-	public static void insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
+	public static boolean insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
 		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
 				+ "supplierId, workerPosition ) VALUES( '" + supplierWorker.getUserId() + "', '" + supplierWorker.getStatusInSystem() + "', '" + supplierWorker.getUserFirstName() + "', '" 
 				+ supplierWorker.getUserLastName() + "', '" +  supplierWorker.getHomeBranch() + "', '" +  0+ "', '" +  supplierWorker.getUserEmail() + "', '" +  supplierWorker.getPhoneNumber()
@@ -464,8 +467,11 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Supplier workers already Imported.\n");
+			return true;
 		}
+		
+		return false;
 				
 	}
 	
@@ -473,7 +479,7 @@ public class Query {
 	 * This method gets a company object and insert it into the company table in DB.
 	 * @param company
 	 */
-	public static void insertOneRowIntoCompanyTable(Company company) {
+	public static boolean insertOneRowIntoCompanyTable(Company company) {
 		String query = "INSERT INTO semesterialproject.company (companyName, companyStatusInSystem, address, email, companyCode) VALUES ('" +company.getCompanyName()
 		+"', '" + company.getStatusCompanyInSystem() +"', '" + company.getAddress() +"', '" + company.getEmail() +"', '" + company.getcompanyCode() + "' )";
 		PreparedStatement pstmt=null;
@@ -481,15 +487,18 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Companies already Imported.\n");
+			return true;
 		}
+		
+		return false;
 	}
 	
 	/**
 	 * This method gets a ceo user and insert him into ceoBiteMe table.
 	 * @param ceo
 	 */
-	public static void inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
+	public static boolean inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
 		String query = "INSERT INTO semesterialproject.ceobiteme (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + ceo.getUserId()
 		+ "' , '" + ceo.getStatusInSystem().toString() 	+ "' , '" + ceo.getUserFirstName() + "' , '" + ceo.getUserLastName() + "' , '" + ceo.getHomeBranch().toString() + "' , '" + 0 
 		+ "' , '" + ceo.getUserEmail() + "' , '" + ceo.getPhoneNumber() +"' )";
@@ -498,15 +507,17 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Ceo Bite Me Already Imported.\n");
+			return true;
 		}
+		return false;
 	}
 	
 	/**
 	 * this method gets a branch manager and insert it into branch manager table.
 	 * @param bm
 	 */
-	public static void insertOneRowIntoBranchManagerTable(BranchManager bm) {
+	public static boolean insertOneRowIntoBranchManagerTable(BranchManager bm) {
 		String query = "INSERT INTO semesterialproject.branchmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + bm.getUserId()
 		+ "' , '" + bm.getStatusInSystem().toString() 	+ "' , '" + bm.getUserFirstName() + "' , '" + bm.getUserLastName() + "' , '" + bm.getHomeBranch().toString() + "' , '" + 0 
 		+ "' , '" + bm.getUserEmail() + "' , '" + bm.getPhoneNumber() +"' )";
@@ -515,15 +526,17 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Branch Managers Already Imported.\n");
+			return true;
 		}
+		return false;
 	}
 	
 	/**
 	 * This method gets a supplier , and inserts the supplier object into the supplier table in DB.
 	 * @param supplier
 	 */
-	public static void insertOneRowIntoSupplierTable(Supplier supplier) {
+	public static boolean insertOneRowIntoSupplierTable(Supplier supplier) {
 		String query = "INSERT INTO semesterialproject.supplier (supplierId, supplierName, homeBranch, email, phoneNumber, revenueFee, statusInSystem ) VALUES ('" + supplier.getSupplierId() 
 		+ "' , '" + supplier.getSupplierName() + "' , '" +  supplier.getHomeBranch() + "' , '" +  supplier.getEmail() + "' , '" +  supplier.getPhoneNumber() + "' , '" +  supplier.getRevenueFee()
 		+ "' , '" +  supplier.getStatusInSystem() +"' )";
@@ -532,11 +545,13 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Suppliers already Imported.\n");
+			return true;
 		}
+		return false;
 	}
 	
-	public static void insertOneRowIntoHrManagerTable(HrManager hr) {
+	public static boolean insertOneRowIntoHrManagerTable(HrManager hr) {
 		//INSERT INTO `semesterialproject`.`hrmanager` (`userID`, `statusInSystem`, `firstName`, `lastName`, `homeBranch`, `isLoggedIn`
 		//, `businessW4cCodeNumber`, `email`, `phoneNumber`, `privateCreditCard`, `balance`, `companyName`, `budgetType`, `customerPosition`, `budgetMaxAmount`, `privateW4cCodeNumber`) 
 		//VALUES ('2222', '222', '222', '22', '22', '22', '2', '2', '22', '2', '2', '2', '2', '2', '2', '2');
@@ -564,8 +579,10 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate(); 
 		}catch(SQLException e) {
-			e.printStackTrace();
+			BiteMeServerUI.console.add("Hr Manager already Imported.\n");
+			return true;
 		}
+		return false;
 	}
 	
 	/**

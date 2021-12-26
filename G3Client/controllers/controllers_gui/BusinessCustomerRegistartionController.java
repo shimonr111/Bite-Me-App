@@ -422,7 +422,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(monthlyMaxBudgedTxtField); textFields.add(passwordField);
 		textFields.add(phoneTxtField); textFields.add(userNameField);
 		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField); integerFields.add(monthlyMaxBudgedTxtField);
-		integerFields.add(phoneTxtField); integerFields.add(expirationTxtField);
+		integerFields.add(phoneTxtField); 
 		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		getCompanies();
 		Branch homeBranch = connectedUser.getHomeBranch();

@@ -32,6 +32,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
+import users.ConfirmationStatus;
 import users.Customer;
 import users.HrManager;
 import users.User;
@@ -285,7 +286,8 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 		Message message = new Message (Task.GET_CUSTOMERS_FROM_DB,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		for(User user : customersList)
-			customers.add(user);
+			if((!user.getStatusInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) && !(user instanceof HrManager))
+				customers.add(user);
 		customerIdCol.setCellValueFactory(new PropertyValueFactory<User,String>("userId"));
 		firstNameCol.setCellValueFactory(new PropertyValueFactory<User,String>("userFirstName"));
 		lastNameCol.setCellValueFactory(new PropertyValueFactory<User,String>("userLastName"));

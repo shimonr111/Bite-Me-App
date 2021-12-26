@@ -40,26 +40,39 @@ public class ImportDataQueries {
 	public static void getDataFromExternalDB() {
 		
 		ResultSet rs = Query.getExternalDB();
-		boolean isImported=false;
+		boolean isImportedIntoRegistrationTable=false;
+		boolean isImportedIntoLoginTable = false;
+		boolean isImported =false;
 		try {
 		while(rs.next()) {
-			isImported=Query.insertRowIntoRegistrationTable(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
-					rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14),rs.getString(15),
-					rs.getInt(16),rs.getDouble(17));
-			if(isImported)
-				break;
+			if(rs.getString(1).equals("user")) {
+				ResultSet rs2 = Query.getColumnWithConditionFromTableInDB("login","userID","userID='"+rs.getString(2)+"'");
+				if(rs2.isBeforeFirst())
+					isImportedIntoLoginTable=true;
+			}
+			if(!isImportedIntoLoginTable) {
+				isImportedIntoRegistrationTable=Query.insertRowIntoRegistrationTable(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
+						rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14),rs.getString(15),
+						rs.getInt(16),rs.getDouble(17));
+			}
+			
+			if(isImportedIntoRegistrationTable || isImportedIntoLoginTable)
+				isImported = true;
+			isImportedIntoLoginTable=false;
 		}
 		rs.close();
 		if(!isImported) {
 			BiteMeServerUI.console.add("Users Management Data imported.\n");
-			getBranchManagers();
-			BiteMeServerUI.console.add("Branch managers added\n");
-			getCeoBiteMe();
-			BiteMeServerUI.console.add("Ceo BiteMe added\n");
+			if(getBranchManagers())
+				BiteMeServerUI.console.add("Branch managers added\n");
+			if(getCeoBiteMe())
+				BiteMeServerUI.console.add("Ceo BiteMe added\n");
 			getSuppliers();
 			getCompanies();
-			getHrManagers();
-			getSupplierWorkers();
+			if(getHrManagers())
+				BiteMeServerUI.console.add("Hr Managers added\n");
+			if(getSupplierWorkers())
+				BiteMeServerUI.console.add("Supplier Workers added\n");
 			
 			
 		}
@@ -73,7 +86,7 @@ public class ImportDataQueries {
 	/**
 	 * get all the workers of the registered suppliers.
 	 */
-	public static void getSupplierWorkers() {
+	public static boolean getSupplierWorkers() {
 		ArrayList<SupplierWorker> workers = new ArrayList<>();
 		ArrayList<Login> workersLogin = new ArrayList<>();
 		ResultSet rs;
@@ -94,13 +107,15 @@ public class ImportDataQueries {
 			Login login = workersLogin.get(i);
 			SupplierWorker supplierWorker = workers.get(i);
 			Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), supplierWorker.getUserId(), "supplierworker");
-			Query.insertOneRowIntoSupplierWorkerTable(supplierWorker);
+			if(Query.insertOneRowIntoSupplierWorkerTable(supplierWorker))
+				return false;
 		}
+		return true;
 	}
 	/**
 	 * get all the HR managers of the companies .
 	 */
-	public static void getHrManagers() {
+	public static boolean getHrManagers() {
 		ArrayList<HrManager> hrManagers = new ArrayList<>();
 		ArrayList<Login> hrLogin = new ArrayList<>();
 		ResultSet rs;
@@ -114,7 +129,6 @@ public class ImportDataQueries {
 						)), rs.getString(4),rs.getString(5),Branch.valueOf(rs.getString(6)), 
 						false, rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(15), BudgetType.MONTHLY,PositionType.HR,
 						0));
-				System.out.println(rs.getString(15));
 				hrLogin.add(new Login(rs.getString(13),rs.getString(14)));
 			}
 			rs.close();
@@ -125,8 +139,10 @@ public class ImportDataQueries {
 			Login login = hrLogin.get(i);
 			HrManager hr = hrManagers.get(i);
 			Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), hr.getUserId(), "hrmanager");
-			Query.insertOneRowIntoHrManagerTable(hr);
+			if(Query.insertOneRowIntoHrManagerTable(hr))
+				return false;
 		}
+		return true;
 	}
 	
 	/**
@@ -148,7 +164,8 @@ public class ImportDataQueries {
 			}
 		for(int i=0;i<companiesList.size();i++) {
 			Company company = companiesList.get(i);
-			Query.insertOneRowIntoCompanyTable(company);
+			if(Query.insertOneRowIntoCompanyTable(company))
+				break;
 		}
 		
 	}
@@ -171,14 +188,15 @@ public class ImportDataQueries {
 		}
 		for(int i=0;i<suppliersList.size();i++) {
 			Supplier supplier = suppliersList.get(i);
-			Query.insertOneRowIntoSupplierTable(supplier);	
+			if(Query.insertOneRowIntoSupplierTable(supplier))
+				break;
 		}
 	}
 	
 	/**
 	 * get the ceo bite me and insert it into his table in the internal db.
 	 */
-	public static void getCeoBiteMe() {
+	public static boolean getCeoBiteMe() {
 		CeoBiteMe ceo=null;
 		Login ceoLogin=null;
 		ResultSet rs = Query.getRowsFromTableInDB("registration", "userType= 'ceobiteme'");
@@ -196,16 +214,16 @@ public class ImportDataQueries {
 		}
 		if(ceo!= null) {
 			Query.insertOneRowIntoLoginTable(ceoLogin.getUserName(), ceoLogin.getPassword(), ceo.getUserId(), "ceobiteme");
-			Query.inserOneRowIntoCeoBiteMeTable(ceo);
+			if(Query.inserOneRowIntoCeoBiteMeTable(ceo))
+				return false;
 		}
-		
-		
+		return true;		
 	}
 	
 	/**
 	 * get the branchmanagers after clicking on import button.
 	 */
-	public static void getBranchManagers(){
+	public static boolean getBranchManagers(){
 		ArrayList<BranchManager> branchManagersList= new ArrayList<>();
 		ArrayList<Login> branchManagersLoginList = new ArrayList<>();
 		ResultSet rs;
@@ -225,9 +243,11 @@ public class ImportDataQueries {
 			Login login = branchManagersLoginList.get(i);
 			BranchManager bm = branchManagersList.get(i);
 			Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), bm.getUserId(), "branchmanager");
-			Query.insertOneRowIntoBranchManagerTable(bm);
+			if(Query.insertOneRowIntoBranchManagerTable(bm))
+				return false;
 			
 			
 		}
+		return true;
 	}
 }
