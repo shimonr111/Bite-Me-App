@@ -102,8 +102,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     @FXML
     private ComboBox<ConfirmationStatus> statusComboBox;
     
-    @FXML
-    private ComboBox<String> phonePrefixCombo;
+
     
     @FXML
     private Text displayMessage;
@@ -251,7 +250,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
 		budgetTypeCombo.setValue(businessCustomer.getBudgetOfBusinessCustomer());
 		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
-		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
+
 		
 	}
 

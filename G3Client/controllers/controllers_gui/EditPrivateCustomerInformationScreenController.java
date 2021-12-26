@@ -87,8 +87,6 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     @FXML
     private ComboBox<ConfirmationStatus> setStatusComboBox;
     
-    @FXML
-    private ComboBox<String> phonePrefixCombo;
     
     @FXML
     private Text displayMessage;
@@ -242,7 +240,6 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		setHomeBranchCombo.setValue(customer.getHomeBranch());
 		setStatusComboBox.setValue(customer.getStatusInSystem());
 		setStatusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
-		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		
 	}
 
