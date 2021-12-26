@@ -211,8 +211,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	void getAddItemBtn(ActionEvent event) {
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
 		ItemWithPicture addNewRow = new ItemWithPicture(new Item(supplierId, "Item name", ItemCategory.FIRST, ItemSize.REGULAR, DataLists.getDefaultFirstPicturePath(), 10.0));
-		updateItemsWithPicture.add(addNewRow); // remove it from our array
-		manageMenuTable.getItems().add(addNewRow);
+		manageMenuTable.getItems().add(addNewRow); // we add it to the table, but it wont be saved locally until we click or change some field of this row
 	}
 	
 	
@@ -354,6 +353,14 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 		categoryColumn.setOnEditCommit(
 	            event ->
 	    {
+	    	errorText.setVisible(false);
+	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
+	    	if(event.getRowValue().getItemName() == "Item name") { 
+	    		errorText.setVisible(true);
+    			errorText.setText("Please edit the item name first!");
+        		errorText.setFill(Color.RED);
+	    	}
+	     else { 
 	    	updateItemsWithPicture.remove(event.getRowValue());
 	    	event.getRowValue().setCategory(event.getNewValue());
 	    	switch(event.getNewValue()) {
@@ -378,39 +385,72 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	}
 	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),128,128,false,true)));
 	    	updateItemsWithPicture.add(event.getRowValue());
-	    });
+	    }
+	   });
 		
 		itemNameColumn.setOnEditCommit(
 	            event ->
 	    {
-	    	updateItemsWithPicture.remove(event.getRowValue());
-	    	event.getRowValue().setItemName(event.getNewValue());
-	    	updateItemsWithPicture.add(event.getRowValue());
+	    	errorText.setVisible(false);
+	    	boolean itemAlreadyExist = false;
+	    	for(ItemWithPicture i : updateItemsWithPicture) { // check if there is duplicate of item names
+	    		if(i.getItemName().equals(event.getNewValue())) {
+	    			errorText.setVisible(true);
+	    			errorText.setText("This item already exist! Choose other name");
+	        		errorText.setFill(Color.RED);
+	        		itemAlreadyExist=true;
+	    	      }
+	    	}
+	   
+	    	if(!itemAlreadyExist) { // there is not same item name so we can add it
+	    		updateItemsWithPicture.remove(event.getRowValue());
+		    	event.getRowValue().setItemName(event.getNewValue());
+		    	updateItemsWithPicture.add(event.getRowValue());
+	    	}
 	    });
 		
 		sizeColumn.setOnEditCommit(
 		       event ->
 	    {	
+	    	errorText.setVisible(false);
+	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
+	    	if(event.getRowValue().getItemName() == "Item name") {
+	    		errorText.setVisible(true);
+    			errorText.setText("Please edit the item name first!");
+        		errorText.setFill(Color.RED);
+	    	}
+	    	else {
 	    	updateItemsWithPicture.remove(event.getRowValue());
 	    	event.getRowValue().setSize(event.getNewValue());
 	    	updateItemsWithPicture.add(event.getRowValue());
+	    	}
 		});
 		
 		priceColumn.setOnEditCommit(
 	            event ->
 	    {
-	    	if(event.getNewValue() <= 0) { //check if the user did not enter negative price
+	    	errorText.setVisible(false);
+	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
+	    	if(event.getRowValue().getItemName() == "Item name") {
+	    		errorText.setVisible(true);
+    			errorText.setText("Please edit the item name first!");
+        		errorText.setFill(Color.RED);
+	    	}
+	    	
+	    	else { 
+	    	  if(event.getNewValue() <= 0) { //check if the user did not enter negative price
 	    		errorText.setText("Wrong price! enter positive number please");
 	    		errorText.setFill(Color.RED);
 	    	}
 	    		    	
-	    	else { // the user enter positive price
+	    	  else { // the user enter positive price
 	    		updateItemsWithPicture.remove(event.getRowValue());
 	    		event.getRowValue().setPrice(event.getNewValue());
 	    		updateItemsWithPicture.add(event.getRowValue());
 	    	}
+	    }
 	    	
-	    });
+	  });
 		
 		
 	}
