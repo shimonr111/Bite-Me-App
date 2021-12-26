@@ -38,9 +38,10 @@ import util.DateTimeHandler;
  * 
  * @author Mousa, Srour
  * @author Alexander, Martinov
+ * @author Lior, Guzovsky
  * Class description:
  * This class will analyze the login feature from the side of the server
- * @version 15/12/2021
+ * @version 26/12/2021
  */
 public class Query {
 
@@ -582,6 +583,23 @@ public class Query {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Update all budgetUsed according to the condition
+	 * (which can be weekly,daily or monthly) to 0
+	 * 
+	 * @param condition
+	 */
+	public static void updateBusinessCustomersBudgetUsed(String condition) {
+		PreparedStatement pstmt = null;
+		try {
+			String query = "UPDATE semesterialproject.businesscustomer" +" SET "+"budgetUsed= 0"+" WHERE " +"("+condition+")";
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	}
 	
 }

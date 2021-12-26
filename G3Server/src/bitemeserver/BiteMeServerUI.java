@@ -53,7 +53,7 @@ import util.Constans;
  * This is a class that works as an
  * UI for the server.
  * 
- * @version 03/12/2021
+ * @version 26/12/2021
  */
 public class BiteMeServerUI extends Application implements Initializable {
 	/**
