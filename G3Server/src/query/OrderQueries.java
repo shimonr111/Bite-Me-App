@@ -285,26 +285,40 @@ public class OrderQueries {
 	}
 	
 	/**
-	 * This function updates in the DB the balance
-	 * and budget balance of the user
+	 * This function updates in the DB the 
+	 * budget balance of the user
 	 * 
 	 * @param messageFromClient
 	 * @return
 	 * @throws SQLException
 	 */
 	public static Message updatePaymentBalanceAndBudgetBalance(Message messageFromClient) throws SQLException{
-		if(messageFromClient.getObject() instanceof BusinessCustomer) {
-			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","budgetUsed='"+(((BusinessCustomer)messageFromClient.getObject()).getBudgetUsed())+"'",
-					"userID='"+(((BusinessCustomer)messageFromClient.getObject()).getUserId())+"'");
-			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","balance='"+(((BusinessCustomer)messageFromClient.getObject()).getBalance())+"'",
-					"userID='"+(((BusinessCustomer)messageFromClient.getObject()).getUserId())+"'");
-		}else if(messageFromClient.getObject() instanceof Customer) {
-			Query.updateOneColumnForTableInDbByPrimaryKey("customer","balance='"+(((Customer)messageFromClient.getObject()).getBalance())+"'",
-					"userID='"+(((Customer)messageFromClient.getObject()).getUserId())+"'");
+		ArrayList<Object> list = (ArrayList<Object>)messageFromClient.getObject();
+		Customer customer = (Customer)list.get(0);
+		String supplierId = (String)list.get(1);
+		if(customer instanceof BusinessCustomer) 
+			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","budgetUsed='"+((BusinessCustomer)customer).getBudgetUsed()+"'",
+					"userID='"+((BusinessCustomer)customer).getUserId()+"'");
+		if(customer.getBalance()==0) {
+			//check if exist  -> delete
+			//else do nothing
+			ResultSet rs =Query.getRowsFromTableInDB("balance", "customerUserId='"+customer.getUserId()+"' AND ( supplierId ='" + supplierId +"')");
+			try {
+				if(rs.next()) {
+					Query.deleteRowFromTableInDbByPrimaryKey("balance", "customerUserId='"+customer.getUserId()+"' AND ( supplierId ='" + supplierId +"')");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+		else {
+			Query.updateOneColumnForTableInDbByPrimaryKey("balance", "balance='"+customer.getBalance()+"'"
+					, "customerUserId='"+customer.getUserId()+"' AND ( supplierId ='" + supplierId +"')");
+		}
 		Message messageToClient = new Message(Task.CUSTOMER_UPDATE_DB_AFTER_PAYMENT, Answer.SUCCEED, null);
         return messageToClient;
+        
 	}
 	
 	
@@ -438,6 +452,35 @@ public class OrderQueries {
 		}
 
 		return new Message(Task.DISPLAY_ORDERS_INTO_TABLE,Answer.SUCCEED,orderList);
+	}
+	
+	/**
+	 * In this method we get the userId and the supplierId , 
+	 * we check if the user has already a balance in this restaurant :
+	 * if he does, we return the amount of balance he has.
+	 * else , we return 0.
+	 * @param message
+	 * @return
+	 */
+	public static Message getBalanceForUser(Message message) {
+		Message returnMessageToClient= message;
+		Order order = (Order)message.getObject();
+		String userId = order.getCustomerUserId();
+		String supplierId = order.getSupplierUserId();
+		ResultSet rs =Query.getRowsFromTableInDB("balance", "customerUserId='"+userId+"' AND ( supplierId ='" + supplierId +"')");
+		try {
+			if(!rs.isBeforeFirst()) {
+				returnMessageToClient.setObject(Double.toString(0));
+			}
+			else {
+				if(rs.next())
+					returnMessageToClient.setObject(Double.toString(rs.getDouble(3)));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnMessageToClient;
 	}
 	
 }

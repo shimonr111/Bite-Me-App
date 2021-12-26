@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER S
 USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: semesterialproject
+-- Host: localhost    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -16,6 +16,34 @@ USE `semesterialproject`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `balance`
+--
+
+DROP TABLE IF EXISTS `balance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `balance` (
+  `supplierId` varchar(256) NOT NULL,
+  `customerUserId` varchar(256) NOT NULL,
+  `balance` double DEFAULT '0',
+  PRIMARY KEY (`supplierId`,`customerUserId`),
+  KEY `supplierId_idx` (`supplierId`),
+  KEY `customerUserId_idx` (`customerUserId`),
+  CONSTRAINT `customerUserId` FOREIGN KEY (`customerUserId`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `balance`
+--
+
+LOCK TABLES `balance` WRITE;
+/*!40000 ALTER TABLE `balance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `balance` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `branchmanager`
@@ -44,7 +72,6 @@ CREATE TABLE `branchmanager` (
 
 LOCK TABLES `branchmanager` WRITE;
 /*!40000 ALTER TABLE `branchmanager` DISABLE KEYS */;
-INSERT INTO `branchmanager` VALUES ('1041','CONFIRMED','branchmanagerNfirstName','branchmanagerNlastName','NORTH',0,'branchManagerNEmail@BM.com','104104'),('1042','CONFIRMED','branchmanagerSfirstName','branchmanagerSlastName','SOUTH',0,'branchManagerSEmail@BM.com','104204'),('1043','CONFIRMED','branchmanagerCfirstName','branchmanagerClastName','CENTER',0,'branchManagerCEmail@BM.com','104304');
 /*!40000 ALTER TABLE `branchmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +117,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1002','CONFIRMED','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',0,'Intel','WEEKLY','REGULAR',200,31062,0);
+INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',0,'Intel','WEEKLY','REGULAR',200,31062,0);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +148,6 @@ CREATE TABLE `ceobiteme` (
 
 LOCK TABLES `ceobiteme` WRITE;
 /*!40000 ALTER TABLE `ceobiteme` DISABLE KEYS */;
-INSERT INTO `ceobiteme` VALUES ('1001','CONFIRMED','ceoFirstname','ceoLastname','NOT_APPLICABLE',0,'ceoEmail@BM.com','100101');
 /*!40000 ALTER TABLE `ceobiteme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +175,7 @@ CREATE TABLE `company` (
 
 LOCK TABLES `company` WRITE;
 /*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES ('Apple','PENDING_REGISTRATION','AppleAddress','apple@apple.com',5002),('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001);
+INSERT INTO `company` VALUES ('Apple','CONFIRMED','AppleAddress','apple@apple.com',5002),('Intel','CONFIRMED','IntelAddress','intel@intel.com',5001);
 /*!40000 ALTER TABLE `company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +200,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('3000','01/35','111'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
+INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('3000','01/35','111'),('30005','111','01/35'),('30006','111','01/35'),('30008','111','01/35'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +236,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,31000,'customerEmail@gmeel.com','100000','3000',NULL);
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,31000,'customerEmail@gmeel.com','100000','3000',0);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +309,7 @@ CREATE TABLE `item_in_menu` (
 
 LOCK TABLES `item_in_menu` WRITE;
 /*!40000 ALTER TABLE `item_in_menu` DISABLE KEYS */;
-INSERT INTO `item_in_menu` VALUES ('burger','5555','MAIN','LARGE','C://',45),('burger','5556','MAIN','LARGE','C://',45),('caesar','1111','SALAD','SMALL','C://',25),('caesar','1112','SALAD','SMALL','C://',25),('caesar','2222','SALAD','SMALL','C://',25),('caesar','2223','SALAD','SMALL','C://',25),('cola','1111','DRINK','LARGE','C://',12),('cola','1112','DRINK','LARGE','C://',12),('cola','2222','DRINK','LARGE','C://',12),('cola','2223','DRINK','LARGE','C://',12),('cola','5555','DRINK','LARGE','C://',12),('cola','5556','DRINK','LARGE','C://',12),('fries','1111','FIRST','SMALL','C://',14),('fries','1112','FIRST','SMALL','C://',14),('fries','2222','FIRST','SMALL','C://',14),('fries','2223','FIRST','SMALL','C://',14),('fries','5555','FIRST','SMALL','C://',14),('fries','5556','FIRST','SMALL','C://',14),('ice cream','1111','DESSERT','REGULAR','C://',12),('ice cream','1112','DESSERT','REGULAR','C://',12),('ice cream','2222','DESSERT','REGULAR','C://',12),('ice cream','2223','DESSERT','REGULAR','C://',12),('pie','5555','DESSERT','REGULAR','C://',12),('pie','5556','DESSERT','REGULAR','C://',12),('pizza','1111','MAIN','LARGE','C://',45),('pizza','1112','MAIN','LARGE','C://',45),('pizza','2222','MAIN','LARGE','C://',45),('pizza','2223','MAIN','LARGE','C://',45),('tuna salad','5555','SALAD','SMALL','C://',25),('tuna salad','5556','SALAD','SMALL','C://',25);
+INSERT INTO `item_in_menu` VALUES ('burger','5555','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('burger','5556','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('caesar','1111','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25),('caesar','1112','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25),('caesar','2222','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25),('caesar','2223','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25),('cola','1111','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('cola','1112','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('cola','2222','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('cola','2223','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('cola','5555','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('cola','5556','DRINK','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDrink.jpg',12),('fries','1111','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('fries','1112','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('fries','2222','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('fries','2223','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('fries','5555','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('fries','5556','FIRST','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',14),('ice cream','1111','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('ice cream','1112','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('ice cream','2222','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('ice cream','2223','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('pie','5555','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('pie','5556','DESSERT','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg',12),('pizza','1111','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('pizza','1112','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('pizza','2222','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('pizza','2223','MAIN','LARGE','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultMain.jpg',45),('SSA','2222','DRINK','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',10),('Test26','2222','FIRST','REGULAR','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultFirst.jpg',10),('tuna salad','5555','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25),('tuna salad','5556','SALAD','SMALL','File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg',25);
 /*!40000 ALTER TABLE `item_in_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +336,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('ceo','ceo','1001','ceobiteme'),('bc','bc','1002','businesscustomer'),('bmn','bmn','1041','branchmanager'),('bms','bms','1042','branchmanager'),('bmc','bmc','1043','branchmanager'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker');
+INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('bc','bc','1002','businesscustomer'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker'),('mnw','mnw','2002','supplierworker');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +354,7 @@ CREATE TABLE `order` (
   `customerUserType` varchar(256) DEFAULT NULL,
   `branch` enum('NORTH','CENTER','SOUTH') DEFAULT NULL,
   `timeType` enum('REGULAR','PRE') DEFAULT NULL,
-  `status` enum('PENDING_APPROVAL','APPROVED','UN_APPROVED') DEFAULT NULL,
+  `status` enum('PENDING_APPROVAL','APPROVED','UN_APPROVED','COMPLETED') DEFAULT NULL,
   `issueDateTime` datetime DEFAULT NULL,
   `estimatedSupplyDateTime` datetime DEFAULT NULL,
   `actualSupplyDateTime` datetime DEFAULT NULL,
@@ -345,7 +371,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`orderNumber`),
   KEY `order_supplierId_idx` (`supplierId`),
   CONSTRAINT `order_supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,7 +380,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,'1111','1000','regular','CENTER','REGULAR','APPROVED','2021-01-01 12:00:00','2021-01-01 13:00:00','2021-01-01 12:30:00','TAKE_AWAY',82,'first','last','address','123123',25,'pizza,cola','no olives',NULL),(2,'1111','1000','regular','CENTER','REGULAR','APPROVED','2021-01-02 16:00:00','2021-00-02 17:00:00','2021-01-02 17:30:00','TAKE_AWAY',94,'first','last','address','123123',25,'pizza,cola,cola','no olives',NULL),(3,'1112','1000','regular','NORTH','REGULAR','APPROVED','2021-01-03 12:00:00','2021-01-03 13:00:00','2021-01-03 12:30:00','TAKE_AWAY',82,'first','last','address','123123',25,'pizza,cola','no olives',NULL),(4,'1112','1000','regular','NORTH','REGULAR','APPROVED','2021-01-04 16:00:00','2021-01-04 17:00:00','2021-01-04 17:30:00','TAKE_AWAY',94,'first','last','address','123123',25,'pizza,cola,cola','no olives',NULL),(5,'2222','1000','regular','SOUTH','REGULAR','APPROVED','2021-01-01 12:00:00','2021-01-01 13:00:00','2021-01-01 12:30:00','TAKE_AWAY',82,'first','last','address','123123',25,'pizza,cola','no olives',NULL),(6,'2222','1000','regular','SOUTH','REGULAR','APPROVED','2021-01-02 16:00:00','2021-00-02 17:00:00','2021-01-02 17:30:00','TAKE_AWAY',94,'first','last','address','123123',25,'pizza,cola,cola','no olives',NULL),(7,'2223','1000','regular','CENTER','REGULAR','APPROVED','2021-01-03 12:00:00','2021-01-03 13:00:00','2021-01-03 12:30:00','TAKE_AWAY',82,'first','last','address','123123',25,'pizza,cola','no olives',NULL),(8,'2223','1000','regular','CENTER','REGULAR','APPROVED','2021-01-04 16:00:00','2021-01-04 17:00:00','2021-01-04 17:30:00','TAKE_AWAY',94,'first','last','address','123123',25,'pizza,cola,cola','no olives',NULL),(13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR'),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR');
+INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR'),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR'),(15,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:53:36','2021-12-24 17:00:00',NULL,'TAKE_AWAY',81,'Test','test2','','1122',0,'burger,cola,cola,pie,','null,null,null,null,','NA'),(16,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:59:31','2021-12-24 17:00:00',NULL,'DELIVERY',51,'Mosa','Srour','Raanan','123123',25,'cola,fries,','null,null,','REGULAR'),(17,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:01:45','2021-12-24 18:00:00',NULL,'DELIVERY',37,'ss','ss','as','123',25,'cola,','null,','REGULAR'),(18,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:07:43','2021-12-24 18:00:00',NULL,'DELIVERY',37,'s','s','s2s2','2',25,'pie,','null,','REGULAR'),(19,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:12:19','2021-12-24 18:00:00',NULL,'DELIVERY',70,'sds','sds','sasd','12321',25,'burger,','null,','REGULAR'),(20,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:13:41','2021-12-24 17:00:00',NULL,'DELIVERY',70,'asd','asd','s','32432s',25,'pizza,','null,','REGULAR'),(21,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 20:29:33','2021-12-24 21:00:00',NULL,'TAKE_AWAY',40,'mm','mm','','12321',0,'fries,fries,ice cream,','null,big,small,','NA'),(22,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 21:59:19','2021-12-26 23:00:00',NULL,'TAKE_AWAY',12,'ss','ss','','333',0,'cola,','null,','NA'),(23,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 22:00:18','2021-12-26 23:00:00',NULL,'TAKE_AWAY',37,'sds','dsds','','121',0,'caesar,cola,','null,null,','NA');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -393,7 +419,6 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES ('user','1003','PENDING_REGISTRATION','businesscustomerFirstName','businesscustomerLastName','NORTH',0,'businessCustomerEmail@business.com','100303','3003','111','01/35','bcu','bcu','null',0,0),('user','1005','PENDING_REGISTRATION','supplierWorkerFirstname','supplierWorkerLastname','NORTH',0,'supplierWorkerEmail@supplies.com','100505','3004','111','01/35','sw','sw','null',0,0);
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,7 +475,7 @@ CREATE TABLE `supplier` (
 
 LOCK TABLES `supplier` WRITE;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
-INSERT INTO `supplier` VALUES ('1111','Dominos','CENTER','support@dominos.com','100001111',7.8,'PENDING_REGISTRATION'),('1112','Dominos','NORTH','support@dominos.com','100001111',9.8,'CONFIRMED'),('2222','PizzaHut','SOUTH','support@pizzahut.com','100002222',10,'PENDING_REGISTRATION'),('2223','PizzaHut','CENTER','support@pizzahut.com','100002222',12,'PENDING_REGISTRATION'),('5555','Mcdonalds','NORTH','support@mcdonalds.com','100005555',11.3,'PENDING_REGISTRATION'),('5556','Mcdonalds','CENTER','support@mcdonalds.com','100005555',7.2,'PENDING_REGISTRATION');
+INSERT INTO `supplier` VALUES ('1111','Dominos','CENTER','support@dominos.com','100001111',7.8,'PENDING_REGISTRATION'),('1112','Dominos','NORTH','support@dominos.com','100001111',9.8,'CONFIRMED'),('2222','PizzaHut','SOUTH','support@pizzahut.com','100002222',10,'CONFIRMED'),('2223','PizzaHut','CENTER','support@pizzahut.com','100002222',12,'PENDING_REGISTRATION'),('5555','Mcdonalds','NORTH','support@mcdonalds.com','100005555',11.3,'CONFIRMED'),('5556','Mcdonalds','CENTER','support@mcdonalds.com','100005555',7.2,'PENDING_REGISTRATION');
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -483,7 +508,7 @@ CREATE TABLE `supplierworker` (
 
 LOCK TABLES `supplierworker` WRITE;
 /*!40000 ALTER TABLE `supplierworker` DISABLE KEYS */;
-INSERT INTO `supplierworker` VALUES ('2000','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000211','2222','CERTIFIED'),('2001','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000222','2222','REGULAR');
+INSERT INTO `supplierworker` VALUES ('2000','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000211','2222','CERTIFIED'),('2001','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000222','2222','REGULAR'),('2002','CONFIRMED','MN','MN','NORTH',1,'mnw@mac.com','1002234','5555','CERTIFIED');
 /*!40000 ALTER TABLE `supplierworker` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -496,4 +521,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-22 19:40:54
+-- Dump completed on 2021-12-26 22:02:22

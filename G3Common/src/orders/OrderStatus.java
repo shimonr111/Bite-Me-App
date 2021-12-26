@@ -25,6 +25,12 @@ public enum OrderStatus {
 		public String toString() {
 			return "Un-Approved";
 		}
+	},
+	COMPLETED{
+		@Override
+		public String toString() {
+			return "Completed";
+		}
 	}
 
 }

@@ -379,7 +379,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    	}
 	    	
 	    	/*Send to server for updating customers balance and company budget*/
-	    	Message messageForUpdateBalance = new Message(Task.CUSTOMER_UPDATE_DB_AFTER_PAYMENT,Answer.WAIT_RESPONSE,connectedUser);
+	    	ArrayList<Object> list = new ArrayList<>();
+	    	list.add(connectedUser);
+	    	list.add(order.getSupplierUserId());
+	    	Message messageForUpdateBalance = new Message(Task.CUSTOMER_UPDATE_DB_AFTER_PAYMENT,Answer.WAIT_RESPONSE,list);
 	    	sendToClient(messageForUpdateBalance);//send message to the server telling the balance and budget update and than push into DB
 	    	
 	    	/*Give notice for the user that the order is ok*/
