@@ -402,11 +402,14 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  	 */
  	public boolean isInt(TextField txtField) {
  		try {
- 		int checkIfInt = Integer.parseInt(txtField.getText());
- 		return true;
- 		}catch(NumberFormatException e) {
- 			return false;
- 		}
+ 	 		int checkIfInt = Integer.parseInt(txtField.getText());
+ 	 		if(checkIfInt>0) {
+ 	 			return true;
+ 	 		}
+ 	 		return false;
+ 	 		}catch(NumberFormatException e) {
+ 	 			return false;
+ 	 		}
  	}
  	
  	/**
@@ -419,7 +422,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(monthlyMaxBudgedTxtField); textFields.add(passwordField);
 		textFields.add(phoneTxtField); textFields.add(userNameField);
 		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField); integerFields.add(monthlyMaxBudgedTxtField);
-		integerFields.add(phoneTxtField);
+		integerFields.add(phoneTxtField); integerFields.add(expirationTxtField);
 		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		getCompanies();
 		Branch homeBranch = connectedUser.getHomeBranch();
