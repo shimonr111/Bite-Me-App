@@ -211,6 +211,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 		statusText.setText(connectedUser.getStatusInSystem().toString());
 		if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
 			btnStartOrder.setDisable(true);
+			viewOrdersBtn.setDisable(true);
 		}
 	}
 }
