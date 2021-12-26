@@ -307,7 +307,8 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     	order.setBranch(connectedUser.getHomeBranch()); //set to the branch the user chose in W4C identification stage
     	order.setSupplierUserId(restaurantID);
     	order.setCustomerUserId(connectedUser.getUserId());
-    	
+    	// get the balance for specific user in this resturant.
+    	sendToClient(new Message(Task.GET_USER_BALANCE,Answer.WAIT_RESPONSE,order));
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {

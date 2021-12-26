@@ -28,6 +28,7 @@ import orders.Item;
 import orders.Order;
 import users.BusinessCustomer;
 import users.Company;
+import users.Customer;
 import users.Supplier;
 import users.User;
 import util.OrderForView;
@@ -347,6 +348,9 @@ public class AnalyzeMessageFromServer {
 				default:
 					break;
 				}
+				break;
+			case GET_USER_BALANCE:
+				((Customer)AbstractBiteMeController.connectedUser).setBalance((Double.parseDouble((String)recivedMessageFromServer.getObject())));
 				break;
 				
 			default:
