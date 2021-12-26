@@ -160,7 +160,14 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     		errorText.setText("Please, fill all the fields!");
     		errorText.setFill(Color.RED);
     	}
+    	
     	else {
+    		if (!(isInt(phoneTxtField))) {
+        		errorText.setText("Please, insert only numbers in the phone field!");
+        		errorText.setFill(Color.RED);
+    		}
+    		
+    		else {
     		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
     				phoneTxtField.getText());
     		order.setSupplyMethodInformation(takeAwayInformation);
@@ -169,6 +176,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     		 OrderSummaryScreenController orderSummaryScreenController = new OrderSummaryScreenController();
     		 orderSummaryScreenController.initOrderSummaryScreen(order); // call the init of the next screen
     	}
+      }
     }
     
     /**
@@ -237,5 +245,22 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
   public void initialize(URL arg0, ResourceBundle arg1) {
 	phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
   }
+  
+	/**
+	 * this method checks if the textField contains numbers only.
+	 * @param txtField
+	 * @return true or false according to the input.
+	 */
+	public boolean isInt(TextField txtField) {
+		try {
+ 	 		int checkIfInt = Integer.parseInt(txtField.getText());
+ 	 		if(checkIfInt>0) {
+ 	 			return true;
+ 	 		}
+ 	 		return false;
+ 	 		}catch(NumberFormatException e) {
+ 	 			return false;
+ 	 		}
+	}
 
 }

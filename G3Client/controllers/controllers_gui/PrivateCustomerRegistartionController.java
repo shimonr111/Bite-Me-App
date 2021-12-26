@@ -216,7 +216,10 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  	public boolean isInt(TextField txtField) {
  		try {
  		int checkIfInt = Integer.parseInt(txtField.getText());
- 		return true;
+ 		if(checkIfInt>0) {
+ 			return true;
+ 		}
+ 		return false;
  		}catch(NumberFormatException e) {
  			return false;
  		}
@@ -312,7 +315,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField) ; textFields.add(emailTxtField); textFields.add(expirationTxtField);
 		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(passwordField); textFields.add(phoneTxtField);
 		textFields.add(userNameTxtField);
-		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField) ; integerFields.add(idNumTxtField); integerFields.add(phoneTxtField); 
+		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField) ; integerFields.add(idNumTxtField); integerFields.add(phoneTxtField); integerFields.add(expirationTxtField); 
 		 UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
 		confirmedEmailTxtField.setText(userForRegistration.getEmail()); creditNumTxtField.setText(userForRegistration.getCreditCardNumber()); cvvTxtField.setText(userForRegistration.getCreditCardCvvCode());
 		emailTxtField.setText(userForRegistration.getEmail()); expirationTxtField.setText(userForRegistration.getCreditCardDateOfExpiration()); firstNameTxtField.setText(userForRegistration.getFirstName());
@@ -343,6 +346,8 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 			}
 		});
 	}
+	
+	
 
 }
 
