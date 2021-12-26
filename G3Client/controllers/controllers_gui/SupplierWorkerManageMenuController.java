@@ -1,10 +1,9 @@
 package controllers_gui;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -23,14 +22,21 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
+import orders.ItemWithPicture;
 import orders.Order;
+import orders.OrderStatus;
 import users.SupplierWorker;
+import util.DataLists;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,6 +44,8 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -59,7 +67,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	private static SupplierWorkerManageMenuController supplierWorkerManageMenuController;
 	public static ArrayList<Item> itemListOfMenuFromDB = new ArrayList<>();
 	public static ArrayList<Item> updateItems = new ArrayList<>();
-	
+	public static ArrayList<ItemWithPicture> updateItemsWithPicture = new ArrayList<>();
 	@FXML
 	private Button btnExit;
 
@@ -70,23 +78,24 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	private Button btnBack;
 
 	@FXML
-	private TableView<Item> manageMenuTable;
+	private TableView<ItemWithPicture> manageMenuTable;
 
 	@FXML
-	private TableColumn<Item, ItemCategory> categoryColumn;
+	private TableColumn<ItemWithPicture, ItemCategory> categoryColumn;
 
 	@FXML
-	private TableColumn<Item, String> itemNameColumn;
+	private TableColumn<ItemWithPicture, String> itemNameColumn;
 
 	@FXML
-	private TableColumn<Item, String> pictureColumn;
+	private TableColumn<ItemWithPicture, ImageView> pictureColumn;
 
 	@FXML
-	private TableColumn<Item, ItemSize> sizeColumn;
+	private TableColumn<ItemWithPicture, ItemSize> sizeColumn;
 
 	@FXML
-	private TableColumn<Item, Double> priceColumn;
+	private TableColumn<ItemWithPicture, Double> priceColumn;
 
+    
 	@FXML
 	private Button saveBtn;
 
@@ -98,7 +107,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 
 	@FXML
 	private Button removeItemBtn;
-
+	
+	
 	/**
 	 * This is a function for going back to the previous screen.
 	 * 
@@ -106,8 +116,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	 */
 	@FXML
 	void getBackBtn(ActionEvent event) {
-		updateItems.clear();// clear this array for the next time we come back for this screen
-		
+		updateItemsWithPicture.clear();// clear this array for the next time we come back for this screen
+		updateItems.clear();
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -172,12 +182,16 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	@FXML
 	void getSaveBtn(ActionEvent event) {
        // if the menu is empty or the user added new items but did not edit them, it will not let him to save the changes.
-       if(updateItems.isEmpty()) {
+       if(updateItemsWithPicture.isEmpty()) {
     	   errorText.setVisible(true);
     	   errorText.setText("The menu is empty! insert values or add new items");
     	   errorText.setFill(Color.RED);
        }
        else {
+    	   updateItems.clear();
+    	   for(ItemWithPicture i: updateItemsWithPicture) {
+    		   updateItems.add(i.getItem());
+    	   }
     	   Message message = new Message(Task.MANAGE_MENU_FINISHED,Answer.WAIT_RESPONSE,updateItems);
        	   sendToClient(message);//send message to the server telling the manage menu is finished and than push into DB
        	   
@@ -196,7 +210,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	@FXML
 	void getAddItemBtn(ActionEvent event) {
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
-		Item addNewRow = new Item(supplierId, "Item name", ItemCategory.FIRST, ItemSize.REGULAR, "picture path", 10.0);
+		ItemWithPicture addNewRow = new ItemWithPicture(new Item(supplierId, "Item name", ItemCategory.FIRST, ItemSize.REGULAR, DataLists.getDefaultFirstPicturePath(), 10.0));
+		updateItemsWithPicture.add(addNewRow); // remove it from our array
 		manageMenuTable.getItems().add(addNewRow);
 	}
 	
@@ -209,9 +224,9 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	@FXML
     void getRemoveItemBtn(ActionEvent event) {
 		if(manageMenuTable.getSelectionModel().getSelectedItem() != null) { // when row selected
-    		if(manageMenuTable.getSelectionModel().getSelectedItem() instanceof Item) {
-    			Item itemRemoveFromMenu = (Item)manageMenuTable.getSelectionModel().getSelectedItem(); // insert this selected row 
-    			updateItems.remove(itemRemoveFromMenu); // remove it from our array
+    		if(manageMenuTable.getSelectionModel().getSelectedItem() instanceof ItemWithPicture) {
+    			ItemWithPicture itemRemoveFromMenu = (ItemWithPicture)manageMenuTable.getSelectionModel().getSelectedItem(); // insert this selected row 
+    			updateItemsWithPicture.remove(itemRemoveFromMenu); // remove it from our array
     			manageMenuTable.getItems().remove(itemRemoveFromMenu); // remove it from the table
     		}
     	}
@@ -264,7 +279,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		String supplierId=((SupplierWorker) connectedUser).getSupplier().getSupplierId();
-		ObservableList<Item> items = FXCollections.observableArrayList();
+		ObservableList<ItemWithPicture> items = FXCollections.observableArrayList();
 		Message message = new Message (Task.GET_ITEMS_FOR_MANAGE_MENU,Answer.WAIT_RESPONSE,supplierId);
 		sendToClient(message);
 		if(itemListOfMenuFromDB == null) {
@@ -273,18 +288,23 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
     		errorText.setFill(Color.RED);
 		}
 		else {
+			for(Item i : itemListOfMenuFromDB) {
+				items.add(new ItemWithPicture(i));
+			}
 			//add all the wrapper items to the table view
-			items.addAll(itemListOfMenuFromDB);
 		}
-		
 		// Set the id of the supplier for each item
-		for(int i=0; i<itemListOfMenuFromDB.size(); i++) {
-			itemListOfMenuFromDB.get(i).setSupplierUserId(supplierId);
+					for(int i=0; i<itemListOfMenuFromDB.size(); i++) {
+						itemListOfMenuFromDB.get(i).setSupplierUserId(supplierId);
+					}
+	
+		
+		updateItemsWithPicture = new ArrayList<ItemWithPicture>(); //copy the menu we got from DB to our updateItems array
+		for(Item i : itemListOfMenuFromDB) {
+			updateItemsWithPicture.add(new ItemWithPicture(i));
 		}
 		
-		updateItems = new ArrayList<Item>(itemListOfMenuFromDB); //copy the menu we got from DB to our updateItems array
-		
-        categoryColumn.setCellValueFactory(new PropertyValueFactory<Item,ItemCategory>("category"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture, ItemCategory>("category"));
     	//set combo box in category column
 		categoryColumn.setCellFactory((param) -> new ComboBoxTableCell<>(new StringConverter<ItemCategory>() {
 
@@ -300,13 +320,13 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 			
 		}, ItemCategory.values()));
         
-		itemNameColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("itemName"));
+		itemNameColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture,String>("ItemName"));
 		itemNameColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // set text field in item name column
+			
 		
-		pictureColumn.setCellValueFactory(new PropertyValueFactory<Item,String>("picturePath"));
-		pictureColumn.setCellFactory(TextFieldTableCell.forTableColumn()); // set text field in picture path column
-		
-		sizeColumn.setCellValueFactory(new PropertyValueFactory<Item, ItemSize>("size"));
+		pictureColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture, ImageView>("picture"));
+	  
+		sizeColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture, ItemSize>("size"));
 		//set combo box in size column
 		sizeColumn.setCellFactory((param) -> new ComboBoxTableCell<>(new StringConverter<ItemSize>() {
 
@@ -323,7 +343,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 		}, ItemSize.values()));
 				
 		
-		priceColumn.setCellValueFactory(new PropertyValueFactory<Item,Double>("price"));
+		priceColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture, Double>("price"));
 		priceColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter())); //set text field in price column
 		
 		manageMenuTable.setItems(items);
@@ -334,33 +354,46 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 		categoryColumn.setOnEditCommit(
 	            event ->
 	    {
-	    	updateItems.remove(event.getRowValue());
+	    	updateItemsWithPicture.remove(event.getRowValue());
 	    	event.getRowValue().setCategory(event.getNewValue());
-	        updateItems.add(event.getRowValue());
+	    	switch(event.getNewValue()) {
+	    	case SALAD:
+	    		event.getRowValue().setPicturePath(DataLists.getDefaultSaladPicturePath());
+	    		break;
+	    	case FIRST:
+	    		event.getRowValue().setPicturePath(DataLists.getDefaultFirstPicturePath());
+	    		break;
+	    	case MAIN:
+	    		event.getRowValue().setPicturePath(DataLists.getDefaultMainPicturePath());
+	    		break;
+	    	case DESSERT:
+	    		event.getRowValue().setPicturePath(DataLists.getDefaultDessertPicturePath());
+	    		break;
+	    	case DRINK:
+	    		event.getRowValue().setPicturePath(DataLists.getDefaultDrinkPicturePath());
+	    		break;
+			default:
+				break;
+	    	
+	    	}
+	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),128,128,false,true)));
+	    	updateItemsWithPicture.add(event.getRowValue());
 	    });
 		
 		itemNameColumn.setOnEditCommit(
 	            event ->
 	    {
-	    	updateItems.remove(event.getRowValue());
+	    	updateItemsWithPicture.remove(event.getRowValue());
 	    	event.getRowValue().setItemName(event.getNewValue());
-	        updateItems.add(event.getRowValue());
-	    });
-		
-		pictureColumn.setOnEditCommit(
-	            event ->
-	    {
-	    	updateItems.remove(event.getRowValue());
-	    	event.getRowValue().setPicturePath(event.getNewValue());
-	        updateItems.add(event.getRowValue());
+	    	updateItemsWithPicture.add(event.getRowValue());
 	    });
 		
 		sizeColumn.setOnEditCommit(
 		       event ->
 	    {	
-	    	updateItems.remove(event.getRowValue());
+	    	updateItemsWithPicture.remove(event.getRowValue());
 	    	event.getRowValue().setSize(event.getNewValue());
-	        updateItems.add(event.getRowValue());
+	    	updateItemsWithPicture.add(event.getRowValue());
 		});
 		
 		priceColumn.setOnEditCommit(
@@ -372,9 +405,9 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	}
 	    		    	
 	    	else { // the user enter positive price
-	    		updateItems.remove(event.getRowValue());
+	    		updateItemsWithPicture.remove(event.getRowValue());
 	    		event.getRowValue().setPrice(event.getNewValue());
-		        updateItems.add(event.getRowValue());
+	    		updateItemsWithPicture.add(event.getRowValue());
 	    	}
 	    	
 	    });
