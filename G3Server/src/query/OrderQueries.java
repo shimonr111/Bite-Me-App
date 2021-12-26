@@ -40,6 +40,7 @@ import util.OrderForView;
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
  * @author Alexander, Martinov
+ * @author Mousa, Srour.
  * Class description: 
  * This is a class for 
  * order queries which is 
@@ -397,7 +398,7 @@ public class OrderQueries {
 					break;
 				}
 				// get the date with the wanted format without the time
-				Date date = DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(8));
+				Date date = DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9));
 				ZoneId defaultZoneId = ZoneId.systemDefault();
 				Instant instant = date.toInstant();
 				LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
@@ -406,25 +407,20 @@ public class OrderQueries {
 				LocalTime localTime = instant.atZone(defaultZoneId).toLocalTime();
 				orderTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 				// get the order items with comments
+				orderDetails="";
 				String items = rs.getString(18);
 				String comments = rs.getString(19);
 				String [] itemsParts = items.split(",");
 				String [] commentsParts = comments.split(",");
-				orderDetails = "Items: ";
 				for(int i=0;i<itemsParts.length;i++) {
+					orderDetails= orderDetails + (i+1) +") ";
 					orderDetails = orderDetails + itemsParts[i];	
-					if(i==itemsParts.length -1) 
-						orderDetails += "\nComments: ";
-					else
-						orderDetails+= ", ";
-					
-				}
-				for(int i=0;i<commentsParts.length;i++) {
 					if(!commentsParts[i].equals("null")) {
-						orderDetails = orderDetails+ commentsParts[i];
-						if(i<commentsParts.length-1)
-							orderDetails += ", ";
+						orderDetails = orderDetails +" (" + commentsParts[i]+")\n";
 					}
+					else
+						orderDetails+="\n";
+					
 				}
 				// get the status
 				String status = rs.getString(7);

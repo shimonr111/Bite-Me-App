@@ -215,6 +215,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 		Message message = new Message (Task.GET_ORDERS_FOR_USER,Answer.WAIT_RESPONSE,connectedUser.getUserId());
 		sendToClient(message);
 		nameTxt.setText(connectedUser.getUserFirstName() + "'s orders in progres: ");
+		orderDetailsCol.setStyle("-fx-text-alignment: left;");
 		ObservableList<OrderForView> ordersObservable = FXCollections.observableArrayList();
 		if(!ordersForCustomer.isEmpty()) {
 			ordersObservable.addAll(ordersForCustomer);

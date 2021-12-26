@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/OCSF"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/liorfx"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mosaFx"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
