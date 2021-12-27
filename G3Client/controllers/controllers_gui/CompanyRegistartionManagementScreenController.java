@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
 import users.Company;
@@ -99,7 +100,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Confirm or Deny the company registration requests by clicking on the buttons while selecting company from table");
+    	PopUpMessages.helpMessage("On this screen you can confirm or deny the company registration requests by clicking on the buttons while selecting company at table.");
     }
     
     /**
@@ -172,12 +173,12 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
 					root = loader.load(getClass().getResource("/fxmls/BM3CompanyRegistartionManagementScreen.fxml").openStream());
 					companyRegistartionManagementScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Company Confirmation");

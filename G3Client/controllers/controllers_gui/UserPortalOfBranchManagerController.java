@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.ConfirmationStatus;
 
@@ -141,7 +142,7 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
-		PopUpMessages.helpMessage("This is the Main screen of Branch manager, Please press any button!");
+		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");
 	}
 	
 	/**
@@ -195,12 +196,12 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 					root = loader.load(getClass().getResource(fxmlPath).openStream());
 					userPortalOfBranchManagerController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Branch Manager Main Screen");
@@ -225,6 +226,13 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		scene.setOnMousePressed(pressEvent -> {
+		    scene.setOnMouseDragged(dragEvent -> {
+		    	primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+		    	primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+		    });
+		});
 		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setScene(scene);
 		primaryStage.show();/* show the new screen */

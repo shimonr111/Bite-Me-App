@@ -91,7 +91,7 @@ public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	 * current screen 
 	 */
 	public void getHelpBtn(ActionEvent event) throws Exception {
-		PopUpMessages.helpMessage("Welcome to BiteMe App! press Enter to login your user.");
+		PopUpMessages.helpMessage("This is Bite-Me system welcome screen.\nPress 'I am Hungry' to proceed to the login screen.");
 	}
 	
 	/**

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.ConfirmationStatus;
 
@@ -97,7 +98,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
-		PopUpMessages.helpMessage("This is the Main screen of the CEO of Bite Me system, Please press any button!");	
+		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");	
 	}
 	
 	/**
@@ -151,12 +152,12 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 					root = loader.load(getClass().getResource(fxmlPath).openStream());
 					userPortalOfCEOController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Main menu");
@@ -183,12 +184,12 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 					root = loader.load(getClass().getResource("/fxmls/UserPortalOfCEO.fxml").openStream());
 					userPortalOfCEOController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("CEO Main Screen");

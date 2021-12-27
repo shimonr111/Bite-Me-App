@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.BudgetType;
@@ -164,7 +165,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("You can change the customer's Status, change status then clock save and go back to see changes.");
+    	PopUpMessages.helpMessage("On this screen you can edit business customers information.");
 
     }
 
@@ -185,12 +186,12 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 					root = loader.load(getClass().getResource("/fxmls/BM12EditBusinessCustomerInformationScreen.fxml").openStream());
 					editBusinessCustomerInformationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Edit Business Customer");

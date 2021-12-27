@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.ConfirmationStatus;
@@ -119,7 +120,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please fill in all the fields to complete the registration!");
+    	PopUpMessages.helpMessage("On this screen you can register private customers!");
     }
 
     /**
@@ -249,12 +250,12 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 					root = loader.load(getClass().getResource("/fxmls/BM7PrivateCustomerRegistartion.fxml").openStream());
 					privateCustomerRegistrationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Private customer registration");

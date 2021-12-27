@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 	public class DisplayReportScreenController extends AbstractBiteMeController implements Initializable  {
 
@@ -53,6 +54,13 @@ import javafx.stage.Stage;
 					root = loader.load(getClass().getResource("/fxmls/BM15DisplaySingleReportScreen.fxml").openStream());
 					displayReportScreenController.displayReportScreenController = loader.getController();
 					Scene scene = new Scene(root);
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
+					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("View Report");
 					Stage.setScene(scene);

@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -128,12 +129,12 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/UserPortalOfSupplier.fxml").openStream());
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) {
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Main Screen");
@@ -170,7 +171,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	 */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
-		PopUpMessages.helpMessage("This is a screen for managing the menu of the restaurant");
+		PopUpMessages.helpMessage("On this screen you can manage you'r resturant menu (add, remove or edit items).");
 	}
 
 	
@@ -250,12 +251,12 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 						root = loader.load(getClass().getResource("/fxmls/SUP1ManageMenuScreen.fxml").openStream());
 						supplierWorkerManageMenuController = loader.getController();
 						Scene scene = new Scene(root);
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
+						Stage.initStyle(StageStyle.UNDECORATED);
+						scene.setOnMousePressed(pressEvent -> {
+						    scene.setOnMouseDragged(dragEvent -> {
+						    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+						    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+						    });
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Manage Menu");
