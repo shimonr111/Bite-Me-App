@@ -4,6 +4,9 @@ package query;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+
+import util.DateTimeHandler;
 import util.SupplierByReport;
 /**
  * @author Alexander, Martinov
@@ -259,5 +262,63 @@ public class ReportQueries {
 		if(i==0)
 			return null;
 		return supplierForReport;
+	}
+	/**
+	    * gets list of pdf files in system by date and branch
+	    */
+	public static String[][] getPdfList(String[] branchAndDate) {
+		//branchAndDate[0] is the branch
+		//branchAndDate[1] is the date from
+		//branchAndDate[2] is the date to
+		int i=0;
+		int pdfNumber=0;
+		String[][] pdfList = null;
+		ResultSet pdfRs;
+		Date pdfDate=null;
+		if(branchAndDate[0].equals("NOT_APPLICABLE"))
+		pdfRs=Query.getColumnFromTableInDB("quarterlypdf where dateuploaded between '"+branchAndDate[1]+"' and '"+branchAndDate[2]+"'","*");
+		else
+			pdfRs=Query.getColumnFromTableInDB("quarterlypdf where homeBranch='"+branchAndDate[0]+"' and dateuploaded between '"+branchAndDate[1]+"' and '"+branchAndDate[2]+"'","*");
+		try {
+			if(pdfRs.last()) {
+				pdfNumber=pdfRs.getRow();
+				pdfRs.beforeFirst();
+			}
+			pdfList = new String[pdfNumber][4];
+			while(pdfRs.next()) {
+				pdfList[i][0]=pdfRs.getString(1);
+				pdfList[i][1]=pdfRs.getString(2);
+				pdfList[i][2]=pdfRs.getString(4);
+				pdfDate=DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(pdfRs.getString(3));
+				pdfList[i][3]=DateTimeHandler.convertMySqlDateTimeFormatToString(pdfDate);
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(i==0)
+			return null;
+		return pdfList;
+	}
+	/**
+	    * gets pdf file binary from db by pdf file number
+	    */
+	public static byte[] getPdfFileFromDb(String pdfId) {
+		int i=0;
+		byte[] fileArray=null;
+		ResultSet file;
+		file= Query.getRowsFromTableInDB("quarterlypdf", "pdfId='"+pdfId+"'");
+		try {
+			while(file.next()) {
+				fileArray=(byte[])file.getObject(5);
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(i!=1){
+			return null;
+		}
+		return fileArray;
 	}
 }

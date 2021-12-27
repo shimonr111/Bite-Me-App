@@ -360,6 +360,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    		errorText.setVisible(true);
     			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	     else { 
 	    	updateItemsWithPicture.remove(event.getRowValue());
@@ -384,7 +385,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 				break;
 	    	
 	    	}
-	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),128,128,false,true)));
+	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),64,64,false,true)));
 	    	updateItemsWithPicture.add(event.getRowValue());
 	    }
 	   });
@@ -395,7 +396,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	errorText.setVisible(false);
 	    	boolean itemAlreadyExist = false;
 	    	for(ItemWithPicture i : updateItemsWithPicture) { // check if there is duplicate of item names
-	    		if(i.getItemName().equals(event.getNewValue())) {
+	    		if(i.getItemName().toUpperCase().equals(event.getNewValue().toUpperCase())) {
 	    			errorText.setVisible(true);
 	    			errorText.setText("This item name is already exist!");
 	        		errorText.setFill(Color.RED);
@@ -420,6 +421,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    		errorText.setVisible(true);
     			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	    	else {
 	    	updateItemsWithPicture.remove(event.getRowValue());
@@ -437,12 +439,14 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    		errorText.setVisible(true);
     			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	    	
 	    	else { 
 	    	  if(event.getNewValue() <= 0) { //check if the user did not enter negative price
 	    		errorText.setText("Price cannot be un-positive!");
 	    		errorText.setFill(Color.RED);
+	    		manageMenuTable.refresh();
 	    	}
 	    		    	
 	    	  else { // the user enter positive price

@@ -185,6 +185,29 @@ public class Query {
 	}
 	
 	/**
+	 * method for inserting reports into db
+	 * @param supplierReport
+	 * @return
+	 */
+	public static void savePdfToDb(Object[] report) {
+		//reports[0] is the branch name
+		//reports[1] is the report pdf file
+		//reports[2] is the report file name
+		PreparedStatement pstmt=null;
+		try {
+		String query = "INSERT INTO `semesterialproject`.`quarterlypdf` (`filename`,`homeBranch`,pdffile) VALUES (?,?,?);";
+		pstmt = con.prepareStatement(query);
+		pstmt.setString(1,(String)report[2]);
+		pstmt.setString(2,(String)report[0]);
+		pstmt.setObject(3,report[1]);
+		
+		pstmt.executeUpdate();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * 
 	 * @param tableName
 	 * @param columnName

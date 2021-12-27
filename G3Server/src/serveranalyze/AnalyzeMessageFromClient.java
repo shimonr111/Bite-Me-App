@@ -167,6 +167,15 @@ public class AnalyzeMessageFromClient {
 			 case CUSTOMER_UPDATE_DB_AFTER_PAYMENT:
 				 recivedMessageFromClient = OrderQueries.updatePaymentBalanceAndBudgetBalance((Message)message);
 				 break;
+			 case UPLOAD_PDF:
+				 recivedMessageFromClient = ReportsController.uploadQuarterlyReport((Message)message);
+				 break;
+			 case GET_PDF_LIST:
+				 recivedMessageFromClient = ReportsController.getUploadedList((Message)message);
+				 break;
+			 case GET_PDF_FILE:
+				 recivedMessageFromClient = ReportsController.getPdfFile((Message)message);
+				 break;
 			 case GET_USER_BALANCE:
 				 recivedMessageFromClient = OrderQueries.getBalanceForUser((Message) message);
 				 break;
