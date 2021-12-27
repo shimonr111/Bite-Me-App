@@ -70,9 +70,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     private Button btnExit;
 
     @FXML
-    private Button saveBtn;
-
-    @FXML
     private Button btnBack;
 
     @FXML
@@ -83,9 +80,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private TableColumn<Order, SupplyType> orderTypeColumn;
-
-    @FXML
-    private TableColumn<Order, Date> orderDateColumn;
 
     @FXML
     private TableColumn<Order, Date> estSupplyTimeColumn;
@@ -144,35 +138,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 				((Node) event.getSource()).getScene().getWindow().hide();
 			}
 		});
-    }
-
-
-    /**
-     * This button is for updating  
-     * the status of orders in the manage order table into the 
-     * Order DB.
-     * 
-     * 
-     * @param event
-     */
-    @FXML
-    void getBtnSave(ActionEvent event) {
-    	 // if the table is empty 
-        if(updateOrders.isEmpty()) {
-     	   errorText.setVisible(true);
-     	   errorText.setText("There is no orders!");
-     	   errorText.setFill(Color.RED);
-        }
-        else {
-     	   Message message = new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders);
-           sendToClient(message);//send message to the server telling the manage order is finished and then push into DB
-        	   
-           /*Give notice for the user that the changes have been saved*/
-     	   PopUpMessages.updateMessage("Order changes saved successfully!");
-     	   
-     	   //add call to initialize method for updating need functionality
-        }
-
     }
 
     /**
@@ -278,7 +243,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		/*Set data in the table */
 		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
 		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
-		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
 	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
 	    customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("receiverPhoneNumber"));
 	    statusColumn.setCellValueFactory(new PropertyValueFactory<Order,OrderStatus>("status"));
