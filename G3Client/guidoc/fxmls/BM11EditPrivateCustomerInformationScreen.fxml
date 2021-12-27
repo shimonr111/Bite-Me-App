@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditPrivateCustomerInformationScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.EditPrivateCustomerInformationScreenController">
    <children>
       <Button id="other-btns" fx:id="btnSave" layoutX="422.0" layoutY="620.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" styleClass="saveWhiteButton" text="Save" textFill="#383838">
          <font>
@@ -120,35 +120,31 @@
                <children>
                   <VBox layoutX="13.0" layoutY="51.0" prefHeight="128.0" prefWidth="254.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="85.0" prefWidth="280.0">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Phone Number:">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <HBox prefHeight="37.0" prefWidth="205.0" spacing="5.0">
-                                 <children>
-                                    <TextField fx:id="phoneTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="123-4567" styleClass="text-field" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="40.0" />
-                                 </padding>
-                              </HBox>
-                           </children>
-                        </VBox>
                         <HBox prefHeight="100.0" prefWidth="247.0" spacing="5.0">
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
-                                    <TextField fx:id="emailTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Phone Number:" />
+                                    <TextField fx:id="phoneTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" styleClass="text-field" />
                                  </children>
                               </VBox>
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <padding>
+                              <Insets left="75.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="247.0" spacing="5.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
+                                    <TextField fx:id="emailTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" styleClass="text-field" />
+                                 </children>
+                              </VBox>
+                           </children>
                            <padding>
                               <Insets left="75.0" />
                            </padding>

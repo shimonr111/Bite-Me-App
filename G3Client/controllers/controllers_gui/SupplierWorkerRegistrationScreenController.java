@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.ConfirmationStatus;
@@ -139,7 +140,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	     */
 	    @FXML
 	    void getHelpBtn(ActionEvent event) {
-	    	PopUpMessages.helpMessage("Please fill in all the fields to complete the registration, then click on Save.");
+	    	PopUpMessages.helpMessage("On this screen you can register supplier worker.");
 	    }
 	    
 	    /**
@@ -281,12 +282,12 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 						root = loader.load(getClass().getResource("/fxmls/BM4SupplierWorkerRegistrationScreen.fxml").openStream());
 						supplierWorkerRegistrationScreenController = loader.getController();
 						Scene scene = new Scene(root);
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
+						Stage.initStyle(StageStyle.UNDECORATED);
+						scene.setOnMousePressed(pressEvent -> {
+						    scene.setOnMouseDragged(dragEvent -> {
+						    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+						    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+						    });
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("SupplierWorker registration");

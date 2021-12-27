@@ -26,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import orders.Order;
 import orders.PaymentWay;
@@ -307,12 +308,12 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 						Stage.setResizable(false);
 						root = loader.load(getClass().getResource("/fxmls/ORD6OrderSummary.fxml").openStream());
 						Scene scene = new Scene(root);
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
+						Stage.initStyle(StageStyle.UNDECORATED);
+						scene.setOnMousePressed(pressEvent -> {
+						    scene.setOnMouseDragged(dragEvent -> {
+						    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+						    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+						    });
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Payment Method");
@@ -405,7 +406,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     */
 	    @FXML
 	    void getHelpBtn(ActionEvent event) {
-	    	PopUpMessages.helpMessage("Please choose the way will pay (cash / credit card)");
+	    	PopUpMessages.helpMessage("On this screen you can choose the order payment methods and amount to pay.");
 	    }
 
 	    /**
@@ -428,12 +429,12 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 						root = loader.load(getClass().getResource("/fxmls/ORD7PaymentConfiguration.fxml").openStream());
 						orderPaymentConfigurationScreenController = loader.getController();
 						Scene scene = new Scene(root);
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-							@Override
-							public void handle(WindowEvent event) { 
-								event.consume();
-								Stage.close();
-							}
+						Stage.initStyle(StageStyle.UNDECORATED);
+						scene.setOnMousePressed(pressEvent -> {
+						    scene.setOnMouseDragged(dragEvent -> {
+						    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+						    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+						    });
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 						Stage.setTitle("Payment");

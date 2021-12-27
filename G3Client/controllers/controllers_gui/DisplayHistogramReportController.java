@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.SupplierByReport;
 
 	public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable {
@@ -65,6 +66,13 @@ import util.SupplierByReport;
 //					root = loader.load(getClass().getResource("/fxmls/CEO7DisplayHistogramReport.fxml").openStream());
 //					displayHistogramReportController.displayHistogramReportController = loader.getController();
 //					Scene scene = new Scene(root);
+//				Stage.initStyle(StageStyle.UNDECORATED);
+//				scene.setOnMousePressed(pressEvent -> {
+//				    scene.setOnMouseDragged(dragEvent -> {
+//				    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+//				    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+//				    });
+//				});
 //					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 //					Stage.setTitle("View Report");
 				 CategoryAxis yAxis = new CategoryAxis();

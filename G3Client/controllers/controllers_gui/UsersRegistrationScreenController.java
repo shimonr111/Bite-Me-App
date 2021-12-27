@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.UserForRegistration;
 
@@ -105,7 +106,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Choose a user from the list and click on the relevant button to register the user");
+    	PopUpMessages.helpMessage("On this screen you can register users by clicking on the desierd user on the table and the register as button.");
     }
 
     @FXML
@@ -141,12 +142,12 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 					root = loader.load(getClass().getResource("/fxmls/BM13UsersRegistrationScreen.fxml").openStream());
 					usersRegistrationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("User registration");
@@ -206,6 +207,13 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		scene.setOnMousePressed(pressEvent -> {
+		    scene.setOnMouseDragged(dragEvent -> {
+		    	primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+		    	primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+		    });
+		});
 		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setTitle("Main menu");
 		primaryStage.setScene(scene);

@@ -28,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
 import orders.DeliverySupplyMethod;
@@ -134,12 +135,12 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource(pathForLastScreen).openStream());
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle(pageTitle); 
@@ -195,7 +196,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please confirm the summary of your order and choose payment method (cash / credit card)");
+    	PopUpMessages.helpMessage("On this screen you see the summary of your order and confirm the order to proceed to payment.");
     }
 
 
@@ -219,12 +220,12 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 					root = loader.load(getClass().getResource("/fxmls/ORD6OrderSummary.fxml").openStream());
 					orderSummaryScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Order Summary");

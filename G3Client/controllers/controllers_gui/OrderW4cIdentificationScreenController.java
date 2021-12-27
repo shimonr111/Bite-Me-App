@@ -28,6 +28,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.BusinessCustomer;
@@ -102,12 +103,12 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/UserPortalOfCustomer.fxml").openStream());
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Main menu");
@@ -145,8 +146,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please enter your W4C identification card and choose from which branch"
-    			+ " you want to order");
+    	PopUpMessages.helpMessage("On this screen you identify with your W4C (Enter the number or scan QR code).");
     }
 
     /**
@@ -247,11 +247,13 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     	dialog.setHeaderText("Put your W4C (QR Simulation)");
     	dialog.setTitle("G#3 QR Simulation");
     	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+    	PopUpMessages.centerButtons(dialog.getDialogPane());
     	Optional<String> result = dialog.showAndWait();
     	  if(result.isPresent()) {
     		  if (result.get().matches("[0-9]+") && result.get().length() > 2) //check that it contains only numbers
     			  codeTxtField.setText(result.get());
     	  }
+
     	  
     }
     
@@ -273,12 +275,12 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 					root = loader.load(getClass().getResource("/fxmls/ORD1W4C_Identification_Screen.fxml").openStream());
 					orderW4cIdentificationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("W4C Identification");

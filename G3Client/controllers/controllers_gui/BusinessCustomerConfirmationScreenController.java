@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
 import users.HrManager;
@@ -169,7 +170,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Confirm or Deny the confirmation request for business customers");
+    	PopUpMessages.helpMessage("On this screen you can confirm or deny business customers registration requests.");
     }
     
     /**
@@ -187,12 +188,12 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 					root = loader.load(getClass().getResource("/fxmls/HR2BusinessCustomerConfirmationScreen.fxml").openStream());
 					businessCustomerConfirmationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Business Customer Confirmation");

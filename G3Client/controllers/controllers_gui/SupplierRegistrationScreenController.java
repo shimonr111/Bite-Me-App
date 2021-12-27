@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Company;
 import users.Supplier;
@@ -125,7 +126,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Confirm or Deny the supplier registration requests by clicking on the buttons while selecting supplier from table");
+    	PopUpMessages.helpMessage("Confirm or Deny the supplier registration requests by clicking on the buttons while selecting suppliers at the table!");
     }
     
     /**
@@ -143,12 +144,12 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 					root = loader.load(getClass().getResource("/fxmls/BM14SupplierRegistrationScreen.fxml").openStream());
 					supplierRegistrationScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Supplier Registration");

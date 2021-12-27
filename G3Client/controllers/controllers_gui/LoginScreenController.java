@@ -28,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Login;
 
@@ -181,12 +182,12 @@ public class LoginScreenController extends AbstractBiteMeController{
 					AnalyzeMessageFromServer.removeClientListener(listener);
 					root = loader.load(getClass().getResource("/fxmls/EntryHomeScreenForm.fxml").openStream());
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Home");
@@ -209,7 +210,8 @@ public class LoginScreenController extends AbstractBiteMeController{
 	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
-		PopUpMessages.helpMessage("Insert your user name and password and then press Login.");
+		PopUpMessages.helpMessage("On this screen you enter you'r credintials to log into Bite-Me system."
+				+ "\nOnly confirmed users can log into the system!");
 	}
 	
 	/**
@@ -278,6 +280,13 @@ public class LoginScreenController extends AbstractBiteMeController{
 			e.printStackTrace();
 		}
 		Scene scene = new Scene(root);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		scene.setOnMousePressed(pressEvent -> {
+		    scene.setOnMouseDragged(dragEvent -> {
+		    	primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+		    	primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+		    });
+		});
 		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setTitle("Login");
 		primaryStage.setScene(scene);

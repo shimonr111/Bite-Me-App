@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import util.SupplierByReport;
 
@@ -87,7 +88,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	 */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
-		PopUpMessages.helpMessage("Select a Year and a Quarter to view a report");
+		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the year and quarter.");
 	}
 
 	@FXML
@@ -146,13 +147,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 					root = loader.load(getClass().getResource("/fxmls/CEO1ViewQuarterlyReportsScreen.fxml").openStream());
 					viewQuarterlyReportsScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-//							event.consume();
-//							Stage.close();
-							getExitBtn(new ActionEvent());
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("View Reports");

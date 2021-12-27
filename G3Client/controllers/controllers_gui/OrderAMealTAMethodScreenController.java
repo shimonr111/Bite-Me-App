@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import orders.AbatractSupplyMethod;
 import orders.Order;
@@ -96,12 +97,12 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 					Stage.setResizable(false);
 					root = loader.load(getClass().getResource("/fxmls/ORD4ChooseSupplyMethod.fxml").openStream());
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Fill Take-Away details");
@@ -140,7 +141,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
-    	PopUpMessages.helpMessage("Please insert information for the Take away process");
+    	PopUpMessages.helpMessage("On this screen you insert you'r contact information for the TA process.");
     }
 
 
@@ -169,7 +170,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     		
     		else {
     		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
-    				phoneTxtField.getText());
+    				phonePrefixCombo.getValue() + phoneTxtField.getText());
     		order.setSupplyMethodInformation(takeAwayInformation);
     		//move to next screen
     		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -213,12 +214,12 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 					root = loader.load(getClass().getResource("/fxmls/ORD5OrderAMealTAMethod.fxml").openStream());
 					orderAMealTAMethodScreenController = loader.getController();
 					Scene scene = new Scene(root);
-					Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-						@Override
-						public void handle(WindowEvent event) { 
-							event.consume();
-							Stage.close();
-						}
+					Stage.initStyle(StageStyle.UNDECORATED);
+					scene.setOnMousePressed(pressEvent -> {
+					    scene.setOnMouseDragged(dragEvent -> {
+					    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+					    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("Take Away");
