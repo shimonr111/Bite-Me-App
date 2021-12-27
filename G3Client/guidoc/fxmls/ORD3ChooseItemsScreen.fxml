@@ -38,7 +38,7 @@
             </Label>
             <TableView fx:id="menuTable" layoutX="27.0" layoutY="59.0" prefHeight="320.0" prefWidth="486.0">
               <columns>
-                <TableColumn fx:id="pictureMenuColumn" prefWidth="138.0" text="Picture" />
+                <TableColumn fx:id="pictureMenuColumn" prefWidth="138.0" />
                 <TableColumn fx:id="menuCategoryColumn" prefWidth="100.0" text="Category" />
                   <TableColumn fx:id="itemMenuColumn" prefWidth="100.0" text="Item Name" />
                   <TableColumn fx:id="sizeMenuColumn" text="Size" />
