@@ -62,6 +62,7 @@
                <children>
                   <Button id="button-menu" fx:id="btnViewMonthlyReports" mnemonicParsing="false" onAction="#getMonthlyReports" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View System Reports" />
                   <Button id="button-menu" fx:id="btnViewQuarterlyReports" maxHeight="60.0" maxWidth="300.0" mnemonicParsing="false" onAction="#getQuarterlyReports" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View Quarterly Reports" />
+                  <Button id="button-menu" fx:id="btnViewSentReports" mnemonicParsing="false" onAction="#getSentReports" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View Uploaded Reports" />
                </children>
             </VBox>
          </children>

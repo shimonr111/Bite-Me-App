@@ -1,5 +1,7 @@
 package reports;
 
+import java.io.File;
+
 import communication.Answer;
 import communication.Message;
 import query.Query;
@@ -62,6 +64,46 @@ public class ReportsController {
 		SupplierByReport[] sentSuppliers=ReportQueries.getSuppliersFromDb(branchAndDate[1],branchAndDate[0], branchAndDate[2]);
 		returnMessageToClient.setObject(sentSuppliers);
 		returnMessageToClient.setAnswer(Answer.SENT_REPORT_SUPPLIERS_LIST);
+		return returnMessageToClient;
+	}
+    /**
+     *prepares message notifying of successful file upload
+     *@param messageFromClient message received from client
+     *@param type report type being sent
+     */
+	public static Message uploadQuarterlyReport(Message messageFromClient) {
+		Message returnMessageToClient = messageFromClient;
+		Query.savePdfToDb((Object[])messageFromClient.getObject());
+		returnMessageToClient.setObject(null);
+		returnMessageToClient.setAnswer(Answer.REPORT_UPLOADED);
+		return returnMessageToClient;
+	}
+    /**
+     *prepares message with pdf list to for client
+     *@param messageFromClient message received from client
+     *@param type report type being sent
+     */
+	public static Message getUploadedList(Message messageFromClient) {
+		Message returnMessageToClient = messageFromClient;
+		String[] branchAndDate = (String[])messageFromClient.getObject();
+		String[][] pdfList=null;
+		pdfList=ReportQueries.getPdfList(branchAndDate);
+		returnMessageToClient.setObject(pdfList);
+		returnMessageToClient.setAnswer(Answer.PDF_LIST_SENT);
+		return returnMessageToClient;
+	}
+    /**
+     *prepares message with pdf file byte array for client
+     *@param messageFromClient message received from client
+     *@param type report type being sent
+     */
+	public static Message getPdfFile(Message messageFromClient) {
+		Message returnMessageToClient = messageFromClient;
+		String pdfId = (String)messageFromClient.getObject();
+		byte[] pdfFile=null;
+		pdfFile=ReportQueries.getPdfFileFromDb(pdfId);
+		returnMessageToClient.setObject(pdfFile);
+		returnMessageToClient.setAnswer(Answer.PDF_FILE_SENT);
 		return returnMessageToClient;
 	}
 }

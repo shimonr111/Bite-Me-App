@@ -132,8 +132,6 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	public void displaySingleReport(String report) {
 		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
 		displayHistogramReportController.initDisplayReportScreen(suppliers);
-//		displayHistogramReportController.setReport(suppliers);
-//		displayHistogramReportController.showReport();
 }
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {

@@ -2,6 +2,7 @@ package clientanalyze;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
 import controllers_gui.WatchOrderHistoryScreenController;
 import controllers_gui.UsersRegistrationScreenController;
+import controllers_gui.ViewBMQuarterlyReportsScreenController;
 import controllers_gui.ViewQuarterlyReportsScreenController;
 import controllers_gui.ViewSystemReportsScreenCEOController;
 import orders.Item;
@@ -320,6 +322,32 @@ public class AnalyzeMessageFromServer {
 					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					ViewSystemReportsScreenCEOController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					break;
+					default:
+						break;
+				}
+				break;
+			case UPLOAD_PDF:
+				switch(recievedAnswerFromServer) {
+				case REPORT_UPLOADED:
+					break;
+					default:
+						break;
+				}
+				break;
+			case GET_PDF_LIST:
+				switch(recievedAnswerFromServer) {
+				case PDF_LIST_SENT:
+					ViewBMQuarterlyReportsScreenController.pdfList=(String[][])recivedMessageFromServer.getObject();
+					break;
+					default:
+						break;
+				}
+				break;
+			case GET_PDF_FILE:
+				switch(recievedAnswerFromServer) {
+				case PDF_FILE_SENT:
+					ViewBMQuarterlyReportsScreenController.pdfFile=(byte[])recivedMessageFromServer.getObject();
 					break;
 					default:
 						break;

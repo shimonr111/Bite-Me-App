@@ -27,6 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -145,7 +147,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			else {//otherwise primes report generator, and generates reports by selected type
 				ReportGenerator.setSuppliers(suppliers);
 				saveQuarterlyReport(date);
-				setRelevantTextToDisplayMessageText("PDF created in C:\\G3BiteMe\\Reports");
+				setRelevantTextToDisplayMessageText("Report Generated");
 				suppliers=null;
 				}
     }
@@ -332,8 +334,8 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		PDPageContentStream contentStream = new PDPageContentStream(report, incomePage);
 		contentStream.beginText();
 		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-		contentStream.newLineAtOffset(25, 500);
-		contentStream.showText("Income Report By Supplier");
+		contentStream.newLineAtOffset(25, 700);
+		contentStream.showText("Quarterly Income Report By Supplier");
 		contentStream.newLineAtOffset(0, -15);
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
@@ -343,30 +345,57 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Total Income: "+supplier.getIncome()+"");
 			contentStream.newLineAtOffset(0, -15);
 		}
-		replacer=ReportGenerator.generateIncomeReport();
-		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
-		contentStream.showText(replacer);
 	    contentStream.endText();
 	    contentStream.close();
 	    contentStream = new PDPageContentStream(report, orderPage);
 	    contentStream.beginText();
 		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-		contentStream.newLineAtOffset(25, 100);
-		replacer=ReportGenerator.generateOrderReport();
-		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
-		contentStream.showText(replacer);      
+		contentStream.newLineAtOffset(25, 700);
+		contentStream.showText("Quarterly Order Report By Supplier");
+		contentStream.newLineAtOffset(0, -15);
+		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
+		contentStream.newLineAtOffset(0, -15);
+		for(SupplierByReport supplier:suppliers) {
+			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Salads Ordered: "+supplier.getTypeSums()[0]);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Opening Dishes Ordered: "+supplier.getTypeSums()[1]);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Main Dishes Ordered: "+supplier.getTypeSums()[2]);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Desserts Ordered: "+supplier.getTypeSums()[3]);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Drinks Ordered: "+supplier.getTypeSums()[4]);
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.newLineAtOffset(0, -15);
+		}  
 	    contentStream.endText();
 	    contentStream.close();
 	    contentStream = new PDPageContentStream(report, performancePage);
 	    contentStream.beginText();
 		contentStream.setFont(PDType1Font.TIMES_ROMAN, 12);
-		contentStream.newLineAtOffset(25, 100);
-		replacer=ReportGenerator.generatePerformanceReport();
-		replacer = replacer.replace("\n", "<br>").replace("\r", "<br>");
-		contentStream.showText(replacer);      
+		contentStream.newLineAtOffset(25, 700);
+		contentStream.showText("Quarterly Performance Report By Supplier");
+		contentStream.newLineAtOffset(0, -15);
+		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
+		contentStream.newLineAtOffset(0, -15);
+		for(SupplierByReport supplier:suppliers) {
+			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Total Orders: "+supplier.getTotalOrders());
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Late Orders: "+supplier.getLateOrders());
+			contentStream.newLineAtOffset(0, -15);
+		}  
 	    contentStream.endText();
 	    contentStream.close();
-		report.save("C:\\G3BiteMe\\Reports\\"+date+".pdf");    
+	    FileChooser fileChooser = new FileChooser();
+	    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName(date+" Quarterly Report.pdf");
+        Stage stage= new Stage();
+        report.save(fileChooser.showSaveDialog(stage)); 
 		report.close();
 		} catch (IOException e) {
 			e.printStackTrace();
