@@ -82,9 +82,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     private ComboBox<String> setHomeBranchCombo;
     
     @FXML
-    private ComboBox<String> phonePrefixCombo;
-
-    @FXML
     private TextField cvvTxtField;
 
     @FXML
@@ -184,10 +181,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  			displayMessage.setText("Please, Fill in all the marked fields !!");
  			return false;
  		}
- 		if(phonePrefixCombo.getValue() == null) {
- 			displayMessage.setText("Please, pick your choice from the 'Prefix' box!");
- 			return false;
- 		}
+
  		for(TextField intTxt : integerFields) {
  			if(!isInt(intTxt)) {
  				intTxt.setStyle("-fx-border-color: red");
@@ -332,7 +326,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 			setHomeBranchCombo.setValue("South Branch");
 		displayMessage.setText("");
 		
-		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
 			public void clientUserIdExist() {
