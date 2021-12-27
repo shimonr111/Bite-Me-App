@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="loginExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.LoginScreenController">
+<Pane maxHeight="768.0" maxWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" styleClass="loginExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.LoginScreenController">
    <children>
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
@@ -31,23 +31,23 @@
          <children>
             <Button fx:id="btnLogin" layoutX="45.0" layoutY="308.0" mnemonicParsing="false" onAction="#getLoginBtn" prefHeight="50.0" prefWidth="250.0" styleClass="loginButton" text="Login" />
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="87.0" layoutY="35.0" maxHeight="50.0" maxWidth="284.0" prefHeight="50.0" prefWidth="167.0" styleClass="loginHeadLight" text="User Login" />
-            <VBox layoutX="69.0" layoutY="97.0" prefHeight="207.0" prefWidth="203.0">
+            <VBox layoutX="69.0" layoutY="97.0" prefHeight="165.0" prefWidth="203.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="Username *" />
+                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="*Username:" />
                         <TextField fx:id="userNameField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="Username" styleClass="text-field" />
                      </children>
                   </VBox>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="Password *" />
+                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="*Password:" />
                         <PasswordField fx:id="passwordField" prefHeight="35.0" prefWidth="200.0" promptText="Password" />
                      </children>
                   </VBox>
-                  <Label fx:id="errorLabel" prefHeight="35.0" prefWidth="200.0" styleClass="errorText" text="" />
                </children>
             </VBox>
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="262.0" prefHeight="40.0" prefWidth="200.0" styleClass="errorText" />
          </children>
       </AnchorPane>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
