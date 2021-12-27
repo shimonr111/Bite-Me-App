@@ -102,10 +102,10 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     	ConfirmationStatus oldStatus = customer.getStatusInSystem();
     	String newStatus = setStatusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
-    		displayMessage.setText("There were no changes");
+    		displayMessage.setText("There were no changes.");
     	}
     	else {
-      		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to save the changes.");
+      		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Save changes?");
     		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(customer.getUserId());
@@ -126,7 +126,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     		default:
     			break;		
     		}
-    		displayMessage.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		displayMessage.setText("Customer status changed from:" + oldStatus.toString() + " to:" + newStatus + ".");
     		}
     	}
     }

@@ -47,7 +47,7 @@
                   <TextField fx:id="searchTextField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <Text fx:id="errorText" layoutX="248.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <Text fx:id="errorText" fill="RED" layoutX="153.0" layoutY="411.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="393.0703199803829" />
             <TableView fx:id="manageOrdersTable" layoutX="119.0" layoutY="136.0" prefHeight="250.0" prefWidth="462.0">
                <columns>
                   <TableColumn fx:id="orderNumColum" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Order #" />

@@ -68,8 +68,9 @@
 .errorTextWhite{
 	-fx-text-alignment: center;
 	-fx-font-size: 12px;
- -fx-text-fill: white;
+	-fx-text-fill: white;
 	-fx-background-position: center center;
+	-fx-font-weight: bold;
 }
 
 .saveButton{

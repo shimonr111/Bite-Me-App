@@ -32,7 +32,7 @@
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <VBox layoutX="69.0" layoutY="122.0" prefHeight="156.0" prefWidth="205.0" spacing="5.0">
+            <VBox layoutX="69.0" layoutY="113.0" prefHeight="156.0" prefWidth="205.0" spacing="5.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
@@ -43,7 +43,6 @@
                               <ComboBox fx:id="supplyTimeCombo" prefHeight="31.0" prefWidth="94.0" promptText="Time" />
                            </children>
                         </HBox>
-                        <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
                      </children>
                   </VBox>
                   <VBox fillWidth="false" prefHeight="30.0" prefWidth="203.0" styleClass="loginBundleVBOX">
@@ -59,6 +58,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
+            <Text fx:id="errorText" fill="RED" layoutX="18.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="306.0" />
          </children>
       </AnchorPane>
    </children>

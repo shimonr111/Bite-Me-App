@@ -224,7 +224,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     	else {
     		//set error message to the user
     		errorText1.setVisible(true); 
-    		errorText1.setText("You didn't choose any items, please choose them first!");
+    		errorText1.setText("No items in the cart!");
     		errorText1.setFill(Color.RED);
     	}
     }
@@ -357,7 +357,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		if(itemListOfMenuFromDB == null) {
 			errorText1.setVisible(true);
 			errorText1.setText("There are no Items in this restaurant!");
-    		errorText1.setFill(Color.RED);
 		}
 		else {
 			//add all the wrapper items to the table view

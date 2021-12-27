@@ -347,19 +347,19 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  				returnVal=false;
  			}
  		if(returnVal==false) {
- 			displayMessage.setText("Please, Fill in all the marked fields !!");
+ 			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  		} 
  		if(!checkComboBoxInput(companyNameCombo,"Select company:")) {
- 			displayMessage.setText("Please, pick your choice from the 'Select company' box!");
+ 			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  			}
  		if(!checkComboBoxInput(positionCombo,"Select position:")) {
- 			displayMessage.setText("Please, pick your choice from the 'Select position' box!");
+ 			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  			}
  		if(!checkComboBoxInput(budgetTypeCombo, "Select Budget type:")) {
- 			displayMessage.setText("Please, pick your choice from the 'Select Budget type' box!");
+ 			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  		}
  		
@@ -367,18 +367,18 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  		for(TextField intTxt : integerFields) {
  			if(!isInt(intTxt)) {
  				intTxt.setStyle("-fx-border-color: red");
- 				displayMessage.setText("Marked field must contain only numbers !");
+ 				displayMessage.setText("Marked field must contain only numbers!");
  				return false;
  			}
  		}
  		if(emailTxtField.getText().contains("@")==false) {
  			emailTxtField.setStyle("-fx-border-color: red");
- 			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
+ 			displayMessage.setText("Incorrect email format, email must contain '@'!");
  			return false;
  		}
  		else if(emailTxtField.getText().equals(confirmedEmailTxtField.getText())== false) {
  			confirmedEmailTxtField.setStyle("-fx-border-color: red");
- 			displayMessage.setText("Please, fill the same Email address on both email fields!!");
+ 			displayMessage.setText("Emails doesn't match!");
  			return false;
  		}
  		return true;
@@ -434,7 +434,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 				companyNameCombo.setDisable(true);
 				budgetTypeCombo.setDisable(true);
 				saveBtn.setDisable(true);
-				displayMessage.setText("You can not register an employer, no confirmed companies");
+				displayMessage.setText("No confirmed companies. Cannot register employees!");
 			}
 		}
 		else {

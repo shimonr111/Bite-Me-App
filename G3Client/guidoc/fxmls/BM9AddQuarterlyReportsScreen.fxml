@@ -31,7 +31,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Text fx:id="errorText" layoutX="119.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <Text fx:id="errorText" fill="RED" layoutX="12.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">

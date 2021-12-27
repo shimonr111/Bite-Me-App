@@ -32,7 +32,7 @@
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="38.0" maxHeight="50.0" maxWidth="317.0" prefHeight="50.0" prefWidth="294.0" styleClass="W4CHeadLight" text="Restaurant Selection" />
             <ComboBox fx:id="chooseResComboBox" layoutX="75.0" layoutY="185.0" prefHeight="31.0" prefWidth="190.0" promptText="Select Restaurant" />
-            <Text fx:id="errorText" layoutX="68.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <Text fx:id="errorText" fill="RED" layoutX="23.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="294.0" />
          </children>
       </AnchorPane>
    </children>

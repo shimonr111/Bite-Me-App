@@ -47,7 +47,7 @@
                   </VBox>
                </children>
             </VBox>
-            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="262.0" prefHeight="40.0" prefWidth="200.0" styleClass="errorText" />
+            <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="262.0" prefHeight="40.0" prefWidth="200.0" styleClass="errorText" textFill="RED" />
          </children>
       </AnchorPane>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
