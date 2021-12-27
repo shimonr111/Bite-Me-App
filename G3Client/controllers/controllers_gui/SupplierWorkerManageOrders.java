@@ -282,7 +282,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
 	    customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("receiverPhoneNumber"));
 	    statusColumn.setCellValueFactory(new PropertyValueFactory<Order,OrderStatus>("status"));
-	    
+	    /*Show only the options below for the combo box in the table view*/
+	    OrderStatus[] orderStatusArray = {OrderStatus.PENDING_APPROVAL , OrderStatus.UN_APPROVED , OrderStatus.APPROVED};
 	    statusColumn.setCellFactory((param) -> new ComboBoxTableCell<>(new StringConverter<OrderStatus>() {
 
 			@Override
@@ -295,28 +296,32 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 				return OrderStatus.valueOf(string);
 			}
 			
-		}, OrderStatus.values()));
+		},orderStatusArray));
 	    
 	    manageOrdersTable.setItems(ordersForManageOrderTable);
 	    manageOrdersTable.setEditable(true); // set the table editable in order to edit items
 	    
 	    
-	    /*Save changes in the table view in the local memory*/
+	    /*Save changes in the table view when the user changed the status of the reservation*/
 	    statusColumn.setOnEditCommit(
 	            event ->
 	    {
 			Order order = event.getRowValue();  // create new object of item get the specific row where we made the change in the status column
 			updateOrders.remove(order); // remove this row from updateOrders array
 			order.setStatus(event.getNewValue()); // set the new status in the order array
-			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
-			/*Simulation for sending an email to the user with his details*/
-	           sendToClient(new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders));//send message to the server telling the manage order is finished and then push into DB
-			if(event.getNewValue() == OrderStatus.APPROVED) {
-				PopUpMessages.simulationMessage("Simulation","Simulation SMS to the user!","SMS sent to : " + order.getReceiverPhoneNumber());
+	        /*Simulation for sending an email to the user with his details*/
+	        if(event.getNewValue() == OrderStatus.APPROVED) {
+				PopUpMessages.simulationMessage("Simulation","Simulation SMS to the user!","SMS sent to : " + order.getReceiverPhoneNumber());				
+				/*remove from the table view after being approved*/
+				ordersForManageOrderTable.remove(order);
+				/*Set issued Date time to the point where the order is approved in the restaurant*/
+				order.setIssueDateTime(new Date()); //test
 			}
-	    	
+			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
+	        sendToClient(new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders));//send message to the server telling the manage order is finished and then push into DB
 	    });
 	    
+	    /*Used for searching bar in the table view*/
 	    FilteredList<Order> filteredData = new FilteredList<Order>(ordersForManageOrderTable , b -> true);
 		searchTextField.textProperty().addListener((observable, oldValue, newValue)->{
 			filteredData.setPredicate(Order ->{
