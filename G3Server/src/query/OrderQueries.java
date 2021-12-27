@@ -206,7 +206,7 @@ public class OrderQueries {
 		
 		/*get the order number as written in the DB*/
 		ResultSet result = Query.getRowsFromTableInDB("order","supplierId= '"+supplierId+"' AND (customerUserId= '"+customerUserId+"')"
-				+ "AND (branch= '"+branch+"') AND (issueDateTime= '"+DateTimeHandler.convertMySqlDateTimeFormatToString(issueDateTime)+"') " ); 
+				+ "AND (branch= '"+branch+"') AND (issueDateTime= '"+DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime)+"') " ); 
 		while(result.next()) {
 			orderIntoDb.setOrderNumber(Integer.valueOf(result.getString(1)));
 			}
@@ -276,6 +276,7 @@ public class OrderQueries {
 			}
 			
 			Query.updateOneColumnForTableInDbByPrimaryKey("order", "status='"+orderStatus+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // update the status column in DB according to supplyId
+			Query.updateOneColumnForTableInDbByPrimaryKey("order", "issueDateTime='"+DateTimeHandler.convertMySqlDateTimeFormatToString(order.getIssueDateTime())+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // 
 		}
 		
 		
