@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.IsoFields;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -43,6 +44,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 
     @FXML
     private ComboBox<String> ReportYear;
+
+    @FXML
+    private ComboBox<String> ReportBranch;
 	@FXML
 	private Button btnBack;
 
@@ -114,7 +118,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 				break;
 		}
 		String[] branchAndDate=new String[3];
-		branchAndDate[0]="NOT_APPLICABLE";
+		branchAndDate[0]=getBranch();
 		branchAndDate[1]=date; //prepare message to server, report date and branch
 		branchAndDate[2]="quarterly";
 		Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
@@ -123,8 +127,8 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 			setRelevantTextToDisplayMessageText("No reports found for that time period");
 		}
 		else {//otherwise primes report generator, and generates reports by selected type
-			ReportGenerator.setSuppliers(suppliers);
-			displaySingleReport(ReportGenerator.generateIncomeReport("by branch"));
+			displaySingleReport("By branch");
+			suppliers=null;
 		}
 		}
 	}
@@ -132,6 +136,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	public void displaySingleReport(String report) {
 		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
 		displayHistogramReportController.initDisplayReportScreen(suppliers);
+		displayHistogramReportController.showReport();
 }
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
@@ -167,6 +172,8 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	public void initialize(URL location, ResourceBundle resources) {
 		ReportYear.setValue("Year");
 		ReportQuarter.setValue("Quarter");
+		ReportBranch.setValue("Branch");
+		ReportBranch.getItems().addAll(getBranches());
 		 Year y = Year.now();
 		for(int i=y.getValue();i>2000;i--) 
 			ReportYear.getItems().add(""+i);
@@ -176,6 +183,11 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	public boolean checkDate() {
 		if(ReportYear.getValue().equals("Year")) {
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
+			return false;
+		}
+		else
+		if(ReportBranch.getValue().equals("Branch")) {
 			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
@@ -194,5 +206,28 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 			}
 		});
 }
+	public String getBranch(){
+		String branch=ReportBranch.getValue();
+		switch (branch) {
+		case "North":
+			return "NORTH";
+		case "Center":
+			return "CENTER";
+		case "South":
+			return "SOUTH";
+		case "All":
+			return "NOT_APPLICABLE";
+			default:
+				return "";
+		}
+	}
+	public String[] getBranches() {
+		String[] branches= new String[4];
+		branches[0]="North";
+		branches[1]="Center";
+		branches[2]="South";
+		branches[3]="All";
+		return branches;
+	}
 }
 
