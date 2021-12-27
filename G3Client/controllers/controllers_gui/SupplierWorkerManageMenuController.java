@@ -399,7 +399,8 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    			errorText.setVisible(true);
 	    			errorText.setText("This item name is already exist!");
 	        		errorText.setFill(Color.RED);
-	        		itemAlreadyExist=true;
+	        		itemAlreadyExist = true;
+	        		manageMenuTable.refresh();
 	    	      }
 	    	}
 	   
