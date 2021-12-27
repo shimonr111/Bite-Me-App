@@ -11,7 +11,7 @@
 	-fx-text-alignment: center;
 }
 .button:hover{
-	   -fx-cursor: hand;
+	-fx-cursor: hand;
 }
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Layouts ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
@@ -61,12 +61,14 @@
 	-fx-text-alignment: center;
 	-fx-font-size: 12px;
 	-fx-background-position: center center;
+	-fx-text-fill: red;
+	-fx-font-weight: bold;
 }
 
 .errorTextWhite{
 	-fx-text-alignment: center;
 	-fx-font-size: 12px;
-	  -fx-text-fill: white;
+ -fx-text-fill: white;
 	-fx-background-position: center center;
 }
 

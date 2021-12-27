@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierWorkerManageOrders">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.SupplierWorkerManageOrders">
    <children>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Manage Orders" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
@@ -30,7 +30,7 @@
          </children>
       </HBox>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="162.0" layoutY="125.0" prefHeight="480.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="162.0" layoutY="125.0" prefHeight="459.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
             <Label alignment="CENTER" layoutX="176.0" layoutY="14.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="Manage Orders" textFill="#383838">
                <font>
@@ -47,12 +47,11 @@
                   <TextField fx:id="searchTextField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <Text fx:id="errorText" layoutX="250.0" layoutY="399.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
-            <TableView fx:id="manageOrdersTable" layoutX="56.0" layoutY="130.0" prefHeight="250.0" prefWidth="588.0">
+            <Text fx:id="errorText" layoutX="248.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
+            <TableView fx:id="manageOrdersTable" layoutX="119.0" layoutY="136.0" prefHeight="250.0" prefWidth="462.0">
                <columns>
                   <TableColumn fx:id="orderNumColum" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Order #" />
                   <TableColumn fx:id="orderTypeColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Order Type" />
-                  <TableColumn fx:id="orderDateColumn" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="Issued Date" />
                   <TableColumn fx:id="estSupplyTimeColumn" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="EST. Supply Time" />
                   <TableColumn fx:id="customerPhoneColumn" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Phone #" />
                   <TableColumn fx:id="statusColumn" maxWidth="75.0" minWidth="75.0" prefWidth="75.0" text="Status" />
@@ -61,11 +60,6 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="saveBtn" layoutX="277.0" layoutY="410.0" mnemonicParsing="false" onAction="#getBtnSave" prefHeight="40.0" prefWidth="150.0" styleClass="saveButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="Save" textFill="#383838">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Button>
          </children>
       </AnchorPane>
    </children>
