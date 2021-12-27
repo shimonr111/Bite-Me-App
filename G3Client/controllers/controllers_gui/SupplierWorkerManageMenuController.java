@@ -385,7 +385,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 				break;
 	    	
 	    	}
-	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),128,128,false,true)));
+	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),64,64,false,true)));
 	    	updateItemsWithPicture.add(event.getRowValue());
 	    }
 	   });
