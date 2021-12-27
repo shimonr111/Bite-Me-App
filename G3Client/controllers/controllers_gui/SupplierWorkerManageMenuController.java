@@ -185,7 +185,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
        // if the menu is empty or the user added new items but did not edit them, it will not let him to save the changes.
        if(updateItemsWithPicture.isEmpty()) {
     	   errorText.setVisible(true);
-    	   errorText.setText("The menu is empty! insert values or add new items");
+    	   errorText.setText("The menu is empty! insert values or add new items.");
     	   errorText.setFill(Color.RED);
        }
        else {
@@ -284,7 +284,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 		sendToClient(message);
 		if(itemListOfMenuFromDB == null) {
 			errorText.setVisible(true);
-			errorText.setText("There are no Items in this restaurant!");
+			errorText.setText("There are no items in this restaurant!");
     		errorText.setFill(Color.RED);
 		}
 		else {
@@ -358,8 +358,9 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
 	    	if(event.getRowValue().getItemName() == "Item name") { 
 	    		errorText.setVisible(true);
-    			errorText.setText("Please edit the item name first!");
+    			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	     else { 
 	    	updateItemsWithPicture.remove(event.getRowValue());
@@ -384,7 +385,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 				break;
 	    	
 	    	}
-	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),128,128,false,true)));
+	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),64,64,false,true)));
 	    	updateItemsWithPicture.add(event.getRowValue());
 	    }
 	   });
@@ -395,11 +396,12 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	errorText.setVisible(false);
 	    	boolean itemAlreadyExist = false;
 	    	for(ItemWithPicture i : updateItemsWithPicture) { // check if there is duplicate of item names
-	    		if(i.getItemName().equals(event.getNewValue())) {
+	    		if(i.getItemName().toUpperCase().equals(event.getNewValue().toUpperCase())) {
 	    			errorText.setVisible(true);
-	    			errorText.setText("This item already exist! Choose other name");
+	    			errorText.setText("This item name is already exist!");
 	        		errorText.setFill(Color.RED);
-	        		itemAlreadyExist=true;
+	        		itemAlreadyExist = true;
+	        		manageMenuTable.refresh();
 	    	      }
 	    	}
 	   
@@ -417,8 +419,9 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
 	    	if(event.getRowValue().getItemName() == "Item name") {
 	    		errorText.setVisible(true);
-    			errorText.setText("Please edit the item name first!");
+    			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	    	else {
 	    	updateItemsWithPicture.remove(event.getRowValue());
@@ -434,14 +437,16 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	// if we added new item and did not change the default name, it wont save this item if we try to change other fields
 	    	if(event.getRowValue().getItemName() == "Item name") {
 	    		errorText.setVisible(true);
-    			errorText.setText("Please edit the item name first!");
+    			errorText.setText("Edit the item name first!");
         		errorText.setFill(Color.RED);
+        		manageMenuTable.refresh();
 	    	}
 	    	
 	    	else { 
 	    	  if(event.getNewValue() <= 0) { //check if the user did not enter negative price
-	    		errorText.setText("Wrong price! enter positive number please");
+	    		errorText.setText("Price cannot be un-positive!");
 	    		errorText.setFill(Color.RED);
+	    		manageMenuTable.refresh();
 	    	}
 	    		    	
 	    	  else { // the user enter positive price

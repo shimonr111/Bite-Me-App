@@ -36,7 +36,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <VBox layoutX="75.0" layoutY="76.0" prefHeight="230.0" prefWidth="290.0" spacing="5.0">
+            <VBox layoutX="76.0" layoutY="76.0" prefHeight="206.0" prefWidth="290.0" spacing="5.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
@@ -87,13 +87,9 @@
                         <Insets top="5.0" />
                      </padding>
                   </HBox>
-                  <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="284.99999959766865">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </Text>
                </children>
             </VBox>
+            <Text fx:id="errorText" fill="RED" layoutX="43.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="355.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="555.0" layoutY="236.0" prefHeight="160.0" prefWidth="360.0" styleClass="itemSelectionMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">

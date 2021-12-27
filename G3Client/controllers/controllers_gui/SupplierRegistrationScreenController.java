@@ -101,16 +101,16 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     void getCompleteRegistrationBtn(ActionEvent event) {
     	Supplier selectedSupplier = suppliersTable.getSelectionModel().getSelectedItem();
     	if(selectedSupplier != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you are sure you want to confirm "+ selectedSupplier.getSupplierName());
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Are you sure you want to confirm:" + selectedSupplier.getSupplierName() + "?");
     		if(result.get() == ButtonType.OK) {
         		Message message = new Message(Task.CONFIRM_SUPPLIER,Answer.WAIT_RESPONSE,selectedSupplier);
         		sendToClient(message);
-        		displayMessage.setText("Supplier: "+ selectedSupplier.getSupplierName() +" was confirmed.");
+        		displayMessage.setText("Supplier:"+ selectedSupplier.getSupplierName() +" confirmed.");
         		initialize(null, null);	
     		}
     	}
     	else {
-    		displayMessage.setText("Please Select One Company to Confirm.");
+    		displayMessage.setText("Select company to confirm.");
     	}
     }
 

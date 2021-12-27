@@ -130,8 +130,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
     	String pickedRestaurntName =  chooseResComboBox.getValue(); //Receive the restaurants name from the user
     	String pickedRestaurantId = null;
     	if(chooseResComboBox.getValue() == null) {
-    		errorText.setText("Please choose restaurant!");
-    		errorText.setFill(Color.RED);
+    		errorText.setText("Choose restaurant!");
     	}
     	else {
     	for(Entry<String, String> entry: suppliersList.entrySet()) {
@@ -203,7 +202,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 					    });
 					});
 					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-					Stage.setTitle("Choose restaurant");
+					Stage.setTitle("Choose restaurant!");
 					Stage.setScene(scene);
 					Stage.show();
 				} catch (IOException e) {
@@ -225,7 +224,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 		sendToClient(message);
 		//There are no restaurants for this Branch, set message to user
 		if(suppliersList == null) {
-			errorText.setText("Switch Branch, this one has no restaurants!, go back");
+			errorText.setText("Switch Branch, this one has no restaurants!");
     		errorText.setFill(Color.RED);
     		nextBtn.setDisable(true);
 		}

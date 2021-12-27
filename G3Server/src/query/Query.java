@@ -330,16 +330,13 @@ public class Query {
 			Date actualSupplyDateTime, SupplyType supplyType, double totalPrice, String receiverFirstName,
 			String receiverLastName, String receiverAddress, String receiverPhoneNumber, double deliveryFee, String itemList, String comments, DeliveryType deliveryType) {
 		
-		String issueDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(issueDateTime);
 		String estimatedSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime);
-		String actualSupplyDateAndTime = DateTimeHandler.convertMySqlDateTimeFormatToString(actualSupplyDateTime);
 
-				
 		String query = "INSERT INTO semesterialproject.order ( orderNumber, supplierId, customerUserId, customerUserType, branch,"
-				+ " timeType, status, issueDateTime, estimatedSupplyDateTime, supplyType,"
+				+ " timeType, status, estimatedSupplyDateTime, supplyType,"
 				+ " totalPrice, receiverFirstName, receiverLastName, receiverAddress, receiverPhoneNumber, deliveryFee,"
 				+ " itemsList, comments, deliveryType) VALUES( '" + orderNumber +"' , '"+supplierId +"' , '" + customerUserId+"' , '" + customerUserType+"' , '" + branch+"' ,"
-						+ " '" + timeType.name()+"' , '" + status.name()+"' , '" + issueDateAndTime +"' , '" + estimatedSupplyDateAndTime  +"' , '"+ supplyType.name()+"' ,"
+						+ " '" + timeType.name()+"' , '" + status.name()+"' ,  '" + estimatedSupplyDateAndTime  +"' , '"+ supplyType.name()+"' ,"
 								+ " '" + totalPrice+"' , '" + receiverFirstName+"' , '" + receiverLastName+"' , '" + receiverAddress+"' , '" + receiverPhoneNumber+"' ,"
 										+ " '" + deliveryFee+"' , '" + itemList+"' , '" + comments+"' , '" +deliveryType.name() +"' )";
 

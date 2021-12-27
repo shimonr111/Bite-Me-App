@@ -35,11 +35,11 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <VBox layoutX="97.0" layoutY="105.0" prefHeight="250.0" prefWidth="250.0">
+            <VBox layoutX="97.0" layoutY="105.0" prefHeight="182.0" prefWidth="250.0">
                <children>
                   <VBox prefHeight="88.0" prefWidth="303.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="294.0" styleClass="loginLabels" text="Select Reports Time Range:" />
+                        <Label prefHeight="35.0" prefWidth="294.0" styleClass="loginLabels" text="*Select Reports Time Range:" />
                         <HBox alignment="CENTER" prefHeight="54.0" prefWidth="303.0" spacing="10.0">
                            <children>
                               <ComboBox fx:id="ReportYear" prefHeight="30.0" prefWidth="90.0" promptText="Year" visibleRowCount="10" />
@@ -53,7 +53,7 @@
                   </VBox>
                   <VBox prefHeight="88.0" prefWidth="303.0">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="294.0" styleClass="loginLabels" text="Select Report Type:" />
+                        <Label prefHeight="35.0" prefWidth="294.0" styleClass="loginLabels" text="*Select Report Type:" />
                         <HBox alignment="CENTER" prefHeight="47.0" prefWidth="303.0" spacing="10.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -64,14 +64,6 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <HBox alignment="CENTER" prefHeight="54.0" prefWidth="303.0" spacing="10.0">
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <children>
-                        <Label fx:id="MessageLabel" prefHeight="17.0" prefWidth="174.0" />
-                     </children>
-                  </HBox>
                </children>
             </VBox>
             <Button fx:id="viewReportBtn" layoutX="132.0" layoutY="355.0" mnemonicParsing="false" onAction="#getViewReport" prefHeight="50.0" prefWidth="180.0" styleClass="regiViewButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="View Report" textFill="#383838">
@@ -79,8 +71,9 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
+            <Label fx:id="MessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="296.0" prefHeight="40.0" prefWidth="406.0" styleClass="errorText" textFill="RED" />
          </children>
       </AnchorPane>
-      <Button fx:id="quarterlyBtn" layoutX="532.0" layoutY="628.0" mnemonicParsing="false" onAction="#getQuarterly" prefHeight="64.0" prefWidth="317.0" text="Generate Quarterly PDF (temp button)" />
+      <Button fx:id="quarterlyBtn" layoutX="354.0" layoutY="645.0" mnemonicParsing="false" onAction="#getQuarterly" prefHeight="64.0" prefWidth="317.0" styleClass="backButton" text="Generate Quarterly PDF" />
    </children>
 </Pane>

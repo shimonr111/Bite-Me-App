@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="supplyExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="supplyExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderSummaryScreenController">
    <children>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
@@ -30,12 +30,12 @@
       </HBox>
       <AnchorPane layoutX="292.0" layoutY="164.0" prefHeight="440.0" prefWidth="440.0" styleClass="itemSelectionCartPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label layoutX="109.0" layoutY="31.0" styleClass="itemSelectionCartHeadLight" text="Order Summary" textFill="#383838">
+            <Label layoutX="108.0" layoutY="20.0" styleClass="itemSelectionCartHeadLight" text="Order Summary" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <TableView fx:id="orderSummaryTable" layoutX="25.0" layoutY="85.0" prefHeight="230.0" prefWidth="392.0">
+            <TableView fx:id="orderSummaryTable" layoutX="24.0" layoutY="72.0" prefHeight="230.0" prefWidth="392.0">
                <columns>
                   <TableColumn fx:id="iteamNameColumn" prefWidth="100.0" text="Item Name" />
                   <TableColumn fx:id="sizeColumn" text="Size" />
@@ -43,11 +43,11 @@
                   <TableColumn fx:id="commentColumn" prefWidth="150.0" text="Comments" />
                </columns>
             </TableView>
-            <Button fx:id="choosePaymentMethodBtn" layoutX="95.0" layoutY="331.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="50.0" prefWidth="250.0" styleClass="proceedToPaymentButton" text="Proceed to Payment" />
-            <Text fx:id="errorText" layoutX="119.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="204.07031998038292" />
+            <Button fx:id="choosePaymentMethodBtn" layoutX="95.0" layoutY="342.0" mnemonicParsing="false" onAction="#getChoosePaymenMethodtBtn" prefHeight="50.0" prefWidth="250.0" styleClass="proceedToPaymentButton" text="Proceed to Payment" />
+            <Text fx:id="errorText" fill="RED" layoutX="12.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="402.0" layoutY="564.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
+      <AnchorPane layoutX="402.0" layoutY="580.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
          <children>
             <Label layoutX="30.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Total Order Price">
                <font>

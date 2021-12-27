@@ -150,7 +150,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  				returnVal=false;
  			}
  		if(returnVal==false) {
- 			errorText.setText("Please fill all the marked fields!");
+ 			errorText.setText("Please fill all the required fields (*)!");
  			return false;
  		}
  		if(!isInt(companyNameTxtField1)) {
@@ -161,12 +161,12 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  		
  		if(companyEmailTxtField.getText().contains("@")==false) {
  			companyEmailTxtField.setStyle("-fx-border-color: red");
- 			errorText.setText("Please use a correct Email format (E-mail must contain a '@')!");
+ 			errorText.setText("Incorrect email format, email must contain '@'!");
  			return false;
  		}
  		else if(companyEmailTxtField.getText().equals(confirmEmailTxtField.getText())== false) {
  			confirmEmailTxtField.setStyle("-fx-border-color: red");
- 			errorText.setText("Please fill the same Email address on both email fields!");
+ 			errorText.setText("Emails doesn't match!");
  			return false;
  		}
  		return true;
@@ -285,7 +285,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 			@Override
 			public void clientCompanyRegistrationSucceed() {
 				((HrManager) connectedUser).setCompany(companyAfterRegistration);
-				setRelevantTextToDisplayMessageText("Registration succeed, you have to wait for Confirmation from the Branch Manager");
+				setRelevantTextToDisplayMessageText("Registration succeed, now you are pending confirmation of the Branch Manager!");
 			}
 		});
 		

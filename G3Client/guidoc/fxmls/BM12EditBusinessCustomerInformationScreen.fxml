@@ -22,11 +22,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Text fx:id="displayMessage" fill="#9a1212" layoutX="301.0" layoutY="741.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="423.89892578125">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Text>
       <Button fx:id="btnclose1" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
@@ -215,5 +210,6 @@
          </padding>
       </GridPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Customer Management ➝ Edit Business Customer Information " />
+      <Text fx:id="displayMessage" fill="RED" layoutX="304.0" layoutY="692.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
    </children>
 </Pane>

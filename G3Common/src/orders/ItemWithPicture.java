@@ -48,7 +48,7 @@ public class ItemWithPicture {
 	
 	public ItemWithPicture(Item item) {
 		this.item = item;
-		this.picture = new ImageView(new Image(item.getPicturePath(),128,128,false,true));
+		this.picture = new ImageView(new Image(item.getPicturePath(),64,64,false,true));
 		this.ItemName = item.getItemName();
 		this.category = item.getCategory();
 		this.size = item.getSize();

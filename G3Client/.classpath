@@ -25,5 +25,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javafx"/>
 	<classpathentry kind="lib" path="C:/G3BiteMe/G3Client/pdfbox/pdfbox-app-2.0.25.jar"/>
+	<classpathentry kind="lib" path="pdfbox/javax.mail-1.6.2.jar"/>
+	<classpathentry kind="lib" path="pdfbox/javax.activation-1.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

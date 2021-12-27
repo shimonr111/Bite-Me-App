@@ -77,9 +77,6 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
     private Button btnHelp;
 
     @FXML
-    private Text errorText;
-
-    @FXML
     private Button viewReportBtn;
 
 
@@ -140,22 +137,22 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	 */
 	public boolean checkDateAndType() {
 		if(ReportYear.getValue().equals("Year")) {
-			setRelevantTextToDisplayMessageText("Please Select A Year");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		else
 		if(ReportMonth.getValue().equals("Month")) {
-			setRelevantTextToDisplayMessageText("Please Select A Month");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		else
 		if(branchBox.getValue().equals("Branch")) {
-			setRelevantTextToDisplayMessageText("Please Select A Branch");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		else
 		if(ReportType.getValue().equals("Report Type")) {
-			setRelevantTextToDisplayMessageText("Please Select A Report Type");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		return true;
