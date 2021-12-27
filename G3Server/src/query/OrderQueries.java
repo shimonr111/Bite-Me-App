@@ -354,6 +354,7 @@ public class OrderQueries {
 						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(8)), DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9)),
 						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(10)),SupplyType.valueOf(rs.getString(11)),0,rs.getDouble(12),
 						null);
+				orderFromDb.setCustomerUserType(rs.getString(4));
 				SupplyType supplyType = SupplyType.valueOf(rs.getString(11));
 				if(supplyType == SupplyType.DELIVERY) {
 					orderFromDb.setSupplyMethodInformation(new DeliverySupplyMethod(0, Integer.parseInt(rs.getString(1)), rs.getString(13), rs.getString(14), rs.getString(16), DeliveryType.valueOf(rs.getString(20)), rs.getString(15)));
@@ -482,6 +483,31 @@ public class OrderQueries {
 			e.printStackTrace();
 		}
 		return returnMessageToClient;
+	}
+	
+	/**
+	 * In this method we look for the customer email
+	 * according to the userId and customer type.
+	 * @param message
+	 * @return
+	 */
+	public static Message getCustomerEmailForSimulation(Message message) {
+		ArrayList<String> customerDetails = (ArrayList<String>)message.getObject();
+		String userID = customerDetails.get(0);
+		String customerType = customerDetails.get(1);
+		String customerEmail =null;
+		ResultSet rs = Query.getRowsFromTableInDB(customerType,"userID='"+userID+"'");
+		try {
+			if(rs.next()) {
+				customerEmail = rs.getString(8);
+			}
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(customerEmail!=null)
+			return new Message(Task.GET_USER_EMAIL,Answer.SUCCEED,customerEmail);
+		return null;
 	}
 	
 }
