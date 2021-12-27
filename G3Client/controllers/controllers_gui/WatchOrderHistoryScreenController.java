@@ -63,7 +63,10 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 
     @FXML // fx:id="helpBtn"
     private Button helpBtn; // Value injected by FXMLLoader
-
+    
+    @FXML // fx:id="confirmBtn"
+    private Button confirmBtn; // Value injected by FXMLLoader
+    
     @FXML // fx:id="nameTxt"
     private Text nameTxt; // Value injected by FXMLLoader
 
@@ -92,6 +95,11 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     		setBusinessCustomerPortal(event);
     	else
     		setPrivateCustomerPortal(event);
+    }
+    
+    @FXML
+    void getConfirmBtn(ActionEvent event) {
+
     }
 
     @FXML

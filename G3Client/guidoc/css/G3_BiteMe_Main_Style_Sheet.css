@@ -129,6 +129,20 @@
 
 }
 
+.confirmOrderButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/confirm.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 90% 50%;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size:20px;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
 .denyButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/close.png");
