@@ -352,6 +352,9 @@ public class AnalyzeMessageFromServer {
 			case GET_USER_BALANCE:
 				((Customer)AbstractBiteMeController.connectedUser).setBalance((Double.parseDouble((String)recivedMessageFromServer.getObject())));
 				break;
+			case GET_USER_EMAIL:
+				SupplierWorkerManageOrders.approvedCustomerEmail = (String)recivedMessageFromServer.getObject();
+				break;
 				
 			default:
 				break;

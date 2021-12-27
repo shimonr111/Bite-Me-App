@@ -1,10 +1,19 @@
 package controllers_gui;
-
+//import com.sun.activation:javax.activation
+import javax.activation.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Properties;
 import java.util.ResourceBundle;
+
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
@@ -18,7 +27,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,13 +43,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import javafx.util.StringConverter;
 import orders.Order;
 import orders.OrderStatus;
 import orders.SupplyType;
 import users.SupplierWorker;
-import users.UserForRegistration;
 
 /**
  * 
@@ -66,11 +72,9 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	public static ArrayList<Order> updateOrders = new ArrayList<>();
 	private static AnalyzeClientListener listener;
 	public static ObservableList<Order> ordersForManageOrderTable;
+	public static String approvedCustomerEmail;
 	@FXML
     private Button btnExit;
-
-    @FXML
-    private Button saveBtn;
 
     @FXML
     private Button btnBack;
@@ -83,9 +87,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 
     @FXML
     private TableColumn<Order, SupplyType> orderTypeColumn;
-
-    @FXML
-    private TableColumn<Order, Date> orderDateColumn;
 
     @FXML
     private TableColumn<Order, Date> estSupplyTimeColumn;
@@ -144,35 +145,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 				((Node) event.getSource()).getScene().getWindow().hide();
 			}
 		});
-    }
-
-
-    /**
-     * This button is for updating  
-     * the status of orders in the manage order table into the 
-     * Order DB.
-     * 
-     * 
-     * @param event
-     */
-    @FXML
-    void getBtnSave(ActionEvent event) {
-    	 // if the table is empty 
-        if(updateOrders.isEmpty()) {
-     	   errorText.setVisible(true);
-     	   errorText.setText("There are no orders!");
-     	   errorText.setFill(Color.RED);
-        }
-        else {
-     	   Message message = new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders);
-           sendToClient(message);//send message to the server telling the manage order is finished and then push into DB
-        	   
-           /*Give notice for the user that the changes have been saved*/
-     	   PopUpMessages.updateMessage("Order changes saved successfully!");
-     	   
-     	   //add call to initialize method for updating need functionality
-        }
-
     }
 
     /**
@@ -261,6 +233,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		/*send message to server to get all orders for this supplier worker that works in specific restaurant*/
 		Message message = new Message (Task.SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS,Answer.WAIT_RESPONSE,supplierId); 
 		sendToClient(message);
+	
 		
 		/*Check if the DB doesn't have orders for this restaurant*/
 		if(orderListFromDB == null) {
@@ -278,7 +251,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		/*Set data in the table */
 		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
 		orderTypeColumn.setCellValueFactory(new PropertyValueFactory<Order,SupplyType>("supplyType"));
-		orderDateColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("issueDateTime"));
 	    estSupplyTimeColumn.setCellValueFactory(new PropertyValueFactory<Order,Date>("estimatedSupplyDateTime"));
 	    customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("receiverPhoneNumber"));
 	    statusColumn.setCellValueFactory(new PropertyValueFactory<Order,OrderStatus>("status"));
@@ -311,7 +283,21 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			order.setStatus(event.getNewValue()); // set the new status in the order array
 	        /*Simulation for sending an email to the user with his details*/
 	        if(event.getNewValue() == OrderStatus.APPROVED) {
-				PopUpMessages.simulationMessage("Simulation","Simulation SMS to the user!","SMS sent to : " + order.getReceiverPhoneNumber());				
+	        	// get the user email
+	        	ArrayList<String> list = new ArrayList<>();
+	        	list.add(order.getCustomerUserId());
+	        	list.add(order.getCustomerUserType());
+	        	sendToClient(new Message(Task.GET_USER_EMAIL,Answer.WAIT_RESPONSE,list));
+				if(approvedCustomerEmail!=null) {
+					try {
+						sendMail(approvedCustomerEmail);
+
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				PopUpMessages.simulationMessage("Simulation","Simulation Email to the user!","E-mail sent to : " +approvedCustomerEmail);
 				/*remove from the table view after being approved*/
 				ordersForManageOrderTable.remove(order);
 				/*Set issued Date time to the point where the order is approved in the restaurant*/
@@ -349,6 +335,55 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		manageOrdersTable.setItems(sortedData);
 		
 	} 
+	
+	/**
+	 * This method sets the properties of so send an email
+	 * to the customer's email.
+	 * @param reciever
+	 * @throws Exception
+	 */
+	public static void sendMail(String reciever) throws Exception {
+		System.out.println("Sending email");
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
+		
+		String myEmail = "g3.biteme@gmail.com";
+		String password = "G.bite.3.me";
+		
+		Session session = Session.getInstance(properties, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(myEmail, password);
+			}
+		});
+		
+		javax.mail.Message message = prepareMessage(session, myEmail,reciever);
+		
+		Transport.send(message);
+		System.out.println("Message sent");
+		
+		
+	}
+	
+	/*
+	 * This method prepared the message to send it via email.
+	 */
+	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever) {
+		try {
+			javax.mail.Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(myEmail));
+			message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(reciever));
+			message.setSubject("Bite Me - G3 - Email Simulation");
+			message.setText("Your order is approved from the resaurant");
+			return message;
+		}catch(Exception ex) {
+			System.out.println("sending email failed");
+		}
+		return null;
+	}
 
 
 }
