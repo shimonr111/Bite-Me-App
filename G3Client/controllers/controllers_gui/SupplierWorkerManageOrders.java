@@ -160,7 +160,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     	 // if the table is empty 
         if(updateOrders.isEmpty()) {
      	   errorText.setVisible(true);
-     	   errorText.setText("There is no orders!");
+     	   errorText.setText("There are no orders!");
      	   errorText.setFill(Color.RED);
         }
         else {

@@ -114,7 +114,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     void getConfirmBtn(ActionEvent event) {
     	User selectedCustomer = businessCustomerTable.getSelectionModel().getSelectedItem();
     	if(selectedCustomer != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you are sure you want to confirm this employee");
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Confirm this employee?");
     		if(result.get() == ButtonType.OK) {
     			ArrayList<String> objectToMessage = new ArrayList<>();
     			objectToMessage.add(selectedCustomer.getUserId());
@@ -122,7 +122,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     			objectToMessage.add("businesscustomer"); // table name
         		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
         		sendToClient(message);
-        		errorText.setText("Customer ID: "+selectedCustomer.getUserId()+" was confirmed.");
+        		errorText.setText("Customer ID:" + selectedCustomer.getUserId() + " confirmed.");
         		initialize(null, null);	
     		}
     	}
@@ -137,14 +137,14 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     void getDenyBtn(ActionEvent event) {
       	User selectedCustomer = businessCustomerTable.getSelectionModel().getSelectedItem();  	
     	if(selectedCustomer != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Denying the confirmation will lead to remove this customer");
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Denying the confirmation will lead to remove this customer!");
     		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(selectedCustomer.getUserId());
     		objectToMessage.add("businesscustomer");
     		Message message = new Message(Task.REMOVE_USER_FROM_DB,Answer.WAIT_RESPONSE,objectToMessage);
     		sendToClient(message);
-    		errorText.setText("Customer ID: "+selectedCustomer.getUserId()+" was removed.");
+    		errorText.setText("Customer ID:"+selectedCustomer.getUserId()+" removed.");
     		initialize(null, null);	
     		}
     	}
@@ -247,7 +247,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 		Message message = new Message (Task.GET_BUSINESS_CUSTOMERS_FOR_CONFIRMATION,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		if(businessCustomersWaitingForConfirmation.isEmpty())
-			errorText.setText("No Confirmation Requests");
+			errorText.setText("No confirmation requests!");
 		employeeIdCol.setCellValueFactory(new PropertyValueFactory<BusinessCustomer,String>("userId"));
 		employeeNameCol.setCellValueFactory(new PropertyValueFactory<BusinessCustomer,String>("userFirstName"));
 		employeeLastNameCol.setCellValueFactory(new PropertyValueFactory<BusinessCustomer,String>("userLastName"));

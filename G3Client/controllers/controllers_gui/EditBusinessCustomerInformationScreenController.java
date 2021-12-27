@@ -113,10 +113,10 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     	ConfirmationStatus oldStatus = businessCustomer.getStatusInSystem();
     	String newStatus = statusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
-    		displayMessage.setText("There were no changes");
+    		displayMessage.setText("There were no changes.");
     	}
     	else {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to save the changes.");
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Save changes?");
     		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(businessCustomer.getUserId());
@@ -140,7 +140,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     		default:
     			break;		
     		}
-    		displayMessage.setText("Customer Status has been changed From '"+oldStatus.toString() +"' To '"+ newStatus +"'.");
+    		displayMessage.setText("Customer status changed from:" + oldStatus.toString() +" to:" + newStatus +".");
     		}
     	}
     }

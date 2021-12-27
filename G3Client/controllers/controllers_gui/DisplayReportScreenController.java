@@ -4,11 +4,17 @@ package controllers_gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -18,10 +24,15 @@ import javafx.stage.StageStyle;
 
 	    @FXML
 	    private TextArea TextField;
+	    
 	    private static String report;
 	    private static FXMLLoader loader;
 	    private static Stage Stage;
 	    public static DisplayReportScreenController displayReportScreenController;
+	    
+	    @FXML
+		private Button btnExit = null;
+		
 		public static String getReport() {
 			return report;
 		}
@@ -78,5 +89,11 @@ import javafx.stage.StageStyle;
 				}
 			});
 	 	}
+	 	
+		public void getExitBtn(ActionEvent event) throws Exception {
+			((Node) event.getSource()).getScene().getWindow().hide();
+		}
 	}
+	
+
 

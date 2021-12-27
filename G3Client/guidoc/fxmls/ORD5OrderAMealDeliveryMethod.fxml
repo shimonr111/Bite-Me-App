@@ -16,7 +16,7 @@
    <children>
       <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <VBox layoutX="65.0" layoutY="67.0" prefHeight="289.0" prefWidth="211.0" spacing="5.0">
+            <VBox layoutX="65.0" layoutY="67.0" prefHeight="269.0" prefWidth="211.0" spacing="5.0">
                <children>
                   <VBox fillWidth="false" prefHeight="72.0" prefWidth="211.0" styleClass="loginBundleVBOX">
                      <children>
@@ -63,7 +63,6 @@
                         <Insets />
                      </VBox.margin>
                   </VBox>
-                  <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="204.07031998038292" />
                </children>
             </VBox>
             <Label layoutX="108.0" layoutY="14.0" prefHeight="53.0" prefWidth="124.0" styleClass="deliveryHeadLight" text="Delivery" textFill="#383838">
@@ -71,6 +70,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
+            <Text fx:id="errorText" fill="RED" layoutX="23.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="294.0703199803829" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="402.0" layoutY="534.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">

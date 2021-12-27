@@ -111,18 +111,18 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     void getConfirmBtn(ActionEvent event) {
     	Company selectedCompany = companiesTable.getSelectionModel().getSelectedItem();
     	if(selectedCompany != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you are sure you want to confirm "+ selectedCompany.getCompanyName());
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Sure you want to confirm:"+ selectedCompany.getCompanyName() +"?");
     		if(result.get() == ButtonType.OK) {
     			ArrayList<Object> objectToMessage = new ArrayList<>();
     			objectToMessage.add(selectedCompany);
         		Message message = new Message(Task.CONFIRM_COMPANY,Answer.WAIT_RESPONSE,selectedCompany);
         		sendToClient(message);
-        		displayText.setText("Company: "+ selectedCompany.getCompanyName() +" was confirmed.");
+        		displayText.setText("Company:"+ selectedCompany.getCompanyName() +"confirmed.");
         		initialize(null, null);	
     		}
     	}
     	else {
-    		displayText.setText("Please Select One Company to Confirm.");
+    		displayText.setText("Select company to confirm!");
     	}
     }
     
@@ -134,7 +134,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     void getDenyBtn(ActionEvent event) {
        	Company selectedCompany = companiesTable.getSelectionModel().getSelectedItem();	
     	if(selectedCompany != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Denying the confirmation will lead to remove" +selectedCompany.getCompanyName());
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Denying the confirmation will lead to remove:" +selectedCompany.getCompanyName() + "!");
     		if(result.get() == ButtonType.OK) {
     		Message message = new Message(Task.DENY_COMPANY,Answer.WAIT_RESPONSE,selectedCompany);
     		sendToClient(message);

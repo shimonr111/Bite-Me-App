@@ -29,7 +29,7 @@
          </children>
       </HBox>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="35.0" maxHeight="50.0" maxWidth="317.0" prefHeight="50.0" prefWidth="317.0" styleClass="W4CHeadLight" text="W4C Identification" />
             <VBox layoutX="69.0" layoutY="117.0" prefHeight="166.0" prefWidth="203.0">
@@ -42,8 +42,7 @@
                         <TextField fx:id="companyCodeTextField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="Company code" styleClass="text-field" />
                      </children>
                   </VBox>
-                  <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="200.0" />
-                  <Label alignment="CENTER" prefHeight="33.0" prefWidth="203.0" styleClass="W4CLabels" text="OR" />
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="203.0" styleClass="W4CLabels" text="OR" />
                   <VBox fillWidth="false" prefHeight="30.0" prefWidth="203.0" styleClass="loginBundleVBOX">
                      <children>
                         <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="Scan QR Code:" />
@@ -51,22 +50,23 @@
                   </VBox>
                </children>
             </VBox>
-            <Button fx:id="qrBtn" alignment="CENTER" layoutX="120.0" layoutY="299.0" maxHeight="50.0" maxWidth="200.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="50.0" prefWidth="100.0" styleClass="QRButton" textFill="#383838">
+            <Button fx:id="qrBtn" alignment="CENTER" layoutX="120.0" layoutY="290.0" maxHeight="50.0" maxWidth="200.0" mnemonicParsing="false" onAction="#getQrBtn" prefHeight="50.0" prefWidth="100.0" styleClass="QRButton" textFill="#383838">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
+            <Text fx:id="errorText" fill="RED" layoutX="28.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="286.0" />
          </children>
       </AnchorPane>
       <Button fx:id="nextBtn" layoutX="807.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
-      <AnchorPane layoutX="342.0" layoutY="575.0" prefHeight="100.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="342.0" layoutY="552.0" prefHeight="100.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
             <Label layoutX="86.0" layoutY="8.0" styleClass="W4CBranchLabel" text="Choose Branch">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-                  <ComboBox fx:id="homeBranchCombo" layoutX="80.0" layoutY="49.0" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
+                  <ComboBox fx:id="homeBranchCombo" layoutX="80.0" layoutY="50.0" prefHeight="17.0" prefWidth="180.0" promptText="Home Branch Name" />
          </children>
       </AnchorPane>
    </children>

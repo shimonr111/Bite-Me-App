@@ -66,11 +66,7 @@
                   <TableColumn fx:id="companyNameCol" maxWidth="300.0" prefWidth="300.0" text="Company Name" />
                </columns>
             </TableView>
-            <Text fx:id="displayText" layoutX="98.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="244.13671875">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Text>
+            <Text fx:id="displayText" fill="RED" layoutX="12.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
    </children>

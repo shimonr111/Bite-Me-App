@@ -130,7 +130,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     			}
     	}
     	else {
-    		errorText.setText("Please, select one customer to edit.");
+    		errorText.setText("Select customer to edit.");
     	}
     }
     
@@ -165,7 +165,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     void getRemoveBtn(ActionEvent event) {
     	User selectedUser = customerListTable.getSelectionModel().getSelectedItem();  	
     	if(selectedUser != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Click OK if you want to remove this customer");
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Remove this customer?");
     		if(result.get() == ButtonType.OK) {
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(selectedUser.getUserId());
@@ -180,12 +180,12 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     		}
     		Message message = new Message(Task.REMOVE_USER_FROM_DB,Answer.WAIT_RESPONSE,objectToMessage);
     		sendToClient(message);
-    		errorText.setText("Customer ID: "+selectedUser.getUserId()+" were removed.");
+    		errorText.setText("Customer ID:"+selectedUser.getUserId()+" removed.");
     		initialize(null, null);	
     		}
     	}
     	else {
-    		errorText.setText("Please, select one customer to remove.");
+    		errorText.setText("Select customer to remove!");
     	}
     }
     

@@ -90,7 +90,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     		 BCRC.initBusinessCustomerRegistrationScreen();
     	}
     	else {
-    		displayMessage.setText("Select a user to register as a business customer");
+    		displayMessage.setText("Select user first!");
     	}
     }
 
@@ -120,7 +120,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     		
     	}
     	else {
-    		displayMessage.setText("Select a user to register as a private customer");
+    		displayMessage.setText("Select user first!");
     	}
     }
 
@@ -226,7 +226,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 		Message message = new Message(Task.GET_USERS_FOR_REGISTRATION,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		if(usersList.isEmpty())
-			displayMessage.setText("No users waiting for registration");
+			displayMessage.setText("No users waiting for registration!");
 		userIdCol.setCellValueFactory(new PropertyValueFactory<UserForRegistration,String>("userID"));
 		userFirstNameCol.setCellValueFactory(new PropertyValueFactory<UserForRegistration,String>("firstName"));
 		userLastName.setCellValueFactory(new PropertyValueFactory<UserForRegistration,String>("lastName"));

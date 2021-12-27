@@ -161,7 +161,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     	/*if the user has entered a wrong input set message accordingly*/
     	if(!isW4cTextFieldNotEmpty(codeTxtField.getText())) {
     		//put error string to the user and mark the invalid field 
-    		errorText.setText("Please, enter a w4c code!!");
+    		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
     		codeTxtField.setStyle("-fx-border-color: red");
     	}
@@ -173,7 +173,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     			//in the DB and in our code we save the w4c number as int where as in the GUI we get it as string
     			//so we convert it here
     			if(!codeTxtField.getText().equals(String.valueOf(((Customer) connectedUser).getPrivateW4cCodeNumber()))) {
-    				errorText.setText("Wrong W4c code, please try again!!");
+    				errorText.setText("Wrong W4C code!, try agian.");
     	    		errorText.setFill(Color.RED);
     	    		codeTxtField.setStyle("-fx-border-color: red");
     			}
@@ -185,7 +185,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     							((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(true); 
     						}
     						else {
-    							errorText.setText("Wrong company code number, please enter other one!!");
+    							errorText.setText("Wrong company code!, try agian.");
     		    	    		errorText.setFill(Color.RED);
     		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
     						}
@@ -243,7 +243,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      */
     @FXML
     void getQrBtn(ActionEvent event) {
-    	TextInputDialog dialog = new TextInputDialog("Put here your W4C code");
+    	TextInputDialog dialog = new TextInputDialog("~Code Here~");
     	dialog.setHeaderText("Put your W4C (QR Simulation)");
     	dialog.setTitle("G#3 QR Simulation");
     	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());

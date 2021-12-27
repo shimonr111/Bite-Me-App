@@ -60,11 +60,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Text fx:id="errorText" layoutX="84.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="277.0703199803829">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Text>
+            <Text fx:id="errorText" fill="RED" layoutX="12.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
    </children>
