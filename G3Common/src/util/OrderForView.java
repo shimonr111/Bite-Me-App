@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class OrderForView implements Serializable{
 	
+	private int orderNum;
 	private String resturantName;
 	private String orderDate;
 	private String orderTime;
@@ -11,15 +12,24 @@ public class OrderForView implements Serializable{
 	private String orderStatus;
 	
 	public OrderForView(String resturantName, String orderDate, String orderTime, String orderDetails,
-			String orderStatus) {
+			String orderStatus,int orderNum) {
 		super();
 		this.resturantName = resturantName;
 		this.orderDate = orderDate;
 		this.orderTime = orderTime;
 		this.orderDetails = orderDetails;
 		this.orderStatus = orderStatus;
+		this.orderNum = orderNum;
 	}
 	
+	public int getOrderNum() {
+		return orderNum;
+	}
+
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
+
 	public String getResturantName() {
 		return resturantName;
 	}

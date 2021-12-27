@@ -32,6 +32,7 @@ import users.Branch;
 import users.BusinessCustomer;
 import users.ConfirmationStatus;
 import users.Customer;
+import util.Constans;
 import util.DateTimeHandler;
 import util.OrderForView;
 
@@ -388,9 +389,12 @@ public class OrderQueries {
 		String customerId = (String)message.getObject();
 		ArrayList<OrderForView> orderList = new ArrayList<>();
 		String resturantName="", orderDate="", orderTime="",orderDetails="",orderStatus="";
+		int orderNum;
 		ResultSet rs = Query.getRowsFromTableInDB("order", "customerUserId='"+customerId+"' AND ( status= 'PENDING_APPROVAL' OR (status = 'APPROVED'))");
 		try {
 			while(rs.next()) {
+				// get the order number.
+				orderNum = rs.getInt(1);
 				// get the supplier string .
 				String supplierId= rs.getString(2);
 				String supplierStatus = "";
@@ -445,7 +449,7 @@ public class OrderQueries {
 				else
 					orderStatus = "Pending for resturant approval";
 				// add to the list
-				orderList.add(new OrderForView(resturantName, orderDate, orderTime, orderDetails, orderStatus));	
+				orderList.add(new OrderForView(resturantName, orderDate, orderTime, orderDetails, orderStatus,orderNum));	
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -508,6 +512,101 @@ public class OrderQueries {
 		if(customerEmail!=null)
 			return new Message(Task.GET_USER_EMAIL,Answer.SUCCEED,customerEmail);
 		return null;
+	}
+	
+	/**
+	 * Set the actual supply date and the order status.
+	 * Check if the user will get a balance and update it
+	 * into balance table accordingly.
+	 * @param message
+	 * @return
+	 */
+	public static Message updateActualTimeAndCheckBalance(Message message) {
+		ArrayList<Object> orderDetails = (ArrayList<Object>)message.getObject();
+		Date actualDate = (Date)orderDetails.get(0);
+		int orderNum = Integer.parseInt((String)orderDetails.get(1));
+		SupplyType supplyType=null;
+		OrderTimeType timeType=null;
+		Date issuedDate=null,estimatedDate=null;
+		String userId=null,supplierId=null;
+		double totalPrice=0;
+		double balance=0;
+		//update the actual time and the order status to completed
+		Query.updateOneColumnForTableInDbByPrimaryKey("order", "actualSupplyDateTime='"+DateTimeHandler.convertMySqlDateTimeFormatToString(actualDate)+"'", "orderNumber='"+orderNum+"'");
+		Query.updateOneColumnForTableInDbByPrimaryKey("order", "status='COMPLETED'", "orderNumber='"+orderNum+"'");
+		//get the order to check balance
+		ResultSet rs = Query.getRowsFromTableInDB("order","orderNumber='"+orderNum+"'");
+		try {
+			if(rs.next()) {
+				supplierId=rs.getString(2);
+				userId = rs.getString(3);
+				timeType = OrderTimeType.valueOf(rs.getString(6)); 
+				issuedDate = DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(8));
+				estimatedDate = DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9));
+				supplyType = SupplyType.valueOf(rs.getString(11));
+				totalPrice = rs.getDouble(12);
+				
+			}
+			rs.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(supplyType == SupplyType.TAKE_AWAY) {
+			return new Message(Task.SET_ACTUAL_DATE_AND_BALANCE,Answer.SUCCEED,null);
+		}
+		else {
+			long diff = actualDate.getTime() - issuedDate.getTime();
+			if(timeType == OrderTimeType.REGULAR) {
+				if(diff> Constans.ONE_HOUR_IN_MILLESECONDS) {
+					balance = totalPrice*Constans.FIFTY_PERCENT;
+					ResultSet rs2=Query.getRowsFromTableInDB("balance", "supplierId='"+supplierId+"' AND ( customerUserId='" + userId+"')");
+					try {
+						if(!rs2.isBeforeFirst()) {
+							//insert a new row with the userId,supplierId and the calculated balance.
+							Query.insertOneRowIntoBalanceTable(userId, supplierId, balance);
+						}
+						else {
+							//Calculate the new balance and update in the balance table.
+							if(rs2.next())
+							balance = balance +rs2.getDouble(3);
+							Query.updateOneColumnForTableInDbByPrimaryKey("balance", "balance='"+balance+"'",  "supplierId='"+supplierId+"' AND ( customerUserId='" + userId+"')");
+						}
+						rs.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+				}
+			}
+			/// it is PRE order
+			else {
+				if(diff> Constans.TWENTY_MINUTES_IN_MILLESECONDS) {
+					balance = totalPrice*Constans.FIFTY_PERCENT;
+					ResultSet rs2 =Query.getRowsFromTableInDB("balance", "supplierId='"+supplierId+"' AND ( customerUserId='" + userId+"')");
+					try {
+						if(!rs2.isBeforeFirst()) {
+							//insert a new row with the userId,supplierId and the calculated balance.
+							Query.insertOneRowIntoBalanceTable(userId, supplierId, balance);
+						}
+						else {
+							//Calculate the new balance and update in the balance table.
+							if(rs2.next())
+							balance+=rs2.getDouble(3);
+							Query.updateOneColumnForTableInDbByPrimaryKey("balance", "balance='"+balance+"'",  "supplierId='"+supplierId+"' AND ( customerUserId='" + userId+"')");
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		
+		return new Message(Task.SET_ACTUAL_DATE_AND_BALANCE,Answer.SUCCEED,null);
+		
 	}
 	
 }

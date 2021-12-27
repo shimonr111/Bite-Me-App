@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,11 +20,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
+import users.Company;
 import util.OrderForView;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bitemeclient.PopUpMessages;
@@ -97,9 +101,39 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     		setPrivateCustomerPortal(event);
     }
     
+    /**
+     * This function is used for updating the balance 
+     * of a user if the supplier was late according to the
+     * delivery type.
+     * We will save in that stage the ActualDate according to the course guidelines.
+     * @param event
+     */
     @FXML
     void getConfirmBtn(ActionEvent event) {
-
+     	OrderForView orderForView = ordersTable.getSelectionModel().getSelectedItem();
+    	if(orderForView != null) {
+    		if(orderForView.getOrderStatus().equals("Pending for resturant approval")) {
+    			// add text and display this string : "You can't confirm orders that are still not approved from the restaurant"
+    		}
+    		else {
+    			Optional<ButtonType> result = PopUpMessages.confirmationMessage("Pressing OK button means that you have recieved your order.");
+    			if(result.get() == ButtonType.OK) {
+    				ArrayList<Object> objectToMessage = new ArrayList<>();
+    				Date actualDate = new Date();
+    				int orderNumber = orderForView.getOrderNum();
+    				
+    				objectToMessage.add(actualDate);
+    				objectToMessage.add(Integer.toString(orderNumber));
+    				Message message = new Message(Task.SET_ACTUAL_DATE_AND_BALANCE,Answer.WAIT_RESPONSE,objectToMessage);
+    				sendToClient(message);
+    				System.out.println("1");
+    				initialize(null, null);	
+    			}
+    		}
+    	}
+    	else {
+    		//displayText.setText("Select company to confirm!");
+    	}
     }
 
     @FXML
@@ -221,20 +255,20 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println("2");
 		Message message = new Message (Task.GET_ORDERS_FOR_USER,Answer.WAIT_RESPONSE,connectedUser.getUserId());
 		sendToClient(message);
 		nameTxt.setText(connectedUser.getUserFirstName() + "'s orders in progres: ");
 		orderDetailsCol.setStyle("-fx-text-alignment: left;");
 		ObservableList<OrderForView> ordersObservable = FXCollections.observableArrayList();
-		if(!ordersForCustomer.isEmpty()) {
-			ordersObservable.addAll(ordersForCustomer);
-			resturantNameCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("resturantName"));
-			dateCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderDate"));
-			timeCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderTime"));
-			orderDetailsCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderDetails"));
-			statusCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderStatus"));
-			ordersTable.setItems(ordersObservable);
-		}
+		ordersObservable.addAll(ordersForCustomer);
+		resturantNameCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("resturantName"));
+		dateCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderDate"));
+		timeCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderTime"));
+		orderDetailsCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderDetails"));
+		statusCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderStatus"));
+		ordersTable.setItems(ordersObservable);
+
 		
 	}
 

@@ -639,4 +639,22 @@ public class Query {
 			}
 	}
 	
+	/**
+	 * This method gets all the balance table parameters 
+	 * and inserts a new row into this table in DB.
+	 * @param userId
+	 * @param supplierId
+	 * @param balance
+	 */
+	public static void insertOneRowIntoBalanceTable(String userId,String supplierId,double balance) {
+		String query = "INSERT INTO semesterialproject.balance (supplierId, customerUserId, balance) VALUES ('" + supplierId + "' , '" + userId + "' , '" +  balance +"')";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate(); 
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

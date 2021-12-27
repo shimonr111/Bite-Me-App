@@ -182,6 +182,9 @@ public class AnalyzeMessageFromClient {
 			 case GET_USER_EMAIL:
 				 recivedMessageFromClient = OrderQueries.getCustomerEmailForSimulation((Message) message);
 				 break;
+			 case SET_ACTUAL_DATE_AND_BALANCE:
+				recivedMessageFromClient = OrderQueries.updateActualTimeAndCheckBalance((Message)message);
+				 break;
 			default:
 				break;
 			}
