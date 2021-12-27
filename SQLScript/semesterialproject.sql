@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER S
 USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: localhost    Database: semesterialproject
+-- Host: 127.0.0.1    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -385,6 +385,32 @@ INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_A
 UNLOCK TABLES;
 
 --
+-- Table structure for table `quarterlypdf`
+--
+
+DROP TABLE IF EXISTS `quarterlypdf`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `quarterlypdf` (
+  `pdfId` int NOT NULL AUTO_INCREMENT,
+  `filename` varchar(256) DEFAULT NULL,
+  `dateuploaded` datetime DEFAULT CURRENT_TIMESTAMP,
+  `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT NULL,
+  `pdffile` longblob,
+  PRIMARY KEY (`pdfId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `quarterlypdf`
+--
+
+LOCK TABLES `quarterlypdf` WRITE;
+/*!40000 ALTER TABLE `quarterlypdf` DISABLE KEYS */;
+/*!40000 ALTER TABLE `quarterlypdf` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `registration`
 --
 
@@ -521,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-26 22:02:22
+-- Dump completed on 2021-12-27 22:14:53

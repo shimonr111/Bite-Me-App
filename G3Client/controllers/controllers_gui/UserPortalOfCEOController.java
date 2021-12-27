@@ -48,6 +48,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	@FXML
 	private Button btnHelp;
     @FXML
+    private Button btnViewSentReports;
+    @FXML
     private Text ceoName;
     @FXML
     private Text statusText;
@@ -100,7 +102,12 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");	
 	}
-	
+    @FXML
+    void getSentReports(ActionEvent event) {
+    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    	ViewBMQuarterlyReportsScreenController viewBMQuarterlyReportsScreenController = new ViewBMQuarterlyReportsScreenController();
+    	viewBMQuarterlyReportsScreenController.initViewBMQuarterlyReportsScreen();
+    }
 	/**
 	 * Returns to login screen
 	 * @param event
