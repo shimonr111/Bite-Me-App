@@ -45,7 +45,7 @@ public class PopUpMessages {
 		alert.setContentText(message);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 		DialogPane dialogPane = alert.getDialogPane();
-		alert.getDialogPane().getStylesheets().add("/css/G3_BiteMe_Main_Style_Sheet.css");
+		dialogPane.getStylesheets().add("/css/G3_BiteMe_Main_Style_Sheet.css");
 		dialogPane.setPrefHeight(200);
 		dialogPane.setPrefWidth(450);
 		dialogPane.setStyle("fx-text-alignment: left;");
@@ -66,6 +66,7 @@ public class PopUpMessages {
 		Alert alert = new Alert (type,"");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.getDialogPane().setHeaderText(message);
+		alert.getDialogPane().getStylesheets().add("/css/G3_BiteMe_Main_Style_Sheet.css");
 		centerButtons(alert.getDialogPane());
 		return alert.showAndWait();
 	}
@@ -83,6 +84,7 @@ public class PopUpMessages {
 		Alert alert = new Alert (type,"");
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.getDialogPane().setHeaderText(message);
+		alert.getDialogPane().getStylesheets().add("/css/G3_BiteMe_Main_Style_Sheet.css");
 		centerButtons(alert.getDialogPane());
 		return alert.showAndWait();
 	}
@@ -104,6 +106,7 @@ public class PopUpMessages {
 		alert.setContentText(bodyMessage);
 		Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 		DialogPane dialogPane = alert.getDialogPane();
+		dialogPane.getStylesheets().add("/css/G3_BiteMe_Main_Style_Sheet.css");
 		centerButtons(dialogPane);
 		alert.showAndWait();
 	}
