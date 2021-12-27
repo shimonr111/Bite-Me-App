@@ -135,7 +135,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     void getBtnNext(ActionEvent event) {
     	/*Check if the user hasn't entered any data to the combo box, deny continue to next screen*/
     	if((supplyMethodCombo.getValue() == null) || (supplyTimeCombo.getValue() == null)) {
-    		errorText.setText("Please fill the fields!");
+    		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
     	}
     	else {

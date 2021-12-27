@@ -216,32 +216,32 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	 				returnVal=false;
 	 			}
 	 		if(returnVal==false) {
-	 			displayMessage.setText("Please, Fill in all the marked fields !!");
+	 			displayMessage.setText("Please fill all the required fields (*)!");
 	 			return false;
 	 		}
 	 		for(TextField intTxt : integerFields) {
 	 			if(!isInt(intTxt)) {
 	 				intTxt.setStyle("-fx-border-color: red");
-	 				displayMessage.setText("Marked field must contain only numbers !");
+	 				displayMessage.setText("Marked field must contain only numbers!");
 	 				return false;
 	 			}
 	 		}
 	 		if(!checkComboBoxInput(chooseResComboBox,"Select supplier:")) {
-	 			displayMessage.setText("Please, pick your choice from the 'Select supplier' box!");
+	 			displayMessage.setText("Please fill all the required fields (*)!");
 	 			return false;
 	 			}
 	 		if(!checkComboBoxInput(workerCombo,"Select worker type:")) {
-	 			displayMessage.setText("Please, pick your choice from the 'Select worker type' box!");
+	 			displayMessage.setText("Please fill all the required fields (*)!");
 	 			return false;
 	 			}
 	 		if(emailTxtField.getText().contains("@")==false) {
 	 			emailTxtField.setStyle("-fx-border-color: red");
-	 			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
+	 			displayMessage.setText("Incorrect email format, email must contain '@'!");
 	 			return false;
 	 		}
 	 		else if(emailTxtField.getText().equals(confirmEmailTxtField.getText())== false) {
 	 			confirmEmailTxtField.setStyle("-fx-border-color: red");
-	 			displayMessage.setText("Please, fill the same Email address on both email fields!!");
+	 			displayMessage.setText("Emails doesn't match!");
 	 			return false;
 	 		}
 	 		return true;
@@ -290,7 +290,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 						    });
 						});
 						scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
-						Stage.setTitle("SupplierWorker registration");
+						Stage.setTitle("Supplier-Worker registration");
 						Stage.setScene(scene);
 						Stage.show();
 					} catch (IOException e) {
@@ -356,7 +356,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 		//There are no restaurants for this Branch, set message to user
 		chooseResComboBox.setValue("Select supplier:");
 		if(suppliersList == null) {
-			setRelevantTextToDisplayMessageText("No suppliers in selected branch");
+			setRelevantTextToDisplayMessageText("No suppliers in the selected branch!");
 		}
 		else {
 			//add the relevant suppliers to the combo box
@@ -388,15 +388,15 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 		AnalyzeMessageFromServer.addClientListener(new AnalyzeClientListener(){
 			@Override
 			public void clientSupplierRegistrationSucceed() {
-				setRelevantTextToDisplayMessageText("SupplierWorker Registration Succeed!");
+				setRelevantTextToDisplayMessageText("Supplier-Worker registration succeed!");
 			}
 			@Override
 			public void clientSupplierIdExist() {
-				setRelevantTextToDisplayMessageText("This ID already exist on system, try again");
+				setRelevantTextToDisplayMessageText("This ID already exist on the system, try again!");
 			}
 			@Override
 			public void clientSupplierUserNameExist() {
-				setRelevantTextToDisplayMessageText("This User Name already exist on system,try again");
+				setRelevantTextToDisplayMessageText("This username already exist on the system, try again!");
 			}
 			
 		});

@@ -158,13 +158,13 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
     @FXML
     void getNextBtn(ActionEvent event) {
     	if(isEmptyFields()) {
-    		errorText.setText("Please, fill all the fields!");
+    		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
     	}
     	
     	else {
     		if (!(isInt(phoneTxtField))) {
-        		errorText.setText("Please, insert only numbers in the phone field!");
+        		errorText.setText("Insert only numbers in the phone field!");
         		errorText.setFill(Color.RED);
     		}
     		

@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import jdbc.mySqlConnection;
 import query.ImportDataQueries;
 import query.Query;
@@ -172,6 +173,13 @@ public class BiteMeServerUI extends Application implements Initializable {
 	public void start(Stage primaryStage) throws Exception {
 		Pane root = FXMLLoader.load(getClass().getResource("/fxmls/Server.fxml"));
 		Scene scene = new Scene(root);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		scene.setOnMousePressed(pressEvent -> {
+		    scene.setOnMouseDragged(dragEvent -> {
+		        primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+		        primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+		    });
+		});
 		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 		primaryStage.setTitle("Server");
 		primaryStage.setScene(scene);

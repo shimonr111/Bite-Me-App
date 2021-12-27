@@ -75,11 +75,6 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <Text fx:id="errorText" fill="#900f0f" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="302.0703199803829">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Text>
                      </children>
                   </VBox>
                   <VBox maxHeight="120.0" maxWidth="300.0" prefHeight="112.0" prefWidth="300.0" spacing="5.0">
@@ -106,6 +101,11 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
+            <Text fx:id="errorText" fill="RED" layoutX="39.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="365.0703199803829">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Company Registration" />

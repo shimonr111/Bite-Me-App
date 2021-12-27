@@ -179,6 +179,9 @@ public class AnalyzeMessageFromClient {
 			 case GET_USER_BALANCE:
 				 recivedMessageFromClient = OrderQueries.getBalanceForUser((Message) message);
 				 break;
+			 case GET_USER_EMAIL:
+				 recivedMessageFromClient = OrderQueries.getCustomerEmailForSimulation((Message) message);
+				 break;
 			default:
 				break;
 			}

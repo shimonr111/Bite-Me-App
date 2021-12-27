@@ -166,7 +166,7 @@ public class Order implements Serializable {
 		this.branch = branch;
 		this.timeType = OrderTimeType.REGULAR; //default, need to update when getting the supply time.
 		this.status = OrderStatus.PENDING_APPROVAL; //default when creating new order.
-		this.issueDateTime = new Date();
+		this.issueDateTime = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields("1970/01/01", "00:00"); //set default - update after the restaurant approved the order
 		
 		this.estimatedSupplyDateTime = null;
 		this.actualSupplyDateTime = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields("1970/01/01", "00:00"); //set default

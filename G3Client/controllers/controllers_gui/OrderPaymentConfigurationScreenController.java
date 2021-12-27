@@ -118,16 +118,15 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	   @FXML
 	    void getAddAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
-	    		errorText.setText("Please choose the payment method first!");
-	    		errorText.setFill(Color.RED);
+	    		errorText.setText("Choose payment method!");
 	    	}
 		   else if(enterAmountTextField.getText() == "") {
-			   errorText.setText("Please enter the payment ammount!");
-	    	   errorText.setFill(Color.RED);
+			   errorText.setText("Enter amount!");
+	    	   
 		   }
 		   else if(amountLeftToPay == 0) {
-			   errorText.setText("Nothing to pay anymore, press finish order!");
-	    	   errorText.setFill(Color.RED);
+			   errorText.setText("No balance to pay, press finish!");
+	    	   
 		   }
 		   else {
 			   errorText.setText(""); //disable previous error warning
@@ -192,8 +191,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   }
 			  }
 			   }catch(NumberFormatException e) {
-				   errorText.setText("You have entered invalid amount to pay, Please change it!");
-		    	   errorText.setFill(Color.RED);
+				   errorText.setText("Invalid amount to pay, change it!");
+		    	   
 			   }
 			   
 		   }
@@ -209,16 +208,16 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	   @FXML
 	    void getRemoveAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
-	    		errorText.setText("Please choose the payment method first!");
-	    		errorText.setFill(Color.RED);
+	    		errorText.setText("Choose payment method!");
+	    		
 	    	}
 		   else if(enterAmountTextField.getText() == "") {
-			   errorText.setText("Please enter the payment ammount!");
-	    	   errorText.setFill(Color.RED);
+			   errorText.setText("Enter amount!");
+	    	   
 		   }
 		   else if(amountLeftToPay == order.getTotalPrice()) {
-			   errorText.setText("Nothing to remove anymore, enter payment method!");
-	    	   errorText.setFill(Color.RED);
+			   errorText.setText("Nothing to remove, enter payment method!");
+	    	   
 		   }
 		   else {
 			   errorText.setText(""); //disable previous error warning
@@ -283,8 +282,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   }
 			  }
 			   }catch(NumberFormatException e) {
-				   errorText.setText("You have entered invalid amount to pay, Please change it!");
-		    	   errorText.setFill(Color.RED);
+				   errorText.setText("Invalid amount to pay, change it!");
+		    	   
 			   }
 		   }
 	    }
@@ -355,8 +354,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    @FXML
 	    void getFinishOrderBtn(ActionEvent event) {
 	    	if(amountLeftToPay!=0) {
-	    		errorText.setText("Finish paying first!!");
-	    		errorText.setFill(Color.RED);
+	    		errorText.setText("Finish with the payment first!");
+	    		
 	    	}
 	    	else {
 	    	errorText.setText("");
@@ -387,7 +386,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    	sendToClient(messageForUpdateBalance);//send message to the server telling the balance and budget update and than push into DB
 	    	
 	    	/*Give notice for the user that the order is ok*/
-    		PopUpMessages.updateMessage("You have finished the order, The food will be shortly at your door steps!!");
+    		PopUpMessages.updateMessage("Order finished successfully!");
     		OrderChooseItemsScreenController.order= null; 
 	    	/*After saving the order in the DB send the customer back to his home screen*/ 
     		if(connectedUser instanceof BusinessCustomer)
@@ -573,15 +572,15 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		double accountBalance =  Double.parseDouble(availableAccountBalanceTextField.getText());
 		double budgetBalance=0;
 		if(enteredAmount<0 || (amountLeftToPay - enteredAmount < 0)) {
-			errorText.setText("You have entered a wrong input value, change it!!");
-    		errorText.setFill(Color.RED);
+			errorText.setText("Wrong input value, change it!");
+    		
 			return false;
 		}
 
 		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
 			if((accountBalance < enteredAmount)) {
-				errorText.setText("You have entered a wrong input value, change it!!");
-				errorText.setFill(Color.RED);
+				errorText.setText("Wrong input value, change it!");
+				
 				return false;
 			}
 		}
@@ -589,8 +588,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
 			budgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText()); 
 			if(budgetBalance < enteredAmount) {
-				errorText.setText("You have entered a wrong input value, change it!!");
-				errorText.setFill(Color.RED);
+				errorText.setText("Wrong input value, change it!");
+				
 				return false;
 			}
 		}
@@ -608,67 +607,58 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	private boolean isPaymentAmountValidForRemoveAmount(PaymentWay paymentWay) {
 		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());		
 		if(enteredAmount<0) {
-			errorText.setText("You have entered a wrong input value, change it!!");
-    		errorText.setFill(Color.RED);
+			errorText.setText("Wrong input value, change it!");
 			return false;
 		}
 		//double employerBudgetBalance = Double.parseDouble(availableBudgetBalanceTextField.getText());
 		if(paymentWay == PaymentWay.ACCOUNT_BALANCE) {
 			if(alreadyAccountBalanceTextField.getText() == "") {
-				errorText.setText("You have entered a wrong input value, change it!!");
-	    		errorText.setFill(Color.RED);
+					errorText.setText("Wrong input value, change it!");
 				return false;
 			}
 			else {
 				double accountBalanceAlreadyPayed =  Double.parseDouble(alreadyAccountBalanceTextField.getText());
 				if(accountBalanceAlreadyPayed < enteredAmount) {
-					errorText.setText("You have entered a wrong input value, change it!!");
-					errorText.setFill(Color.RED);
+						errorText.setText("Wrong input value, change it!");
 					return false;
 				}
 			}
 		}
 		if(paymentWay == PaymentWay.EMPLOYEE_BUDGET) {
 			if(alreadyEmployeeBudgetTextField.getText() == "") {
-				errorText.setText("You have entered a wrong input value, change it!!");
-	    		errorText.setFill(Color.RED);
+					errorText.setText("Wrong input value, change it!");
 				return false;
 			}
 			else {
 				double alreadyBudgetBalance =  Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
 				if(alreadyBudgetBalance < enteredAmount) {
-					errorText.setText("You have entered a wrong input value, change it!!");
-					errorText.setFill(Color.RED);
+						errorText.setText("Wrong input value, change it!");
 					return false;
 				}
 			}
 		}
 		if(paymentWay == PaymentWay.CASH) {
 			if(alreadyCashTextField.getText() == "") {
-				errorText.setText("You have entered a wrong input value, change it!!");
-	    		errorText.setFill(Color.RED);
+					errorText.setText("Wrong input value, change it!");
 				return false;
 			}
 			else {
 				double cashAlreadyPayed =  Double.parseDouble(alreadyCashTextField.getText());
 				if(cashAlreadyPayed < enteredAmount) {
-					errorText.setText("You have entered a wrong input value, change it!!");
-		    		errorText.setFill(Color.RED);
+						errorText.setText("Wrong input value, change it!");
 					return false;
 				}
 			}
 		}
 		if(paymentWay == PaymentWay.CREDIT_CARD) {
 			if(alreadyCreditCardTextField.getText() == "") {
-				errorText.setText("You have entered a wrong input value, change it!!");
-	    		errorText.setFill(Color.RED);
+					errorText.setText("Wrong input value, change it!");
 				return false;
 			}
 			else {
 				double creaditCardAlreadyPayed = Double.parseDouble(alreadyCreditCardTextField.getText());
 				if(creaditCardAlreadyPayed < enteredAmount) {
-					errorText.setText("You have entered a wrong input value, change it!!");
-		    		errorText.setFill(Color.RED);
+						errorText.setText("Wrong input value, change it!");
 					return false;
 				}
 			}

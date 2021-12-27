@@ -179,25 +179,25 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  				returnVal=false;
  			}
  		if(returnVal==false) {
- 			displayMessage.setText("Please, Fill in all the marked fields !!");
+ 			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  		}
 
  		for(TextField intTxt : integerFields) {
  			if(!isInt(intTxt)) {
  				intTxt.setStyle("-fx-border-color: red");
- 				displayMessage.setText("Marked field must contain only numbers !");
+ 				displayMessage.setText("Marked field must contain only numbers!");
  				return false;
  			}
  		}
  		if(emailTxtField.getText().contains("@")==false) {
  			emailTxtField.setStyle("-fx-border-color: red");
- 			displayMessage.setText("Please, Fill in a correct Email (E-mail must contain a '@') !!");
+ 			displayMessage.setText("Incorrect email format, email must contain '@'!");
  			return false;
  		}
  		else if(emailTxtField.getText().equals(confirmedEmailTxtField.getText())== false) {
  			confirmedEmailTxtField.setStyle("-fx-border-color: red");
- 			displayMessage.setText("Please, fill the same Email address on both email fields!!");
+ 			displayMessage.setText("Emails doesn't match!");
  			return false;
  		}
  		return true;
@@ -330,10 +330,10 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 		AnalyzeMessageFromServer.addClientListener(listener=new AnalyzeClientListener(){
 			@Override
 			public void clientUserIdExist() {
-				setRelevantTextToDisplayMessageText("This ID already exist on system");
+				setRelevantTextToDisplayMessageText("This ID already exists on system!");
 			}
 			public void clientUserNameExist() {
-				setRelevantTextToDisplayMessageText("This User Name already exist on system");
+				setRelevantTextToDisplayMessageText("This username already exists on system!");
 			}
 			public void clientPrivateCustomerRegistrationSucceed() {
 				setRelevantTextToDisplayMessageText("Registration Succeed!");

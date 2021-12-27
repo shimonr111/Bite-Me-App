@@ -13,7 +13,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button fx:id="btnEnter" layoutX="338.0" layoutY="620.0" mnemonicParsing="false" onAction="#getEnterBtn" prefHeight="60.0" prefWidth="350.0" styleClass="homeEnterButton" text="I am Hungry" textFill="#383838">
+      <Button fx:id="btnEnter" layoutX="337.0" layoutY="563.0" mnemonicParsing="false" onAction="#getEnterBtn" prefHeight="60.0" prefWidth="350.0" styleClass="homeEnterButton" text="I am Hungry" textFill="#383838">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

@@ -236,7 +236,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 			passwordField.setStyle("-fx-border-color: red");
 		}
 		if(login.getUserName().equals("") || login.getPassword().equals("")) {
-			setRelevantTextToErrorLable("Please fill all the required fields (*)",true);
+			setRelevantTextToErrorLable("Please fill all the required fields (*)!",true);
 			return false;
 		}
 		else
@@ -341,12 +341,12 @@ public class LoginScreenController extends AbstractBiteMeController{
 			
 			@Override
 			public void clientNotFoundInSystem() {
-				setRelevantTextToErrorLable("User is not found in the system!",true);
+				setRelevantTextToErrorLable("Wrong username or password!",true);
 			}
 			
 			@Override
 			public void clientIsNotConfirmed() {
-				setRelevantTextToErrorLable("User is not confirmed in the system yet!",true);
+				setRelevantTextToErrorLable("User is not confirmed!",true);
 			}	
 	});
 	}

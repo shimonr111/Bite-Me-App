@@ -44,7 +44,7 @@
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <HBox layoutX="107.0" layoutY="387.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
+            <HBox layoutX="107.0" layoutY="378.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
                <children>
                   <Button fx:id="confirmBtn" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="40.0" prefWidth="100.0" styleClass="confirmButton" textFill="#383838">
                      <font>
@@ -68,7 +68,7 @@
                   <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <Text fx:id="errorText" layoutX="91.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="261.0703199803829">
+            <Text fx:id="errorText" fill="RED" layoutX="32.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="376.0703199803829">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

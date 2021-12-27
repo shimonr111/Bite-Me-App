@@ -176,12 +176,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	public boolean checkDate() {
 		if(ReportYear.getValue().equals("Year")) {
-			setRelevantTextToDisplayMessageText("Please Select A Year");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		else
 		if(ReportQuarter.getValue().equals("Quarter")) {
-			setRelevantTextToDisplayMessageText("Please Select A Quarter");
+			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
 			return false;
 		}
 		return true;
