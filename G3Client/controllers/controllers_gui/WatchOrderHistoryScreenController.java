@@ -126,7 +126,6 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     				objectToMessage.add(Integer.toString(orderNumber));
     				Message message = new Message(Task.SET_ACTUAL_DATE_AND_BALANCE,Answer.WAIT_RESPONSE,objectToMessage);
     				sendToClient(message);
-    				System.out.println("1");
     				initialize(null, null);	
     			}
     		}
@@ -255,7 +254,6 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("2");
 		Message message = new Message (Task.GET_ORDERS_FOR_USER,Answer.WAIT_RESPONSE,connectedUser.getUserId());
 		sendToClient(message);
 		nameTxt.setText(connectedUser.getUserFirstName() + "'s orders in progres: ");

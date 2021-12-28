@@ -222,12 +222,51 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * @return boolean if fields are empty
      */
     private boolean isEmptyFields() {
-    	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
-    			phoneTxtField.getText().equals("") || addressTextField.getText().equals("") || 
-    			(cityCombo.getValue() == null) || (streetCombo.getValue() == null) || (phonePrefixCombo.getValue() == null)){
-    		return true;
+    	boolean res = false;
+
+    	if(firstNameTextField.getText().equals("")) {
+    		firstNameTextField.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		firstNameTextField.setStyle("-fx-border-color: black");
     	}
-    	return false;
+    	if(lastNameTextField.getText().equals("")) {
+    		lastNameTextField.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		lastNameTextField.setStyle("-fx-border-color: black");
+    	}
+    	if(phoneTxtField.getText().equals("")) {
+    		phoneTxtField.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		phoneTxtField.setStyle("-fx-border-color: black");
+    	}
+    	if(addressTextField.getText().equals("")) {
+    		addressTextField.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		addressTextField.setStyle("-fx-border-color: black");
+    	}
+    	if(cityCombo.getValue() == null) {
+    		cityCombo.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		cityCombo.setStyle("-fx-border-color: black");
+    	}
+    	if(streetCombo.getValue() == null) {
+    		streetCombo.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		streetCombo.setStyle("-fx-border-color: black");
+    	}
+    	if(phonePrefixCombo.getValue() == null) {
+    		phonePrefixCombo.setStyle("-fx-border-color: red");
+    		res = true;
+    	}else {
+    		phonePrefixCombo.setStyle("-fx-border-color: black");
+    	}
+    	return res;
     }
 
     /**

@@ -256,7 +256,7 @@ public class OrderQueries {
 	public static Message updateOrdersStatusOnDb(Message messageFromClient) throws SQLException{
 		ArrayList<Order> orders = new ArrayList<>();
 		orders = new ArrayList<Order>((Collection<? extends Order>)messageFromClient.getObject());//copy the array that we got from the controller
-		String orderStatus=null;
+		String orderStatus = null;
 		
 		for (Order order : orders) {
 			switch(order.getStatus()) {
@@ -270,16 +270,16 @@ public class OrderQueries {
 				
 			case UN_APPROVED:
 				orderStatus="UN_APPROVED";
+				break;	
+			default:
 				break;
-				
-				default:
-					break;
 			}
-			
+			System.out.println(order);
 			Query.updateOneColumnForTableInDbByPrimaryKey("order", "status='"+orderStatus+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // update the status column in DB according to supplyId
-			Query.updateOneColumnForTableInDbByPrimaryKey("order", "issueDateTime='"+DateTimeHandler.convertMySqlDateTimeFormatToString(order.getIssueDateTime())+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // 
+			if(orderStatus.equals("APPROVED")) {
+				Query.updateOneColumnForTableInDbByPrimaryKey("order", "issueDateTime='"+DateTimeHandler.convertMySqlDateTimeFormatToString(order.getIssueDateTime())+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); 
+			}
 		}
-		
 		
 				
 		Message messageToClient = new Message(Task.MANAGE_ORDER_FINISHED, Answer.MANAGE_ORDER_SUCCEEDED_WRITING_INTO_DB, null);

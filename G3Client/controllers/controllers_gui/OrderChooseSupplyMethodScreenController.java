@@ -134,7 +134,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     @FXML
     void getBtnNext(ActionEvent event) {
     	/*Check if the user hasn't entered any data to the combo box, deny continue to next screen*/
-    	if((supplyMethodCombo.getValue() == null) || (supplyTimeCombo.getValue() == null)) {
+    	if(isSupplyMethodComboBoxInvalid()) {
     		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
     	}
@@ -184,6 +184,30 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     	}
 
     }
+
+
+    /**
+     * Update the border for not entered 
+     * values in the screen
+     * 
+     * @return true if data is invalid 
+     */
+	private boolean isSupplyMethodComboBoxInvalid() {
+		boolean res = false;
+		if(supplyMethodCombo.getValue() == null) {
+			supplyMethodCombo.setStyle("-fx-border-color: red");
+			res = true;
+		}else {
+			supplyMethodCombo.setStyle("-fx-border-color: black");
+		}
+		if(supplyTimeCombo.getValue() == null) {
+			supplyTimeCombo.setStyle("-fx-border-color: red");
+			res = true;
+		}else {
+    		supplyTimeCombo.setStyle("-fx-border-color: black");
+		}
+		return res;
+	}
 
       /**
      * Exit from screen and update

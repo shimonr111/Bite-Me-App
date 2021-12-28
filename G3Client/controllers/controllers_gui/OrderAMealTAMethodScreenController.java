@@ -167,7 +167,6 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
         		errorText.setText("Insert only numbers in the phone field!");
         		errorText.setFill(Color.RED);
     		}
-    		
     		else {
     		takeAwayInformation = new TakeAwaySupplyMethod(order.getSupplyId(),order.getOrderNumber(),firstNameTextField.getText(),lastNameTextField.getText(),
     				phonePrefixCombo.getValue() + phoneTxtField.getText());
@@ -188,11 +187,32 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * @return boolean if fields are empty
      */
     private boolean isEmptyFields() {
-    	if(firstNameTextField.getText().equals("") || lastNameTextField.getText().equals("") ||
-    			phoneTxtField.getText().equals("") || (phonePrefixCombo.getValue() == null)) {
-    		return true;
-    	}
-    	return false;
+    	boolean res = false;
+    		if(firstNameTextField.getText().equals("")) {
+    			firstNameTextField.setStyle("-fx-border-color: red");
+    			res = true;
+    		}else {
+    			firstNameTextField.setStyle("-fx-border-color: black");
+    		}
+    		if(lastNameTextField.getText().equals("")) {
+    			lastNameTextField.setStyle("-fx-border-color: red");
+    			res = true;
+    		}else {
+    			lastNameTextField.setStyle("-fx-border-color: black");
+    		}
+    		if(phoneTxtField.getText().equals("")) {
+    			phoneTxtField.setStyle("-fx-border-color: red");
+    			res = true;
+    		}else {
+    			phoneTxtField.setStyle("-fx-border-color: black");
+    		}
+    		if((phonePrefixCombo.getValue() == null)) {
+    			phonePrefixCombo.setStyle("-fx-border-color: red");
+    			res = true;
+    		}else {
+    			phonePrefixCombo.setStyle("-fx-border-color: black");
+    		}
+    		return res;
     }
 
    /**
@@ -256,10 +276,12 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 		try {
  	 		int checkIfInt = Integer.parseInt(txtField.getText());
  	 		if(checkIfInt>0) {
+        		phoneTxtField.setStyle("-fx-border-color: black");
  	 			return true;
  	 		}
  	 		return false;
  	 		}catch(NumberFormatException e) {
+        		phoneTxtField.setStyle("-fx-border-color: red");
  	 			return false;
  	 		}
 	}
