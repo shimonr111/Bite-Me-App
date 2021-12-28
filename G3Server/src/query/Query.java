@@ -103,7 +103,6 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
 		}catch(SQLException e) {
-			BiteMeServerUI.console.add("Data Already Imported.\n");
 			return true;
 		}
 		return false;
@@ -295,7 +294,8 @@ public class Query {
 			pstmt = con.prepareStatement(query);
 			pstmt.executeUpdate();
 		}catch(java.sql.SQLIntegrityConstraintViolationException e) {
-			BiteMeServerUI.console.add("User name already Imported.\n");
+			if(!BiteMeServerUI.console.contains("One or more User Names already Imported.\n"))
+				BiteMeServerUI.console.add("One or more User Names already Imported.\n");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

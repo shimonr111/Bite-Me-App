@@ -42,7 +42,7 @@ public class ImportDataQueries {
 		ResultSet rs = Query.getExternalDB();
 		boolean isImportedIntoRegistrationTable=false;
 		boolean isImportedIntoLoginTable = false;
-		boolean isImported =false;
+		boolean isImported =false, toConsole=false;
 		try {
 		while(rs.next()) {
 			if(rs.getString(1).equals("user")) {
@@ -54,10 +54,15 @@ public class ImportDataQueries {
 				isImportedIntoRegistrationTable=Query.insertRowIntoRegistrationTable(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6),
 						rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14),rs.getString(15),
 						rs.getInt(16),rs.getDouble(17));
+				if(isImportedIntoRegistrationTable&& !toConsole) {
+					if(!BiteMeServerUI.console.contains("Data Already Imported.\n"))
+						BiteMeServerUI.console.add("Data Already Imported.\n");
+						toConsole=true;
+				}
 			}
 			
-			if(isImportedIntoRegistrationTable || isImportedIntoLoginTable)
-				isImported = true;
+//			if(isImportedIntoRegistrationTable)
+//				isImported = true;
 			isImportedIntoLoginTable=false;
 		}
 		rs.close();
