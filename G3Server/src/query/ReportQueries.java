@@ -22,7 +22,7 @@ public class ReportQueries {
      * @param toDate date when report ends
      */
 	public static void getIncomeForSuppliers(SupplierByReport[] suppliersByBranchAndIncome,String fromDate, String toDate) {
-		ResultSet orders=Query.getColumnFromTableInDB("order where issueDateTime between '"+fromDate+"' AND '"
+		ResultSet orders=Query.getColumnFromTableInDB("order where status='COMPLETED' AND issueDateTime between '"+fromDate+"' AND '"
 				+toDate+"' group by supplierId","supplierId,sum(totalprice)"); //queries for totalprice sum, by supplierId
 		try {
 			while(orders.next()) {
@@ -86,7 +86,7 @@ public class ReportQueries {
      * @param toDate date when report ends
      */
 	public static void getOrdersByType(SupplierByReport[] suppliersForOrderByType,String fromDate, String toDate) {
-		ResultSet orders=Query.getColumnFromTableInDB("order where issueDateTime between '"+fromDate+"' AND '"
+		ResultSet orders=Query.getColumnFromTableInDB("order where status='COMPLETED' AND issueDateTime between '"+fromDate+"' AND '"
 				+toDate+"' order by supplierId","supplierId,itemsList");//queries for item lists (reciept) by supplierId 
 		try {
 			while(orders.next()) {
@@ -150,7 +150,7 @@ public class ReportQueries {
      * @param toDate date when report ends
      */
 	public static void getOrderAmounts(SupplierByReport[] suppliersByPerformance,String fromDate, String toDate) {
-		ResultSet orders=Query.getColumnFromTableInDB("order where issueDateTime between '"+fromDate+"' AND '"
+		ResultSet orders=Query.getColumnFromTableInDB("order where status='COMPLETED' AND issueDateTime between '"+fromDate+"' AND '"
 				+toDate+"' group by supplierId","supplierId, count(orderNumber) AS orders");//queries for amount of orders by counting order rows in given time period by supplierId
 				try {
 			while(orders.next()) {
@@ -192,7 +192,7 @@ public class ReportQueries {
 		int i=0;
 		int suppliersNumber=0;
 		SupplierByReport[] supplierForReport = null;
-		ResultSet suppliers=Query.getColumnFromTableInDB("supplier","*");
+		ResultSet suppliers=Query.getColumnFromTableInDB("supplier where statusInSystem='CONFIRMED'","*");
 		try {
 			if(suppliers.last()) {
 				suppliersNumber=suppliers.getRow();

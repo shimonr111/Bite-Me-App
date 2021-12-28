@@ -65,7 +65,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 
 	private static FXMLLoader loader;
 	private static ViewQuarterlyReportsScreenController viewQuarterlyReportsScreenController;
-	public static SupplierByReport[] suppliers=null;
+	public static SupplierByReport[][] suppliers=null;
 
 	/**
      * loads the previous screen after clicking on back button.
@@ -127,16 +127,20 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 			setRelevantTextToDisplayMessageText("No reports found for that time period");
 		}
 		else {//otherwise primes report generator, and generates reports by selected type
-			displaySingleReport("By branch");
+			if((suppliers[0]!=null||suppliers[1]!=null||suppliers[2]!=null)&&suppliers[3]!=null) {
+			displaySingleReport(branchAndDate);
 			suppliers=null;
+			}
+			else
+				setRelevantTextToDisplayMessageText("No reports found for that time period");
 		}
 		}
 	}
 	
-	public void displaySingleReport(String report) {
+	public void displaySingleReport(String[] branchAndDate) {
 		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
 		displayHistogramReportController.initDisplayReportScreen(suppliers);
-		displayHistogramReportController.showReport();
+		displayHistogramReportController.showReport(branchAndDate);
 }
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
