@@ -230,9 +230,9 @@ public class ReportQueries {
 		SupplierByReport[] supplierForReport = null;
 		ResultSet suppliers;
 		if(branch.equals("NOT_APPLICABLE"))
-		suppliers=Query.getColumnFromTableInDB("supplier","*");
+		suppliers=Query.getColumnFromTableInDB("supplier where statusInSystem='CONFIRMED'","*");
 		else
-			suppliers=Query.getColumnFromTableInDB("supplier where homeBranch='"+branch+"'","*");
+			suppliers=Query.getColumnFromTableInDB("supplier where statusInSystem='CONFIRMED' AND homeBranch='"+branch+"'","*");
 		try {//first queries for relevant suppliers for requested report
 			if(suppliers.last()) {
 				suppliersNumber=suppliers.getRow();

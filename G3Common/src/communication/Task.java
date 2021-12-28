@@ -63,5 +63,4 @@ public enum Task {
 	UPLOAD_PDF,
 	GET_PDF_LIST,
 	GET_PDF_FILE,
-	GET_USER_EMAIL
 }
