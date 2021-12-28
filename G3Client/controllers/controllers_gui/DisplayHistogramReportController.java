@@ -1,7 +1,10 @@
 package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
@@ -18,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import util.SupplierByReport;
@@ -25,46 +29,26 @@ import util.SupplierByReport;
 	public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable {
 
 	    @FXML
+	    private CategoryAxis Category;
+
+	    @FXML
+	    private NumberAxis Numbers;
+	    @FXML
 	    private BarChart<Number, String> reportHistogram;
 
 	    @FXML
-	    private Label reportName;
+	    private Text reportNameText;
 
 	    @FXML
 	    private TextArea reportTextField;
 	    private static FXMLLoader loader;
 	    private static Stage Stage;
 	    public static DisplayHistogramReportController displayHistogramReportController;
-	    public static SupplierByReport[] suppliers=null;
+	    public static SupplierByReport[][] suppliers=null;
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
-			setRelevantTextToDisplayMessageText();
 		}
-	 	private void setRelevantTextToDisplayMessageText() {
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					int totalOrders=0;
-					int totalRevenue=0;
-				    CategoryAxis yAxis = new CategoryAxis();
-				    NumberAxis xAxis = new NumberAxis();
-				    reportHistogram = new BarChart<Number, String>(xAxis, yAxis);
-				    XYChart.Series series1 = new XYChart.Series();
-				        xAxis.setLabel("Period");
-				        ArrayList<String> months = new ArrayList<String>();
-				        months.add("m1");
-				        months.add("m2");
-				        months.add("m3");
-				        yAxis.setCategories(FXCollections.<String>observableArrayList(months));
-				        xAxis.setLabel("Orders");
-				        series1.setName("Orders");
-				        for(SupplierByReport supplier: suppliers)
-				        	series1.getData().add(new XYChart.Data(supplier.getTotalOrders(),supplier.getSupplierId()));
-				        reportHistogram.getData().add(series1);
-				}
-			});
-	}
-	 	public void initDisplayReportScreen(SupplierByReport[] report) {
+	 	public void initDisplayReportScreen(SupplierByReport[][] report) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -92,11 +76,44 @@ import util.SupplierByReport;
 			}
 		});
 	}
-	 	public void showReport() {
+	 	public void showReport(String[] branchAndDate) {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
-					displayHistogramReportController.Stage.show();;
+					String reportNameText="";
+					Calendar c= Calendar.getInstance();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					try {
+						
+						c.setTime(sdf.parse(branchAndDate[1]));
+						reportNameText =reportNameText+"Quarterly report ";
+						reportNameText=reportNameText+c.get(Calendar.YEAR)+" Q"+(sdf.parse(branchAndDate[1]).getMonth()/3+1);
+						
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					ReportGenerator.setQuarter(suppliers);
+					ReportGenerator.setSuppliers(suppliers[3]);
+					int[][] chart=ReportGenerator.getOrdersValue();
+					XYChart.Series orders= new XYChart.Series<>();
+					XYChart.Series value= new XYChart.Series<>();
+					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[0][0]));
+					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[0][1]));
+					c.add(Calendar.MONTH,1);
+					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[1][0]));
+					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[1][1]));
+					c.add(Calendar.MONTH,1);
+					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[2][0]));
+					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[2][1]));
+					orders.setName("Orders");
+					value.setName("Value in NIS");
+					displayHistogramReportController.reportHistogram.getData().addAll(orders,value);
+					displayHistogramReportController.reportNameText.setText(reportNameText);
+					if(branchAndDate[0].equals("NOT_APPLICABLE"))
+					displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport("by branch"));
+					else
+						displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport());
+					displayHistogramReportController.Stage.show();
 				}
 			});
 	 	}

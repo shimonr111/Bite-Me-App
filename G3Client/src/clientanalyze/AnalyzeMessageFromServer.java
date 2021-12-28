@@ -321,7 +321,9 @@ public class AnalyzeMessageFromServer {
 				case SENT_REPORT_SUPPLIERS_LIST:
 					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					ViewSystemReportsScreenCEOController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
-					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					break;
+				case SENT_REPORT_QUARTERLY_LIST:
+					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[][])recivedMessageFromServer.getObject();
 					break;
 					default:
 						break;

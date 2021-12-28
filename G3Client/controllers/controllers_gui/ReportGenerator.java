@@ -1,5 +1,9 @@
 package controllers_gui;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import util.SupplierByReport;
 /**
  * 
@@ -14,6 +18,7 @@ public class ReportGenerator {
 	 * Class members description:
 	 */
 	private static SupplierByReport[] suppliers;
+	private static SupplierByReport[][] quarter;
 	public static String[] getReportTypes() {
 		String[] reportTypes= new String[3];
 		reportTypes[0]="Incomes";
@@ -103,5 +108,25 @@ public class ReportGenerator {
      */
 	public static void setSuppliers(SupplierByReport[] suppliers) {
 		ReportGenerator.suppliers = suppliers;
+	}
+	public static SupplierByReport[][] getQuarter() {
+		return quarter;
+	}
+	public static void setQuarter(SupplierByReport[][] quarter) {
+		ReportGenerator.quarter = quarter;
+	}
+	public static int[][] getOrdersValue(){
+		int[][] ordersAndValue={{0,0},{0,0},{0,0}};
+		for(int i=0;i<3;i++) {
+			if(quarter!=null&&quarter[i]!=null) {
+			for(int j=0;j<quarter[i].length;j++) {
+				if(quarter[i][j]!=null) {
+				ordersAndValue[i][0]+=quarter[i][j].getTotalOrders();
+				ordersAndValue[i][1]+=(int)Double.parseDouble(quarter[i][j].getIncome());
+				}
+				}
+		}
+		}
+		return ordersAndValue;
 	}
 }
