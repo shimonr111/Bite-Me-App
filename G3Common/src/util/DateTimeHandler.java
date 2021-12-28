@@ -62,8 +62,11 @@ public class DateTimeHandler {
 	 * @return String: returns the date in string in MySql DateTime format.
 	 */
 	public static String convertMySqlDateTimeFormatToString(Date date) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		return dateFormat.format(date);
+		if(date != null) {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			return dateFormat.format(date);
+		}
+		return null;
 	}
 
 	/**

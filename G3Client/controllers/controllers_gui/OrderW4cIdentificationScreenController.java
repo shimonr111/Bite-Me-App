@@ -181,11 +181,17 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     				//check if the user is business user and than check if he enters with the company code number if so check validity
     				if(connectedUser instanceof BusinessCustomer) {
     					if(!isCompanyCodeNumberEmpty(companyCodeTextField.getText())) {
+    						try {
     						if(((BusinessCustomer) connectedUser).getcompanyOfBusinessCustomer().getcompanyCode() ==  Integer.parseInt(companyCodeTextField.getText())) {
     							((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(true); 
     						}
     						else {
     							errorText.setText("Wrong company code!, try agian.");
+    		    	    		errorText.setFill(Color.RED);
+    		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
+    						}
+    						}catch(Exception e) { //for case the users enters chars and other letters rather than numbers
+    							errorText.setText("Invalid company code!, try agian.");
     		    	    		errorText.setFill(Color.RED);
     		    	    		companyCodeTextField.setStyle("-fx-border-color: red");
     						}

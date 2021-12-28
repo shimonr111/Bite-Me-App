@@ -119,14 +119,16 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    void getAddAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
 	    		errorText.setText("Choose payment method!");
+	    		paymentMethodCombo.setStyle("-fx-border-color: red");
+
 	    	}
 		   else if(enterAmountTextField.getText() == "") {
-			   errorText.setText("Enter amount!");
+			   errorText.setText("Please enter amount to pay!");
+			   enterAmountTextField.setStyle("-fx-border-color: red");
 	    	   
 		   }
 		   else if(amountLeftToPay == 0) {
-			   errorText.setText("No balance to pay, press finish!");
-	    	   
+			   errorText.setText("You have finished paying! , press finish!");
 		   }
 		   else {
 			   errorText.setText(""); //disable previous error warning
@@ -209,11 +211,11 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    void getRemoveAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
 	    		errorText.setText("Choose payment method!");
-	    		
+	    		paymentMethodCombo.setStyle("-fx-border-color: red");
 	    	}
 		   else if(enterAmountTextField.getText() == "") {
 			   errorText.setText("Enter amount!");
-	    	   
+			   enterAmountTextField.setStyle("-fx-border-color: red");
 		   }
 		   else if(amountLeftToPay == order.getTotalPrice()) {
 			   errorText.setText("Nothing to remove, enter payment method!");
