@@ -55,6 +55,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 	private static FXMLLoader loader;
     private static OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController;
     private static Order order;
+    private static  DeliveryType deliveryType;
     private static DeliverySupplyMethod deliveryInformation;
     @FXML
     private TextField addressTextField;
@@ -276,7 +277,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	* screen controller.
   	* 
   	*/
-    public void initDeliveryMethodScreen(Order order) {
+    public void initDeliveryMethodScreen(Order order, DeliveryType deliveryType) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -305,6 +306,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 			}
 		});
 		OrderAMealDeliveryMethodScreenController.order=order; // save the order from the previous screen	
+		OrderAMealDeliveryMethodScreenController.deliveryType=deliveryType;
 	}
 
 
@@ -315,7 +317,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-  		deliveryInformation = new DeliverySupplyMethod(order.getSupplyId(),order.getOrderNumber(),null,null,null,DeliveryType.REGULAR,null);
+  		deliveryInformation = new DeliverySupplyMethod(order.getSupplyId(),order.getOrderNumber(),null,null,null,deliveryType,null);
   		order.setSupplyMethodInformation(deliveryInformation);
   		calcTotalBill();
   		deliveryFeeTextField.setText(String.valueOf(Constans.REGULAR_DELIVERY_FEE_IN_NIS));	
