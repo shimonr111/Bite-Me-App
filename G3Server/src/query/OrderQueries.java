@@ -207,7 +207,7 @@ public class OrderQueries {
 		
 		/*get the order number as written in the DB*/
 		ResultSet result = Query.getRowsFromTableInDB("order","supplierId= '"+supplierId+"' AND (customerUserId= '"+customerUserId+"')"
-				+ "AND (branch= '"+branch+"') AND (issueDateTime= '"+DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime)+"') " ); 
+				+ "AND (branch= '"+branch+"') AND (estimatedSupplyDateTime= '"+DateTimeHandler.convertMySqlDateTimeFormatToString(estimatedSupplyDateTime)+"') " ); 
 		while(result.next()) {
 			orderIntoDb.setOrderNumber(Integer.valueOf(result.getString(1)));
 			}
@@ -274,7 +274,6 @@ public class OrderQueries {
 			default:
 				break;
 			}
-			System.out.println(order);
 			Query.updateOneColumnForTableInDbByPrimaryKey("order", "status='"+orderStatus+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); // update the status column in DB according to supplyId
 			if(orderStatus.equals("APPROVED")) {
 				Query.updateOneColumnForTableInDbByPrimaryKey("order", "issueDateTime='"+DateTimeHandler.convertMySqlDateTimeFormatToString(order.getIssueDateTime())+"'" , "supplierId='"+order.getSupplierUserId()+"' AND ( orderNumber='"+order.getOrderNumber()+"')"); 
@@ -356,6 +355,7 @@ public class OrderQueries {
 						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(10)),SupplyType.valueOf(rs.getString(11)),0,rs.getDouble(12),
 						null);
 				orderFromDb.setCustomerUserType(rs.getString(4));
+				//
 				SupplyType supplyType = SupplyType.valueOf(rs.getString(11));
 				if(supplyType == SupplyType.DELIVERY) {
 					orderFromDb.setSupplyMethodInformation(new DeliverySupplyMethod(0, Integer.parseInt(rs.getString(1)), rs.getString(13), rs.getString(14), rs.getString(16), DeliveryType.valueOf(rs.getString(20)), rs.getString(15)));

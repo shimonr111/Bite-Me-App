@@ -246,7 +246,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			ordersForManageOrderTable.addAll(orderListFromDB);
 		}
 		
-		 updateOrders = new ArrayList<Order>(orderListFromDB); //copy the orders we got from DB to our updateOrders array
+		 updateOrders = new ArrayList<Order>(); //copy the orders we got from DB to our updateOrders array ---orderListFromDB
 		
 		/*Set data in the table */
 		orderNumColum.setCellValueFactory(new PropertyValueFactory<Order,Integer>("orderNumber"));
@@ -279,9 +279,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	            event ->
 	    {
 			Order order = event.getRowValue();  // create new object of item get the specific row where we made the change in the status column
-			updateOrders.remove(order); // remove this row from updateOrders array
 			order.setStatus(event.getNewValue()); // set the new status in the order array
-			System.out.println(event.getNewValue()); //debug
 	        /*Simulation for sending an email to the user with his details*/
 	        if(event.getNewValue() == OrderStatus.APPROVED) {
 	        	// get the user email
@@ -307,6 +305,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
 			System.out.println(updateOrders);
 	        sendToClient(new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders));//send message to the server telling the manage order is finished and then push into DB
+	        updateOrders.remove(order); //remove from the updated arrayList
 	    });
 	    
 	    /*Used for searching bar in the table view*/

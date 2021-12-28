@@ -152,6 +152,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     
     @FXML
     void getRefreshBtn(ActionEvent event) {
+    	ordersForCustomer.clear(); 
     	initialize(null, null);
     }
     
