@@ -28,14 +28,14 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane layoutX="293.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="292.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" layoutX="16.0" layoutY="20.0" prefHeight="50.0" prefWidth="412.0" styleClass="viewHeadLight" text="View System Monthly Reports" textFill="#383838">
+            <Label alignment="CENTER" layoutX="14.0" layoutY="25.0" prefHeight="50.0" prefWidth="412.0" styleClass="viewHeadLight" text="View System Monthly Reports" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <VBox layoutX="97.0" layoutY="105.0" prefHeight="182.0" prefWidth="250.0">
+            <VBox layoutX="95.0" layoutY="85.0" prefHeight="180.0" prefWidth="250.0">
                <children>
                   <VBox prefHeight="88.0" prefWidth="303.0">
                      <children>
@@ -54,26 +54,26 @@
                   <VBox prefHeight="88.0" prefWidth="303.0">
                      <children>
                         <Label prefHeight="35.0" prefWidth="294.0" styleClass="loginLabels" text="*Select Report Type:" />
-                        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="303.0" spacing="10.0">
+                        <HBox alignment="CENTER" prefHeight="55.0" prefWidth="250.0" spacing="10.0">
                            <padding>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                            <children>
-                              <ComboBox fx:id="ReportType" prefHeight="30.0" prefWidth="180.0" promptText="Report Type" />
+                              <ComboBox fx:id="ReportType" prefHeight="30.0" prefWidth="180.0" promptText="Report Type" styleClass="combo-box" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                </children>
             </VBox>
-            <Button fx:id="viewReportBtn" layoutX="132.0" layoutY="355.0" mnemonicParsing="false" onAction="#getViewReport" prefHeight="50.0" prefWidth="180.0" styleClass="regiViewButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="View Report" textFill="#383838">
+            <Button fx:id="viewReportBtn" layoutX="130.0" layoutY="385.0" mnemonicParsing="false" onAction="#getViewReport" prefHeight="50.0" prefWidth="180.0" styleClass="regiViewButton" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" text="View Report" textFill="#383838">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Label fx:id="MessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="17.0" layoutY="296.0" prefHeight="40.0" prefWidth="406.0" styleClass="errorText" textFill="RED" />
+            <Label fx:id="MessageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="340.0" prefHeight="40.0" prefWidth="410.0" styleClass="errorText" textFill="RED" />
          </children>
       </AnchorPane>
-      <Button fx:id="quarterlyBtn" layoutX="354.0" layoutY="645.0" mnemonicParsing="false" onAction="#getQuarterly" prefHeight="64.0" prefWidth="317.0" styleClass="backButton" text="Generate Quarterly PDF" />
+      <Button fx:id="quarterlyBtn" layoutX="337.0" layoutY="630.0" mnemonicParsing="false" onAction="#getQuarterly" prefHeight="50.0" prefWidth="350.0" styleClass="generateButton" text="Generate Quarterly Reports" />
    </children>
 </Pane>

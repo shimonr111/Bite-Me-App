@@ -30,9 +30,9 @@
       </HBox>
       <Button fx:id="nextBtn" layoutX="807.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBtnNext" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <VBox layoutX="58.0" layoutY="100.0" prefHeight="200.0" prefWidth="225.0" spacing="5.0">
+            <VBox layoutX="61.0" layoutY="139.0" prefHeight="195.0" prefWidth="225.0" spacing="5.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
@@ -58,12 +58,12 @@
                   </VBox>
                </children>
             </VBox>
-            <Label layoutX="18.0" layoutY="35.0" prefHeight="53.0" prefWidth="306.0" styleClass="supplyHeadLight" text="Supply Configuration" textFill="#383838">
+            <Label layoutX="18.0" layoutY="15.0" prefHeight="50.0" prefWidth="310.0" styleClass="supplyHeadLight" text="Supply Configuration" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Text fx:id="errorText" fill="RED" layoutX="18.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="306.0" />
+            <Text fx:id="errorText" fill="RED" layoutX="20.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="306.0" />
          </children>
       </AnchorPane>
    </children>

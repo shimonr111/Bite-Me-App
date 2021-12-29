@@ -16,7 +16,7 @@
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="Server IP *" />
+                        <Label prefHeight="35.0" prefWidth="100.0" styleClass="loginLabels" text="*Server IP:" />
                         <TextField fx:id="enterIPTxt" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" styleClass="text-field" text="localhost" />
                      </children>
                   </VBox>

@@ -29,14 +29,14 @@
          </children>
       </HBox>
       <Button fx:id="BackBtn" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="222.0" layoutY="154.0" prefHeight="460.0" prefWidth="580.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="162.0" layoutY="129.0" prefHeight="480.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" layoutX="116.0" layoutY="20.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="Supplier Registration" textFill="#383838">
+            <Label alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="deliveryHeadLight" text="Supplier Registration" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER" layoutX="201.0" layoutY="85.0" prefHeight="59.0" prefWidth="180.0">
+            <VBox alignment="CENTER" layoutX="269.0" layoutY="64.0" prefHeight="60.0" prefWidth="180.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Search Supplier:">
                      <font>
@@ -46,21 +46,21 @@
                   <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <Button fx:id="completeRegistrationBtn" layoutX="240.0" layoutY="406.0" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getCompleteRegistrationBtn" prefHeight="40.0" prefWidth="100.0" styleClass="confirmButton" textFill="#383838">
+            <Button fx:id="completeRegistrationBtn" layoutX="309.0" layoutY="418.0" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getCompleteRegistrationBtn" prefHeight="40.0" prefWidth="100.0" styleClass="confirmButton" textFill="#383838">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <TableView fx:id="suppliersTable" layoutX="30.0" layoutY="165.0" prefHeight="200.0" prefWidth="521.0">
+            <TableView fx:id="suppliersTable" layoutX="59.0" layoutY="134.0" prefHeight="200.0" prefWidth="600.0">
               <columns>
-                <TableColumn fx:id="supllierIdCol" prefWidth="90.0" text="Supplier ID" />
-                <TableColumn fx:id="supplierNameCol" prefWidth="110.0" text="Supplier Name" />
-                  <TableColumn fx:id="supplierEmailCol" prefWidth="120.0" text="Email" />
-                  <TableColumn fx:id="supplierPhoneCol" minWidth="0.0" prefWidth="110.0" text="Phone" />
-                  <TableColumn fx:id="supplierRevenueFeeCol" prefWidth="90.0" text="Revenue Fee" />
+                <TableColumn fx:id="supllierIdCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Supplier ID" />
+                <TableColumn fx:id="supplierNameCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Supplier Name" />
+                  <TableColumn fx:id="supplierEmailCol" maxWidth="120.0" minWidth="150.0" prefWidth="120.0" text="Email" />
+                  <TableColumn fx:id="supplierPhoneCol" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Phone" />
+                  <TableColumn fx:id="supplierRevenueFeeCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Revenue Fee" />
               </columns>
             </TableView>
-            <Text fx:id="displayMessage" fill="RED" layoutX="83.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
+            <Text fx:id="displayMessage" fill="RED" layoutX="151.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Supplier Registration" />

@@ -29,14 +29,14 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane layoutX="104.0" layoutY="154.0" prefHeight="323.0" prefWidth="440.0" styleClass="itemSelectionMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="142.0" layoutY="144.0" prefHeight="400.0" prefWidth="380.0" styleClass="paymentConfigMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label layoutX="55.0" layoutY="25.0" styleClass="itemSelectionMainHeadLight" text="Payment Configuration" textFill="#383838">
+            <Label layoutX="29.0" layoutY="15.0" styleClass="itemSelectionMainHeadLight" text="Payment Configuration" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <VBox layoutX="76.0" layoutY="76.0" prefHeight="206.0" prefWidth="290.0" spacing="5.0">
+            <VBox layoutX="43.0" layoutY="124.0" prefHeight="223.0" prefWidth="295.0" spacing="10.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
@@ -62,7 +62,7 @@
                   </VBox>
                   <VBox fillWidth="false" prefHeight="30.0" prefWidth="203.0" spacing="5.0" styleClass="loginBundleVBOX">
                      <children>
-                        <Label prefHeight="20.0" prefWidth="292.0" styleClass="loginLabels" text="Payment Options:">
+                        <Label prefHeight="20.0" prefWidth="292.0" styleClass="loginLabels" text="*Payment Options:">
                            <padding>
                               <Insets bottom="5.0" />
                            </padding>
@@ -88,18 +88,21 @@
                      </padding>
                   </HBox>
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </VBox>
-            <Text fx:id="errorText" fill="RED" layoutX="43.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="355.0" />
+            <Text fx:id="errorText" fill="RED" layoutX="34.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="321.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="555.0" layoutY="236.0" prefHeight="160.0" prefWidth="360.0" styleClass="itemSelectionMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="544.0" layoutY="224.0" prefHeight="240.0" prefWidth="380.0" styleClass="alreadyPaidMenuPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
             <Label layoutX="99.0" layoutY="14.0" styleClass="itemSelectionMainHeadLight" text="Already Paid" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <HBox layoutX="22.0" layoutY="59.0" prefHeight="82.0" prefWidth="355.0" spacing="10.0">
+            <HBox layoutX="13.0" layoutY="120.0" prefHeight="106.0" prefWidth="355.0" spacing="10.0">
                <children>
                   <VBox maxHeight="80.0" prefHeight="100.0" prefWidth="80.0">
                      <children>
@@ -126,13 +129,10 @@
                      </children>
                   </VBox>
                </children>
-               <padding>
-                  <Insets right="5.0" top="5.0" />
-               </padding>
             </HBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="634.0" layoutY="384.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
+      <AnchorPane layoutX="624.0" layoutY="424.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
          <children>
             <Label layoutX="57.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Left To Pay">
                <font>
@@ -142,7 +142,7 @@
             <TextField fx:id="totalToPayTextField" alignment="CENTER" layoutX="80.0" layoutY="29.0" prefHeight="30.0" prefWidth="60.0" promptText="0.0" styleClass="itemPriceTextField" />
          </children>
       </AnchorPane>
-      <Button fx:id="finishOrderBtn" layoutX="419.0" layoutY="516.0" mnemonicParsing="false" onAction="#getFinishOrderBtn" prefHeight="50.0" prefWidth="250.0" styleClass="finishOrderButton" text="Finish Order" />
+      <Button fx:id="finishOrderBtn" layoutX="372.0" layoutY="610.0" mnemonicParsing="false" onAction="#getFinishOrderBtn" prefHeight="70.0" prefWidth="300.0" styleClass="finishOrderButton" text="Finish Order" />
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection ➝ Item Selection ➝ Choose Supply Method ➝ Supply Method ➝ Order Summary ➝ Payment" />
    </children>
 </Pane>

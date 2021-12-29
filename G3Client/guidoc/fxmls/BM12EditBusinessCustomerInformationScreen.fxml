@@ -37,7 +37,7 @@
             </Button>
          </children>
       </HBox>
-      <GridPane hgap="10.0" layoutX="208.0" layoutY="117.0" prefHeight="492.0" prefWidth="609.0" vgap="30.0">
+      <GridPane hgap="10.0" layoutX="208.0" layoutY="116.0" prefHeight="492.0" prefWidth="609.0" vgap="30.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="291.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="288.0" />
@@ -57,13 +57,13 @@
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="First Name:" />
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="*First Name:" />
                                     <TextField fx:id="firstNameTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="First name" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Last Name:" />
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Last Name:" />
                                     <TextField fx:id="lastNameTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="Last name" styleClass="text-field" />
                                  </children>
                               </VBox>
@@ -79,13 +79,13 @@
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="ID:" />
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="*ID:" />
                                     <TextField fx:id="idNumTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="100.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="100.0" promptText="ID" styleClass="text-field" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Home Branch:" />
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Home Branch:" />
                                     <ComboBox fx:id="setHomeBranchCombo" disable="true" prefHeight="30.0" prefWidth="100.0" promptText="Branch" />
                                  </children>
                               </VBox>
@@ -98,7 +98,7 @@
                            <children>
                               <VBox prefHeight="47.0" prefWidth="139.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Status:" />
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="*Status:" />
                                     <ComboBox fx:id="statusComboBox" prefHeight="25.0" prefWidth="170.0" promptText="Status" />
                                  </children>
                               </VBox>
@@ -117,7 +117,7 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="85.0" prefWidth="280.0">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Phone Number:">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="*Phone Number:">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -134,7 +134,7 @@
                            <children>
                               <VBox prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Email:" />
+                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="*Email:" />
                                     <TextField fx:id="emailTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" minHeight="30.0" minWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Email" styleClass="text-field" />
                                  </children>
                               </VBox>
@@ -154,17 +154,17 @@
                <children>
                   <VBox layoutX="9.0" layoutY="41.0" prefHeight="72.0" prefWidth="262.0">
                      <children>
-                        <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
+                        <HBox prefHeight="72.0" prefWidth="270.0" spacing="15.0">
                            <children>
-                              <VBox prefHeight="100.0" prefWidth="123.0">
+                              <VBox prefHeight="72.0" prefWidth="134.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="130.0" styleClass="loginLabels" text="Company Name:" />
+                                    <Label prefHeight="35.0" prefWidth="125.0" styleClass="loginLabels" text="*Company Name:" />
                                     <ComboBox fx:id="companyNameCombo" disable="true" prefHeight="30.0" prefWidth="111.0" promptText="Companies" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="72.0" prefWidth="116.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Position" />
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Position:" />
                                     <ComboBox fx:id="positionCombo" disable="true" prefHeight="30.0" prefWidth="114.0" promptText="Position" />
                                  </children>
                               </VBox>
@@ -183,15 +183,15 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
                            <children>
-                              <VBox prefHeight="100.0" prefWidth="123.0">
+                              <VBox prefHeight="72.0" prefWidth="126.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="125.0" styleClass="loginLabels" text="Budget Amount:" />
+                                    <Label prefHeight="35.0" prefWidth="125.0" styleClass="loginLabels" text="*Budget Amount:" />
                                     <TextField fx:id="monthlyMaxBudgedTxtField" disable="true" editable="false" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Monthly Max" />
                                  </children>
                               </VBox>
                               <VBox prefHeight="100.0" prefWidth="107.0">
                                  <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Budget Type:" />
+                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Budget Type:" />
                                     <ComboBox fx:id="budgetTypeCombo" disable="true" prefHeight="30.0" prefWidth="130.0" promptText="Type" />
                                  </children>
                               </VBox>

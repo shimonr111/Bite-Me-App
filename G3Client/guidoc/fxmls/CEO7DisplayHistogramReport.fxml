@@ -7,41 +7,56 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.DisplayHistogramReportController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.DisplayHistogramReportController">
   <content>
-    <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="853.0" prefWidth="598.0">
+    <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <VBox layoutX="29.0" layoutY="19.0" prefHeight="824.0" prefWidth="524.0">
+            <VBox layoutX="34.0" layoutY="184.0" prefHeight="525.0" prefWidth="524.0">
                <children>
-                  <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" text="X" />
-                  <Text fx:id="reportNameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Quarterly Report">
-                     <font>
-                        <Font size="29.0" />
-                     </font>
-                  </Text>
-                  <BarChart fx:id="reportHistogram" prefHeight="264.0" prefWidth="524.0">
+                  <BarChart fx:id="reportHistogram" prefHeight="264.0" prefWidth="524.0" styleClass="chart-series-line">
                     <xAxis>
-                      <CategoryAxis fx:id="Category" label="Months" side="BOTTOM" />
+                      <CategoryAxis fx:id="Category" label="Months" style="-fx-background-color: white;">
+                           <tickLabelFont>
+                              <Font name="System Bold" size="10.0" />
+                           </tickLabelFont></CategoryAxis>
                     </xAxis>
                     <yAxis>
-                      <NumberAxis fx:id="Numbers" side="LEFT" />
+                      <NumberAxis fx:id="Numbers" side="LEFT" tickLabelFill="WHITE" />
                     </yAxis>
                   </BarChart>
-                  <BarChart fx:id="valueHistogram" prefHeight="264.0" prefWidth="524.0">
+                  <BarChart fx:id="valueHistogram" prefHeight="264.0" prefWidth="524.0" styleClass="chart-series-line">
                      <xAxis>
-                        <CategoryAxis fx:id="Category1" label="Months" side="BOTTOM" />
+                        <CategoryAxis fx:id="Category1" label="Months" prefWidth="467.0" side="BOTTOM" style="-fx-background-color: white;">
+                           <tickLabelFont>
+                              <Font name="System Bold" size="10.0" />
+                           </tickLabelFont></CategoryAxis>
                      </xAxis>
                      <yAxis>
-                        <NumberAxis fx:id="Numbers1" side="LEFT" />
+                        <NumberAxis fx:id="Numbers1" side="LEFT" tickLabelFill="WHITE" />
                      </yAxis>
                   </BarChart>
-                  <TextArea fx:id="reportTextField" editable="false" focusTraversable="false" prefHeight="396.0" prefWidth="524.0" />
                </children>
             </VBox>
+            <TextArea fx:id="reportTextField" editable="false" focusTraversable="false" layoutX="569.0" layoutY="247.0" prefHeight="400.0" prefWidth="400.0" styleClass="ReportsText" />
+            <Text fx:id="reportNameText" layoutX="147.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="HistoText" text="Quarterly Report" wrappingWidth="729.6796875">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Text>
+            <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+               <children>
+                  <Button id="btnExit" fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children></AnchorPane>
   </content>
 </ScrollPane>

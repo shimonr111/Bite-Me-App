@@ -13,7 +13,7 @@
 
 <Pane prefHeight="768.0" prefWidth="1024.0" styleClass="W4CExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.OrderW4cIdentificationScreenController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝" />
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification " />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
             <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
@@ -29,14 +29,14 @@
          </children>
       </HBox>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="loginMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="W4CMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="12.0" layoutY="35.0" maxHeight="50.0" maxWidth="317.0" prefHeight="50.0" prefWidth="317.0" styleClass="W4CHeadLight" text="W4C Identification" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="15.0" maxHeight="50.0" maxWidth="320.0" prefHeight="50.0" prefWidth="320.0" styleClass="W4CHeadLight" text="W4C Identification" />
             <VBox layoutX="69.0" layoutY="117.0" prefHeight="166.0" prefWidth="203.0">
                <children>
                   <VBox fillWidth="false" prefHeight="82.0" prefWidth="234.0" styleClass="loginBundleVBOX">
                      <children>
-                        <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="Enter W4C Code:" />
+                        <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="*Enter W4C Code:" />
                         <TextField fx:id="codeTxtField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="W4C Code" styleClass="text-field" />
 						<Label fx:id="companyCodeLabel" prefHeight="20.0" prefWidth="143.0" styleClass="loginLabels" text="Enter company code:" />
                         <TextField fx:id="companyCodeTextField" maxHeight="35.0" maxWidth="200.0" prefHeight="35.0" prefWidth="200.0" promptText="Company code" styleClass="text-field" />

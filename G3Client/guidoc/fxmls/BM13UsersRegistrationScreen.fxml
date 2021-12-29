@@ -29,14 +29,14 @@
          </children>
       </HBox>
       <Button fx:id="backButton" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="293.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="162.0" layoutY="129.0" prefHeight="480.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="User Registration" textFill="#383838">
+            <Label alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="deliveryHeadLight" text="User Registration" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <HBox layoutX="107.0" layoutY="387.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
+            <HBox layoutX="245.0" layoutY="415.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
                <children>
                   <Button fx:id="privateCustomerButton" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getPrivateCustomer" prefHeight="40.0" prefWidth="100.0" styleClass="regiRegularButton" text="Private" textFill="#383838">
                      <font>
@@ -50,7 +50,7 @@
                   </Button>
                </children>
             </HBox>
-            <VBox alignment="CENTER" layoutX="132.0" layoutY="82.0" prefHeight="59.0" prefWidth="180.0">
+            <VBox alignment="CENTER" layoutX="269.0" layoutY="64.0" prefHeight="60.0" prefWidth="180.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Search Users:">
                      <font>
@@ -60,14 +60,14 @@
                   <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <TableView fx:id="usersTable" layoutX="72.0" layoutY="157.0" prefHeight="200.0" prefWidth="300.0">
+            <TableView fx:id="usersTable" layoutX="158.0" layoutY="134.0" prefHeight="250.0" prefWidth="405.0">
               <columns>
-                <TableColumn fx:id="userIdCol" prefWidth="100.0" text="User ID" />
-                <TableColumn fx:id="userFirstNameCol" prefWidth="100.0" text="First Name" />
-                  <TableColumn fx:id="userLastName" prefWidth="100.0" text="Last Name" />
+                <TableColumn fx:id="userIdCol" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="User ID" />
+                <TableColumn fx:id="userFirstNameCol" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="First Name" />
+                  <TableColumn fx:id="userLastName" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="Last Name" />
               </columns>
             </TableView>
-            <Text fx:id="displayMessage" fill="RED" layoutX="14.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
+            <Text fx:id="displayMessage" fill="RED" layoutX="152.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ User Registration" />
