@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER S
 USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: semesterialproject
+-- Host: localhost    Database: semesterialproject
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -368,6 +368,8 @@ CREATE TABLE `order` (
   `itemsList` varchar(6000) DEFAULT NULL,
   `comments` varchar(3000) DEFAULT NULL,
   `deliveryType` enum('NA','REGULAR','MULTI','ROBOTIC') DEFAULT NULL,
+  `balanceUsed` double DEFAULT '0',
+  `budgetBalanceUsed` double DEFAULT '0',
   PRIMARY KEY (`orderNumber`),
   KEY `order_supplierId_idx` (`supplierId`),
   CONSTRAINT `order_supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
@@ -380,7 +382,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR'),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR'),(15,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:53:36','2021-12-24 17:00:00',NULL,'TAKE_AWAY',81,'Test','test2','','1122',0,'burger,cola,cola,pie,','null,null,null,null,','NA'),(16,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:59:31','2021-12-24 17:00:00',NULL,'DELIVERY',51,'Mosa','Srour','Raanan','123123',25,'cola,fries,','null,null,','REGULAR'),(17,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:01:45','2021-12-24 18:00:00',NULL,'DELIVERY',37,'ss','ss','as','123',25,'cola,','null,','REGULAR'),(18,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:07:43','2021-12-24 18:00:00',NULL,'DELIVERY',37,'s','s','s2s2','2',25,'pie,','null,','REGULAR'),(19,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:12:19','2021-12-24 18:00:00',NULL,'DELIVERY',70,'sds','sds','sasd','12321',25,'burger,','null,','REGULAR'),(20,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:13:41','2021-12-24 17:00:00',NULL,'DELIVERY',70,'asd','asd','s','32432s',25,'pizza,','null,','REGULAR'),(21,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 20:29:33','2021-12-24 21:00:00',NULL,'TAKE_AWAY',40,'mm','mm','','12321',0,'fries,fries,ice cream,','null,big,small,','NA'),(22,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 21:59:19','2021-12-26 23:00:00',NULL,'TAKE_AWAY',12,'ss','ss','','333',0,'cola,','null,','NA'),(23,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 22:00:18','2021-12-26 23:00:00',NULL,'TAKE_AWAY',37,'sds','dsds','','121',0,'caesar,cola,','null,null,','NA');
+INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR',0,0),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR',0,0),(15,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:53:36','2021-12-24 17:00:00',NULL,'TAKE_AWAY',81,'Test','test2','','1122',0,'burger,cola,cola,pie,','null,null,null,null,','NA',0,0),(16,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:59:31','2021-12-24 17:00:00',NULL,'DELIVERY',51,'Mosa','Srour','Raanan','123123',25,'cola,fries,','null,null,','REGULAR',0,0),(17,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:01:45','2021-12-24 18:00:00',NULL,'DELIVERY',37,'ss','ss','as','123',25,'cola,','null,','REGULAR',0,0),(18,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:07:43','2021-12-24 18:00:00',NULL,'DELIVERY',37,'s','s','s2s2','2',25,'pie,','null,','REGULAR',0,0),(19,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:12:19','2021-12-24 18:00:00',NULL,'DELIVERY',70,'sds','sds','sasd','12321',25,'burger,','null,','REGULAR',0,0),(20,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:13:41','2021-12-24 17:00:00',NULL,'DELIVERY',70,'asd','asd','s','32432s',25,'pizza,','null,','REGULAR',0,0),(21,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 20:29:33','2021-12-24 21:00:00',NULL,'TAKE_AWAY',40,'mm','mm','','12321',0,'fries,fries,ice cream,','null,big,small,','NA',0,0),(22,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 21:59:19','2021-12-26 23:00:00',NULL,'TAKE_AWAY',12,'ss','ss','','333',0,'cola,','null,','NA',0,0),(23,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 22:00:18','2021-12-26 23:00:00',NULL,'TAKE_AWAY',37,'sds','dsds','','121',0,'caesar,cola,','null,null,','NA',0,0);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,4 +549,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-27 22:14:53
+-- Dump completed on 2021-12-29 13:31:12
