@@ -115,6 +115,7 @@ public class ItemWithPicture {
 
 	public void setPicturePath(String picturePath) {
 		this.picturePath = picturePath;
+		item.setPicturePath(picturePath);
 	}
 	
 	@Override

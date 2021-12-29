@@ -368,25 +368,30 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	    	switch(event.getNewValue()) {
 	    	case SALAD:
 	    		event.getRowValue().setPicturePath(DataLists.getDefaultSaladPicturePath());
+	    		event.getRowValue().setPicture(creatImageView(DataLists.getDefaultSaladPicturePath()));
 	    		break;
 	    	case FIRST:
 	    		event.getRowValue().setPicturePath(DataLists.getDefaultFirstPicturePath());
+	    		event.getRowValue().setPicture(creatImageView(DataLists.getDefaultFirstPicturePath()));
 	    		break;
 	    	case MAIN:
 	    		event.getRowValue().setPicturePath(DataLists.getDefaultMainPicturePath());
+	    		event.getRowValue().setPicture(creatImageView(DataLists.getDefaultMainPicturePath()));
 	    		break;
 	    	case DESSERT:
 	    		event.getRowValue().setPicturePath(DataLists.getDefaultDessertPicturePath());
+	    		event.getRowValue().setPicture(creatImageView(DataLists.getDefaultDessertPicturePath()));
 	    		break;
 	    	case DRINK:
 	    		event.getRowValue().setPicturePath(DataLists.getDefaultDrinkPicturePath());
+	    		event.getRowValue().setPicture(creatImageView(DataLists.getDefaultDrinkPicturePath()));
 	    		break;
 			default:
 				break;
-	    	
 	    	}
-	    	event.getRowValue().setPicture(new ImageView(new Image(event.getRowValue().getPicturePath(),64,64,false,true)));
 	    	updateItemsWithPicture.add(event.getRowValue());
+	    	manageMenuTable.refresh();
+	    	
 	    }
 	   });
 		
@@ -459,6 +464,10 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	  });
 		
 		
+	}
+	
+	public ImageView creatImageView(String picPath) {
+		return new ImageView(new Image(picPath, 64,64,false,true));
 	}
 
 }
