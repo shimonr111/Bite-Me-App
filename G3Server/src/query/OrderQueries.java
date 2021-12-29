@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
+
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -172,8 +174,10 @@ public class OrderQueries {
 	 * @throws SQLException
 	 */
 	public static Message addOrderToDbAndUpdateSupplier(Message messageFromClient) throws SQLException{
-		Order orderIntoDb = (Order) messageFromClient.getObject();
-		
+		ArrayList<Object> list = (ArrayList<Object>) messageFromClient.getObject();
+		Order orderIntoDb = (Order)list.get(2);
+		double balanceUsed = Double.parseDouble((String) list.get(0));
+		double budgetBalanceUsed = Double.parseDouble((String) list.get(1));
 		int orderNumber = orderIntoDb.getOrderNumber();
 		String supplierId = orderIntoDb.getSupplierUserId();
 		String customerUserId = orderIntoDb.getCustomerUserId();
@@ -211,6 +215,11 @@ public class OrderQueries {
 		while(result.next()) {
 			orderIntoDb.setOrderNumber(Integer.valueOf(result.getString(1)));
 			}
+		
+		/*Update DB balance and budget balance*/
+		Query.updateOneColumnForTableInDbByPrimaryKey("order", "balanceUsed='"+balanceUsed+"'" , "orderNumber='"+orderIntoDb.getOrderNumber()+"'"); 
+		Query.updateOneColumnForTableInDbByPrimaryKey("order", "budgetBalanceUsed='"+budgetBalanceUsed+"'" , "orderNumber='"+orderIntoDb.getOrderNumber()+"'"); 
+		
 		Message messageToClient = new Message(Task.ORDER_FINISHED, Answer.ORDER_SUCCEEDED_WRITING_INTO_DB, orderIntoDb);
 		return messageToClient;
 	}
@@ -609,4 +618,58 @@ public class OrderQueries {
 		
 	}
 	
+	/**
+	 * This function is for going back to the money that the user had before
+	 * the order was done
+	 * @param message
+	 * @throws SQLException
+	 */
+	public static void reverseBudgetBalanceAndBalanceForUserInUnApprovedOrder(Message message) throws SQLException{
+		ArrayList<String> list = (ArrayList<String>) message.getObject();
+		int orderNumber = Integer.valueOf(list.get(1));
+		String customerId = list.get(0);
+		String supplierId = list.get(2);
+		double balanceUsed = 0.0;
+		double budgetBalanceUsed = 0.0;
+		
+		/*get the order row from order table*/
+		ResultSet rs = Query.getRowsFromTableInDB("order", "orderNumber='"+orderNumber+"'");
+		if(rs.next()) {
+			balanceUsed = rs.getDouble(21);
+			budgetBalanceUsed = rs.getDouble(22);
+		}
+		rs.close();
+		/*Update business customer backwards and balance table as well*/
+		double companyBudgetUsedBeforeCancelingOrder = 0.0;
+		ResultSet rs2 = Query.getRowsFromTableInDB("businesscustomer", "userID='"+customerId+"'");
+		if(!rs2.isBeforeFirst()) {
+			//not business customer
+		}else {
+			if(rs2.next()) {
+				//if there is a businesscustomer
+				companyBudgetUsedBeforeCancelingOrder = rs2.getDouble(17);
+				companyBudgetUsedBeforeCancelingOrder = companyBudgetUsedBeforeCancelingOrder - budgetBalanceUsed; //reverse to previous stage
+				//update businesscustomer table
+				Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer", "budgetUsed='"+companyBudgetUsedBeforeCancelingOrder+"'",  "userID='"+customerId+"'");
+			}
+			rs2.close();
+		}
+		
+		//update balance table
+		double balanceBudgetUsedBeforeCancelingOrder = 0.0;
+		ResultSet rs3 = Query.getRowsFromTableInDB("balance", "supplierId='"+supplierId+"' AND ( customerUserId='" + customerId+"')");
+		if(!rs3.isBeforeFirst()) {
+			//create row in DB
+			Query.insertOneRowIntoBalanceTable(customerId, supplierId, balanceUsed);
+		}else {
+			if(rs3.next()) {
+				//if there is a row in the balance table
+				balanceBudgetUsedBeforeCancelingOrder = rs3.getDouble(3);
+				balanceBudgetUsedBeforeCancelingOrder = balanceBudgetUsedBeforeCancelingOrder + balanceUsed; //reverse to previous stage
+				//update businesscustomer table
+				Query.updateOneColumnForTableInDbByPrimaryKey("balance", "balance='"+balanceBudgetUsedBeforeCancelingOrder+"'",  "supplierId='"+supplierId+"' AND ( customerUserId='" + customerId+"')");
+			}
+			rs3.close();
+		}
+	}
 }

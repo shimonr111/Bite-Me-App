@@ -361,8 +361,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    	}
 	    	else {
 	    	errorText.setText("");
-	    	Message message = new Message(Task.ORDER_FINISHED,Answer.WAIT_RESPONSE,order);
-	    	sendToClient(message);//send message to the server telling the order is finished and than push into DB
+
+	    	/*Used for updating the balance used and the budget balance used in order to restore if needed from the supplier side if he doesn't approve the order*/
+	    	String balanceUsed = "0";
+	    	String budgetBalanceUsed = "0";
 	    	
 	    	/*send to the server the customers data for updating the balance and update the users budget balance in case of businessCustomer*/
 	    	/*decrement the amount balance used by the user (customer \ business customer*/
@@ -370,15 +372,25 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    		/*In case the connected user is business customer update his budget balance accordingly*/
 	    		if(!alreadyEmployeeBudgetTextField.getText().equals("")) {
 		    	((BusinessCustomer)connectedUser).setBudgetUsed(((BusinessCustomer)connectedUser).getBudgetUsed()+Double.valueOf(alreadyEmployeeBudgetTextField.getText())); //set new budget used after use
+		    	budgetBalanceUsed = alreadyEmployeeBudgetTextField.getText();
 	    		}
 	    		if(!alreadyAccountBalanceTextField.getText().equals("")) {
 			    	((BusinessCustomer)connectedUser).setBalance(((BusinessCustomer)connectedUser).getBalance()-Double.valueOf(alreadyAccountBalanceTextField.getText())); //set new balance after reduce
-		    		}
+			    	balanceUsed = alreadyAccountBalanceTextField.getText();	
+	    		}
 	    	}else {
 	    		if(!alreadyAccountBalanceTextField.getText().equals("")) {
 		    	((Customer)connectedUser).setBalance(((Customer)connectedUser).getBalance()-Double.valueOf(alreadyAccountBalanceTextField.getText())); //set new balance after reduce
+		    	balanceUsed = alreadyAccountBalanceTextField.getText();
 	    		}
 	    	}
+	    	/*Send to Server and update order table in relevant columns*/
+	    	List<Object> orderDetailsToDb = new ArrayList<Object>();
+	    	orderDetailsToDb.add(balanceUsed);
+	    	orderDetailsToDb.add(budgetBalanceUsed);
+	    	orderDetailsToDb.add(order);
+	    	Message message = new Message(Task.ORDER_FINISHED,Answer.WAIT_RESPONSE,orderDetailsToDb);
+	    	sendToClient(message);//send message to the server telling the order is finished and than push into DB
 	    	
 	    	/*Send to server for updating customers balance and company budget*/
 	    	ArrayList<Object> list = new ArrayList<>();
