@@ -32,6 +32,7 @@ public class ReportsController {
      */
 	public static void pullData(String fromDate,String toDate, String type) {
 		suppliers=ReportQueries.getSuppliersForReport();
+		if(suppliers!=null) {
 		ReportQueries.getIncomeForSuppliers(suppliers,fromDate, toDate);
 		ReportQueries.buildMenusByType(suppliers,fromDate, toDate);
 		ReportQueries.getOrdersByType(suppliers,fromDate, toDate);
@@ -39,13 +40,16 @@ public class ReportsController {
 		ReportQueries.getOrderAmounts(suppliers,fromDate, toDate);
 		ReportQueries.setIssueDates(suppliers, fromDate);
 		ReportQueries.setReportType(suppliers, type);
+		}
 	}
     /**
      *uploads currently stores reports list to db
      */
 	public static void uploadReports() {
+		if(suppliers!=null) {
 		for(int i=0;i<suppliers.length;i++)
 		Query.saveReportToDb(suppliers[i]);
+		}
 	}
 	/**
      *downloads specified reports list to working report list

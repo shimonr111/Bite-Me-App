@@ -242,6 +242,9 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 		supplierForReport = new SupplierByReport[suppliersNumber];
+		if(suppliersNumber==0) {
+			return null;
+		}
 		ResultSet report;
 		if(branch.equals("NOT_APPLICABLE"))
 		report= Query.getRowsFromTableInDB("reports", "issueDate='"+fromDate+"' and reportType='"+type+"'");
