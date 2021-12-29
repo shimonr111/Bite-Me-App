@@ -236,15 +236,14 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	
 		
 		/*Check if the DB doesn't have orders for this restaurant*/
-		if(orderListFromDB == null) {
+		if(orderListFromDB.isEmpty()) {
 			errorText.setVisible(true);
 			errorText.setText("There are no orders for this restaurant!");
 			errorText.setFill(Color.RED);
 		}
-		else {
 			//add all the wrapper orders to the table view
 			ordersForManageOrderTable.addAll(orderListFromDB);
-		}
+
 		
 		 updateOrders = new ArrayList<Order>(); //copy the orders we got from DB to our updateOrders array ---orderListFromDB
 		
