@@ -358,7 +358,7 @@ public class AnalyzeMessageFromServer {
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_WORKER_NO_ORDERS_FOUND:
-					SupplierWorkerManageOrders.orderListFromDB = null;
+					SupplierWorkerManageOrders.orderListFromDB = new ArrayList<Order>();
 					break;
 				case SUPPLIER_WORKER_ORDERS_FOUND:
 					SupplierWorkerManageOrders.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();

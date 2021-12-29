@@ -188,6 +188,9 @@ public class AnalyzeMessageFromClient {
 			 case CONFIRM_BUSINESS_CUSTOMER:
 				 recivedMessageFromClient = RegistrationQueries.businessCustomerCompleteRegistration((Message) message);
 				 break;
+			 case SUPPLIER_RESTORE_BALANCE_AND_BUDGET_BALANCE:
+				 OrderQueries.reverseBudgetBalanceAndBalanceForUserInUnApprovedOrder((Message) message);
+				 break;
 			default:
 				break;
 			}

@@ -236,15 +236,14 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	
 		
 		/*Check if the DB doesn't have orders for this restaurant*/
-		if(orderListFromDB == null) {
+		if(orderListFromDB.isEmpty()) {
 			errorText.setVisible(true);
 			errorText.setText("There are no orders for this restaurant!");
 			errorText.setFill(Color.RED);
 		}
-		else {
 			//add all the wrapper orders to the table view
 			ordersForManageOrderTable.addAll(orderListFromDB);
-		}
+
 		
 		 updateOrders = new ArrayList<Order>(); //copy the orders we got from DB to our updateOrders array ---orderListFromDB
 		
@@ -301,9 +300,16 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 				ordersForManageOrderTable.remove(order);
 				/*Set issued Date time to the point where the order is approved in the restaurant*/
 				order.setIssueDateTime(new Date()); //test
+			}else if(event.getNewValue() == OrderStatus.UN_APPROVED) {
+				ArrayList<String> updateBudgetAndBalance = new ArrayList<>();
+	        	updateBudgetAndBalance.add(order.getCustomerUserId());
+	        	updateBudgetAndBalance.add(String.valueOf(order.getOrderNumber()));
+	        	updateBudgetAndBalance.add(order.getSupplierUserId());
+	        	/*Send to the server message for restoring the payment amount*/
+	        	sendToClient(new Message(Task.SUPPLIER_RESTORE_BALANCE_AND_BUDGET_BALANCE,Answer.WAIT_RESPONSE,updateBudgetAndBalance));
+	        	ordersForManageOrderTable.remove(order);
 			}
 			updateOrders.add(order); // update the updateOrders array with the row that contains the new status
-			System.out.println(updateOrders);
 	        sendToClient(new Message(Task.MANAGE_ORDER_FINISHED,Answer.WAIT_RESPONSE,updateOrders));//send message to the server telling the manage order is finished and then push into DB
 	        updateOrders.remove(order); //remove from the updated arrayList
 	    });
