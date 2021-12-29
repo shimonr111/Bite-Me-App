@@ -6,8 +6,8 @@ import java.util.Arrays;
 public class DataLists {
 	private static ArrayList<String> northCitys = new ArrayList<String> (Arrays.asList("Acre", "Afula","Hadera", "Haifa" ,"Karmiel", "N/A"));
 	private static ArrayList<String> centerCitys = new ArrayList<String> (Arrays.asList("Bat-Yam","Herzliya", "Tel-Aviv" ,"N/A"));
-	private static ArrayList<String> southCitys = new ArrayList<String> (Arrays.asList("Ashdod", "Ashkelon", "Beersheba", "Dimona", "Eilat","N/A"));
-	private static ArrayList<String> Streets = new ArrayList<String> (Arrays.asList("Netiv Hen", "HaHistadrut", "Trumpeldor", "Rambam", "Yad-Labanim", "HaZait", "N/A"));
+	private static ArrayList<String> southCitys = new ArrayList<String> (Arrays.asList("Ashdod", "Ashkelon", "Beersheba", "Dimona", "Eilat"));
+	private static ArrayList<String> Streets = new ArrayList<String> (Arrays.asList("Netiv Hen", "HaHistadrut", "Trumpeldor", "Rambam", "Yad-Labanim", "HaZait"));
 	private static ArrayList<String> phonePrefix = new ArrayList<String> (Arrays.asList("02","03","04","08","077","050","052","053","054","055","057","058"));
 	private static String defaultSaladPicturePath = "File:///C:/G3BiteMe/Design/ItemsImageBank/defaultSalad.jpg";
 	private static String defaultDessertPicturePath = "File:///C:/G3BiteMe/Design/ItemsImageBank/defaultDessert.jpg";

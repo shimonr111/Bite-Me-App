@@ -42,7 +42,7 @@
                      <children>
                         <HBox prefHeight="30.0" prefWidth="211.0" spacing="20.0">
                            <children>
-                              <Label prefHeight="33.0" prefWidth="111.0" styleClass="loginLabels" text="Account Budget:" />
+                              <Label prefHeight="30.0" prefWidth="120.0" styleClass="loginLabels" text="Account Balance:" />
                               <Label fx:id="availableBudgetBalanceLabel" prefHeight="33.0" prefWidth="141.0" styleClass="loginLabels" text="Company Budget:" />
                            </children>
                         </HBox>
