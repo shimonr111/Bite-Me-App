@@ -76,8 +76,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     @FXML
     private TextField userNameField;
 
-    @FXML
-    private TextField monthlyMaxBudgedTxtField;
 
     @FXML
     private Button btnExit;
@@ -99,9 +97,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 
     @FXML
     private ComboBox<String> companyNameCombo;
-
-    @FXML
-    private ComboBox<String> budgetTypeCombo;
 
     @FXML
     private TextField cvvTxtField;
@@ -179,7 +174,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     		ArrayList<Object> list = new ArrayList<>();
     		Branch homeBranch = getHomeBranch();
     		PositionType positionType = getPositionType();
-    		BudgetType budgetType = getBudgetType();
     		CreditCard creditCard = new CreditCard(creditNumTxtField.getText(),expirationTxtField.getText(),cvvTxtField.getText());
     		Login login = new Login (userNameField.getText(),passwordField.getText());
     		list.add(login);
@@ -187,7 +181,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     		if(positionType.equals(PositionType.REGULAR)) {
     			BusinessCustomer businessCustomer = new BusinessCustomer(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
     				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-    				creditNumTxtField.getText(),companyNameCombo.getValue(),budgetType,positionType,Integer.parseInt(monthlyMaxBudgedTxtField.getText()));
+    				creditNumTxtField.getText(),companyNameCombo.getValue(),BudgetType.DAILY,positionType,0);
     			list.add(businessCustomer);
     			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
         		sendToClient(message);
@@ -195,7 +189,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     		else {
     			HrManager hrManager = new HrManager(idNumTxtField.getText(),ConfirmationStatus.CONFIRMED,firstNameTxtField.getText(),
         				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-        				creditNumTxtField.getText(),"Waiting_Registration",budgetType,positionType,Integer.parseInt(monthlyMaxBudgedTxtField.getText()));
+        				creditNumTxtField.getText(),"Waiting_Registration",null,positionType,0);
     			list.add(hrManager);
     			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
         		sendToClient(message);
@@ -205,17 +199,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     	}
     }
     
-    /**
-     * gets the budget type selected from the combo box and returns it as an enum.
-     * @return
-     */
-    private BudgetType getBudgetType() {
-    	if(budgetTypeCombo.getValue().equals("Daily budget"))
-    		return BudgetType.DAILY;
-    	else if(budgetTypeCombo.getValue().equals("Weekly budget"))
-    		return BudgetType.WEEKLY;
-    	return BudgetType.MONTHLY;
-    }
+
     
     /**
      * gets the position type selected from the combo box and returns it as an enum.
@@ -358,10 +342,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  			}
- 		if(!checkComboBoxInput(budgetTypeCombo, "Select Budget type:")) {
- 			displayMessage.setText("Please fill all the required fields (*)!");
- 			return false;
- 		}
  		
 
  		for(TextField intTxt : integerFields) {
@@ -414,9 +394,9 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField); textFields.add(emailTxtField); textFields.add(expirationTxtField);
-		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(monthlyMaxBudgedTxtField); textFields.add(passwordField);
+		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(passwordField);
 		textFields.add(phoneTxtField); textFields.add(userNameField);
-		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField); integerFields.add(monthlyMaxBudgedTxtField);
+		integerFields.add(creditNumTxtField); integerFields.add(cvvTxtField); integerFields.add(idNumTxtField);
 		integerFields.add(phoneTxtField); 
 		getCompanies();
 		Branch homeBranch = connectedUser.getHomeBranch();
@@ -432,7 +412,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 				txt.setEditable(false);
 				positionCombo.setDisable(true);
 				companyNameCombo.setDisable(true);
-				budgetTypeCombo.setDisable(true);
 				saveBtn.setDisable(true);
 				displayMessage.setText("No confirmed companies. Cannot register employees!");
 			}
@@ -443,8 +422,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 			positionCombo.setValue("Regular worker");
 			positionCombo.getItems().addAll("Regular worker","Human Resources");
 			positionCombo.setDisable(true);
-			budgetTypeCombo.setValue("Select Budget type:");
-			budgetTypeCombo.getItems().addAll("Daily budget","Weekly budget","Monthly budget");
 			displayMessage.setText("");
 		
 			UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;

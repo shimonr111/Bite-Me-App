@@ -250,7 +250,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
 		budgetTypeCombo.setValue(businessCustomer.getBudgetOfBusinessCustomer());
-		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
+		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN);
 
 		
 	}

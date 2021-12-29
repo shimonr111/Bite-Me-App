@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.BusinessCustomerRegistartionController">
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.BusinessCustomerRegistartionController">
    <children>
       <Button id="other-btns" fx:id="saveBtn" layoutX="423.0" layoutY="670.0" mnemonicParsing="false" onAction="#getSaveBtn" prefHeight="51.0" prefWidth="180.0" styleClass="saveWhiteButton" text="Save" textFill="#383838">
          <font>
@@ -250,18 +250,8 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
                            <children>
-                              <VBox prefHeight="100.0" prefWidth="123.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="125.0" styleClass="loginLabels" text="Budget Amount:" />
-                                    <TextField fx:id="monthlyMaxBudgedTxtField" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Monthly Max" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="100.0" prefWidth="107.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="Budget Type:" />
-                                    <ComboBox fx:id="budgetTypeCombo" prefHeight="30.0" prefWidth="130.0" promptText="Type" />
-                                 </children>
-                              </VBox>
+                              <VBox prefHeight="100.0" prefWidth="123.0" />
+                              <VBox prefHeight="100.0" prefWidth="107.0" />
                            </children>
                            <padding>
                               <Insets left="25.0" />

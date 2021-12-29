@@ -185,6 +185,9 @@ public class AnalyzeMessageFromClient {
 			 case SET_ACTUAL_DATE_AND_BALANCE:
 				recivedMessageFromClient = OrderQueries.updateActualTimeAndCheckBalance((Message)message);
 				 break;
+			 case CONFIRM_BUSINESS_CUSTOMER:
+				 recivedMessageFromClient = RegistrationQueries.businessCustomerCompleteRegistration((Message) message);
+				 break;
 			default:
 				break;
 			}

@@ -26,6 +26,7 @@ import users.BusinessCustomer;
 import users.HrManager;
 import users.Supplier;
 import users.User;
+import users.UserForRegistration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +58,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 	private static FXMLLoader loader;
     private static BusinessCustomerConfirmationScreenController businessCustomerConfirmationScreenController;
     public static ArrayList<BusinessCustomer> businessCustomersWaitingForConfirmation = new ArrayList<>();
+	public static BusinessCustomer businessCustomerForConfirmation;
 	
 	@FXML
     private Button btnExit;
@@ -117,14 +119,21 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Confirm this employee?");
     		if(result.get() == ButtonType.OK) {
     			ArrayList<String> objectToMessage = new ArrayList<>();
-    			objectToMessage.add(selectedCustomer.getUserId());
-    			objectToMessage.add("CONFIRMED");
-    			objectToMessage.add("businesscustomer"); // table name
-        		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
-        		sendToClient(message);
-        		errorText.setText("Customer ID:" + selectedCustomer.getUserId() + " confirmed.");
-        		initialize(null, null);	
+//    			objectToMessage.add(selectedCustomer.getUserId());
+//    			objectToMessage.add("CONFIRMED");
+//    			objectToMessage.add("businesscustomer"); // table name
+//        		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
+//        		sendToClient(message);
+//        		errorText.setText("Customer ID:" + selectedCustomer.getUserId() + " confirmed.");
+//        		initialize(null, null);	
+    			businessCustomerForConfirmation = (BusinessCustomer)selectedCustomer;
+    			ConfirmBusinessAskForDetailsController confirmBusinessAskForDetailsController = new ConfirmBusinessAskForDetailsController();
+    			confirmBusinessAskForDetailsController.initConfirmBusinessAskForDeatilsScreen();
+    			((Node) event.getSource()).getScene().getWindow().hide();
     		}
+    	}
+    	else {
+    		errorText.setText("Please choose one employee to confirm");
     	}
     }
     
@@ -236,6 +245,34 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 				}
 			});
 		
+	}
+	
+	/**
+	 * this method will be called from the next screen when clicking on back button
+	 */
+	public void initPortalAgain() {
+		loader = new FXMLLoader();
+		Stage primaryStage = new Stage();
+		Pane root = null;
+		try {
+			root = loader.load(getClass().getResource("/fxmls/HR2BusinessCustomerConfirmationScreen.fxml").openStream());
+			//root = FXMLLoader.load(getClass().getResource("/fxmls/LoginScreen.fxml"));
+			businessCustomerConfirmationScreenController = loader.getController();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Scene scene = new Scene(root);
+		primaryStage.initStyle(StageStyle.UNDECORATED);
+		scene.setOnMousePressed(pressEvent -> {
+		    scene.setOnMouseDragged(dragEvent -> {
+		    	primaryStage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+		    	primaryStage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+		    });
+		});
+		scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+		primaryStage.setScene(scene);
+		primaryStage.show();/* show the new screen */
 	}
 
 	/**
