@@ -7,19 +7,26 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import communication.Answer;
+import communication.Message;
+import communication.Task;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,15 +36,30 @@ import util.SupplierByReport;
 	public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable {
 
 	    @FXML
+	    private AnchorPane anchorPane;
+	    @FXML
+	    private Button exitBtn;
+	    
+	    @FXML
 	    private CategoryAxis Category;
 
 	    @FXML
 	    private NumberAxis Numbers;
+
 	    @FXML
 	    private BarChart<Number, String> reportHistogram;
 
 	    @FXML
 	    private Text reportNameText;
+	    
+	    @FXML
+	    private NumberAxis Numbers1;
+	    
+	    @FXML
+	    private CategoryAxis Category1;
+	    
+	    @FXML
+	    private BarChart<Number, String> valueHistogram;
 
 	    @FXML
 	    private TextArea reportTextField;
@@ -55,7 +77,6 @@ import util.SupplierByReport;
 				loader = new FXMLLoader();
 				ScrollPane root;
 				Stage = new Stage();
-				Stage.setResizable(false);
 				suppliers=report;
 					try {
 						root = loader.load(getClass().getResource("/fxmls/CEO7DisplayHistogramReport.fxml").openStream());
@@ -76,6 +97,11 @@ import util.SupplierByReport;
 			}
 		});
 	}
+	 	
+	 	@FXML
+		public void getExitBtn(ActionEvent event) {
+	 		((Node) event.getSource()).getScene().getWindow().hide();
+		}
 	 	public void showReport(String[] branchAndDate) {
 			Platform.runLater(new Runnable() {
 				@Override
@@ -107,12 +133,17 @@ import util.SupplierByReport;
 					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[2][1]));
 					orders.setName("Orders");
 					value.setName("Value in NIS");
-					displayHistogramReportController.reportHistogram.getData().addAll(orders,value);
-					displayHistogramReportController.reportNameText.setText(reportNameText);
-					if(branchAndDate[0].equals("NOT_APPLICABLE"))
+					displayHistogramReportController.reportHistogram.getData().addAll(orders);
+					displayHistogramReportController.valueHistogram.getData().addAll(value);
+					if(branchAndDate[0].equals("NOT_APPLICABLE")) {
 					displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport("by branch"));
+					displayHistogramReportController.reportNameText.setText(reportNameText+" All branches");
+					}
 					else
+					{
 						displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport());
+						displayHistogramReportController.reportNameText.setText(reportNameText+" "+branchAndDate[0].toLowerCase()+" branch");
+					}
 					displayHistogramReportController.Stage.show();
 				}
 			});

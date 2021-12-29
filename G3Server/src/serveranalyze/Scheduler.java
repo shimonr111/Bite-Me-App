@@ -30,10 +30,10 @@ public class Scheduler extends TimerTask {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar c = Calendar.getInstance();
 		c.setTime(newDate);
-		c.add(Calendar.MONTH, 1);
-		Date nextMonth=c.getTime();
-		c.add(Calendar.MONTH, 2);
-		Date nextQuarter=c.getTime();
+		c.add(Calendar.MONTH, -1);
+		Date prevMonth=c.getTime();
+		c.add(Calendar.MONTH, -2);
+		Date prevQuarter=c.getTime();
 		if(current.getDay()!= newDate.getDay()) {
 			System.out.println("New Day");
 			//TBD : Add actions after one day.
@@ -45,7 +45,7 @@ public class Scheduler extends TimerTask {
 			//TBD : Add actions after one month.
 			String budgetType = BudgetType.MONTHLY.toString();
 			Query.updateBusinessCustomersBudgetUsed("budgetType='"+budgetType+"'"); //update budgetUsed to 0 every month for monthly budget type
-			ReportsController.pullData(sdf.format(newDate), sdf.format(nextMonth), "monthly");
+			ReportsController.pullData(sdf.format(prevMonth),sdf.format(newDate), "monthly");
 			ReportsController.uploadReports();
 			
 		}
@@ -60,7 +60,7 @@ public class Scheduler extends TimerTask {
 		if((current.getMonth() /3 ) + 1 !=  (newDate.getMonth()/3) + 1) {
 			System.out.println("New Quarater");
 			//TBD : Add actions after one quarter.
-			ReportsController.pullData(sdf.format(newDate), sdf.format(nextQuarter), "quarterly");
+			ReportsController.pullData(sdf.format(prevQuarter), sdf.format(newDate), "quarterly");
 			ReportsController.uploadReports();
 		}
 		
