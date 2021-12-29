@@ -240,7 +240,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		phoneTxtField.setText(customer.getPhoneNumber());  emailTxtField.setText(customer.getUserEmail()); 
 		setHomeBranchCombo.setValue(customer.getHomeBranch());
 		setStatusComboBox.setValue(customer.getStatusInSystem());
-		setStatusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN,ConfirmationStatus.PENDING_APPROVAL);
+		setStatusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN);
 		
 	}
 

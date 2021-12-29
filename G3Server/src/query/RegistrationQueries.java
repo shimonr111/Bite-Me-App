@@ -12,6 +12,7 @@ import communication.Message;
 import communication.Task;
 import users.Branch;
 import users.BranchManager;
+import users.BudgetType;
 import users.BusinessCustomer;
 import users.Company;
 import users.ConfirmationStatus;
@@ -434,6 +435,25 @@ public class RegistrationQueries {
 	public static void getSupplierConfirmation(Message message) {
 		Supplier supplier = (Supplier)message.getObject();
 		Query.updateOneColumnForTableInDbByPrimaryKey("supplier", "statusInSystem='CONFIRMED'", "supplierId='"+supplier.getSupplierId()+"'");
+	}
+	
+	
+	/**
+	 * In this method we get all the messing information about the business customer
+	 * from the HR manager, we insert the information and we change the status to 
+	 * CONFIRMED so he is approved in system .
+	 * @param message
+	 * @return
+	 */
+	public static Message businessCustomerCompleteRegistration(Message message) {
+		ArrayList<Object> businessCustomerBudgetDetails = (ArrayList<Object>)message.getObject();
+		BudgetType budgetType = (BudgetType)businessCustomerBudgetDetails.get(0);
+		int budgetAmount = Integer.parseInt((String)businessCustomerBudgetDetails.get(1));
+		String businessCustomerId = (String)businessCustomerBudgetDetails.get(2);
+		//UPDATE `semesterialproject`.`supplierworker` SET `isLoggedIn` = '1' WHERE (`userID` = '40000');
+		Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer", "statusInSystem='CONFIRMED', budgetType='"+budgetType+"', "
+				+ "budgetMaxAmount='"+budgetAmount+"'", "userID='"+businessCustomerId+"'");
+		return new Message(Task.CONFIRM_BUSINESS_CUSTOMER,Answer.SUCCEED,null);
 	}
 
 
