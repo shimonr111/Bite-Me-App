@@ -68,20 +68,6 @@ public class EditUsersQueries {
 			e.printStackTrace();
 		}
 		
-		rs = Query.getRowsFromTableInDB("hrmanager","homeBranch = '"+homeBranch.toString()+"'");
-		try {
-			while(rs.next()) {
-			company = LoginQueries.getCompany(rs.getString(12));
-			customersList.add(new HrManager(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getDouble(11),company, 
-						(BudgetType.valueOf(rs.getString(13))),(PositionType.valueOf(rs.getString(14))),rs.getInt(15)));
-			}
-			rs.close();
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		returnMessageToClient = new Message (Task.DISPLAY_CUSTOMERS_INTO_TABLE,Answer.SUCCEED,customersList);
 		return returnMessageToClient;
 		
@@ -121,7 +107,7 @@ public class EditUsersQueries {
 	public static Message getBusinessCustomersListFromDb(Message message) {
 		Message returnMessageToClient;
 		ArrayList<BusinessCustomer> businessCustomersList = new ArrayList<>();
-		String companyName = ((HrManager)message.getObject()).getcompanyOfBusinessCustomer().getCompanyName();
+		String companyName = ((HrManager)message.getObject()).getCompany().getCompanyName();
 		Company company;
 		ResultSet rs;
 		rs= Query.getRowsFromTableInDB("businesscustomer", "companyName= '"+companyName+"' AND (statusInSystem= 'PENDING_APPROVAL')");

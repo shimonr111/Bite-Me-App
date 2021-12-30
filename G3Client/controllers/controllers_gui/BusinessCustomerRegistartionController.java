@@ -186,15 +186,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
         		sendToClient(message);
     		}
-    		else {
-    			HrManager hrManager = new HrManager(idNumTxtField.getText(),ConfirmationStatus.CONFIRMED,firstNameTxtField.getText(),
-        				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-        				creditNumTxtField.getText(),"Waiting_Registration",null,positionType,0);
-    			list.add(hrManager);
-    			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
-        		sendToClient(message);
-    		}
-    		
     		
     	}
     }

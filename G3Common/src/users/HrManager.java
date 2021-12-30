@@ -12,71 +12,60 @@ import java.io.Serializable;
  * functionalities of a HR manager in our system.
  * @version 08/12/2021
  */
-public class HrManager extends BusinessCustomer implements Serializable{
+public class HrManager extends User implements Serializable{
 
 	/**
 	 * Class members description:
 	 */
+	private Company company;;
 	
-	/**
-	 * This is the constructor used for passing the object.
-	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param W4CCodeNumber
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param privateCreditCard
-	 * @param companyOfBusinessCustomer
-	 * @param budgetOfBusinessCustomer
-	 * @param businessCustomerPosition
-	 * @param budgetMaxAmount
-	 */
-	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
-			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
-			String privateCreditCard, double balance, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount) {
-		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber, userEmail,
-				phoneNumber, privateCreditCard, balance, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
-				budgetMaxAmount);
-	}
 	
-	/**
-	 * This is the constructor of the class for registering.
-	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param privateCreditCard
-	 * @param companyOfBusinessCustomer
-	 * @param budgetOfBusinessCustomer
-	 * @param businessCustomerPosition
-	 * @param budgetMaxAmount
-	 */
+/**
+ * This is the constructor used for passing the object.
+ * 
+ * @param userId
+ * @param statusInSystem
+ * @param userFirstName
+ * @param userLastName
+ * @param homeBranch
+ * @param isLoggedIn
+ * @param companyCode
+ * @param userEmail
+ * @param phoneNumber
+ * @param company
+ */
 	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
-			String privateCreditCard, String companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount) {
+			 Company company) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, userEmail,
-				phoneNumber, privateCreditCard, companyOfBusinessCustomer, budgetOfBusinessCustomer, businessCustomerPosition,
-				budgetMaxAmount);
+				phoneNumber);
+		this.company=company;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Company getCompany() {
+		return company;
+	}
+	
+	/**
+	 * 
+	 * @param company
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+
 
 	/**
 	 * This is the toString for this class
 	 */
 	@Override
 	public String toString() {
-		return "HR Manager: " + userFirstName  + " "+userLastName + ", Company name: " + companyOfBusinessCustomer.getCompanyName();
+		return "HR Manager: " + userFirstName  + " "+userLastName + ", Company name: " + company.getCompanyName();
 	}
 
 }

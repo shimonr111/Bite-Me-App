@@ -121,10 +121,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     		ArrayList<String> objectToMessage = new ArrayList<>();
     		objectToMessage.add(businessCustomer.getUserId());
     		objectToMessage.add(newStatus);
-    		if(businessCustomer instanceof HrManager)
-    			objectToMessage.add("hrmanager");
-    		else 
-    			objectToMessage.add("businesscustomer"); // table name
+    		objectToMessage.add("businesscustomer"); // table name
     		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
     		sendToClient(message);
     		switch(newStatus) {

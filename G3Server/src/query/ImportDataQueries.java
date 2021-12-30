@@ -128,12 +128,9 @@ public class ImportDataQueries {
 		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userType= 'hrmanager'");
 		try {
 			while(rs.next()) {
-				CreditCard card= new CreditCard(rs.getString(10),rs.getString(11),rs.getString(12));
-				Query.insertOneRowIntoCreditCardTable(card);
-				hrManagers.add(new HrManager(rs.getString(2),ConfirmationStatus.valueOf(rs.getString(3
-						)), rs.getString(4),rs.getString(5),Branch.valueOf(rs.getString(6)), 
-						false, rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(15), BudgetType.MONTHLY,PositionType.HR,
-						0));
+				Company company = LoginQueries.getCompany(rs.getString(15));
+				hrManagers.add(new HrManager(rs.getString(2),ConfirmationStatus.valueOf(rs.getString(3)), rs.getString(4),rs.getString(5),Branch.valueOf(rs.getString(6)), 
+						false, rs.getString(8),rs.getString(9),company));
 				hrLogin.add(new Login(rs.getString(13),rs.getString(14)));
 			}
 			rs.close();
