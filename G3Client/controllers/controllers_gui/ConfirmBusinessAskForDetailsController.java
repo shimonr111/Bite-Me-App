@@ -100,6 +100,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     		objectToServer.add(budgetTypeCombo.getValue());
     		objectToServer.add(budgetAmountTxtField.getText());
     		objectToServer.add(workerIdTxtField.getText());
+//    		System.out.println((budgetTypeCombo.getValue() + " " + budgetAmountTxtField.getText()+" " + workerIdTxtField.getText()));
     		Message message = new Message(Task.CONFIRM_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,objectToServer);
     		sendToClient(message);
     		displayText.setText("Worker " + workerFirstNameTxtField.getText() +" is confirmed in system");
