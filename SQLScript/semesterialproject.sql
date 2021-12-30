@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `semesterialproject`;
 -- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: semesterialproject
@@ -200,7 +198,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('3000','01/35','111'),('30005','111','01/35'),('30006','111','01/35'),('30008','111','01/35'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
+INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('3000','01/35','111'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -254,20 +252,11 @@ CREATE TABLE `hrmanager` (
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `businessW4cCodeNumber` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
-  `privateCreditCard` varchar(256) DEFAULT NULL,
-  `balance` double DEFAULT NULL,
   `companyName` varchar(256) DEFAULT NULL,
-  `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
-  `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
-  `budgetMaxAmount` int DEFAULT NULL,
-  `privateW4cCodeNumber` int DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `hrmanager_companyName_idx` (`companyName`),
-  KEY `hrmanager_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `hrmanager_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `hrmanager_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `hrmanager_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -279,7 +268,7 @@ CREATE TABLE `hrmanager` (
 
 LOCK TABLES `hrmanager` WRITE;
 /*!40000 ALTER TABLE `hrmanager` DISABLE KEYS */;
-INSERT INTO `hrmanager` VALUES ('1222','CONFIRMED','intelHRfirstName','intelHRlastName','NOT_APPLICABLE',0,5001,'intelhr@intel.com','0101010','37882',0,'Intel','MONTHLY','HR',0,37882),('1333','CONFIRMED','appleHrfirstName','AppleHrLastName','NOT_APPLICABLE',0,5002,'applhr@apple.com','200001','41323',0,'Apple','MONTHLY','HR',0,41323);
+INSERT INTO `hrmanager` VALUES ('1222','CONFIRMED','intelHRfirstName','intelHRlastName','NOT_APPLICABLE',0,'intelhr@intel.com','0101010','Intel'),('1333','CONFIRMED','appleHrfirstName','AppleHrLastName','NOT_APPLICABLE',0,'applhr@apple.com','200001','Apple');
 /*!40000 ALTER TABLE `hrmanager` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -549,4 +538,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-29 13:31:12
+-- Dump completed on 2021-12-30 11:08:28

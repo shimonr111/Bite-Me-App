@@ -271,7 +271,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(companyNameTxtField); textFields.add(companyNameTxtField1); textFields.add(companyEmailTxtField); textFields.add(confirmEmailTxtField); textFields.add(companyAddTxtField);
 		errorText.setText("");
-		Company company = ((HrManager)connectedUser).getcompanyOfBusinessCustomer();
+		Company company = ((HrManager)connectedUser).getCompany();
 		companyNameTxtField.setText(company.getCompanyName()); companyNameTxtField1.setText(Integer.toString(company.getcompanyCode())); companyEmailTxtField.setText(company.getEmail());
 		confirmEmailTxtField.setText(company.getEmail()); companyAddTxtField.setText(company.getAddress());
 		for(TextField txt : textFields) {

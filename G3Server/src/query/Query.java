@@ -571,29 +571,17 @@ public class Query {
 		return false;
 	}
 	
+	/**
+	 * this method gets an object of Hr Manager , and parse the data 
+	 * to insert a new row into Hr Manager table in DB.
+	 * @param hr
+	 * @return
+	 */
 	public static boolean insertOneRowIntoHrManagerTable(HrManager hr) {
-		//INSERT INTO `semesterialproject`.`hrmanager` (`userID`, `statusInSystem`, `firstName`, `lastName`, `homeBranch`, `isLoggedIn`
-		//, `businessW4cCodeNumber`, `email`, `phoneNumber`, `privateCreditCard`, `balance`, `companyName`, `budgetType`, `customerPosition`, `budgetMaxAmount`, `privateW4cCodeNumber`) 
-		//VALUES ('2222', '222', '222', '22', '22', '22', '2', '2', '22', '2', '2', '2', '2', '2', '2', '2');
-		int employerID=0;
-		ResultSet rs = null;
-		PreparedStatement pstmt1=null;
-		try {
-			String query1 = "SELECT companyCode FROM semesterialproject.company WHERE companyName='"+hr.getCompanyOfBusinessCustomerString()+"'";
-			pstmt1 = con.prepareStatement(query1);
-			rs= pstmt1.executeQuery();
-			if(rs.next())
-			 employerID = rs.getInt(1);
-			rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		String query = "INSERT INTO semesterialproject.hrmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, "
-				+ "phoneNumber, privateCreditCard, balance, companyName, budgetType, customerPosition, budgetMaxAmount, privateW4cCodeNumber) VALUES ('" + hr.getUserId() 
+		String query = "INSERT INTO semesterialproject.hrmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, "
+				+ "phoneNumber, companyName) VALUES ('" + hr.getUserId() 
 				+ "' , '" + hr.getStatusInSystem() + "' , '" + hr.getUserFirstName() + "' , '" +  hr.getUserLastName() + "' , '" + hr.getHomeBranch() + "' , '" + 0
-				+ "' , '" + employerID+ "' , '" + hr.getUserEmail() + "' , '" + hr.getPhoneNumber() + "' , '" + hr.getPrivateW4cCodeNumber() 
-				+ "' , '" + hr.getBalance() + "' , '" + hr.getCompanyOfBusinessCustomerString() + "' , '" + hr.getBudgetOfBusinessCustomer() + "' , '" + hr.getPositionType()
-				+ "' , '" + hr.getBudgetMaxAmount() + "' , '" + hr.getPrivateW4cCodeNumber() +"')";
+				+ "' , '" + hr.getUserEmail() + "' , '" + hr.getPhoneNumber() + "' , '" +hr.getCompany().getCompanyName() +"')";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt = con.prepareStatement(query);

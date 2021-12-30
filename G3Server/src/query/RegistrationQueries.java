@@ -81,12 +81,7 @@ public class RegistrationQueries {
 		  @SuppressWarnings("unchecked")
 		ArrayList<Object> list = (ArrayList<Object>) message.getObject();
 		String businessCustomerType=null;
-		if(list.get(2) instanceof HrManager) {
-			businessCustomerType = "hrmanager";
-		}
-		else {
-			businessCustomerType = "businesscustomer";
-		}
+		businessCustomerType = "businesscustomer";
 		Login login = (Login) list.get(0);
 		CreditCard creditCard = (CreditCard) list.get(1);
 		if(checkIfUserIdExist((User)list.get(2))) {
@@ -100,14 +95,9 @@ public class RegistrationQueries {
 		if(!checkIfCreditCardNumberExist(creditCard))
 			Query.insertOneRowIntoCreditCardTable(creditCard);
 		Query.insertOneRowIntoLoginTable(login.getUserName(), login.getPassword(), ((User)list.get(2)).getUserId(), businessCustomerType);
-		if(businessCustomerType.equals("hrmanager")) {
-			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "hrmanager");
-			Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+((BusinessCustomer)list.get(2)).getUserId()+"'");
-		}
-		else {
-			Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "businesscustomer");
-			Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+((BusinessCustomer)list.get(2)).getUserId()+"'");
-		}
+		Query.insertOneRowIntoBusinessCustomerOrHrManagerTable((BusinessCustomer)list.get(2), "businesscustomer");
+		Query.deleteRowFromTableInDbByPrimaryKey("registration", "userID='"+((BusinessCustomer)list.get(2)).getUserId()+"'");
+		
 		
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
@@ -450,7 +440,6 @@ public class RegistrationQueries {
 		BudgetType budgetType = (BudgetType)businessCustomerBudgetDetails.get(0);
 		int budgetAmount = Integer.parseInt((String)businessCustomerBudgetDetails.get(1));
 		String businessCustomerId = (String)businessCustomerBudgetDetails.get(2);
-		//UPDATE `semesterialproject`.`supplierworker` SET `isLoggedIn` = '1' WHERE (`userID` = '40000');
 		Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer", "statusInSystem='CONFIRMED', budgetType='"+budgetType+"', "
 				+ "budgetMaxAmount='"+budgetAmount+"'", "userID='"+businessCustomerId+"'");
 		return new Message(Task.CONFIRM_BUSINESS_CUSTOMER,Answer.SUCCEED,null);

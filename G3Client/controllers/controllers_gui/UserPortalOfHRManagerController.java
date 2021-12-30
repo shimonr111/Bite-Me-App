@@ -220,14 +220,14 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		hrManagerName.setText(connectedUser.getUserFirstName());
-		if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
-			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		if(((HrManager)connectedUser).getCompany().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
+			companyName.setText(((HrManager)connectedUser).getCompany().getCompanyName());
 			companyStatus.setText("Not Registered");
 			btnBusinessCustomerConfirm.setDisable(true);
 			statusText.setText(connectedUser.getStatusInSystem().toString());
 		}
-		else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
-			companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+		else if(((HrManager)connectedUser).getCompany().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
+			companyName.setText(((HrManager)connectedUser).getCompany().getCompanyName());
 			companyStatus.setText("Pending Approval");
 			btnCompanyReg.setDisable(true);
 			btnBusinessCustomerConfirm.setDisable(true);
@@ -238,15 +238,15 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 			statusText.setText(connectedUser.getStatusInSystem().toString());
 			companyStatus.setText("Confirmed");
 			if(connectedUser.getStatusInSystem().equals(ConfirmationStatus.FROZEN)) {
-				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+				companyName.setText(((HrManager)connectedUser).getCompany().getCompanyName());
 				btnBusinessCustomerConfirm.setDisable(true);
 			}
-			else if(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
+			else if(((HrManager)connectedUser).getCompany().getStatusCompanyInSystem().equals(ConfirmationStatus.PENDING_APPROVAL)) {
 				btnBusinessCustomerConfirm.setDisable(true);
-				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+				companyName.setText(((HrManager)connectedUser).getCompany().getCompanyName());
 			}
 			else
-				companyName.setText(((HrManager)connectedUser).getcompanyOfBusinessCustomer().getCompanyName());
+				companyName.setText(((HrManager)connectedUser).getCompany().getCompanyName());
 		}
 		
 		
