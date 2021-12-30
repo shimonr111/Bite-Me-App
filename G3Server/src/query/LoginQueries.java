@@ -259,10 +259,10 @@ public class LoginQueries {
 		Company company = null;
 		try {
 			if(rs.next()) {
-				company = getCompany(rs.getString(12));
+				company = getCompany(rs.getString(11));
 				businessCustomerResult = new BusinessCustomer(rs.getString(1),(ConfirmationStatus.valueOf(rs.getString(2))),rs.getString(3),rs.getString(4),(Branch.valueOf(rs.getString(5))),
-						rs.getBoolean(6),rs.getInt(16),rs.getString(8),rs.getString(9),rs.getString(10),0,company,(BudgetType.valueOf(rs.getString(13))),rs.getInt(15));
-				businessCustomerResult.setBudgetUsed(rs.getDouble(17));
+						rs.getBoolean(6),rs.getInt(14),rs.getString(8),rs.getString(9),rs.getString(10),0,company,(BudgetType.valueOf(rs.getString(12))),rs.getInt(13));
+				businessCustomerResult.setBudgetUsed(rs.getDouble(15));
 			}
 			rs.close();
 		} catch (SQLException e) {

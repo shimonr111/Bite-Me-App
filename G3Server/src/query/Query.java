@@ -426,9 +426,9 @@ public class Query {
 	 */
 	public static void insertOneRowIntoCustomerTable(Customer customer) {
 		String query = "INSERT INTO semesterialproject.customer ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, privateW4cCodeNumber, email, phoneNumber, "
-				+ "privateCreditCard, balance ) VALUES( '" + customer.getUserId() + "', '" + customer.getStatusInSystem().toString() +  "', '" +customer.getUserFirstName() +  "', '" +
+				+ "privateCreditCard ) VALUES( '" + customer.getUserId() + "', '" + customer.getStatusInSystem().toString() +  "', '" +customer.getUserFirstName() +  "', '" +
 				customer.getUserLastName() +  "', '" + customer.getHomeBranch().toString() + "', '"  + 0 +  "', '" + customer.getPrivateW4cCodeNumber() 
-				+  "', '" + customer.getUserEmail() +  "', '" + customer.getPhoneNumber() +  "', '" + customer.getPrivateCreditCard() + "', '" +0  +"' )";
+				+  "', '" + customer.getUserEmail() +  "', '" + customer.getPhoneNumber() +  "', '" + customer.getPrivateCreditCard()  +"' )";
 		PreparedStatement pstmt=null;
 		try {
 			pstmt = con.prepareStatement(query);
@@ -458,7 +458,7 @@ public class Query {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
+		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, companyCode, email, phoneNumber, "
 				+ "privateCreditCard, companyName, budgetType, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
 				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
 				+  "', '" + businessCustomer.getUserEmail() +  "', '" + businessCustomer.getPhoneNumber() +  "', '" + businessCustomer.getPrivateCreditCard() +  "', '"  + businessCustomer.getCompanyOfBusinessCustomerString() 
