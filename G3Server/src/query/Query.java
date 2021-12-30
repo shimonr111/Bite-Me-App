@@ -400,7 +400,7 @@ public class Query {
 	 * @param cvvNumber
 	 */
 	public static void insertOneRowIntoCreditCardTable(CreditCard creditCard) {
-		String query = "INSERT INTO semesterialproject.creditcard ( creditCardNumber, creditCardCvvCode, creditCardDateOfExpiration) VALUES ( '" 
+		String query = "INSERT INTO semesterialproject.creditcard ( creditCardNumber, creditCardDateOfExpiration,creditCardCvvCode) VALUES ( '" 
 				+ creditCard.getCreditCardNumber()+"' , '" +creditCard.getCreditCardDateOfExpiration() + "' , '"+creditCard.getCreditCardCvvCode()+"' )";
 		PreparedStatement pstmt=null;
 		try {

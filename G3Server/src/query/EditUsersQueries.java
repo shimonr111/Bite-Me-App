@@ -170,18 +170,7 @@ public class EditUsersQueries {
 	 */
 	public static void denyCompany(Message message) {
 		Company company = (Company) message.getObject();
-		String hrManagerId="";
-		ResultSet rs=Query.getColumnWithConditionFromTableInDB("hrmanager", "userID", "companyName='"+company.getCompanyName()+"'");
-		try {
-		if(rs.next())
-			hrManagerId=rs.getString(1);
-		}catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "companyName='Waiting_Registration'", "userID='"+hrManagerId+"'");
-		Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager", "businessW4cCodeNumber='0'", "userID='"+hrManagerId+"'" );
-		Query.deleteRowFromTableInDbByPrimaryKey("company", "companyName='"+company.getCompanyName()+"'");
+		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem='PENDING_REGISTRATION'",  "companyCode='"+company.getcompanyCode()+"'");
 	}
 	
 
