@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -30,9 +29,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import orders.AbatractSupplyMethod;
 import orders.DeliveryType;
 import orders.Order;
 import orders.OrderTimeType;
@@ -50,18 +47,16 @@ import util.DateTimeHandler;
  * choosing the supply method 
  * for the order shipment.
  * 
- * 
  * @version 17/12/2021
  */
 public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-
 	private static FXMLLoader loader;
     private static OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController;
     private static Order order;
-
 
     @FXML
     private DatePicker supplyDatePicker;
@@ -90,15 +85,13 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
     @FXML
     private ComboBox<DeliveryType> dileveryTypeComboBox;
 
-
     /**
      * Back button for the previous screen
-     * 
      * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -129,7 +122,6 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 
     }
 
-
     /**
      * This function is used for
      * switching to the next screen and 
@@ -137,7 +129,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * @param event
      */
     @FXML
-    void getBtnNext(ActionEvent event) {
+    public void getBtnNext(ActionEvent event) {
     	/*Check if the user hasn't entered any data to the combo box, deny continue to next screen*/
     	if(isSupplyMethodComboBoxInvalid()) {
     		errorText.setText("Please fill all the required fields (*)!");
@@ -207,7 +199,6 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 
     }
 
-
     /**
      * Update the border for not entered 
      * values in the screen
@@ -238,7 +229,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -254,10 +245,9 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you choose the supply method (Delivery / TA) and the desierd supply time.");
     }
-
 
   /**
    * This is the init for the current 
@@ -298,11 +288,12 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 		OrderChooseSupplyMethodScreenController.order=order; // save the order from the previous screen	
 	}
 
-
   	 /**
      * This is a function for 
      * initializing the screen.
      * 
+     * @param arg0
+     * @param arg1
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

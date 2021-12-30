@@ -16,11 +16,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Company;
 import users.ConfirmationStatus;
-import users.CreditCard;
-import users.Customer;
 import users.HrManager;
-import users.Login;
-import util.DataLists;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -86,20 +82,22 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     
     /**
      * Call the method that loads the previous screen.
+     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	AnalyzeMessageFromServer.removeClientListener(listener);
     	setHrManagerPortal(event);
     }
     
     /**
      * This method will log out , disconnect and then exist .
+     * 
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -110,20 +108,22 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     
     /**
      * Display relevant pop up message.
+     * 
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you register companies.");
     }
     
     /**
      * This method will check if all the input from textFields were correctly filled in , 
      * and then it sends the relevant message to the server to Add the company to DB.
+     * 
      * @param event
      */
     @FXML
-    void getBtnSave(ActionEvent event) {
+    public void getBtnSave(ActionEvent event) {
     	if(checkAllFields()==true) {
     		companyAfterRegistration = new Company(companyNameTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,companyAddTxtField.getText()
     				,companyEmailTxtField.getText(),Integer.parseInt(companyNameTxtField1.getText()));
@@ -132,12 +132,11 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     	}
     }
 
-    
     /**
-     * 
-     * this method checks if all the fields are filled
+     * This method checks if all the fields are filled
      * in addition here we check if the input were correct.
-     * @return
+     * 
+     * @return boolean: true if fill all fields
      */
  	public boolean checkAllFields() {
  		boolean returnVal=true;
@@ -173,7 +172,8 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  	}
  	
  	/**
- 	 * this method checks if the textField contains numbers only.
+ 	 * This method checks if the textField contains numbers only.
+ 	 * 
  	 * @param txtField
  	 * @return true or false according to the input.
  	 */
@@ -187,7 +187,8 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  	}
  	
  	/**
- 	 * this method sets a message from the listeners to the displayMessage .
+ 	 * This method sets a message from the listeners to the displayMessage .
+ 	 * 
  	 * @param message
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
@@ -201,7 +202,8 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	}
     
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, 
+     * it will be called from the previous screen.
      */
 	public void initCompanyRegistrationScreen() {
 		Platform.runLater(new Runnable() {
@@ -235,6 +237,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	
 	/**
 	 * this method loads the previous screen.
+	 * 
 	 * @param event
 	 */
 	public void setHrManagerPortal(ActionEvent event) {
@@ -264,8 +267,12 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 			});
 		
 	}
+	
     /**
      * Initialize Listener to handle the answer from the server.
+     * 
+     * @param arg0
+     * @param arg1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

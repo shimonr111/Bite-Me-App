@@ -10,7 +10,6 @@ import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,18 +18,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
 /**
  * @author Lior, Guzovsky.
  * @author Ori, Malka. 
  * @author Mousa, Srour.
  * @author Alexander, Martinov
- * Class description: 
  * 
+ * Class description: 
  * This is a class for 
  * controlling the UI IP
  * form.
@@ -40,12 +37,6 @@ import javafx.stage.WindowEvent;
 public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
-	 */
-	
-	/**
-	 * This is an atribute for 
-	 * working with this controller
-	 * from outside of the class.
 	 */
 	
 	@FXML
@@ -96,8 +87,10 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	}
 	
 	/**
-	 * button to exit from
+	 * Button to exit from
 	 * the frame. 
+	 * 
+	 * @param event
 	 */
 	public void exitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit IP server configuration");
@@ -161,7 +154,6 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	/**
 	 * This is a function for setting Error 
 	 * to the Client UI 
-	 * 
 	 * TBD: add textfield to IP confirmation screen - ip inccorect
 	 * 
 	 * @param event

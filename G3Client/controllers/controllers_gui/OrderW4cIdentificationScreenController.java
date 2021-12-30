@@ -4,16 +4,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javax.swing.Popup;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,16 +25,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import users.Branch;
 import users.BusinessCustomer;
 import users.Customer;
-import users.HrManager;
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of w4c identification of 
@@ -47,10 +42,10 @@ import users.HrManager;
  * @version 13/12/2021
  */
 public class OrderW4cIdentificationScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-	
 	private static FXMLLoader loader;
     private static OrderW4cIdentificationScreenController orderW4cIdentificationScreenController;
     
@@ -92,7 +87,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -129,7 +124,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -145,7 +140,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you identify with your W4C (Enter the number or scan QR code).");
     }
 
@@ -157,7 +152,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * @param event
      */
     @FXML
-    void getNextBtn(ActionEvent event) {
+    public void getNextBtn(ActionEvent event) {
     	/*if the user has entered a wrong input set message accordingly*/
     	if(!isW4cTextFieldNotEmpty(codeTxtField.getText())) {
     		//put error string to the user and mark the invalid field 
@@ -248,7 +243,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * @param event
      */
     @FXML
-    void getQrBtn(ActionEvent event) {
+    public void getQrBtn(ActionEvent event) {
     	TextInputDialog dialog = new TextInputDialog("~Code Here~");
     	dialog.setHeaderText("Put your W4C (QR Simulation)");
     	dialog.setTitle("G#3 QR Simulation");
@@ -306,6 +301,8 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * the DB before 
      * uploading the screen .
      * 
+     * @param arg0
+     * @param arg1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -355,7 +352,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 	 * for the company Code Number.
 	 * 
 	 * @param companyCodeNumber
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isCompanyCodeNumberEmpty(String companyCodeNumber) {
 		if(companyCodeNumber.equals("")) {

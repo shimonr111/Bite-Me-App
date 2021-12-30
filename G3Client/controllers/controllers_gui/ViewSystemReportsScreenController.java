@@ -1,14 +1,10 @@
 package controllers_gui;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Map.Entry;
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -24,10 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -36,12 +30,12 @@ import util.SupplierByReport;
 import org.apache.pdfbox.pdmodel.PDDocument;  
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1CFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;  
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+
 /**
  * 
- * @author Alexander, Martinov
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of viewing system reports 
@@ -49,11 +43,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
  * 
  * @version 21/12/2021
  */
-public class ViewSystemReportsScreenController extends AbstractBiteMeController implements Initializable {
+public class ViewSystemReportsScreenController extends AbstractBiteMeController implements Initializable{
 	
 	/**
 	 * Class members description:
 	 */
+	private static FXMLLoader loader;
+	private static ViewSystemReportsScreenController viewSystemReportsScreenController;
+	public static SupplierByReport[] suppliers=null;
+	
 	@FXML
     private Label MessageLabel;
 
@@ -84,23 +82,24 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
     @FXML
     private Button viewReportBtn;
 
-
-	private static FXMLLoader loader;
-	private static ViewSystemReportsScreenController viewSystemReportsScreenController;
-	public static SupplierByReport[] suppliers=null;
-
 	/**
 	 * this method calls the setBranchManagerPortal to get back the previous screen
 	 * this method works immedietly after clicking on back button.
+	 * 
 	 * @param event
 	 */
 	@FXML
-	void getBackBtn(ActionEvent event) {
+	public void getBackBtn(ActionEvent event) {
 		setBranchManagerPortal(event);
 	}
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
 	@FXML
-	void getExitBtn(ActionEvent event) {
+	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -109,12 +108,23 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		System.exit(0);
 	}
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
 	@FXML
-	void getHelpBtn(ActionEvent event) {
+	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the time range and report type.");
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getQuarterly(ActionEvent event) {
+    public void getQuarterly(ActionEvent event) {
     		Year y = Year.now();
     		LocalDate myLocal = LocalDate.now();
     		String date="";
@@ -151,11 +161,14 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 				suppliers=null;
 				}
     }
+    
 	/**
 	 * Asks server for selected report by date and type and displays it to the user
+	 * 
+	 * @param event
 	 */
 	@FXML
-	void getViewReport(ActionEvent event) {
+	public void getViewReport(ActionEvent event) {
 		if(checkDateAndType()) {
 			String date=ReportYear.getValue()+"-"+ReportMonth.getValue()+"-01";
 			String[] branchAndDate=new String[3];
@@ -199,8 +212,11 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			}
 		}
 	}
+	
 	/**
 	 *Checks year, month and report type fields were filled(selected)
+	 *
+	 *@return boolean
 	 */
 	public boolean checkDateAndType() {
 		if(ReportYear.getValue().equals("Year")) {
@@ -219,8 +235,11 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		}
 		return true;
 	}
+	
 	/**
-	 *sets message to small text field on the bottom
+	 *Sets message to small text field on the bottom
+	 *
+	 *@param message
 	 */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
 			Platform.runLater(new Runnable() {
@@ -229,11 +248,12 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 					viewSystemReportsScreenController.MessageLabel.setText(message);
 				}
 			});
-			
-		
 	}
-	  /**
-     * loads the previous screen after clicking on back button.
+	 	
+	 /**
+     * Loads the previous screen after clicking on back button.
+     * 
+     * @param event
      */
 	public void setBranchManagerPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -262,8 +282,12 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		});
 
 	}
+	
 	/**
 	 * This is the priming function for the fields
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -281,6 +305,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		}
 		ReportType.getItems().addAll(ReportGenerator.getReportTypes());
 	}
+	
 	/**
 	 * This is the initialization function for this 
 	 * screen when switched to.
@@ -315,12 +340,24 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			}
 		});
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param report
+     */
 	public void displaySingleReport(String report) {
 		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
 		displayReportScreenController.initDisplayReportScreen();
 		displayReportScreenController.setReport(report);
 		displayReportScreenController.showReport();
 }
+	
+	/**
+     * This method...
+     * 
+     * @param date
+     */
 	public void saveQuarterlyReport(String date) {
 		String replacer;
 		try {

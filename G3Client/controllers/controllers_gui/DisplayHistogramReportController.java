@@ -1,17 +1,12 @@
 package controllers_gui;
+
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import communication.Answer;
-import communication.Message;
-import communication.Task;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,20 +18,34 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import util.SupplierByReport;
 
-	public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable {
+/**
+ * 
+ * @author
+ * 
+ * Class description: 
+ * 
+ * @version 
+ */
+public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable{
 
+	     /**
+	     * Class members description:
+	     */
+	    private static FXMLLoader loader;
+	    private static Stage Stage;
+	    public static DisplayHistogramReportController displayHistogramReportController;
+	    public static SupplierByReport[][] suppliers=null;
+	    
 	    @FXML
 	    private AnchorPane anchorPane;
+	    
 	    @FXML
 	    private Button exitBtn;
 	    
@@ -63,13 +72,22 @@ import util.SupplierByReport;
 
 	    @FXML
 	    private TextArea reportTextField;
-	    private static FXMLLoader loader;
-	    private static Stage Stage;
-	    public static DisplayHistogramReportController displayHistogramReportController;
-	    public static SupplierByReport[][] suppliers=null;
+	    
+	    /**
+	     * This method...
+	     * 
+	     * @param arg0
+	     * @param arg1
+	     */
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 		}
+		
+		 /**
+	     * This method...
+	     * 
+	     * @param report
+	     */
 	 	public void initDisplayReportScreen(SupplierByReport[][] report) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -98,10 +116,21 @@ import util.SupplierByReport;
 		});
 	}
 	 	
+	 	 /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	 	@FXML
 		public void getExitBtn(ActionEvent event) {
 	 		((Node) event.getSource()).getScene().getWindow().hide();
 		}
+	 	
+	 	 /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	 	public void showReport(String[] branchAndDate) {
 			Platform.runLater(new Runnable() {
 				@Override

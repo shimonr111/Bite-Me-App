@@ -1,12 +1,8 @@
 package controllers_gui;
 
-	import java.io.IOException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import communication.Answer;
-import communication.Message;
-import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,30 +16,62 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-	public class DisplayReportScreenController extends AbstractBiteMeController implements Initializable  {
+/**
+ * 
+ * @author
+ * 
+ * Class description: 
+ * 
+ * @version 
+ */
+public class DisplayReportScreenController extends AbstractBiteMeController implements Initializable  {
 
-	    @FXML
-	    private TextArea TextField;
-	    
+	    /**
+	     * Class members description:
+	     */
 	    private static String report;
 	    private static FXMLLoader loader;
 	    private static Stage Stage;
 	    public static DisplayReportScreenController displayReportScreenController;
 	    
 	    @FXML
+	    private TextArea TextField;
+	    
+	    @FXML
 		private Button btnExit = null;
 		
+	    /**
+	     * This method...
+	     */
 		public static String getReport() {
 			return report;
 		}
+		
+		/**
+	     * This method...
+	     * 
+	     * @param report
+	     */
 		public static void setReport(String report) {
 			DisplayReportScreenController.report = report;
 		}
+		
+		/**
+	     * This method...
+	     * 
+	     * @param arg0
+	     * @param arg1
+	     */
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			setRelevantTextToDisplayMessageText(report);
-			
 		}
+		
+		/**
+	     * This method...
+	     * 
+	     * @param message
+	     */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
 			Platform.runLater(new Runnable() {
 				@Override
@@ -52,6 +80,10 @@ import javafx.stage.StageStyle;
 				}
 			});
 	}
+	 	
+	 	/**
+	     * This method...
+	     */
 	 	public void initDisplayReportScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -81,6 +113,10 @@ import javafx.stage.StageStyle;
 			}
 		});
 	}
+	 	
+	 	/**
+	     * This method...
+	     */
 	 	public void showReport() {
 			Platform.runLater(new Runnable() {
 				@Override
@@ -90,6 +126,12 @@ import javafx.stage.StageStyle;
 			});
 	 	}
 	 	
+	 	/**
+	     * This method...
+	     * 
+	     * @param event
+	     * @throw Exception
+	     */
 		public void getExitBtn(ActionEvent event) throws Exception {
 			((Node) event.getSource()).getScene().getWindow().hide();
 		}

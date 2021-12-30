@@ -17,12 +17,10 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BudgetType;
 import users.BusinessCustomer;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -31,19 +29,20 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour
- * class description: 
+ * @author Mousa, Srour.
+ * 
+ * Class description: 
  * This is a class for 
  * controlling the UI of ConfirmBusinessASkForDetails that appears immediately after clicking
  * on Confirm button from the BusinessCustomerConfirmation screen from HR Manager .
+ * 
  * @version 29/12/2021
  */
-public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeController implements Initializable {
+public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeController implements Initializable{
 	
 	/**
 	 * class members description:
 	 */
-	
 	private static FXMLLoader loader;
     private static ConfirmBusinessAskForDetailsController confirmBusinessAskForDetailsController;
     
@@ -77,13 +76,23 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     @FXML
     private Text displayText;
 
+    /**
+     * Call the method that loads the previous screen.
+     * 
+     * @param event
+     */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setConfirmationMainScreen(event);
     }
 
+    /**
+     * This function....
+     * 
+     * @param event
+     */
     @FXML
-    void getCompleterRegistrationBtn(ActionEvent event) {
+    public void getCompleterRegistrationBtn(ActionEvent event) {
     	budgetAmountTxtField.setStyle(null);
     	if(budgetTypeCombo.getValue() == null)
     		displayText.setText("Choose budget type for worker");
@@ -106,8 +115,13 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     	}
     }
 
+    /**
+     * This function....
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -116,15 +130,19 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 		System.exit(0);
     }
 
+    /**
+     * This function....
+     * 
+     * @param event
+     */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("Enter the budget type and the budget amount for the worker to complete registration");
     }
     
-    
-    
  	/**
- 	 * this method checks if the textField contains numbers only.
+ 	 * This method checks if the textField contains numbers only.
+ 	 * 
  	 * @param txtField
  	 * @return true or false according to the input.
  	 */
@@ -139,8 +157,9 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
  	 			return false;
  	 		}
  	}
+ 	
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, it will be called from the previous screen.
      */
 	public void initConfirmBusinessAskForDeatilsScreen() {
 		Platform.runLater(new Runnable() {
@@ -173,7 +192,8 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 	}
 	
 	/**
-	 * this method loads the previous screen.
+	 * This method loads the previous screen.
+	 * 
 	 * @param event
 	 */
 	public void setConfirmationMainScreen(ActionEvent event) {
@@ -204,6 +224,12 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 		
 	}
 
+	/**
+	 * This method ...
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		BusinessCustomer businessCustomer = BusinessCustomerConfirmationScreenController.businessCustomerForConfirmation;

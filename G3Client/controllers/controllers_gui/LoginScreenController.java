@@ -1,11 +1,6 @@
 package controllers_gui;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import org.bouncycastle.cms.bc.BcPasswordEnvelopedRecipient;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -14,25 +9,21 @@ import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import users.Login;
 
 /** 
+ * 
  * @author Shimon, Rubin.
  * @author Mousa, Srour.
  * @author Lior, Guzovsky.
@@ -41,99 +32,43 @@ import users.Login;
  * This class present the Login Screen 
  * and responsible for the functionality
  * of this screen 
+ * 
  * @version 07/12/2021
  */
 public class LoginScreenController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
-	
-	/**
-	 * Used for switching label in
-	 * Screen.
-	 */
 	public static FXMLLoader loader;
 	private static LoginScreenController loginScreenController;
 	private static AnalyzeClientListener listener;
 	
-
-	/**
-	 * name 
-	 * of the user
-	 */
 	@FXML
 	private TextField userNameField;
-	
-	/**
-	 * Password field
-	 * of the user 
-	 */
 	
 	@FXML
 	private PasswordField passwordField;
 	
-	/**
-	 * This button exit 
-	 * from the app immediately 
-	 */
 	@FXML
 	private Button btnExit;
 	
-	/**
-	 * This button login and move 
-	 * forward to the user portal 
-	 * after we insert user and pass
-	 */
 	@FXML
 	private Button btnLogin;
 	
-	/**
-	 * This button move back
-	 * to the previous screen 
-	 */
 	@FXML
 	private Button btnBack;
 	
-	/**
-	 * This button pop
-	 * up message which show
-	 * to us info about the
-	 * current page 
-	 */
 	@FXML
 	private Button btnHelp;
 	
-	/**
-	 * This is an error
-	 * label for giving the user
-	 * indication about errors
-	 * that have occurred during the
-	 * login phase.
-	 */
 	@FXML
 	private Label errorLabel;
 
 	/**
-	 * From here those are the functions
-	 * that handle the GUI events that
-	 * happened.
-	 */
-	
-	/**
-	 * This function starts when the 
-	 * screen is up.
-	 * 
-	 * @param primaryStage
-	 * @throws Exception
-	 */
-	public void start(Stage primaryStage) throws Exception {
-		
-	}
-	
-	/**
 	 * Using exit button
 	 * in order to exit from
 	 * the app. 
+	 * 
 	 * @param event: the action event sent from the UI.
 	 */
 	// Event Listener on Button[#btnExit].onAction
@@ -148,6 +83,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * Using login button hide 
 	 * window and go user portal 
 	 * screen.
+	 * 
 	 * @param event: the action event sent from the UI.
 	 */
 	// Event Listener on Button[#btnLogin].onAction
@@ -166,6 +102,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * Using back button
 	 * in order to exit from
 	 * the current app
+	 * 
 	 * @param event: the action event sent from the UI.
 	 */
 	// Event Listener on Button[#btnBack].onAction
@@ -205,6 +142,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * Using help button
 	 * in order to show instructions
 	 * for the current screen 
+	 * 
 	 * @param event: the action event sent from the UI.
 	 */
 	// Event Listener on Button[#btnHelp].onAction
@@ -227,7 +165,7 @@ public class LoginScreenController extends AbstractBiteMeController{
 	 * If they are not ok, pop up message accordingly.
 	 * 
 	 * @param login
-	 * @return
+	 * @return boolean
 	 */
 	 private boolean isLoginDataValidFromUser(Login login) {
 		if(login.getUserName().equals(""))
@@ -243,13 +181,13 @@ public class LoginScreenController extends AbstractBiteMeController{
 			return true;
 	}
 	 
-	
 	 /**
 	  * This is a function which sets all
 	  * the messages to the Error lable 
 	  * at the Login screen.
 	  * 
 	  * @param message
+	  * @param isVisible
 	  */
 	private void setRelevantTextToErrorLable(String message, boolean isVisible) {
 		Platform.runLater(new Runnable() {

@@ -22,17 +22,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import users.BusinessCustomer;
 import users.Company;
-import users.Supplier;
-import users.User;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -41,7 +36,8 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Company Registration Management Screen that appears immediately after clicking
@@ -50,7 +46,8 @@ import javafx.fxml.Initializable;
  * 
  * @version 16/12/2021
  */
-public class CompanyRegistartionManagementScreenController extends AbstractBiteMeController implements Initializable {
+public class CompanyRegistartionManagementScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
@@ -86,29 +83,32 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     private TextField searchField;
     
 	/**
-     * calls the method that loads the previous screen.
+     * Calls the method that loads the previous screen.
+     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setBranchManagerPortal(event);
     }
     
     /**
-     * displays a message to the user.
+     * Displays a message to the user.
+     * 
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can confirm or deny the company registration requests by clicking on the buttons while selecting company at table.");
     }
     
     /**
-     * get the selected company and send it to the server for confirmation.
+     * Get the selected company and send it to the server for confirmation.
+     * 
      * @param event
      */
     @FXML
-    void getConfirmBtn(ActionEvent event) {
+    public void getConfirmBtn(ActionEvent event) {
     	Company selectedCompany = companiesTable.getSelectionModel().getSelectedItem();
     	if(selectedCompany != null) {
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Sure you want to confirm:"+ selectedCompany.getCompanyName() +"?");
@@ -127,7 +127,8 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     }
     
     /**
-     * we get the selected company and we send it to the server.
+     * We get the selected company and we send it to the server.
+     * 
      * @param event
      */
     @FXML
@@ -145,11 +146,12 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     }
     
     /**
-     * log out and then exit.
+     * Log out and then exit.
+     * 
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
        	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
       	sendToClient(message);
     	connectedUser = null;
@@ -159,7 +161,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     }
     
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, it will be called from the previous screen.
      */
 	public void initCompanyRegistrationManagementScreen() {
 		Platform.runLater(new Runnable() {
@@ -192,7 +194,8 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
 	}
     
     /**
-	 * this method loads the previous screen.
+	 * This method loads the previous screen.
+	 * 
 	 * @param event
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
@@ -225,6 +228,9 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     
 	/**
 	 * Initialize the table after getting all the companies that were not confirmed yet.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

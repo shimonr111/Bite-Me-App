@@ -1,19 +1,15 @@
 package controllers_gui;
+
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.Year;
-import java.time.temporal.IsoFields;
-import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,16 +17,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import util.SupplierByReport;
 
 /**
-* @author Alexander, Martinov
+* @author Alexander, Martinov.
+* 
 * Class description: 
 * This is a class for 
 * controlling the UI of viewing quarterly reports 
@@ -38,7 +33,15 @@ import util.SupplierByReport;
 * 
 * @version 14/12/2021
 */
-public class ViewQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable {
+public class ViewQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable{
+	
+	/**
+	 * Class members description:
+	 */
+	private static FXMLLoader loader;
+	private static ViewQuarterlyReportsScreenController viewQuarterlyReportsScreenController;
+	public static SupplierByReport[][] suppliers=null;
+	
     @FXML
     private ComboBox<String> ReportQuarter;
 
@@ -47,6 +50,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 
     @FXML
     private ComboBox<String> ReportBranch;
+    
 	@FXML
 	private Button btnBack;
 
@@ -61,24 +65,26 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 
 	@FXML
 	private Button viewReportBtn;
-	
-
-	private static FXMLLoader loader;
-	private static ViewQuarterlyReportsScreenController viewQuarterlyReportsScreenController;
-	public static SupplierByReport[][] suppliers=null;
 
 	/**
-     * loads the previous screen after clicking on back button.
+     * Loads the previous screen after clicking on back button.
+     * 
+     * @param event
      */
 	@FXML
-	void getBackBtn(ActionEvent event) {
+	public void getBackBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		UserPortalOfCEOController UPCC = new UserPortalOfCEOController();
 		UPCC.initCEOUserPortalAgain();
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
-	void getExitBtn(ActionEvent event) {
+	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -86,17 +92,24 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		sendToClient(disconnectMessage);
 		System.exit(0);
 	}
+	
 	/**
 	 * This is pop message for the help button.
+	 * 
 	 * @param event
 	 */
 	@FXML
-	void getHelpBtn(ActionEvent event) {
+	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the year and quarter.");
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
-	void getReport(ActionEvent event) {
+	public void getReport(ActionEvent event) {
 		if(checkDate()) {
 		String y = ReportYear.getValue();
 		String date ="";
@@ -137,11 +150,20 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		}
 	}
 	
+	 /**
+     * This method....
+     * 
+     * @param branchAndDate
+     */
 	public void displaySingleReport(String[] branchAndDate) {
 		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
 		displayHistogramReportController.initDisplayReportScreen(suppliers);
 		displayHistogramReportController.showReport(branchAndDate);
 }
+	
+	 /**
+     * This method....
+     */
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -172,6 +194,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		});
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param location
+     * @param recources
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		ReportYear.setValue("Year");
@@ -185,6 +213,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 			ReportQuarter.getItems().add(""+i);
 	}
 	}
+	
+	 /**
+     * This method....
+     * 
+     * @return boolean
+     */
 	public boolean checkDate() {
 		if(ReportYear.getValue().equals("Year")) {
 			setRelevantTextToDisplayMessageText("Please fill all the required fields (*)!");
@@ -202,6 +236,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		}
 		return true;
 	}
+	
+	 /**
+     * This method....
+     * 
+     * @param message
+     */
  	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -210,6 +250,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 			}
 		});
 }
+ 	
+ 	 /**
+     * This method....
+     * 
+     * @return String
+     */
 	public String getBranch(){
 		String branch=ReportBranch.getValue();
 		switch (branch) {
@@ -225,6 +271,12 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 				return "";
 		}
 	}
+	
+	 /**
+     * This method....
+     * 
+     * @return String[]
+     */
 	public String[] getBranches() {
 		String[] branches= new String[4];
 		branches[0]="North";

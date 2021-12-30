@@ -20,26 +20,23 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
-import users.Company;
 import util.OrderForView;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.fxml.Initializable;
 
-
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This class is a controller of the view reports screen.
  * 
@@ -47,54 +44,56 @@ import javafx.fxml.Initializable;
  */
 public class WatchOrderHistoryScreenController extends AbstractBiteMeController implements Initializable{
 	
-	
 	/**
-	 * class members description:
+	 * Class members description:
 	 */
-	
 	public static FXMLLoader loader;
 	private static WatchOrderHistoryScreenController watchOrderHistoryScreenController;
 	public static ArrayList<OrderForView> ordersForCustomer = new ArrayList<>();
 	
-    @FXML // fx:id="backBtn"
-    private Button backBtn; // Value injected by FXMLLoader
+    @FXML 
+    private Button backBtn; 
 
-    @FXML // fx:id="dateCol"
-    private TableColumn<OrderForView,String> dateCol; // Value injected by FXMLLoader
-
-    @FXML // fx:id="exitBtn"
-    private Button exitBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="helpBtn"
-    private Button helpBtn; // Value injected by FXMLLoader
-    
-    @FXML // fx:id="confirmBtn"
-    private Button confirmBtn; // Value injected by FXMLLoader
-    
-    @FXML // fx:id="nameTxt"
-    private Text nameTxt; // Value injected by FXMLLoader
-
-    @FXML // fx:id="orderDetailsCol"
-    private TableColumn<OrderForView,String> orderDetailsCol; // Value injected by FXMLLoader
-
-    @FXML // fx:id="ordersTable"
-    private TableView<OrderForView> ordersTable; // Value injected by FXMLLoader
-    
-    @FXML // fx:id="refreshBtn"
-    private Button refreshBtn; // Value injected by FXMLLoader
-
-    @FXML // fx:id="resturantNameCol"
-    private TableColumn<OrderForView,String> resturantNameCol; // Value injected by FXMLLoader
-
-    @FXML // fx:id="statusCol"
-    private TableColumn<OrderForView,String> statusCol; // Value injected by FXMLLoader
-
-    @FXML // fx:id="timeCol"
-    private TableColumn<OrderForView,String> timeCol; // Value injected by FXMLLoader
-
+    @FXML 
+    private TableColumn<OrderForView,String> dateCol; 
 
     @FXML
-    void getBackBtn(ActionEvent event) {
+    private Button exitBtn; 
+
+    @FXML
+    private Button helpBtn; 
+    
+    @FXML 
+    private Button confirmBtn; 
+    
+    @FXML 
+    private Text nameTxt; 
+
+    @FXML 
+    private TableColumn<OrderForView,String> orderDetailsCol; 
+
+    @FXML 
+    private TableView<OrderForView> ordersTable;
+    
+    @FXML 
+    private Button refreshBtn; 
+
+    @FXML 
+    private TableColumn<OrderForView,String> resturantNameCol;
+
+    @FXML 
+    private TableColumn<OrderForView,String> statusCol; 
+
+    @FXML
+    private TableColumn<OrderForView,String> timeCol; 
+
+	/**
+     * This method...
+     * 
+     * @param event
+     */
+    @FXML
+    public void getBackBtn(ActionEvent event) {
     	if(connectedUser instanceof BusinessCustomer)
     		setBusinessCustomerPortal(event);
     	else
@@ -106,10 +105,11 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
      * of a user if the supplier was late according to the
      * delivery type.
      * We will save in that stage the ActualDate according to the course guidelines.
+     * 
      * @param event
      */
     @FXML
-    void getConfirmBtn(ActionEvent event) {
+    public void getConfirmBtn(ActionEvent event) {
      	OrderForView orderForView = ordersTable.getSelectionModel().getSelectedItem();
     	if(orderForView != null) {
     		if(orderForView.getOrderStatus().equals("Pending for resturant approval")) {
@@ -135,8 +135,13 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     	}
     }
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -145,19 +150,29 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 		System.exit(0);
     }
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this table you can see your orders that have not been completed yet.");	
     }
     
+	/**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getRefreshBtn(ActionEvent event) {
+    public void getRefreshBtn(ActionEvent event) {
     	ordersForCustomer.clear(); 
     	initialize(null, null);
     }
     
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, it will be called from the previous screen.
      */
 	public void initOrderHistoryScreen() {
 		Platform.runLater(new Runnable() {
@@ -191,7 +206,8 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	
 	
 	/**
-	 * this method loads the private customer portal.
+	 * This method loads the private customer portal.
+	 * 
 	 * @param event
 	 */
 	public void setPrivateCustomerPortal(ActionEvent event) {
@@ -223,7 +239,8 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	}
 	
 	/**
-	 * this method loads the business customer portal
+	 * This method loads the business customer portal
+	 * 
 	 * @param event
 	 */
 	public void setBusinessCustomerPortal(ActionEvent event) {
@@ -253,6 +270,13 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 			});
 		
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param arg0
+     * @param arg1
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Message message = new Message (Task.GET_ORDERS_FOR_USER,Answer.WAIT_RESPONSE,connectedUser.getUserId());
@@ -267,8 +291,6 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 		orderDetailsCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderDetails"));
 		statusCol.setCellValueFactory(new PropertyValueFactory<OrderForView,String>("orderStatus"));
 		ordersTable.setItems(ordersObservable);
-
-		
 	}
 
 }

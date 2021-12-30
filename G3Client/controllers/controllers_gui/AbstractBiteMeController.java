@@ -1,22 +1,21 @@
 package controllers_gui;
 
-import java.util.ArrayList;
 import bitemeclient.BiteMeClientUI;
 import communication.Message;
 import users.User;
 
 /**
+ * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  *
  * Class description: 
- * 
  * This Abstract class will 
  * be key designed for all controllers
  * 
  * @version 08/12/2021
  */
-public abstract class AbstractBiteMeController {
+public abstract class AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
@@ -34,14 +33,14 @@ public abstract class AbstractBiteMeController {
 	 * 
 	 * @param message
 	 */
-	public static void sendToClient(Message message) {
+	public static void sendToClient(Message message){
 		BiteMeClientUI.biteMeClientController.accept(message);
 	}
 
 	/**
 	 * Constructor for the class.
 	 */
-	public AbstractBiteMeController() {
+	public AbstractBiteMeController(){
 		
 	}
 

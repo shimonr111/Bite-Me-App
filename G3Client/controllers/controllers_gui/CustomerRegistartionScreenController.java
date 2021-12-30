@@ -1,9 +1,6 @@
 package controllers_gui;
 
-
 import java.io.IOException;
-import java.net.URL;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -16,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -24,7 +20,8 @@ import javafx.stage.WindowEvent;
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of CustomerResitrationScreen that appears immediately after clicking
@@ -33,7 +30,7 @@ import javafx.stage.WindowEvent;
  * 
  * @version 10/12/2021
  */
-public class CustomerRegistartionScreenController extends AbstractBiteMeController {
+public class CustomerRegistartionScreenController extends AbstractBiteMeController{
 	
 	/**
 	 * Class members description:
@@ -56,22 +53,35 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    @FXML
 	    private Button businessCustomerBtn;
 	    
-
-
+	    /**
+	     * Call the method that loads the previous screen.
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getBackBtn(ActionEvent event) {
+	    public void getBackBtn(ActionEvent event) {
 	    	setBranchManagerPortal(event);
 	    }
 
+	    /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getBusinessCustomer(ActionEvent event) {
+	    public void getBusinessCustomer(ActionEvent event) {
 	    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 	    	BusinessCustomerRegistartionController BCRC = new BusinessCustomerRegistartionController();
 	    	BCRC.initBusinessCustomerRegistrationScreen();
 	    }
 
+	    /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getExitBtn(ActionEvent event) {
+	    public void getExitBtn(ActionEvent event) {
 	    	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 			sendToClient(message);
 			connectedUser = null;
@@ -80,20 +90,30 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 			System.exit(0);
 	    }
 
+	    /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getHelpBtn(ActionEvent event) {
+	    public void getHelpBtn(ActionEvent event) {
 	    	PopUpMessages.helpMessage("On this screen you can choose which customer you want to register.");
 	    }
 
+	    /**
+	     * This method...
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getPrivateCustomer(ActionEvent event) {
+	    public void getPrivateCustomer(ActionEvent event) {
 	    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 	    	PrivateCustomerRegistartionController PCRC = new PrivateCustomerRegistartionController();
 	    	PCRC.initPrivateCustomerRegistrationScreen();
 	    }
 	    
 	    /**
-	     * this method loads the current screen.
+	     * This method loads the current screen.
 	     */
 		public void initCustomerRegistrationScreen() {
 			Platform.runLater(new Runnable() {
@@ -127,7 +147,8 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 		}
 		
 		/**
-		 * this method loads the branch manager portal screen ( previous screen)
+		 * This method loads the branch manager portal screen ( previous screen)
+		 * 
 		 * @param event
 		 */
 		public void setBranchManagerPortal(ActionEvent event) {
@@ -159,7 +180,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 		}
 		
 		/**
-		 * this method loads this screen after clicking back from next one.
+		 * This method loads this screen after clicking back from next one.
 		 */
 		public void initPortalAgain() {
 			loader = new FXMLLoader();

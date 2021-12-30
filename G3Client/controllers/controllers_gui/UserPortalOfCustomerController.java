@@ -6,12 +6,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-
-import java.awt.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -19,20 +16,19 @@ import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import users.Branch;
 import users.ConfirmationStatus;
 
 /**
  * 
- * @author Lior, Guzovsky
- * @author Mousa, Srour
- * @author Alexander, Martinov
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of customer
@@ -41,24 +37,34 @@ import users.ConfirmationStatus;
  * @version 09/12/2021
  */
 public class UserPortalOfCustomerController extends AbstractBiteMeController implements Initializable{
-	@FXML
-	private Button btnStartOrder;
-    @FXML
-    private Button viewOrdersBtn;
-	@FXML
-	private Button btnExit;
-	@FXML
-	private Button btnLogout;
-	@FXML
-	private Button btnHelp;
-    @FXML
-    private Text userName;
-    @FXML
-    private Text statusText;
-
+	
+	/**
+	 * Class members description:
+	 */
 	public static FXMLLoader loader;
 	private static UserPortalOfCustomerController userPortalOfCustomerController;
 	
+	@FXML
+	private Button btnStartOrder;
+	
+    @FXML
+    private Button viewOrdersBtn;
+    
+	@FXML
+	private Button btnExit;
+	
+	@FXML
+	private Button btnLogout;
+	
+	@FXML
+	private Button btnHelp;
+	
+    @FXML
+    private Text userName;
+    
+    @FXML
+    private Text statusText;
+   
 	/**
 	 * This is a function
 	 * for going to the next screen of w4c
@@ -66,14 +72,18 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	 * 
 	 * @param event
 	 */
-	// Event Listener on Button[#btnStartOrder].onAction
 	@FXML
 	public void getStartOrderBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		OrderW4cIdentificationScreenController w4cIdentificationController = new OrderW4cIdentificationScreenController();
 		w4cIdentificationController.initW4cIdentificationScreen(); // call the init of the next screen
 	}
-	// Event Listener on Button[#btnExit].onAction
+	
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -83,7 +93,12 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 		sendToClient(disconnectMessage);
 		System.exit(0);
 	}
-	// Event Listener on Button[#btnLogout].onAction
+	
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
 		//System.out.println(connectedUser);
@@ -95,17 +110,21 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	
 	/**
 	 * This is pop message for the help button.
+	 * 
 	 * @param event
 	 */
-	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");	
 		}
 	
-
+	/**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getViewOrdersBtn(ActionEvent event) {
+    public void getViewOrdersBtn(ActionEvent event) {
     	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
     	WatchOrderHistoryScreenController watchOrderHistoryScreenController = new WatchOrderHistoryScreenController();
     	watchOrderHistoryScreenController.initOrderHistoryScreen(); // call the init of the next screen
@@ -113,6 +132,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 
 	/**
 	 * Returns to login screen
+	 * 
 	 * @param event
 	 */	
 	private void setToLoginScreen(ActionEvent event) {
@@ -211,6 +231,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	/**
 	 * This method will initialize the values according to 
 	 * connected user.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

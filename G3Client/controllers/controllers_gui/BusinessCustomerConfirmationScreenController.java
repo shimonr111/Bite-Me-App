@@ -23,17 +23,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
-import users.HrManager;
-import users.Supplier;
 import users.User;
-import users.UserForRegistration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -42,10 +37,12 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
- * controlling the UI of business customer confirmation from the HR manager portal
+ * controlling the UI of business customer confirmation
+ * from the HR manager portal
  * after clicking on that button.
  * 
  * @version 15/12/2021
@@ -81,7 +78,6 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     @FXML
     private TableColumn<BusinessCustomer, String> employeeNameCol;
 
-
     @FXML
     private TableColumn<BusinessCustomer, String> employeeLastNameCol;
 
@@ -98,11 +94,14 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     private TextField searchField;
     
     /**
-     * after pressing on back button we will call the method that loads the previous screen.
+     * This is a function that 
+     * after pressing on back button we will call 
+     * the method that loads the previous screen.
+     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setHrManagerPortal(event);
     }
     
@@ -110,10 +109,11 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
      * Pressing on confirm will lead to confirm the employee and change his status ,
      * he will be deleted from the list after confirming him because the list will have
      * only the remaining request to confirm/deny.
+     * 
      * @param event
      */
     @FXML
-    void getConfirmBtn(ActionEvent event) {
+    public void getConfirmBtn(ActionEvent event) {
     	User selectedCustomer = businessCustomerTable.getSelectionModel().getSelectedItem();
     	if(selectedCustomer != null) {
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Confirm this employee?");
@@ -140,10 +140,11 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     /**
      * Denying confirmation request for employee will lead to delete him from the DB
      * and deleting him from the table.
+     * 
      * @param event
      */
     @FXML
-    void getDenyBtn(ActionEvent event) {
+    public void getDenyBtn(ActionEvent event) {
       	User selectedCustomer = businessCustomerTable.getSelectionModel().getSelectedItem();  	
     	if(selectedCustomer != null) {
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Denying the confirmation will lead to remove this customer!");
@@ -160,11 +161,12 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     }
     
     /**
-     * clicking on exit button will log out the user then disconnect and exit.
+     * Clicking on exit button will log out the user then disconnect and exit.
+     * 
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -174,16 +176,18 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     }
     
     /**
-     * display a pop up message.
+     * Display a pop up message.
+     * 
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can confirm or deny business customers registration requests.");
     }
     
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, it will be 
+     * called from the previous screen.
      */
 	public void initBusinessCustomerConfirmationScreen() {
 		Platform.runLater(new Runnable() {
@@ -216,7 +220,8 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 	}
 	
 	/**
-	 * this method loads the previous screen.
+	 * This method loads the previous screen.
+	 * 
 	 * @param event
 	 */
 	public void setHrManagerPortal(ActionEvent event) {
@@ -248,7 +253,8 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 	}
 	
 	/**
-	 * this method will be called from the next screen when clicking on back button
+	 * This method will be called from the next screen
+	 * when clicking on back button
 	 */
 	public void initPortalAgain() {
 		loader = new FXMLLoader();

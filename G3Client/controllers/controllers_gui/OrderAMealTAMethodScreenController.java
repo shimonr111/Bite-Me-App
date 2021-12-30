@@ -3,14 +3,12 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,13 +22,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import orders.AbatractSupplyMethod;
 import orders.Order;
 import orders.TakeAwaySupplyMethod;
-import util.Constans;
 import util.DataLists;
-
 
 /**
  * 
@@ -39,19 +33,18 @@ import util.DataLists;
  * Class description: 
  * This is a class for 
  * 
- * 
- * 
  * @version 17/12/2021
  */
 public class OrderAMealTAMethodScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-
 	private static FXMLLoader loader;
     private static OrderAMealTAMethodScreenController orderAMealTAMethodScreenController;
     private static Order order;
     private static TakeAwaySupplyMethod takeAwayInformation;
+    
     @FXML
     private TextField firstNameTextField;
 
@@ -82,11 +75,10 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      /**
      * Back button for the 
      * 
-     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -117,14 +109,14 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 
     }
 
-        /**
+     /**
      * Exit from screen and update
      * DB.
      * 
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -140,7 +132,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you insert you'r contact information for the TA process.");
     }
 
@@ -150,13 +142,10 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This function is used for
      * switching to the next screen and 
      * 
-     * 
-     *
-     * 
      * @param event
      */
     @FXML
-    void getNextBtn(ActionEvent event) {
+    public void getNextBtn(ActionEvent event) {
     	if(isEmptyFields()) {
     		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
@@ -221,6 +210,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This function is called from the previous 
      * screen controller.
      * 
+     * @param order
      */
   public void initTAMethodScreen(Order order) {
 		Platform.runLater(new Runnable() {
@@ -261,6 +251,8 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This is a function for 
      * initializing the screen.
      * 
+     * @param arg0
+     * @param arg1
      */
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
@@ -269,6 +261,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
   
 	/**
 	 * this method checks if the textField contains numbers only.
+	 * 
 	 * @param txtField
 	 * @return true or false according to the input.
 	 */
