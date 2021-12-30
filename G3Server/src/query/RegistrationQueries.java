@@ -437,7 +437,8 @@ public class RegistrationQueries {
 	 */
 	public static Message businessCustomerCompleteRegistration(Message message) {
 		ArrayList<Object> businessCustomerBudgetDetails = (ArrayList<Object>)message.getObject();
-		BudgetType budgetType = (BudgetType)businessCustomerBudgetDetails.get(0);
+		BudgetType budgetType = BudgetType.valueOf((String)businessCustomerBudgetDetails.get(0));
+		System.out.println(budgetType);
 		int budgetAmount = Integer.parseInt((String)businessCustomerBudgetDetails.get(1));
 		String businessCustomerId = (String)businessCustomerBudgetDetails.get(2);
 		Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer", "statusInSystem='CONFIRMED', budgetType='"+budgetType+"', "
