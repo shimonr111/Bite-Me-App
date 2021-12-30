@@ -913,6 +913,13 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+}
+
+.supplyMethodMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/supply.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
