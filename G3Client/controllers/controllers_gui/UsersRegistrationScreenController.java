@@ -1,9 +1,9 @@
 package controllers_gui;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -32,7 +32,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.UserForRegistration;
 
-public class UsersRegistrationScreenController extends AbstractBiteMeController implements Initializable {
+public class UsersRegistrationScreenController extends AbstractBiteMeController implements Initializable{
 	
 	/**
 	 * Class members description:
@@ -75,13 +75,23 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     @FXML
     private TableView<UserForRegistration> usersTable;
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setBranchManagerPortal(event);
     }
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getBusinessCustomer(ActionEvent event) {
+    public void getBusinessCustomer(ActionEvent event) {
     	UserForRegistration selectedUser = usersTable.getSelectionModel().getSelectedItem();
     	if(selectedUser != null) {
     		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -94,8 +104,13 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     	}
     }
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -104,13 +119,23 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 		System.exit(0);
     }
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can register users by clicking on the desierd user on the table and the register as button.");
     }
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
-    void getPrivateCustomer(ActionEvent event) {
+    public void getPrivateCustomer(ActionEvent event) {
     	UserForRegistration selectedUser = usersTable.getSelectionModel().getSelectedItem();
     	if(selectedUser != null) {
     	 	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -124,10 +149,8 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     	}
     }
 
-
-    
     /**
-     * this method loads the current screen.
+     * This method loads the current screen.
      */
 	public void initUserRegistrationScreen() {
 		Platform.runLater(new Runnable() {
@@ -161,7 +184,8 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 	}
 	
 	/**
-	 * this method loads the branch manager portal screen ( previous screen)
+	 * This method loads the branch manager portal screen ( previous screen) 
+	 * 
 	 * @param event
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
@@ -193,7 +217,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 	}
 	
 	/**
-	 * this method loads this screen after clicking back from next one.
+	 * This method loads this screen after clicking back from next one.
 	 */
 	public void initPortalAgain() {
 		loader = new FXMLLoader();
@@ -220,6 +244,12 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 		primaryStage.show();/* show the new screen */
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param arg0
+     * @param arg1
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<UserForRegistration> userObservableList = FXCollections.observableArrayList();

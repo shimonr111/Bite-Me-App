@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -29,11 +28,12 @@ import javafx.stage.WindowEvent;
 import users.Branch;
 import users.ConfirmationStatus;
 import users.Customer;
-import util.DataLists;
 import javafx.fxml.Initializable;
+
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Edit Customer that appears immediately after clicking
@@ -42,7 +42,7 @@ import javafx.fxml.Initializable;
  * 
  * @version 13/12/2021
  */
-public class EditPrivateCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
+public class EditPrivateCustomerInformationScreenController extends AbstractBiteMeController implements Initializable{
 	 
 	/**
 	 * Class members description:
@@ -81,24 +81,24 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     @FXML
     private TextField emailTxtField;
 
-
     @FXML
     private ComboBox<Branch> setHomeBranchCombo;
 
     @FXML
     private ComboBox<ConfirmationStatus> setStatusComboBox;
     
-    
     @FXML
     private Text displayMessage;
 
     /**
-     * this method runs after clicking on SAVE button , it checks if there were any changes to the customer status
+     * This method runs after clicking on SAVE button , 
+     * it checks if there were any changes to the customer status
      * and if yes it sends a relevant message to the server.
+     * 
      * @param event
      */
     @FXML
-    void getSaveBtn(ActionEvent event) {
+    public void getSaveBtn(ActionEvent event) {
     	ConfirmationStatus oldStatus = customer.getStatusInSystem();
     	String newStatus = setStatusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
@@ -132,20 +132,22 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     }
     
     /**
-     * calls the method that loads the previous screen.
+     * Calls the method that loads the previous screen.
+     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setEditCustomerInformationScreen(event);
     }
-
-
+    
     /**
-     * logout then exit.
+     * Logout then exit.
+     * 
+     * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -154,9 +156,8 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 		System.exit(0);
     }
 
-   
     /**
-     * display a message to the customer.
+     * Display a message to the customer.
      * @param event
      */
     @FXML
@@ -166,7 +167,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     }
     
     /**
-     * sets the screen , it will be called from previous screen.
+     * Sets the screen , it will be called from previous screen.
      */
 	public void initEditPrivateCustomerInformationScreen() {
 		Platform.runLater(new Runnable() {
@@ -200,7 +201,8 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 	}
 	
 	/**
-	 *  this method for the back button , it sets the previous screen.
+	 *  This method for the back button , it sets the previous screen.
+	 *  
 	 * @param event
 	 */
 	public void setEditCustomerInformationScreen(ActionEvent event) {
@@ -232,7 +234,10 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 	}
 	
 	/**
-	 * initialize the fields and boxes accordingly.
+	 * Initialize the fields and boxes accordingly.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

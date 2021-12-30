@@ -1,9 +1,9 @@
 package controllers_gui;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -31,20 +31,19 @@ import users.BudgetType;
 import users.BusinessCustomer;
 import users.ConfirmationStatus;
 import users.CreditCard;
-import users.Customer;
-import users.HrManager;
 import users.Login;
 import users.PositionType;
 import users.UserForRegistration;
-import util.DataLists;
 
 /**
  * 
- * @author Mousa, Srour
- * lass description: 
+ * @author Mousa, Srour.
+ * 
+ * Class description: 
  * This is a class for 
  * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
  * on Private Customer registration from the BusinessCustomerRegistrationScreen form.
+ * 
  * @version 11/12/2021
  */
 public class BusinessCustomerRegistartionController extends AbstractBiteMeController implements Initializable{
@@ -75,7 +74,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 
     @FXML
     private TextField userNameField;
-
 
     @FXML
     private Button btnExit;
@@ -121,19 +119,21 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 
     /**
      * This method loads the previous screen.
+     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setUserRegistrationScreen(event);
     }
     
     /**
-     * this method does log out and then exit.
+     * This method does log out and then exit.
+     * 
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
       	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
       	sendToClient(message);
     	connectedUser = null;
@@ -143,16 +143,22 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
 
     /**
-     * displaying a popup message to the user.
+     * Displaying a popup message to the user.
+     * 
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you register business customers.");
     }
     
+    /**
+     * This function..
+     * 
+     * @param event
+     */
     @FXML
-    void getPositionComboBox(ActionEvent event) {
+    public void getPositionComboBox(ActionEvent event) {
     	if(positionCombo.getValue().equals("Human Resources")) {
     		companyNameCombo.setValue("None");
     		companyNameCombo.setDisable(true);
@@ -164,12 +170,14 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * this method will run after clicking on save button, it checks if all the fields were correctly filled.
+     * This method will run after clicking on save button,
+     * it checks if all the fields were correctly filled.
      * and then create a relevant message to the server.
+     * 
      * @param event
      */
     @FXML
-    void getSaveBtn(ActionEvent event) {
+    public void getSaveBtn(ActionEvent event) {
     	if(checkAllFields()==true) {
     		ArrayList<Object> list = new ArrayList<>();
     		Branch homeBranch = getHomeBranch();
@@ -190,11 +198,10 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     	}
     }
     
-
-    
     /**
-     * gets the position type selected from the combo box and returns it as an enum.
-     * @return
+     * Gets the position type selected from the combo box and returns it as an enum.
+     * 
+     * @return PositionType: HR or REGULAR
      */
     private PositionType getPositionType() {
     	if(positionCombo.getValue().equals("Human Resources"))
@@ -203,8 +210,9 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * gets the HomeBranch from the combo box as a string and returns it as a Branch Enum.
-     * @return
+     * Gets the HomeBranch from the combo box as a string and returns it as a Branch Enum.
+     * 
+     * @return Branch: SOUTH or NORTH or CENTER
      */
     private Branch getHomeBranch() {
     	if(setHomeBranchCombo.getValue().equals("South Branch")) 
@@ -217,7 +225,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
  	/**
- 	 * this method sets a message from the listeners to the displayMessage .
+ 	 * This method sets a message from the listeners to the displayMessage.
+ 	 * 
  	 * @param message
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
@@ -264,9 +273,9 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		});
 	}
     
-    
     /**
      * This method sets the previous screen .
+     * 
      * @param event
      */
     public void setUserRegistrationScreen(ActionEvent event) {
@@ -298,7 +307,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * this message gets all the confirmed companies from DB to display them into the comboBox.
+     * This message gets all the confirmed companies from DB to display them into the comboBox.
      */
     public void getCompanies(){
     	Message message = new Message(Task.GET_COMPANIES_FROM_DB,Answer.WAIT_RESPONSE,null);
@@ -306,10 +315,10 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * 
-     * this method checks if all the fields are filled
+     * This method checks if all the fields are filled
      * in addition here we check if the input were correct.
-     * @return
+     * 
+     * @return boolean: true if field all fields
      */
     public boolean checkAllFields() {
     	boolean returnVal=true;
@@ -355,6 +364,11 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  		return true;
     }
     
+    /**
+     * This method checks if ....
+     * 
+     * @return boolean: true if
+     */
     public boolean checkComboBoxInput(ComboBox comboBox, String message) {
     	if(comboBox.getValue().equals(message))
     		return false;
@@ -362,7 +376,8 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
  	/**
- 	 * this method checks if the textField contains numbers only.
+ 	 * This method checks if the textField contains numbers only.
+ 	 * 
  	 * @param txtField
  	 * @return true or false according to the input.
  	 */
@@ -379,8 +394,11 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  	}
  	
  	/**
- 	 * in this method we initialize all the fields and combo boxes.
+ 	 * In this method we initialize all the fields and combo boxes.
  	 * in addition we initialize the listeners.
+ 	 * 
+ 	 * @param arg0
+ 	 * @param arg1
  	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

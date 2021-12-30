@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -25,33 +24,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import javafx.util.StringConverter;
 import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.ItemWithPicture;
 import orders.Order;
-import orders.OrderStatus;
 import users.BusinessCustomer;
-import users.Customer;
-import users.HrManager;
-
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of the item 
@@ -60,6 +52,7 @@ import users.HrManager;
  * @version 14/12/2021
  */
 public class OrderChooseItemsScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
@@ -140,7 +133,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * @param event
      */
     @FXML
-    void getAddToCartBtn(ActionEvent event) {
+    public void getAddToCartBtn(ActionEvent event) {
     	if(menuTable.getSelectionModel().getSelectedItem() != null) {
     		if(menuTable.getSelectionModel().getSelectedItem() instanceof ItemWithPicture) {
     			errorText1.setVisible(false); // if the user added an item to the cart set invisible
@@ -176,7 +169,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	totalPriceTxtField.setText(String.valueOf(0));//set text to 0
     	order.totalPrice = 0;//set total price in order to 0
     	for(Item item : order.itemList) {
@@ -212,8 +205,13 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		});
     }
 
+    /**
+     * This method move to next screen
+     * 
+     * @param event
+     */
     @FXML
-    void getBtnNext(ActionEvent event) {
+    public void getBtnNext(ActionEvent event) {
     	//first check if the order item array list is not empty, if it is set text to the user and deny going to the next screen
     	if(order.itemList.size()!=0) {
     		addCustomerUserTypeToOrderObj(); //set the customer type
@@ -236,7 +234,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -252,7 +250,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can see the resturant menu.\nTo add items to the cart, click at item on the menu and the add button.\n"
     			+ "To remove items from the cart, click at the item on the cart and the remove button.\n"
     			+ "On each item you added to the cart you can add a comment (for example: no lettuce, Medium-Well..");
@@ -271,6 +269,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     	}
     	order.setCustomerUserType(customerType);
     }
+    
     /**
      * Remove item from cart
      * and update price and order 
@@ -279,7 +278,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * @param event
      */
     @FXML
-    void getRemoveItemBtn(ActionEvent event) {
+    public void getRemoveItemBtn(ActionEvent event) {
     	if(cartTable.getSelectionModel().getSelectedItem() != null) {
     		if(cartTable.getSelectionModel().getSelectedItem() instanceof Item) {
     			Item itemRemoveFromCart = (Item)cartTable.getSelectionModel().getSelectedItem();
@@ -298,6 +297,8 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * This function is called from the previous 
      * screen controller.
      * 
+     * @param pickRestaurantId
+     * @param pickRestaurantName
      */
     public void initChooseItemsScreen(String pickedRestaurantId, String pickedRestaurntName ) {
     	restaurantID = pickedRestaurantId;
@@ -347,6 +348,8 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * to the screen in the Table View 
      * for showing it to the user.
      * 
+     * @param arg0
+     * @param arg1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

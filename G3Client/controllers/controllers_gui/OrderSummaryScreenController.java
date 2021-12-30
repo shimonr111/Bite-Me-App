@@ -3,7 +3,6 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -12,7 +11,6 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,17 +21,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import orders.AbatractSupplyMethod;
 import orders.DeliverySupplyMethod;
 import orders.Item;
-import orders.ItemCategory;
 import orders.ItemSize;
 import orders.Order;
 import util.Constans;
@@ -42,6 +35,7 @@ import util.Constans;
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * 
  * Class description: 
  * This is a class for the summary of the 
  * order process.
@@ -49,15 +43,16 @@ import util.Constans;
  * @version 17/12/2021
  */
 public class OrderSummaryScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-
 	private static FXMLLoader loader;
     private static OrderSummaryScreenController orderSummaryScreenController;
     private static Order order;
     private String pathForLastScreen= null;
     private String pageTitle;
+    
     @FXML
     private Button choosePaymentMethodBtn;
 
@@ -94,11 +89,10 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     /**
      * Back button for the 
      * 
-     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	switch(order.getSupplyType()){
 		  case TAKE_AWAY:
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealTAMethod.fxml";
@@ -163,7 +157,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * @param event
      */
     @FXML
-    void getChoosePaymenMethodtBtn(ActionEvent event) {
+    public void getChoosePaymenMethodtBtn(ActionEvent event) {
 
   //now we need to change this screen to the next one
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -179,7 +173,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -195,7 +189,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you see the summary of your order and confirm the order to proceed to payment.");
     }
 
@@ -206,6 +200,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This function is called from the previous 
      * screen controller.
      * 
+     * @param order
      */
   public void initOrderSummaryScreen(Order order) {
 	  OrderSummaryScreenController.order = order;
@@ -243,6 +238,8 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This is a function for 
      * initializing the screen.
      * 
+     * @param arg0
+     * @param arg1
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

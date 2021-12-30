@@ -1,19 +1,18 @@
 package controllers_gui;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import util.SupplierByReport;
+
 /**
  * 
  * @author Alexander, Martinov
+ * 
  * Class description: 
  * This is a class for generating reports from SupplierByReport arrays
  * 
  * @version 21/12/2021
  */
 public class ReportGenerator {
+	
 	/**
 	 * Class members description:
 	 */
@@ -26,9 +25,12 @@ public class ReportGenerator {
 		reportTypes[2]="Performance";
 		return reportTypes;
 	}
+	
     /**
      * Performance report string generator
      * orders by supplierid, name and income
+     * 
+     * @return String
      */
 	public static String generateIncomeReport() {
 		String report="Income Report By Supplier\nIssued on: "+suppliers[0].getIssueDate()+"\n";
@@ -38,6 +40,12 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
+	 /**
+     * This method...
+     * 
+     * @return String
+     */
 	public static String generateIncomeReport(String all) {
 		String report="Income Report By Supplier\nIssued on: "+suppliers[0].getIssueDate()+"\n";
 		for(SupplierByReport supplier:suppliers) {
@@ -46,9 +54,12 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
     /**
      * Performance report string generator
      * orders by supplierid, name and type of dish
+     * 
+     * @return String
      */
 	public static String generateOrderReport() {
 		String report="Order Report By Supplier and Dish Type\nIssued on: "+suppliers[0].getIssueDate()+"\n";
@@ -62,6 +73,12 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
+	 /**
+     * This method...
+     * 
+     * @return String
+     */
 	public static String generateOrderReport(String all) {
 		String report="Order Report By Supplier and Dish Type\nIssued on: "+suppliers[0].getIssueDate()+"\n";
 		for(SupplierByReport supplier:suppliers) {
@@ -74,9 +91,12 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
     /**
      * Performance report string generator
      * orders by supplierid, name, total orders and late orders
+     * 
+     * @return String
      */
 	public static String generatePerformanceReport() {
 		String report="Performance Report By Supplier\nIssued on: "+suppliers[0].getIssueDate()+"\n";
@@ -87,6 +107,12 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
+	 /**
+     * This method...
+     * 
+     * @return String
+     */
 	public static String generatePerformanceReport(String all) {
 		String report="Performance Report By Supplier\nIssued on: "+suppliers[0].getIssueDate()+"\n";
 		for(SupplierByReport supplier:suppliers) {
@@ -96,25 +122,49 @@ public class ReportGenerator {
 		}
 		return report;
 	}
+	
     /**
-     * getter method for supplier reports array
+     * Getter method for supplier reports array
+     * 
+     * @return SupplierByReport[]
      */
 	public static SupplierByReport[] getSuppliers() {
 		return suppliers;
 	}
+	
+	
     /**
      * setter method for supplier reports array
+     * 
      * @param suppliers
      */
 	public static void setSuppliers(SupplierByReport[] suppliers) {
 		ReportGenerator.suppliers = suppliers;
 	}
+	
+	/**
+     * This method...
+     * 
+     * @return SupplierByReport[][]
+     */
 	public static SupplierByReport[][] getQuarter() {
 		return quarter;
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param quarter
+     */
 	public static void setQuarter(SupplierByReport[][] quarter) {
 		ReportGenerator.quarter = quarter;
 	}
+	
+	/**
+     * This method...
+     * 
+     * @return int
+     */
 	public static int[][] getOrdersValue(){
 		int[][] ordersAndValue={{0,0},{0,0},{0,0}};
 		for(int i=0;i<3;i++) {

@@ -1,15 +1,9 @@
 package controllers_gui;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.IsoFields;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Map.Entry;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -25,22 +19,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import util.SupplierByReport;
-import org.apache.pdfbox.pdmodel.PDDocument;  
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import org.apache.pdfbox.pdmodel.font.PDType1CFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;  
+ 
 /**
  * 
- * @author Alexander, Martinov
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of viewing system reports 
@@ -48,11 +36,15 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
  * 
  * @version 21/12/2021
  */
-public class ViewSystemReportsScreenCEOController extends AbstractBiteMeController implements Initializable {
+public class ViewSystemReportsScreenCEOController extends AbstractBiteMeController implements Initializable{
 	
 	/**
 	 * Class members description:
 	 */
+	private static FXMLLoader loader;
+	private static ViewSystemReportsScreenCEOController viewSystemReportsScreenCEOController;
+	public static SupplierByReport[] suppliers=null;
+	
 	@FXML
     private Label MessageLabel;
 
@@ -64,6 +56,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 
     @FXML
     private ComboBox<String> ReportYear;
+    
     @FXML
     private ComboBox<String> branchBox;
 
@@ -79,23 +72,24 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
     @FXML
     private Button viewReportBtn;
 
-
-	private static FXMLLoader loader;
-	private static ViewSystemReportsScreenCEOController viewSystemReportsScreenCEOController;
-	public static SupplierByReport[] suppliers=null;
-
 	/**
-	 * this method calls the setBranchManagerPortal to get back the previous screen
-	 * this method works immedietly after clicking on back button.
+	 * This method calls the setBranchManagerPortal to get back the previous screen
+	 * This method works immedietly after clicking on back button.
+	 * 
 	 * @param event
 	 */
 	@FXML
-	void getBackBtn(ActionEvent event) {
+	public void getBackBtn(ActionEvent event) {
 		setCeoPortal(event);
 	}
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
 	@FXML
-	void getExitBtn(ActionEvent event) {
+	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -104,15 +98,23 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		System.exit(0);
 	}
 
+	/**
+     * This method...
+     * 
+     * @param event
+     */
 	@FXML
-	void getHelpBtn(ActionEvent event) {
+	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the time range and report type.");
 	}
+	
 	/**
 	 * Asks server for selected report by date and type and displays it to the user
+	 * 
+	 * @param event
 	 */
 	@FXML
-	void getViewReport(ActionEvent event) {
+	public void getViewReport(ActionEvent event) {
 		if(checkDateAndType()) {
 			String date=ReportYear.getValue()+"-"+ReportMonth.getValue()+"-01";
 			String[] branchAndDate=new String[3];
@@ -132,8 +134,11 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 			}
 		}
 	}
+	
 	/**
 	 *Checks year, month and report type fields were filled(selected)
+	 *
+	 *@return boolean
 	 */
 	public boolean checkDateAndType() {
 		if(ReportYear.getValue().equals("Year")) {
@@ -157,8 +162,11 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		}
 		return true;
 	}
+	
 	/**
-	 *sets message to small text field on the bottom
+	 *Sets message to small text field on the bottom
+	 *
+	 *@param message
 	 */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
 			Platform.runLater(new Runnable() {
@@ -168,8 +176,11 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 				}
 			});	
 	}
-	  /**
-     * loads the previous screen after clicking on back button.
+	 	
+	 /**
+     * Loads the previous screen after clicking on back button.
+     * 
+     * @param event
      */
 	public void setCeoPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -198,8 +209,12 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		});
 
 	}
+	
 	/**
 	 * This is the priming function for the fields
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -254,12 +269,24 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 			}
 		});
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param report
+     */
 	public void displaySingleReport(String report) {
 		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
 		displayReportScreenController.initDisplayReportScreen();
 		displayReportScreenController.setReport(report);
 		displayReportScreenController.showReport();
 }
+	
+	/**
+     * This method...
+     * 
+     * @param date
+     */
 	public void saveQuarterlyReport(String date) {
 	}
 	public String[] getBranches() {
@@ -270,6 +297,12 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		branches[3]="All";
 		return branches;
 	}
+	
+	/**
+     * This method...
+     * 
+     * @return String
+     */
 	public String getBranch(){
 		String branch=branchBox.getValue();
 		switch (branch) {
@@ -285,6 +318,12 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 				return "";
 		}
 	}
+	
+	/**
+     * This method...
+     * 
+     * @return String
+     */
 	public void displayReport(String reportBranches) {
 	String type=ReportType.getValue();
 	if(reportBranches.equals("All")) {

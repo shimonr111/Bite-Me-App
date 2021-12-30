@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -33,22 +32,26 @@ import users.CreditCard;
 import users.Customer;
 import users.Login;
 import users.UserForRegistration;
-import util.DataLists;
 
 /**
  * 
- * @author Mousa, Srour
- * lass description: 
+ * @author Mousa, Srour.
+ * 
+ * Class description: 
  * This is a class for 
  * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
  * on Private Customer registration from the CustomerRegistrationScreen form.
+ * 
  * @version 10/12/2021
  */
-public class PrivateCustomerRegistartionController extends AbstractBiteMeController implements Initializable  {
+public class PrivateCustomerRegistartionController extends AbstractBiteMeController implements Initializable{
+	
+	/**
+	 * Class members description:
+	 */
 	private static FXMLLoader loader;
     private static PrivateCustomerRegistartionController privateCustomerRegistrationScreenController;
     private static AnalyzeClientListener listener;
-    
     private ArrayList<TextField> textFields = new ArrayList<>();
     private ArrayList<TextField> integerFields = new ArrayList<>();
     
@@ -106,9 +109,13 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     @FXML
     private TextField userNameTxtField;
     
-
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
       	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
       	sendToClient(message);
     	connectedUser = null;
@@ -117,9 +124,13 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
    		System.exit(0);
     }
 
-
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can register private customers!");
     }
 
@@ -128,10 +139,11 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
      * if they all the fields were correctly filled so we create a new message 
      * the object in this message is an arrayList of customer,login and credit card
      * we need these 3 objects on the server side .
+     * 
      * @param event
      */
     @FXML
-    void getSaveBtn(ActionEvent event) {
+    public void getSaveBtn(ActionEvent event) {
     	if(checkAllFields()==true) {
     		Branch homeBranch;
     		if(setHomeBranchCombo.getValue().equals("South Branch")) 
@@ -155,18 +167,22 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     	}
     }
     
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
 		AnalyzeMessageFromServer.removeClientListener(listener);
 		setUserRegistrationScreen(event);
     }
     
-    
     /**
-     * 
-     * this method checks if all the fields are filled
+     * This method checks if all the fields are filled
      * in addition here we check if the input were correct.
-     * @return
+     * 
+     * @return boolean: true if fill all fields
      */
  	public boolean checkAllFields() {
  		boolean returnVal=true;
@@ -205,6 +221,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  	
  	/**
  	 * this method checks if the textField contains numbers only.
+ 	 * 
  	 * @param txtField
  	 * @return true or false according to the input.
  	 */
@@ -222,6 +239,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  	
  	/**
  	 * this method sets a message from the listeners to the displayMessage .
+ 	 * 
  	 * @param message
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
@@ -234,7 +252,6 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 		
 	}
 
-    
     /**
      * This method initialize the private customer registration form.
      */
@@ -271,6 +288,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     
     /**
      * This method sets the previous screen .
+     * 
      * @param event
      */
     public void setUserRegistrationScreen(ActionEvent event) {
@@ -301,11 +319,13 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 	
     }
     
-
-	@Override
 	/**
 	 * Here we initialize also the listeners.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
+    @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		textFields.add(confirmedEmailTxtField); textFields.add(creditNumTxtField); textFields.add(cvvTxtField) ; textFields.add(emailTxtField); textFields.add(expirationTxtField);
 		textFields.add(firstNameTxtField); textFields.add(idNumTxtField); textFields.add(lastNameTxtField); textFields.add(passwordField); textFields.add(phoneTxtField);

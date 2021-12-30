@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -23,7 +22,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,6 +36,7 @@ import util.OrderBusinessBudgetCalculation;
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
+ * 
  * Class description: 
  * This is a class for the user 
  * to add all his payment to the system (cash / credit card, etc.)
@@ -45,10 +44,10 @@ import util.OrderBusinessBudgetCalculation;
  * @version 20/12/2021
  */
 public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeController implements Initializable{
+	
 		/**
 		 * Class members description:
 		 */
-
 		private static FXMLLoader loader;
 	    private static OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController;
 	    private static Order order;
@@ -116,7 +115,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * @param event
 	     */
 	   @FXML
-	    void getAddAmountBtn(ActionEvent event) {
+	   public void getAddAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
 	    		errorText.setText("Choose payment method!");
 	    		paymentMethodCombo.setStyle("-fx-border-color: red");
@@ -208,7 +207,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    * @param event
 	    */
 	   @FXML
-	    void getRemoveAmountBtn(ActionEvent event) {
+	   public void getRemoveAmountBtn(ActionEvent event) {
 		   if(paymentMethodCombo.getValue() == null) {
 	    		errorText.setText("Choose payment method!");
 	    		paymentMethodCombo.setStyle("-fx-border-color: red");
@@ -290,15 +289,13 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		   }
 	    }
 	   
-	   
 	     /**
 	     * Back button for the 
-	     * 
 	     * 
 	     * @param event
 	     */
 	    @FXML
-	    void getBackBtn(ActionEvent event) {
+	    public void getBackBtn(ActionEvent event) {
 	      Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -336,7 +333,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * @param event
 	     */
 	    @FXML
-	    void getExitBtn(ActionEvent event) {
+	    public void getExitBtn(ActionEvent event) {
 	    	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 			sendToClient(message);
 			connectedUser = null;
@@ -354,7 +351,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * @param event
 	     */
 	    @FXML
-	    void getFinishOrderBtn(ActionEvent event) {
+	    public void getFinishOrderBtn(ActionEvent event) {
 	    	if(amountLeftToPay!=0) {
 	    		errorText.setText("Finish with the payment first!");
 	    		
@@ -418,7 +415,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * @param event
 	     */
 	    @FXML
-	    void getHelpBtn(ActionEvent event) {
+	    public void getHelpBtn(ActionEvent event) {
 	    	PopUpMessages.helpMessage("On this screen you can choose the order payment methods and amount to pay.");
 	    }
 
@@ -428,6 +425,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * This function is called from the previous 
 	     * screen controller.
 	     * 
+	     * @param order
 	     */
 	  public void initPaymentConfigurationScreen(Order order) {
 		  OrderPaymentConfigurationScreenController.order = order;
@@ -461,7 +459,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		}
 	  
 		/**
-		 * this method loads the customer portal
+		 * This method loads the customer portal
+		 * 
 		 * @param event
 		 */
 		public void setPrivateCustomerPortal(ActionEvent event) {
@@ -493,7 +492,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		}
 		
 		/**
-		 * this method loads the customer portal
+		 * This method loads the customer portal
+		 * 
 		 * @param event
 		 */
 		public void setBusinessCustomerPortal(ActionEvent event) {
@@ -529,6 +529,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	* This is a function for 
 	* initializing the screen.
 	* 
+	* @param arg0
+	* @param arg1
 	*/
 	@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
