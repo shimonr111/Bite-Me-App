@@ -32,7 +32,6 @@ import users.BusinessCustomer;
 import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Login;
-import users.PositionType;
 import users.UserForRegistration;
 
 /**
@@ -86,9 +85,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 
     @FXML
     private TextField confirmedEmailTxtField;
-
-    @FXML
-    private ComboBox<String> positionCombo;
 
     @FXML
     private ComboBox<String> setHomeBranchCombo;
@@ -153,23 +149,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * This function..
-     * 
-     * @param event
-     */
-    @FXML
-    public void getPositionComboBox(ActionEvent event) {
-    	if(positionCombo.getValue().equals("Human Resources")) {
-    		companyNameCombo.setValue("None");
-    		companyNameCombo.setDisable(true);
-    	}
-    	else {
-    		companyNameCombo.setValue("Select company:");
-    		companyNameCombo.setDisable(false);
-    	}
-    }
-    
-    /**
      * This method will run after clicking on save button,
      * it checks if all the fields were correctly filled.
      * and then create a relevant message to the server.
@@ -181,32 +160,17 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     	if(checkAllFields()==true) {
     		ArrayList<Object> list = new ArrayList<>();
     		Branch homeBranch = getHomeBranch();
-    		PositionType positionType = getPositionType();
     		CreditCard creditCard = new CreditCard(creditNumTxtField.getText(),expirationTxtField.getText(),cvvTxtField.getText());
     		Login login = new Login (userNameField.getText(),passwordField.getText());
     		list.add(login);
     		list.add(creditCard);
-    		if(positionType.equals(PositionType.REGULAR)) {
-    			BusinessCustomer businessCustomer = new BusinessCustomer(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
-    				lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
-    				creditNumTxtField.getText(),companyNameCombo.getValue(),BudgetType.DAILY,positionType,0);
-    			list.add(businessCustomer);
-    			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
-        		sendToClient(message);
-    		}
-    		
+    		BusinessCustomer businessCustomer = new BusinessCustomer(idNumTxtField.getText(),ConfirmationStatus.PENDING_APPROVAL,firstNameTxtField.getText(),
+    		lastNameTxtField.getText(),homeBranch,false,emailTxtField.getText(),phoneTxtField.getText(),
+			creditNumTxtField.getText(),companyNameCombo.getValue(),BudgetType.DAILY,0);
+   			list.add(businessCustomer);
+   			Message message = new Message(Task.REGISTER_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,list);
+       		sendToClient(message);		
     	}
-    }
-    
-    /**
-     * Gets the position type selected from the combo box and returns it as an enum.
-     * 
-     * @return PositionType: HR or REGULAR
-     */
-    private PositionType getPositionType() {
-    	if(positionCombo.getValue().equals("Human Resources"))
-    			return PositionType.HR;
-    	return PositionType.REGULAR;
     }
     
     /**
@@ -338,12 +302,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  			displayMessage.setText("Please fill all the required fields (*)!");
  			return false;
  			}
- 		if(!checkComboBoxInput(positionCombo,"Select position:")) {
- 			displayMessage.setText("Please fill all the required fields (*)!");
- 			return false;
- 			}
  		
-
  		for(TextField intTxt : integerFields) {
  			if(!isInt(intTxt)) {
  				intTxt.setStyle("-fx-border-color: red");
@@ -419,7 +378,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 			for(TextField txt : textFields) {
 				txt.setDisable(true);
 				txt.setEditable(false);
-				positionCombo.setDisable(true);
 				companyNameCombo.setDisable(true);
 				saveBtn.setDisable(true);
 				displayMessage.setText("No confirmed companies. Cannot register employees!");
@@ -428,9 +386,6 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 		else {
 			companyNameCombo.setValue("Select company:");
 			companyNameCombo.getItems().addAll(companies);
-			positionCombo.setValue("Regular worker");
-			positionCombo.getItems().addAll("Regular worker","Human Resources");
-			positionCombo.setDisable(true);
 			displayMessage.setText("");
 		
 			UserForRegistration userForRegistration = UsersRegistrationScreenController.userForRegistration;
@@ -448,10 +403,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 					setRelevantTextToDisplayMessageText("This User Name already exist on system");
 				}
 				public void clientBusinessCustomerRegistrationSucceed() {
-					if(positionCombo.getValue().equals("Regular worker"))
-						setRelevantTextToDisplayMessageText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");
-					else
-						setRelevantTextToDisplayMessageText("Registration Succeed,this user can now log in and register his company.");			
+					setRelevantTextToDisplayMessageText("Registration Succeed, waiting for confirmation from "+companyNameCombo.getValue()+" HR manager.");		
 				}
 			});
 		}

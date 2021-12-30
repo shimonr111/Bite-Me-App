@@ -116,21 +116,11 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     public void getConfirmBtn(ActionEvent event) {
     	User selectedCustomer = businessCustomerTable.getSelectionModel().getSelectedItem();
     	if(selectedCustomer != null) {
-    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Confirm this employee?");
-    		if(result.get() == ButtonType.OK) {
     			ArrayList<String> objectToMessage = new ArrayList<>();
-//    			objectToMessage.add(selectedCustomer.getUserId());
-//    			objectToMessage.add("CONFIRMED");
-//    			objectToMessage.add("businesscustomer"); // table name
-//        		Message message = new Message(Task.UPDATE_CUSTOMER_STATUS,Answer.WAIT_RESPONSE,objectToMessage);
-//        		sendToClient(message);
-//        		errorText.setText("Customer ID:" + selectedCustomer.getUserId() + " confirmed.");
-//        		initialize(null, null);	
     			businessCustomerForConfirmation = (BusinessCustomer)selectedCustomer;
     			ConfirmBusinessAskForDetailsController confirmBusinessAskForDetailsController = new ConfirmBusinessAskForDetailsController();
     			confirmBusinessAskForDetailsController.initConfirmBusinessAskForDeatilsScreen();
     			((Node) event.getSource()).getScene().getWindow().hide();
-    		}
     	}
     	else {
     		errorText.setText("Please choose one employee to confirm");
