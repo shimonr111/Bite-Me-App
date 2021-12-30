@@ -89,11 +89,10 @@ CREATE TABLE `businesscustomer` (
   `lastName` varchar(256) DEFAULT NULL,
   `homeBranch` enum('NORTH','CENTER','SOUTH','NOT_APPLICABLE') DEFAULT 'NOT_APPLICABLE',
   `isLoggedIn` tinyint(1) DEFAULT '0',
-  `businessW4cCodeNumber` int DEFAULT NULL,
+  `companyCode` int DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
-  `balance` double DEFAULT '0',
   `companyName` varchar(256) DEFAULT NULL,
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
@@ -102,8 +101,8 @@ CREATE TABLE `businesscustomer` (
   PRIMARY KEY (`userID`),
   KEY `businesscustomer_privateCreditCard_idx` (`privateCreditCard`),
   KEY `businesscustomer_companyName_idx` (`companyName`),
-  KEY `businesscustomer_businessW4cCodeNumber_idx` (`businessW4cCodeNumber`),
-  CONSTRAINT `businesscustomer_businessW4cCodeNumber` FOREIGN KEY (`businessW4cCodeNumber`) REFERENCES `company` (`companyCode`),
+  KEY `businesscustomer_businessW4cCodeNumber_idx` (`companyCode`),
+  CONSTRAINT `businesscustomer_businessW4cCodeNumber` FOREIGN KEY (`companyCode`) REFERENCES `company` (`companyCode`),
   CONSTRAINT `businesscustomer_companyName` FOREIGN KEY (`companyName`) REFERENCES `company` (`companyName`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `businesscustomer_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -116,7 +115,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',0,'Intel','WEEKLY',200,31062,0);
+INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022',NULL,'Intel','WEEKLY',200,31062,0);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,6 +146,7 @@ CREATE TABLE `ceobiteme` (
 
 LOCK TABLES `ceobiteme` WRITE;
 /*!40000 ALTER TABLE `ceobiteme` DISABLE KEYS */;
+INSERT INTO `ceobiteme` VALUES ('1001','CONFIRMED','Leon','Mark','NOT_APPLICABLE',0,'leon.mark@BM.com','04-8981121');
 /*!40000 ALTER TABLE `ceobiteme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('1001','01/35','111'),('3000','01/35','111'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
+INSERT INTO `creditcard` VALUES ('3005','111','01/35'),('3006','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,6 @@ CREATE TABLE `customer` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `privateCreditCard` varchar(256) DEFAULT NULL,
-  `balance` double DEFAULT NULL,
   PRIMARY KEY (`userID`),
   KEY `privateCreditCard_idx` (`privateCreditCard`),
   CONSTRAINT `customer_privateCreditCard` FOREIGN KEY (`privateCreditCard`) REFERENCES `creditcard` (`creditCardNumber`) ON DELETE SET NULL ON UPDATE CASCADE,
@@ -235,7 +234,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,31000,'customerEmail@gmeel.com','100000','3000',0);
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,31000,'customerEmail@gmeel.com','100000',NULL);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -326,7 +325,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('bc','bc','1002','businesscustomer'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker'),('mnw','mnw','2002','supplierworker');
+INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('ceo','ceo','1001','ceobiteme'),('bc','bc','1002','businesscustomer'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker'),('mnw','mnw','2002','supplierworker');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +362,7 @@ CREATE TABLE `order` (
   PRIMARY KEY (`orderNumber`),
   KEY `order_supplierId_idx` (`supplierId`),
   CONSTRAINT `order_supplierId` FOREIGN KEY (`supplierId`) REFERENCES `supplier` (`supplierId`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,7 +371,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR',0,0),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR',0,0),(15,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:53:36','2021-12-24 17:00:00',NULL,'TAKE_AWAY',81,'Test','test2','','1122',0,'burger,cola,cola,pie,','null,null,null,null,','NA',0,0),(16,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:59:31','2021-12-24 17:00:00',NULL,'DELIVERY',51,'Mosa','Srour','Raanan','123123',25,'cola,fries,','null,null,','REGULAR',0,0),(17,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:01:45','2021-12-24 18:00:00',NULL,'DELIVERY',37,'ss','ss','as','123',25,'cola,','null,','REGULAR',0,0),(18,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:07:43','2021-12-24 18:00:00',NULL,'DELIVERY',37,'s','s','s2s2','2',25,'pie,','null,','REGULAR',0,0),(19,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:12:19','2021-12-24 18:00:00',NULL,'DELIVERY',70,'sds','sds','sasd','12321',25,'burger,','null,','REGULAR',0,0),(20,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:13:41','2021-12-24 17:00:00',NULL,'DELIVERY',70,'asd','asd','s','32432s',25,'pizza,','null,','REGULAR',0,0),(21,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 20:29:33','2021-12-24 21:00:00',NULL,'TAKE_AWAY',40,'mm','mm','','12321',0,'fries,fries,ice cream,','null,big,small,','NA',0,0),(22,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 21:59:19','2021-12-26 23:00:00',NULL,'TAKE_AWAY',12,'ss','ss','','333',0,'cola,','null,','NA',0,0),(23,'2222','1000','customer','SOUTH','REGULAR','PENDING_APPROVAL','2021-12-26 22:00:18','2021-12-26 23:00:00',NULL,'TAKE_AWAY',37,'sds','dsds','','121',0,'caesar,cola,','null,null,','NA',0,0);
+INSERT INTO `order` VALUES (13,'1112','1000','customer','NORTH','PRE','PENDING_APPROVAL','2021-12-22 18:57:24','2021-12-22 22:00:00',NULL,'DELIVERY',58,'hfg','fgdh','dfgs','456',25,'caesar,fries,','null,null,','REGULAR',0,0),(14,'1112','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-22 19:31:08','2021-12-22 20:00:00',NULL,'DELIVERY',49,'dfsga','sdgf','xcvz','345',25,'ice cream,cola,','null,null,','REGULAR',0,0),(15,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:53:36','2021-12-24 17:00:00',NULL,'TAKE_AWAY',81,'Test','test2','','1122',0,'burger,cola,cola,pie,','null,null,null,null,','NA',0,0),(16,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 15:59:31','2021-12-24 17:00:00',NULL,'DELIVERY',51,'Mosa','Srour','Raanan','123123',25,'cola,fries,','null,null,','REGULAR',0,0),(17,'5555','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:01:45','2021-12-24 18:00:00',NULL,'DELIVERY',37,'ss','ss','as','123',25,'cola,','null,','REGULAR',0,0),(18,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:07:43','2021-12-24 18:00:00',NULL,'DELIVERY',37,'s','s','s2s2','2',25,'pie,','null,','REGULAR',0,0),(19,'5555','1002','businesscustomer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:12:19','2021-12-24 18:00:00',NULL,'DELIVERY',70,'sds','sds','sasd','12321',25,'burger,','null,','REGULAR',0,0),(20,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 16:13:41','2021-12-24 17:00:00',NULL,'DELIVERY',70,'asd','asd','s','32432s',25,'pizza,','null,','REGULAR',0,0),(21,'1112','1000','customer','NORTH','REGULAR','PENDING_APPROVAL','2021-12-24 20:29:33','2021-12-24 21:00:00',NULL,'TAKE_AWAY',40,'mm','mm','','12321',0,'fries,fries,ice cream,','null,big,small,','NA',0,0),(22,'2222','1000','customer','SOUTH','REGULAR','UN_APPROVED','2021-12-26 21:59:19','2021-12-26 23:00:00',NULL,'TAKE_AWAY',12,'ss','ss','','333',0,'cola,','null,','NA',0,0),(23,'2222','1000','customer','SOUTH','REGULAR','UN_APPROVED','2021-12-26 22:00:18','2021-12-26 23:00:00',NULL,'TAKE_AWAY',37,'sds','dsds','','121',0,'caesar,cola,','null,null,','NA',0,0),(24,'2222','10000','customer','SOUTH','REGULAR','COMPLETED','2021-12-30 18:27:42','2021-12-30 22:00:00','2021-12-30 20:29:52','DELIVERY',38,'test','test','ss','041212',0,'Olives,','null,','REGULAR',0,0),(25,'2222','10000','customer','SOUTH','REGULAR','COMPLETED','2021-12-30 17:32:35','2021-12-30 21:00:00','2021-12-30 20:33:49','TAKE_AWAY',12,'ss','ss','','0322',0,'Coke,','null,','NA',12,0),(26,'2222','10004','businesscustomer','SOUTH','REGULAR','COMPLETED','2021-12-30 19:07:20','2021-12-30 22:00:00','2021-12-30 21:10:14','DELIVERY',25,'ll','ll','sds','0312',0,'Chicken Wings,','null,','REGULAR',0,3);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,6 +436,7 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
+INSERT INTO `registration` VALUES ('user','10002','PENDING_REGISTRATION','Alexander','Martinov','CENTER',0,'alexander.martinov@gmail.com','0544441200','1002','111','01/35','alexander','alexander','null',0,0),('user','10003','PENDING_REGISTRATION','Shimon','Rubin','CENTER',0,'shimon.rubin@gmail.com','0544441233','1003','111','01/35','shimon','shimon','null',0,0),('user','10005','PENDING_REGISTRATION','Dan','Micheal','SOUTH',0,'dan.micheal@gmail.com','0541112341','1005','111','01/35','dan','dan','null',0,0);
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -539,4 +539,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-30 19:48:15
+-- Dump completed on 2021-12-30 21:15:16
