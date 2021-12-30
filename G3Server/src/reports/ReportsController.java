@@ -1,6 +1,10 @@
 package reports;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.ObjectInputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,6 +42,7 @@ public class ReportsController {
 		ReportQueries.getOrdersByType(suppliers,fromDate, toDate);
 		ReportQueries.getLateSuppliesAmount(suppliers,fromDate, toDate);
 		ReportQueries.getOrderAmounts(suppliers,fromDate, toDate);
+		ReportQueries.getAverageSupplyTime(suppliers,fromDate, toDate);
 		ReportQueries.setIssueDates(suppliers, fromDate);
 		ReportQueries.setReportType(suppliers, type);
 		}
@@ -71,12 +76,38 @@ public class ReportsController {
 			returnMessageToClient.setObject(getQuarterReports(branchAndDate));
 			returnMessageToClient.setAnswer(Answer.SENT_REPORT_QUARTERLY_LIST);
 		}
+		else if(branchAndDate[2].equals("receipt")){
+			returnMessageToClient.setObject(getSupplierIdReport(branchAndDate));
+			returnMessageToClient.setAnswer(Answer.SENT_REPORT_SUPPLIERS_LIST);
+		}
 		else {
 		SupplierByReport[] sentSuppliers=ReportQueries.getSuppliersFromDb(branchAndDate[1],branchAndDate[0], branchAndDate[2]);
 		returnMessageToClient.setObject(sentSuppliers);
 		returnMessageToClient.setAnswer(Answer.SENT_REPORT_SUPPLIERS_LIST);
 		}
 		return returnMessageToClient;
+	}
+	private static Object getSupplierIdReport(String[] supplierIdAndDate) {
+		ResultSet rs;
+		int i=0;
+		SupplierByReport[] supplier=new SupplierByReport[1];
+		rs=Query.getRowsFromTableInDB("reports", "supplier='"+supplierIdAndDate[0]+"' and issueDate='"+supplierIdAndDate[1]+"' and reportType='monthly'");
+		try {
+		while(rs.next()) {
+				if(i==0) {
+					byte[] st = (byte[]) rs.getObject(6);
+				      ByteArrayInputStream baip = new ByteArrayInputStream(st);
+				      ObjectInputStream ois = new ObjectInputStream(baip);
+				      supplier[i] = (SupplierByReport) ois.readObject();
+				      i++;
+				}
+		}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		if(i==0)
+			return null;
+		return supplier;
 	}
 	/**
 	 * gets the three reports needed for a quarter starting from sent date

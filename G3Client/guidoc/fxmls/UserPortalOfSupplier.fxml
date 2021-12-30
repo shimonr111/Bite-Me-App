@@ -67,7 +67,7 @@
                <children>
                   <Button id="button-menu" fx:id="btnManageOrders" mnemonicParsing="false" onAction="#getManageOrdersBtn" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsManage" text="Order Management" />
                   <Button id="button-menu" fx:id="btnManageMenu" mnemonicParsing="false" onAction="#getManageMenuBtn" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsManage" text="Menu Management" />
-                  <Button id="button-menu" mnemonicParsing="false" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View Receipts Summary" />
+                  <Button id="button-menu" fx:id="viewReceiptsBtn" mnemonicParsing="false" onAction="#getViewReceipts" prefHeight="60.0" prefWidth="300.0" styleClass="userPortalMainButtonsView" text="View Receipts Summary" />
                </children>
             </VBox>
          </children>

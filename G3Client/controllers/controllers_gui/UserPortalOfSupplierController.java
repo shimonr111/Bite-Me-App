@@ -67,6 +67,8 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
     
     @FXML
     private Text statusText;
+    @FXML
+    private Button viewReceiptsBtn;
 	
     /**
      * This method....
@@ -130,7 +132,14 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");
 	}
-	
+
+    @FXML
+    void getViewReceipts(ActionEvent event) {
+    	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+    	ViewReceiptsSummaryController viewReceiptsSummaryController = new ViewReceiptsSummaryController();
+    	viewReceiptsSummaryController.initViewReceiptsSummaryScreen(); // call the init of the next screen	
+    }
+
 	/**
 	 * Returns to login screen
 	 * 
