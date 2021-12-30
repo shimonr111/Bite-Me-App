@@ -25,6 +25,7 @@ import controllers_gui.WatchOrderHistoryScreenController;
 import controllers_gui.UsersRegistrationScreenController;
 import controllers_gui.ViewBMQuarterlyReportsScreenController;
 import controllers_gui.ViewQuarterlyReportsScreenController;
+import controllers_gui.ViewReceiptsSummaryController;
 import controllers_gui.ViewSystemReportsScreenCEOController;
 import orders.Item;
 import orders.Order;
@@ -321,9 +322,11 @@ public class AnalyzeMessageFromServer {
 				case SENT_REPORT_SUPPLIERS_LIST:
 					ViewSystemReportsScreenController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					ViewSystemReportsScreenCEOController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
+					ViewReceiptsSummaryController.suppliers=(SupplierByReport[])recivedMessageFromServer.getObject();
 					break;
 				case SENT_REPORT_QUARTERLY_LIST:
 					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[][])recivedMessageFromServer.getObject();
+					ViewSystemReportsScreenController.suppliers=((SupplierByReport[][])recivedMessageFromServer.getObject())[3];
 					break;
 					default:
 						break;

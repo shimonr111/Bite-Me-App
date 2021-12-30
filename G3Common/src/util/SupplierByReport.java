@@ -33,10 +33,24 @@ public class SupplierByReport implements Serializable {
 	private int[] typeSums={0,0,0,0,0};
 	private int totalOrders=0;
 	private int lateOrders=0;
-    /**
+	private String averageSupplyTime;
+	private Double supplierFee;
+	/**
      *only has getter and setter methods
      *and one to string method
      */
+	public String getAverageSupplyTime() {
+		return averageSupplyTime;
+	}
+	public void setAverageSupplyTime(String averageSupplyTime) {
+		this.averageSupplyTime = averageSupplyTime;
+	}
+	public Double getSupplierFee() {
+		return supplierFee;
+	}
+	public void setSupplierFee(Double supplierFee) {
+		this.supplierFee = supplierFee;
+	}
 	public int getTotalOrders() {
 		return totalOrders;
 	}

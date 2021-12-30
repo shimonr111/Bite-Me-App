@@ -2,6 +2,7 @@ package controllers_gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
@@ -173,23 +174,17 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 				switch(type) {
 				case "Incomes":
 					displaySingleReport(ReportGenerator.generateIncomeReport());
-					//PopUpMessages.helpMessage(ReportGenerator.generateIncomeReport());
 					setRelevantTextToDisplayMessageText("");
-					//System.out.print(ReportGenerator.generateIncomeReport());
 					suppliers=null;//flushes supplier reports list to recieve next report
 				break;
 				case "Orders":
 					displaySingleReport(ReportGenerator.generateOrderReport());
-					//PopUpMessages.helpMessage(ReportGenerator.generateOrderReport());
 					setRelevantTextToDisplayMessageText("");
-					//System.out.print(ReportGenerator.generateOrderReport());
 					suppliers=null;
 					break;
 				case "Performance":
 					displaySingleReport(ReportGenerator.generatePerformanceReport());
-					//PopUpMessages.helpMessage(ReportGenerator.generatePerformanceReport());
 					setRelevantTextToDisplayMessageText("");
-					//System.out.print(ReportGenerator.generatePerformanceReport());
 					suppliers=null;
 					break;
 				default:
@@ -386,6 +381,8 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Total Orders: "+supplier.getTotalOrders());
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Late Orders: "+supplier.getLateOrders());
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Late Orders percentage: "+(new DecimalFormat("#0.0").format((supplier.getLateOrders()/(double)supplier.getTotalOrders())*100)));
 			contentStream.newLineAtOffset(0, -15);
 		}  
 	    contentStream.endText();

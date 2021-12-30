@@ -1,8 +1,10 @@
 package controllers_gui;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import util.SupplierByReport;
 /**
@@ -35,6 +37,9 @@ public class ReportGenerator {
 		for(SupplierByReport supplier:suppliers) {
 			report=report+"Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"\n";
 			report=report+"Total Income: "+supplier.getIncome()+"\n";
+			report=report+"BM cut in percentage: "+(new DecimalFormat("#0.00").format(suppliers[0].getSupplierFee()))+"\n";
+			report=report+"Total net income of supplier: "+(new DecimalFormat("#0.00").format((1-((suppliers[0].getSupplierFee())/100))*Double.parseDouble(suppliers[0].getIncome())))+"\n";
+			report=report+"Total BM cut: "+(new DecimalFormat("#0.00").format((((suppliers[0].getSupplierFee())/100))*Double.parseDouble(suppliers[0].getIncome())))+"\n";
 		}
 		return report;
 	}
@@ -43,6 +48,9 @@ public class ReportGenerator {
 		for(SupplierByReport supplier:suppliers) {
 			report=report+"Supplier ID: "+supplier.getSupplierId()+" Name: "+supplier.getSupplierName()+" Branch: "+supplier.getSupplierBranch().toLowerCase()+"\n";
 			report=report+"Total Income: "+supplier.getIncome()+"\n";
+			report=report+"BM cut in percentage: "+(new DecimalFormat("#0.00").format(suppliers[0].getSupplierFee()))+"\n";
+			report=report+"Total net income of supplier: "+(new DecimalFormat("#0.00").format((1-((suppliers[0].getSupplierFee())/100))*Double.parseDouble(suppliers[0].getIncome())))+"\n";
+			report=report+"Total BM cut: "+(new DecimalFormat("#0.00").format((((suppliers[0].getSupplierFee())/100))*Double.parseDouble(suppliers[0].getIncome())))+"\n";
 		}
 		return report;
 	}
@@ -84,6 +92,8 @@ public class ReportGenerator {
 			report=report+"Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"\n";
 			report=report+"Total Orders: "+supplier.getTotalOrders()+"\n";
 			report=report+"Late Orders: "+supplier.getLateOrders()+"\n";
+			report=report+"Late Orders percentage: "+(new DecimalFormat("#0.0").format((supplier.getLateOrders()/(double)supplier.getTotalOrders())*100))+"\n";
+			report=report+"Average supply time: "+supplier.getAverageSupplyTime()+"\n";
 		}
 		return report;
 	}
@@ -93,8 +103,27 @@ public class ReportGenerator {
 			report=report+"Supplier ID: "+supplier.getSupplierId()+" Name: "+supplier.getSupplierName()+" Branch: "+supplier.getSupplierBranch().toLowerCase()+"\n";
 			report=report+"Total Orders: "+supplier.getTotalOrders()+"\n";
 			report=report+"Late Orders: "+supplier.getLateOrders()+"\n";
+			report=report+"Late Orders percentage: "+(new DecimalFormat("#0.0").format((supplier.getLateOrders()/(double)supplier.getTotalOrders())*100))+"\n";
+			report=report+"Average supply time: "+supplier.getAverageSupplyTime()+"\n";
 		}
 		return report;
+	}
+	public static String generateBill() {
+		String bill="Your monthly bill for ";
+		Calendar c= Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			
+			c.setTime(sdf.parse(suppliers[0].getIssueDate()));
+			bill=bill+c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH)+" ";
+			bill=bill+c.get(Calendar.YEAR);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		bill=bill+"\nTotal Order Revenue: "+suppliers[0].getIncome()+" NIS\n";
+		bill=bill+"BM cut in percentage: "+(new DecimalFormat("#0.00").format(suppliers[0].getSupplierFee()));
+		bill=bill+"\nTotal net income: "+(new DecimalFormat("#0.00").format((1-((suppliers[0].getSupplierFee())/100))*Double.parseDouble(suppliers[0].getIncome())));
+		return bill;
 	}
     /**
      * getter method for supplier reports array

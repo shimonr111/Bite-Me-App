@@ -121,7 +121,7 @@ public class ReportQueries {
      */
 	public static void getLateSuppliesAmount(SupplierByReport[] suppliersByPerformance,String fromDate, String toDate) {
 		ResultSet lates=Query.getBasicQuery("(\r\n"
-				+ "SELECT supplierId,timeType, timediff(actualSupplyDateTime, estimatedSupplyDateTime) AS date_difference \r\n"
+				+ "SELECT supplierId,timeType, timediff(actualSupplyDateTime, issueDateTime) AS date_difference \r\n"
 				+ "FROM semesterialproject.order where issueDateTime between '"+fromDate+"' and '"+toDate+"') AS dates \r\n"
 				+ "WHERE (dates.date_difference >'01:00:00' AND dates.timeType='REGULAR') or (dates.date_difference >'00:20:00' AND dates.timeType='PRE')group by supplierId;",
 				"supplierId,count(supplierId) AS lates ");
@@ -157,6 +157,28 @@ public class ReportQueries {
 				for(int i=0;i<suppliersByPerformance.length;i++) {
 					if(suppliersByPerformance[i].getSupplierId().equals(orders.getString(1))){
 						suppliersByPerformance[i].setTotalOrders(orders.getInt(2));//saves total order amount to each supplier in report
+						break;
+						}
+					}
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+    /**
+     * queries orders table to get average supply time of orders by supplier
+     * @param suppliersByPerformance reports array being worked on
+     * @param fromDate date when report starts
+     * @param toDate date when report ends
+     */
+	public static void getAverageSupplyTime(SupplierByReport[] suppliersByPerformance,String fromDate, String toDate) {
+		ResultSet supplyTime=Query.getBasicQuery("semesterialproject.order where issueDateTime between '"+fromDate+"' and '"+toDate+"' group by supplierId",
+				" supplierId,status,(sec_to_time(FLOOR(avg(ABS(TIMESTAMPDIFF(SECOND,actualSupplyDateTime,issueSupplyDateTime)))))) as averageSupply ");
+		try {
+			while(supplyTime.next()) {
+				for(int i=0;i<suppliersByPerformance.length;i++) {
+					if(suppliersByPerformance[i].getSupplierId().equals(supplyTime.getString(1))){//saves amount of late orders by supplierId
+						suppliersByPerformance[i].setAverageSupplyTime(supplyTime.getString(3));
 						break;
 						}
 					}
@@ -210,6 +232,7 @@ public class ReportQueries {
 				supplierForReport[i].setSupplierId(suppliers.getString(1));
 				supplierForReport[i].setSupplierName(suppliers.getString(2));
 				supplierForReport[i].setSupplierBranch(suppliers.getString(3));
+				supplierForReport[i].setSupplierFee(suppliers.getDouble(6));
 				i++;
 			}
 		} catch (SQLException e) {
