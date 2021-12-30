@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -20,6 +21,7 @@ import users.BusinessCustomer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -105,14 +107,16 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     		budgetAmountTxtField.setStyle("-fx-border-color: red");
     	}
     	else {
-    		ArrayList<Object> objectToServer = new ArrayList<>();
-    		objectToServer.add(budgetTypeCombo.getValue());
-    		objectToServer.add(budgetAmountTxtField.getText());
-    		objectToServer.add(workerIdTxtField.getText());
-//    		System.out.println((budgetTypeCombo.getValue() + " " + budgetAmountTxtField.getText()+" " + workerIdTxtField.getText()));
-    		Message message = new Message(Task.CONFIRM_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,objectToServer);
-    		sendToClient(message);
-    		displayText.setText("Worker " + workerFirstNameTxtField.getText() +" is confirmed in system");
+    		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Confirm " +workerFirstNameTxtField.getText() +" ?" );
+    		if(result.get() == ButtonType.OK) {
+	    		ArrayList<Object> objectToServer = new ArrayList<>();
+	    		objectToServer.add(budgetTypeCombo.getValue());
+	    		objectToServer.add(budgetAmountTxtField.getText());
+	    		objectToServer.add(workerIdTxtField.getText());
+	    		Message message = new Message(Task.CONFIRM_BUSINESS_CUSTOMER,Answer.WAIT_RESPONSE,objectToServer);
+	    		sendToClient(message);
+	    		displayText.setText("Worker " + workerFirstNameTxtField.getText() +" is confirmed in system");
+    		}
     	}
     }
 

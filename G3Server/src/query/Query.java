@@ -459,10 +459,10 @@ public class Query {
 				e.printStackTrace();
 			}
 		String query2 = "INSERT INTO semesterialproject." +type+" ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, businessW4cCodeNumber, email, phoneNumber, "
-				+ "privateCreditCard, companyName, budgetType, customerPosition, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
+				+ "privateCreditCard, companyName, budgetType, budgetMaxAmount ,privateW4cCodeNumber ) VALUES ( '" + businessCustomer.getUserId() +  "', '" + businessCustomer.getStatusInSystem().toString()+  "', '" +
 				businessCustomer.getUserFirstName() +  "', '" + businessCustomer.getUserLastName() +  "', '" + businessCustomer.getHomeBranch().toString() +  "', '" + 0 +  "', '" + employerID
 				+  "', '" + businessCustomer.getUserEmail() +  "', '" + businessCustomer.getPhoneNumber() +  "', '" + businessCustomer.getPrivateCreditCard() +  "', '"  + businessCustomer.getCompanyOfBusinessCustomerString() 
-				+ "', '" +  businessCustomer.getBudgetOfBusinessCustomer().toString() + "', '"  + businessCustomer.getPositionType().toString() + "', '"  + businessCustomer.getBudgetMaxAmount() +  "', '" 
+				+ "', '" +  businessCustomer.getBudgetOfBusinessCustomer().toString() + "', '"    + businessCustomer.getBudgetMaxAmount() +  "', '" 
 				+ businessCustomer.getPrivateW4cCodeNumber()+"' )";
 		PreparedStatement pstmt2=null;
 		try {

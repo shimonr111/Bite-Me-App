@@ -30,7 +30,6 @@ import users.Branch;
 import users.BudgetType;
 import users.BusinessCustomer;
 import users.ConfirmationStatus;
-import users.PositionType;
 
 
 /**
@@ -88,8 +87,6 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     @FXML
     private TextField monthlyMaxBudgedTxtField;
 
-    @FXML
-    private ComboBox<PositionType> positionCombo;
 
     @FXML
     private ComboBox<Branch> setHomeBranchCombo;
@@ -262,7 +259,6 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		phoneTxtField.setText(businessCustomer.getPhoneNumber());  emailTxtField.setText(businessCustomer.getUserEmail());
 		monthlyMaxBudgedTxtField.setText(Integer.toString(businessCustomer.getBudgetMaxAmount()));
 		setHomeBranchCombo.setValue(businessCustomer.getHomeBranch());
-		positionCombo.setValue(businessCustomer.getPositionType());
 		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
 		budgetTypeCombo.setValue(businessCustomer.getBudgetOfBusinessCustomer());

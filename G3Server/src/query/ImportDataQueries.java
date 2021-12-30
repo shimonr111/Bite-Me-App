@@ -14,7 +14,6 @@ import users.ConfirmationStatus;
 import users.CreditCard;
 import users.HrManager;
 import users.Login;
-import users.PositionType;
 import users.Supplier;
 import users.SupplierWorker;
 import users.WorkerPosition;

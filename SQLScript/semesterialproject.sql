@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `semesterialproject` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `semesterialproject`;
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: semesterialproject
+-- Host: localhost    Database: semesterialproject
 -- ------------------------------------------------------
--- Server version	8.0.26
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -96,7 +94,6 @@ CREATE TABLE `businesscustomer` (
   `balance` double DEFAULT '0',
   `companyName` varchar(256) DEFAULT NULL,
   `budgetType` enum('DAILY','WEEKLY','MONTHLY') DEFAULT NULL,
-  `customerPosition` enum('HR','REGULAR') DEFAULT NULL,
   `budgetMaxAmount` int DEFAULT NULL,
   `privateW4cCodeNumber` int DEFAULT NULL,
   `budgetUsed` double DEFAULT '0',
@@ -117,7 +114,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',0,'Intel','WEEKLY','REGULAR',200,31062,0);
+INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022','3002',0,'Intel','WEEKLY',200,31062,0);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +197,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('3000','01/35','111'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
+INSERT INTO `creditcard` VALUES ('1000','01/35','111'),('1001','01/35','111'),('3000','01/35','111'),('3002','01/35','111'),('3005','111','01/35'),('3006','111','01/35');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -540,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-30 12:06:55
+-- Dump completed on 2021-12-30 17:33:26
