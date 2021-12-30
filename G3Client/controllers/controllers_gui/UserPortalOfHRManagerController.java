@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -23,16 +22,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import users.Branch;
 import users.ConfirmationStatus;
 import users.HrManager;
-import javafx.scene.control.ComboBox;
 
 /**
  * 
- * @author Mousa, Srour
- * @author Alexander, Martinov
- * @author Lior, Guzovsky
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * @author Lior, Guzovsky.
  * 
  * Class description: 
  * This is a class for 
@@ -43,41 +40,62 @@ import javafx.scene.control.ComboBox;
  */
 public class UserPortalOfHRManagerController extends AbstractBiteMeController  implements Initializable{
 	
-
-	@FXML
-	private Button btnCompanyReg;
-	@FXML
-	private Button btnBusinessCustomerConfirm;
-	@FXML
-	private Button btnExit;
-	@FXML
-	private Button btnLogout;
-	@FXML
-	private Button btnHelp;
-	@FXML
-	private Label customerNameLabel;
-	@FXML
-	private Label companyNameLabel;
-    @FXML
-    private Text hrManagerName;
-    @FXML
-    private Text companyName;
-    @FXML
-    private Text companyStatus;
-    @FXML
-    private Text statusText;
-
+	/**
+	 * Class members description:
+	 */
 	public static FXMLLoader loader;
 	private static UserPortalOfHRManagerController userPortalOfHRManagerController;
 	
-	// Event Listener on Button[#btnCompanyReg].onAction
+	@FXML
+	private Button btnCompanyReg;
+	
+	@FXML
+	private Button btnBusinessCustomerConfirm;
+	
+	@FXML
+	private Button btnExit;
+	
+	@FXML
+	private Button btnLogout;
+	
+	@FXML
+	private Button btnHelp;
+	
+	@FXML
+	private Label customerNameLabel;
+	
+	@FXML
+	private Label companyNameLabel;
+	
+    @FXML
+    private Text hrManagerName;
+    
+    @FXML
+    private Text companyName;
+    
+    @FXML
+    private Text companyStatus;
+    
+    @FXML
+    private Text statusText;
+
+    /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getCompanyReg(ActionEvent event) {
 		CompanyRegistartionScreenController companyRegistartionScreenController = new CompanyRegistartionScreenController();
 		companyRegistartionScreenController.initCompanyRegistrationScreen();
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
-	// Event Listener on Button[#btnBusinessCustomerConfirm].onAction
+	
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getBusinessCustomerConfirm(ActionEvent event) {
 		BusinessCustomerConfirmationScreenController businessCustomerConfirmationScreenController = new BusinessCustomerConfirmationScreenController();
@@ -85,7 +103,11 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 	
-	// Event Listener on Button[#btnExit].onAction
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -96,7 +118,11 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 		System.exit(0);
 	}
 	
-	// Event Listener on Button[#btnLogout].onAction
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -107,18 +133,18 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	
 	/**
 	 * This is pop message for the help button.
+	 * 
 	 * @param event
 	 */
-	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");	
 
 	}
 
-	
 	/**
 	 * Returns to login screen
+	 * 
 	 * @param event
 	 */
 	private void setToLoginScreen(ActionEvent event) {
@@ -185,8 +211,9 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 			}
 		});
 	}
+	
 	/**
-	 * this method will be called from the next screen when clicking on back button
+	 * This method will be called from the next screen when clicking on back button
 	 */
 	public void initPortalAgain() {
 		loader = new FXMLLoader();
@@ -215,6 +242,9 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	
 	/**
 	 * This method sets the correct values of the hrManager in portal.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

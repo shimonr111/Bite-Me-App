@@ -1,10 +1,10 @@
 package controllers_gui;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -30,13 +30,12 @@ import users.Branch;
 import users.BudgetType;
 import users.BusinessCustomer;
 import users.ConfirmationStatus;
-import users.HrManager;
-import users.PositionType;
-import util.DataLists;
+
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Edit Business Customer that appears immediately after clicking
@@ -46,14 +45,14 @@ import util.DataLists;
  * @version 13/12/2021
  */
 
-public class EditBusinessCustomerInformationScreenController extends AbstractBiteMeController implements Initializable {
+public class EditBusinessCustomerInformationScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
 	private static FXMLLoader loader;
     private static EditBusinessCustomerInformationScreenController editBusinessCustomerInformationScreenController;
     public static BusinessCustomer businessCustomer;
-    
     
 	@FXML
     private Button btnExit;
@@ -88,8 +87,6 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     @FXML
     private TextField monthlyMaxBudgedTxtField;
 
-    @FXML
-    private ComboBox<PositionType> positionCombo;
 
     @FXML
     private ComboBox<Branch> setHomeBranchCombo;
@@ -103,13 +100,16 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     @FXML
     private ComboBox<ConfirmationStatus> statusComboBox;
     
-
-    
     @FXML
     private Text displayMessage;
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getSaveBtn(ActionEvent event) {
+    public void getSaveBtn(ActionEvent event) {
     	ConfirmationStatus oldStatus = businessCustomer.getStatusInSystem();
     	String newStatus = statusComboBox.getValue().toString();
     	if(oldStatus.toString().equals(newStatus)) {
@@ -142,15 +142,23 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     	}
     }
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setEditCustomerInformationScreen(event);
     }
 
-
-
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -159,16 +167,20 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		System.exit(0);
     }
 
-
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can edit business customers information.");
 
     }
 
     
     /**
-     * sets the screen , it will be called from previous screen.
+     * Sets the screen , it will be called from previous screen.
      */
 	public void initEditBusinessCustomerInformationScreen() {
 		Platform.runLater(new Runnable() {
@@ -202,7 +214,8 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 	}
 	
 	/**
-	 *  this method for the back button , it sets the previous screen.
+	 *  This method for the back button , it sets the previous screen.
+	 *  
 	 * @param event
 	 */
 	public void setEditCustomerInformationScreen(ActionEvent event) {
@@ -234,7 +247,10 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 	}
 	
     /**
-     * this method initialize the fields and combo boxes accordingly.
+     * This method initialize the fields and combo boxes accordingly.
+     * 
+     * @param arg0
+     * @param arg1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -243,13 +259,10 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 		phoneTxtField.setText(businessCustomer.getPhoneNumber());  emailTxtField.setText(businessCustomer.getUserEmail());
 		monthlyMaxBudgedTxtField.setText(Integer.toString(businessCustomer.getBudgetMaxAmount()));
 		setHomeBranchCombo.setValue(businessCustomer.getHomeBranch());
-		positionCombo.setValue(businessCustomer.getPositionType());
 		companyNameCombo.setValue(businessCustomer.getcompanyOfBusinessCustomer().getCompanyName());
 		statusComboBox.setValue(businessCustomer.getStatusInSystem());
 		budgetTypeCombo.setValue(businessCustomer.getBudgetOfBusinessCustomer());
-		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN);
-
-		
+		statusComboBox.getItems().addAll(ConfirmationStatus.CONFIRMED,ConfirmationStatus.FROZEN);		
 	}
 
 }

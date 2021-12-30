@@ -202,7 +202,7 @@
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*CVV:" />
                                     <HBox prefHeight="24.0" prefWidth="137.0">
                                        <children>
-                                          <TextField fx:id="cvvTxtField" editable="false" maxWidth="80.0" prefHeight="30.0" prefWidth="80.0" promptText="e.g - 123" styleClass="text-field" />
+                                          <TextField fx:id="cvvTxtField" disable="true" editable="false" maxWidth="80.0" prefHeight="30.0" prefWidth="80.0" promptText="e.g - 123" styleClass="text-field" />
                                           <Pane maxHeight="30.0" maxWidth="50.0" prefHeight="30.0" prefWidth="50.0" styleClass="cvvPane" />
                                        </children>
                                     </HBox>
@@ -229,15 +229,9 @@
                                     <ComboBox fx:id="companyNameCombo" prefHeight="30.0" prefWidth="111.0" promptText="Companies" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="72.0" prefWidth="116.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Position" />
-                                    <ComboBox fx:id="positionCombo" onAction="#getPositionComboBox" prefHeight="30.0" prefWidth="114.0" promptText="Position" />
-                                 </children>
-                              </VBox>
                            </children>
                            <padding>
-                              <Insets left="25.0" />
+                              <Insets left="80.0" />
                            </padding>
                         </HBox>
                      </children>

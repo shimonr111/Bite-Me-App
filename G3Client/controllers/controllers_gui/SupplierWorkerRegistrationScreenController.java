@@ -11,22 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.Branch;
 import users.ConfirmationStatus;
-import users.CreditCard;
-import users.Customer;
 import users.Login;
-import users.PositionType;
 import users.Supplier;
 import users.SupplierWorker;
 import users.UserForRegistration;
 import users.WorkerPosition;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Map.Entry;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -46,8 +40,9 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour
- * @author Alexander, Martinov
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of SupplierWorker registration Screen that appears immediately after clicking
@@ -56,7 +51,8 @@ import javafx.fxml.Initializable;
  * 
  * @version 15/12/2021
  */
-public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeController implements Initializable {
+public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
@@ -66,6 +62,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
     private ArrayList<TextField> integerFields = new ArrayList<>();
     public static Map<String,String> suppliersList = new HashMap<>(); 
     public static Supplier supplier = new Supplier(null, null, null, null, null, 0,null);
+    
 	   @FXML
 	    private TextField resturantNameTxtField;
 	   
@@ -121,11 +118,12 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    private Text displayMessage;
 	    
 	    /**
-	     * log out and then exit.
+	     * Log out and then exit.
+	     * 
 	     * @param event
 	     */
 	    @FXML
-	    void getExitBtn(ActionEvent event) {
+	    public void getExitBtn(ActionEvent event) {
 	      	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 	      	sendToClient(message);
 	    	connectedUser = null;
@@ -135,21 +133,23 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    }
 	    
 	    /**
-	     * displays a message to the user.
+	     * Displays a message to the user.
+	     * 
 	     * @param event
 	     */
 	    @FXML
-	    void getHelpBtn(ActionEvent event) {
+	    public void getHelpBtn(ActionEvent event) {
 	    	PopUpMessages.helpMessage("On this screen you can register supplier worker.");
 	    }
 	    
 	    /**
-	     * this method runs after clicking on save button, it checks if all the fields were filled correctly 
+	     * This method runs after clicking on save button, it checks if all the fields were filled correctly 
 	     * creates a relevant message to the server to insert the data into DB.
+	     * 
 	     * @param event
 	     */
 	    @FXML
-	    void getSaveBtn(ActionEvent event) {
+	    public void getSaveBtn(ActionEvent event) {
 	    	if(checkAllFields()) {
 	    		String supplierName=chooseResComboBox.getValue();
 	        	for(Entry<String, String> entry: suppliersList.entrySet()) {
@@ -183,6 +183,11 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    	}
 	    }
 	    
+	    /**
+	     * This method..
+	     * 
+	     * @return WorkerPosition
+	     */
 	    private WorkerPosition getWorkerPosition() {
 	    	if(workerCombo.getValue().equals("Certified worker"))
 	    			return WorkerPosition.CERTIFIED;
@@ -190,7 +195,8 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    }
 
 		/**
-	     * calls the method that loads the previous screen.
+	     * Calls the method that loads the previous screen.
+	     * 
 	     * @param event
 	     */
 	    @FXML
@@ -199,10 +205,10 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    }
 	
 	    /**
-	     * 
-	     * this method checks if all the fields are filled
+	     * This method checks if all the fields are filled
 	     * in addition here we check if the input were correct.
-	     * @return
+	     * 
+	     * @return boolean: true if fill all fields
 	     */
 	 	public boolean checkAllFields() {
 	 		boolean returnVal=true;
@@ -246,6 +252,13 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	 		}
 	 		return true;
 	 	}
+	 	
+	 	 /**
+	     * This method...
+	     * 
+	     * @param comboBox
+	     * @param message
+	     */
 	    public boolean checkComboBoxInput(ComboBox comboBox, String message) {
 	    	if(comboBox.getValue().equals(message))
 	    		return false;
@@ -253,7 +266,8 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    }
 	 	
 	 	/**
-	 	 * this method checks if the textField contains numbers only.
+	 	 * This method checks if the textField contains numbers only.
+	 	 * 
 	 	 * @param txtField
 	 	 * @return true or false according to the input.
 	 	 */
@@ -266,9 +280,8 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	 		}
 	 	}
 	 	
-	    
 	    /**
-	     * this method loads the current screen, it will be called from the previous screen.
+	     * This method loads the current screen, it will be called from the previous screen.
 	     */
 		public void initSupplierRegistrationScreen() {
 			Platform.runLater(new Runnable() {
@@ -302,6 +315,7 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 		
 	    /**
 	     * This method sets the previous screen .
+	     * 
 	     * @param event
 	     */
 	    public void setUserRegistrationScreen(ActionEvent event) {
@@ -333,7 +347,8 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 	    }
 		
 	 	/**
-	 	 * this method sets a message from the listeners to the displayMessage .
+	 	 * This method sets a message from the listeners to the displayMessage .
+	 	 * 
 	 	 * @param message
 	 	 */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
@@ -347,7 +362,10 @@ public class SupplierWorkerRegistrationScreenController extends AbstractBiteMeCo
 		}
 	 	
 	 	/**
-	 	 * this method initialize all the fields and boxes and  listeners accordingly.
+	 	 * This method initialize all the fields and boxes and  listeners accordingly.
+	 	 * 
+	 	 * @param arg0
+	 	 * @param  arg1
 	 	 */
 	 	@Override
 	 	public void initialize(URL arg0, ResourceBundle arg1) {

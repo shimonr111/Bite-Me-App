@@ -21,7 +21,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import orders.Order;
 import users.ConfirmationStatus;
 import users.SupplierWorker;
 import users.WorkerPosition;
@@ -37,30 +36,45 @@ import users.WorkerPosition;
  * 
  * @version 15/12/2021
  */
-public class UserPortalOfSupplierController extends AbstractBiteMeController  implements Initializable {
+public class UserPortalOfSupplierController extends AbstractBiteMeController  implements Initializable{
+	
+	/**
+	 * Class members description:
+	 */
+	public static FXMLLoader loader;
+	private static UserPortalOfSupplierController userPortalOfSupplierController;
+	
 	@FXML
 	private Button btnExit;
+	
 	@FXML
 	private Button btnLogout;
+	
 	@FXML
 	private Button btnManageOrders;
+	
 	@FXML
 	private Button btnManageMenu;
+	
 	@FXML
 	private Text supplierName;
+	
 	@FXML
 	private Button btnHelp;
+	
     @FXML
     private Text resturantName;
+    
     @FXML
     private Text statusText;
     @FXML
     private Button viewReceiptsBtn;
 	
-	public static FXMLLoader loader;
-	private static UserPortalOfSupplierController userPortalOfSupplierController;
-	
-	// Event Listener on Button[#btnExit].onAction
+    /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -70,7 +84,12 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 		sendToClient(disconnectMessage);
 		System.exit(0);
 	}
-	// Event Listener on Button[#btnLogout].onAction
+	
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -85,14 +104,18 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	 * 
 	 * @param event
 	 */
-	// Event Listener on Button[#btnManageOrders].onAction
 	@FXML
 	public void getManageOrdersBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		SupplierWorkerManageOrders supplierWorkerManageOrders = new SupplierWorkerManageOrders();
 		supplierWorkerManageOrders.initSupplierWorkerManageOrdersScreen(); // call the init of the next screen	
 	}
-	// Event Listener on Button[#btnManageMenu].onAction
+	
+	/**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	public void getManageMenuBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -102,21 +125,24 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	
 	/**
 	 * This is pop message for the help button.
+	 * 
 	 * @param event
 	 */
-	// Event Listener on Button[#btnHelp].onAction
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("This is you'r the User-Portal, from here you can access the system functionalities!");
 	}
+
     @FXML
     void getViewReceipts(ActionEvent event) {
     	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
     	ViewReceiptsSummaryController viewReceiptsSummaryController = new ViewReceiptsSummaryController();
     	viewReceiptsSummaryController.initViewReceiptsSummaryScreen(); // call the init of the next screen	
     }
+
 	/**
 	 * Returns to login screen
+	 * 
 	 * @param event
 	 */
 	private void setToLoginScreen(ActionEvent event) {
@@ -184,10 +210,12 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 		});
 	}
 	
-	
 	/**
-	 * set the supplier details on the supplierPortal according
+	 * Set the supplier details on the supplierPortal according
 	 * to the connected supplier.
+	 * 
+	 * @param arg0
+	 * @param arg1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

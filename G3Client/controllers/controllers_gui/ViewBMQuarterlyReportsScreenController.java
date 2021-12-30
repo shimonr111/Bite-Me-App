@@ -3,10 +3,8 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.Year;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -27,8 +25,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -36,21 +32,26 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-import orders.Item;
-import orders.ItemWithPicture;
+
 /**
  * 
- * @author Alexander, Martinov
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of downloading quarterly BM report pdfs
  * 
  * @version 27/12/2021
  */
-public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable {
+public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
+	private static FXMLLoader loader;
+	private static ViewBMQuarterlyReportsScreenController viewBMQuarterlyReportsScreenController;
+	public static String[][] pdfList=null;
+	public static byte[] pdfFile=null;
 
 	@FXML
 	private ComboBox<String> ReportQuarter;
@@ -78,6 +79,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 
     @FXML
     private Text errorText;
+    
     @FXML
     private TableColumn<String[], String> filenameColumn=new TableColumn();
     
@@ -89,15 +91,22 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 
 	@FXML
 	private Button viewReportBtn;
-	private static FXMLLoader loader;
-	private static ViewBMQuarterlyReportsScreenController viewBMQuarterlyReportsScreenController;
-	public static String[][] pdfList=null;
-	public static byte[] pdfFile=null;
+	
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	void getBackBtn(ActionEvent event) {
 		setCeoPortal(event);
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -108,11 +117,21 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		System.exit(0);
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view uploaded branch reports by selecting the time range and report type.");
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
     void getReport(ActionEvent event) {
     	if(pdfTable.getSelectionModel().getSelectedItem()!=null) {
@@ -139,6 +158,11 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     	}
     }
 
+    /**
+     * This method....
+     * 
+     * @param event
+     */
     @FXML
     void searchReport(ActionEvent event) {
     	if(checkDate()) {
@@ -185,6 +209,11 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     		}
     }
     	
+    /**
+     * This method....
+     * 
+     * @return boolean
+     */
     	public boolean checkDate() {
     		if(ReportYear.getValue().equals("Year")) {
     			setRelevantTextToDisplayMessageText("Please Select A Year");
@@ -206,7 +235,9 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 			
     	}
     	/**
-    	 *sets message to small text field on the bottom
+    	 *Sets message to small text field on the bottom
+    	 *
+    	 *@param message
     	 */
 	private void setRelevantTextToDisplayMessageText(String message) {
 	Platform.runLater(new Runnable() {
@@ -217,8 +248,10 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	});
 }
 	
-	  /**
-     * loads the previous screen after clicking on back button.
+	 /**
+     * Loads the previous screen after clicking on back button.
+     * 
+     * @param event
      */
 	public void setCeoPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -247,10 +280,10 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		});
 
 	}
+	
 	/**
 	 * This is the initialization function for this 
 	 * screen when switched to.
-	 * 
 	 */
 	public void initViewBMQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
@@ -282,6 +315,12 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		});
 	}
 
+	 /**
+     * This method....
+     * 
+     * @param arg0
+     * @param arg1
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ReportYear.setValue("Year");

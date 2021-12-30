@@ -3,14 +3,12 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,14 +22,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import orders.DeliverySupplyMethod;
 import orders.DeliveryType;
 import orders.Order;
-import users.Branch;
 import util.Constans;
 import util.DataLists;
-
 
 /**
  * 
@@ -43,20 +38,19 @@ import util.DataLists;
  * the UI of the delivery method
  * that was picked by the user.
  * 
- * 
- * 
  * @version 17/12/2021
  */
 public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeController implements Initializable{
+	
 	 /**
 	 * Class members description:
 	 */
-
 	private static FXMLLoader loader;
     private static OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController;
     private static Order order;
     private static  DeliveryType deliveryType;
     private static DeliverySupplyMethod deliveryInformation;
+    
     @FXML
     private TextField addressTextField;
 
@@ -102,11 +96,10 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 	/**
      * Back button for the 
      * 
-     * 
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	//fix the back button so that the price will be without the fee and the discount
     	switch(order.getTimeType()) {
   		case PRE:
@@ -156,7 +149,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -165,7 +158,6 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 		System.exit(0);
     }
     
-    
    /**
      * This is a method for getting 
      * information for the user
@@ -173,7 +165,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you insert you'r contact information for the Delivery process.!");
     }
 
@@ -182,13 +174,10 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * This function is used for
      * switching to the next screen and 
      * 
-     * 
-     *
-     * 
      * @param event
      */
     @FXML
-    void getNextBtn(ActionEvent event) {
+    public void getNextBtn(ActionEvent event) {
     	if(isEmptyFields()) {
     		errorText.setText("Please fill all the required fields (*)!");
     		errorText.setFill(Color.RED);
@@ -276,6 +265,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	* This function is called from the previous 
   	* screen controller.
   	* 
+  	* @param order
+  	* @param deliveryType
   	*/
     public void initDeliveryMethodScreen(Order order, DeliveryType deliveryType) {
 		Platform.runLater(new Runnable() {
@@ -309,11 +300,12 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 		OrderAMealDeliveryMethodScreenController.deliveryType=deliveryType;
 	}
 
-
   	 /**
      * This is a function for 
      * initializing the screen.
      * 
+     * @param arg0
+     * @param arg1
      */
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -340,11 +332,9 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   		phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
 		}
 		
-
   	/**
   	 * Calculate the total bill depending on
   	 * the fee and the time type order (Pre order and Regular)
-  	 * 
   	 */
   	private void calcTotalBill() {
   		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
@@ -359,7 +349,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	}
   	
   	/**
- 	 * this method checks if the textField contains numbers only.
+ 	 * This method checks if the textField contains numbers only.
+ 	 * 
  	 * @param txtField
  	 * @return true or false according to the input.
  	 */

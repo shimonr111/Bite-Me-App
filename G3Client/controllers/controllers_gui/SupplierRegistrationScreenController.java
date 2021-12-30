@@ -22,16 +22,12 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import users.Company;
 import users.Supplier;
-import users.UserForRegistration;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -40,7 +36,8 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour
+ * @author Mousa, Srour.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Supplier Registration Screen that appears immediately after clicking
@@ -49,6 +46,7 @@ import javafx.fxml.Initializable;
  * @version 22/12/2021
  */
 public class SupplierRegistrationScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * class members description:
 	 */
@@ -92,13 +90,23 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     @FXML
     private TableView<Supplier> suppliersTable;
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	setBranchManagerPortal(event);
     }
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getCompleteRegistrationBtn(ActionEvent event) {
+    public void getCompleteRegistrationBtn(ActionEvent event) {
     	Supplier selectedSupplier = suppliersTable.getSelectionModel().getSelectedItem();
     	if(selectedSupplier != null) {
     		Optional<ButtonType> result = PopUpMessages.confirmationMessage("Are you sure you want to confirm:" + selectedSupplier.getSupplierName() + "?");
@@ -114,8 +122,13 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     	}
     }
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
        	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
       	sendToClient(message);
     	connectedUser = null;
@@ -124,13 +137,18 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
    		System.exit(0);
     }
 
+    /**
+     * This method...
+     * 
+     * @param event
+     */
     @FXML
     void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("Confirm or Deny the supplier registration requests by clicking on the buttons while selecting suppliers at the table!");
     }
     
     /**
-     * this method loads the current screen, it will be called from the previous screen.
+     * This method loads the current screen, it will be called from the previous screen.
      */
 	public void initSupplierRegistrationScreen() {
 		Platform.runLater(new Runnable() {
@@ -163,7 +181,8 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	}
     
     /**
-	 * this method loads the previous screen.
+	 * This method loads the previous screen.
+	 * 
 	 * @param event
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
@@ -193,6 +212,13 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 			});
 		
 	}
+	
+	/**
+     * This method...
+     * 
+     * @param arg0
+     * @param arg1
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ObservableList<Supplier> suppliersObservable = FXCollections.observableArrayList();

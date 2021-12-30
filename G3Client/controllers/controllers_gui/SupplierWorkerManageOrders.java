@@ -1,20 +1,17 @@
 package controllers_gui;
-//import com.sun.activation:javax.activation
-import javax.activation.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
-
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import bitemeclient.PopUpMessages;
 import clientanalyze.AnalyzeClientListener;
 import clientanalyze.AnalyzeMessageFromServer;
@@ -51,8 +48,8 @@ import users.SupplierWorker;
 
 /**
  * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
  * 
  * Class description: 
  * This is a class for managing all the orders
@@ -62,10 +59,10 @@ import users.SupplierWorker;
  * @version 21/12/2021
  */
 public class SupplierWorkerManageOrders extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-
 	private static FXMLLoader loader;
     private static SupplierWorkerManageOrders supplierWorkerManageOrders;
 	public static ArrayList<Order> orderListFromDB = new ArrayList<>();
@@ -73,6 +70,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	private static AnalyzeClientListener listener;
 	public static ObservableList<Order> ordersForManageOrderTable;
 	public static String approvedCustomerEmail;
+	
 	@FXML
     private Button btnExit;
 
@@ -103,7 +101,6 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     @FXML
     private Text errorText;
     
-
     @FXML
     private TextField searchTextField;
     
@@ -114,7 +111,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	/*TBD: delete observable list*/
     	updateOrders.clear();// clear this array for the next time we come back for this screen
     	AnalyzeMessageFromServer.removeClientListener(listener); //delete listener from listener list
@@ -153,7 +150,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -169,17 +166,13 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can manage the resturant orders (update the orders status).");
     }
 
-	
 	/**
 	 * This is the initialization function for this 
 	 * screen.
-	 * 
-	 * @param primaryStage
-	 * @param fxmlPath
 	 */
 	public void initSupplierWorkerManageOrdersScreen() {
 		/*Add listener for */
@@ -224,7 +217,12 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		});
 	}
 	
-	
+	/**
+	 * This method....
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -346,6 +344,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	/**
 	 * This method sets the properties of so send an email
 	 * to the customer's email.
+	 * 
 	 * @param reciever
 	 * @throws Exception
 	 */
@@ -375,8 +374,13 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 		
 	}
 	
-	/*
+	/**
 	 * This method prepared the message to send it via email.
+	 * 
+	 * @param session
+	 * @param myEmail
+	 * @param reciever
+	 * @return prepareMessage
 	 */
 	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever) {
 		try {

@@ -35,10 +35,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 */
 	protected BudgetType budgetOfBusinessCustomer;
 
-	/**
-	 * This is the customers position in the company.
-	 */
-	protected PositionType businessCustomerPosition;
 
 	/**
 	 * Each business customer has a budget that he cannot exceed.
@@ -61,7 +57,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * 
 	 */
 	protected double budgetUsed;
-
+	
 	/**
 	 * This is the constructor used for passing the object.
 	 * 
@@ -75,27 +71,27 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * @param userEmail
 	 * @param phoneNumber
 	 * @param privateCreditCard
+	 * @param balance
 	 * @param companyOfBusinessCustomer
 	 * @param budgetOfBusinessCustomer
-	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
 			String privateCreditCard, double balance, Company companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount) {
+			 int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, W4CCodeNumber,
 				userEmail, phoneNumber, privateCreditCard, balance);
 		this.companyOfBusinessCustomer = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
-		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
 		this.isLoggedInAsBusinessAccount = false;
 		this.budgetUsed = 0;
 	}
 	
+
 	/**
-	 * This is the constructor for first creation;
+	 * This is the constructor for first creation.
 	 * 
 	 * @param userId
 	 * @param statusInSystem
@@ -108,18 +104,16 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * @param privateCreditCard
 	 * @param companyOfBusinessCustomer
 	 * @param budgetOfBusinessCustomer
-	 * @param businessCustomerPosition
 	 * @param budgetMaxAmount
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,
 			String privateCreditCard, String companyOfBusinessCustomer, BudgetType budgetOfBusinessCustomer,
-			PositionType businessCustomerPosition, int budgetMaxAmount) {
+			 int budgetMaxAmount) {
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber, privateCreditCard);
 		this.companyOfBusinessCustomerString = companyOfBusinessCustomer;
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
-		this.businessCustomerPosition = businessCustomerPosition;
 		this.budgetMaxAmount = budgetMaxAmount;
 		this.isLoggedInAsBusinessAccount = false;
 		this.budgetUsed = 0;
@@ -134,9 +128,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 		return budgetOfBusinessCustomer;
 	}
 	
-	public PositionType getPositionType() {
-		return  businessCustomerPosition;
-	}
 
 	public void setBudgetOfBusinessCustomer(BudgetType budgetOfBusinessCustomer) {
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;

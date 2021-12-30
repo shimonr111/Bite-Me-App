@@ -8,16 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
-
-import javax.swing.DefaultComboBoxModel;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,14 +26,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import users.BusinessCustomer;
-import users.HrManager;
+
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
  * @author Alexander, Martinov
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of the restaurant 
@@ -46,10 +42,10 @@ import users.HrManager;
  * @version 15/12/2021
  */
 public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeController implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
-	
 	private static FXMLLoader loader;
     private static OrderChooseResturantInOrderScreenController orderChooseResturantInOrderScreenController;
     /*This array List will help us to get the data we want 
@@ -83,7 +79,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * @param event
      */
     @FXML
-    void getBackBtn(ActionEvent event) {
+    public void getBackBtn(ActionEvent event) {
     	if(connectedUser instanceof BusinessCustomer) {
     		((BusinessCustomer) connectedUser).setLoggedInAsBusinessAccount(false);
     	}
@@ -126,7 +122,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * @param event
      */
     @FXML
-    void getBtnNext(ActionEvent event) {
+    public void getBtnNext(ActionEvent event) {
     	String pickedRestaurntName =  chooseResComboBox.getValue(); //Receive the restaurants name from the user
     	String pickedRestaurantId = null;
     	if(chooseResComboBox.getValue() == null) {
@@ -155,7 +151,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * @param event
      */
     @FXML
-    void getExitBtn(ActionEvent event) {
+    public void getExitBtn(ActionEvent event) {
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
@@ -171,7 +167,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * @param event
      */
     @FXML
-    void getHelpBtn(ActionEvent event) {
+    public void getHelpBtn(ActionEvent event) {
     	PopUpMessages.helpMessage("On this screen you can choose the resturant you want to order from, to view the resturant menu please click next.");
     }
 
@@ -216,6 +212,8 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * This is a function for 
      * initializing the screen.
      * 
+     * @param arg0
+     * @param arg1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

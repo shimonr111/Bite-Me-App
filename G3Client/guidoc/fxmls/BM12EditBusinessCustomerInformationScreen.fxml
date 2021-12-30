@@ -162,15 +162,9 @@
                                     <ComboBox fx:id="companyNameCombo" disable="true" prefHeight="30.0" prefWidth="111.0" promptText="Companies" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="72.0" prefWidth="116.0">
-                                 <children>
-                                    <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Position:" />
-                                    <ComboBox fx:id="positionCombo" disable="true" prefHeight="30.0" prefWidth="114.0" promptText="Position" />
-                                 </children>
-                              </VBox>
                            </children>
                            <padding>
-                              <Insets left="25.0" />
+                              <Insets left="80.0" />
                            </padding>
                         </HBox>
                      </children>

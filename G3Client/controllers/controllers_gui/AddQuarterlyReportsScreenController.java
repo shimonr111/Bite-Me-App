@@ -1,11 +1,11 @@
 package controllers_gui;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-
 import bitemeclient.PopUpMessages;
 import communication.Answer;
 import communication.Message;
@@ -25,20 +25,26 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+
 /**
  * 
- * @author Alexander, Martinov
+ * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This is a class for 
  * controlling the UI of adding quarterly reports by BM
  * 
  * @version 27/12/2021
  */
-public class AddQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable {
-	/**
-	 * Class members description:
-	 */
-
+public class AddQuarterlyReportsScreenController extends AbstractBiteMeController implements Initializable{
+	
+	    /**
+	    * Class members description:
+	    */
+	    private static FXMLLoader loader;
+	    private static AddQuarterlyReportsScreenController addQuarterlyReportsScreenController;
+	    private static File quarterlyPDF=null;
+	
 	    @FXML
 	    private Button btnBack;
 
@@ -56,17 +62,24 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 
 	    @FXML
 	    private Button uploadReportBtn;
-		private static FXMLLoader loader;
-		private static AddQuarterlyReportsScreenController addQuarterlyReportsScreenController;
-		private static File quarterlyPDF=null;
 
+	    /**
+	     * This is a function
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getBackBtn(ActionEvent event) {
+	    public void getBackBtn(ActionEvent event){
 	    	setBranchManagerPortal(event);
 	    }
 
+	    /**
+	     * This is a function
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getExitBtn(ActionEvent event) {
+	    public void getExitBtn(ActionEvent event){
 			Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 			sendToClient(message);
 			connectedUser = null;
@@ -75,13 +88,23 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 			System.exit(0);
 	    }
 
+	    /**
+	     * This is a function
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getHelpBtn(ActionEvent event) {
+	    public void getHelpBtn(ActionEvent event){
 	    	PopUpMessages.helpMessage("Please select the report file and click upload");
 	    }
 
+	    /**
+	     * This is a function
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getSaveBtn(ActionEvent event) {
+	    public void getSaveBtn(ActionEvent event){
 	    	if(quarterlyPDF!= null) {
 	    		Object[] sentFiles=new Object[3];
 	    		String branchName = connectedUser.getHomeBranch().toString();
@@ -103,34 +126,43 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	    	setRelevantTextToDisplayMessageText("Please select a report to upload");
 	    }
 
+	    /**
+	     * This is a function
+	     * 
+	     * @param event
+	     */
 	    @FXML
-	    void getUploadReport(ActionEvent event) {
+	    public void getUploadReport(ActionEvent event){
 	    	 FileChooser fileChooser = new FileChooser();
 	 	     FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
 	         fileChooser.getExtensionFilters().add(extFilter);
 	         Stage stage= new Stage();
 	         quarterlyPDF = fileChooser.showOpenDialog(stage);
 	    }
-/**
- *sets message to small text field on the bottom
- */
- 	private void setRelevantTextToDisplayMessageText(String message) {
-		Platform.runLater(new Runnable() {
+
+	    /**
+	     * This is a function
+	     * 
+	     * @param message
+	     */
+ 	     private void setRelevantTextToDisplayMessageText(String message){
+		    Platform.runLater(new Runnable(){
 			@Override
-			public void run() {
+			public void run(){
 				addQuarterlyReportsScreenController.errorText.setText(message);
 			}
 		});
-		
-	
 }
-		  /**
-	     * loads the previous screen after clicking on back button.
-	     */
-		public void setBranchManagerPortal(ActionEvent event) {
-			Platform.runLater(new Runnable() {
+ 	     
+ 	    /**
+ 	     * This is a function
+ 	     * 
+ 	     * @param event
+ 	     */
+		 public void setBranchManagerPortal(ActionEvent event){
+			Platform.runLater(new Runnable(){
 				@Override
-				public void run() {
+				public void run(){
 					FXMLLoader loader = new FXMLLoader();
 					Pane root;
 					try {
@@ -139,14 +171,14 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 						root = loader.load(getClass().getResource("/fxmls/UserPortalOfBranchManager.fxml").openStream());
 						UserPortalOfBranchManagerController UOBMC = new UserPortalOfBranchManagerController();
 						UOBMC.initPortalAgain();
-						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+						Stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 							@Override
-							public void handle(WindowEvent event) { 
+							public void handle(WindowEvent event){ 
 								event.consume();
 								Stage.close();
 							}
 						});
-					} catch (IOException e) {
+					} catch (IOException e){
 						e.printStackTrace();
 					}
 					((Node) event.getSource()).getScene().getWindow().hide();
@@ -155,15 +187,16 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 
 		}
 		
-		/**
-		 * This is the initialization function for this 
-		 * screen when switched to.
-		 * 
-		 */
-		public void initAddQuarterlyReportsScreen() {
-			Platform.runLater(new Runnable() {
+	       /**
+		     * This is the initialization function for this 
+		     * screen when switched to.
+		     * 
+		     * @param message
+		     */
+		     public void initAddQuarterlyReportsScreen(){
+		     	Platform.runLater(new Runnable(){
 				@Override
-				public void run() {
+				public void run(){
 					loader = new FXMLLoader();
 					Pane root;
 					try {
@@ -189,9 +222,16 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 				}
 			});
 		}
-		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-		}
+		     
+		       /**
+			     * This is a function 
+			     * 
+			     * @param arg0
+			     * @param arg1
+			     */
+		        @Override
+		        public void initialize(URL arg0, ResourceBundle arg1) {
+		      }
 
 	}
 
