@@ -415,13 +415,13 @@ public class OrderQueries {
 				rs2.close();
 				switch(supplierStatus) {
 				case "NORTH":
-					resturantName= resturantName + ", North Branch";
+					resturantName= resturantName + "-North";
 					break;
 				case "CENTER":
-					resturantName= resturantName + ", Center Branch";
+					resturantName= resturantName + "-Center";
 					break;
 				case "SOUTH":
-					resturantName= resturantName + ", South Branch";
+					resturantName= resturantName + "-South";
 					break;
 				default:
 					break;
@@ -431,7 +431,7 @@ public class OrderQueries {
 				ZoneId defaultZoneId = ZoneId.systemDefault();
 				Instant instant = date.toInstant();
 				LocalDate localDate = instant.atZone(defaultZoneId).toLocalDate();
-				orderDate = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+				orderDate = localDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT));
 				//get the time with the wanted format without date
 				LocalTime localTime = instant.atZone(defaultZoneId).toLocalTime();
 				orderTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm"));
@@ -454,9 +454,9 @@ public class OrderQueries {
 				// get the status
 				String status = rs.getString(7);
 				if(status.equals("APPROVED"))
-					orderStatus = "Approved, In progress";
+					orderStatus = "Approved";
 				else
-					orderStatus = "Pending for resturant approval";
+					orderStatus = "Pending Approval";
 				// add to the list
 				orderList.add(new OrderForView(resturantName, orderDate, orderTime, orderDetails, orderStatus,orderNum));	
 			}

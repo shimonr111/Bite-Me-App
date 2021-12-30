@@ -151,7 +151,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 				try {
 					Stage Stage = new Stage();
 					Stage.setResizable(false);
-					root = loader.load(getClass().getResource("/fxmls/HRConfirmBusinessAskForDetails.fxml").openStream());
+					root = loader.load(getClass().getResource("/fxmls/HR3ConfirmBusinessAskForDetails.fxml").openStream());
 					confirmBusinessAskForDetailsController = loader.getController();
 					Scene scene = new Scene(root);
 					Stage.initStyle(StageStyle.UNDECORATED);
@@ -210,7 +210,6 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 		workerIdTxtField.setText(businessCustomer.getUserId()); workerIdTxtField.setDisable(true); workerIdTxtField.setEditable(false);
 		workerFirstNameTxtField.setText(businessCustomer.getUserFirstName()); workerFirstNameTxtField.setDisable(true); workerFirstNameTxtField.setEditable(false);
 		workerLastNameTxtField.setText(businessCustomer.getUserLastName()); workerLastNameTxtField.setDisable(true); workerLastNameTxtField.setEditable(false);
-		
 		budgetTypeCombo.getItems().addAll(BudgetType.values());
 		displayText.setText("");
 		

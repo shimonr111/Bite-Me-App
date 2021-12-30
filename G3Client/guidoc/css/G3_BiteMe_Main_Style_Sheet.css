@@ -73,6 +73,24 @@
 	-fx-font-weight: bold;
 }
 
+
+.HistoText{
+ -fx-font-smoothing-type: lcd;
+ -fx-text-alignment: center;
+ -fx-fill: white;
+ -fx-font-size: 20pt;
+ -fx-font-weight: bold;
+ -fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 2.0, 3.0, 3.5);
+}
+
+.ReportsText{
+ -fx-font-smoothing-type: lcd;
+ -fx-text-alignment: center;
+ -fx-fill:linear-gradient(to bottom, #141e30, #243b55);
+ -fx-font-size: 12pt;
+}
+
+
 .saveButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/disc.png");
@@ -171,7 +189,6 @@
 
 }
 
-
 .button{
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 2.0, 2.0, 2.0);
 	-fx-background-radius: 6,5;
@@ -184,6 +201,31 @@
     -fx-background-insets: 0.0, 1.0;
     -fx-font-weight: bold;
 }
+
+.generateButton{
+    -fx-background-color: white;
+    -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/generate.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+	-fx-background-size: 48 48;
+    -fx-background-position: 95% 50%;
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.downloadPDFButton{
+    -fx-background-color: white;
+    -fx-background-image: url("File:///C:/G3BiteMe/Design/Images/downloadpdf.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+	-fx-background-size: 36 36;
+    -fx-background-position: 90% 50%;
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
 
 .topMenuLabel{
 	-fx-text-fill: white;
@@ -217,6 +259,7 @@
         #0093EF,
         #f2eeee;
 }
+
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /**~~~~~@@@@ Server @@@@~~~~~*/
@@ -351,12 +394,14 @@
 
 .homeEnterButton{
 	-fx-background-color: white;
-
+	-fx-background-size: 48 48;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/hungry.png");
+	-fx-background-repeat: stretch;  
 	-fx-alignment: center;
-    -fx-background-position: 25% 50%;
+    -fx-background-position: 85% 50%;
 	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
 	-fx-font-weight:bold;
-	-fx-font-size: 20px;
+	-fx-font-size: 24px;
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 
@@ -503,7 +548,7 @@
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addUser.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
-    -fx-background-position: 50% 90%;
+    -fx-background-position: 50% 100%;
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -619,6 +664,16 @@
 	-fx-background-size: 150 75;
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logo.png");
 }
+.W4CMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-repeat: stretch;   
+	-fx-background-position: 50% 18%;
+	-fx-background-size: 36 36;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/id-card.png");
+}
 
 .W4CLabels{
 	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
@@ -680,9 +735,9 @@
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
 	-fx-background-repeat: stretch;   
-	-fx-background-position: 50% 35%;
-	-fx-background-size: 36 36;
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/restaurant.png");
+	-fx-background-position: 50% 25%;
+	-fx-background-size: 64 64;
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/restuColor.png");
 }
 
 .chooseRestuHeadLight{
@@ -718,6 +773,33 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/menu.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 65% 2%;
+	-fx-background-size: 48 48;
+}
+.paymentConfigMenuPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/online-payment.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 18%;
+	-fx-background-size: 64 64;
+}
+.alreadyPaidMenuPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/payment-method.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 32%;
+	-fx-background-size: 48 48;
 }
 
 .itemSelectionMenuHeadLight{
@@ -734,6 +816,11 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/shopping-cart.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 68% 3%;
+	-fx-background-size: 48 48;
 }
 
 
@@ -748,10 +835,11 @@
 
 .itemSelectionAddToCartButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addToCart.png");
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/add-to-basket.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
     -fx-background-position: 50% 50%;
+	-fx-background-size: 36 36;
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -762,10 +850,11 @@
 
 .itemSelectionRemoveFromCartButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/removeFromCart.png");
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/remove-from-cart.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
     -fx-background-position: 50% 50%;
+    -fx-background-size: 36 36;
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -824,6 +913,23 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/supply.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 20%;
+    -fx-background-size: 64 64;
+}
+
+.TaMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/take-away.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 20%;
+    -fx-background-size: 64 64;
 }
 
 .supplyLabels{
@@ -861,6 +967,11 @@
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/delivery-man.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 15%;
+    -fx-background-size: 48 48;
 }
 
 .deliveryLabels{
@@ -893,6 +1004,18 @@
 	-fx-background-radius: 6,5;
 
 }
+
+.summaryCartPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/analyst.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 15%;
+	-fx-background-size: 48 48;
+}
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /**~~~@@ Payment Config @@~~~*/
@@ -903,7 +1026,11 @@
 	-fx-font-size: 20px;
 	-fx-font-smoothing-type: lcd;
 	-fx-background-radius: 6,5;
-
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/panel.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 90% 50%;
+	-fx-background-size: 48 48;
 }
 
 .addOrRemoveAmountButton{
@@ -1055,10 +1182,23 @@
 
 }
 
+.searchButton{
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/search.png");
+	-fx-background-repeat: stretch;  
+	-fx-background-position: 50% 50%;
+	-fx-background-size: 24 24;
+	-fx-alignment: center; 
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+
+}
+
 .uploadReportButton{
 	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/upload2.png");
 	-fx-background-repeat: stretch;  
+	-fx-background-size: 24 24;
 	-fx-alignment: center; 
     -fx-background-position: 50% 50%;
 	-fx-text-fill: white;
@@ -1077,10 +1217,18 @@
 	-fx-text-alignment: center;
 	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
 }
+
+.viewHeadLightWhite{
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-size: 28px;
+	-fx-font-smoothing-type: lcd;
+	-fx-text-alignment: center;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.5, 0, 0, 0.5);
+}
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Combo-Box ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
-
 .combo-box .list-cell 
 {
     -fx-background-color: white;
@@ -1155,10 +1303,17 @@
 .combo-box-base:disabled {
     -fx-opacity: .4;
 }
-
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 /** ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ Table-View ~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@ */
+
+.table-column {
+  -fx-alignment: center;
+}
+
+.table-column.orderDetails {
+  -fx-alignment: center_left;
+}
 
 .table-view{
     -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
@@ -1310,6 +1465,19 @@
         linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
     -fx-background-insets: 1 0 1 1, 1 0 1 1, 3 2 3 3;
     -fx-background-radius: 2 0 0 2, 1 0 0 1, 0;
+}
+
+ /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ 
+ /** ~~~~@@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~ Charts ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~~@@@@ */
+.default-color0.chart-series-line { 
+	-fx-stroke: #7900FF;
+}
+.default-color1.chart-series-line { 
+	-fx-stroke: #548CFF;
+}
+.default-color2.chart-series-line { 
+	-fx-stroke: #93FFD8;
 }
 
  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */

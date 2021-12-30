@@ -29,15 +29,15 @@
             </Button>
          </children>
       </HBox>
-      <Button fx:id="btnBack" layoutX="67.0" layoutY="630.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="293.0" layoutY="154.0" prefHeight="460.0" prefWidth="440.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <AnchorPane layoutX="162.0" layoutY="129.0" prefHeight="480.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="50.0" prefWidth="351.0" styleClass="deliveryHeadLight" text="Company Registration" textFill="#383838">
+            <Label alignment="CENTER" layoutX="84.0" layoutY="14.0" prefHeight="50.0" prefWidth="550.0" styleClass="deliveryHeadLight" text="Company Registration Management" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <HBox layoutX="107.0" layoutY="387.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
+            <HBox layoutX="245.0" layoutY="415.0" prefHeight="50.0" prefWidth="230.0" spacing="25.0">
                <children>
                   <Button fx:id="confirmBtn" maxHeight="40.0" minHeight="40.0" mnemonicParsing="false" onAction="#getConfirmBtn" prefHeight="40.0" prefWidth="100.0" styleClass="confirmButton" textFill="#383838">
                      <font>
@@ -51,7 +51,7 @@
                   </Button>
                </children>
             </HBox>
-            <VBox alignment="CENTER" layoutX="133.0" layoutY="83.0" prefHeight="59.0" prefWidth="180.0">
+            <VBox alignment="CENTER" layoutX="269.0" layoutY="64.0" prefHeight="60.0" prefWidth="180.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="300.0" styleClass="employeeLabels" text="Search Company:">
                      <font>
@@ -61,12 +61,12 @@
                   <TextField fx:id="searchField" maxHeight="30.0" maxWidth="150.0" minHeight="30.0" minWidth="100.0" prefHeight="30.0" prefWidth="150.0" promptText="Search Keywords.." />
                </children>
             </VBox>
-            <TableView fx:id="companiesTable" layoutX="74.0" layoutY="157.0" prefHeight="200.0" prefWidth="300.0">
+            <TableView fx:id="companiesTable" layoutX="200.0" layoutY="132.0" prefHeight="250.0" prefWidth="300.0">
                <columns>
-                  <TableColumn fx:id="companyNameCol" maxWidth="300.0" prefWidth="300.0" text="Company Name" />
+                  <TableColumn fx:id="companyNameCol" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Company Name" />
                </columns>
             </TableView>
-            <Text fx:id="displayText" fill="RED" layoutX="12.0" layoutY="376.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
+            <Text fx:id="displayText" fill="RED" layoutX="152.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
    </children>

@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -28,11 +29,16 @@
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection" />
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
       <Button fx:id="nextBtn" layoutX="807.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBtnNext" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
-      <AnchorPane layoutX="342.0" layoutY="164.0" prefHeight="400.0" prefWidth="340.0" styleClass="chooseRestuMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="chooseRestuMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="23.0" layoutY="38.0" maxHeight="50.0" maxWidth="317.0" prefHeight="50.0" prefWidth="294.0" styleClass="W4CHeadLight" text="Restaurant Selection" />
-            <ComboBox fx:id="chooseResComboBox" layoutX="75.0" layoutY="185.0" prefHeight="31.0" prefWidth="190.0" promptText="Select Restaurant" />
-            <Text fx:id="errorText" fill="RED" layoutX="23.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="294.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="11.0" layoutY="15.0" maxHeight="50.0" maxWidth="320.0" prefHeight="50.0" prefWidth="320.0" styleClass="W4CHeadLight" text="Restaurant Selection" />
+            <Text fx:id="errorText" fill="RED" layoutX="24.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="294.0" />
+            <VBox fillWidth="false" layoutX="74.0" layoutY="168.0" prefHeight="82.0" prefWidth="195.0" styleClass="loginBundleVBOX">
+               <children>
+                  <Label prefHeight="35.0" prefWidth="117.0" styleClass="loginLabels" text="*Select Resturant:" />
+                  <ComboBox fx:id="chooseResComboBox" prefHeight="31.0" prefWidth="190.0" promptText="Resturants" />
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
