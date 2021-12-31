@@ -4,7 +4,8 @@ import users.BusinessCustomer;
 
 /**
 * 
-* @author Lior, Guzovsky
+* @author Lior, Guzovsky.
+* 
 *  Class description:
 *  This is a util class for calculating the 
 *  money left for any customer who is at least
@@ -12,7 +13,7 @@ import users.BusinessCustomer;
 *  
 *  @version 25/12/2021
 */
-public class OrderBusinessBudgetCalculation {
+public class OrderBusinessBudgetCalculation{
 
 	/**
 	 * This is a method for calculating 
@@ -22,7 +23,7 @@ public class OrderBusinessBudgetCalculation {
 	 * @param client
 	 * @return
 	 */
-	public static double calculateBusinessBudgetLeftForUser(BusinessCustomer client) {
+	public static double calculateBusinessBudgetLeftForUser(BusinessCustomer client){
 		double budgetLeftForTheUser = 0.0;
 		switch(client.getBudgetOfBusinessCustomer()) {
 			case DAILY:

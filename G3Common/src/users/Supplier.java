@@ -1,12 +1,16 @@
 package users;
+
 import java.io.Serializable;
+
 /**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
+ * 
  * Class description: This class is a class which
  * defines the main attributes and functionalities of a supplier in our
  * system.
+ * 
  * @version 15/12/2021
  */
 public class Supplier implements Serializable{
@@ -14,6 +18,7 @@ public class Supplier implements Serializable{
 	/**
 	 * Class members description:
 	 */
+	
 	/**
 	 * This is the Id of the supplier
 	 */
@@ -63,7 +68,6 @@ public class Supplier implements Serializable{
 		this.statusInSystem=statusInSystem;
 	}
 	
-
 	/**
 	 * This section is for the Setters and Getters of the Class Supplier
 	 */
@@ -123,11 +127,9 @@ public class Supplier implements Serializable{
 		this.statusInSystem = statusInSystem;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Supplier: " + supplierName + "belongs to:" + homeBranch;
 	}
 	
-
 }

@@ -3,11 +3,13 @@ package orders;
 /**
  * 
  * @author Ori, Malka.
+ * 
  *  Enum description:
  *  This Enum is used to describe the order time type (for internal use, determine discount)
+ *  
  *  @version 11/12/2021
  */
-public enum OrderTimeType {
+public enum OrderTimeType{
 	REGULAR {
 		@Override
 		public String toString() {

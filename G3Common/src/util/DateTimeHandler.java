@@ -8,12 +8,13 @@ import java.util.Date;
 /**
  * 
  * @author Ori, Malka.
+ * 
  *  Class description:
  *  This class helps us to handle time and date (DB<->GUI).
+ *  
  * @version 11/12/2021
  */
-public class DateTimeHandler {
-
+public class DateTimeHandler{
 
 	/**
 	 * 

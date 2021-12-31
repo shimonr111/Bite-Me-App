@@ -6,9 +6,11 @@ import java.io.Serializable;
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This class is the base class which defines the main attributes and functionalities
  * of a user in our system.
+ * 
  * @version 09/12/2021
  */
 public abstract class User implements Serializable{
@@ -61,7 +63,6 @@ public abstract class User implements Serializable{
 	 */
 	protected String phoneNumber;
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

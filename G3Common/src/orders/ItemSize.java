@@ -3,8 +3,10 @@ package orders;
 /**
  * 
  * @author Ori, Malka.
+ * 
  *  Enum description:
- *  This Enum is used to describe the item size varieties. 
+ *  This Enum is used to describe the item size varieties.
+ *   
  *  @version 11/12/2021
  */
 public enum ItemSize {

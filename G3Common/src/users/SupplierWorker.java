@@ -5,9 +5,11 @@ import java.io.Serializable;
 /**
  * 
  * @author Alexander, Martinov.
+ * 
  * Class description: This class is a class which
  * defines the main attributes and functionalities of a supplier worker in our
  * system.
+ * 
  * @version 15/12/2021
  */
 public class SupplierWorker extends User implements Serializable{

@@ -1,16 +1,17 @@
 package users;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
+ * 
  * Class description: 
  * This class is a class that represents
  * a credit card that belongs to a customer \ Business customer
  * HR manger and etc.
+ * 
  * @version 08/12/2021
  */
 public class CreditCard implements Serializable{

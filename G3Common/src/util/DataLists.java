@@ -3,6 +3,17 @@ package util;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * 
+ *  Class description: 
+ * This class manages all the system data strings
+ *  
+ * @version 09/12/2021
+ */
 public class DataLists {
 	private static ArrayList<String> northCitys = new ArrayList<String> (Arrays.asList("Acre", "Afula","Hadera", "Haifa" ,"Karmiel", "N/A"));
 	private static ArrayList<String> centerCitys = new ArrayList<String> (Arrays.asList("Bat-Yam","Herzliya", "Tel-Aviv" ,"N/A"));

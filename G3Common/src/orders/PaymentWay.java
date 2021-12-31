@@ -2,8 +2,9 @@ package orders;
 
 /**
  * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * 
  * Class description: 
  * This is an Enum for 
  * the way we pay in the system
@@ -11,10 +12,9 @@ package orders;
  * the combo box in the payment configuration
  * screen in the order process.
  * 
- * 
  * @version 17/12/2021
  */
-public enum PaymentWay {
+public enum PaymentWay{
 
 	CASH {
 		@Override

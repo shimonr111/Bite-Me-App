@@ -2,15 +2,17 @@ package users;
 
 /**
 * 
-* @author Lior, Guzovsky
+* @author Lior, Guzovsky.
+* 
 *  Enum description:
 *  This Enum is used to describe the type of 
 *  budget the business customer
 *  gets from his employer in the 
 *  Bite Me system.
+*  
 *  @version 29/11/2021
 */
-public enum BudgetType {
+public enum BudgetType{
 
 	DAILY{
 		@Override
