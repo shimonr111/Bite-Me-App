@@ -154,7 +154,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="clientsTable" prefHeight="130.0" prefWidth="410.0">
+                  <TableView fx:id="clientsTable" prefHeight="130.0" prefWidth="365.0">
                     <columns>
                       <TableColumn fx:id="ipAddressCol" prefWidth="130.0" text="IP" />
                       <TableColumn fx:id="hostNameCol" prefWidth="130.0" text="Host" />
