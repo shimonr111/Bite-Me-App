@@ -70,6 +70,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	private static AnalyzeClientListener listener;
 	public static ObservableList<Order> ordersForManageOrderTable;
 	public static String approvedCustomerEmail;
+	public static ArrayList<String> approvedCustomerDetailsForMail = new ArrayList<>();
 	
 	@FXML
     private Button btnExit;
@@ -299,10 +300,13 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	        	ArrayList<String> list = new ArrayList<>();
 	        	list.add(order.getCustomerUserId());
 	        	list.add(order.getCustomerUserType());
+	        	list.add(order.getSupplierUserId());
 	        	sendToClient(new Message(Task.GET_USER_EMAIL,Answer.WAIT_RESPONSE,list));
+	        	approvedCustomerEmail = approvedCustomerDetailsForMail.get(0);
 				if(approvedCustomerEmail!=null) {
 					try {
-						sendMail(approvedCustomerEmail);
+						sendMail(approvedCustomerEmail,approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3),
+								order.getOrderNumber());
 
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -364,7 +368,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	 * @param reciever - the receivers order email
 	 * @throws Exception
 	 */
-	public static void sendMail(String reciever) throws Exception {
+	public static void sendMail(String reciever,String firstName,String lastName,String restaurantName,int orderNumber) throws Exception {
 		System.out.println("Sending email");
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
@@ -382,7 +386,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 			}
 		});
 		
-		javax.mail.Message message = prepareMessage(session, myEmail,reciever);
+		javax.mail.Message message = prepareMessage(session, myEmail,reciever,firstName,lastName,restaurantName,orderNumber);
 		
 		Transport.send(message);
 		System.out.println("Message sent");
@@ -401,13 +405,14 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	 * @throws MessagingException in case the setFrom() method doesn't work.
 	 * @return javax.mail.Message - the message we want to send to the customer
 	 */
-	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever) {
+	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever,String firstName,String lastName
+			,String restaurantName,int orderNumber) {
 		try {
 			javax.mail.Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(myEmail));
 			message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(reciever));
 			message.setSubject("Bite Me - G3 - Email Simulation");
-			message.setText("Your order is approved by the restaurant, soon you will meet again!");
+			message.setText("Hey "+firstName +" " + lastName +", your order <"+orderNumber+"> from "+restaurantName+" is approved!");
 			return message;
 		}catch(Exception ex) {
 			System.out.println("sending email failed");

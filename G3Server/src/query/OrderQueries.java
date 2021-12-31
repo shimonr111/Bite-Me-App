@@ -508,18 +508,33 @@ public class OrderQueries {
 		ArrayList<String> customerDetails = (ArrayList<String>)message.getObject();
 		String userID = customerDetails.get(0);
 		String customerType = customerDetails.get(1);
-		String customerEmail =null;
+		String supplierId = customerDetails.get(2);
+		ArrayList<String> customerMailDetails = new ArrayList<>();
 		ResultSet rs = Query.getRowsFromTableInDB(customerType,"userID='"+userID+"'");
 		try {
 			if(rs.next()) {
-				customerEmail = rs.getString(8);
+				customerMailDetails.add(rs.getString(8)) ; //email 0
+				customerMailDetails.add(rs.getString(3)); // first name 1
+				customerMailDetails.add(rs.getString(4)); // last name 2;
 			}
+			rs.close();
 		}catch(SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(customerEmail!=null)
-			return new Message(Task.GET_USER_EMAIL,Answer.SUCCEED,customerEmail);
+		ResultSet rs2 = Query.getRowsFromTableInDB("supplier", "supplierId='"+supplierId +"'");
+		try {
+			if(rs2.next()) {
+				String restaurantWithBranch = "" + rs2.getString(2) +"-" +rs2.getString(3) +" Branch";
+				customerMailDetails.add(restaurantWithBranch);  // 3 restaurant info.
+			}
+			rs2.close();
+		}catch(SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(!customerMailDetails.isEmpty())
+			return new Message(Task.GET_USER_EMAIL,Answer.SUCCEED,customerMailDetails);
 		return null;
 	}
 	
