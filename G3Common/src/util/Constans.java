@@ -1,5 +1,16 @@
 package util;
 
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * 
+ *  Class description: 
+ * This class manages all the system constants
+ *  
+ * @version 09/12/2021
+ */
 public class Constans {
 	public static final double REGULAR_DELIVERY_FEE_IN_NIS = 25.0;
 	public static final double MINIMUM_MULTI_DELIVERY_FEE_IN_NIS = 15.0;

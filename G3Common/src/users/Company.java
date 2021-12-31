@@ -7,10 +7,12 @@ import java.io.Serializable;
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
  * @author Ori, Malka.
+ * 
  *  Class description: This class sets data for
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
+ *  
  * @version 15/12/2021
  */
 public class Company implements Serializable{
@@ -107,6 +109,5 @@ public class Company implements Serializable{
 	public void setcompanyCode(int companyCode) {
 		this.companyCode = companyCode;
 	}
-	
 	
 }

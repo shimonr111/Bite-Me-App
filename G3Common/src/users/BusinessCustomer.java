@@ -7,10 +7,12 @@ import java.io.Serializable;
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
+ * 
  *  Class description: 
  * This class is derived class from
  *  Customer class which defines the main attributes and functionalities
  *  of a Business customer in our system.
+ *  
  * @version 09/12/2021
  */
 public class BusinessCustomer extends Customer implements Serializable{
@@ -34,7 +36,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 	 * per day, week and month.
 	 */
 	protected BudgetType budgetOfBusinessCustomer;
-
 
 	/**
 	 * Each business customer has a budget that he cannot exceed.
@@ -89,7 +90,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.budgetUsed = 0;
 	}
 	
-
 	/**
 	 * This is the constructor for first creation.
 	 * 
@@ -128,7 +128,6 @@ public class BusinessCustomer extends Customer implements Serializable{
 		return budgetOfBusinessCustomer;
 	}
 	
-
 	public void setBudgetOfBusinessCustomer(BudgetType budgetOfBusinessCustomer) {
 		this.budgetOfBusinessCustomer = budgetOfBusinessCustomer;
 	}
@@ -172,6 +171,7 @@ public class BusinessCustomer extends Customer implements Serializable{
 	public void setBudgetUsed(double budgetUsed) {
 		this.budgetUsed = budgetUsed;
 	}
+	
 	/**
 	 * This is the toString for this class
 	 */

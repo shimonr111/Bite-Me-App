@@ -5,17 +5,16 @@ package communication;
  *  @author Lior, Guzovsky.
  *  @author Ori, Malka.
  *  @author Alexander, Martinov.
- *  Class description: 
  *  
+ *  Class description: 
  *  This is an enum
  *  for all the answers we get from the 
  *  server according to the 
  *  Task that has been sent.
  *  
  *  @version 21/12/2021
- *
  */
-public enum Answer {
+public enum Answer{
 	/**
 	 * This is our default value
 	 * to be set upon start before the server 
@@ -57,7 +56,6 @@ public enum Answer {
 	COMPANY_NAME_ALREADY_EXIST,
 	COMPANY_CODE_ALREADY_EXIST,
 	
-	
 	/**
 	 * Answers related to Order
 	 * Operation.
@@ -92,6 +90,4 @@ public enum Answer {
 	SUPPLIER_WORKER_ORDERS_FOUND,
 	MANAGE_MENU_SUCCEEDED_WRITING_INTO_DB,
 	MANAGE_ORDER_SUCCEEDED_WRITING_INTO_DB,
-
-	
 }

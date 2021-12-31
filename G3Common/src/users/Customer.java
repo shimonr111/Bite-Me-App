@@ -6,6 +6,7 @@ import java.io.Serializable;
  * 
  * @author Lior, Guzovsky.
 * @author Alexander, Martinov.
+* 
  * Class description: 
  * This class is derived class from User class
  *  which defines the main attributes and functionalities
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @version 09/12/2021
  */
 public class Customer extends User implements Serializable{
+	
 	/**
 	 * Class members description:
 	 */	
@@ -124,7 +126,6 @@ public class Customer extends User implements Serializable{
 		return "Customer: "  + userFirstName + " " + userLastName;
 	}
 
-	
 	/** This method used to generate customer W4C, based on the user id, which is unique */
 	private int generateW4C() {
 		return  31 * Integer.parseInt(userId);

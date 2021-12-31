@@ -5,21 +5,20 @@ import java.io.Serializable;
 /**
  * 
  * @author Ori, Malka.
+ * 
  *  Class description: 
  *  This Abstract class is a base class
  *  for supply method.
+ *  
  * @version 11/12/2021
  */
 public class TakeAwaySupplyMethod extends AbatractSupplyMethod implements Serializable{
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
 	 * Class members description:
 	 */
 	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Constructors:
 	 */
@@ -37,8 +36,4 @@ public class TakeAwaySupplyMethod extends AbatractSupplyMethod implements Serial
 		// TODO Auto-generated constructor stub
 	}
 	
-	/**
-	 * Methods:
-	 */
-
 }

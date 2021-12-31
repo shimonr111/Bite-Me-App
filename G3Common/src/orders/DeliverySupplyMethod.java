@@ -17,14 +17,12 @@ import util.Constans;
  * @version 11/12/2021
  */
 public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	
 	/**
 	 * Class members:
 	 */
+	
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The delivery type.
@@ -91,7 +89,6 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serial
 		this.deliveryFee = calculateDeliveryFee();
 	}
 	
-	
 	/*
 	 * Methods:
 	 */
@@ -121,7 +118,6 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serial
 		return fee;
 	}
 
-
 	/**
 	 * Getters and Setters functions
 	 */
@@ -149,7 +145,5 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serial
 	public void setDeliveryType(DeliveryType deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-	
-	
 	
 }

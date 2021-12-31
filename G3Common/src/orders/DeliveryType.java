@@ -3,11 +3,13 @@ package orders;
 /**
  * 
  * @author Ori, Malka.
+ * 
  *  Enum description:
  *  This Enum is used to describe the delivery types.
+ *  
  *  @version 11/12/2021
  */
-public enum DeliveryType {
+public enum DeliveryType{
 
 	NA {
 		@Override
