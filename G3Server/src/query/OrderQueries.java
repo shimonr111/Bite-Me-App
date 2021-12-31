@@ -525,7 +525,20 @@ public class OrderQueries {
 		ResultSet rs2 = Query.getRowsFromTableInDB("supplier", "supplierId='"+supplierId +"'");
 		try {
 			if(rs2.next()) {
-				String restaurantWithBranch = "" + rs2.getString(2) +"-" +rs2.getString(3) +" Branch";
+				String restaurantWithBranch =  rs2.getString(2) ;
+				switch(rs2.getString(3)) {
+				case"NORTH":
+					restaurantWithBranch = restaurantWithBranch + " (North Branch)";
+					break;
+				case "CENTER":
+					restaurantWithBranch = restaurantWithBranch + " (Center Branch)";
+					break;
+				case "SOUTH":
+					restaurantWithBranch = restaurantWithBranch + " (South Branch)";
+					break;
+				default:
+					break;
+				}
 				customerMailDetails.add(restaurantWithBranch);  // 3 restaurant info.
 			}
 			rs2.close();
