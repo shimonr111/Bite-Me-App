@@ -41,7 +41,7 @@ import util.OrderBusinessBudgetCalculation;
  * This is a class for the user 
  * to add all his payment to the system (cash / credit card, etc.)
  * 
- * @version 20/12/2021
+ * @version 31/12/2021
  */
 public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeController implements Initializable{
 	
@@ -112,7 +112,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * adding amount of money payed 
 	     * by the user.
 	     * 
-	     * @param event
+	     * @param event - when pressed on the button
 	     */
 	   @FXML
 	   public void getAddAmountBtn(ActionEvent event) {
@@ -136,7 +136,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   double moneyToPay = Double.parseDouble(enterAmountTextField.getText());
 			   if(isPaymentAmountValidForAddAmount(paymentWay)) {
 				   amountLeftToPay -= moneyToPay; //update the amount left to pay
-				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+				   totalToPayTextField.setText(OrderBusinessBudgetCalculation.df.format(amountLeftToPay));//set the total price, set format as 2 decimal figures after the dot
 			   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
 			   case CASH:
@@ -147,7 +147,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   cash = Double.parseDouble(alreadyCashTextField.getText());
 				   }
 				   cash += moneyToPay;
-				   alreadyCashTextField.setText(String.valueOf(cash));
+				   alreadyCashTextField.setText(OrderBusinessBudgetCalculation.df.format(cash)); //set format as 2 decimal figures after the dot
 				  break;
 			   case CREDIT_CARD:
 				   double creditCard;
@@ -157,7 +157,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
 				   }
 				   creditCard += moneyToPay;
-				   alreadyCreditCardTextField.setText(String.valueOf(creditCard));
+				   alreadyCreditCardTextField.setText(OrderBusinessBudgetCalculation.df.format(creditCard));//set format as 2 decimal figures after the dot
 				  break;
 			   case ACCOUNT_BALANCE:
 				   double accountBalance;
@@ -167,8 +167,9 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
 				   }
 				   accountBalance += moneyToPay;
-				   availableAccountBalanceTextField.setText(String.valueOf(Double.parseDouble(availableAccountBalanceTextField.getText())-moneyToPay));
-				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
+				   availableAccountBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format(Double.parseDouble
+						   (availableAccountBalanceTextField.getText())-moneyToPay));//set format as 2 decimal figures after the dot
+				   alreadyAccountBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format(accountBalance));//set format as 2 decimal figures after the dot
 				   break;
 			   case EMPLOYEE_BUDGET:
 				    boolean isLoggedInAsBusinessAccount = false;
@@ -182,9 +183,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 						}else {
 							employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
 						}
-						availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())-moneyToPay)); //bug?
+						availableBudgetBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format
+								(Double.parseDouble(availableBudgetBalanceTextField.getText())-moneyToPay)); //set format as 2 decimal figures after the dot
 						employeeBudget += moneyToPay;
-						alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+						alreadyEmployeeBudgetTextField.setText(OrderBusinessBudgetCalculation.df.format(employeeBudget));//set format as 2 decimal figures after the dot
 					}
 				   break;
 			   default:
@@ -204,7 +206,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    * amount of money from the paying methods
 	    * by the user
 	    * 
-	    * @param event
+	    * @param event - when pressed on the button
 	    */
 	   @FXML
 	   public void getRemoveAmountBtn(ActionEvent event) {
@@ -227,7 +229,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   double moneyToReturn = Double.parseDouble(enterAmountTextField.getText());
 			   if(isPaymentAmountValidForRemoveAmount(paymentWay)) {
 				   amountLeftToPay += moneyToReturn; //update the amount left to pay
-				   totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
+				   totalToPayTextField.setText(OrderBusinessBudgetCalculation.df.format(amountLeftToPay));//set the total price, set format as 2 decimal figures after the dot
 				   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
 			   case CASH:
@@ -238,7 +240,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   cash = Double.parseDouble(alreadyCashTextField.getText());
 				   }
 				   cash -= moneyToReturn;
-				   alreadyCashTextField.setText(String.valueOf(cash));
+				   alreadyCashTextField.setText(OrderBusinessBudgetCalculation.df.format(cash));//set format as 2 decimal figures after the dot
 				  break;
 			   case CREDIT_CARD:
 				   double creditCard;
@@ -248,7 +250,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   creditCard = Double.parseDouble(alreadyCreditCardTextField.getText());
 				   }
 				   creditCard -= moneyToReturn;
-				   alreadyCreditCardTextField.setText(String.valueOf(creditCard));
+				   alreadyCreditCardTextField.setText(OrderBusinessBudgetCalculation.df.format(creditCard));//set format as 2 decimal figures after the dot
 				  break;
 			   case ACCOUNT_BALANCE:
 				   double accountBalance;
@@ -258,8 +260,9 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 				   accountBalance = Double.parseDouble(alreadyAccountBalanceTextField.getText());
 				   }
 				   accountBalance -= moneyToReturn;
-				   availableAccountBalanceTextField.setText(String.valueOf(Double.parseDouble(availableAccountBalanceTextField.getText())+moneyToReturn));
-				   alreadyAccountBalanceTextField.setText(String.valueOf(accountBalance));
+				   availableAccountBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format
+						   (Double.parseDouble(availableAccountBalanceTextField.getText())+moneyToReturn));//set format as 2 decimal figures after the dot
+				   alreadyAccountBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format(accountBalance));//set format as 2 decimal figures after the dot
 				   break;
 			   case EMPLOYEE_BUDGET:
 				   boolean isLoggedInAsBusinessAccount = false;
@@ -273,9 +276,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 							}else {
 								employeeBudget = Double.parseDouble(alreadyEmployeeBudgetTextField.getText());
 							}
-							availableBudgetBalanceTextField.setText(String.valueOf(Double.parseDouble(availableBudgetBalanceTextField.getText())+moneyToReturn));
+							availableBudgetBalanceTextField.setText(OrderBusinessBudgetCalculation.df.format
+									(Double.parseDouble(availableBudgetBalanceTextField.getText())+moneyToReturn));//set format as 2 decimal figures after the dot
 							employeeBudget -= moneyToReturn;
-							alreadyEmployeeBudgetTextField.setText(String.valueOf(employeeBudget));
+							alreadyEmployeeBudgetTextField.setText(OrderBusinessBudgetCalculation.df.format(employeeBudget));//set format as 2 decimal figures after the dot
 						}	
 				   break;
 			   default:
@@ -290,9 +294,10 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	    }
 	   
 	     /**
-	     * Back button for the 
+	     * Back button for enable the user
+	     * go back to summary screen.
 	     * 
-	     * @param event
+	     * @param event - when pressed on the button
 	     */
 	    @FXML
 	    public void getBackBtn(ActionEvent event) {
@@ -330,7 +335,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * Exit from screen and update
 	     * DB.
 	     * 
-	     * @param event
+	     * @param event - when pressed on the button
 	     */
 	    @FXML
 	    public void getExitBtn(ActionEvent event) {
@@ -348,13 +353,12 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * after the finish we move him to his main user portal 
 	     * UI view.
 	     * 
-	     * @param event
+	     * @param event - when pressed on the button
 	     */
 	    @FXML
 	    public void getFinishOrderBtn(ActionEvent event) {
 	    	if(amountLeftToPay!=0) {
 	    		errorText.setText("Finish with the payment first!");
-	    		
 	    	}
 	    	else {
 	    	errorText.setText("");
@@ -404,15 +408,15 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
     			setBusinessCustomerPortal(event);
     		else
     			setPrivateCustomerPortal(event);
-
 	    	}
 	    }
 
-	       /**
+	     /**
+	     * 
 	     * This is a method for getting 
 	     * information for the user
 	     * 
-	     * @param event
+	     * @param event - when pressed on the button
 	     */
 	    @FXML
 	    public void getHelpBtn(ActionEvent event) {
@@ -492,7 +496,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		}
 		
 		/**
-		 * This method loads the customer portal
+		 * This method loads the business customer portal
 		 * 
 		 * @param event
 		 */
@@ -524,13 +528,16 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			
 		}
 
-
 	/**
 	* This is a function for 
-	* initializing the screen.
+	* initializing the screen, we set here all the data from
+	* the DB related to the balance and the budget received for 
+	* the user (depends on the customer type - business or regular).
+	* In addition, we add here all the data for the combo box 
+	* picking payment options.
 	* 
-	* @param arg0
-	* @param arg1
+	* @param arg0 - not in use
+	* @param arg1 - not in use
 	*/
 	@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
