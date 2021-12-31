@@ -56,15 +56,15 @@ import users.SupplierWorker;
  * for the supplier. In this screen the supplier worker changes status of 
  * orders.
  * 
- * @version 21/12/2021
+ * @version 31/12/2021
  */
-public class SupplierWorkerManageOrders extends AbstractBiteMeController implements Initializable{
-	
+public class SupplierWorkerManageOrdersController extends AbstractBiteMeController implements Initializable{
 	/**
 	 * Class members description:
 	 */
+	
 	private static FXMLLoader loader;
-    private static SupplierWorkerManageOrders supplierWorkerManageOrders;
+	private static SupplierWorkerManageOrdersController supplierWorkerManageOrders; /*used for switching the screen to the next one*/
 	public static ArrayList<Order> orderListFromDB = new ArrayList<>();
 	public static ArrayList<Order> updateOrders = new ArrayList<>();
 	private static AnalyzeClientListener listener;
@@ -145,7 +145,8 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     }
 
     /**
-     * Exit and logout button
+     * This is a function for exiting 
+     * the screen.
      * 
      * @param event
      */
@@ -171,8 +172,13 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
     }
 
 	/**
-	 * This is the initialization function for this 
+	 * This is the start function for this 
 	 * screen.
+	 * In this function we add the controller
+	 * as a listener that listens for orders 
+	 * added by any customer so that he can
+	 * display them without the use of refresh 
+	 * button.
 	 */
 	public void initSupplierWorkerManageOrdersScreen() {
 		/*Add listener for */
@@ -218,10 +224,20 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	}
 	
 	/**
-	 * This method....
+	 * This method is used for initialization 
+	 * of the screen.
+	 * We add in this functions all the orders received
+	 * from the DB related to that specific restaurant that their
+	 * status is  OrderStatus.PENDING_APPROVAL, than we show it 
+	 * to the supplier worker and enable him to approve or disapprove
+	 * the order sent by the customer. In addition, we send an email if the
+	 * order is approved by the supplier worker to the customers personal email. 
+	 * When an order that is shown in the table view changes status (from OrderStatus.PENDING_APPROVAL
+	 * to OrderStatus.UN_APPROVED or OrderStatus.APPROVED) we delete it from the table view 
+	 * and update the DB.
 	 * 
-	 * @param arg0
-	 * @param arg1
+	 * @param arg0 - not in use
+	 * @param arg1 - not in use
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -342,10 +358,10 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	} 
 	
 	/**
-	 * This method sets the properties of so send an email
-	 * to the customer's email.
+	 * This method sets the properties for sending an email
+	 * to the customer.
 	 * 
-	 * @param reciever
+	 * @param reciever - the receivers order email
 	 * @throws Exception
 	 */
 	public static void sendMail(String reciever) throws Exception {
@@ -375,12 +391,15 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 	}
 	
 	/**
-	 * This method prepared the message to send it via email.
+	 * This method prepares the message that is being sent via email
+	 * to the user.
 	 * 
 	 * @param session
-	 * @param myEmail
-	 * @param reciever
-	 * @return prepareMessage
+	 * @param myEmail - the companies (G3-Bite-Me) email.
+	 * @param reciever - the receivers email.
+	 * 
+	 * @throws MessagingException in case the setFrom() method doesn't work.
+	 * @return javax.mail.Message - the message we want to send to the customer
 	 */
 	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever) {
 		try {
@@ -388,7 +407,7 @@ public class SupplierWorkerManageOrders extends AbstractBiteMeController impleme
 			message.setFrom(new InternetAddress(myEmail));
 			message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(reciever));
 			message.setSubject("Bite Me - G3 - Email Simulation");
-			message.setText("Your order is approved from the resaurant");
+			message.setText("Your order is approved by the restaurant, soon you will meet again!");
 			return message;
 		}catch(Exception ex) {
 			System.out.println("sending email failed");

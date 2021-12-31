@@ -18,7 +18,7 @@ import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierRegistrationScreenController;
 import controllers_gui.SupplierWorkerManageMenuController;
-import controllers_gui.SupplierWorkerManageOrders;
+import controllers_gui.SupplierWorkerManageOrdersController;
 import controllers_gui.SupplierWorkerRegistrationScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
 import controllers_gui.WatchOrderHistoryScreenController;
@@ -361,10 +361,10 @@ public class AnalyzeMessageFromServer {
 			case SUPPLIER_WORKER_GET_ALL_RELEVANT_ORDERS:
 				switch(recievedAnswerFromServer) {
 				case SUPPLIER_WORKER_NO_ORDERS_FOUND:
-					SupplierWorkerManageOrders.orderListFromDB = new ArrayList<Order>();
+					SupplierWorkerManageOrdersController.orderListFromDB = new ArrayList<Order>();
 					break;
 				case SUPPLIER_WORKER_ORDERS_FOUND:
-					SupplierWorkerManageOrders.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();
+					SupplierWorkerManageOrdersController.orderListFromDB = (ArrayList<Order>)recivedMessageFromServer.getObject();
 					break;
 				default:
 					break;
@@ -386,7 +386,7 @@ public class AnalyzeMessageFromServer {
 				((Customer)AbstractBiteMeController.connectedUser).setBalance((Double.parseDouble((String)recivedMessageFromServer.getObject())));
 				break;
 			case GET_USER_EMAIL:
-				SupplierWorkerManageOrders.approvedCustomerEmail = (String)recivedMessageFromServer.getObject();
+				SupplierWorkerManageOrdersController.approvedCustomerEmail = (String)recivedMessageFromServer.getObject();
 				break;
 				
 			default:
