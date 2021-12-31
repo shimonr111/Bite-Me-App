@@ -64,7 +64,10 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    }
 
 	    /**
-	     * This method...
+	     * This method will run after clicking on the business
+	     * button while selecting a row from the table,
+	     * in this method we create a new object and we call 
+	     * the init of the next screen.
 	     * 
 	     * @param event
 	     */
@@ -76,7 +79,8 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    }
 
 	    /**
-	     * This method...
+	     * This method will disconnect the client 
+	     * then log out the connected user and exit.
 	     * 
 	     * @param event
 	     */
@@ -91,7 +95,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    }
 
 	    /**
-	     * This method...
+	     * This method will display a pop up message to the user.
 	     * 
 	     * @param event
 	     */
@@ -101,7 +105,10 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    }
 
 	    /**
-	     * This method...
+	     * This method will run after clicking on the private
+	     * button while selecting a row from the table,
+	     * in this method we create a new object and we call 
+	     * the Init of the next screen.
 	     * 
 	     * @param event
 	     */

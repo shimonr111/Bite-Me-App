@@ -68,7 +68,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
     private Text statusText;
 
     /**
-     * This method....
+     * This method will load the quertely reports
+     * screen.
      * 
      * @param event
      */
@@ -80,7 +81,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	 /**
-     * This method....
+     * This method disconnect the specific client,
+     * log out the connected user and exit.
      * 
      * @param event
      */
@@ -96,7 +98,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	 /**
-     * This method....
+     * This method log out the connected user,
+     * and load the login screen again.
      * 
      * @param event
      */
@@ -110,7 +113,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	 /**
-     * This method....
+     * This method load the screen of monthly reports.
      * 
      * @param event
      */
@@ -132,7 +135,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	 /**
-     * This method....
+     * This method load the screen of Sent reports.
      * 
      * @param event
      */
@@ -247,7 +250,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	}
 	
 	 /**
-     * This method....
+     * This method will initialize the portal
+     * according to the connected user details.
      * 
      * @param arg0
      * @param arg1

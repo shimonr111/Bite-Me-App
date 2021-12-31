@@ -324,9 +324,10 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     }
     
     /**
-     * This method checks if ....
+     * This method checks if the selected value of the
+     * comboBox equals to a message.
      * 
-     * @return boolean: true if
+     * @return boolean: true if equals.
      */
     public boolean checkComboBoxInput(ComboBox comboBox, String message) {
     	if(comboBox.getValue().equals(message))

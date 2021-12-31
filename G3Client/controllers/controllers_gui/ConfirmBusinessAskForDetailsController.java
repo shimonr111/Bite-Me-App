@@ -89,7 +89,10 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     }
 
     /**
-     * This function....
+     * This function will run immediately after clicking
+     * on Save button , it checks if all the required fields
+     * were filled correctly , and if yes so we create
+     * a new message to server to update those fields.
      * 
      * @param event
      */
@@ -121,7 +124,8 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     }
 
     /**
-     * This function....
+     * This function will disconnect the client
+     * then log out the connected user and exit.
      * 
      * @param event
      */
@@ -136,7 +140,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     }
 
     /**
-     * This function....
+     * This function will display a pop up message to the user.
      * 
      * @param event
      */
@@ -230,7 +234,8 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 	}
 
 	/**
-	 * This method ...
+	 * This method will initialize all the fields
+	 * according to the selected customer .
 	 * 
 	 * @param arg0
 	 * @param arg1

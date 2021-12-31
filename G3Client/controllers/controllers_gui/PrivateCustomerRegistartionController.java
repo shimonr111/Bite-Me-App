@@ -110,7 +110,8 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     private TextField userNameTxtField;
     
     /**
-     * This method...
+     * This method will disconnect the client,
+     * log out the connected user and then exit.
      * 
      * @param event
      */
@@ -125,7 +126,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     }
 
     /**
-     * This method...
+     * This method will display a pop up message to the user.
      * 
      * @param event
      */
@@ -168,7 +169,8 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     }
     
     /**
-     * This method...
+     * This method will call the method that calls
+     * the previous screen.
      * 
      * @param event
      */

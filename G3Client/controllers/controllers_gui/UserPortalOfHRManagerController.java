@@ -80,7 +80,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
     private Text statusText;
 
     /**
-     * This method....
+     * This method Load the screen of company Registration.
      * 
      * @param event
      */
@@ -92,7 +92,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen
+     * of business customers confirmation.
      * 
      * @param event
      */
@@ -104,7 +105,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	}
 	
 	/**
-     * This method....
+     * This method will disconnect the specific client,
+     * log out the connected user and exit.
      * 
      * @param event
      */
@@ -119,7 +121,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	}
 	
 	/**
-     * This method....
+     * This method log out the connected  user,
+     * and load the login screen.
      * 
      * @param event
      */

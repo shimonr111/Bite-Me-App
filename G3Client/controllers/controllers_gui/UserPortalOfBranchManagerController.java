@@ -72,7 +72,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
     
 
     /**
-     * This method....
+     * This method Load the screen the shows the
+     * reports.
      * 
      * @param event
      */
@@ -84,7 +85,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen
+     * of company menagement.
      * 
      * @param event
      */
@@ -96,7 +98,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen of 
+     * Edit Customer.
      * 
      * @param event
      */
@@ -108,7 +111,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen
+     * of supplier registration.
      * 
      * @param event
      */
@@ -120,7 +124,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen of
+     * Custoemr Registration.
      * 
      * @param event
      */
@@ -132,7 +137,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will disconnect the specific client,
+     * log out the connected user then exit.
      * 
      * @param event
      */
@@ -147,7 +153,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will log out the  connected user,
+     * then loads the previous screen.
      * 
      * @param event
      */
@@ -161,7 +168,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will load the screen of
+     * Adding quarterly reports.
      * 
      * @param event
      */
@@ -253,7 +261,8 @@ public class UserPortalOfBranchManagerController extends AbstractBiteMeControlle
 	}
 	
 	/**
-     * This method....
+     * This method will be called from the next screen, 
+     * it will load this screen again.
      */
 	public void initPortalAgain() {
 		loader = new FXMLLoader();

@@ -80,7 +80,9 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	}
 	
 	/**
-     * This method....
+     * This method disconnect the specific
+     * client, log out the connected user
+     * and exit.
      * 
      * @param event
      */
@@ -95,7 +97,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	}
 	
 	/**
-     * This method....
+     * This method log out the connected user
+     * and load the login screen.
      * 
      * @param event
      */
@@ -119,7 +122,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 		}
 	
 	/**
-     * This method....
+     * This method load the screen of
+     * View Orders.
      * 
      * @param event
      */
