@@ -435,7 +435,6 @@ CREATE TABLE `registration` (
 
 LOCK TABLES `registration` WRITE;
 /*!40000 ALTER TABLE `registration` DISABLE KEYS */;
-INSERT INTO `registration` VALUES ('user','10002','PENDING_REGISTRATION','Alexander','Martinov','CENTER',0,'alexander.martinov@gmail.com','0544441200','1002','111','01/35','alexander','alexander','null',0,0),('user','10003','PENDING_REGISTRATION','Shimon','Rubin','CENTER',0,'shimon.rubin@gmail.com','0544441233','1003','111','01/35','shimon','shimon','null',0,0),('user','10005','PENDING_REGISTRATION','Dan','Micheal','SOUTH',0,'dan.micheal@gmail.com','0541112341','1005','111','01/35','dan','dan','null',0,0);
 /*!40000 ALTER TABLE `registration` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -538,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-30 21:18:22
+-- Dump completed on 2021-12-31 16:07:41
