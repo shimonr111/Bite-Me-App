@@ -88,7 +88,8 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     private TableColumn<OrderForView,String> timeCol; 
 
 	/**
-     * This method...
+     * This method calls the method that loads
+     * the previous screen.
      * 
      * @param event
      */
@@ -136,7 +137,8 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     }
 
 	/**
-     * This method...
+     * This method disconnect the specific client,
+     * log out the connected user and exit.
      * 
      * @param event
      */
@@ -151,7 +153,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     }
 
 	/**
-     * This method...
+     * This method displays a pop up message to the user.
      * 
      * @param event
      */
@@ -161,7 +163,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     }
     
 	/**
-     * This method...
+     * This method refreshes the table .
      * 
      * @param event
      */
@@ -272,7 +274,8 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	}
 	
 	/**
-     * This method...
+     * This method initialize the table according to the existing orders
+     * for the customer.
      * 
      * @param arg0
      * @param arg1
