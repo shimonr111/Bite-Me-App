@@ -1,5 +1,7 @@
 package util;
 
+import java.text.DecimalFormat;
+
 import users.BusinessCustomer;
 
 /**
@@ -14,6 +16,15 @@ import users.BusinessCustomer;
 *  @version 25/12/2021
 */
 public class OrderBusinessBudgetCalculation{
+	/**
+	 * Class members description:
+	 */
+	
+	/**
+	 * Decimal format for saving only two
+	 * places after the dot.
+	 */
+    public static final DecimalFormat df = new DecimalFormat("0.00");
 
 	/**
 	 * This is a method for calculating 
@@ -27,13 +38,13 @@ public class OrderBusinessBudgetCalculation{
 		double budgetLeftForTheUser = 0.0;
 		switch(client.getBudgetOfBusinessCustomer()) {
 			case DAILY:
-				budgetLeftForTheUser = ((Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) / Constans.DAYS_IN_MONTH) - client.getBudgetUsed());
+				budgetLeftForTheUser = Double.valueOf(df.format(((Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) / Constans.DAYS_IN_MONTH) - client.getBudgetUsed())));
 				break;
 			case WEEKLY:
-				budgetLeftForTheUser = ((Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) / Constans.WEEKS_IN_MONTH) - client.getBudgetUsed());
+				budgetLeftForTheUser = Double.valueOf(df.format(((Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) / Constans.WEEKS_IN_MONTH) - client.getBudgetUsed())));
 				break;
 			case MONTHLY:
-				budgetLeftForTheUser = (Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) - client.getBudgetUsed());
+				budgetLeftForTheUser = Double.valueOf(df.format((Double.valueOf(String.valueOf(client.getBudgetMaxAmount())) - client.getBudgetUsed())));
 				break;
 			default:
 				break;
