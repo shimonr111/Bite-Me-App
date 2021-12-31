@@ -305,7 +305,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	        	approvedCustomerEmail = approvedCustomerDetailsForMail.get(0);
 				if(approvedCustomerEmail!=null) {
 					try {
-						sendMail("mosa.srour.s9@gmail.com",approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3),
+						sendMail(approvedCustomerEmail,approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3),
 								order.getOrderNumber());
 
 					} catch (Exception e) {
