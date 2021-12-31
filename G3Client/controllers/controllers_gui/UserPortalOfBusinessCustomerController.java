@@ -76,7 +76,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
     private Text statusText;
     
     /**
-     * This method....
+     * This method will disconnect the specific client,
+     * log out the connected user and exit.
      * 
      * @param event
      */
@@ -92,7 +93,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	}
 	
 	 /**
-     * This method....
+     * This method will log out the connected user,
+     * and load the login screen again.
      * 
      * @param event
      */
@@ -130,7 +132,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	}
 	
 	/**
-	 * This method...
+	 * This method will load the
+	 * View Order screen.
 	 * 
 	 * @param event
 	 */

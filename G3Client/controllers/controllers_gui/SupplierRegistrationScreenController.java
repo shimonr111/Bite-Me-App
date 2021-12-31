@@ -91,7 +91,8 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     private TableView<Supplier> suppliersTable;
 
     /**
-     * This method...
+     * This method will call the method that loads
+     * the previous screen.
      * 
      * @param event
      */
@@ -101,7 +102,11 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     }
 
     /**
-     * This method...
+     * This method will run after clicking save button
+     * it will show a confirmation box to confirm if the branch manager
+     * wants to confirm m this supplier, and if he clicks on OK button
+     * so we create a message to the server to change the supplier
+     * status.
      * 
      * @param event
      */
@@ -123,7 +128,8 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     }
 
     /**
-     * This method...
+     * This method will disconnect the specific client,
+     * log out the connected user and exit.
      * 
      * @param event
      */
@@ -138,7 +144,8 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     }
 
     /**
-     * This method...
+     * This method display a pop up message 
+     * to the user.
      * 
      * @param event
      */
@@ -214,7 +221,8 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	}
 	
 	/**
-     * This method...
+     * This method will initialize the list and
+     * gets all the relevant data from the DB.
      * 
      * @param arg0
      * @param arg1

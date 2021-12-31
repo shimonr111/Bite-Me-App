@@ -76,7 +76,8 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     private TableView<UserForRegistration> usersTable;
 
     /**
-     * This method....
+     * This method will call the
+     * method that loads the previous screen.
      * 
      * @param event
      */
@@ -86,7 +87,9 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     }
 
     /**
-     * This method....
+     * This method will check if the selected
+     * row of the table is not null , and then
+     * load the business customer registration screen.
      * 
      * @param event
      */
@@ -105,7 +108,8 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     }
 
     /**
-     * This method....
+     * This method will disconnect the specific client,
+     * log out the connected user, and exit.
      * 
      * @param event
      */
@@ -120,7 +124,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     }
 
     /**
-     * This method....
+     * This method will display a pop up message to the user.
      * 
      * @param event
      */
@@ -130,7 +134,9 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
     }
 
     /**
-     * This method....
+     * This method will check if the selected
+     * row of the table is not null , and then
+     * load the private customer registration screen.
      * 
      * @param event
      */
@@ -245,7 +251,10 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 	}
 
 	 /**
-     * This method....
+     * This method will initialize the table of view
+     * after getting all the relevant data from the server,
+     * we will initialize the table according to the class UserForRegistration
+     * and we initialize the search bar.
      * 
      * @param arg0
      * @param arg1

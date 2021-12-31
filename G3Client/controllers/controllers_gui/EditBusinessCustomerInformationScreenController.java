@@ -104,7 +104,11 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     private Text displayMessage;
 
     /**
-     * This method...
+     * This method will run after clicking on save button
+     * we check if there were any changes to the status
+     * of the customer, 
+     * if yes so we send a message to server asking to 
+     * change the status of the customer.
      * 
      * @param event
      */
@@ -143,7 +147,8 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     }
 
     /**
-     * This method...
+     * This method will call the method that loads
+     * the previous screen.
      * 
      * @param event
      */
@@ -153,7 +158,8 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     }
 
     /**
-     * This method...
+     * This method will disconnect the client and
+     * then log out and exit.
      * 
      * @param event
      */
@@ -168,7 +174,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     }
 
     /**
-     * This method...
+     * This method will display a pop up message to the user.
      * 
      * @param event
      */
