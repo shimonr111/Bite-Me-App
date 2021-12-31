@@ -107,7 +107,7 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	@FXML
 	public void getManageOrdersBtn(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		SupplierWorkerManageOrders supplierWorkerManageOrders = new SupplierWorkerManageOrders();
+		SupplierWorkerManageOrdersController supplierWorkerManageOrders = new SupplierWorkerManageOrdersController();
 		supplierWorkerManageOrders.initSupplierWorkerManageOrdersScreen(); // call the init of the next screen	
 	}
 	
