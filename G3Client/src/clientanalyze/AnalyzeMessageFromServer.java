@@ -386,7 +386,7 @@ public class AnalyzeMessageFromServer {
 				((Customer)AbstractBiteMeController.connectedUser).setBalance((Double.parseDouble((String)recivedMessageFromServer.getObject())));
 				break;
 			case GET_USER_EMAIL:
-				SupplierWorkerManageOrdersController.approvedCustomerEmail = (String)recivedMessageFromServer.getObject();
+				SupplierWorkerManageOrdersController.approvedCustomerDetailsForMail = (ArrayList<String>)recivedMessageFromServer.getObject();
 				break;
 				
 			default:
