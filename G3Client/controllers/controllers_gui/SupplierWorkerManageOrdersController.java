@@ -412,7 +412,8 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 			message.setFrom(new InternetAddress(myEmail));
 			message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(reciever));
 			message.setSubject("Bite Me - G3 - Email Simulation");
-			message.setText("Hey "+firstName +" " + lastName +", your order <"+orderNumber+"> from "+restaurantName+" is approved!");
+			message.setText("Hey "+firstName +" " + lastName +"!\nYou'r order #"+orderNumber+" from "+restaurantName+" is approved!\n"
+					+ "Thank you for choosing Bite Me, we are always happy to satisfy true hunger.");
 			return message;
 		}catch(Exception ex) {
 			System.out.println("sending email failed");
