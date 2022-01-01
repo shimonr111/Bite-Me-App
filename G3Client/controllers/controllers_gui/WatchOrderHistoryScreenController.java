@@ -113,7 +113,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     public void getConfirmBtn(ActionEvent event) {
      	OrderForView orderForView = ordersTable.getSelectionModel().getSelectedItem();
     	if(orderForView != null) {
-    		if(orderForView.getOrderStatus().equals("Pending for resturant approval")) {
+    		if(orderForView.getOrderStatus().equals("Pending Approval")) {
     			// add text and display this string : "You can't confirm orders that are still not approved from the restaurant"
     		}
     		else {
