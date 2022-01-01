@@ -148,6 +148,21 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         	String time = supplyTimeCombo.getValue();
         	Date dateForOrder = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields(date,time);
         	order.setEstimatedSupplyDateTime(dateForOrder);
+    		if (supplyDatePicker.getValue().equals(LocalDate.now())) { // if the customer chose the delivery for the current day
+    			int desiredHourInt = Integer.valueOf(time.substring(0, 2)); // convert String hour to Integer hour
+    			Date currentHourStr = new Date(); // the current hour
+    			int currentHourInt = currentHourStr.getHours(); // convert the current hour to Integer
+    			if(desiredHourInt - currentHourInt > 2) { // if the desired time to get the delivery is more than 2 hours
+    				order.setTimeType(OrderTimeType.PRE);
+    			}
+    			else { // the desired time is to get the delivery in less than 2 hours
+    				order.setTimeType(OrderTimeType.REGULAR);
+    			}
+    		}
+    		else { // the customer chose the delivery for the next days
+    			order.setTimeType(OrderTimeType.PRE);
+    		}
+    		
         	switch(order.getSupplyType()) {
         	case TAKE_AWAY:
         		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
@@ -160,22 +175,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
         				errorText.setText("Please choose dilevery type(*)");
         		}
         		else {
-	        		if (supplyDatePicker.getValue().equals(LocalDate.now())) { // if the customer chose the delivery for the current day
-	        			int desiredHourInt = Integer.valueOf(time.substring(0, 2)); // convert String hour to Integer hour
-	        			Date currentHourStr = new Date(); // the current hour
-	        			int currentHourInt = currentHourStr.getHours(); // convert the current hour to Integer
-	        			if(desiredHourInt - currentHourInt > 2) { // if the desired time to get the delivery is more than 2 hours
-	        				order.setTimeType(OrderTimeType.PRE);
-	        			}
-	        			else { // the desired time is to get the delivery in less than 2 hours
-	        				order.setTimeType(OrderTimeType.REGULAR);
-	        			}
-	        		}
-	        		else { // the customer chose the delivery for the next days
-	        			order.setTimeType(OrderTimeType.PRE);
-	        		}
-	        		
-	        		
+
 	        		DeliveryType deliveryType =null;
 	        		if(connectedUser instanceof BusinessCustomer) {
 	        			if(((BusinessCustomer)connectedUser).getLoggedInAsBusinessAccount())

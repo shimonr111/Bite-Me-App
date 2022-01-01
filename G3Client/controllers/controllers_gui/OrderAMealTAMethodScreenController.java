@@ -22,8 +22,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import orders.DeliverySupplyMethod;
 import orders.Order;
 import orders.TakeAwaySupplyMethod;
+import util.Constans;
 import util.DataLists;
 
 /**
@@ -79,6 +81,13 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
+    	switch(order.getTimeType()) {
+  		case PRE:
+  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+  			break;
+  		default:
+  			break;
+	  }
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
@@ -256,6 +265,14 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      */
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
+		switch(order.getTimeType()) {
+		case PRE:
+			order.setTotalPrice(order.getTotalPrice()*(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+			break;
+		default:
+			break;
+		
+		}
 	phonePrefixCombo.getItems().addAll(DataLists.getPhonePrefix());
   }
   

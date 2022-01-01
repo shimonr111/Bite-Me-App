@@ -93,6 +93,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
+
     	switch(order.getSupplyType()){
 		  case TAKE_AWAY:
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealTAMethod.fxml";
@@ -102,23 +103,20 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 			  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
 			  pageTitle = "Delivery";
 			  //set total price to the price as it was after choose supply method stage
-			  switch(order.getTimeType()) {
-		  		case PRE:
-		  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
-		  			if(order.getSupplyMethodInformation() instanceof DeliverySupplyMethod) {
-		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
-		  			}
-		  			break;
-		  		case REGULAR:
-		  			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
-		  			break;
-		  		default:
-		  			break;
-			  }
+	  			if(order.getSupplyMethodInformation() instanceof DeliverySupplyMethod) {
+	  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
+	  			}
 			  break;
 		  	default:
 			 break;
 	  }
+		  switch(order.getTimeType()) {
+	  		case PRE:
+	  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
+	  			break;
+	  		default:
+	  			break;
+		  }
       Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
