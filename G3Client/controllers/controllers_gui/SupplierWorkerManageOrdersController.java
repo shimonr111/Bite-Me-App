@@ -377,7 +377,8 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 		properties.put("mail.smtp.port", "587");
 		
 		String myEmail = "g3.biteme@gmail.com";
-		String password = "G.bite.3.me";
+		String myBackUpEmail = "g3.biteme.backup@gmail.com";
+		String password = "lyhnlajwhukfcqng";
 		
 		Session session = Session.getInstance(properties, new Authenticator() {
 			@Override
@@ -387,10 +388,28 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 		});
 		
 		javax.mail.Message message = prepareMessage(session, myEmail,reciever,firstName,lastName,restaurantName,orderNumber);
-		
+		try {
 		Transport.send(message);
-		System.out.println("Message sent");
-		
+		}
+		catch (com.sun.mail.smtp.SMTPSendFailedException e1) {
+			System.out.println("Sending Email from the primary email address failed, trying with the backup email.");
+			session = Session.getInstance(properties, new Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(myBackUpEmail, password);
+				}
+			});
+			
+			message = prepareMessage(session, myBackUpEmail,reciever,firstName,lastName,restaurantName,orderNumber);
+			try {
+			Transport.send(message);
+			}
+			catch (com.sun.mail.smtp.SMTPSendFailedException e2) {
+				System.out.println("Sending Email from the backup email address failed!");
+				return;
+			}
+		}
+		System.out.println("Email sent successfuly!");
 		
 	}
 	
