@@ -577,7 +577,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			alreadyCreditCardTextField.setDisable(true);
 			alreadyAccountBalanceTextField.setDisable(true);
 			availableAccountBalanceTextField.setDisable(true);
-			order.setTotalPrice(Math.round(order.getTotalPrice())); //done for treating a behavioral bug that started in numbers with a few figures after the dot.
+			order.setTotalPrice(order.getTotalPrice()); //done for treating a behavioral bug that started in numbers with a few figures after the dot.
 			amountLeftToPay = order.getTotalPrice();
 			totalToPayTextField.setText(String.valueOf(amountLeftToPay));//set the total price
 		}
