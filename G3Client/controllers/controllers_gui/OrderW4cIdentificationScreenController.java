@@ -48,6 +48,14 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 	 */
 	private static FXMLLoader loader;
     private static OrderW4cIdentificationScreenController orderW4cIdentificationScreenController;
+    /**
+     * This member indicate if its the first order of this customer, used to save the actual home branch in the first order.
+     */
+    private static boolean isFirstOrder = true;
+    /**
+     * The actual home branch that we will display as the home branch every time cusomer enters the W4C identification screen.
+     */
+    private static Branch actualHomeBranch;
     
     @FXML
     private TextField codeTxtField;
@@ -312,7 +320,13 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 			/*make the company code text and label invisible for customer*/
 			companyCodeLabel.setVisible(false);
 			companyCodeTextField.setVisible(false);
-		Branch homeBranch = connectedUser.getHomeBranch();
+			
+		//To save the actual home branch in the beginning so it will always displayed in the identification process.
+		if(isFirstOrder) {
+			actualHomeBranch = connectedUser.getHomeBranch();
+			isFirstOrder = false;
+		}
+		Branch homeBranch = actualHomeBranch;
 		if(homeBranch.equals(Branch.NORTH))
 			homeBranchCombo.setValue("North Branch");
 		else if(homeBranch.equals(Branch.CENTER))
