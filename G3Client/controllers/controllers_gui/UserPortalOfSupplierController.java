@@ -220,6 +220,7 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		viewReceiptsBtn.setDisable(true);
 		if(((SupplierWorker)connectedUser).getSupplier().getStatusInSystem().equals(ConfirmationStatus.PENDING_REGISTRATION)) {
 			resturantName.setText(((SupplierWorker)connectedUser).getSupplier().getSupplierName()+" - Pending for Approval"); 
 			btnManageMenu.setDisable(true);
@@ -233,6 +234,9 @@ public class UserPortalOfSupplierController extends AbstractBiteMeController  im
 				btnManageMenu.setDisable(true);
 				btnManageOrders.setDisable(true);
 			
+			}
+			if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.MANAGER)) {
+				viewReceiptsBtn.setDisable(false);
 			}
 			if(((SupplierWorker)connectedUser).getWorkerPosition().equals(WorkerPosition.REGULAR)) {
 				btnManageMenu.setDisable(true);

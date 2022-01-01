@@ -3,6 +3,7 @@ package users;
 /**
 * 
 * @author Alexander, Martinov.
+* @author Mousa, Srour.
 * 
 *  Enum description:
 *  This Enum is used to describe the position
@@ -10,7 +11,7 @@ package users;
 *  between supplier manager and regular worker in the
 *  Bite Me system.
 *  
-*  @version 15/12/2021
+*  @version 1/1/2022
 */
 public enum WorkerPosition {
 
@@ -26,5 +27,11 @@ public enum WorkerPosition {
 			return "REGULAR";
 		}
 	
+	},
+	MANAGER{
+		@Override
+		public String toString() {
+			return "MANAGER";
+		}
 	}
 }
