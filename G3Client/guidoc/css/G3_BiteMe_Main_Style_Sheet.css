@@ -20,7 +20,7 @@
 .backButton{
     -fx-background-color: white;
     -fx-background-position: center center;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
@@ -32,7 +32,7 @@
 .nextButton{
     -fx-background-color: white;
     -fx-background-position: center center;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
@@ -44,7 +44,7 @@
 .exitButton{
     -fx-background-color: white;
     -fx-background-position: center center;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 20px;
    	-fx-font-weight: bold;
 }
@@ -52,7 +52,7 @@
 .helpButton{
     -fx-background-color: white;
     -fx-background-position: center center;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
@@ -86,13 +86,13 @@
 .ReportsText{
  -fx-font-smoothing-type: lcd;
  -fx-text-alignment: center;
- -fx-fill:linear-gradient(to bottom, #141e30, #243b55);
+ -fx-fill:linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
  -fx-font-size: 12pt;
 }
 
 
 .saveButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/disc.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -112,7 +112,7 @@
 	-fx-alignment: center; 
     -fx-background-position: 75% 50%;
    	-fx-background-size: 24 24;
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
 	-fx-font-smoothing-type: lcd;
@@ -121,7 +121,7 @@
 }
 
 .refreshButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/refresh.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -134,7 +134,7 @@
 
 }
 .confirmButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/confirm.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -148,7 +148,7 @@
 }
 
 .confirmOrderButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/confirm.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -162,7 +162,7 @@
 }
 
 .denyButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/close.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -176,7 +176,7 @@
 }
 
 .editButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/edit.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -209,7 +209,7 @@
 	-fx-alignment: center; 
 	-fx-background-size: 48 48;
     -fx-background-position: 95% 50%;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
@@ -221,7 +221,7 @@
 	-fx-alignment: center; 
 	-fx-background-size: 36 36;
     -fx-background-position: 90% 50%;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
@@ -238,19 +238,19 @@
 
 .text-field {
 
-	 -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	 -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	 -fx-font-size: 14.0px;
  }
 
 .text-field:focused {
     -fx-background-color:
-        linear-gradient(to bottom, #141e30, #243b55),
+        linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30),
         #f2eeee;
 }
 
 .text-field:hover {
     -fx-background-color:
-        linear-gradient(to bottom, #141e30, #243b55),
+        linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30),
         #f2eeee;
 }
 
@@ -264,7 +264,7 @@
 
 /**~~~~~@@@@ Server @@@@~~~~~*/
 .serverExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -278,7 +278,7 @@
 }
 
 .serverConnectButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -288,7 +288,7 @@
 }
 
 .serverDisconnectButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -302,7 +302,7 @@
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center;
     -fx-background-position: 1.5% 50%;
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -312,7 +312,7 @@
 }
 
 .serverHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 40px;
 	-fx-font-smoothing-type: lcd;
@@ -321,7 +321,7 @@
 }
 
 .serverLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 18px;
 	-fx-font-smoothing-type: lcd;
@@ -332,7 +332,7 @@
 }
 
 .serverConsoleClinetsLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 24px;
 	-fx-font-smoothing-type: lcd;
@@ -345,7 +345,7 @@
 
 /**~~@@ IP Confirmation @@~~*/
 .ipExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -359,7 +359,7 @@
 }
 
 .ipConfirmButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/key.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center;
@@ -373,7 +373,7 @@
 }
 
 .ipConfirmHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 32px;
 	-fx-font-smoothing-type: lcd;
@@ -385,7 +385,7 @@
 
 /**~~@@ Home Screen @@~~*/
 .homeExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 50%;
 	-fx-background-size: 300 150;
@@ -399,7 +399,7 @@
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center;
     -fx-background-position: 85% 50%;
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 24px;
 	-fx-font-smoothing-type: lcd;
@@ -427,7 +427,7 @@
 /**~~~~@@ Login Screen @@~~~~*/
 
 .loginExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -441,7 +441,7 @@
 }
 
 .loginButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/outline_login_white_24dp.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -455,7 +455,7 @@
 }
 
 .loginLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 14px;
 	-fx-font-smoothing-type: lcd;
@@ -466,7 +466,7 @@
 }
 
 .loginHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 32px;
 	-fx-font-smoothing-type: lcd;
@@ -485,7 +485,7 @@
 /**~~~~@@ User Portals @@~~~~*/
 
 .userPortalExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -500,7 +500,7 @@
 }
 
 .userPortalTopPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 0%;
 	-fx-background-size: 48 48;
@@ -517,7 +517,7 @@
 }
 
 .userPortalLogoutButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/logout.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -531,7 +531,7 @@
 }
 
 .userPortalMainButtonsManage{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/manage.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
@@ -544,7 +544,7 @@
 }
 
 .userPortalMainButtonsRegister{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addUser.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
@@ -557,7 +557,7 @@
 }
 
 .userPortalMainButtonsOrder{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/cart.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
@@ -570,7 +570,7 @@
 }
 
 .userPortalMainButtonsView{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/report.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
@@ -583,7 +583,7 @@
 }
 
 .userPortalMainButtonsAddReport{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/addNote.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: top-center; 
@@ -610,7 +610,7 @@
 }
 
 .userPortalWelcomeLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
 	-fx-font-smoothing-type: lcd;
@@ -618,7 +618,7 @@
 }
 
 .userPortalStatusLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 16px;
 	-fx-font-smoothing-type: lcd;
@@ -626,7 +626,7 @@
 }
 
 .userPortalStatusTypeLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 12px;
 	-fx-font-smoothing-type: lcd;
@@ -635,7 +635,7 @@
 }
 
 .userPortaluserNameLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size:22px;
 	-fx-font-smoothing-type: lcd;
@@ -645,7 +645,7 @@
 }
 
 .userPortalRetsturantNameLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size:22px;
 	-fx-font-smoothing-type: lcd;
@@ -658,7 +658,7 @@
 /**~@@ W4C Identification @@~*/
 
 .W4CExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -676,7 +676,7 @@
 }
 
 .W4CLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 16px;
 	-fx-font-smoothing-type: lcd;
@@ -686,7 +686,7 @@
 }
 
 .QRButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/QR.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -700,7 +700,7 @@
 }
 
 .W4CHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -709,7 +709,7 @@
 }
 
 .W4CBranchLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 24px;
 	-fx-font-smoothing-type: lcd;
@@ -722,7 +722,7 @@
 /**~@@ Choose Restaurant @@~~*/
 
 .chooseRestuExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -741,7 +741,7 @@
 }
 
 .chooseRestuHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -752,7 +752,7 @@
 
 /**~~~~@@ Item Selection @@~~~~*/
 .itemSelectionExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -760,7 +760,7 @@
 }
 
 .itemSelectionMainHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -803,7 +803,7 @@
 }
 
 .itemSelectionMenuHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -825,7 +825,7 @@
 
 
 .itemSelectionCartHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -834,7 +834,7 @@
 }
 
 .itemSelectionAddToCartButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/add-to-basket.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -849,7 +849,7 @@
 }
 
 .itemSelectionRemoveFromCartButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/remove-from-cart.png");
 	-fx-background-repeat: stretch;  
 	-fx-alignment: center; 
@@ -878,7 +878,7 @@
 }
 
 .itemSelectionPriceLabel{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 20px;
 	-fx-font-smoothing-type: lcd;
@@ -901,7 +901,7 @@
 
 /**~~~~@@ Supply @@~~~~*/
 .supplyExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -940,7 +940,7 @@
 }
 
 .supplyLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 14px;
 	-fx-font-smoothing-type: lcd;
@@ -950,7 +950,7 @@
 }
 
 .supplyHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -962,7 +962,7 @@
 
 /**~~~~@@ Delivery @@~~~~*/
 .deliveryExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -982,7 +982,7 @@
 }
 
 .deliveryLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 14px;
 	-fx-font-smoothing-type: lcd;
@@ -992,7 +992,7 @@
 }
 
 .deliveryHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 30px;
 	-fx-font-smoothing-type: lcd;
@@ -1003,7 +1003,7 @@
 
 /**~~@@ Order Summary @@~*/
 .proceedToPaymentButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -1028,7 +1028,7 @@
 /**~~~@@ Payment Config @@~~~*/
 .finishOrderButton{
 	-fx-background-color: white;
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight: bold;
 	-fx-font-size: 20px;
 	-fx-font-smoothing-type: lcd;
@@ -1041,7 +1041,7 @@
 }
 
 .addOrRemoveAmountButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:14px;
@@ -1053,7 +1053,7 @@
 
 /**~~~~@@ Registration @@~~~~*/
 .regiExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -1061,7 +1061,7 @@
 }
 
 .regiRegularButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:16px;
@@ -1150,7 +1150,7 @@
 
 /**~~~~@@ Employees Confirmation @@~~~~*/
 .employeeLabels{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 14px;
 	-fx-font-smoothing-type: lcd;
@@ -1163,7 +1163,7 @@
 
 /**~~~~@@ Reports @@~~~~*/
 .reportsSmallExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 5%;
 	-fx-background-size: 130 65;
@@ -1171,7 +1171,7 @@
 }
 
 .reportsBigExternalPane{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-repeat: stretch;   
 	-fx-background-position: 50% 6%;
 	-fx-background-size: 150 75;
@@ -1180,7 +1180,7 @@
 
 
 .regiViewButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-fill: white;
 	-fx-font-weight:bold;
 	-fx-font-size:20px;
@@ -1190,7 +1190,7 @@
 }
 
 .searchButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/search.png");
 	-fx-background-repeat: stretch;  
 	-fx-background-position: 50% 50%;
@@ -1202,7 +1202,7 @@
 }
 
 .uploadReportButton{
-	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/upload2.png");
 	-fx-background-repeat: stretch;  
 	-fx-background-size: 24 24;
@@ -1217,7 +1217,7 @@
 }
 
 .viewHeadLight{
-	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 28px;
 	-fx-font-smoothing-type: lcd;
@@ -1239,14 +1239,14 @@
 .combo-box .list-cell 
 {
     -fx-background-color: white;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
 	-fx-font-size: 14px;
 	-fx-font-smoothing-type: lcd;
 	-fx-text-alignment: center;
     -fx-padding: 3 2 2 7;
     -fx-cell-size: 2em; 
-	-fx-border-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 }
 
 .combo-box-popup .list-view 
@@ -1267,13 +1267,13 @@
 .combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
 {
     -fx-background: -fx-accent;
-    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-text-fill: -fx-selection-bar-text;
 }
 
 .combo-box-popup .list-view .list-cell:filled:hover 
 {
-    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-text-fill: -fx-selection-bar-text;
 }
 
@@ -1286,7 +1286,7 @@
 }
 
 .combo-box-base:hover
-{  	-fx-border-color: linear-gradient(to bottom, #141e30, #243b55);
+{  	-fx-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-border-radius: 6.0, 5.0;
     -fx-background-radius: 6.0, 5.0;
     -fx-background-insets: 0.0, 1.0;
@@ -1323,8 +1323,8 @@
 }
 
 .table-view{
-    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
-    -fx-border-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
+    -fx-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-font-size: 14px;
     -fx-text-weight: Bold;
     -fx-padding: 0;
@@ -1332,12 +1332,12 @@
 
 }
 .table-view:focused{
-  -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+  -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 }
 
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55);
-    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
+    -fx-table-cell-border-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
     -fx-background-radius: 5px 5px 0px 0px;
     -fx-background-insets: 0 5px 0 0;
 }
@@ -1357,7 +1357,7 @@
 
 .table-view .column-header-background .label{
     -fx-font-size: 14px;
-    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55);
+    -fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-text-alignment: center;
     -fx-font-weight: Bold;
 }
@@ -1384,7 +1384,7 @@
     -fx-padding: 0.0em;
 }
 .table-row-cell:selected {
-	-fx-text-background-color: linear-gradient(to bottom, #141e30, #243b55);
+	-fx-text-background-color: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	 -fx-font-weight: Bold;
 }
 
@@ -1404,11 +1404,11 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color:  linear-gradient(to bottom, #141e30, #243b55);
+    -fx-background-color:  linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
       -fx-opacity: 0.8;
 }
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color:  linear-gradient(to right, #141e30, #243b55);
+    -fx-background-color:  linear-gradient(to right, #141e30, #243b55, #243b55, #141e30);
     -fx-opacity: 0.8;
 }
 
@@ -1416,7 +1416,7 @@
 
 /** ~~~~@@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~ Dialog-Pane ~~~@@@~~~@@@~~~@@@~~~@@@~~~@@@~~~~@@@@ */
  .dialog-pane{
-  -fx-border-color:linear-gradient(to bottom, #141e30, #243b55);
+  -fx-border-color:linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
   -fx-border-width:20.0px;
   -fx-background-radius: 6,5;
  }
@@ -1426,7 +1426,7 @@
 
 }
 .dialog-pane > .content.label {
-   -fx-text-fill:linear-gradient(to bottom, #141e30, #243b55);
+   -fx-text-fill:linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
    -fx-font-size: 14px;
    -fx-font-weight: bold;
    -fx-text-alignment: left;
@@ -1439,13 +1439,13 @@
 
 .dialog-pane:header .header-panel .label{
   -fx-background-radius: 6,5;
-  -fx-text-fill:linear-gradient(to bottom, #141e30, #243b55);
+  -fx-text-fill:linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
   -fx-font-size:14px;
 }
 
 /**Costumization of Buttons**/
 .dialog-pane .button{
-   -fx-background-color:linear-gradient(to bottom, #141e30, #243b55);
+   -fx-background-color:linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
    -fx-background-alignment: left;
    -fx-text-fill: white;
  }
