@@ -17,7 +17,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.ConfirmBusinessAskForDetailsController">
    <children>
-      <Text fx:id="displayText" layoutX="311.0" layoutY="701.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="401.13671875" />
+      <Text fx:id="displayText" fill="RED" layoutX="311.0" layoutY="701.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="401.13671875" />
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ Employees Confirmation ➝ Insert Employee Information " />
       <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
          <children>
@@ -96,7 +96,7 @@
             </AnchorPane>
             <AnchorPane maxHeight="145.0" maxWidth="280.0" minHeight="120.0" minWidth="280.0" prefHeight="132.0" prefWidth="280.0" styleClass="budgetPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" GridPane.rowIndex="1">
                <children>
-                  <VBox layoutX="13.0" layoutY="48.0" prefHeight="72.0" prefWidth="254.0">
+                  <VBox layoutX="1.0" layoutY="48.0" prefHeight="72.0" prefWidth="266.0">
                      <children>
                         <HBox prefHeight="100.0" prefWidth="268.0" spacing="15.0">
                            <children>
@@ -106,10 +106,10 @@
                                     <TextField fx:id="budgetAmountTxtField" maxHeight="30.0" maxWidth="120.0" prefHeight="30.0" prefWidth="120.0" promptText="Monthly Max" />
                                  </children>
                               </VBox>
-                              <VBox prefHeight="100.0" prefWidth="107.0">
+                              <VBox prefHeight="72.0" prefWidth="115.0">
                                  <children>
                                     <Label prefHeight="35.0" prefWidth="120.0" styleClass="loginLabels" text="*Budget Type:" />
-                                    <ComboBox fx:id="budgetTypeCombo" editable="true" prefHeight="30.0" prefWidth="130.0" promptText="Type" />
+                                    <ComboBox fx:id="budgetTypeCombo" editable="true" prefHeight="30.0" prefWidth="115.0" promptText="Type" />
                                  </children>
                               </VBox>
                            </children>
