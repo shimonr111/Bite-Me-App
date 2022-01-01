@@ -115,7 +115,7 @@ CREATE TABLE `businesscustomer` (
 
 LOCK TABLES `businesscustomer` WRITE;
 /*!40000 ALTER TABLE `businesscustomer` DISABLE KEYS */;
-INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','hrmanagerFirstname','hrmanagerLastname','NORTH',0,5001,'hrmanagerEmail@Intel.com','10022',NULL,'Intel','WEEKLY',200,31062,0);
+INSERT INTO `businesscustomer` VALUES ('1002','PENDING_APPROVAL','Natalie','Saren','NORTH',0,5001,'natalie.business@gmail.com','10022','4001','Intel','WEEKLY',200,31062,0);
 /*!40000 ALTER TABLE `businesscustomer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `creditcard` (
 
 LOCK TABLES `creditcard` WRITE;
 /*!40000 ALTER TABLE `creditcard` DISABLE KEYS */;
-INSERT INTO `creditcard` VALUES ('3005','111','01/35'),('3006','111','01/35');
+INSERT INTO `creditcard` VALUES ('4000','111','11/20'),('4001','222','12/25');
 /*!40000 ALTER TABLE `creditcard` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +233,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES ('1000','CONFIRMED','customerFirstname','customerLastname','NORTH',0,31000,'customerEmail@gmeel.com','100000',NULL);
+INSERT INTO `customer` VALUES ('1000','CONFIRMED','Ricard','Luis','NORTH',0,31000,'ricard.customer@gmail.com','100000','4000');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -324,7 +324,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('bc','bc','1002','businesscustomer'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker'),('mnw','mnw','2002','supplierworker');
+INSERT INTO `login` VALUES ('cu','cu','1000','customer'),('bc','bc','1002','businesscustomer'),('intelhr','intelhr','1222','hrmanager'),('applehr','applehr','1333','hrmanager'),('phsw','phsw','2000','supplierworker'),('phsrw','phsrw','2001','supplierworker'),('mnw','mnw','2002','supplierworker'),('phswm','phswm','2003','supplierworker');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +512,7 @@ CREATE TABLE `supplierworker` (
   `email` varchar(256) DEFAULT NULL,
   `phoneNumber` varchar(256) DEFAULT NULL,
   `supplierId` varchar(256) DEFAULT NULL,
-  `workerPosition` enum('CERTIFIED','REGULAR') DEFAULT NULL,
+  `workerPosition` enum('CERTIFIED','REGULAR','MANAGER') DEFAULT NULL,
   PRIMARY KEY (`userID`),
   CONSTRAINT `supplierWorker_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -524,7 +524,7 @@ CREATE TABLE `supplierworker` (
 
 LOCK TABLES `supplierworker` WRITE;
 /*!40000 ALTER TABLE `supplierworker` DISABLE KEYS */;
-INSERT INTO `supplierworker` VALUES ('2000','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000211','2222','CERTIFIED'),('2001','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000222','2222','REGULAR'),('2002','CONFIRMED','MN','MN','NORTH',1,'mnw@mac.com','1002234','5555','CERTIFIED');
+INSERT INTO `supplierworker` VALUES ('2000','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000211','2222','CERTIFIED'),('2001','CONFIRMED','PHWfirstName','PHWlastname','SOUTH',0,'phw@pizzahut.com','1000222','2222','REGULAR'),('2002','CONFIRMED','MN','MN','NORTH',1,'mnw@mac.com','1002234','5555','CERTIFIED'),('2003','CONFIRMED','PhsManager','PhsManager','SOUTH',0,'phsmanager@piizahut.com','104123123','2222','MANAGER');
 /*!40000 ALTER TABLE `supplierworker` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -537,4 +537,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-31 16:07:41
+-- Dump completed on 2022-01-01 23:53:03
