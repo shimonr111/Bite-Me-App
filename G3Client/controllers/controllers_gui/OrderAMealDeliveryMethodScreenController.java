@@ -103,8 +103,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     	//fix the back button so that the price will be without the fee and the discount
     	switch(order.getTimeType()) {
   		case PRE:
-  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
   			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
+  			order.setTotalPrice(order.getTotalPrice()/(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
   			break;
   		case REGULAR:
   			order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.supplyMethodInformation).getDeliveryFee()); //update the total cost of the order
@@ -337,7 +337,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	 * the fee and the time type order (Pre order and Regular)
   	 */
   	private void calcTotalBill() {
-  		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
+  	
   		switch(order.getTimeType()) {
   		case PRE:
   			order.setTotalPrice(order.getTotalPrice()*(1-Constans.PRE_ORDER_DISCOUNT)); //set discount according to the instructions
@@ -346,6 +346,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   			break;
   		
   		}
+  		order.setTotalPrice(order.getTotalPrice()+deliveryInformation.getDeliveryFee()); //update the total cost of the order
   	}
   	
   	/**
