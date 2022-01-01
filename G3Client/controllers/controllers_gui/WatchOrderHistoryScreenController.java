@@ -86,6 +86,10 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 
     @FXML
     private TableColumn<OrderForView,String> timeCol; 
+    
+
+    @FXML
+    private Text displayText;
 
 	/**
      * This method calls the method that loads
@@ -111,10 +115,11 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
      */
     @FXML
     public void getConfirmBtn(ActionEvent event) {
+    	displayText.setText("");
      	OrderForView orderForView = ordersTable.getSelectionModel().getSelectedItem();
     	if(orderForView != null) {
     		if(orderForView.getOrderStatus().equals("Pending Approval")) {
-    			// add text and display this string : "You can't confirm orders that are still not approved from the restaurant"
+    			displayText.setText("You can't confirm orders that are still not approved from the restaurant");
     		}
     		else {
     			Optional<ButtonType> result = PopUpMessages.confirmationMessage("Pressing OK button means that you have recieved your order.");
@@ -132,7 +137,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
     		}
     	}
     	else {
-    		//displayText.setText("Select company to confirm!");
+    		displayText.setText("Select an order to confirm!");
     	}
     }
 
@@ -282,6 +287,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		displayText.setText("");
 		Message message = new Message (Task.GET_ORDERS_FOR_USER,Answer.WAIT_RESPONSE,connectedUser.getUserId());
 		sendToClient(message);
 		nameTxt.setText(connectedUser.getUserFirstName() + "'s orders in progres: ");
