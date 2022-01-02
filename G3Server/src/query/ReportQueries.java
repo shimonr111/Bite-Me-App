@@ -173,7 +173,7 @@ public class ReportQueries {
      */
 	public static void getAverageSupplyTime(SupplierByReport[] suppliersByPerformance,String fromDate, String toDate) {
 		ResultSet supplyTime=Query.getBasicQuery("semesterialproject.order where issueDateTime between '"+fromDate+"' and '"+toDate+"' group by supplierId",
-				" supplierId,status,(sec_to_time(FLOOR(avg(ABS(TIMESTAMPDIFF(SECOND,actualSupplyDateTime,issueSupplyDateTime)))))) as averageSupply ");
+				" supplierId,status,(sec_to_time(FLOOR(avg(ABS(TIMESTAMPDIFF(SECOND,actualSupplyDateTime,issueDateTime)))))) as averageSupply ");
 		try {
 			while(supplyTime.next()) {
 				for(int i=0;i<suppliersByPerformance.length;i++) {
