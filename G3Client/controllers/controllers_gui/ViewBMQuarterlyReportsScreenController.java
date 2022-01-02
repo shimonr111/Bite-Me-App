@@ -93,7 +93,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	private Button viewReportBtn;
 	
 	 /**
-     * This method....
+     * This method returns to the previous screen when the back button is pressed
      * 
      * @param event
      */
@@ -102,11 +102,11 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		setCeoPortal(event);
 	}
 
-	 /**
-     * This method....
-     * 
-     * @param event
-     */
+	/**
+	 * Clicking on exit button will log out the user then disconnect and exit.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -117,18 +117,19 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		System.exit(0);
 	}
 
-	 /**
-     * This method....
-     * 
-     * @param event
-     */
+	/**
+	 * Display a help pop up message.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view uploaded branch reports by selecting the time range and report type.");
 	}
 
 	 /**
-     * This method....
+     * This method requests a file from the db by it's unique file Id 
+     * Then saves it to a location specified with a file chooser
      * 
      * @param event
      */
@@ -137,6 +138,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     	if(pdfTable.getSelectionModel().getSelectedItem()!=null) {
     	String[] selectedItem=null;
     	selectedItem=pdfTable.getSelectionModel().getSelectedItem();
+    	//selectedItem[0] has the fileId, brought in from the db after loading the available files for that date
     	Message message = new Message (Task.GET_PDF_FILE,Answer.WAIT_RESPONSE,selectedItem[0]);
 		sendToClient(message);
 		if(pdfFile==null) {
@@ -146,6 +148,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 			FileChooser fileChooser = new FileChooser();
 		    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
 	        fileChooser.getExtensionFilters().add(extFilter);
+	        //selectedItem[1] has the file name of the selected file, sets it as the default name when downloading
 	        fileChooser.setInitialFileName(selectedItem[1]);
 	        Stage stage= new Stage();
 	        try {
@@ -159,7 +162,8 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     }
 
     /**
-     * This method....
+     * This method prepares a file list request from the server
+     * then it calls the table filling fuction, and clears the list for the next request
      * 
      * @param event
      */
@@ -167,27 +171,27 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     void searchReport(ActionEvent event) {
     	if(checkDate()) {
 			pdfTable.getItems().clear();
-    		String y = ReportYear.getValue();
-    		String yplusone =""+(Integer.parseInt(y)+1);
+    		String year = ReportYear.getValue();
+    		String yearPlusOne =""+(Integer.parseInt(year)+1);
     		String datefrom ="";
     		String dateby ="";
     		String quarter = ReportQuarter.getValue();
     		switch(quarter) {
     		case "1":
-    			datefrom=""+y+"-01-01";
-    			dateby=""+y+"-04-01";
+    			datefrom=""+year+"-01-01";
+    			dateby=""+year+"-04-01";
     			break;
     		case "2":
-    			datefrom=""+y+"-04-01";
-    			dateby=""+y+"-07-01";
+    			datefrom=""+year+"-04-01";
+    			dateby=""+year+"-07-01";
     			break;
     		case "3":
-    			datefrom=""+y+"-07-01";
-    			dateby=""+y+"-10-01";
+    			datefrom=""+year+"-07-01";
+    			dateby=""+year+"-10-01";
     			break;
     		case "4":
-    			datefrom=""+y+"-10-01";
-    			dateby=""+yplusone+"-01-01";
+    			datefrom=""+year+"-10-01";
+    			dateby=""+yearPlusOne+"-01-01";
     			break;
     			default:
     				break;
@@ -210,9 +214,9 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     }
     	
     /**
-     * This method....
+     * This method checks whether a year and a quarter were selected to pull reports from
      * 
-     * @return boolean
+     * @return boolean true if all fields were filled, false otherwise
      */
     	public boolean checkDate() {
     		if(ReportYear.getValue().equals("Year")) {
@@ -226,6 +230,11 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     		}
     		return true;
     	}
+        /**
+         * This method prepares an observable list for the table view of the files available in the server
+         * then it sets it into the table
+         * 
+         */
     	public void fillFoundReports() {
     		ObservableList<String[]> pdfStringList = FXCollections.observableArrayList();
 			for(String[] i : pdfList) {
@@ -237,7 +246,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
     	/**
     	 *Sets message to small text field on the bottom
     	 *
-    	 *@param message
+    	 *@param message string to be displayed
     	 */
 	private void setRelevantTextToDisplayMessageText(String message) {
 	Platform.runLater(new Runnable() {
@@ -316,7 +325,8 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	}
 
 	 /**
-     * This method....
+     * This method primes the year and quarter selection fields
+     * then it sets the cell value factories for the name, branch and date columns
      * 
      * @param arg0
      * @param arg1
@@ -331,6 +341,9 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		for(int i=1;i<5;i++) {
 			ReportQuarter.getItems().add(""+i);
 	}
+		//overrides the property value factory to set the correct string to the correct column
+		//filename, branch and date are passed as a string array
+		//filename is at index 1
 		filenameColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 		    @Override
 		    public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> row) {
@@ -342,6 +355,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		        }
 		    }
 		});
+		//branch is at index 2
 		branchColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 		    @Override
 		    public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> row) {
@@ -353,6 +367,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 		        }
 		    }
 		});
+		//date is at index 3
 		dateColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<String[], String>, ObservableValue<String>>() {
 		    @Override
 		    public ObservableValue<String> call(TableColumn.CellDataFeatures<String[], String> row) {

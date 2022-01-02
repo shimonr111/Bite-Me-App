@@ -18,11 +18,11 @@ import javafx.stage.StageStyle;
 
 /**
  * 
- * @author
+ * @author Alexander, Martinov.
  * 
- * Class description: 
+ * Class description: This is a class for displaying a system report in text format
  * 
- * @version 
+ * @version 26/12/2021
  */
 public class DisplayReportScreenController extends AbstractBiteMeController implements Initializable  {
 
@@ -40,39 +40,34 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 	    @FXML
 		private Button btnExit = null;
 		
-	    /**
-	     * This method...
-	     */
-		public static String getReport() {
-			return report;
-		}
 		
 		/**
-	     * This method...
+	     * setter for the report to be displayed
 	     * 
-	     * @param report
+	     * @param report report in string format
 	     */
 		public static void setReport(String report) {
 			DisplayReportScreenController.report = report;
 		}
 		
 		/**
-	     * This method...
+	     * Screen initialization method
+	     * calls report text setter
 	     * 
 	     * @param arg0
 	     * @param arg1
 	     */
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
-			setRelevantTextToDisplayMessageText(report);
+			setReportInTextField(report);
 		}
 		
 		/**
-	     * This method...
+	     * Sets the text field to the passed report string
 	     * 
-	     * @param message
+	     * @param message string message to be set
 	     */
-	 	private void setRelevantTextToDisplayMessageText(String message) {
+	 	private void setReportInTextField(String message) {
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
@@ -81,9 +76,10 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 			});
 	}
 	 	
-	 	/**
-	     * This method...
-	     */
+		/**
+		 * This is the initialization method for the report screen
+		 * 
+		 */
 	 	public void initDisplayReportScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -115,7 +111,8 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 	}
 	 	
 	 	/**
-	     * This method...
+	     * The setting and showing of a report are split so that
+	     * a report is only shown after its set
 	     */
 	 	public void showReport() {
 			Platform.runLater(new Runnable() {
@@ -127,7 +124,7 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 	 	}
 	 	
 	 	/**
-	     * This method...
+	     * This method closes the current report display screen
 	     * 
 	     * @param event
 	     * @throw Exception
