@@ -17,6 +17,7 @@ import controllers_gui.EditCustomerInformationScreenController;
 import controllers_gui.JoinMultiDeliveryScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
+import controllers_gui.OrderSummaryScreenController;
 import controllers_gui.SupplierRegistrationScreenController;
 import controllers_gui.SupplierWorkerManageMenuController;
 import controllers_gui.SupplierWorkerManageOrdersController;
@@ -391,6 +392,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER:
 				JoinMultiDeliveryScreenController.availableMultiOrders = (ArrayList<Order>)recivedMessageFromServer.getObject();
+				break;
+			case JOIN_MULTI_GET_NUMBER_OF_PARTICIPANTS:
+				OrderSummaryScreenController.joinMultiNumberOfParticipants = (Integer) recivedMessageFromServer.getObject();
 				break;
 				
 			default:

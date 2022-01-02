@@ -104,7 +104,7 @@ public class DeliverySupplyMethod extends AbatractSupplyMethod implements Serial
 			fee = Constans.REGULAR_DELIVERY_FEE_IN_NIS;
 			break;
 		case MULTI:
-			double multiDiscount = numberOfParticipants * 5;
+			double multiDiscount = (numberOfParticipants-1) * 5;
 			fee = Constans.REGULAR_DELIVERY_FEE_IN_NIS - multiDiscount;
 			if (fee < Constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS)
 				fee = Constans.MINIMUM_MULTI_DELIVERY_FEE_IN_NIS;

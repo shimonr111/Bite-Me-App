@@ -801,4 +801,28 @@ public class OrderQueries {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method gets the multi particiapnts order, number of participants.
+	 * @param message
+	 * @return a message contains an Integer which is the number of particiapnts.
+	 */
+	public static Message joinMultiGetNumberOfParticipants(Message message) {
+		ArrayList<Object> listFromClient = (ArrayList<Object>)message.getObject();
+		int ownerOrderNumber = Integer.parseInt((String)listFromClient.get(0));
+		Integer multiPartiNumber = 1;
+		ResultSet rs = Query.getRowsFromTableInDB("order", "orderNumber='"+ownerOrderNumber+"'");
+		try {
+			if(rs.next()) {
+				// get the row of the multiple participants owner
+				multiPartiNumber = rs.getInt(23);
+
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message (Task.JOIN_MULTI_GET_NUMBER_OF_PARTICIPANTS, Answer.SUCCEED, multiPartiNumber);
+	}
 }
