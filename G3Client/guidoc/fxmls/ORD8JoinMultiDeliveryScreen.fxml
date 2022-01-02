@@ -4,32 +4,46 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.JoinMultiDeliveryScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" styleClass="regiExternalPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers_gui.JoinMultiDeliveryScreenController">
    <children>
-      <Label layoutX="187.0" layoutY="31.0" text="Join Multiple Participants Delivery">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" text="X" />
-      <Button fx:id="helpBtn" layoutX="23.0" layoutY="2.0" mnemonicParsing="false" onAction="#getHelpBtn" text="?" />
-      <Button fx:id="backBtn" layoutX="8.0" layoutY="361.0" mnemonicParsing="false" onAction="#getBackBtn" text="Back" />
-      <Button fx:id="nextBtn" layoutX="518.0" layoutY="361.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="25.0" prefWidth="68.0" text="Next" />
-      <TableView fx:id="multiTable" layoutX="111.0" layoutY="88.0" prefHeight="200.0" prefWidth="354.0">
-        <columns>
-          <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="addressCol" prefWidth="278.0" text="Delivery Address" />
-        </columns>
-      </TableView>
-      <Text fx:id="displayText" fill="#b51717" layoutX="129.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="354.0">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Text>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection ➝ Item Selection ➝ Choose Supply Method ➝Join Multi Participants Delivery" />
+      <Button fx:id="nextBtn" layoutX="807.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getNextBtn" prefHeight="50.0" prefWidth="150.0" styleClass="nextButton" text="🢂 NEXT 🢂" />
+      <Button fx:id="backBtn" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
+      <HBox layoutX="34.0" layoutY="44.0" prefHeight="40.0" prefWidth="108.0" spacing="5.0">
+         <children>
+            <Button id="btnExit" fx:id="exitBtn" mnemonicParsing="false" onAction="#getExitBtn" prefHeight="40.0" prefWidth="50.0" styleClass="exitButton" text="✖">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="helpBtn" mnemonicParsing="false" onAction="#getHelpBtn" prefHeight="40.0" prefWidth="50.0" styleClass="helpButton" text="❔" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="342.0" layoutY="144.0" prefHeight="400.0" prefWidth="340.0" styleClass="JoinMultiMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+         <children>
+            <Label layoutX="30.0" layoutY="14.0" prefHeight="53.0" prefWidth="280.0" styleClass="deliveryHeadLight" text="Join Multi Delivery" textFill="#383838">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Text fx:id="displayText" fill="RED" layoutX="17.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="306.6953125" />
+            <TableView fx:id="multiTable" layoutX="18.0" layoutY="156.0" prefHeight="200.0" prefWidth="305.0">
+              <columns>
+                <TableColumn fx:id="nameCol" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Name" />
+                <TableColumn fx:id="addressCol" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Delivery Address" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

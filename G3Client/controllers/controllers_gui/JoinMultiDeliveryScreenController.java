@@ -135,7 +135,7 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 	     */
 	    @FXML
 	    void getHelpBtn(ActionEvent event) {
-	    	PopUpMessages.helpMessage("Please select what multiple deliviry would you like to join");
+	    	PopUpMessages.helpMessage("Please select which multi-participants delivery you would like to join.");
 	    }
 	    
 	    /**
@@ -210,7 +210,7 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 		listToServer.add(connectedUser.getUserId());
 		sendToClient(new Message (Task.GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER,Answer.WAIT_RESPONSE,listToServer));
 		if(availableMultiOrders.isEmpty()) {
-			displayText.setText("No available multiple participants deliviry for this restaurant");
+			displayText.setText("There are no multi-participants delivery for this restaurant!");
 		}
 		else {
 			availableOrdersObservable.addAll(availableMultiOrders);

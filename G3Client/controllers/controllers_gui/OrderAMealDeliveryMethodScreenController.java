@@ -194,7 +194,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
     		deliveryInformation.setReceiverFirstName(firstNameTextField.getText());
     		deliveryInformation.setReceiverLastName(lastNameTextField.getText());
     		deliveryInformation.setReceiverPhoneNumber(phonePrefixCombo.getValue() + phoneTxtField.getText());
-    		deliveryInformation.setReciverAddress(cityCombo.getValue() + streetCombo.getValue() + addressTextField.getText());
+    		deliveryInformation.setReciverAddress(cityCombo.getValue() + " " + streetCombo.getValue() + " " + addressTextField.getText());
     		
     		//move to next screen
     		 ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
