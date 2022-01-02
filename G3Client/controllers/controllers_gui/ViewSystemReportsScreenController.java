@@ -132,16 +132,16 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
     		int quarter = myLocal.get(IsoFields.QUARTER_OF_YEAR);
     		switch(quarter) {
     		case 1:
-    			date=""+y+"-01-01";
+    			date=""+(Integer.parseInt(y.toString())-1)+"-10-01";
     			break;
     		case 2:
-    			date=""+y+"-04-01";
+    			date=""+y+"-01-01";
     			break;
     		case 3:
-    			date=""+y+"-07-01";
+    			date=""+y+"-04-01";
     			break;
     		case 4:
-    			date=""+y+"-10-01";
+    			date=""+y+"-07-01";
     			break;
     			default:
     				break;
