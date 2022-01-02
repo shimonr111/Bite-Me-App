@@ -3,6 +3,7 @@ package controllers_gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -24,12 +25,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import orders.Item;
@@ -143,6 +146,16 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     			order.totalPrice += itemAddToCart.getPrice();
     			//print the new sum to the user
     			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
+    		
+		    	TextInputDialog dialog = new TextInputDialog("~Comment Here~");
+		    	dialog.setHeaderText("Add Item Comment");
+		    	dialog.getDialogPane().getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+		    	PopUpMessages.centerButtons(dialog.getDialogPane());
+		    	Optional<String> result = dialog.showAndWait();
+		    	  if(result.isPresent()) {
+		    		  if (!result.get().equals("~Comment Here~")) //check that it contains only numbers
+		    			  itemAddToCart.setComment(result.get());
+		    	  }
     			itemsForCart.add(itemAddToCart);
     			cartTable.setItems(itemsForCart);
     			commentCartColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Item,String>>() {
