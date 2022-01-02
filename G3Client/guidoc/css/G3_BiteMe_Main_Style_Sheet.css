@@ -939,6 +939,18 @@
     -fx-background-size: 64 64;
 }
 
+.JoinMultiMainPane{
+	-fx-background-color:white;
+	-fx-font-smoothing-type: lcd;
+	-fx-background-radius: 6,5;
+	-fx-effect: dropshadow(three-pass-box,  rgba(0,0,0,0.5), 0.1, 25.0, 3.0, 4.0);
+	-fx-background-image: url("File:///C:/G3BiteMe/Design/Images/join.png");
+	-fx-background-repeat: stretch;  
+	-fx-alignment: center; 
+    -fx-background-position: 50% 20%;
+    -fx-background-size: 64 64;
+}
+
 .supplyLabels{
 	-fx-text-fill: linear-gradient(to bottom, #141e30, #243b55, #243b55, #141e30);
 	-fx-font-weight:bold;
