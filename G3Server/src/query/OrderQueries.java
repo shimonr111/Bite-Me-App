@@ -51,7 +51,7 @@ import util.OrderForView;
  * related to the DB in the order 
  * process.
  * 
- * @version 22/12/2021
+ * @version 2/1/2022
  */
 public class OrderQueries {
 	
@@ -698,6 +698,107 @@ public class OrderQueries {
 				Query.updateOneColumnForTableInDbByPrimaryKey("balance", "balance='"+balanceBudgetUsedBeforeCancelingOrder+"'",  "supplierId='"+supplierId+"' AND ( customerUserId='" + customerId+"')");
 			}
 			rs3.close();
+		}
+	}
+	
+	/**
+	 * In this method we get the MULTI
+	 * orders and with pending approval status and with
+	 * the same supplier id that the customer is
+	 * looking for.
+	 *  so the other business customers can join 
+	 *  them into the delivery.
+	 * @param message
+	 * @return a message contains the list of orders
+	 */
+	public static Message getAvailableMultiOrders(Message message) {
+		ArrayList<String> listFromClient = (ArrayList<String>)message.getObject();
+		
+		String supplierId = listFromClient.get(0);
+		String customerId = listFromClient.get(1);
+		ArrayList<Order> ordersWithMulti = new ArrayList<>();
+		String customerName ="";
+		ResultSet rs = Query.getRowsFromTableInDB("order", "supplierId='"+supplierId+"' AND (status='PENDING_APPROVAL' AND ( deliveryType='MULTI' AND ("
+				+ "customerUserId != '"+customerId+"')))");
+		try {
+			while(rs.next()) {
+				ResultSet rs2 = Query.getRowsFromTableInDB("businesscustomer", "userID='"+rs.getString(3)+"'");
+				if(rs2.next()) {
+					customerName = rs2.getString(3);
+				}
+				rs2.close();
+				ordersWithMulti.add(new Order (rs.getInt(1),rs.getString(3),customerName,rs.getString(15)));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new Message (Task.GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER,Answer.SUCCEED,ordersWithMulti);
+	}
+	
+	/**
+	 * This method gets a finished order by a customer
+	 * that has been ordered by the Join multiple participants option,
+	 * we get all the delivery details from the customer who he wants to join
+	 * for the multiple delivery option , we insert a new row for the new participant
+	 * with his items but without any amount of cost, we add the cost of his order
+	 * to the owner of the multiple-order.
+	 * @param message
+	 */
+	public static void joinMultiFinishedOrder(Message message) {
+		ArrayList<Object> listFromClient = (ArrayList<Object>)message.getObject();
+		Order order = (Order)listFromClient.get(0);
+		int ownerOrderNumber = Integer.parseInt((String)listFromClient.get(1));
+		Order multiOrder=null;
+		ResultSet rs = Query.getRowsFromTableInDB("order", "orderNumber='"+ownerOrderNumber+"'");
+		try {
+			if(rs.next()) {
+				// insert into a order table a new row wihtout payment ( all 0 )
+				double totalPrice=0.0;
+				String itemList = order.turnItemListIntoStringForDB();
+				String commentsList = order.turnCommentsIntoStringForDB();
+				Query.insertOneRowIntoOrderTable(order.getOrderNumber(),order.getSupplierUserId(),order.getCustomerUserId(),order.getCustomerUserType()
+						,order.getBranch(),OrderTimeType.valueOf(rs.getString(6)),
+						OrderStatus.COMPLETED,DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9)),
+						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9)),
+						DateTimeHandler.buildMySqlDateTimeFormatFromDateTimeString(rs.getString(9)),SupplyType.DELIVERY,totalPrice,
+						rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16),0.0,itemList,commentsList,DeliveryType.JOIN_MULTI);
+				// update the row of the multiple participants owner
+				int participants = rs.getInt(23);
+				totalPrice=order.getTotalPrice()+25; // delivery fee(25) by default
+				double ownerTotalPrice = rs.getDouble(12);
+				String ownerItems = rs.getString(18);
+				String ownerComments = rs.getString(19);
+				switch(participants) {
+				case 1:
+					ownerTotalPrice = ownerTotalPrice+totalPrice-10; //2 participants 
+					participants+=1;
+					ownerItems+=itemList;
+					ownerComments+=commentsList;
+					
+					break;
+				case 2:
+					ownerTotalPrice = ownerTotalPrice+totalPrice-20; // 3 participants
+					participants+=1;
+					ownerItems+=itemList;
+					ownerComments+=commentsList;
+					break;
+				default:
+					ownerTotalPrice = ownerTotalPrice+totalPrice-10;
+					ownerItems+=itemList;
+					ownerComments+=commentsList;
+					participants+=1;
+					break;
+					
+				}
+				Query.updateOneColumnForTableInDbByPrimaryKey("order", "totalPrice='"+ownerTotalPrice+"', itemsList='"+ownerItems+"', comments='"+
+						ownerComments+"', participantsAmount='"+participants+"'", "orderNumber='"+ownerOrderNumber+"'");
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

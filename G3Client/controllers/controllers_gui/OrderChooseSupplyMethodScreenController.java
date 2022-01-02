@@ -130,71 +130,78 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      */
     @FXML
     public void getBtnNext(ActionEvent event) {
-    	/*Check if the user hasn't entered any data to the combo box, deny continue to next screen*/
-    	if(isSupplyMethodComboBoxInvalid()) {
-    		errorText.setText("Please fill all the required fields (*)!");
-    		errorText.setFill(Color.RED);
+    	if(dileveryTypeComboBox.getValue()==DeliveryType.JOIN_MULTI) {
+    		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+			JoinMultiDeliveryScreenController joinMultiDeliveryScreenController = new JoinMultiDeliveryScreenController();
+			joinMultiDeliveryScreenController.initMultiDeviveryScreenController(order, dileveryTypeComboBox.getValue());
     	}
     	else {
-    		/*save the supply method*/
-        	if (supplyMethodCombo.getValue().equals("Take-Away")) {
-        		order.setSupplyType(SupplyType.TAKE_AWAY);
-        	}
-        	else {
-        		order.setSupplyType(SupplyType.DELIVERY);
-        	}
-        	/*save the desired time of the supply (date and time)*/
-        	String date = supplyDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        	String time = supplyTimeCombo.getValue();
-        	Date dateForOrder = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields(date,time);
-        	order.setEstimatedSupplyDateTime(dateForOrder);
-    		if (supplyDatePicker.getValue().equals(LocalDate.now())) { // if the customer chose the delivery for the current day
-    			int desiredHourInt = Integer.valueOf(time.substring(0, 2)); // convert String hour to Integer hour
-    			Date currentHourStr = new Date(); // the current hour
-    			int currentHourInt = currentHourStr.getHours(); // convert the current hour to Integer
-    			if(desiredHourInt - currentHourInt > 2) { // if the desired time to get the delivery is more than 2 hours
-    				order.setTimeType(OrderTimeType.PRE);
-    			}
-    			else { // the desired time is to get the delivery in less than 2 hours
-    				order.setTimeType(OrderTimeType.REGULAR);
-    			}
-    		}
-    		else { // the customer chose the delivery for the next days
-    			order.setTimeType(OrderTimeType.PRE);
-    		}
-    		
-        	switch(order.getSupplyType()) {
-        	case TAKE_AWAY:
-        		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-        		OrderAMealTAMethodScreenController orderAMealTAMethodScreenController = new OrderAMealTAMethodScreenController();
-        		orderAMealTAMethodScreenController.initTAMethodScreen(order); // call the init of the next screen
-        		break;
-        	case DELIVERY:
-        		/* check the delivery type */
-        		if(dileveryTypeComboBox.getValue()==null && connectedUser instanceof BusinessCustomer && ((BusinessCustomer)connectedUser).getLoggedInAsBusinessAccount()) {
-        				errorText.setText("Please choose dilevery type(*)");
-        		}
-        		else {
-
-	        		DeliveryType deliveryType =null;
-	        		if(connectedUser instanceof BusinessCustomer) {
-	        			if(((BusinessCustomer)connectedUser).getLoggedInAsBusinessAccount())
-	        				deliveryType = dileveryTypeComboBox.getValue();
-	        			else  
-	        				deliveryType = DeliveryType.REGULAR;
-	        				
-	        		}
-	        		else
-	        			 deliveryType = DeliveryType.REGULAR;
+	    	/*Check if the user hasn't entered any data to the combo box, deny continue to next screen*/
+	    	if(isSupplyMethodComboBoxInvalid()) {
+	    		errorText.setText("Please fill all the required fields (*)!");
+	    		errorText.setFill(Color.RED);
+	    	}
+	    	else {
+	    		/*save the supply method*/
+	        	if (supplyMethodCombo.getValue().equals("Take-Away")) {
+	        		order.setSupplyType(SupplyType.TAKE_AWAY);
+	        	}
+	        	else {
+	        		order.setSupplyType(SupplyType.DELIVERY);
+	        	}
+	        	/*save the desired time of the supply (date and time)*/
+	        	String date = supplyDatePicker.getValue().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+	        	String time = supplyTimeCombo.getValue();
+	        	Date dateForOrder = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields(date,time);
+	        	order.setEstimatedSupplyDateTime(dateForOrder);
+	    		if (supplyDatePicker.getValue().equals(LocalDate.now())) { // if the customer chose the delivery for the current day
+	    			int desiredHourInt = Integer.valueOf(time.substring(0, 2)); // convert String hour to Integer hour
+	    			Date currentHourStr = new Date(); // the current hour
+	    			int currentHourInt = currentHourStr.getHours(); // convert the current hour to Integer
+	    			if(desiredHourInt - currentHourInt > 2) { // if the desired time to get the delivery is more than 2 hours
+	    				order.setTimeType(OrderTimeType.PRE);
+	    			}
+	    			else { // the desired time is to get the delivery in less than 2 hours
+	    				order.setTimeType(OrderTimeType.REGULAR);
+	    			}
+	    		}
+	    		else { // the customer chose the delivery for the next days
+	    			order.setTimeType(OrderTimeType.PRE);
+	    		}
+	    		
+	        	switch(order.getSupplyType()) {
+	        	case TAKE_AWAY:
 	        		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-	        		OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController = new OrderAMealDeliveryMethodScreenController();
-	        		orderAMealDeliveryMethodScreenController.initDeliveryMethodScreen(order,deliveryType); // call the init of the next screen
-        		}
-        		break;
-        		
-        	default:
-        		break;
-        	}
+	        		OrderAMealTAMethodScreenController orderAMealTAMethodScreenController = new OrderAMealTAMethodScreenController();
+	        		orderAMealTAMethodScreenController.initTAMethodScreen(order); // call the init of the next screen
+	        		break;
+	        	case DELIVERY:
+	        		/* check the delivery type */
+	        		if(dileveryTypeComboBox.getValue()==null && connectedUser instanceof BusinessCustomer && ((BusinessCustomer)connectedUser).getLoggedInAsBusinessAccount()) {
+	        				errorText.setText("Please choose dilevery type(*)");
+	        		}
+	        		else {
+		        		DeliveryType deliveryType =null;
+		        		if(connectedUser instanceof BusinessCustomer) {
+		        			if(((BusinessCustomer)connectedUser).getLoggedInAsBusinessAccount()) 
+		        				deliveryType = dileveryTypeComboBox.getValue();
+		        				
+		        			else  
+		        				deliveryType = DeliveryType.REGULAR;
+		        				
+		        		}
+		        		else
+		        			 deliveryType = DeliveryType.REGULAR;
+		        		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		        		OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController = new OrderAMealDeliveryMethodScreenController();
+		        		orderAMealDeliveryMethodScreenController.initDeliveryMethodScreen(order,deliveryType); // call the init of the next screen
+	        		}
+	        		break;
+	        		
+	        	default:
+	        		break;
+	        	}
+	    	}
     	}
 
     }
@@ -299,7 +306,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 	public void initialize(URL arg0, ResourceBundle arg1) {
   		supplyDatePicker.setValue(LocalDate.now()); // set the Current date in the date picker
   		supplyDatePicker.getEditor().setDisable(true); //deny from the user writing in the text field of the date
-  		dileveryTypeComboBox.getItems().addAll(DeliveryType.REGULAR,DeliveryType.MULTI);
+  		dileveryTypeComboBox.getItems().addAll(DeliveryType.REGULAR,DeliveryType.MULTI,DeliveryType.JOIN_MULTI);
   		dileveryTypeComboBox.setVisible(false);
   		supplyMethodCombo.getItems().addAll(SupplyType.DELIVERY.toString(), SupplyType.TAKE_AWAY.toString()); //set supply methods in the combo box of supply method
   		supplyMethodCombo.setOnAction(new EventHandler<ActionEvent>() {
@@ -313,6 +320,8 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 						}
 						else {
 							dileveryTypeComboBox.setVisible(false);
+							supplyDatePicker.setDisable(false);
+							supplyTimeCombo.setDisable(false);
 						}
 					}
 					else {
@@ -324,6 +333,22 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
   			
   			
 		});
+  		dileveryTypeComboBox.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if(dileveryTypeComboBox.getValue()==DeliveryType.JOIN_MULTI) {
+					supplyDatePicker.setDisable(true);
+					supplyTimeCombo.setDisable(true);
+				}
+				else {
+					supplyDatePicker.setDisable(false);
+					supplyTimeCombo.setDisable(false);
+				}
+				
+			}
+  			
+  		});
   		List<String> hourArray = new ArrayList<String>(); // create hour array
   		Date date = new Date();
   		int hour = date.getHours();
