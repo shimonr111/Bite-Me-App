@@ -74,7 +74,6 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 
 	/**
 	 * This method calls the setBranchManagerPortal to get back the previous screen
-	 * This method works immedietly after clicking on back button.
 	 * 
 	 * @param event
 	 */
@@ -84,10 +83,10 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	}
 
 	/**
-     * This method...
-     * 
-     * @param event
-     */
+	 * Clicking on exit button will log out the user then disconnect and exit.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -99,10 +98,10 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	}
 
 	/**
-     * This method...
-     * 
-     * @param event
-     */
+	 * This is pop message for the help button.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the time range and report type.");
@@ -138,7 +137,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 *Checks year, month and report type fields were filled(selected)
 	 *
-	 *@return boolean
+	 *@return boolean true if all fields were selected, false otherwise
 	 */
 	public boolean checkDateAndType() {
 		if(ReportYear.getValue().equals("Year")) {
@@ -166,7 +165,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 *Sets message to small text field on the bottom
 	 *
-	 *@param message
+	 *@param message string to be displayed
 	 */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
 			Platform.runLater(new Runnable() {
@@ -271,9 +270,9 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	}
 	
 	/**
-     * This method...
+     * This method primes the report display screen and initializes it
      * 
-     * @param report
+     * @param report string to be shown in report field
      */
 	public void displaySingleReport(String report) {
 		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
@@ -282,13 +281,11 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		displayReportScreenController.showReport();
 }
 	
-	/**
-     * This method...
+	 /**
+     * This method prepares a string array for the branch selection combo box
      * 
-     * @param date
+     * @return String[] string array with all branches 
      */
-	public void saveQuarterlyReport(String date) {
-	}
 	public String[] getBranches() {
 		String[] branches= new String[4];
 		branches[0]="North";
@@ -298,10 +295,10 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 		return branches;
 	}
 	
-	/**
-     * This method...
+	 /**
+     * This method sets the branch string for the message based on the combo box input
      * 
-     * @return String
+     * @return String message format of combo box selection
      */
 	public String getBranch(){
 		String branch=branchBox.getValue();
@@ -320,12 +317,12 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	}
 	
 	/**
-     * This method...
+     * This method generates the appropriate report, and calls the display function
      * 
-     * @return String
      */
 	public void displayReport(String reportBranches) {
 	String type=ReportType.getValue();
+	//if all branches were selected, includes supplier branch in report
 	if(reportBranches.equals("All")) {
 	switch(type) {
 	case "Incomes":

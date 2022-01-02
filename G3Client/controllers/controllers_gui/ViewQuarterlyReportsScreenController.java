@@ -78,11 +78,11 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		UPCC.initCEOUserPortalAgain();
 	}
 
-	 /**
-     * This method....
-     * 
-     * @param event
-     */
+	/**
+	 * Clicking on exit button will log out the user then disconnect and exit.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -104,7 +104,8 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 
 	 /**
-     * This method....
+     * This method prepares a report request message
+     * based on the requested branch and report year and quarter
      * 
      * @param event
      */
@@ -133,7 +134,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		String[] branchAndDate=new String[3];
 		branchAndDate[0]=getBranch();
 		branchAndDate[1]=date; //prepare message to server, report date and branch
-		branchAndDate[2]="quarterly";
+		branchAndDate[2]="quarterly";//report type
 		Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
 		sendToClient(message);
 		if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
@@ -151,9 +152,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	
 	 /**
-     * This method....
+     * This method passes the report list to the display screen, and initializes it
      * 
-     * @param branchAndDate
+     * @param branchAndDate string for specifying report year, quarter and branch
      */
 	public void displaySingleReport(String[] branchAndDate) {
 		DisplayHistogramReportController displayHistogramReportController=new DisplayHistogramReportController();
@@ -161,9 +162,10 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		displayHistogramReportController.showReport(branchAndDate);
 }
 	
-	 /**
-     * This method....
-     */
+	/**
+	 * This is the initialization function for this 
+	 * screen when switched to.
+	 */
 	public void initViewQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -215,9 +217,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	
 	 /**
-     * This method....
+     * This method checks whether a year, a quarter and a branch were selected to pull reports from
      * 
-     * @return boolean
+     * @return boolean true if all fields were selected, false otherwise
      */
 	public boolean checkDate() {
 		if(ReportYear.getValue().equals("Year")) {
@@ -237,11 +239,11 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 		return true;
 	}
 	
-	 /**
-     * This method....
-     * 
-     * @param message
-     */
+	/**
+	 *Sets message to small text field on the bottom
+	 *
+	 *@param message string to be displayed
+	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -252,9 +254,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 }
  	
  	 /**
-     * This method....
+     * This method sets the branch string for the message based on the combo box input
      * 
-     * @return String
+     * @return String message format of combo box selection
      */
 	public String getBranch(){
 		String branch=ReportBranch.getValue();
@@ -273,9 +275,9 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	}
 	
 	 /**
-     * This method....
+     * This method prepares a string array for the branch selection combo box
      * 
-     * @return String[]
+     * @return String[] string array with all branches 
      */
 	public String[] getBranches() {
 		String[] branches= new String[4];

@@ -85,7 +85,6 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 
 	/**
 	 * this method calls the setBranchManagerPortal to get back the previous screen
-	 * this method works immedietly after clicking on back button.
 	 * 
 	 * @param event
 	 */
@@ -95,10 +94,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	}
 
 	/**
-     * This method...
-     * 
-     * @param event
-     */
+	 * Clicking on exit button will log out the user then disconnect and exit.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
 		Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
@@ -110,17 +109,18 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	}
 
 	/**
-     * This method...
-     * 
-     * @param event
-     */
+	 * This is pop message for the help button.
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
 		PopUpMessages.helpMessage("On this screen you can view system reports by selecting the time range and report type.");
 	}
 	
 	/**
-     * This method...
+     * This method prepares a quarterly report request from the server
+     * and calls a save to file function if a report was returned from the server
      * 
      * @param event
      */
@@ -187,23 +187,18 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 				switch(type) {
 				case "Incomes":
 					displaySingleReport(ReportGenerator.generateIncomeReport());
-					setRelevantTextToDisplayMessageText("");
-					suppliers=null;//flushes supplier reports list to recieve next report
 				break;
 				case "Orders":
 					displaySingleReport(ReportGenerator.generateOrderReport());
-					setRelevantTextToDisplayMessageText("");
-					suppliers=null;
 					break;
 				case "Performance":
 					displaySingleReport(ReportGenerator.generatePerformanceReport());
-					setRelevantTextToDisplayMessageText("");
-					suppliers=null;
 					break;
 				default:
-					suppliers=null;
 						break;
 				}
+				setRelevantTextToDisplayMessageText("");
+				suppliers=null;//flushes supplier reports list to receive next report
 			}
 		}
 	}
@@ -211,7 +206,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 *Checks year, month and report type fields were filled(selected)
 	 *
-	 *@return boolean
+	 *@return boolean true if all fields were selected, false otherwise
 	 */
 	public boolean checkDateAndType() {
 		if(ReportYear.getValue().equals("Year")) {
@@ -234,7 +229,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 *Sets message to small text field on the bottom
 	 *
-	 *@param message
+	 *@param message string to be displayed
 	 */
 	 	private void setRelevantTextToDisplayMessageText(String message) {
 			Platform.runLater(new Runnable() {
@@ -337,9 +332,9 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	}
 	
 	/**
-     * This method...
+     * This method primes the report display screen and initializes it
      * 
-     * @param report
+     * @param report string to be shown in report field
      */
 	public void displaySingleReport(String report) {
 		DisplayReportScreenController displayReportScreenController=new DisplayReportScreenController();
@@ -349,9 +344,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 }
 	
 	/**
-     * This method...
+     * This method creates a pdf file based on a pulled quarterly report
+     * then saves it to a filechooser picked location
      * 
-     * @param date
+     * @param date date of quarterly report pdf, needed for naming the file
      */
 	public void saveQuarterlyReport(String date) {
 		String replacer;

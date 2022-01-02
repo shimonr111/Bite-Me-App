@@ -27,155 +27,167 @@ import util.SupplierByReport;
 
 /**
  * 
- * @author
+ * @author Alexander, Martinov.
  * 
- * Class description: 
+ * Class description: This is a class for displaying a quarterly CEO
+ * report
  * 
- * @version 
+ * @version 29/12/2021
  */
-public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable{
+public class DisplayHistogramReportController extends AbstractBiteMeController implements Initializable {
 
-	     /**
-	     * Class members description:
-	     */
-	    private static FXMLLoader loader;
-	    private static Stage Stage;
-	    public static DisplayHistogramReportController displayHistogramReportController;
-	    public static SupplierByReport[][] suppliers=null;
-	    
-	    @FXML
-	    private AnchorPane anchorPane;
-	    
-	    @FXML
-	    private Button exitBtn;
-	    
-	    @FXML
-	    private CategoryAxis Category;
+	/**
+	 * Class members description:
+	 */
+	private static FXMLLoader loader;
+	private static Stage Stage;
+	public static DisplayHistogramReportController displayHistogramReportController;
+	public static SupplierByReport[][] suppliers = null;
 
-	    @FXML
-	    private NumberAxis Numbers;
+	@FXML
+	private AnchorPane anchorPane;
 
-	    @FXML
-	    private BarChart<Number, String> reportHistogram;
+	@FXML
+	private Button exitBtn;
 
-	    @FXML
-	    private Text reportNameText;
-	    
-	    @FXML
-	    private NumberAxis Numbers1;
-	    
-	    @FXML
-	    private CategoryAxis Category1;
-	    
-	    @FXML
-	    private BarChart<Number, String> valueHistogram;
+	@FXML
+	private CategoryAxis Category;
 
-	    @FXML
-	    private TextArea reportTextField;
-	    
-	    /**
-	     * This method...
-	     * 
-	     * @param arg0
-	     * @param arg1
-	     */
-		@Override
-		public void initialize(URL arg0, ResourceBundle arg1) {
-		}
-		
-		 /**
-	     * This method...
-	     * 
-	     * @param report
-	     */
-	 	public void initDisplayReportScreen(SupplierByReport[][] report) {
+	@FXML
+	private NumberAxis Numbers;
+
+	@FXML
+	private BarChart<Number, String> reportHistogram;
+
+	@FXML
+	private Text reportNameText;
+
+	@FXML
+	private NumberAxis Numbers1;
+
+	@FXML
+	private CategoryAxis Category1;
+
+	@FXML
+	private BarChart<Number, String> valueHistogram;
+
+	@FXML
+	private TextArea reportTextField;
+
+	/**
+	 * This is the initialization function for this screen when switched to.
+	 * 
+	 * @param message
+	 */
+	public void initDisplayReportScreen(SupplierByReport[][] report) {
 		Platform.runLater(new Runnable() {
 			@Override
 			public void run() {
 				loader = new FXMLLoader();
 				ScrollPane root;
 				Stage = new Stage();
-				suppliers=report;
-					try {
-						root = loader.load(getClass().getResource("/fxmls/CEO7DisplayHistogramReport.fxml").openStream());
+				suppliers = report;
+				try {
+					root = loader.load(getClass().getResource("/fxmls/CEO7DisplayHistogramReport.fxml").openStream());
 					displayHistogramReportController = loader.getController();
 					Scene scene = new Scene(root);
-				scene.setOnMousePressed(pressEvent -> {
-				    scene.setOnMouseDragged(dragEvent -> {
-				    	Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
-				    	Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
-				    });
-				});
-					scene.getStylesheets().add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
+					scene.setOnMousePressed(pressEvent -> {
+						scene.setOnMouseDragged(dragEvent -> {
+							Stage.setX(dragEvent.getScreenX() - pressEvent.getSceneX());
+							Stage.setY(dragEvent.getScreenY() - pressEvent.getSceneY());
+						});
+					});
+					scene.getStylesheets()
+							.add(getClass().getResource("/css/G3_BiteMe_Main_Style_Sheet.css").toExternalForm());
 					Stage.setTitle("View Report");
 					Stage.setScene(scene);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
-	 	
-	 	 /**
-	     * This method...
-	     * 
-	     * @param event
-	     */
-	 	@FXML
-		public void getExitBtn(ActionEvent event) {
-	 		((Node) event.getSource()).getScene().getWindow().hide();
-		}
-	 	
-	 	 /**
-	     * This method...
-	     * 
-	     * @param event
-	     */
-	 	public void showReport(String[] branchAndDate) {
-			Platform.runLater(new Runnable() {
-				@Override
-				public void run() {
-					String reportNameText="";
-					Calendar c= Calendar.getInstance();
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					try {
-						
-						c.setTime(sdf.parse(branchAndDate[1]));
-						reportNameText =reportNameText+"Quarterly report ";
-						reportNameText=reportNameText+c.get(Calendar.YEAR)+" Q"+(sdf.parse(branchAndDate[1]).getMonth()/3+1);
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					ReportGenerator.setQuarter(suppliers);
-					ReportGenerator.setSuppliers(suppliers[3]);
-					int[][] chart=ReportGenerator.getOrdersValue();
-					XYChart.Series orders= new XYChart.Series<>();
-					XYChart.Series value= new XYChart.Series<>();
-					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[0][0]));
-					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[0][1]));
-					c.add(Calendar.MONTH,1);
-					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[1][0]));
-					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[1][1]));
-					c.add(Calendar.MONTH,1);
-					orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[2][0]));
-					value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),chart[2][1]));
-					orders.setName("Orders");
-					value.setName("Value in NIS");
-					displayHistogramReportController.reportHistogram.getData().addAll(orders);
-					displayHistogramReportController.valueHistogram.getData().addAll(value);
-					if(branchAndDate[0].equals("NOT_APPLICABLE")) {
-					displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport("by branch"));
-					displayHistogramReportController.reportNameText.setText(reportNameText+" All branches");
-					}
-					else
-					{
-						displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport());
-						displayHistogramReportController.reportNameText.setText(reportNameText+" "+branchAndDate[0].toLowerCase()+" branch");
-					}
-					displayHistogramReportController.Stage.show();
-				}
-			});
-	 	}
+
+	/**
+	 * clicking the exit button will close the currently viewed report
+	 * 
+	 * @param event
+	 */
+	@FXML
+	public void getExitBtn(ActionEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide();
 	}
 
+	/**
+	 * This method prepares a title, an orders histogram, 
+	 * a monetary value histogram, and an income report, then it displays it
+	 * 
+	 * @param event
+	 */
+	public void showReport(String[] branchAndDate) {
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				String reportNameText = "";
+				Calendar c = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					//prepares a title for the report
+					c.setTime(sdf.parse(branchAndDate[1]));
+					reportNameText = reportNameText + "Quarterly report ";
+					reportNameText = reportNameText + c.get(Calendar.YEAR) + " Q" 
+							+ (sdf.parse(branchAndDate[1]).getMonth() / 3 + 1);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// gets an array with the orders amount and their values by month
+				ReportGenerator.setQuarter(suppliers);
+				ReportGenerator.setSuppliers(suppliers[3]);
+				int[][] ordersAndValuesByMonth = ReportGenerator.getOrdersValue();
+				//prepares two histograms
+				XYChart.Series orders = new XYChart.Series<>();
+				XYChart.Series value = new XYChart.Series<>();
+				//when data is added, the month is converted from MM format, to month name (i.e January)
+				orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[0][0]));
+				value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[0][1]));
+				c.add(Calendar.MONTH, 1);
+				orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[1][0]));
+				value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[1][1]));
+				c.add(Calendar.MONTH, 1);
+				orders.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[2][0]));
+				value.getData().add(new XYChart.Data<>(c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH),
+						ordersAndValuesByMonth[2][1]));
+				orders.setName("Orders");
+				value.setName("Value in NIS");
+				displayHistogramReportController.reportHistogram.getData().addAll(orders);
+				displayHistogramReportController.valueHistogram.getData().addAll(value);
+				if (branchAndDate[0].equals("NOT_APPLICABLE")) { 
+					//calls report function with branch specification on print if all branches were requested
+					displayHistogramReportController.reportTextField
+							.setText(ReportGenerator.generateIncomeReport("by branch"));
+					displayHistogramReportController.reportNameText.setText(reportNameText + " All branches");
+				} else {
+					displayHistogramReportController.reportTextField.setText(ReportGenerator.generateIncomeReport());
+					displayHistogramReportController.reportNameText
+							.setText(reportNameText + " " + branchAndDate[0].toLowerCase() + " branch");
+				}
+				displayHistogramReportController.Stage.show();
+			}
+		});
+	}
+	/**
+	 * Screen initialization method
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 */
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+	}
+}
