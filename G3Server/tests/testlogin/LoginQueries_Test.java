@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import bitemeserver.BiteMeServerUI;
@@ -21,7 +23,16 @@ import junit.framework.Assert;
 public class LoginQueries_Test {
 	
 	/*Set connection to DB for testing*/
-	public mySqlConnection sqlConnection;
+	public mySqlConnection sqlConnection = new mySqlConnection();
+	
+	/*DB name*/
+	final public static String DEFAULT_DB_NAME = "jdbc:mysql://localhost/semesterialproject?serverTimezone=IST";
+	
+	/*DB user name*/
+	final public static String DEFAULT_DB_USER = "root";
+	
+	/*DB password for specific user*/
+	final public static String DEFAULT_DB_PASSWORD = "S6FW8Ps6fw8p!";
 	
 	/*Create login object*/
 	public Login loginForTest;
@@ -47,6 +58,10 @@ public class LoginQueries_Test {
 	private String userNameSupplierWorker = "phsw";
 	private String passwordSupplierWorker = "phsw";
 	
+	/*User name and Password for supplier worker already logged in*/
+	private String userNameSupplierWorkerLoggedIn = "phsrw";
+	private String passwordSupplierWorkerLoggedIn = "phsrw";
+	
 	/*User name and Password for Ceo*/
 	private String userNameCeo = "ceo";
 	private String passwordCeo = "ceo";
@@ -55,9 +70,15 @@ public class LoginQueries_Test {
 	private String userNameHrManager = "intelhr";
 	private String passwordHrManager = "intelhr";
 	 
+	/*User name and password for not confirmed user*/
+	private String userNameForNotConfirmedStatusUser = "agadircc";
+	private String passwordForNotConfirmedStatusUser = "agadircc";
+	
 	/*Before each test we will do all those actions for clean start in each test*/
 	@BeforeEach
-	void setUp() throws Exception {		
+	void setUp() throws Exception {	
+		sqlConnection.connectToDB(DEFAULT_DB_NAME, DEFAULT_DB_USER, DEFAULT_DB_PASSWORD, false);
+		Query.setConnectionFromServerToDB(sqlConnection.getConnection());
 		/*Set the message to Login Task, Answer Wait response for the server to change and the object returned to null*/
 		messageFromClassUnderTest = new Message(Task.LOGIN,Answer.WAIT_RESPONSE,null);
 	}
@@ -169,7 +190,6 @@ public class LoginQueries_Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		/*Check if the answer is correct - use Assert true*/
 		assertTrue(answerReceived == answerExpectedForTest);
 	}
@@ -212,7 +232,7 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_HR_MANAGER;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
+		/*Put in the Login object the userName and password for HR manager */
 		loginForTest = new Login(userNameHrManager,passwordHrManager); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
@@ -232,7 +252,7 @@ public class LoginQueries_Test {
 	
 	@Test
 	//Test Description: Check if user that not confirmed return the right answer from the server
-	//Test Input: userNameCustomer = "" , passwordCustomer = ""
+	//Test Input: userNameForNotConfirmedStatusUser = "agadircc" , passwordForNotConfirmedStatusUser = "agadircc"
 	//Test Expected Output: Message received with Answer.ERROR_USER_NOT_CONFIRMED
 	void test_user_not_confirmed() {	
 		
@@ -240,8 +260,8 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.ERROR_USER_NOT_CONFIRMED;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
-		loginForTest = new Login("",""); 
+		/*Put in the Login object the userName and password for user not found */
+		loginForTest = new Login(userNameForNotConfirmedStatusUser,passwordForNotConfirmedStatusUser); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
@@ -260,7 +280,7 @@ public class LoginQueries_Test {
 	
 	@Test
 	//Test Description: Check if user that already logged in return the right answer from the server
-	//Test Input: userNameCustomer = "" , passwordCustomer = ""
+	//Test Input: userNameSupplierWorkerLoggedIn = "phsrw" , passwordSupplierWorkerLoggedIn = "phsrw"
 	//Test Expected Output: Message received with Answer.ERROR_ALREADY_LOGGED_IN
 	void test_user_already_logged_in() {	
 		
@@ -268,8 +288,8 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.ERROR_ALREADY_LOGGED_IN;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
-		loginForTest = new Login("",""); 
+		/*Put in the Login object the userName and password for user already logged in */
+		loginForTest = new Login(userNameSupplierWorkerLoggedIn,passwordSupplierWorkerLoggedIn); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
@@ -296,7 +316,7 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.ERROR_USER_NOT_FOUND;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
+		/*Put in the Login object the userName and password for user not found */
 		loginForTest = new Login("",""); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
@@ -313,16 +333,5 @@ public class LoginQueries_Test {
 		/*Check if the answer is correct - use Assert true*/
 		assertTrue(answerReceived == answerExpectedForTest);
 	}
-	
-	@Test
-	//Test Description: Check if one of the fields is empty
-	//Test Input: userNameCustomer = "" , passwordCustomer = ""
-	//Test Expected Output: Message received with Answer.
-	void test_empty_fields() {	
 		
-
-	}
-	
-	
-	
 }
