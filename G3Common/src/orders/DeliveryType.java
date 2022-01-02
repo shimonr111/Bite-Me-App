@@ -32,7 +32,7 @@ public enum DeliveryType{
 	JOIN_MULTI{
 		@Override
 		public String toString() {
-			return "Join_Multi_Participants";
+			return "Join Multi-Participants";
 		}
 	},
 	ROBOTIC {

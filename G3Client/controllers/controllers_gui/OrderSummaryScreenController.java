@@ -58,6 +58,8 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     private String pageTitle;
     public static DeliveryType deliveryType= DeliveryType.REGULAR;
     public static int MultiOrderNumber;
+    public static int joinMultiNumberOfParticipants;
+    public static int joinMultiDeliveryCost;
     
     @FXML
     private Button choosePaymentMethodBtn;
@@ -197,7 +199,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     	Message message = new Message(Task.LOGOUT,Answer.WAIT_RESPONSE,connectedUser);
 		sendToClient(message);
 		connectedUser = null;
-		Message disconnectMessage= new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
+		Message disconnectMessage = new Message(Task.CLIENT_DICONNECT,Answer.WAIT_RESPONSE,null);
 		sendToClient(disconnectMessage);
 		System.exit(0);
     }
@@ -297,7 +299,23 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
   	totalOrderPriceTextField.setDisable(true); //set total price disable so that the user can't edit the price of the order
-  	totalOrderPriceTextField.setText(String.valueOf(order.getTotalPrice())); //set total price in screen
+  	joinMultiDeliveryCost = 0;
+	if(OrderSummaryScreenController.deliveryType == DeliveryType.JOIN_MULTI) {
+		// add logic
+		ArrayList<Object> objectToServer = new ArrayList<>();
+		objectToServer.add(Integer.toString(MultiOrderNumber));
+		sendToClient(new Message (Task.JOIN_MULTI_GET_NUMBER_OF_PARTICIPANTS,Answer.WAIT_RESPONSE,objectToServer));
+		switch (joinMultiNumberOfParticipants) {
+		case 1:
+			joinMultiDeliveryCost = 20;
+			break;
+		default:
+			joinMultiDeliveryCost = 15;
+			break;
+		}
+		
+	}
+  	totalOrderPriceTextField.setText(String.valueOf(order.getTotalPrice() + joinMultiDeliveryCost)); //set total price in screen
   	/*Set data in the table for the summary*/
 	ObservableList<Item> items = FXCollections.observableArrayList();	
 	items.addAll(order.itemList);

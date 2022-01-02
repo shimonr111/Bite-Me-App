@@ -194,6 +194,9 @@ public class AnalyzeMessageFromClient {
 			 case GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER:
 				 recivedMessageFromClient = OrderQueries.getAvailableMultiOrders((Message) message);
 				 break;
+			 case JOIN_MULTI_GET_NUMBER_OF_PARTICIPANTS:
+				 recivedMessageFromClient = OrderQueries.joinMultiGetNumberOfParticipants((Message)message);
+				 break;
 			 case JOIN_MULTI_FINISH_ORDER:
 				 OrderQueries.joinMultiFinishedOrder((Message)message);
 				 break;
