@@ -102,6 +102,17 @@ public class Order implements Serializable{
 	public String customerUserType;
 	
 	/**
+	 * used for multiple participants delivery.
+	 */
+	public String customerName;
+	
+
+	/**
+	 * used for multiple participants delivery.
+	 */
+	public String deliveryAddress;
+	
+	/**
 	 * This section is for the attributes
 	 * of the supply process, we need to 
 	 * save here all the information about the receiver
@@ -176,6 +187,13 @@ public class Order implements Serializable{
 		this.customerUserType = null;
 		
 	} 
+	
+	public Order(int orderNumber, String supplierUserId, String customerName, String deliveryAddress) {
+		this.orderNumber = orderNumber;
+		this.supplierUserId = supplierUserId;
+		this.customerName = customerName;
+		this.deliveryAddress = deliveryAddress;
+	}
 	
 	/**
 	 * Methods:
@@ -299,6 +317,22 @@ public class Order implements Serializable{
 
 	public String getReceiverPhoneNumber() {
 		return supplyMethodInformation.getReceiverPhoneNumber();
+	}
+	
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(String deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 
 	/**

@@ -14,6 +14,7 @@ import controllers_gui.BusinessCustomerConfirmationScreenController;
 import controllers_gui.BusinessCustomerRegistartionController;
 import controllers_gui.CompanyRegistartionManagementScreenController;
 import controllers_gui.EditCustomerInformationScreenController;
+import controllers_gui.JoinMultiDeliveryScreenController;
 import controllers_gui.OrderChooseItemsScreenController;
 import controllers_gui.OrderChooseResturantInOrderScreenController;
 import controllers_gui.SupplierRegistrationScreenController;
@@ -387,6 +388,9 @@ public class AnalyzeMessageFromServer {
 				break;
 			case GET_USER_EMAIL:
 				SupplierWorkerManageOrdersController.approvedCustomerDetailsForMail = (ArrayList<String>)recivedMessageFromServer.getObject();
+				break;
+			case GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER:
+				JoinMultiDeliveryScreenController.availableMultiOrders = (ArrayList<Order>)recivedMessageFromServer.getObject();
 				break;
 				
 			default:

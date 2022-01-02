@@ -191,6 +191,12 @@ public class AnalyzeMessageFromClient {
 			 case SUPPLIER_RESTORE_BALANCE_AND_BUDGET_BALANCE:
 				 OrderQueries.reverseBudgetBalanceAndBalanceForUserInUnApprovedOrder((Message) message);
 				 break;
+			 case GET_BUSINESS_CUSTOMERS_WITH_MULTI_ORDER:
+				 recivedMessageFromClient = OrderQueries.getAvailableMultiOrders((Message) message);
+				 break;
+			 case JOIN_MULTI_FINISH_ORDER:
+				 OrderQueries.joinMultiFinishedOrder((Message)message);
+				 break;
 			default:
 				break;
 			}

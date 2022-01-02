@@ -2,6 +2,7 @@ package controllers_gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import bitemeclient.PopUpMessages;
 import communication.Answer;
@@ -11,6 +12,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,7 +27,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import orders.DeliverySupplyMethod;
+import orders.DeliveryType;
 import orders.Item;
 import orders.ItemSize;
 import orders.Order;
@@ -52,6 +56,8 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     private static Order order;
     private String pathForLastScreen= null;
     private String pageTitle;
+    public static DeliveryType deliveryType= DeliveryType.REGULAR;
+    public static int MultiOrderNumber;
     
     @FXML
     private Button choosePaymentMethodBtn;
@@ -100,12 +106,17 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 			  pageTitle = "Take away";
 			  break;
 		  case DELIVERY:
-			  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
-			  pageTitle = "Delivery";
-			  //set total price to the price as it was after choose supply method stage
-	  			if(order.getSupplyMethodInformation() instanceof DeliverySupplyMethod) {
-	  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
-	  			}
+			  if(OrderSummaryScreenController.deliveryType == DeliveryType.JOIN_MULTI) {
+				  pathForLastScreen = "/fxmls/ORD8JoinMultiDeliveryScreen.fxml";
+			  }
+			  else {
+				  pathForLastScreen = "/fxmls/ORD5OrderAMealDeliveryMethod.fxml";
+				  pageTitle = "Delivery";
+				  //set total price to the price as it was after choose supply method stage
+		  			if(order.getSupplyMethodInformation() instanceof DeliverySupplyMethod) {
+		  				order.setTotalPrice(order.getTotalPrice()-((DeliverySupplyMethod)order.getSupplyMethodInformation()).getDeliveryFee()); //update the total cost of the order
+		  			}
+			  }
 			  break;
 		  	default:
 			 break;
@@ -156,11 +167,22 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      */
     @FXML
     public void getChoosePaymenMethodtBtn(ActionEvent event) {
-
-  //now we need to change this screen to the next one
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
-		orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order); // call the init of the next screen
+    	
+    	if(OrderSummaryScreenController.deliveryType == DeliveryType.JOIN_MULTI) {
+    		// add logic
+    		ArrayList<Object> objectToServer = new ArrayList<>();
+    		objectToServer.add(order);
+    		objectToServer.add(Integer.toString(MultiOrderNumber));
+    		sendToClient(new Message (Task.JOIN_MULTI_FINISH_ORDER,Answer.WAIT_RESPONSE,objectToServer));
+    		PopUpMessages.updateMessage("Your order cost will be added to the Multiple-Participants owner, you have finished your order!");
+    		setBusinessCustomerPortal(event);
+    	}
+    	else {
+    		//now we need to change this screen to the next one
+			((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+			OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController = new OrderPaymentConfigurationScreenController();
+			orderPaymentConfigurationScreenController.initPaymentConfigurationScreen(order); // call the init of the next screen
+    	}
 
     }
 
@@ -229,6 +251,39 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 				}
 			}
 		});
+	}
+  
+	/**
+	 * This method loads the business customer portal
+	 * 
+	 * @param event
+	 */
+	public void setBusinessCustomerPortal(ActionEvent event) {
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					FXMLLoader loader = new FXMLLoader();
+					Pane root;
+					try {
+						Stage Stage = new Stage();
+						Stage.setResizable(false);
+						root = loader.load(getClass().getResource("/fxmls/UserPortalOfBusinessCustomer.fxml").openStream());
+						UserPortalOfBusinessCustomerController UPOBCC = new UserPortalOfBusinessCustomerController();
+						UPOBCC.initPortalAgain();
+						Stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+							@Override
+							public void handle(WindowEvent event) { 
+								event.consume();
+								Stage.close();
+							}
+						});
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+			});
+		
 	}
 
 
