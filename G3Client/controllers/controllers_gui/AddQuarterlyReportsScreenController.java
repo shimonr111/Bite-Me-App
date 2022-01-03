@@ -134,13 +134,20 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	 */
 	@FXML
 	public void getUploadReport(ActionEvent event) {
+		quarterlyPDF = null;
 		FileChooser fileChooser = new FileChooser();
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"); // allow
-																												// only
-																												// pdfs
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"); 
+		// allow only pdfs																					
 		fileChooser.getExtensionFilters().add(extFilter);
 		Stage stage = new Stage();
-		quarterlyPDF = fileChooser.showOpenDialog(stage);
+		File directory = fileChooser.showOpenDialog(stage);
+		if(directory!=null) {
+		quarterlyPDF = directory;
+		setRelevantTextToDisplayMessageText(quarterlyPDF.getName()+" chosen");
+		}
+		else {
+			setRelevantTextToDisplayMessageText("No File Selected");
+		}
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package controllers_gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -350,6 +351,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
      * @param date date of quarterly report pdf, needed for naming the file
      */
 	public void saveQuarterlyReport(String date) {
+		DecimalFormat twoPlacesDouble= new DecimalFormat("#0.00");
 		String replacer;
 		try {
 		PDDocument report= new PDDocument();
@@ -369,9 +371,16 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
+			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Total Income: "+supplier.getIncome()+"");
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("BM cut in percentage: "+(twoPlacesDouble.format(supplier.getSupplierFee())));
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Total net income of supplier: "+(twoPlacesDouble.format(calculateNetIncome(supplier))));
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Total BM cut: "+(twoPlacesDouble.format(calculateBmCut(supplier))));
 			contentStream.newLineAtOffset(0, -15);
 			}
 		}
@@ -387,6 +396,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
+			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Salads Ordered: "+supplier.getTypeSums()[0]);
@@ -398,7 +408,6 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Desserts Ordered: "+supplier.getTypeSums()[3]);
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Drinks Ordered: "+supplier.getTypeSums()[4]);
-			contentStream.newLineAtOffset(0, -15);
 			contentStream.newLineAtOffset(0, -15);
 			}
 		}  
@@ -414,6 +423,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
+			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Total Orders: "+supplier.getTotalOrders());
@@ -421,6 +431,8 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Late Orders: "+supplier.getLateOrders());
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Late Orders percentage: "+(new DecimalFormat("#0.0").format((supplier.getLateOrders()/(double)supplier.getTotalOrders())*100)));
+			contentStream.newLineAtOffset(0, -15);
+			contentStream.showText("Average Supply Time: "+ supplier.getAverageSupplyTime());
 			contentStream.newLineAtOffset(0, -15);
 		}  
 		}
@@ -431,11 +443,29 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
         fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setInitialFileName(date+" Quarterly Report.pdf");
         Stage stage= new Stage();
-        report.save(fileChooser.showSaveDialog(stage)); 
+        File directory = fileChooser.showSaveDialog(stage);
+        if(directory!=null)
+        report.save(directory); 
 		report.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}  
+	}
+    /**
+     * calculates the bm cut of an income report for a supplier
+     * @param supplier the supplier a cut is being calculated for
+     * @return string representation of bm cut
+     */
+	private static double calculateBmCut(SupplierByReport supplier) {
+		return (((supplier.getSupplierFee())/100))*Double.parseDouble(supplier.getIncome());
+	}
+    /**
+     * calculates the net income for a supplier in an income report
+     * @param supplier the supplier the net income is being calculated for
+     * @return string representation of net income
+     */
+	private static double calculateNetIncome(SupplierByReport supplier) {
+		return (1-((supplier.getSupplierFee())/100))*Double.parseDouble(supplier.getIncome());
 	}
 }
 
