@@ -1,5 +1,6 @@
 package controllers_gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -152,11 +153,13 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	        fileChooser.setInitialFileName(selectedItem[1]);
 	        Stage stage= new Stage();
 	        try {
-				Files.write(fileChooser.showSaveDialog(stage).toPath(),pdfFile);
+	        	File directory =fileChooser.showSaveDialog(stage);
+	        	if(directory!=null)
+				Files.write(directory.toPath(),pdfFile);
+		        pdfFile=null;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	        pdfFile=null;
 		}
     	}
     }
