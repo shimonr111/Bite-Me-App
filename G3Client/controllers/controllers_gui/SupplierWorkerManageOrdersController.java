@@ -305,8 +305,11 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	        	approvedCustomerEmail = approvedCustomerDetailsForMail.get(0);
 				if(approvedCustomerEmail!=null) {
 					try {
-						sendMail(approvedCustomerEmail,approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3),
-								order.getOrderNumber());
+						if(order.getSupplyType() == SupplyType.DELIVERY)
+							sendMail(approvedCustomerEmail,approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3), order.getOrderNumber(), order.getEstimatedSupplyDateTime().toString());
+						else {
+							sendMail(approvedCustomerEmail,approvedCustomerDetailsForMail.get(1),approvedCustomerDetailsForMail.get(2),approvedCustomerDetailsForMail.get(3), order.getOrderNumber(), null);
+						}
 
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -368,7 +371,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	 * @param reciever - the receivers order email
 	 * @throws Exception
 	 */
-	public static void sendMail(String reciever,String firstName,String lastName,String restaurantName,int orderNumber) throws Exception {
+	public static void sendMail(String reciever,String firstName,String lastName,String restaurantName,int orderNumber, String arrivalTime) throws Exception {
 		System.out.println("Sending email");
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth", "true");
@@ -387,7 +390,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 			}
 		});
 		
-		javax.mail.Message message = prepareMessage(session, myEmail,reciever,firstName,lastName,restaurantName,orderNumber);
+		javax.mail.Message message = prepareMessage(session, myEmail,reciever,firstName,lastName,restaurantName,orderNumber, arrivalTime);
 		try {
 		Transport.send(message);
 		}
@@ -400,7 +403,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 				}
 			});
 			
-			message = prepareMessage(session, myBackUpEmail,reciever,firstName,lastName,restaurantName,orderNumber);
+			message = prepareMessage(session, myBackUpEmail,reciever,firstName,lastName,restaurantName,orderNumber, arrivalTime);
 			try {
 			Transport.send(message);
 			}
@@ -425,14 +428,18 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	 * @return javax.mail.Message - the message we want to send to the customer
 	 */
 	private static javax.mail.Message prepareMessage(Session session, String myEmail,String reciever,String firstName,String lastName
-			,String restaurantName,int orderNumber) {
+			,String restaurantName, int orderNumber, String arrivalTime) {
 		try {
 			javax.mail.Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(myEmail));
 			message.setRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(reciever));
 			message.setSubject("Bite Me - G3 - Email Simulation");
-			message.setText("Hey "+firstName +" " + lastName +"!\nYou'r order #"+orderNumber+" from "+restaurantName+" is approved!\n"
-					+ "Thank you for choosing Bite Me, we are always happy to satisfy true hunger.");
+			
+			String msg = "Hey "+firstName +" " + lastName +"!\nYou'r order #"+orderNumber+" from "+restaurantName+" is approved!\n";
+			if(arrivalTime != null)
+				msg += "The delivery estimated time is: '"+arrivalTime+"'.\n";
+
+			message.setText(msg + "Thank you for choosing Bite Me, we are always happy to satisfy true hunger.");
 			return message;
 		}catch(Exception ex) {
 			System.out.println("sending email failed");

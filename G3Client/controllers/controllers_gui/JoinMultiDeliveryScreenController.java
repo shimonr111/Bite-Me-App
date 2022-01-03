@@ -201,7 +201,6 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 	     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println(order);
 		JoinMultiDeliveryScreenController.order.setSupplyType(SupplyType.DELIVERY);
 		displayText.setText("");
 		ObservableList<Order> availableOrdersObservable = FXCollections.observableArrayList();

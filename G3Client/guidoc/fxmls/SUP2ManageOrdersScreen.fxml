@@ -30,9 +30,9 @@
          </children>
       </HBox>
       <Button fx:id="btnBack" layoutX="67.0" layoutY="620.0" maxHeight="50.0" maxWidth="167.0" mnemonicParsing="false" onAction="#getBackBtn" prefHeight="50.0" prefWidth="150.0" styleClass="backButton" text="🢀 BACK 🢀" />
-      <AnchorPane layoutX="162.0" layoutY="129.0" prefHeight="480.0" prefWidth="700.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
+      <AnchorPane layoutX="142.0" layoutY="129.0" prefHeight="480.0" prefWidth="740.0" styleClass="supplyMainPane" stylesheets="@../css/G3_BiteMe_Main_Style_Sheet.css">
          <children>
-            <Label alignment="CENTER" layoutX="175.0" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="deliveryHeadLight" text="Manage Orders" textFill="#383838">
+            <Label alignment="CENTER" layoutX="184.0" layoutY="14.0" prefHeight="50.0" prefWidth="350.0" styleClass="deliveryHeadLight" text="Manage Orders" textFill="#383838">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -48,11 +48,11 @@
                </children>
             </VBox>
             <Text fx:id="errorText" fill="RED" layoutX="59.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="600.0703199803829" />
-            <TableView fx:id="manageOrdersTable" layoutX="33.0" layoutY="133.0" prefHeight="300.0" prefWidth="635.0">
+            <TableView fx:id="manageOrdersTable" layoutX="35.0" layoutY="133.0" prefHeight="300.0" prefWidth="670.0">
                <columns>
-                  <TableColumn fx:id="orderNumColum" maxWidth="80.0" minWidth="80.0" text="Order #" />
+                  <TableColumn fx:id="orderNumColum" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="Order #" />
                   <TableColumn fx:id="orderTypeColumn" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" text="Order Type" />
-                  <TableColumn fx:id="estSupplyTimeColumn" maxWidth="170.0" minWidth="170.0" prefWidth="170.0" text="EST. Supply Time" />
+                  <TableColumn fx:id="estSupplyTimeColumn" maxWidth="230.0" minWidth="230.0" prefWidth="230.0" text="EST. Supply Time" />
                   <TableColumn fx:id="customerPhoneColumn" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" text="Phone #" />
                   <TableColumn fx:id="statusColumn" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="Status" />
                </columns>

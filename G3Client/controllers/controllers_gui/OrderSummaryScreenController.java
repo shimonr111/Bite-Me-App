@@ -33,6 +33,7 @@ import orders.DeliveryType;
 import orders.Item;
 import orders.ItemSize;
 import orders.Order;
+import orders.OrderTimeType;
 import util.Constans;
 
 /**
@@ -93,6 +94,9 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 
     @FXML
     private TextField totalOrderPriceTextField;
+    
+    @FXML
+    private Text discountText;
 
     /**
      * Back button for the 
@@ -315,6 +319,9 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 			break;
 		}
 		
+	}
+	else if (order.getTimeType() == OrderTimeType.PRE){
+		discountText.setText("You recived 10% discount due the Pre-Order!");
 	}
   	totalOrderPriceTextField.setText(String.valueOf(order.getTotalPrice() + joinMultiDeliveryCost)); //set total price in screen
   	/*Set data in the table for the summary*/

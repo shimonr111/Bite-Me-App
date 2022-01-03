@@ -47,7 +47,7 @@
             <Text fx:id="errorText" fill="RED" layoutX="12.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="416.6953125" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="402.0" layoutY="565.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
+      <AnchorPane layoutX="402.0" layoutY="580.0" prefHeight="80.0" prefWidth="220.0" styleClass="itemSelectionPricePane">
          <children>
             <Label layoutX="30.0" layoutY="-1.0" styleClass="itemSelectionPriceLabel" text="Total Order Price">
                <font>
@@ -58,5 +58,10 @@
          </children>
       </AnchorPane>
       <Label layoutX="14.0" layoutY="14.0" styleClass="topMenuLabel" text="Home Screen ➝ Login ➝ User Portal ➝ W4C Identification ➝ Restaurant Selection ➝ Item Selection ➝ Choose Supply Method ➝ Supply Method ➝ Order Summary" />
+      <Text fx:id="discountText" fill="#d500ff" fontSmoothingType="LCD" layoutX="304.0" layoutY="567.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="416.6953125">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

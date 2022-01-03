@@ -279,18 +279,16 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 				items.add(new ItemWithPicture(i));
 			}
 			//add all the wrapper items to the table view
+			// Set the id of the supplier for each item
+			for(int i=0; i<itemListOfMenuFromDB.size(); i++) {
+				itemListOfMenuFromDB.get(i).setSupplierUserId(supplierId);
+			}
+			updateItemsWithPicture = new ArrayList<ItemWithPicture>(); //copy the menu we got from DB to our updateItems array
+			for(Item i : itemListOfMenuFromDB) {
+				updateItemsWithPicture.add(new ItemWithPicture(i));
+			}
 		}
-		// Set the id of the supplier for each item
-					for(int i=0; i<itemListOfMenuFromDB.size(); i++) {
-						itemListOfMenuFromDB.get(i).setSupplierUserId(supplierId);
-					}
-	
-		
-		updateItemsWithPicture = new ArrayList<ItemWithPicture>(); //copy the menu we got from DB to our updateItems array
-		for(Item i : itemListOfMenuFromDB) {
-			updateItemsWithPicture.add(new ItemWithPicture(i));
-		}
-		
+
         categoryColumn.setCellValueFactory(new PropertyValueFactory<ItemWithPicture, ItemCategory>("category"));
     	//set combo box in category column
 		categoryColumn.setCellFactory((param) -> new ComboBoxTableCell<>(new StringConverter<ItemCategory>() {
