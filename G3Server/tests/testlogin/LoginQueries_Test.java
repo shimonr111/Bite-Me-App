@@ -149,7 +149,7 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
+		/*Put in the Login object the userName and password for branch manager*/
 		loginForTest = new Login(userNameBranchManager,passwordBranchManager); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
@@ -177,7 +177,7 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_SUPPLIER;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
+		/*Put in the Login object the userName and password for supplier worker */
 		loginForTest = new Login(userNameSupplierWorker,passwordSupplierWorker); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
@@ -204,7 +204,7 @@ public class LoginQueries_Test {
 		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_CEO_BITE_ME;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for business customer */
+		/*Put in the Login object the userName and password for ceo */
 		loginForTest = new Login(userNameCeo,passwordCeo); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
