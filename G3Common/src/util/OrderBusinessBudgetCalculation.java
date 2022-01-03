@@ -1,9 +1,8 @@
-package orders;
+package util;
 
 import java.text.DecimalFormat;
 
 import users.BusinessCustomer;
-import util.Constans;
 
 /**
 * 

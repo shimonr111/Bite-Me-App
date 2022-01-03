@@ -31,14 +31,14 @@ import controllers_gui.ViewReceiptsSummaryController;
 import controllers_gui.ViewSystemReportsScreenCEOController;
 import orders.Item;
 import orders.Order;
-import orders.OrderForView;
 import users.BusinessCustomer;
 import users.Company;
 import users.Customer;
 import users.Supplier;
-import users.SupplierByReport;
 import users.User;
 import users.UserForRegistration;
+import util.OrderForView;
+import util.SupplierByReport;
 
 
 /**

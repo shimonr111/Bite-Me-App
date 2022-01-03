@@ -1,4 +1,4 @@
-package orders;
+package util;
 
 import java.io.Serializable;
 
