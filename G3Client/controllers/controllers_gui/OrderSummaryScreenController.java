@@ -177,6 +177,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
     		objectToServer.add(Integer.toString(MultiOrderNumber));
     		sendToClient(new Message (Task.JOIN_MULTI_FINISH_ORDER,Answer.WAIT_RESPONSE,objectToServer));
     		PopUpMessages.updateMessage("Your order cost will be added to the Multiple-Participants owner, you have finished your order!");
+    		OrderChooseItemsScreenController.order= null;
     		setBusinessCustomerPortal(event);
     	}
     	else {
