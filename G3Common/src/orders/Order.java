@@ -157,6 +157,7 @@ public class Order implements Serializable{
 		this.supplyType = supplyType;
 		this.supplyId = supplyId;
 		this.totalPrice = totalPrice;
+		formatTotalPrice();
 		this.itemList = itemList;
 		this.supplyMethodInformation = null;
 		this.customerUserType =null;
@@ -181,7 +182,7 @@ public class Order implements Serializable{
 		this.actualSupplyDateTime = DateTimeHandler.buildMySqlDateTimeFormatFromTextFields("1970/01/01", "00:00"); //set default
 		this.supplyType = null;
 		this.supplyId = 0;
-		this.totalPrice = 0;
+		this.totalPrice = 0.0;
 		itemList = new ArrayList<Item>();
 		this.supplyMethodInformation = null;
 		this.customerUserType = null;
@@ -281,8 +282,16 @@ public class Order implements Serializable{
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+		formatTotalPrice();
 	}
-
+	
+	/**
+	 * This function used to round the total price to two decimal points.
+	 */
+	private void formatTotalPrice() {
+		double temp = totalPrice * 100;
+		totalPrice = (double) Math.round(temp) / 100;
+	}
 	public Date getEstimatedSupplyDateTime() {
 		return estimatedSupplyDateTime;
 	}

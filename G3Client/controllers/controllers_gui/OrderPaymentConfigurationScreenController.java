@@ -1,6 +1,7 @@
 package controllers_gui;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -594,7 +595,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());
 		double accountBalance =  Double.parseDouble(availableAccountBalanceTextField.getText());
 		double budgetBalance=0;
-		if(enteredAmount<0 || (amountLeftToPay - enteredAmount < 0)) {
+			
+		if(enteredAmount<0 || (amountLeftToPay - enteredAmount < 0) || (BigDecimal.valueOf(enteredAmount).scale() > 2)) {
 			errorText.setText("Wrong input value, change it!");
     		
 			return false;

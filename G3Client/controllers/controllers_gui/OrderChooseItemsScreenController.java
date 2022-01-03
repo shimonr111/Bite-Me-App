@@ -423,7 +423,6 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 		/*If the item list is not empty (we got to this screen from the next one, show the old view table*/
 		if(!order.itemList.isEmpty()) {
 			cartTable.setItems(itemsForCart);
-			order.setTotalPrice(Math.round(order.getTotalPrice()));
 			totalPriceTxtField.setText(String.valueOf(order.totalPrice));
 		}
 	}
