@@ -28,10 +28,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import orders.Order;
-import orders.OrderBusinessBudgetCalculation;
 import orders.PaymentWay;
 import users.BusinessCustomer;
 import users.Customer;
+import util.OrderBusinessBudgetCalculation;
 
 /**
  * 
@@ -130,13 +130,23 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		   else if(amountLeftToPay == 0) {
 			   errorText.setText("You have finished paying! , press finish!");
 		   }
+		   else if(Double.parseDouble(enterAmountTextField.getText()) <= 0.0) {
+			   errorText.setText("Amount must be un-negative!");
+			   enterAmountTextField.setStyle("-fx-border-color: red");
+		   }
+		   else if(BigDecimal.valueOf(Double.parseDouble(enterAmountTextField.getText())).scale() > 2){
+			   errorText.setText("Amount must not exceed 2 decimal points!");
+			   enterAmountTextField.setStyle("-fx-border-color: red");
+		   }
 		   else {
 			   errorText.setText(""); //disable previous error warning
 			   PaymentWay paymentWay = paymentMethodCombo.getValue();
 			   try {
 			   double moneyToPay = Double.parseDouble(enterAmountTextField.getText());
+			   
 			   if(isPaymentAmountValidForAddAmount(paymentWay)) {
 				   amountLeftToPay -= moneyToPay; //update the amount left to pay
+				   amountLeftToPay = (double) Math.round(amountLeftToPay*100)/100;
 				   totalToPayTextField.setText(OrderBusinessBudgetCalculation.df.format(amountLeftToPay));//set the total price, set format as 2 decimal figures after the dot
 			   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
@@ -223,6 +233,14 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   errorText.setText("Nothing to remove, enter payment method!");
 	    	   
 		   }
+		   else if(BigDecimal.valueOf(Double.parseDouble(enterAmountTextField.getText())).scale() > 2){
+			   errorText.setText("Amount must not exceed 2 decimal points!");
+			   enterAmountTextField.setStyle("-fx-border-color: red");
+		   }
+		   else if(Double.parseDouble(enterAmountTextField.getText()) <= 0.0) {
+			   errorText.setText("Amount must be un-negative!");
+			   enterAmountTextField.setStyle("-fx-border-color: red");
+		   }
 		   else {
 			   errorText.setText(""); //disable previous error warning
 			   PaymentWay paymentWay = paymentMethodCombo.getValue();
@@ -230,6 +248,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 			   double moneyToReturn = Double.parseDouble(enterAmountTextField.getText());
 			   if(isPaymentAmountValidForRemoveAmount(paymentWay)) {
 				   amountLeftToPay += moneyToReturn; //update the amount left to pay
+				   amountLeftToPay = (double) Math.round(amountLeftToPay*100)/100;
 				   totalToPayTextField.setText(OrderBusinessBudgetCalculation.df.format(amountLeftToPay));//set the total price, set format as 2 decimal figures after the dot
 				   /*Update all the text fields in the screen according to the users pick in the combo box*/
 			   switch(paymentWay) {
@@ -596,9 +615,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		double accountBalance =  Double.parseDouble(availableAccountBalanceTextField.getText());
 		double budgetBalance=0;
 			
-		if(enteredAmount<0 || (amountLeftToPay - enteredAmount < 0) || (BigDecimal.valueOf(enteredAmount).scale() > 2)) {
+		if((amountLeftToPay - enteredAmount < 0)) {
 			errorText.setText("Wrong input value, change it!");
-    		
 			return false;
 		}
 

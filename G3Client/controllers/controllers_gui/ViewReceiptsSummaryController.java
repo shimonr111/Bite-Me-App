@@ -25,8 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import users.SupplierByReport;
 import users.SupplierWorker;
+import util.SupplierByReport;
 
 /**
  * 

@@ -13,7 +13,7 @@ import communication.Answer;
 import communication.Message;
 import query.Query;
 import query.ReportQueries;
-import users.SupplierByReport;
+import util.SupplierByReport;
 /**
  * @author Alexander, Martinov
  * Class description: 
