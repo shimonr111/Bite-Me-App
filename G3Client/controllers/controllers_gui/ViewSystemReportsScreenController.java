@@ -28,7 +28,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
-import util.SupplierByReport;
+import users.SupplierByReport;
+
 import org.apache.pdfbox.pdmodel.PDDocument;  
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
