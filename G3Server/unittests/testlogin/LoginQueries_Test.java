@@ -1,23 +1,16 @@
 package testlogin;
 
-import query.LoginQueries;
-import query.Query;
-import users.Login;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import bitemeserver.BiteMeServerUI;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import jdbc.mySqlConnection;
-import junit.framework.Assert;
+import query.LoginQueries;
+import query.Query;
+import users.Login;
 
 /*This is the class under test in which we will check the login phase*/
 public class LoginQueries_Test {
@@ -40,7 +33,8 @@ public class LoginQueries_Test {
 	/*Message received form the test to check assertions*/
 	public Message messageFromClassUnderTest;
 	
-	/*Create all the userName and Password for the testing*/
+	//////////////////////////////////////////////////////////////////////////////////////////////////////
+	/**Create all the userName and Password for the testing**/
 	
 	/*User name and Password for regular customer*/
 	private String userNameCustomer = "cu";
@@ -62,7 +56,7 @@ public class LoginQueries_Test {
 	private String userNameSupplierWorkerLoggedIn = "phsrw";
 	private String passwordSupplierWorkerLoggedIn = "phsrw";
 	
-	/*User name and Password for Ceo*/
+	/*User name and Password for CEO*/
 	private String userNameCeo = "ceo";
 	private String passwordCeo = "ceo";
 	
@@ -70,9 +64,16 @@ public class LoginQueries_Test {
 	private String userNameHrManager = "intelhr";
 	private String passwordHrManager = "intelhr";
 	 
-	/*User name and password for not confirmed user*/
-	private String userNameForNotConfirmedStatusUser = "agadircc";
-	private String passwordForNotConfirmedStatusUser = "agadircc";
+	/*User name and password for pending approval user account*/
+	private String userNameForPendingApprovalStatusUser = "agadircc";
+	private String passwordForPendingApprovalStatusUser = "agadircc";
+	
+	/*User name and password for Frozen user account*/
+	private String userNameForFrozenStatusUser = "bbbcr";
+	private String passwordForFrozenStatusUser = "bbbcr";
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*Before each test we will do all those actions for clean start in each test*/
 	@BeforeEach
@@ -252,16 +253,16 @@ public class LoginQueries_Test {
 	
 	@Test
 	//Test Description: Check if user that not confirmed return the right answer from the server
-	//Test Input: userNameForNotConfirmedStatusUser = "agadircc" , passwordForNotConfirmedStatusUser = "agadircc"
+	//Test Input: userNameForPendingApprovalStatusUser = "agadircc" , passwordForPendingApprovalStatusUser = "agadircc"
 	//Test Expected Output: Message received with Answer.ERROR_USER_NOT_CONFIRMED
-	void test_user_not_confirmed() {	
+	void test_user_pending_approval() {	
 		
 		/*Expected result from LoginQuery.createLoginMessageForServer(Message messageFromClient)*/
 		Answer answerExpectedForTest = Answer.ERROR_USER_NOT_CONFIRMED;
 		Answer answerReceived = null;
 		
-		/*Put in the Login object the userName and password for user not found */
-		loginForTest = new Login(userNameForNotConfirmedStatusUser,passwordForNotConfirmedStatusUser); 
+		/*Put in the Login object the userName and password for user in status pending approval */
+		loginForTest = new Login(userNameForPendingApprovalStatusUser,passwordForPendingApprovalStatusUser); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
@@ -318,6 +319,34 @@ public class LoginQueries_Test {
 		
 		/*Put in the Login object the userName and password for user not found */
 		loginForTest = new Login("",""); 
+		
+		/*Set the object in the message we send to the class under test LoginQuery in the function
+		 * createLoginMessageForServer()*/
+		messageFromClassUnderTest.setObject(loginForTest);
+		
+		try {
+			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*Check if the answer is correct - use Assert true*/
+		assertTrue(answerReceived == answerExpectedForTest);
+	}
+	
+	@Test
+	//Test Description: Check if user that has frozen status return Answer.ERROR_USER_NOT_CONFIRMED; from the server
+	//Test Input:userNameForFrozenStatusUser = "bbbcr" , passwordForFrozenStatusUser = "bbbcr"
+	//Test Expected Output: Message received with Answer.CREATE_USER_PORTAL_FOR_SUPPLIER
+	void test_user_frozen() {	
+		
+		/*Expected result from LoginQuery.createLoginMessageForServer(Message messageFromClient)*/
+		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_SUPPLIER;
+		Answer answerReceived = null;
+		
+		/*Put in the Login object the userName and password for user frozen */
+		loginForTest = new Login(userNameForFrozenStatusUser,passwordForFrozenStatusUser); 
 		
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
