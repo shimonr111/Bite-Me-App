@@ -21,7 +21,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import util.SupplierByReport;
+import users.SupplierByReport;
 
 /**
 * @author Alexander, Martinov.

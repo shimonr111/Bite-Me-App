@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import users.SupplierByReport;
 import util.DateTimeHandler;
-import util.SupplierByReport;
 /**
  * @author Alexander, Martinov
  * Class description: 

@@ -19,8 +19,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import orders.OrderForView;
 import users.BusinessCustomer;
-import util.OrderForView;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;

@@ -26,6 +26,7 @@ import orders.Item;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.Order;
+import orders.OrderForView;
 import orders.OrderStatus;
 import orders.OrderTimeType;
 import orders.SupplyType;
@@ -36,7 +37,6 @@ import users.ConfirmationStatus;
 import users.Customer;
 import util.Constans;
 import util.DateTimeHandler;
-import util.OrderForView;
 
 /**
  * 
