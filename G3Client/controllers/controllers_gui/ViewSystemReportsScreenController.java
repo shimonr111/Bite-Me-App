@@ -368,10 +368,12 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
+			if(supplier!=null) {
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Total Income: "+supplier.getIncome()+"");
 			contentStream.newLineAtOffset(0, -15);
+			}
 		}
 	    contentStream.endText();
 	    contentStream.close();
@@ -384,6 +386,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
+			if(supplier!=null) {
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Salads Ordered: "+supplier.getTypeSums()[0]);
@@ -397,6 +400,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Drinks Ordered: "+supplier.getTypeSums()[4]);
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.newLineAtOffset(0, -15);
+			}
 		}  
 	    contentStream.endText();
 	    contentStream.close();
@@ -409,6 +413,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
 		for(SupplierByReport supplier:suppliers) {
+			if(supplier!=null) {
 			contentStream.showText("Supplier ID: "+supplier.getSupplierId()+" Supplier Name: "+supplier.getSupplierName()+"");
 			contentStream.newLineAtOffset(0, -15);
 			contentStream.showText("Total Orders: "+supplier.getTotalOrders());
@@ -418,6 +423,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 			contentStream.showText("Late Orders percentage: "+(new DecimalFormat("#0.0").format((supplier.getLateOrders()/(double)supplier.getTotalOrders())*100)));
 			contentStream.newLineAtOffset(0, -15);
 		}  
+		}
 	    contentStream.endText();
 	    contentStream.close();
 	    FileChooser fileChooser = new FileChooser();
