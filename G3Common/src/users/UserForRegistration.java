@@ -6,8 +6,6 @@ import java.io.Serializable;
  * This class is derived class from User For Registration class
  *  which means that we still don't know this user is going to be registered as
  *  it contains most of the normal User Info but in addition it has an addition members.
- */
-/**
  * 
  * @author Mousa,Srour.
  * 

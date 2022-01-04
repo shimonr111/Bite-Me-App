@@ -4,8 +4,6 @@ import java.io.Serializable;
 /**
  *   Class description:
  *  This Abstract class is a base class for supply method.
- */
-/**
  * 
  * @author Ori, Malka.
  *  

@@ -2,8 +2,6 @@ package orders;
 /**
  *  Enum description:
  *  This Enum is used to describe the order status.
- */
-/**
  * 
  * @author Ori, Malka.
  *  

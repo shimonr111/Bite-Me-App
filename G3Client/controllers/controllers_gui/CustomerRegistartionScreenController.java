@@ -24,8 +24,6 @@ import javafx.stage.WindowEvent;
  * controlling the UI of CustomerResitrationScreen that appears immediately after clicking
  * on Customer registration from the branch portal.
  * form.
- */
-/**
  * 
  * @author Mousa, Srour.
  * 

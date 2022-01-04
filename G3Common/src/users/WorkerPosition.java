@@ -6,8 +6,6 @@ package users;
 *  of the worker in the supplier, differentiating 
 *  between supplier manager and regular worker in the
 *  Bite Me system.
- */
-/**
 * 
 * @author Alexander, Martinov.
 * @author Mousa, Srour.

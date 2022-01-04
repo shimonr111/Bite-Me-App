@@ -38,9 +38,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of Joun Multi Delivery Screen that appears after
  * choosing Join Multi option for delivery type.
  * form.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * 

@@ -26,10 +26,7 @@ import users.Login;
  *  Class description: 
  * This class present the Login Screen 
  * and responsible for the functionality
- * of this screen 
- */
-
-/** 
+ * of this screen  
  * 
  * @author Shimon, Rubin.
  * @author Mousa, Srour.

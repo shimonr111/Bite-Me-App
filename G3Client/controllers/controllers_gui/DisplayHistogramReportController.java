@@ -28,9 +28,6 @@ import util.SupplierByReport;
 /**
  *  Class description: This is a class for displaying a quarterly CEO
  * report
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 

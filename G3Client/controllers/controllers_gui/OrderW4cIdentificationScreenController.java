@@ -33,9 +33,6 @@ import users.Customer;
  * This is a class for 
  * controlling the UI of w4c identification of 
  * private customer.
- */
-
-/**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin

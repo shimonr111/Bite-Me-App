@@ -7,8 +7,6 @@ import java.io.Serializable;
  * This class is a class which
  * defines the main attributes and functionalities of a supplier worker in our
  * system.
- */
-/**
  * 
  * @author Alexander, Martinov.
  * 

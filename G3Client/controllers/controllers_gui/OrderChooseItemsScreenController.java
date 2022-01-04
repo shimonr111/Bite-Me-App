@@ -47,10 +47,6 @@ import users.BusinessCustomer;
  * This is a class for 
  * controlling the UI of the item 
  * choosing for the private customer.
- */
-
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

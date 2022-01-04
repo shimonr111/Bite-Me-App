@@ -7,8 +7,6 @@ import java.io.Serializable;
  * This class is derived class from
  * Customer class which defines the main attributes and functionalities
  * of a Business customer in our system.
- */
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

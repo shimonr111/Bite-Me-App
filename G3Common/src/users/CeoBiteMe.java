@@ -6,8 +6,6 @@ import java.io.Serializable;
  *  Class description: This class is derived class from
  *  Branch manager class which defines the main attributes and functionalities of a
  *  CEO of Bite Me in our system.
- */
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.

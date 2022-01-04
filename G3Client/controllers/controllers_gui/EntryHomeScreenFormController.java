@@ -13,8 +13,6 @@ import javafx.scene.control.Button;
  * Class description: 
  * This class present the Home Screen and 
  * responsible for the functionality of this screen 
- */
-/**
  * 
  * @author Shimon Rubin
  *

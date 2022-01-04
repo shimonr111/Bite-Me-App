@@ -30,9 +30,6 @@ import javafx.stage.WindowEvent;
 /**
  * Class description: This is a class for controlling the UI of adding
  * quarterly reports by BM
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 

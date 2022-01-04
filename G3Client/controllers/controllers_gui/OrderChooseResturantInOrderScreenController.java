@@ -34,9 +34,6 @@ import users.BusinessCustomer;
  * controlling the UI of the restaurant 
  * choosing for the private customer.
  * 
- */
-
-/**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin

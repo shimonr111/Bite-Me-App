@@ -45,9 +45,7 @@ import util.SupplierByReport;
  *  * Class description:
  * This is a class which is a Wrapper for handling
  * all messages from the server.
- */
-
-/**
+ * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov

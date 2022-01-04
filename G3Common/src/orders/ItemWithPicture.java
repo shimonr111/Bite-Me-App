@@ -5,9 +5,6 @@ import javafx.scene.image.ImageView;
 /**
  *  Class description:
  *  This class wraps the item, to add a picture.
- */
-
-/**
  * 
  * @author Ori, Malka.
  *  

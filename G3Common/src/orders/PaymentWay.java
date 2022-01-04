@@ -6,9 +6,6 @@ package orders;
  * used for picking the fields for 
  * the combo box in the payment configuration
  * screen in the order process.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

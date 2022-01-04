@@ -4,8 +4,6 @@ package users;
  * Enum description:
 *  This Enum is used to describe status of a user or a company in the system
 *  each user and company need to be confirmed before they can access the system.
- */
-/**
 * 
 * @author Alexander, Martinov.
 *  

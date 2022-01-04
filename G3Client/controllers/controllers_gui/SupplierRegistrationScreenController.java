@@ -39,9 +39,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of Supplier Registration Screen that appears immediately after clicking
  * on Supplier Registration  from the branch manager portal form.
  * 
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @version 22/12/2021

@@ -34,7 +34,10 @@ import users.Customer;
 import util.OrderBusinessBudgetCalculation;
 
 /**
- * 
+ * Class description:
+ * This is a class for 
+ * controlling the UI of the Order 
+ * payment configuration .
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.
  * @author Mousa, Srour.

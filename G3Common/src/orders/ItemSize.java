@@ -3,8 +3,6 @@ package orders;
 /**
  * 	Enum description:
  *  This Enum is used to describe the item size varieties.
- */
-/**
  * @author Ori, Malka. 
  *   
  *  @version 11/12/2021

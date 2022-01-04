@@ -42,9 +42,6 @@ import util.DateTimeHandler;
  * This is a class for 
  * choosing the supply method 
  * for the order shipment.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

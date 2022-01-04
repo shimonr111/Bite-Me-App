@@ -40,8 +40,6 @@ import javafx.fxml.Initializable;
  * This is a class for 
  * controlling the UI of Edit Customer 
  * form.
- */
-/**
  * 
  * @author Mousa, Srour.
  * 

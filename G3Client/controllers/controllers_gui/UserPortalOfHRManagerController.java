@@ -30,9 +30,6 @@ import users.HrManager;
  * controlling the UI of hrManager
  * form.
  * 
- */
-/**
- * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
  * @author Lior, Guzovsky.

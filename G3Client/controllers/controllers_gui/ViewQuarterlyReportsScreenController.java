@@ -27,8 +27,6 @@ import util.SupplierByReport;
 * This is a class for 
 * controlling the UI of viewing quarterly reports 
 * form.
- */
-/**
 * @author Alexander, Martinov.
 * 
 * @version 14/12/2021

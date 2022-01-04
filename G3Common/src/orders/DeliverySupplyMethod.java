@@ -8,8 +8,6 @@ import util.Constans;
  *  Class description: 
  *  This Abstract class is a base class
  *  for supply method.
- */
-/**
  * 
  * @author Ori, Malka.
  * @author Lior, Guzovsky.

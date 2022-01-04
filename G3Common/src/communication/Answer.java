@@ -5,8 +5,6 @@ package communication;
  *  for all the answers we get from the 
  *  server according to the 
  *  Task that has been sent.
- */
-/**
  * 
  *  @author Lior, Guzovsky.
  *  @author Ori, Malka.

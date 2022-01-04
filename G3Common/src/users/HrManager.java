@@ -7,9 +7,6 @@ import java.io.Serializable;
  * This class is derived class from
  * Business customer class which defines the main attributes and
  * functionalities of a HR manager in our system.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

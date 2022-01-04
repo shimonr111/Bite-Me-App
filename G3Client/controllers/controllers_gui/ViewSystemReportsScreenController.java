@@ -41,9 +41,6 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
  * This is a class for 
  * controlling the UI of viewing system reports 
  * form.
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 

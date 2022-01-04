@@ -30,9 +30,6 @@ import util.SupplierByReport;
  * This is a class for 
  * controlling the UI of viewing system reports 
  * form.
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 

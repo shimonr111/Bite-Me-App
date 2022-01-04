@@ -6,9 +6,6 @@ package users;
 *  budget the business customer
 *  gets from his employer in the 
 *  Bite Me system.
- */
-
-/**
 * 
 * @author Lior, Guzovsky.
 *

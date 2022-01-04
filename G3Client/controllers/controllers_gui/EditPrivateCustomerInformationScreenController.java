@@ -36,8 +36,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of Edit Customer that appears immediately after clicking
  * on Edit while selecting Customer.
  * form.
- */
-/**
  * 
  * @author Mousa, Srour.
  * 

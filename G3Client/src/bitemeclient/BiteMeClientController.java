@@ -5,10 +5,6 @@ import communication.Message;
 /**
  * Class Description:
  * This class constructs the UI for a chat client.
- *
- */
-
-/**
  * @author Ori, Malka.
  * @author Lior, Guzovsky,
  * @author Mousa, Srour.

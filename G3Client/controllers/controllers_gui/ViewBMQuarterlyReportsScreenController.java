@@ -37,8 +37,6 @@ import javafx.util.Callback;
  * Class description: 
  * This is a class for 
  * controlling the UI of downloading quarterly BM report pdfs.
- */
-/**
  * 
  * @author Alexander, Martinov.
  * 

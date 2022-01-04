@@ -7,9 +7,6 @@ import java.io.Serializable;
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.

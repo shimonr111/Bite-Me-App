@@ -27,9 +27,6 @@ import javafx.event.EventHandler;
  * This is a class for 
  * controlling the UI of ceo
  * form.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.

@@ -34,10 +34,6 @@ import javafx.fxml.Initializable;
  * This is a class for 
  * controlling the UI of ConfirmBusinessASkForDetails that appears immediately after clicking
  * on Confirm button from the BusinessCustomerConfirmation screen from HR Manager .
- */
-
-
-/**
  * 
  * @author Mousa, Srour.
  * 

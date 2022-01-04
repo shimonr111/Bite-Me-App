@@ -3,7 +3,6 @@ package users;
 /** Enum description:
  *  This Enum is used to describe the branches in the 
  *  Bite Me system.
-/**
  * 
  * @author Lior, Guzovsky.
  *  

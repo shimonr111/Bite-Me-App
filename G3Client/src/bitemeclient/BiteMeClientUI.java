@@ -10,9 +10,6 @@ import javafx.stage.Stage;
  * This class is used for running the app
  * from the customers side
  *
- */
-
-/**
  * @author Lior, Guzovsky.
  * @author Ori, Malka.
  * @version 03/12/2021

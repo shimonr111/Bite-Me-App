@@ -42,9 +42,6 @@ import javafx.scene.text.Text;
  * Class description: 
  * This is a class for managing the menu for the
  * supplier. In this screen the supplier worker edit the menu.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.
