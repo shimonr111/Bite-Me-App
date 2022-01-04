@@ -24,15 +24,17 @@ import javafx.stage.WindowEvent;
 import users.ConfirmationStatus;
 
 /**
- * 
- * @author Lior, Guzovsky.
- * @author Mousa, Srour.
- * @author Alexander, Martinov.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of customer
  * form.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
  * 
  * @version 09/12/2021
  */
@@ -41,28 +43,57 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static UserPortalOfCustomerController userPortalOfCustomerController;
 	
 	@FXML
+	/**
+	 * Start Order Button
+	 */
 	private Button btnStartOrder;
 	
     @FXML
+    /**
+     * View Orders Button.
+     */
     private Button viewOrdersBtn;
     
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 	
 	@FXML
+	/**
+	 * Log Out Button.
+	 */
 	private Button btnLogout;
 	
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 	
     @FXML
+    /**
+     * The text to display the customer Name.
+     */
     private Text userName;
     
     @FXML
+    /**
+     * The text to display the customer status.
+     */
     private Text statusText;
    
 	/**
@@ -70,7 +101,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	 * for going to the next screen of w4c
 	 * identification.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getStartOrderBtn(ActionEvent event) {
@@ -84,7 +115,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
      * client, log out the connected user
      * and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -100,7 +131,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
      * This method log out the connected user
      * and load the login screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
@@ -125,7 +156,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
      * This method load the screen of
      * View Orders.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getViewOrdersBtn(ActionEvent event) {
@@ -137,7 +168,7 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	/**
 	 * Returns to login screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */	
 	private void setToLoginScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -170,8 +201,8 @@ public class UserPortalOfCustomerController extends AbstractBiteMeController imp
 	 * This is the initialization function for this 
 	 * screen.
 	 * 
-	 * @param primaryStage
-	 * @param fxmlPath
+	 * @param primaryStage The stage of the screen.
+	 * @param fxmlPath The fxml path of the current screen.
 	 */
 	public void initCustomerUserPortal(Stage primaryStage,String fxmlPath) {
 		Platform.runLater(new Runnable() {

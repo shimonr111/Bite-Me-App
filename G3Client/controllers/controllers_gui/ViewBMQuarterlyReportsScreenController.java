@@ -33,14 +33,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-
+/**
+ * Class description: 
+ * This is a class for 
+ * controlling the UI of downloading quarterly BM report pdfs.
+ */
 /**
  * 
  * @author Alexander, Martinov.
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI of downloading quarterly BM report pdfs
  * 
  * @version 27/12/2021
  */
@@ -49,54 +49,109 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static ViewBMQuarterlyReportsScreenController viewBMQuarterlyReportsScreenController;
+	
+	/**
+	 * The pdfList content (String).
+	 */
 	public static String[][] pdfList=null;
+	
+	/**
+	 * The PDF files  (Bytes).
+	 */
 	public static byte[] pdfFile=null;
 
 	@FXML
+	/**
+	 * The Quearter numbers combo box.
+	 */
 	private ComboBox<String> ReportQuarter;
 
 	@FXML
+	/**
+	 * ComboBox of Years .
+	 */
 	private ComboBox<String> ReportYear;
 
     @FXML
+    /**
+     * Column of Branch.
+     */
     private TableColumn<String[], String> branchColumn=new TableColumn();
 
 	@FXML
+	/**
+	 * Back Button.
+	 */
 	private Button btnBack;
 
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 
     @FXML
+    /**
+     * Column of date.
+     */
     private TableColumn<String[], String> dateColumn=new TableColumn();
 
     @FXML
+    /**
+     * Download Button.
+     */
     private Button downloadBtn;
 
     @FXML
+	/**
+	 * The text that we use to display messages to the user.
+	 */
     private Text errorText;
     
     @FXML
+    /**
+     * Column of File Name.
+     */
     private TableColumn<String[], String> filenameColumn=new TableColumn();
     
     @FXML
+    /**
+     * the table view for PDF Files.
+     */
     private TableView<String[]> pdfTable=new TableView();
 
     @FXML
+    /**
+     * The Text field that we use as a search bar.
+     */
     private Button searchBtn;
 
 	@FXML
+	/**
+	 * View Report Button.
+	 */
 	private Button viewReportBtn;
 	
 	 /**
      * This method returns to the previous screen when the back button is pressed
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	void getBackBtn(ActionEvent event) {
@@ -106,7 +161,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	/**
 	 * Clicking on exit button will log out the user then disconnect and exit.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	void getExitBtn(ActionEvent event) {
@@ -121,7 +176,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	/**
 	 * Display a help pop up message.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	void getHelpBtn(ActionEvent event) {
@@ -132,7 +187,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
      * This method requests a file from the db by it's unique file Id 
      * Then saves it to a location specified with a file chooser
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void getReport(ActionEvent event) {
@@ -168,7 +223,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
      * This method prepares a file list request from the server
      * then it calls the table filling fuction, and clears the list for the next request
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void searchReport(ActionEvent event) {
@@ -263,7 +318,7 @@ public class ViewBMQuarterlyReportsScreenController extends AbstractBiteMeContro
 	 /**
      * Loads the previous screen after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	public void setCeoPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {

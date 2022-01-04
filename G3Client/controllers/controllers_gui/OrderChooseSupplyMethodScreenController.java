@@ -38,14 +38,17 @@ import users.BusinessCustomer;
 import util.DateTimeHandler;
 
 /**
- * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * choosing the supply method 
  * for the order shipment.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
  * 
  * @version 17/12/2021
  */
@@ -54,41 +57,80 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderChooseSupplyMethodScreenController orderChooseSupplyMethodScreenController;
+    
+    /**
+     * Static Order object for the current order flow.
+     */
     private static Order order;
 
     @FXML
+    /**
+     * The DatePicker to choose date.
+     */
     private DatePicker supplyDatePicker;
 
     @FXML
+    /**
+     * ComboBox of available time.
+     */
     private ComboBox<String> supplyTimeCombo;
 
     @FXML
+    /**
+     * ComboBox of availabe dates.
+     */
     private ComboBox<String> supplyMethodCombo;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button nextBtn;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
     
     @FXML
+    /**
+     * The ComboBox of DeliveryTypes.
+     */
     private ComboBox<DeliveryType> dileveryTypeComboBox;
 
     /**
      * Back button for the previous screen
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -126,7 +168,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * This function is used for
      * switching to the next screen and 
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBtnNext(ActionEvent event) {
@@ -233,7 +275,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * Exit from screen and update
      * DB.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -249,7 +291,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
      * This is a method for getting 
      * information for the user
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -262,7 +304,7 @@ public class OrderChooseSupplyMethodScreenController extends AbstractBiteMeContr
    * This function is called from the previous 
    * screen controller.
    * 
-   * @param order
+   * @param order The current Order.
    */
   public void initChooseSupplyMethodScreen(Order order) {
 		Platform.runLater(new Runnable() {

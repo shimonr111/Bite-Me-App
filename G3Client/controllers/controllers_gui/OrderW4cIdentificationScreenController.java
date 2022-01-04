@@ -28,16 +28,17 @@ import javafx.stage.StageStyle;
 import users.Branch;
 import users.BusinessCustomer;
 import users.Customer;
+/**
+ *  Class description: 
+ * This is a class for 
+ * controlling the UI of w4c identification of 
+ * private customer.
+ */
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI of w4c identification of 
- * private customer.
  * 
  * @version 13/12/2021
  */
@@ -46,7 +47,15 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderW4cIdentificationScreenController orderW4cIdentificationScreenController;
     /**
      * This member indicate if its the first order of this customer, used to save the actual home branch in the first order.
@@ -58,33 +67,63 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
     private static Branch actualHomeBranch;
     
     @FXML
+    /**
+     * Text Field of W4C code.
+     */
     private TextField codeTxtField;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button nextBtn;
 
     @FXML
+    /**
+     * The QR Button.
+     */
     private Button qrBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * ComboBox of Branches.
+     */
     private ComboBox<String> homeBranchCombo;
     
     @FXML
+    /**
+     * Label of company code if it is business customer.
+     */
     private Label companyCodeLabel;
     
     @FXML
+    /**
+     * Text Field of Company Code for business customers.
+     */
     private TextField companyCodeTextField;
 
     /**
@@ -92,7 +131,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * to the previous screen of the customer 
      * main window.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -129,7 +168,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * This is the function for exiting 
      * the system of Bite me
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -157,7 +196,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * the data received form the user 
      * is ok.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getNextBtn(ActionEvent event) {
@@ -226,7 +265,7 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
      * and putting the relevant branch according the the users
      * choise.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	private void setHomeBranchAccordingToUsersChoiseAndChangeScreen(ActionEvent event) {
 		Branch homeBranch;
@@ -349,8 +388,8 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 	 * has entered an empty input 
 	 * for the W4c code.
 	 * 
-	 * @param w4cInsertText
-	 * @return boolean
+	 * @param w4cInsertText The entered w4c code.
+	 * @return boolean True if it is the customer's code , false if not.
 	 */
 	public boolean isW4cTextFieldNotEmpty(String w4cInsertText) {
 		if(w4cInsertText.equals("")) {
@@ -365,8 +404,8 @@ public class OrderW4cIdentificationScreenController extends AbstractBiteMeContro
 	 * has entered an empty input 
 	 * for the company Code Number.
 	 * 
-	 * @param companyCodeNumber
-	 * @return boolean
+	 * @param companyCodeNumber the entered company's code.
+	 * @return boolean True if it is the company's code , false if not.
 	 */
 	public boolean isCompanyCodeNumberEmpty(String companyCodeNumber) {
 		if(companyCodeNumber.equals("")) {

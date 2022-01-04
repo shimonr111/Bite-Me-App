@@ -1,11 +1,12 @@
 package orders;
 
 /**
+ *  Enum description:
+ *  This Enum is used to describe the order time type (for internal use, determine discount).
+ */
+/**
  * 
  * @author Ori, Malka.
- * 
- *  Enum description:
- *  This Enum is used to describe the order time type (for internal use, determine discount)
  *  
  *  @version 11/12/2021
  */

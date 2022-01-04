@@ -24,18 +24,18 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.ConfirmationStatus;
 import users.HrManager;
-
+/**
+ *  Class description: 
+ * This is a class for 
+ * controlling the UI of hrManager
+ * form.
+ * 
+ */
 /**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
  * @author Lior, Guzovsky.
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI of hrManager
- * form.
- * 
  * @version 25/12/2021
  */
 public class UserPortalOfHRManagerController extends AbstractBiteMeController  implements Initializable{
@@ -43,46 +43,87 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static UserPortalOfHRManagerController userPortalOfHRManagerController;
 	
 	@FXML
+	/**
+	 * Company Registration Button.
+	 */
 	private Button btnCompanyReg;
 	
 	@FXML
+	/**
+	 * Workers Confirmation Button.
+	 */
 	private Button btnBusinessCustomerConfirm;
 	
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 	
 	@FXML
+	/**
+	 * Log Out Button.
+	 */
 	private Button btnLogout;
 	
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 	
 	@FXML
+	/**
+	 * Customer Name Label.
+	 */
 	private Label customerNameLabel;
 	
 	@FXML
+	/**
+	 * Company Name Label.
+	 */
 	private Label companyNameLabel;
 	
     @FXML
+    /**
+     * HR Manager Name Text.
+     */
     private Text hrManagerName;
     
     @FXML
+    /**
+     * Company Name Text.
+     */
     private Text companyName;
     
     @FXML
+    /**
+     * Company Status Text.
+     */
     private Text companyStatus;
     
     @FXML
+    /*
+     * HR Manager status text.
+     */
     private Text statusText;
 
     /**
      * This method Load the screen of company Registration.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getCompanyReg(ActionEvent event) {
@@ -95,7 +136,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
      * This method will load the screen
      * of business customers confirmation.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getBusinessCustomerConfirm(ActionEvent event) {
@@ -108,7 +149,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
      * This method will disconnect the specific client,
      * log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -124,7 +165,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
      * This method log out the connected  user,
      * and load the login screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
@@ -137,7 +178,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -148,7 +189,7 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	/**
 	 * Returns to login screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	private void setToLoginScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -181,8 +222,8 @@ public class UserPortalOfHRManagerController extends AbstractBiteMeController  i
 	 * This is the initialization function for this 
 	 * screen.
 	 * 
-	 * @param primaryStage
-	 * @param fxmlPath
+	 * @param primaryStage The stage of the screen.
+	 * @param fxmlPath The fxml path of the current screen.
 	 */
 	public void initHrManagerUserPortal(Stage primaryStage,String fxmlPath) {
 		Platform.runLater(new Runnable() {

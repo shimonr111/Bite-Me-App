@@ -29,14 +29,17 @@ import util.Constans;
 import util.DataLists;
 
 /**
- * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * 
+ *  
  * Class description: 
  * This is a class for controlling 
  * the UI of the delivery method
  * that was picked by the user.
+ */
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
  * 
  * @version 17/12/2021
  */
@@ -45,58 +48,120 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
 	 /**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderAMealDeliveryMethodScreenController orderAMealDeliveryMethodScreenController;
+    
+    /**
+     * Static Order object for the current order flow.
+     */
     private static Order order;
+    
+    /**
+     * Static Delivery Type, information that we have to know .
+     */
     private static  DeliveryType deliveryType;
+    
+    /**
+     * Static Supply Method, information that we have to know .
+     */
     private static DeliverySupplyMethod deliveryInformation;
     
     @FXML
+    /**
+     * Address Text Field.
+     */
     private TextField addressTextField;
 
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTextField;
 
     @FXML
+    /**
+     * Phone Number Text Field.
+     */
     private TextField phoneTxtField;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The Choose Payment Method Button.
+     */
     private Button choosePayMethBtn;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * Delivery Fee Text Field.
+     */
     private TextField deliveryFeeTextField;
 
     @FXML
+    /**
+     * Last Name Text Field.
+     */
     private TextField lastNameTextField;
     
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button btnNext;
     
     @FXML
+    /**
+     * ComboBox of the cities in the specific branch.
+     */
     private ComboBox<String> cityCombo;
     
     @FXML
+    /**
+     * ComboBox of the streets of the specific city.
+     */
     private ComboBox<String> streetCombo;
     
     @FXML
+    /**
+     * ComboBox of Phone Number Prefix.
+     */
     private ComboBox<String> phonePrefixCombo;
 
 	/**
      * Back button for the 
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -146,7 +211,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * Exit from screen and update
      * DB.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -174,7 +239,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
      * This function is used for
      * switching to the next screen and 
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getNextBtn(ActionEvent event) {
@@ -265,8 +330,8 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	* This function is called from the previous 
   	* screen controller.
   	* 
-  	* @param order
-  	* @param deliveryType
+  	* @param order The current order.
+  	* @param deliveryType the delivery type chosen for the order.
   	*/
     public void initDeliveryMethodScreen(Order order, DeliveryType deliveryType) {
 		Platform.runLater(new Runnable() {
@@ -352,7 +417,7 @@ public class OrderAMealDeliveryMethodScreenController extends AbstractBiteMeCont
   	/**
  	 * This method checks if the textField contains numbers only.
  	 * 
- 	 * @param txtField
+ 	 * @param txtField the textField that we want to check.
  	 * @return true or false according to the input.
  	 */
  	public boolean isInt(TextField txtField) {

@@ -26,13 +26,15 @@ import javafx.stage.WindowEvent;
 import util.SupplierByReport;
  
 /**
- * 
- * @author Alexander, Martinov.
- * 
- * Class description: 
+ *  * Class description: 
  * This is a class for 
  * controlling the UI of viewing system reports 
  * form.
+ */
+
+/**
+ * 
+ * @author Alexander, Martinov.
  * 
  * @version 21/12/2021
  */
@@ -41,41 +43,80 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static ViewSystemReportsScreenCEOController viewSystemReportsScreenCEOController;
+	
+	/**
+	 * The List Of suppliers Report that we get from DB.
+	 */
 	public static SupplierByReport[] suppliers=null;
 	
 	@FXML
+	/**
+	 * The Message Label.
+	 */
     private Label MessageLabel;
 
     @FXML
+	/**
+	 * ComboBox of Months.
+	 */
     private ComboBox<String> ReportMonth;
 
     @FXML
+    /**
+	 * ComboBox of Report types.
+	 */
     private ComboBox<String> ReportType;
 
     @FXML
+	/**
+	 * ComboBox of Years.
+	 */
     private ComboBox<String> ReportYear;
     
     @FXML
+    /**
+     * Combo Box if branches.
+     */
     private ComboBox<String> branchBox;
 
     @FXML
+    /**
+     * Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * View Report Button.
+     */
     private Button viewReportBtn;
 
 	/**
 	 * This method calls the setBranchManagerPortal to get back the previous screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getBackBtn(ActionEvent event) {
@@ -85,7 +126,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 * Clicking on exit button will log out the user then disconnect and exit.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -100,7 +141,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -110,7 +151,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	/**
 	 * Asks server for selected report by date and type and displays it to the user
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getViewReport(ActionEvent event) {
@@ -179,7 +220,7 @@ public class ViewSystemReportsScreenCEOController extends AbstractBiteMeControll
 	 /**
      * Loads the previous screen after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	public void setCeoPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {

@@ -1,16 +1,16 @@
 package communication;
-
+/**
+ *   Class description: 
+ *  This is an enum
+ *  for all the answers we get from the 
+ *  server according to the 
+ *  Task that has been sent.
+ */
 /**
  * 
  *  @author Lior, Guzovsky.
  *  @author Ori, Malka.
  *  @author Alexander, Martinov.
- *  
- *  Class description: 
- *  This is an enum
- *  for all the answers we get from the 
- *  server according to the 
- *  Task that has been sent.
  *  
  *  @version 21/12/2021
  */

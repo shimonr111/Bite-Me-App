@@ -22,16 +22,18 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import users.Login;
 
+/**
+ *  Class description: 
+ * This class present the Login Screen 
+ * and responsible for the functionality
+ * of this screen 
+ */
+
 /** 
  * 
  * @author Shimon, Rubin.
  * @author Mousa, Srour.
  * @author Lior, Guzovsky.
- *
- * Class description: 
- * This class present the Login Screen 
- * and responsible for the functionality
- * of this screen 
  * 
  * @version 07/12/2021
  */
@@ -39,29 +41,62 @@ public class LoginScreenController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static LoginScreenController loginScreenController;
+	
+    /**
+     * The listener for the current form , so when we finish working in this page we stop it.
+     */
 	private static AnalyzeClientListener listener;
 	
 	@FXML
+	/**
+	 * User Name Text Field.
+	 */
 	private TextField userNameField;
 	
 	@FXML
+	/**
+	 * Password Text Field.
+	 */
 	private PasswordField passwordField;
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button btnExit;
 	
 	@FXML
+	/**
+	 * The Login Button.
+	 */
 	private Button btnLogin;
 	
 	@FXML
+	/**
+	 * The Back Button.
+	 */
 	private Button btnBack;
 	
 	@FXML
+	/**
+	 * The Help Button.
+	 */
 	private Button btnHelp;
 	
 	@FXML
+	/**
+	 * The empty text that we use to display messages for the customer.
+	 */
 	private Label errorLabel;
 
 	/**

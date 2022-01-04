@@ -2,13 +2,14 @@ package util;
 
 import java.io.Serializable;
 
-
+/**
+*  Class description:
+*  This is class manages all the order flow values.
+*/
 /**
 * 
 * @author Lior, Guzovsky.
-* 
-*  Class description:
-*  This is class manages all the order flow values.
+* @author Mousa, Srour.
 *  
 *  @version 9/12/2021
 */
@@ -17,15 +18,45 @@ public class OrderForView implements Serializable{
 	/**
 	 * Class members:
 	 */
+	
+	/**
+	 * Order Number.
+	 */
 	private int orderNum;
+	
+	/**
+	 * Restaurant Name.
+	 */
 	private String resturantName;
+	
+	/**
+	 * Order Date.
+	 */
 	private String orderDate;
+	
+	/**
+	 * Order Time.
+	 */
 	private String orderTime;
+	
+	/**
+	 * Order Items+comments.
+	 */
 	private String orderDetails;
+	
+	/**
+	 * Order Status.
+	 */
 	private String orderStatus;
 	
 	/**
-	 * Constructor:
+	 * 
+	 * @param resturantName
+	 * @param orderDate
+	 * @param orderTime
+	 * @param orderDetails
+	 * @param orderStatus
+	 * @param orderNum
 	 */
 	public OrderForView(String resturantName, String orderDate, String orderTime, String orderDetails,
 			String orderStatus,int orderNum) {
@@ -39,16 +70,25 @@ public class OrderForView implements Serializable{
 	}
 	
 	/**
-	 * Getters and Setters:
+	 * 
+	 * @return order number.
 	 */
 	public int getOrderNum() {
 		return orderNum;
 	}
-
+	
+	/**
+	 * 
+	 * @param orderNum
+	 */
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getResturantName() {
 		return resturantName;
 	}

@@ -1,14 +1,16 @@
 package orders;
 
 import java.io.Serializable;
+/**
+ *  
+ *  Class description: 
+ *  This Abstract class is a base class
+ *  for supply method.
+ */
 
 /**
  * 
  * @author Ori, Malka.
- * 
- *  Class description: 
- *  This Abstract class is a base class
- *  for supply method.
  *  
  * @version 11/12/2021
  */

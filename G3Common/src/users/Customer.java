@@ -42,18 +42,17 @@ public class Customer extends User implements Serializable{
 	/**
 	 * This is the constructor used for passing the object.
 	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param W4CCodeNumber
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param accountCode
-	 * @param privateCreditCard
-	 * @param balance
+	 * @param userId Customer user ID.
+	 * @param statusInSystem customer Status in system.
+	 * @param userFirstName customer first name.
+	 * @param userLastName customer last name.
+	 * @param homeBranch customer home branch.
+	 * @param isLoggedIn true if logged in, false if not.
+	 * @param W4CCodeNumber customer w4c code number.
+	 * @param userEmail customer email.
+	 * @param phoneNumber customer phone number.
+	 * @param privateCreditCard customer credit card number.
+	 * @param balance customer balance (initialized to 0 )
 	 */
 	public Customer(String userId, ConfirmationStatus statusInSystem, String userFirstName,
 			String userLastName, Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail,
@@ -68,16 +67,15 @@ public class Customer extends User implements Serializable{
 	/**
 	 * This is the constructor for registering a new customer.
 	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param accountCode
-	 * @param privateCreditCard
+	 * @param userId Customer user ID.
+	 * @param statusInSystem customer Status in system.
+	 * @param userFirstName customer first name.
+	 * @param userLastName customer last name.
+	 * @param homeBranch customer home branch.
+	 * @param isLoggedIn true if logged in, false if not.
+	 * @param userEmail customer email.
+	 * @param phoneNumber customer phone number.
+	 * @param privateCreditCard customer credit card number.
 	 */
 	public Customer(String userId, ConfirmationStatus statusInSystem, String userFirstName,
 			String userLastName, Branch homeBranch, boolean isLoggedIn, String userEmail,

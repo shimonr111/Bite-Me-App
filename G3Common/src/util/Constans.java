@@ -2,12 +2,14 @@ package util;
 
 /**
  * 
+ * Class description: 
+ * This class manages all the system constants
+ */
+/**
+ * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
- * 
- *  Class description: 
- * This class manages all the system constants
  *  
  * @version 09/12/2021
  */

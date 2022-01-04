@@ -35,15 +35,16 @@ import orders.ItemSize;
 import orders.Order;
 import orders.OrderTimeType;
 import util.Constans;
+/**
+ *  Class description: 
+ * This is a class for the summary of the 
+ * order process.
+ */
 
 /**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
- * 
- * Class description: 
- * This is a class for the summary of the 
- * order process.
  * 
  * @version 17/12/2021
  */
@@ -52,56 +53,128 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderSummaryScreenController orderSummaryScreenController;
+    
+    /**
+     * Static Order object for the current order flow.
+     */
     private static Order order;
+    
+    /**
+     * Static String of the path of last screen, so we can change it accordingly.
+     */
     private String pathForLastScreen= null;
+    
+    /**
+     * Static String of page title of last screen, so we can change it accordingly.
+     */
     private String pageTitle;
+    
+    /**
+     * Delivery type used if it is multiple participants delivery.
+     */
     public static DeliveryType deliveryType= DeliveryType.REGULAR;
+    
+    /**
+     * The Multiple Participant delivery order number that the user wants to join to.
+     */
     public static int MultiOrderNumber;
+    
+    /**
+     * The Amount of participants of multiple delivery order.
+     */
     public static int joinMultiNumberOfParticipants;
+    
+    /**
+     * The Cost of delivery fee for multiple participants delivery.
+     */
     public static int joinMultiDeliveryCost;
     
     @FXML
+    /**
+     * The Choose Payment Button.
+     */
     private Button choosePaymentMethodBtn;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * TableView of Items for summary.
+     */
     private TableView<Item> orderSummaryTable;
 
     @FXML
+    /**
+     * The Column of Item Name.
+     */
     private TableColumn<Item, String> iteamNameColumn;
 
     @FXML
+    /**
+     * The Column of Item Size.
+     */
     private TableColumn<Item, ItemSize> sizeColumn;
 
     @FXML
+    /**
+     * The Column of Item Price.
+     */
     private TableColumn<Item, Double> priceColumn;
 
     @FXML
+    /**
+     * The Column of Item Comment.
+     */
     private TableColumn<Item, String> commentColumn;
 
     @FXML
+    /**
+     * Text Field of total price of the order.
+     */
     private TextField totalOrderPriceTextField;
     
     @FXML
+    /**
+     * The text that shows if there is discount for the order.
+     */
     private Text discountText;
 
     /**
      * Back button for the 
      * 
-     * @param event
+     * @param event ActionEvent of javaFx.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -169,7 +242,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This function is used for
      * switching to the next screen and 
      * 
-     * @param event
+     * @param event ActionEvent of javaFx.
      */
     @FXML
     public void getChoosePaymenMethodtBtn(ActionEvent event) {
@@ -197,7 +270,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * Exit from screen and update
      * DB.
      * 
-     * @param event
+     * @param event ActionEvent of javaFx.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -213,7 +286,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This is a method for getting 
      * information for the user
      * 
-     * @param event
+     * @param event ActionEvent of javaFx.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -227,7 +300,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
      * This function is called from the previous 
      * screen controller.
      * 
-     * @param order
+     * @param order The current Order.
      */
   public void initOrderSummaryScreen(Order order) {
 	  OrderSummaryScreenController.order = order;
@@ -263,7 +336,7 @@ public class OrderSummaryScreenController extends AbstractBiteMeController imple
 	/**
 	 * This method loads the business customer portal
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFx.
 	 */
 	public void setBusinessCustomerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

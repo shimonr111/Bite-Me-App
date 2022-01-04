@@ -33,14 +33,16 @@ import communication.Task;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * controlling the UI of Joun Multi Delivery Screen that appears after
  * choosing Join Multi option for delivery type.
  * form.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 2/1/2022
  */
@@ -49,39 +51,83 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 		/**
 		 * Class members description:
 		 */
+	
+		/**
+		 * The FXMLLoader of the current screen.
+		 */
 		private static FXMLLoader loader;
+		
+		/**
+		 * A static object of the current class.
+		 */
 	    private static JoinMultiDeliveryScreenController joinMultiDeliveryScreenController;
+	    
+	    /**
+	     * Static Order object for the current order flow.
+	     */
 	    private static Order order;
+	    
+	    /**
+	     * Static Delivery Type, information that we have to know .
+	     */
 	    private static  DeliveryType deliveryType;
+	    
+	    /**
+	     * ArrayList of available Multiple delivery order that are available , we get them from DB.
+	     */
 	    public static ArrayList<Order> availableMultiOrders = new ArrayList<>();
 	    
 		@FXML
+		/**
+		 * The Column of the delivery address.
+		 */
 	    private TableColumn<Order,String> addressCol;
 
 	    @FXML
+	    /**
+	     * The Back Button.
+	     */
 	    private Button backBtn;
 
 	    @FXML
+	    /**
+	     * The empty text that we use to display messages to the user.
+	     */
 	    private Text displayText;
 
 	    @FXML
+	    /**
+	     * The Exit Button.
+	     */
 	    private Button exitBtn;
 
 	    @FXML
+	    /**
+	     * The Help Button.
+	     */
 	    private Button helpBtn;
 
 	    @FXML
+	    /**
+	     * The Orders table.
+	     */
 	    private TableView<Order> multiTable;
 
 	    @FXML
+	    /**
+	     * The Column that contains the name of the order maker.
+	     */
 	    private TableColumn<Order,String> nameCol;
 
 	    @FXML
+	    /**
+	     * The Next button.
+	     */
 	    private Button nextBtn;
 	    
 	    /**
 	     * This method loads the previous screen.
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     */
 	    @FXML
 	    void getBackBtn(ActionEvent event) {
@@ -117,7 +163,7 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 	    /**
 	     * This method diconnect the specific client,
 	     * log out the conneted user and exit.
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     */
 	    @FXML
 	    void getExitBtn(ActionEvent event) {
@@ -142,7 +188,7 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 	     * This method will check if the user choosed a row from the table,
 	     * and if yes , so we move to the relevant screen while passing
 	     * the nessecary information.
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     */
 	    @FXML
 	    void getNextBtn(ActionEvent event) {
@@ -160,8 +206,8 @@ public class JoinMultiDeliveryScreenController extends AbstractBiteMeController 
 	    
 	    /**
 	     * This method loads the current screen.
-	     * @param order
-	     * @param deliveryType
+	     * @param order The current order.
+	     * @param deliveryType the delivery type choosed for the order.
 	     */
 	    public void initMultiDeviveryScreenController(Order order,DeliveryType deliveryType) {
 			Platform.runLater(new Runnable() {

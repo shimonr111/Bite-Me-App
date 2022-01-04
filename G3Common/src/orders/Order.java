@@ -7,14 +7,15 @@ import users.Branch;
 import util.DateTimeHandler;
 
 /**
+ *  Class description:
+ * This class describes the Order Entity.
+ * 
+ */
+/**
  * 
  * @author Ori, Malka.
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.
- * 
- * Class description:
- * This class describes the Order Entity.
- *  
  * @version 20/12/2021
  */
 public class Order implements Serializable{

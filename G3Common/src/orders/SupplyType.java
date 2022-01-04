@@ -1,11 +1,12 @@
 package orders;
-
+/**
+ *  
+ *  Enum description:
+ *  This Enum is used to describe the order supply method
+ */
 /**
  * 
- * @author Ori, Malka.
- * 
- *  Enum description:
- *  This Enum is used to describe the order supply method.
+ * @author Ori, Malka..
  *  
  *  @version 11/12/2021
  */

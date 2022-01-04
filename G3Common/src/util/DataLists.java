@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
+ *  
+ * Class description: 
+ * This class manages all the system data strings
+ *  
+ */
+/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
- * 
- *  Class description: 
- * This class manages all the system data strings
- *  
  * @version 09/12/2021
  */
 public class DataLists {

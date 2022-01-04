@@ -22,16 +22,17 @@ import communication.Task;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+/**
+ * Class description: 
+ * This is a class for 
+ * controlling the UI of ceo
+ * form.
+ */
 
 /**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI of ceo
- * form.
  * 
  * @version 14/12/2021
  */
@@ -40,38 +41,70 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static UserPortalOfCEOController userPortalOfCEOController;
 	
 	@FXML
+	/**
+	 * View Quarterly Reports button.
+	 */
 	private Button btnViewQuarterlyReports;
 	
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 	
 	@FXML
+	/**
+	 * The Log Out button.
+	 */
 	private Button btnLogout;
 	
 	@FXML
+	/**
+	 * View Monthly Reports Button.
+	 */
 	private Button btnViewMonthlyReports;
 	
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 	
     @FXML
+    /**
+     * View Sent Reports Button.
+     */
     private Button btnViewSentReports;
     
     @FXML
+    /**
+     * The text to display the CEO name.
+     */
     private Text ceoName;
     
     @FXML
+    /**
+     * The Text to display the CEO Status.
+     */
     private Text statusText;
 
     /**
      * This method will load the quertely reports
      * screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getQuarterlyReports(ActionEvent event) {
@@ -84,7 +117,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
      * This method disconnect the specific client,
      * log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -101,7 +134,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
      * This method log out the connected user,
      * and load the login screen again.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
@@ -115,7 +148,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	 /**
      * This method load the screen of monthly reports.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getMonthlyReports(ActionEvent event) {
@@ -127,7 +160,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -137,7 +170,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	 /**
      * This method load the screen of Sent reports.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getSentReports(ActionEvent event) {
@@ -149,7 +182,7 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	/**
 	 * Returns to login screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	private void setToLoginScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -182,8 +215,8 @@ public class UserPortalOfCEOController extends AbstractBiteMeController implemen
 	 * This is the initialization function for this 
 	 * screen.
 	 * 
-	 * @param primaryStage
-	 * @param fxmlPath
+	 * @param primaryStage The stage of the screen.
+	 * @param fxmlPath The fxml path of the current screen.
 	 */
 	public void initCEOUserPortal(Stage primaryStage,String fxmlPath) {
 		Platform.runLater(new Runnable() {

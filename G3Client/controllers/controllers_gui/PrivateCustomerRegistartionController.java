@@ -32,16 +32,18 @@ import users.CreditCard;
 import users.Customer;
 import users.Login;
 import users.UserForRegistration;
-
 /**
- * 
- * @author Mousa, Srour.
  * 
  * Class description: 
  * This is a class for 
  * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
  * on Private Customer registration from the CustomerRegistrationScreen form.
  * 
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * @version 10/12/2021
  */
 public class PrivateCustomerRegistartionController extends AbstractBiteMeController implements Initializable{
@@ -49,71 +51,145 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static PrivateCustomerRegistartionController privateCustomerRegistrationScreenController;
+    
+    /**
+     * Listener for the current page , we stop it if we finished working on this screen.
+     */
     private static AnalyzeClientListener listener;
+    
+    /**
+     * ArrayList of textfield's so we can check them all into a loop.
+     */
     private ArrayList<TextField> textFields = new ArrayList<>();
+    
+    /**
+     * ArrayList of textfield's that should contain numbers only, so we can check them all into a loop.
+     */
     private ArrayList<TextField> integerFields = new ArrayList<>();
     
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTxtField;
 
     @FXML
+    /**
+     * Last Name Text Field.
+     */
     private TextField lastNameTxtField;
 
     @FXML
+    /**
+     * Phone number Text Field.
+     */
     private TextField phoneTxtField;
 
     @FXML
+    /**
+     * Email Text Field.
+     */
     private TextField emailTxtField;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Save Button.
+     */
     private Button saveBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * Confirm Email Text Field.
+     */
     private TextField confirmedEmailTxtField;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * ComboBox of Branches.
+     */
     private ComboBox<String> setHomeBranchCombo;
     
     @FXML
+    /**
+     * CVV of Credit Card Text Field.
+     */
     private TextField cvvTxtField;
 
     @FXML
+    /**
+     * Number of Credit Card Text Field.
+     */
     private TextField creditNumTxtField;
 
     @FXML
+    /**
+     * Expiration DAte of Credit Card Text Field.
+     */
     private TextField expirationTxtField;
 
     @FXML
+    /**
+     * The empty text that we display a messages to the customer threw it.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * Password for Login  Text Field.
+     */
     private TextField passwordField;
 
     @FXML
+    /**
+     * User ID  Text Field.
+     */
     private TextField idNumTxtField;
     
     @FXML
+    /**
+     * The empty text that we display a messages to the customer threw it.
+     */
     private Text displayMessage;
     
     @FXML
+    /**
+     * User Name for Login  Text Field.
+     */
     private TextField userNameTxtField;
     
     /**
      * This method will disconnect the client,
      * log out the connected user and then exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -128,7 +204,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     /**
      * This method will display a pop up message to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -141,7 +217,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
      * the object in this message is an arrayList of customer,login and credit card
      * we need these 3 objects on the server side .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getSaveBtn(ActionEvent event) {
@@ -172,7 +248,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
      * This method will call the method that calls
      * the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -224,7 +300,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  	/**
  	 * this method checks if the textField contains numbers only.
  	 * 
- 	 * @param txtField
+ 	 * @param txtField The text field that we want to check.
  	 * @return true or false according to the input.
  	 */
  	public boolean isInt(TextField txtField) {
@@ -242,7 +318,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
  	/**
  	 * this method sets a message from the listeners to the displayMessage .
  	 * 
- 	 * @param message
+ 	 * @param message the message that we want to display to the user.
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
@@ -291,7 +367,7 @@ public class PrivateCustomerRegistartionController extends AbstractBiteMeControl
     /**
      * This method sets the previous screen .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     public void setUserRegistrationScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {

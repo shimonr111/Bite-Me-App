@@ -1,13 +1,14 @@
 package orders;
 
 import java.io.Serializable;
-
+/**
+ * 
+ *  Class description:
+ *  This class describes the Item Entity.
+ */
 /**
  * 
  * @author Ori, Malka.
- * 
- *  Class description:
- *  This calss describes the Item Entity.
  *  
  * @version 11/12/2021
  */

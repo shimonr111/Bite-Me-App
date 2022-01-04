@@ -32,54 +32,115 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import users.UserForRegistration;
 
+/**
+ *  Class description: 
+ * This is a class for 
+ * controlling the UI of Users Registration.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
+ * 
+ * @version 4/1/2022
+ */
 public class UsersRegistrationScreenController extends AbstractBiteMeController implements Initializable{
 	
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static UsersRegistrationScreenController usersRegistrationScreenController;
+	
+	/**
+	 * ArrayList of user for registration, we get this list from the DB to display into a table view.
+	 */
 	public static ArrayList<UserForRegistration> usersList = new ArrayList<>();
+	
+	/**
+	 * The Chosen User to register.
+	 */
 	public static UserForRegistration userForRegistration;
 	
 	@FXML
+	/**
+	 * Back Button.
+	 */
     private Button backButton;
 
     @FXML
+    /**
+     * Business Customer Button.
+     */
     private Button businessCustomerButton;
 
     @FXML
+    /**
+     * 
+     */
     private Text displayMessage;
 
     @FXML
+	/**
+	 * The empty text that we display the messages to the user.
+	 */
     private Button exitBtn;
 
     @FXML
+    /**
+     * Help Button.
+     */
     private Button helpBtn;
 
     @FXML
+    /**
+     * Private Customer Button.,
+     */
     private Button privateCustomerButton;
     
     @FXML
+    /**
+     * This text field used as search bar.
+     */
     private TextField searchField;
 
     @FXML
+    /**
+     * The First Name Column.
+     */
     private TableColumn<UserForRegistration, String> userFirstNameCol;
 
     @FXML
+    /**
+     * The User ID  Column.
+     */
     private TableColumn<UserForRegistration, String>  userIdCol;
 
     @FXML
+    /**
+     * The Last Name Column.
+     */
     private TableColumn <UserForRegistration, String>  userLastName;
 
     @FXML
+    /**
+     * The TableView For Users that are waiting for registration..
+     */
     private TableView<UserForRegistration> usersTable;
 
     /**
      * This method will call the
      * method that loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -91,7 +152,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
      * row of the table is not null , and then
      * load the business customer registration screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBusinessCustomer(ActionEvent event) {
@@ -111,7 +172,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
      * This method will disconnect the specific client,
      * log out the connected user, and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -138,7 +199,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
      * row of the table is not null , and then
      * load the private customer registration screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getPrivateCustomer(ActionEvent event) {
@@ -192,7 +253,7 @@ public class UsersRegistrationScreenController extends AbstractBiteMeController 
 	/**
 	 * This method loads the branch manager portal screen ( previous screen) 
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

@@ -3,15 +3,16 @@ package users;
 import java.io.Serializable;
 
 /**
+ * Class description: 
+ * This class is derived class from
+ * Customer class which defines the main attributes and functionalities
+ * of a Business customer in our system.
+ */
+/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
- * 
- *  Class description: 
- * This class is derived class from
- *  Customer class which defines the main attributes and functionalities
- *  of a Business customer in our system.
  *  
  * @version 09/12/2021
  */
@@ -62,20 +63,20 @@ public class BusinessCustomer extends Customer implements Serializable{
 	/**
 	 * This is the constructor used for passing the object.
 	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param W4CCodeNumber
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param privateCreditCard
-	 * @param balance
-	 * @param companyOfBusinessCustomer
-	 * @param budgetOfBusinessCustomer
-	 * @param budgetMaxAmount
+	 * @param userId BC user ID.
+	 * @param statusInSystem BC status in system.
+	 * @param userFirstName BC first name.
+	 * @param userLastName BC last name.
+	 * @param homeBranch BC home branch.
+	 * @param isLoggedIn false if not logged in, true if yes.
+	 * @param W4CCodeNumber BC W4C code Number.
+	 * @param userEmail BC Email address.
+	 * @param phoneNumber BC phone number.
+	 * @param privateCreditCard BC Credit card number.
+	 * @param balance BC balance ( initialized to 0 )
+	 * @param companyOfBusinessCustomer BC Company.
+	 * @param budgetOfBusinessCustomer BC Budget from company.
+	 * @param budgetMaxAmount BC Max Amount of budget.
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, int W4CCodeNumber, String userEmail, String phoneNumber,
@@ -93,18 +94,19 @@ public class BusinessCustomer extends Customer implements Serializable{
 	/**
 	 * This is the constructor for first creation.
 	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param privateCreditCard
-	 * @param companyOfBusinessCustomer
-	 * @param budgetOfBusinessCustomer
-	 * @param budgetMaxAmount
+	 * @param userId BC user ID.
+	 * @param statusInSystem BC status in system.
+	 * @param userFirstName BC first name.
+	 * @param userLastName BC last name.
+	 * @param homeBranch BC home branch.
+	 * @param isLoggedIn false if not logged in, true if yes.
+	 * @param userEmail BC Email address.
+	 * @param phoneNumber BC phone number.
+	 * @param privateCreditCard BC Credit card number.
+	 * @param balance BC balance ( initialized to 0 )
+	 * @param companyOfBusinessCustomer BC Company.
+	 * @param budgetOfBusinessCustomer BC Budget from company.
+	 * @param budgetMaxAmount BC Max Amount of budget.
 	 */
 	public BusinessCustomer(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,

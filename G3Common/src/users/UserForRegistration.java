@@ -1,15 +1,15 @@
 package users;
 
 import java.io.Serializable;
-
 /**
- * 
- * @author Mousa,Srour.
- * 
- * Class description: 
+ *  Class description: 
  * This class is derived class from User For Registration class
  *  which means that we still don't know this user is going to be registered as
  *  it contains most of the normal User Info but in addition it has an addition members.
+ */
+/**
+ * 
+ * @author Mousa,Srour.
  * 
  * @version 12/12/2021
  */
@@ -18,18 +18,70 @@ public class UserForRegistration implements Serializable{
 	/**
 	 * Class members description:
 	 */	
+	
+	/**
+	 * User ID.
+	 */
 	private String userID;
+	
+	/**
+	 * The status of the user.
+	 */
 	private ConfirmationStatus statusInSystem;
+	
+	/**
+	 * User First Name.
+	 */
 	private String firstName;
+	
+	/**
+	 * User Last Name.
+	 */
 	private String lastName;
+	
+	/**
+	 * User home branch.
+	 */
 	private Branch homeBranch;
+	
+	/**
+	 * True if logged in, false if not.
+	 */
 	private boolean isLoggedIn;
+	
+	/**
+	 * User Email.
+	 */
 	private String email;
+	
+	/**
+	 * User Phone number.
+	 */
 	private String phoneNumber;
+	
+	/**
+	 * user credit card number.
+	 */
 	private String creditCardNumber;
+	
+	/**
+	 * User Credit Card CVV .
+	 */
 	private String creditCardCvvCode;
+	
+	/**
+	 * Expiration date of user's credit card.
+	 */
 	private String creditCardDateOfExpiration;
+	
+	/**
+	 * User name for log in.
+	 */
 	private String username;
+	
+	/**
+	 * Password for log in.
+	 */
 	private String password;
 	
 	/**

@@ -27,13 +27,19 @@ import orders.Order;
 import orders.TakeAwaySupplyMethod;
 import util.Constans;
 import util.DataLists;
+/**
+ *  
+ * Class description: 
+ * This is a class for controlling 
+ * the UI of the Meal Take-Away Method screen.
+ */
 
 /**
  * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * Class description: 
- * This is a class for 
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
+
  * 
  * @version 17/12/2021
  */
@@ -42,42 +48,85 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderAMealTAMethodScreenController orderAMealTAMethodScreenController;
+    
+    /**
+     * Static Order object for the current order flow.
+     */
     private static Order order;
+    
+    /**
+     * Static Supply Method, information that we have to know .
+     */
     private static TakeAwaySupplyMethod takeAwayInformation;
     
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTextField;
 
     @FXML
+    /**
+     * Phone Number Text Field.
+     */
     private TextField phoneTxtField;
 
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button nextBtn;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * Last Name Text Field.
+     */
     private TextField lastNameTextField;
     
     @FXML
+    /**
+     * ComboBox of phone number prefix.
+     */
     private ComboBox<String> phonePrefixCombo;
 
      /**
      * Back button for the 
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -122,7 +171,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * Exit from screen and update
      * DB.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -138,7 +187,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This is a method for getting 
      * information for the user
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -151,7 +200,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This function is used for
      * switching to the next screen and 
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getNextBtn(ActionEvent event) {
@@ -219,7 +268,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
      * This function is called from the previous 
      * screen controller.
      * 
-     * @param order
+     * @param order The current order.
      */
   public void initTAMethodScreen(Order order) {
 		Platform.runLater(new Runnable() {
@@ -279,7 +328,7 @@ public class OrderAMealTAMethodScreenController extends AbstractBiteMeController
 	/**
 	 * this method checks if the textField contains numbers only.
 	 * 
-	 * @param txtField
+	 * @param txtField the text field that we want to check.
 	 * @return true or false according to the input.
 	 */
 	public boolean isInt(TextField txtField) {

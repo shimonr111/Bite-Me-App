@@ -35,14 +35,16 @@ import communication.Task;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Company Registration Management Screen that appears immediately after clicking
  * on company registration management from the branch portal.
  * form.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 16/12/2021
  */
@@ -51,41 +53,80 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static CompanyRegistartionManagementScreenController companyRegistartionManagementScreenController;
+    
+    /**
+     * A static ArrayList of Companies that we get from the DB.
+     */
     public static ArrayList<Company> companiesWaitingForConfirmation = new ArrayList<>();
     
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Confirm Button.
+     */
     private Button confirmBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Deny Button.
+     */
     private Button denyBtn;
 
     @FXML
+    /**
+     * The TableView of companies.
+     */
     private TableView<Company> companiesTable;
 
     @FXML
+    /**
+     * The column that contains the company name.
+     */
     private TableColumn<Company, String> companyNameCol;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we show messages to the user threw it.
+     */
     private Text displayText;
     
     @FXML
+    /**
+     * A Text Field that we use as a search bar.
+     */
     private TextField searchField;
     
 	/**
      * Calls the method that loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -95,7 +136,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
      * Displays a message to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX. 
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -105,7 +146,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
      * Get the selected company and send it to the server for confirmation.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getConfirmBtn(ActionEvent event) {
@@ -129,7 +170,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
      * We get the selected company and we send it to the server.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void getDenyBtn(ActionEvent event) {
@@ -148,7 +189,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
      * Log out and then exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -196,7 +237,7 @@ public class CompanyRegistartionManagementScreenController extends AbstractBiteM
     /**
 	 * This method loads the previous screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

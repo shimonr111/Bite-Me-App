@@ -1,16 +1,19 @@
 package users;
 
 import java.io.Serializable;
+
+/**
+ * Class description: 
+ * This class is derived class from
+ * Business customer class which defines the main attributes and
+ * functionalities of a HR manager in our system.
+ */
+
 /**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov.
- * 
- * Class description: 
- * This class is derived class from
- * Business customer class which defines the main attributes and
- * functionalities of a HR manager in our system.
  * 
  * @version 08/12/2021
  */
@@ -24,16 +27,16 @@ public class HrManager extends User implements Serializable{
 /**
  * This is the constructor used for passing the object.
  * 
- * @param userId
- * @param statusInSystem
- * @param userFirstName
- * @param userLastName
- * @param homeBranch
- * @param isLoggedIn
- * @param companyCode
- * @param userEmail
- * @param phoneNumber
- * @param company
+ * @param userId HR manger user ID.
+ * @param statusInSystem HR manger Status in system.
+ * @param userFirstName  HR manger first name.
+ * @param userLastName  HR manger last name.
+ * @param homeBranch  HR manger home branch.
+ * @param isLoggedIn true if logged in , false if not.
+ * @param companyCode HR manager company code.
+ * @param userEmail HR manager Email.
+ * @param phoneNumber HR manager phone number.
+ * @param company HR manager company.
  */
 	public HrManager(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,

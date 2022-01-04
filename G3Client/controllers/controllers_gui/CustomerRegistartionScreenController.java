@@ -19,44 +19,68 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of CustomerResitrationScreen that appears immediately after clicking
  * on Customer registration from the branch portal.
  * form.
+ */
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 10/12/2021
  */
 public class CustomerRegistartionScreenController extends AbstractBiteMeController{
 	
-	/**
-	 * Class members description:
-	 */
+		/**
+		 * Class members description:
+		 */
+	
+		/**
+		 * The FXMLLoader of the current screen.
+		 */
 	    private static FXMLLoader loader;
+	    
+		/**
+		 * A static object of the current class.
+		 */
 	    private static CustomerRegistartionScreenController customerRegistrationScreenController;
 	    
 	    @FXML
+	    /**
+	     * The Exit Button.
+	     */
 	    private Button btnExit;
 
 	    @FXML
+	    /**
+	     * The Back Button.
+	     */
 	    private Button backBtn;
 
 	    @FXML
+	    /**
+	     * The Help Button.
+	     */
 	    private Button btnHelp;
 
 	    @FXML
+	    /**
+	     * The Private Customer Button.
+	     */
 	    private Button privateCustomerBtn;
 
 	    @FXML
+	    /**
+	     * The Business Customer Button.
+	     */
 	    private Button businessCustomerBtn;
 	    
 	    /**
 	     * Call the method that loads the previous screen.
 	     * 
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     */
 	    @FXML
 	    public void getBackBtn(ActionEvent event) {
@@ -69,7 +93,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	     * in this method we create a new object and we call 
 	     * the init of the next screen.
 	     * 
-	     * @param event
+	     * @param event  ActionEvent of javaFX.
 	     */
 	    @FXML
 	    public void getBusinessCustomer(ActionEvent event) {
@@ -82,7 +106,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	     * This method will disconnect the client 
 	     * then log out the connected user and exit.
 	     * 
-	     * @param event
+	     * @param event  ActionEvent of javaFX.
 	     */
 	    @FXML
 	    public void getExitBtn(ActionEvent event) {
@@ -97,7 +121,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	    /**
 	     * This method will display a pop up message to the user.
 	     * 
-	     * @param event
+	     * @param event  ActionEvent of javaFX.
 	     */
 	    @FXML
 	    public void getHelpBtn(ActionEvent event) {
@@ -110,7 +134,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 	     * in this method we create a new object and we call 
 	     * the Init of the next screen.
 	     * 
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     */
 	    @FXML
 	    public void getPrivateCustomer(ActionEvent event) {
@@ -156,7 +180,7 @@ public class CustomerRegistartionScreenController extends AbstractBiteMeControll
 		/**
 		 * This method loads the branch manager portal screen ( previous screen)
 		 * 
-		 * @param event
+		 * @param event ActionEvent of javaFX.
 		 */
 		public void setBranchManagerPortal(ActionEvent event) {
 				Platform.runLater(new Runnable() {

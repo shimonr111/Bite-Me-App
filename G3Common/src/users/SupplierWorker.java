@@ -3,12 +3,14 @@ package users;
 import java.io.Serializable;
 
 /**
- * 
- * @author Alexander, Martinov.
- * 
- * Class description: This class is a class which
+ * Class description: 
+ * This class is a class which
  * defines the main attributes and functionalities of a supplier worker in our
  * system.
+ */
+/**
+ * 
+ * @author Alexander, Martinov.
  * 
  * @version 15/12/2021
  */
@@ -33,16 +35,16 @@ public class SupplierWorker extends User implements Serializable{
 	/**
 	 * This is the constructor of the class SupplierWorker
 	 * 
-	 * @param userId
-	 * @param statusInSystem
-	 * @param userFirstName
-	 * @param userLastName
-	 * @param homeBranch
-	 * @param isLoggedIn
-	 * @param userEmail
-	 * @param phoneNumber
-	 * @param supplier
-	 * @param workerPosition
+	 * @param userId Supplier worker user ID.
+	 * @param statusInSystem Supplier worker status in system.
+	 * @param userFirstName Supplier worker first name.
+	 * @param userLastName Supplier worker last name.
+	 * @param homeBranch Supplier worker home branch.
+	 * @param isLoggedIn True if logged in, false if not.
+	 * @param userEmail Supplier worker email.
+	 * @param phoneNumber Supplier worker phone number.
+	 * @param supplier Supplier worker's restaurant.
+	 * @param workerPosition Supplier worker position [Regular,Certified,Manager].
 	 */
 	public SupplierWorker(String userId, ConfirmationStatus statusInSystem, String userFirstName, String userLastName,
 			Branch homeBranch, boolean isLoggedIn, String userEmail, String phoneNumber,

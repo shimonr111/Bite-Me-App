@@ -38,14 +38,17 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+/**
+ * Class description: 
+ * This is a class for managing the menu for the
+ * supplier. In this screen the supplier worker edit the menu.
+ */
 
 /**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.
- * 
- * Class description: This is a class for managing the menu for the
- * supplier. In this screen the supplier worker edit the menu.
+ * @author Mousa, Srour.
  * 
  * @version 23/12/2021
  */
@@ -54,55 +57,114 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static SupplierWorkerManageMenuController supplierWorkerManageMenuController;
+	
+	/**
+	 * ArrayList of existing items to display.
+	 */
 	public static ArrayList<Item> itemListOfMenuFromDB = new ArrayList<>();
+	
+	/**
+	 * List Of items that were added .
+	 */
 	public static ArrayList<Item> updateItems = new ArrayList<>();
+	
+	/**
+	 * List of items with pictures.
+	 */
 	public static ArrayList<ItemWithPicture> updateItemsWithPicture = new ArrayList<>();
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button btnExit;
 
 	@FXML
+	/**
+	 * The Help Button.
+	 */
 	private Button btnHelp;
 
 	@FXML
+	/**
+	 * The Back Button.
+	 */
 	private Button btnBack;
 
 	@FXML
+	/**
+	 * TableView for items with picture.
+	 */
 	private TableView<ItemWithPicture> manageMenuTable;
 
 	@FXML
+	/**
+	 * The Item category column.
+	 */
 	private TableColumn<ItemWithPicture, ItemCategory> categoryColumn;
 
 	@FXML
+	/**
+	 * The Item Name column.
+	 */
 	private TableColumn<ItemWithPicture, String> itemNameColumn;
 
 	@FXML
+	/**
+	 * The Item Picture column.
+	 */
 	private TableColumn<ItemWithPicture, ImageView> pictureColumn;
 
 	@FXML
+	/**
+	 * The Item Size column.
+	 */
 	private TableColumn<ItemWithPicture, ItemSize> sizeColumn;
 
 	@FXML
+	/**
+	 * The Item Price column.
+	 */
 	private TableColumn<ItemWithPicture, Double> priceColumn;
 
 	@FXML
+	/**
+	 * The Save Button.
+	 */
 	private Button saveBtn;
 
 	@FXML
+    /**
+     * The empty text that we display a messages to the customer threw it.
+     */
 	private Text errorText;
 	
 	@FXML
+	/**
+	 * The Add Item Button.
+	 */
 	private Button addItemBtn;
 
 	@FXML
+	/**
+	 * The Remove Item Button.
+	 */
 	private Button removeItemBtn;
 	
 	/**
 	 * This is a function for going back to the previous screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getBackBtn(ActionEvent event) {
@@ -141,7 +203,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	/**
 	 * Exit and logout button
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -167,7 +229,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	/**
 	 * This is a function for saving the changes in the menu.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getSaveBtn(ActionEvent event) {
@@ -195,7 +257,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	/**
 	 * This is a function for adding new item.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getAddItemBtn(ActionEvent event) {
@@ -454,7 +516,7 @@ public class SupplierWorkerManageMenuController extends AbstractBiteMeController
 	/**
      * This function create new image
      * 
-     * @param picPath
+     * @param picPath the patch of the Image to display into image view.
      */
 	public ImageView creatImageView(String picPath) {
 		return new ImageView(new Image(picPath, 64,64,false,true));

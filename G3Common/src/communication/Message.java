@@ -2,16 +2,18 @@ package communication;
 
 import java.io.Serializable;
 
-/** 
- * 
- * @author Ori, Malka.
- * @author Lior, Guzovsky.
- * 
- * Class description: 
+/**
+ *  Class description: 
  * This class present the Home Screen and responsible for the functionality of this screen 
  * This class is used for sending and 
  * getting messages from and to 
  * the server.
+ */
+
+/** 
+ * 
+ * @author Ori, Malka.
+ * @author Lior, Guzovsky.
  * 
  * @version 03/12/2021
  */

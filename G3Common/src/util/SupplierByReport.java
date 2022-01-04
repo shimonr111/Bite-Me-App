@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * @author Alexander, Martinov.
- * 
  * Class description: 
  * This is a which saves relevant data for reports, by supplier.
+ */
+/**
+ * @author Alexander, Martinov.
  * 
  * @version 21/12/2021
  */
@@ -18,20 +19,64 @@ public class SupplierByReport implements Serializable{
 	 * Class members description:
 	 * Stores relevant queried supplier information for report
 	 */
+	
+	/**
+	 * Supplier ID.
+	 */
 	private String supplierId;
+	
+	/**
+	 * Supplier Name.
+	 */
 	private String supplierName;
+	
+	/**
+	 * supplier Branch.
+	 */
 	private String supplierBranch;
+	
+	/**
+	 * Issue Date.
+	 */
 	private String issueDate;
+	
+	/**
+	 * Report Type.
+	 */
 	private String reportType;
+	
+	/***
+	 * Income initialized to 0.
+	 */
 	private String income="0";
-	//string lists for storing menu by category
+	/**
+	 * string lists for storing menu by category.
+	 */
 	private ArrayList<String> salads=new ArrayList<String>();
+	
+	/**
+	 * string lists for storing menu by category.
+	 */
 	private ArrayList<String> firsts=new ArrayList<String>();
+	
+	/**
+	 * string lists for storing menu by category.
+	 */
 	private ArrayList<String> mains=new ArrayList<String>();
+	
+	/**
+	 * string lists for storing menu by category.
+	 */
 	private ArrayList<String> desserts=new ArrayList<String>();
+	
+	/**
+	 * string lists for storing menu by category.
+	 */
 	private ArrayList<String> drinks=new ArrayList<String>();
-	//counted appearances of item categories in report (times ordered)
-	//salads, firsts, mains, desserts, drinks
+	/**
+	 * counted appearances of item categories in report (times ordered)
+	 * salads, firsts, mains, desserts, drinks
+	 */
 	private int[] typeSums={0,0,0,0,0};
 	private int totalOrders=0;
 	private int lateOrders=0;

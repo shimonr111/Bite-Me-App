@@ -29,9 +29,13 @@ import users.SupplierWorker;
 import util.SupplierByReport;
 
 /**
+ *	 Class description: 
+ *  This is a class for
+ *  controlling the UI of viewing supplier receipt form.
+ */
+/**
  * 
- * @author Alexander, Martinov Class description: This is a class for
- *         controlling the UI of viewing supplier receipt form.
+ * @author Alexander, Martinov 
  * 
  * @version 30/12/2021
  */
@@ -40,31 +44,69 @@ public class ViewReceiptsSummaryController extends AbstractBiteMeController impl
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
+	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
+	private static ViewReceiptsSummaryController viewReceiptsSummaryController;
+	
+	/**
+	 * The List Of suppliers Report that we get from DB.
+	 */
+	public static SupplierByReport[] suppliers = null;
+	
 	@FXML
+	/**
+	 * The Message Label.
+	 */
 	private Label MessageLabel;
 
 	@FXML
+	/**
+	 * ComboBox of Months.
+	 */
 	private ComboBox<String> ReportMonth;
 
 	@FXML
+	/**
+	 * ComboBox of years.
+	 */
 	private ComboBox<String> ReportYear;
 
 	@FXML
+	/**
+	 * Back Button.
+	 */
 	private Button btnBack;
 
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 
 	@FXML
+	/**
+	 * View Report Button.
+	 */
 	private Button viewReportBtn;
-	private static ViewReceiptsSummaryController viewReceiptsSummaryController;
-	public static SupplierByReport[] suppliers = null;
-	private static FXMLLoader loader;
 
 	@FXML
+	/**
+	 *  This Method Loads the previous screen.
+	 * @param event ActionEvent of javaFX.
+	 */
 	void getBackBtn(ActionEvent event) {
 		Platform.runLater(new Runnable() {
 			@Override
@@ -163,7 +205,11 @@ public class ViewReceiptsSummaryController extends AbstractBiteMeController impl
 			}
 		});
 	}
-
+	
+	/**
+	 * This method gets a specific report and display it into a new window.
+	 * @param report The report content.
+	 */
 	public void displaySingleReport(String report) {
 		DisplayReportScreenController displayReportScreenController = new DisplayReportScreenController();
 		displayReportScreenController.initDisplayReportScreen();
@@ -172,7 +218,8 @@ public class ViewReceiptsSummaryController extends AbstractBiteMeController impl
 	}
 
 	/**
-	 * sets message to small text field on the bottom
+	 *  sets message to small text field on the bottom
+	 * @param message The message that we want to display.
 	 */
 	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
@@ -186,6 +233,7 @@ public class ViewReceiptsSummaryController extends AbstractBiteMeController impl
 
 	/**
 	 * Checks year, month and report type fields were filled(selected)
+	 * @return True if it is okay, False if the fields were not filled .
 	 */
 	public boolean checkDateAndType() {
 		if (ReportYear.getValue().equals("Year")) {

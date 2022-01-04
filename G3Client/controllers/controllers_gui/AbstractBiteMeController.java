@@ -6,13 +6,16 @@ import users.User;
 
 /**
  * 
- * @author Lior, Guzovsky.
- * @author Mousa, Srour.
- *
  * Class description: 
  * This Abstract class will 
  * be key designed for all controllers
  * 
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
  * @version 08/12/2021
  */
 public abstract class AbstractBiteMeController{

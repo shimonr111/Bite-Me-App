@@ -10,16 +10,18 @@ import clientanalyze.AnalyzeMessageFromServer;
 import communication.Message;
 import ocsf.client.AbstractClient;
 
-
 /**
- * @author Lior, Guzovsky.
- * Class description: 
+ *  Class description: 
  * 
  * This class overrides some of the methods
  * defined in the abstract superclass
  * in order to give more functionality
  * to the client.
  * 
+ */
+/**
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
  * @version 03/12/2021
  */
 public class BiteMeClientCommunication extends AbstractClient {
@@ -43,8 +45,8 @@ public class BiteMeClientCommunication extends AbstractClient {
 	/**
 	 * Constructs an instance of the chat client.
 	 * 
-	 * @param host
-	 * @param port
+	 * @param host the host of connection.
+	 * @param port port of connection (5555 by default).
 	 * @throws IOException
 	 */
 	public BiteMeClientCommunication(String host, int port) throws IOException {
@@ -59,7 +61,7 @@ public class BiteMeClientCommunication extends AbstractClient {
 	 * all data that comes in 
 	 * from the server.
 	 * 
-	 * @param message
+	 * @param message received message from server.
 	 */
 	public void handleMessageFromServer(Object message) throws IOException {
 		if(message instanceof Message ) {

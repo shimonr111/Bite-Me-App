@@ -47,14 +47,16 @@ import orders.SupplyType;
 import users.SupplierWorker;
 
 /**
- * 
- * @author Lior, Guzovsky.
- * @author Shimon, Rubin.
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for managing all the orders
  * for the supplier. In this screen the supplier worker changes status of 
  * orders.
+ */
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
  * 
  * @version 31/12/2021
  */
@@ -63,53 +65,117 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
 	 * Class members description:
 	 */
 	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
-	private static SupplierWorkerManageOrdersController supplierWorkerManageOrders; /*used for switching the screen to the next one*/
+	
+	/**
+	 * A static object of the current class.
+	 */
+	private static SupplierWorkerManageOrdersController supplierWorkerManageOrders;
+	
+	/**
+	 * The order List from the DB.
+	 */
 	public static ArrayList<Order> orderListFromDB = new ArrayList<>();
+	
+	/**
+	 * The updated Orders to send to DB.
+	 */
 	public static ArrayList<Order> updateOrders = new ArrayList<>();
+	
+	/**
+	 * This listener is used on this screen to update the menu without any need of refreshing.
+	 */
 	private static AnalyzeClientListener listener;
+	
+	/**
+	 * The observable list of orders to display into the table.
+	 */
 	public static ObservableList<Order> ordersForManageOrderTable;
+	
+	/**
+	 * The customer email for sending a mail.
+	 */
 	public static String approvedCustomerEmail;
+	
+	/**
+	 * The customer details for the mail content.
+	 */
 	public static ArrayList<String> approvedCustomerDetailsForMail = new ArrayList<>();
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
     private Button btnExit;
 
     @FXML
+    /**
+	 * The Back Button.
+	 */
     private Button btnBack;
 
     @FXML
+    /**
+     * The TableView of Orders.
+     */
     private TableView<Order> manageOrdersTable;
 
     @FXML
+    /**
+     * The order number column.
+     */
     private TableColumn<Order, Integer> orderNumColum;
 
     @FXML
+    /**
+     * The order supply type column.
+     */
     private TableColumn<Order, SupplyType> orderTypeColumn;
 
     @FXML
+    /**
+     * The order Date column.
+     */
     private TableColumn<Order, Date> estSupplyTimeColumn;
 
     @FXML
+    /**
+     * The order's customer phone number  column.
+     */
     private TableColumn<Order, String> customerPhoneColumn;
 
     @FXML
+    /**
+     * The order status column.
+     */
     private TableColumn<Order, OrderStatus> statusColumn; 
 
     @FXML
+    /**
+	 * The Help Button.
+	 */
     private Button btnHelp;
-
+    
+	/**
+	 * The empty text that we display the messages to the user.
+	 */
     @FXML
     private Text errorText;
     
     @FXML
+    /**
+     * The text field that used as a search bar.
+     */
     private TextField searchTextField;
     
     /**
      * This is a function for going back
      * to the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -149,7 +215,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
      * This is a function for exiting 
      * the screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -165,7 +231,7 @@ public class SupplierWorkerManageOrdersController extends AbstractBiteMeControll
      * This is a function for 
      * popping help message if pressed by the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
