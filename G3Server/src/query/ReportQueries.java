@@ -1,22 +1,28 @@
 package query;
 
-
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-
 import util.DateTimeHandler;
 import util.SupplierByReport;
+
 /**
- * @author Alexander, Martinov
  * Class description: 
  * This is a class for running relevant queries to prepare reports
+ */
+
+/**
+ * 
+ * @author Alexander, Martinov.
+
  * @version 21/12/2021
  */
-public class ReportQueries {
+public class ReportQueries{
+	
     /**
-     * queries orders table and saves incomes of suppliers in time period
+     * Queries orders table and saves incomes of suppliers in time period
+     * 
      * @param suppliersByBranchAndIncome reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -37,8 +43,10 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * queries item_in_menu table to build menus by category for suppliers
+     * Queries item_in_menu table to build menus by category for suppliers
+     * 
      * @param suppliersForOrderByType reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -77,10 +85,12 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * queries orders table and gets items ordered lists(receipts) in time period
+     * Queries orders table and gets items ordered lists(receipts) in time period
      * then checks supplier menu to find out the category of each item
      * then increments category counter accordingly
+     * 
      * @param suppliersForOrderByType reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -113,8 +123,10 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * queries orders table to get late orders, ordered by supplier in time period
+     * Queries orders table to get late orders, ordered by supplier in time period
+     * 
      * @param suppliersByPerformance reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -143,8 +155,10 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * queries orders table to get total orders in time period by supplier
+     * Queries orders table to get total orders in time period by supplier
+     * 
      * @param suppliersByPerformance reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -165,8 +179,10 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * queries orders table to get average supply time of orders by supplier
+     * Queries orders table to get average supply time of orders by supplier
+     * 
      * @param suppliersByPerformance reports array being worked on
      * @param fromDate date when report starts
      * @param toDate date when report ends
@@ -187,8 +203,10 @@ public class ReportQueries {
 			e.printStackTrace();
 		}
 	}
+	
     /**
-     * sets report issue date for current working supplier list
+     * Sets report issue date for current working supplier list
+     * 
      * @param suppliers reports array being worked on
      * @param issueDate relevant report month
      */
@@ -196,8 +214,10 @@ public class ReportQueries {
 		for(int i=0;i<suppliers.length;i++)
 			suppliers[i].setIssueDate(issueDate);
 	}
+	
 	/**
-    * sets report type for current working supplier list
+    * Sets report type for current working supplier list
+    * 
     * @param suppliers reports array being worked on
     * @param type date when report starts
     */
@@ -205,6 +225,7 @@ public class ReportQueries {
 		for(int i=0;i<suppliers.length;i++)
 			suppliers[i].setReportType(type);
 	}
+	
 	/**
     * Creates SupplierByReport list from suppliers table
     * queries supplier table, makes a reports list, sets basic supplier info in list
@@ -240,12 +261,14 @@ public class ReportQueries {
 		}
 		return supplierForReport;
 	}
+	
 	/**
-    * gets reports from db by type, branch and date
-    * returns reports list from which reports can be generated
+    * Gets reports from db by type, branch and date
+    * 
     * @param fromDate date for which the reports were generated
     * @param branch branch for which we want to make reports (can be all for quarterly)
     * @param type gets report by type (monthly/quarterly)
+    * @returns reports list from which reports can be generated
     */
 	public static SupplierByReport[] getSuppliersFromDb(String fromDate,String branch, String type) {
 		int i=0;
@@ -289,9 +312,13 @@ public class ReportQueries {
 			return null;
 		return supplierForReport;
 	}
+	
 	/**
-	    * gets list of pdf files in system by date and branch
-	    */
+	 * Gets list of pdf files in system by date and branch
+	 * 
+	 * @param branchAndDate
+	 * @return String of pdf list
+	 */
 	public static String[][] getPdfList(String[] branchAndDate) {
 		//branchAndDate[0] is the branch
 		//branchAndDate[1] is the date from
@@ -326,9 +353,13 @@ public class ReportQueries {
 			return null;
 		return pdfList;
 	}
+	
 	/**
-	    * gets pdf file binary from db by pdf file number
-	    */
+	 * Gets pdf file binary from db by pdf file number
+	 * 
+	 * @param pdfId
+	 * @return bytes of pdf file from db
+	 */
 	public static byte[] getPdfFileFromDb(String pdfId) {
 		int i=0;
 		byte[] fileArray=null;

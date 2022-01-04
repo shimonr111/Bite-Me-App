@@ -1,12 +1,10 @@
 package query;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -18,7 +16,6 @@ import users.Company;
 import users.ConfirmationStatus;
 import users.CreditCard;
 import users.Customer;
-import users.HrManager;
 import users.Login;
 import users.Supplier;
 import users.SupplierWorker;
@@ -26,22 +23,27 @@ import users.User;
 import users.UserForRegistration;
 
 /**
- * 
- * @author Mousa, Srour
- * @author Alexander, Martinov
  * Class description:
  * This class will contain all the queries to DB and logi
  * that relate to Registration phase.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * 
  * @version 15/12/2021
  */
-public class RegistrationQueries {
+public class RegistrationQueries{
 
 	/**
 	 * In this method we check if all the details are not exist before in db ( userID , username , creditcard)
 	 * in case userID or username already exist we return a relevant message and we do not insert new rows into tables
 	 * in case the credit card number already exist , we do create rows and inesrt them but we dont create a new row for the credit card.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer to the clients side
 	 */
 	public static Message getPrivateCustomerRegistration(Message message) {
 		Message messageBackToClient;
@@ -69,11 +71,12 @@ public class RegistrationQueries {
 	}
 	
 	/**
-	 * 	 * In this method we check if all the details are not exist before in db ( userID , username , creditcard)
+	 * In this method we check if all the details are not exist before in db ( userID , username , creditcard)
 	 * in case userID or username already exist we return a relevant message and we do not insert new rows into tables
 	 * in case the credit card number already exist , we do create rows and inesrt them but we dont create a new row for the credit card.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer to the clients side
 	 */
 	
 	public static Message getBusinessCustomerRegistration(Message message) {
@@ -101,15 +104,15 @@ public class RegistrationQueries {
 		
 		messageBackToClient= new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.BUSINESS_CUSTOMER_REGISTRATION_SUCCEED,null);
 		return messageBackToClient;
-		
 	}
 	
 	/**
-	 * 	 * In this method we check if all the details are not exist before in db ( userID , username )
+	 * In this method we check if all the details are not exist before in db ( userID , username )
 	 * in case userID or username already exist we return a relevant message and we do not insert new rows into tables
 	 * we also check here if the supplier name already exist.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer to the clients side
 	 */
 	public static Message getSupplierRegistration(Message message) {
 		Message messageBackToClient;
@@ -138,21 +141,21 @@ public class RegistrationQueries {
 	 * and the HrManager that asked for the registration 
 	 * In case the registration succeed we return a relevant answer and update the companyName 
 	 * of the HrManager to the new company that he asked to register.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer to the clients side
 	 */
 	public static Message getCompanyRegistration(Message message) {
 		Company company = (Company) message.getObject();
 		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem='PENDING_APPROVAL'","companyName ='" + company.getCompanyName()+"'");
 		return new Message(Task.DISPLAY_MESSAGE_TO_CLIENT,Answer.COMPANY_REGISTRATION_SUCCEED,null);
-		
-		
 	}
 	
 	/**
 	 * In this method we check if the company code already exist in DB.
+	 * 
 	 * @param companyCode
-	 * @return
+	 * @return true if company code exist
 	 */
 	public static boolean checkIfCompanyCodeExist(int companyCode) {
 		ResultSet rs = Query.getColumnFromTableInDB("company", "companyCode");
@@ -169,10 +172,12 @@ public class RegistrationQueries {
 		}
 		return false;
 	}
+	
 	/**
 	 * This method gets a string of company name and checks if the name already exist on DB .
+	 * 
 	 * @param companyName
-	 * @return
+	 * @return true if company name exist
 	 */
 	public static boolean checkIfCompanyNameExist(String companyName) {
 		ResultSet rs = Query.getColumnFromTableInDB("company", "companyName");
@@ -189,9 +194,12 @@ public class RegistrationQueries {
 		}
 		return false;
 	}
+	
 	/**
 	 * This method returns a list of suppliers (by branch) for the supplier registration process
+	 * 
 	 * @param messageFromClient
+	 * @return answer to the clients side
 	 */
 	public static Message createRestaurantsForSupplierRegistration(Message messageFromClient) throws SQLException{
 		Message returnMessageToClient = messageFromClient;
@@ -222,10 +230,11 @@ public class RegistrationQueries {
 		return returnMessageToClient;
 	}
 	
-	/**BUS
+	/**
 	 * This method checks if the customerID exist in the customer table.
+	 * 
 	 * @param customer
-	 * @return
+	 * @return true if user id exist
 	 */
 	private static boolean checkIfUserIdExist(User user) {	
 		ResultSet rs = Query.getColumnFromTableInDB("login", "userID");
@@ -245,8 +254,9 @@ public class RegistrationQueries {
 	
 	/**
 	 * This method checks if the username already exists on the login table.
+	 * 
 	 * @param login
-	 * @return
+	 * @return true if login user name exist
 	 */
 	private static boolean checkIfLoginUserNameExist(Login login) {
 		ResultSet rs = Query.getColumnFromTableInDB("login", "username");
@@ -266,8 +276,9 @@ public class RegistrationQueries {
 	
 	/**
 	 * This method checks if the credit card already exist in db.
+	 * 
 	 * @param creditCard
-	 * @return
+	 * @return true if credit card number exist
 	 */
 	private static boolean checkIfCreditCardNumberExist(CreditCard creditCard) {
 		ResultSet rs = Query.getColumnFromTableInDB("creditcard", "creditCardNumber");
@@ -289,9 +300,10 @@ public class RegistrationQueries {
 	}
 	
 	/**
-	 * this method checks if the supplier name already exist in db .
+	 * This method checks if the supplier name already exist in db .
+	 * 
 	 * @param supplierWorker
-	 * @return
+	 * @return true if supplier name exist
 	 */
 	private static boolean checkIfSupplierNameExsist(SupplierWorker supplierWorker) {
 		ResultSet rs = Query.getColumnFromTableInDB("supplier", "supplierName");
@@ -311,10 +323,12 @@ public class RegistrationQueries {
 		}
 		return false;
 	}
+	
 	/**
 	 * This method gets from the db all the confirmed companies and returns them as arraylist.
+	 * 
 	 * @param message
-	 * @return
+	 * @return message answer to the client side
 	 */
 	public static Message getCompaniesFromDB(Message message) {
 		ArrayList<String> companies = new ArrayList<>();
@@ -338,7 +352,9 @@ public class RegistrationQueries {
 	/**
 	 * This method returns a supplier object on request
 	 * used for new supplier worker registration (needs a supplier object for creation)
+	 * 
 	 * @param messageFromClient
+	 * @return message answer to the client side
 	 */
 	public static Message getSupplierFromDb(Message messageFromClient) {	
 		Message returnMessageToClient = messageFromClient;
@@ -367,9 +383,10 @@ public class RegistrationQueries {
 	}
 	
 	/**
-	 * this method looks for all the users in the registration table and returns them into array list to the client.
+	 * This method looks for all the users in the registration table and returns them into array list to the client.
+	 * 
 	 * @param message
-	 * @return
+	 * @return message answer to the client side
 	 */
 	public static Message getUsersFromRegistrationTable(Message message) {
 		Message returnMessageToClient = message;
@@ -398,8 +415,9 @@ public class RegistrationQueries {
 	/**
 	 * This method gets all the suppliers from specific branch that are not registered yet
 	 * and returns them into arrayList to the branch manager .
+	 * 
 	 * @param message
-	 * @return
+	 * @return message answer to the client side
 	 */
 	public static Message getSuppliersWaitingForRegistration(Message message) {
 		Message returnMessageToClient = message;
@@ -432,8 +450,9 @@ public class RegistrationQueries {
 	 * In this method we get all the messing information about the business customer
 	 * from the HR manager, we insert the information and we change the status to 
 	 * CONFIRMED so he is approved in system .
+	 * 
 	 * @param message
-	 * @return
+	 * @return message answer to the client side
 	 */
 	public static Message businessCustomerCompleteRegistration(Message message) {
 		ArrayList<Object> businessCustomerBudgetDetails = (ArrayList<Object>)message.getObject();

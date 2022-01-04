@@ -1,35 +1,44 @@
 package reports;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.ObjectInputStream;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
 import communication.Answer;
 import communication.Message;
 import query.Query;
 import query.ReportQueries;
 import util.SupplierByReport;
+
 /**
- * @author Alexander, Martinov
  * Class description: 
  * This is a class for handling supplier report objects
  * allows creating, storing and retrieving reports
  * also creates a return message when polled from the client
+ */
+
+/**
+ * 
+ * @author Alexander, Martinov.
  * 
  * @version 21/12/2021
  */
-public class ReportsController {
+
+public class ReportsController{
+	
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * Supplier list
+	 */
 	private static SupplierByReport[] suppliers;
+	
     /**
      * Runs and saves all necessary queries to local array for report documenting in db
+     * 
      * @param fromDate date when report starts
      * @param toDate date when report ends
      * @param type report type (monthly/quarterly)
@@ -47,8 +56,9 @@ public class ReportsController {
 		ReportQueries.setReportType(suppliers, type);
 		}
 	}
+	
     /**
-     *uploads currently stores reports list to db
+     *Uploads currently stores reports list to db
      */
 	public static void uploadReports() {
 		if(suppliers!=null) {
@@ -56,8 +66,10 @@ public class ReportsController {
 		Query.saveReportToDb(suppliers[i]);
 		}
 	}
+	
 	/**
-     *downloads specified reports list to working report list
+     *Downloads specified reports list to working report list
+     *
      * @param fromDate date when report starts
      * @param toDate date when report ends
      * @param type report type (monthly/quarterly)
@@ -65,8 +77,10 @@ public class ReportsController {
 	public static void downloadReports(String fromDate,String branch, String type) {
 		suppliers=ReportQueries.getSuppliersFromDb(fromDate,branch, type);
 	}
+	
     /**
-     *prepares message with reports list to for client
+     *Prepares message with reports list to for client
+     *
      *@param messageFromClient message received from client
      */
 	public static Message getSuppliersByBranch(Message messageFromClient) {
@@ -109,9 +123,12 @@ public class ReportsController {
 			return null;
 		return supplier;
 	}
+	
 	/**
-	 * gets the three reports needed for a quarter starting from sent date
+	 * Gets the three reports needed for a quarter starting from sent date
+	 * 
 	 * @param branchAndDate branch and date of first report in quarter
+	 * @return supplier reports of next three months
 	 */
 	public static SupplierByReport[][] getQuarterReports(String[] branchAndDate){
 		SupplierByReport[][] nextThreeMonths=new SupplierByReport[4][];
@@ -134,9 +151,11 @@ public class ReportsController {
 		
 	}
     /**
-     *prepares message notifying of successful file upload
+     *Prepares message notifying of successful file upload
+     *
      *@param messageFromClient message received from client
      *@param type report type being sent
+     *@return message answer to the client side
      */
 	public static Message uploadQuarterlyReport(Message messageFromClient) {
 		Message returnMessageToClient = messageFromClient;
@@ -145,10 +164,13 @@ public class ReportsController {
 		returnMessageToClient.setAnswer(Answer.REPORT_UPLOADED);
 		return returnMessageToClient;
 	}
+	
     /**
-     *prepares message with pdf list to for client
+     *Prepares message with pdf list to for client
+     *
      *@param messageFromClient message received from client
      *@param type report type being sent
+     *@return message answer to the client side
      */
 	public static Message getUploadedList(Message messageFromClient) {
 		Message returnMessageToClient = messageFromClient;
@@ -159,10 +181,13 @@ public class ReportsController {
 		returnMessageToClient.setAnswer(Answer.PDF_LIST_SENT);
 		return returnMessageToClient;
 	}
+	
     /**
-     *prepares message with pdf file byte array for client
+     *Prepares message with pdf file byte array for client
+     *
      *@param messageFromClient message received from client
      *@param type report type being sent
+     *@return message answer to the client side
      */
 	public static Message getPdfFile(Message messageFromClient) {
 		Message returnMessageToClient = messageFromClient;

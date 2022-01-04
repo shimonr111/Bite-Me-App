@@ -3,15 +3,12 @@ package query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import bitemeserver.BiteMeServerUI;
 import users.Branch;
 import users.BranchManager;
-import users.BudgetType;
 import users.CeoBiteMe;
 import users.Company;
 import users.ConfirmationStatus;
-import users.CreditCard;
 import users.HrManager;
 import users.Login;
 import users.Supplier;
@@ -19,22 +16,23 @@ import users.SupplierWorker;
 import users.WorkerPosition;
 
 /**
- * /**
- * @author  Mousa, Srour
  * Class description: 
  * In this class we have all the methods that belong to
  * the import action .
+ */
+
+ /**
+  * 
+ * @author  Mousa, Srour.
  * 
  * @version 22/12/2021
- *
  */
-public class ImportDataQueries {
+public class ImportDataQueries{
 	
 	/**
-	 * we create a new connection , to the external DB , 
-	 * we get all the table from external DB , and put it into our DB.
-	 * we get the branch managers and the ceo which are confirmed already and need no registration.
-	 * 
+	 * We create a new connection , to the external DB , 
+	 * We get all the table from external DB , and put it into our DB.
+	 * We get the branch managers and the ceo which are confirmed already and need no registration.
 	 */
 	public static void getDataFromExternalDB() {
 		
@@ -60,8 +58,6 @@ public class ImportDataQueries {
 				}
 			}
 			
-//			if(isImportedIntoRegistrationTable)
-//				isImported = true;
 			isImportedIntoLoginTable=false;
 		}
 		rs.close();
@@ -88,7 +84,9 @@ public class ImportDataQueries {
 	}
 	
 	/**
-	 * get all the workers of the registered suppliers.
+	 * Get all the workers of the registered suppliers.
+	 * 
+	 * @return boolean depends on if query succeed
 	 */
 	public static boolean getSupplierWorkers() {
 		ArrayList<SupplierWorker> workers = new ArrayList<>();
@@ -117,7 +115,9 @@ public class ImportDataQueries {
 		return true;
 	}
 	/**
-	 * get all the HR managers of the companies .
+	 * Get all the HR managers of the companies .
+	 * 
+	 * @return boolean depends on if query succeed
 	 */
 	public static boolean getHrManagers() {
 		ArrayList<HrManager> hrManagers = new ArrayList<>();
@@ -147,7 +147,7 @@ public class ImportDataQueries {
 	}
 	
 	/**
-	 * get all the companies from the registration table , and move them into the company table on DB.
+	 * Get all the companies from the registration table , and move them into the company table on DB.
 	 */
 	public static void getCompanies() {
 		ArrayList<Company> companiesList = new ArrayList<>();
@@ -172,7 +172,7 @@ public class ImportDataQueries {
 	}
 	
 	/**
-	 * get all the suppliers from the registration table , and move them into the supplier table on DB.
+	 * Get all the suppliers from the registration table , and move them into the supplier table on DB.
 	 */
 	public static void getSuppliers() {
 		ArrayList<Supplier> suppliersList= new ArrayList<>();
@@ -195,7 +195,9 @@ public class ImportDataQueries {
 	}
 	
 	/**
-	 * get the ceo bite me and insert it into his table in the internal db.
+	 * Get the ceo bite me and insert it into his table in the internal db.
+	 * 
+	 * * @return boolean depends on if query succeed
 	 */
 	public static boolean getCeoBiteMe() {
 		CeoBiteMe ceo=null;
@@ -222,7 +224,9 @@ public class ImportDataQueries {
 	}
 	
 	/**
-	 * get the branchmanagers after clicking on import button.
+	 * Get the branchmanagers after clicking on import button.
+	 * 
+	 * * @return boolean depends on if query succeed
 	 */
 	public static boolean getBranchManagers(){
 		ArrayList<BranchManager> branchManagersList= new ArrayList<>();

@@ -14,9 +14,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -39,21 +36,24 @@ import util.DateTimeHandler;
 import util.OrderForView;
 
 /**
- * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * @author Alexander, Martinov
- * @author Mousa, Srour.
  * Class description: 
  * This is a class for 
  * order queries which is 
  * used for getting information 
  * related to the DB in the order 
  * process.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky
+ * @author Shimon, Rubin
+ * @author Alexander, Martinov
+ * @author Mousa, Srour.
  * 
  * @version 2/1/2022
  */
-public class OrderQueries {
+public class OrderQueries{
 	
 	/**
 	 * This is a function for getting all 
@@ -62,7 +62,7 @@ public class OrderQueries {
 	 * process.
 	 * 
 	 * @param messageFromClient
-	 * @return
+	 * @return answer message to the client side
 	 * @throws SQLException
 	 */
 	public static Message createRestaurantsForCustomer(Message messageFromClient) throws SQLException{
@@ -115,7 +115,6 @@ public class OrderQueries {
 		List<Item> itemList = new ArrayList<Item>();
 		//check first if the supplier is confirmed in the system
 		
-		
 		//create query for getting all the items of the specific supplier for the users menu		
 		ResultSet rs = Query.getRowsFromTableInDB("item_in_menu","supplierId='"+supplierId+"'");
 		try {
@@ -148,7 +147,7 @@ public class OrderQueries {
 	 * we want to return to the customer.
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Item object
 	 */
 	private static Item convertToItem(ResultSet rs) {
 		try {
@@ -170,7 +169,7 @@ public class OrderQueries {
 	 * This is a query for adding a new order to the DB.
 	 * 
 	 * @param messageFromClient
-	 * @return
+	 * @return answer message to the client side
 	 * @throws SQLException
 	 */
 	public static Message addOrderToDbAndUpdateSupplier(Message messageFromClient) throws SQLException{
@@ -228,7 +227,7 @@ public class OrderQueries {
 	 * This is a query for update the menu in DB.
 	 * 
 	 * @param messageFromClient
-	 * @return
+	 * @return answer message to the client side
 	 * @throws SQLException
 	 */
 	public static Message updateMenuOnDb(Message messageFromClient) throws SQLException{
@@ -259,7 +258,7 @@ public class OrderQueries {
 	 * This is a query for update the orders status in DB.
 	 * 
 	 * @param messageFromClient
-	 * @return
+	 * @return answer message to the client side
 	 * @throws SQLException
 	 */
 	public static Message updateOrdersStatusOnDb(Message messageFromClient) throws SQLException{
@@ -270,14 +269,23 @@ public class OrderQueries {
 		for (Order order : orders) {
 			switch(order.getStatus()) {
 			case PENDING_APPROVAL:
+				/**
+				 * Update the order status to Pending Approval
+				 */
 				orderStatus="PENDING_APPROVAL";
 				break;
 				
 			case APPROVED:
+				/**
+				 * Update the order status to Approved
+				 */
 				orderStatus="APPROVED";
 				break;
 				
 			case UN_APPROVED:
+				/**
+				 * Update the order status to Un Approved
+				 */
 				orderStatus="UN_APPROVED";
 				break;	
 			default:
@@ -289,7 +297,6 @@ public class OrderQueries {
 			}
 		}
 		
-				
 		Message messageToClient = new Message(Task.MANAGE_ORDER_FINISHED, Answer.MANAGE_ORDER_SUCCEEDED_WRITING_INTO_DB, null);
         return messageToClient;
 	}
@@ -299,7 +306,7 @@ public class OrderQueries {
 	 * budget balance of the user
 	 * 
 	 * @param messageFromClient
-	 * @return
+	 * @return answer message to the client side
 	 * @throws SQLException
 	 */
 	public static Message updatePaymentBalanceAndBudgetBalance(Message messageFromClient) throws SQLException{
@@ -391,8 +398,9 @@ public class OrderQueries {
 	/**
 	 * Get the orders of a specific user to set them into the table 
 	 * according to the wanted format.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer message to the client side
 	 */
 	public static Message getOrdersForUser(Message message) {
 		String customerId = (String)message.getObject();
@@ -415,12 +423,21 @@ public class OrderQueries {
 				rs2.close();
 				switch(supplierStatus) {
 				case "NORTH":
+					/**
+					 * The supplier status is north
+					 */
 					resturantName= resturantName + "-North";
 					break;
 				case "CENTER":
+					/**
+					 * The supplier status is center
+					 */
 					resturantName= resturantName + "-Center";
 					break;
 				case "SOUTH":
+					/**
+					 * The supplier status is south
+					 */
 					resturantName= resturantName + "-South";
 					break;
 				default:
@@ -474,8 +491,9 @@ public class OrderQueries {
 	 * we check if the user has already a balance in this restaurant :
 	 * if he does, we return the amount of balance he has.
 	 * else , we return 0.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer message to the client side
 	 */
 	public static Message getBalanceForUser(Message message) {
 		Message returnMessageToClient= message;
@@ -501,8 +519,9 @@ public class OrderQueries {
 	/**
 	 * In this method we look for the customer email
 	 * according to the userId and customer type.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer message to the client side
 	 */
 	public static Message getCustomerEmailForSimulation(Message message) {
 		ArrayList<String> customerDetails = (ArrayList<String>)message.getObject();
@@ -555,8 +574,9 @@ public class OrderQueries {
 	 * Set the actual supply date and the order status.
 	 * Check if the user will get a balance and update it
 	 * into balance table accordingly.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer message to the client side
 	 */
 	public static Message updateActualTimeAndCheckBalance(Message message) {
 		ArrayList<Object> orderDetails = (ArrayList<Object>)message.getObject();
@@ -649,6 +669,7 @@ public class OrderQueries {
 	/**
 	 * This function is for going back to the money that the user had before
 	 * the order was done
+	 * 
 	 * @param message
 	 * @throws SQLException
 	 */
@@ -708,6 +729,7 @@ public class OrderQueries {
 	 * looking for.
 	 *  so the other business customers can join 
 	 *  them into the delivery.
+	 *  
 	 * @param message
 	 * @return a message contains the list of orders
 	 */
@@ -744,6 +766,7 @@ public class OrderQueries {
 	 * for the multiple delivery option , we insert a new row for the new participant
 	 * with his items but without any amount of cost, we add the cost of his order
 	 * to the owner of the multiple-order.
+	 * 
 	 * @param message
 	 */
 	public static void joinMultiFinishedOrder(Message message) {
@@ -804,6 +827,7 @@ public class OrderQueries {
 	
 	/**
 	 * This method gets the multi particiapnts order, number of participants.
+	 * 
 	 * @param message
 	 * @return a message contains an Integer which is the number of particiapnts.
 	 */

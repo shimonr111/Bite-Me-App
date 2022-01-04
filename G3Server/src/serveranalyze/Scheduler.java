@@ -4,20 +4,21 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
-
 import query.Query;
 import reports.ReportsController;
 import users.BudgetType;
 
 /**
- * @author Mousa, Srour.
- * @author Lior, Guzovsky
- * 
  * Class description: 
- * 
  * This is the scheduler class , it runs immediately after the server connection to DB.
  * we get the date that of connection , every 10 minutes we check the 4 cases below 
  * and we call relevant methods.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
+ * @author Lior, Guzovsky.
  * 
  * @version 26/12/2021
  */
