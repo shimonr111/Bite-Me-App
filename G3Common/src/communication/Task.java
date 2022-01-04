@@ -6,9 +6,6 @@ package communication;
  * This is an enum that
  * helps us to set the operation
  * needed to be done by the server and client.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.

@@ -40,9 +40,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of Company Registration Management Screen that appears immediately after clicking
  * on company registration management from the branch portal.
  * form.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * 

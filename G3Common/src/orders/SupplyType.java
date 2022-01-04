@@ -3,8 +3,6 @@ package orders;
  *  
  *  Enum description:
  *  This Enum is used to describe the order supply method
- */
-/**
  * 
  * @author Ori, Malka..
  *  

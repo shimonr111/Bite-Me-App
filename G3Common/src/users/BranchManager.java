@@ -6,9 +6,6 @@ import java.io.Serializable;
  *  Class description: This class is derived class from
  *  User class which defines the main attributes and functionalities of a
  *  Branch manager in our system.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  *  

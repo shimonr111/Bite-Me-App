@@ -40,14 +40,13 @@ import javafx.fxml.Initializable;
 
 /**
  * 
- * @author Mousa, Srour.
- * @author Alexander, Martinov.
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * controlling the UI of SupplierWorker registration Screen that appears immediately after clicking
  * on supplier registration from the branch portal.
  * form.
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
  * 
  * @version 15/12/2021
  */

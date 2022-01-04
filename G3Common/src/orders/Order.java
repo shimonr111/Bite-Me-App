@@ -10,8 +10,6 @@ import util.DateTimeHandler;
  *  Class description:
  * This class describes the Order Entity.
  * 
- */
-/**
  * 
  * @author Ori, Malka.
  * @author Lior, Guzovsky.

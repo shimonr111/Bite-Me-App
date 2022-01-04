@@ -32,8 +32,6 @@ import util.SupplierByReport;
  *	 Class description: 
  *  This is a class for
  *  controlling the UI of viewing supplier receipt form.
- */
-/**
  * 
  * @author Alexander, Martinov 
  * 

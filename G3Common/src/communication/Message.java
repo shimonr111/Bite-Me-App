@@ -8,9 +8,6 @@ import java.io.Serializable;
  * This class is used for sending and 
  * getting messages from and to 
  * the server.
- */
-
-/** 
  * 
  * @author Ori, Malka.
  * @author Lior, Guzovsky.

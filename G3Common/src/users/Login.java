@@ -7,9 +7,6 @@ import java.io.Serializable;
  *  This class is for login form witch contains the username and password
  *  that the user enters, in addition there are 2 more parameters in this class
  *  the userID and the userType that we get them from DB.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  *  

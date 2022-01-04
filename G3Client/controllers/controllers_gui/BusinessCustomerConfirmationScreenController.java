@@ -41,9 +41,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of business customer confirmation
  * from the HR manager portal
  * after clicking on that button.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * 

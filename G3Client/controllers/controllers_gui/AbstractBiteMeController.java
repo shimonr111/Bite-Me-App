@@ -10,9 +10,6 @@ import users.User;
  * This Abstract class will 
  * be key designed for all controllers
  * 
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

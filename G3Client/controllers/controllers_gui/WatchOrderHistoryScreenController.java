@@ -37,8 +37,6 @@ import javafx.fxml.Initializable;
 /**
  * Class description: 
  * This class is a controller of the view reports screen.
- */
-/**
  * 
  * @author Mousa, Srour.
  * 

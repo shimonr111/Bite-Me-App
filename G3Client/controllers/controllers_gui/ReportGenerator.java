@@ -11,9 +11,6 @@ import util.SupplierByReport;
  *  Class description: 
  * This is a class for generating reports from SupplierByReport arrays
  * 
- */
-
-/**
  * 
  * @author Alexander, Martinov
  * @version 21/12/2021

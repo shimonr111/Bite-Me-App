@@ -3,14 +3,13 @@ package users;
 import java.io.Serializable;
 
 /**
- * 
- * @author Lior, Guzovsky.
-* @author Alexander, Martinov.
-* 
  * Class description: 
  * This class is derived class from User class
  *  which defines the main attributes and functionalities
  * of a regular customer in our system.
+ * 
+ * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  * 
  * @version 09/12/2021
  */

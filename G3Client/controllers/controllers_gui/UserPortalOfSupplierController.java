@@ -29,9 +29,6 @@ import users.WorkerPosition;
  * This is a class for 
  * controlling the UI of supplier
  * form.
- */
-
-/**
  * 
  * @author Mousa, Srour
  * @author Alexander, Martinov.

@@ -30,8 +30,6 @@ import users.ConfirmationStatus;
  * This is a class for 
  * controlling the UI of hrManager
  * form.
- */
-/**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.

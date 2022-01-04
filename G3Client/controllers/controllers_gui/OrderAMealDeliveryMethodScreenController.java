@@ -34,8 +34,6 @@ import util.DataLists;
  * This is a class for controlling 
  * the UI of the delivery method
  * that was picked by the user.
- */
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

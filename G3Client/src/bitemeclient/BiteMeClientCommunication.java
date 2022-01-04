@@ -18,8 +18,6 @@ import ocsf.client.AbstractClient;
  * in order to give more functionality
  * to the client.
  * 
- */
-/**
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @version 03/12/2021

@@ -32,9 +32,6 @@ import util.DataLists;
  * Class description: 
  * This is a class for controlling 
  * the UI of the Meal Take-Away Method screen.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

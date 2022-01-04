@@ -7,9 +7,6 @@ import java.io.Serializable;
  * This class is a class that represents
  * a credit card that belongs to a customer \ Business customer
  * HR manger and etc.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.

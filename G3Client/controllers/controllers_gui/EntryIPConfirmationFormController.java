@@ -26,9 +26,6 @@ import javafx.stage.StageStyle;
  * This is a class for 
  * controlling the UI IP
  * form.
- */
-
-/**
  * @author Lior, Guzovsky.
  * @author Ori, Malka. 
  * @author Mousa, Srour.

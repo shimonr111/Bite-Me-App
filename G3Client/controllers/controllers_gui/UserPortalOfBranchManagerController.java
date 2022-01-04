@@ -29,9 +29,6 @@ import users.ConfirmationStatus;
  * This is a class for 
  * controlling the UI of Branch Manager
  * form.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.

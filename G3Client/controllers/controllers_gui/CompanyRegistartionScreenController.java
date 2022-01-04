@@ -36,9 +36,6 @@ import javafx.fxml.Initializable;
  * controlling the UI of Company Registration from the HR manager portal
  * after clicking on that button.
  * 
- */
-
-/**
  * 
  * @author Mousa, Srour
  * 

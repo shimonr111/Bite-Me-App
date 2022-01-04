@@ -38,10 +38,7 @@ import users.ConfirmationStatus;
  * controlling the UI of Edit Business Customer that appears immediately after clicking
  * on Edit while selecting Business Customer.
  * form.
- */
-
-/**
- * 
+ *
  * @author Mousa, Srour.
  * 
  * @version 13/12/2021

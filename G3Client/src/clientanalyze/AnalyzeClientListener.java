@@ -6,9 +6,7 @@ import orders.Order;
  * 
  * Interface description: 
  * This is an interface which is used to implement the listeners(observable) design pattern
- */
-
-/**
+ * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.
  * @author Alexander, Martinov

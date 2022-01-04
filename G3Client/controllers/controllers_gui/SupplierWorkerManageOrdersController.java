@@ -51,8 +51,6 @@ import users.SupplierWorker;
  * This is a class for managing all the orders
  * for the supplier. In this screen the supplier worker changes status of 
  * orders.
- */
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.

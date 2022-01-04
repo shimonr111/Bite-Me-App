@@ -41,9 +41,6 @@ import users.UserForRegistration;
  * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
  * on Business Customer registration from the BusinessCustomerRegistrationScreen form.
  * 
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * 

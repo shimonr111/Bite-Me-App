@@ -36,9 +36,6 @@ import users.UserForRegistration;
  *  Class description: 
  * This is a class for 
  * controlling the UI of Users Registration.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * 

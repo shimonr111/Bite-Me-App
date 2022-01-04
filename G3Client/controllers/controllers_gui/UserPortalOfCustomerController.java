@@ -28,9 +28,6 @@ import users.ConfirmationStatus;
  * This is a class for 
  * controlling the UI of customer
  * form.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

@@ -20,8 +20,6 @@ import javafx.stage.Stage;
  * This is a class for pop
  * up messages to the client.
  *
- */
-/**
  * @author Mousa, Srour. 
  * @author Shimon, Rubin.
  * @author Lior, Guzovsky.

@@ -5,8 +5,6 @@ import java.io.Serializable;
  * 
  *  Class description:
  *  This class describes the Item Entity.
- */
-/**
  * 
  * @author Ori, Malka.
  *  

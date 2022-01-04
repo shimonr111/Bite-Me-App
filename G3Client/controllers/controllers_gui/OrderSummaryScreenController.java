@@ -39,9 +39,6 @@ import util.Constans;
  *  Class description: 
  * This is a class for the summary of the 
  * order process.
- */
-
-/**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin

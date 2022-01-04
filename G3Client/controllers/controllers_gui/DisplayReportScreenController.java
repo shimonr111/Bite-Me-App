@@ -19,9 +19,6 @@ import javafx.stage.StageStyle;
 /**
  * Class description: 
  * This is a class for displaying a system report in text format
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 
