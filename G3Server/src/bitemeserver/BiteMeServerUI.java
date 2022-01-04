@@ -3,12 +3,9 @@ package bitemeserver;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Timer;
-
 import guiserver.ClientDoc;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -32,30 +29,22 @@ import jdbc.mySqlConnection;
 import query.ImportDataQueries;
 import query.Query;
 import serveranalyze.Scheduler;
-import users.Branch;
-import users.BranchManager;
-import users.BudgetType;
-import users.CeoBiteMe;
-import users.Company;
-import users.ConfirmationStatus;
-import users.CreditCard;
-import users.HrManager;
-import users.Login;
-import users.Supplier;
-import users.SupplierWorker;
-import users.WorkerPosition;
 import util.Constans;
 
 /**
- * @author  Lior, Guzovsky.
  * Class description: 
- * 
  * This is a class that works as an
  * UI for the server.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
  * 
  * @version 26/12/2021
  */
-public class BiteMeServerUI extends Application implements Initializable {
+public class BiteMeServerUI extends Application implements Initializable{
+	
 	/**
 	 * Class members description:
 	 */
@@ -84,6 +73,10 @@ public class BiteMeServerUI extends Application implements Initializable {
 	* The default db name.
 	*/
 	final public static String DEFAULT_DB_NAME = "jdbc:mysql://localhost/semesterialproject?serverTimezone=IST";
+	
+	/**
+	* The external db name.
+	*/
 	final public static String EXTERNAL_DB_NAME = "jdbc:mysql://localhost/externaldb?serverTimezone=IST";
 	
 	/**
@@ -96,58 +89,115 @@ public class BiteMeServerUI extends Application implements Initializable {
 	*/
 	final public static String DEFAULT_DB_PASSWORD = "09000772Mm-";
 	
+	/**
+	* The array of the strings we present in the console
+	*/
 	public static ArrayList<String> console=new ArrayList<>();
+	
+	/**
+	* The array of clients
+	*/
 	public static ObservableList<ClientDoc> clients = FXCollections.observableArrayList();
+	
+	/**
+	* Boolean of if we pressed of the import
+	*/
 	private boolean isImportButtonClicked = false;
+	
 	/**
 	* An FXML loader instance.
 	*/
 	public static FXMLLoader loader;
 
+	/**
+	* Text field for the port
+	*/
 	@FXML
 	private TextField portxt;
 	
+	/**
+	* Text field for the ip
+	*/
 	@FXML
 	private TextField ipTxt;
 	
+	/**
+	* Text field for the DB name
+	*/
 	@FXML
 	private TextField DbNameTxt;
 	
+	/**
+	* Text field for the DB user
+	*/
 	@FXML
 	private TextField DbUserTxt;
 	
+	/**
+	* Password field of DB
+	*/
 	@FXML
 	private PasswordField DbPasswordTxt;
 	
+	/**
+	* Button of the connect
+	*/
 	@FXML
 	private Button connectBtn;
 	
+	/**
+	* Button of the disconnect
+	*/
 	@FXML
 	private Button disconnectBtn;
 	
+	/**
+	* Button of the back button
+	*/
 	@FXML
 	private Button closeBtn;
 	
+	/**
+	* Button of the import button
+	*/
 	@FXML
 	private Button importBtn;
 	
+	/**
+	* Text area of the console
+	*/
 	@FXML
 	private TextArea txtConsole;
 	
-
+	/**
+	* Table of the clients
+	*/
     @FXML
     private TableView<ClientDoc> clientsTable;
 
+    /**
+	* Column of the ip
+	*/
     @FXML
     private TableColumn<ClientDoc, String> ipAddressCol;
 
+    /**
+	* Column of the host name
+	*/
     @FXML
     private TableColumn<ClientDoc, String> hostNameCol;
 
+    /**
+	* Column of the status
+	*/
     @FXML
     private TableColumn<ClientDoc, String> statusCol;
     
-
+    /**
+     * This is the getters from the server GUI
+     * 
+     * @return String from the text field
+     */
 	private String getport() {
 		return portxt.getText();
 	}
@@ -164,10 +214,16 @@ public class BiteMeServerUI extends Application implements Initializable {
 		return DbPasswordTxt.getText();
 	}
 
+	/**
+     * This is the main function of the class
+     */
 	public static void main(String args[]) throws Exception {
 		launch(args);
-	} // end main
+	} 
 
+	/**
+     * This method initialize the fxml and css of the screen
+     */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		Pane root = FXMLLoader.load(getClass().getResource("/fxmls/Server.fxml"));
@@ -185,7 +241,9 @@ public class BiteMeServerUI extends Application implements Initializable {
 		primaryStage.show();
 	}
 	
-	/* insert all the information for the Server configuration screen */
+	/** 
+	 * Insert all the information for the Server configuration screen 
+	 */
 	private void loadInfo() {
 		this.portxt.setText(String.valueOf(DEFAULT_PORT));
 		try {
@@ -200,6 +258,12 @@ public class BiteMeServerUI extends Application implements Initializable {
 		disconnectBtn.setDisable(true);
 	}
 
+	/**
+	 * This method connect to the DB
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void connect(ActionEvent event) throws Exception {
 		String p;
@@ -218,13 +282,25 @@ public class BiteMeServerUI extends Application implements Initializable {
 	if(!isImportButtonClicked)
 		importBtn.setDisable(false);
 	}
-
+	
+    /**
+     * This method exit from the GUI
+     * 
+     * @param event
+     * @throws Exception
+     */
 	@FXML
 	public void getCloseBtn(ActionEvent event) throws Exception {
 		System.out.println("Close Gui Server"); /* close GUI using close button */
 		System.exit(0);
 	}
 
+	/**
+	 * This method disconnect from the DB
+	 * 
+	 * @param event
+	 * @throws Exception
+	 */
 	@FXML
 	public void disconnectBtn(ActionEvent event) throws Exception {
 		setVisabilityForUI(false);
@@ -234,8 +310,9 @@ public class BiteMeServerUI extends Application implements Initializable {
 	
 	@FXML
 	/**
-	 * after clicking on import button , we get all the data from the external db
-	 * after making a new connection to the external DB.
+	 * After clicking on import button , we get all the data from the external db
+	 * After making a new connection to the external DB.
+	 * 
 	 * @param event
 	 * @throws Exception
 	 */
@@ -255,8 +332,10 @@ public class BiteMeServerUI extends Application implements Initializable {
 	}
 	
 	/**
-	* @param isVisable to control the visiablity of the UI
-	*/
+	 * Thid method set the fields and buttons visible 
+	 * 
+	 * @param isVisable to control the visiablity of the UI
+	 */
 	private void setVisabilityForUI(boolean isVisable) {
 		disconnectBtn.setDisable(!isVisable);
 		portxt.setDisable(isVisable);
@@ -281,7 +360,7 @@ public class BiteMeServerUI extends Application implements Initializable {
 				
 	}
 
-	/*
+	/**
 	 * This function goes to the 
 	 * EchoServer method of stop listening 
 	 * when button Disconnect is clicked in
@@ -295,7 +374,16 @@ public class BiteMeServerUI extends Application implements Initializable {
 		serverCommunication.stopListening();
 
 	}
-
+   
+	/**
+	 * This method connect to DB after getting the field that the user filled
+	 * 
+	 * @param p
+	 * @param dbName
+	 * @param dbUserTxt
+	 * @param password
+	 * @return
+	 */
 	public String runServer(String p, String dbName, String dbUserTxt, String password) {
 		String returnMsgFromServer = "Error! Connection failed.\n";
 		int port = 0; // Port to listen on
@@ -322,8 +410,9 @@ public class BiteMeServerUI extends Application implements Initializable {
 		return returnMsgFromServer;
 	}
 	
-	
-
+    /**
+     * This method initialize the fxml vars
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loadInfo();

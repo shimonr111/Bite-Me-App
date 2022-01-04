@@ -7,24 +7,30 @@ import java.sql.SQLException;
 import bitemeserver.BiteMeServerUI;
 
 /**
- * @author Lior, Guzovsky.
  * Class description: 
- * 
  * This is a class for the connection to the 
  * DB.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
  * 
  * @version 03/12/2021
- *
  */
-public class mySqlConnection {
+public class mySqlConnection{
+	
 	/**
 	 * Class members description:
 	 */	
 	
+	/**
+	 * This is the var of the connection to the DB
+	 */
 	private Connection con;
 
 	/**
-	 * create the connection to the DB
+	 * Create the connection to the DB
 	 * 
 	 * @param DBName
 	 * @param DBUserName
@@ -68,6 +74,11 @@ public class mySqlConnection {
 		return true;
 	}
 
+	/**
+	 * This is the getter of the connection
+	 * 
+	 * @return connection
+	 */
 	public Connection getConnection() {
 		return con;
 	}

@@ -2,7 +2,6 @@ package bitemeserver;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import communication.Message;
 import communication.Task;
 import ocsf.server.AbstractServer;
@@ -11,17 +10,21 @@ import query.Query;
 import serveranalyze.AnalyzeMessageFromClient;
 
 /**
- * @author Lior, Guzovsky.
- * @author Mousa, Srour.
- *
  * Class description: 
  * This class overrides some of the
  * methods in the abstract superclass in order
  * to give more functionality to the server.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Mousa, Srour.
  * 
  * @version 04/12/2021
  */
-public class BiteMeServerCommunication extends AbstractServer {
+public class BiteMeServerCommunication extends AbstractServer{
+	
 	/**
 	 * Class members description:
 	 */
@@ -34,9 +37,8 @@ public class BiteMeServerCommunication extends AbstractServer {
 	/**
 	 * ServerGuiController instance to have access to the controller.
 	 */
-//	private ServerGuiController serverGuiController;
 
-	/*
+	/**
 	 * Constructs an instance of the echo server.
 	 *
 	 * @param port: The port number to connect on.
@@ -45,14 +47,12 @@ public class BiteMeServerCommunication extends AbstractServer {
 		super(port);
 	}
 
-	/*
+	/**
 	 * This method handles any messages received from the client.
 	 *
 	 * @param message: The message received from the client.
-	 * 
 	 * @param client: The connection from which the message originated.
 	 */
-
 	public void handleMessageFromClient(Object message, ConnectionToClient client) {
 		if(message instanceof Message) {
 		Message recivedMessageFromClient = (Message)message;
@@ -68,7 +68,6 @@ public class BiteMeServerCommunication extends AbstractServer {
 		}
 		}
 	}
-
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server

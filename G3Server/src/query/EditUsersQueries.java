@@ -19,16 +19,18 @@ import users.HrManager;
 import users.User;
 
 /**
- * 
- * @author Mousa, Srour
-
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Editing users phase.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
+ *
  * @version 13/12/2021
  */
-public class EditUsersQueries {
-	
+public class EditUsersQueries{
 	
 	/**
 	 * This method gets a branch manager object , and gets all the customers,businesscustomers and hrmanagers that belong to same branch.
@@ -75,6 +77,7 @@ public class EditUsersQueries {
 	/**
 	 * This method is general for every user type , in the message we sent the userid,the new status as a string and the table name
 	 * this method calls the update query method and changes the status.
+	 * 
 	 * @param message
 	 */
 	public static void setCustomerNewStatus(Message message) {
@@ -86,7 +89,8 @@ public class EditUsersQueries {
 	}
 	
 	/**
-	 * this method gets a list that contains userId and user type , deletes the user from his table and from login table.
+	 * This method gets a list that contains userId and user type , deletes the user from his table and from login table.
+	 * 
 	 * @param message
 	 */
 	public static void removeUserFromDB(Message message) {
@@ -98,8 +102,9 @@ public class EditUsersQueries {
 	}
 	
 	/**
-	 * this method will return an arraylist of business customer which not approved yet,
-	 * this method will be called after pressing on business customers confirmation from the HR manager portal.
+	 * This method will return an arraylist of business customer which not approved yet,
+	 * This method will be called after pressing on business customers confirmation from the HR manager portal.
+	 * 
 	 * @param message
 	 * @return
 	 */
@@ -130,8 +135,9 @@ public class EditUsersQueries {
 	
 	/**
 	 * This method returns a list of companies that are not approved yet.
+	 * 
 	 * @param message
-	 * @return
+	 * @return answer after making logic or query
 	 */
 	public static Message getPendingApprovalCompaniesFromDb(Message message) {
 		Message returnMessageToClient;
@@ -152,6 +158,7 @@ public class EditUsersQueries {
 	
 	/**
 	 * This method is to confirm company , we change the status of the company to CONFIRMED.
+	 * 
 	 * @param message
 	 */
 	public static void confirmCompany(Message message) {
@@ -159,13 +166,13 @@ public class EditUsersQueries {
 		String companyName = company.getCompanyName();
 		int companyCode = company.getcompanyCode();
 		Query.updateOneColumnForTableInDbByPrimaryKey("company", "companyStatusInSystem= 'CONFIRMED'","companyName='"+companyName+"'");
-		
 	}
 	
 	/**
 	 * Before removing a company , we set the change the hrManager of the company to the same status
 	 * here were before registering the company, so the hrManager won't be deleted from DB
 	 * after denying the registration , he can try and register later.
+	 * 
 	 * @param message
 	 */
 	public static void denyCompany(Message message) {

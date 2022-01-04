@@ -2,7 +2,6 @@ package query;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import communication.Answer;
 import communication.Message;
 import communication.Task;
@@ -22,19 +21,23 @@ import users.User;
 import users.WorkerPosition;
 
 /**
+ * Class description:
+ * This class will contain all the queries to DB
+ * that relate to Login phase.
+ */
+
+/**
  * 
  * @author Mousa, Srour
  * @author Lior, Guzovsky
  * @author Alexander, Martinov
- * Class description:
- * This class will contain all the queries to DB
- * that relate to Login phase.
+ * 
  * @version 15/12/2021
  */
-public class LoginQueries {
+public class LoginQueries{
 	
 	/**
-	 * main function for parsing the message and getting the relevant data for login check
+	 * Main function for parsing the message and getting the relevant data for login check
 	 * 
 	 * @param messageFromClient
 	 * @return
@@ -48,7 +51,7 @@ public class LoginQueries {
 		String userType = null;
 		
 		/**
-		 * get the row from the DB if 
+		 * Get the row from the DB if 
 		 * possible from the login table.
 		 */
 		ResultSet rs = Query.getRowsFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
@@ -65,13 +68,16 @@ public class LoginQueries {
 		}
 		rs.close();
 		/**
-		 * get a row from the 
+		 * Get a row from the 
 		 * DB which is according to the userType table
-		 * for example: "Customer Table.
+		 * For example: "Customer Table.
 		 */
 		rs = Query.getRowsFromTableInDB(userType,"userID='"+userId+"'");
 		switch(userType) {
 		case "customer":
+			/**
+			 * Get a row of customer user
+			 */
 			Customer customerResult = null;
 			//parse data and put in instance.
 			customerResult = LoginQueries.getCustomer(rs);
@@ -79,6 +85,9 @@ public class LoginQueries {
 			recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient,"customer");
 			break;
 		case "ceobiteme":
+			/**
+			 * Get a row of ceo user
+			 */
 			CeoBiteMe ceoResult = null;
 			//parse data and put in instance.
 			ceoResult = LoginQueries.getCeo(rs);
@@ -86,6 +95,9 @@ public class LoginQueries {
 			recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient,"ceobiteme");
 			break;
 		case "hrmanager":
+			/**
+			 * Get a row of hr user
+			 */
 			HrManager hrManagerResult=null;
 			//parse data and put in instance.
 			hrManagerResult=LoginQueries.getHrManager(rs);
@@ -93,6 +105,9 @@ public class LoginQueries {
 			recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient,"hrmanager");
 			break;
 		case "businesscustomer":
+			/**
+			 * Get a row of business customer user
+			 */
 			BusinessCustomer businessCustomerResult = null;
 			//parse data and put in instance.
 			businessCustomerResult = LoginQueries.getBusinessCustomer(rs);
@@ -100,6 +115,9 @@ public class LoginQueries {
 			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient,"businesscustomer");
 			break;
 		case "supplierworker":
+			/**
+			 * Get a row of supplier worker user
+			 */
 			SupplierWorker supplierResult = null;
 			//parse data and put in instance.
 			supplierResult = LoginQueries.getSupplierWorker(rs);
@@ -107,6 +125,9 @@ public class LoginQueries {
 			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplierworker");
 			break;
 		case "branchmanager":
+			/**
+			 * Get a row of branch manager user
+			 */
 			BranchManager branchManagerResult = null;
 			//parse data and put in instance.
 			branchManagerResult = LoginQueries.getBranchManager(rs);
@@ -122,6 +143,7 @@ public class LoginQueries {
 	 * This method gets an user object and sets the correct
 	 * Task and answer according to the info.
 	 * DO NOT CHANGE THE ORDER IN THE LOWER ELSE CASE WHERE WE USE INSTANCEOF!!!!!
+	 * 
 	 * @param user
 	 * @param message
 	 * @param tableName : it is the table name in DB according to the user type .
@@ -162,6 +184,7 @@ public class LoginQueries {
 	/**
 	 *  This method gets an message that contains the User as object in the message 
 	 *  we check what is the user type and we send query to update the isLoggedIn status accordingly.
+	 *  
 	 * @param message
 	 */
 	public static void logOutUser(Message message) {
@@ -184,7 +207,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Customer object
 	 */
 	public static Customer getCustomer(ResultSet rs) {
 		Customer customerResult = null;
@@ -206,7 +229,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Ceo object
 	 */
 	public static CeoBiteMe getCeo(ResultSet rs) {
 		CeoBiteMe ceoResult = null;
@@ -228,7 +251,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Hr object
 	 */
 	public static HrManager getHrManager(ResultSet rs) {
 		HrManager hrManagerResult = null;
@@ -252,7 +275,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Business customer object
 	 */
 	public static BusinessCustomer getBusinessCustomer(ResultSet rs) {
 		BusinessCustomer businessCustomerResult = null;
@@ -277,7 +300,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Supplier worker object
 	 */
 	public static SupplierWorker getSupplierWorker(ResultSet rs) {
 		SupplierWorker supplierWorkerResult = null;
@@ -295,11 +318,13 @@ public class LoginQueries {
 		}
 		return supplierWorkerResult;
 	}
+	
 	/**
 	 * This method searches for a Supplier object by his SupplierId
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param supplierId
+	 * @return Supplier object
 	 */
 	private static Supplier getSupplierForWorker(String supplierId) {
 		Supplier supplierResult = null;
@@ -321,7 +346,7 @@ public class LoginQueries {
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
 	 * @param companyName
-	 * @return
+	 * @return Company object
 	 */
 	public static Company getCompany(String companyName) {
 		Company companyResult = null;
@@ -342,7 +367,7 @@ public class LoginQueries {
 	 * for the Branch Manager
 	 * 
 	 * @param rs
-	 * @return
+	 * @return Branch manager object
 	 */
 	public static BranchManager getBranchManager(ResultSet rs) {
 		BranchManager branchManagerResult = null;

@@ -1,25 +1,17 @@
 package query;
 
-import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
 import bitemeserver.BiteMeServerUI;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import orders.DeliveryType;
 import orders.ItemCategory;
 import orders.ItemSize;
 import orders.OrderStatus;
 import orders.OrderTimeType;
 import orders.SupplyType;
-
 import users.Branch;
 import users.BranchManager;
 import users.BusinessCustomer;
@@ -30,35 +22,54 @@ import users.Customer;
 import users.HrManager;
 import users.Supplier;
 import users.SupplierWorker;
-import users.User;
 import util.DateTimeHandler;
 import util.SupplierByReport;
 
 /**
- * 
- * @author Mousa, Srour
- * @author Alexander, Martinov
- * @author Lior, Guzovsky
  * Class description:
  * This class will analyze the login feature from the side of the server
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
+ * @author Lior, Guzovsky.
+ * 
  * @version 26/12/2021
  */
-public class Query {
 
+public class Query{
+
+	/**
+	 * The var of the connection to the main db
+	 */
 	private static Connection con;
+	
+	/**
+	 * The var of the connection to external db
+	 */
 	private static Connection externalCon;
+	
+	/**
+	 * Setter of the connection of main db
+	 */
 	public static void setConnectionFromServerToDB(Connection connection) {
 		con = connection;
 	}
+	
+	/**
+	 * Setter of the connection of external db
+	 */
 	public static void setConnectionFromServerToExternalDB(Connection connection) {
 		externalCon=connection;
 	}
 	
 	
-	
 	/**
 	 * This method will be called once to import the data of users management from the external DB.
-	 * @return
+	 * 
+	 * @return rs
 	 */
 	public static ResultSet getExternalDB() {
 		PreparedStatement pstmt=null;
@@ -75,6 +86,7 @@ public class Query {
 	
 	/**
 	 * This method  will get the external data and insert it into our registration table .
+	 * 
 	 * @param userType
 	 * @param userID
 	 * @param statusInSystem
@@ -89,7 +101,7 @@ public class Query {
 	 * @param creditCardDateOfExpiration
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return boolean depends if query succeed
 	 */
 	public static boolean insertRowIntoRegistrationTable(String userType, String userID, String statusInSystem, String firstName,String lastName,
 			String homeBranch,int isLoggedIn,String email, String phoneNumber, String creditCardNumber,String creditCardCvvCode,String creditCardDateOfExpiration,
@@ -107,12 +119,13 @@ public class Query {
 		}
 		return false;
 	}
+	
 	/**
 	 * General methods for getting Data from DB
 	 * 
 	 * @param tableName
 	 * @param condition
-	 * @return
+	 * @return rs
 	 */
 	public static ResultSet getRowsFromTableInDB(String tableName, String condition) {
 		PreparedStatement pstmt=null;
@@ -126,11 +139,13 @@ public class Query {
 		}
 		return rs;
 	}
+	
 	/**
-	 * general method for getting specific data from db
+	 * General method for getting specific data from db.
+	 * 
 	 * @param resultName
 	 * @param condition
-	 * @return
+	 * @return rs
 	 */
 	public static ResultSet getBasicQuery(String source, String fields) {
 		PreparedStatement pstmt=null;
@@ -146,9 +161,9 @@ public class Query {
 	}
 	
 	/**
-	 * method for inserting reports into db
+	 * Method for inserting reports into db.
+	 * 
 	 * @param supplierReport
-	 * @return
 	 */
 	public static void saveReportToDb(SupplierByReport supplier) {
 		PreparedStatement pstmt=null;
@@ -184,9 +199,9 @@ public class Query {
 	}
 	
 	/**
-	 * method for inserting reports into db
+	 * Method for inserting reports into db.
+	 * 
 	 * @param supplierReport
-	 * @return
 	 */
 	public static void savePdfToDb(Object[] report) {
 		//reports[0] is the branch name
@@ -207,10 +222,11 @@ public class Query {
 	}
 	
 	/**
+	 * This method get column from table in DB
 	 * 
 	 * @param tableName
 	 * @param columnName
-	 * @return
+	 * @return rs
 	 */
 	public static ResultSet getColumnFromTableInDB(String tableName, String columnName) {
 		PreparedStatement pstmt=null;
@@ -226,11 +242,12 @@ public class Query {
 	}
 	
 	/**
+	 * This method get column with with condition from the dable
 	 * 
 	 * @param tableName
 	 * @param columnName
 	 * @param condition
-	 * @return
+	 * @return rs
 	 */
 	public static ResultSet getColumnWithConditionFromTableInDB(String tableName,String columnName,String condition) {
 		PreparedStatement pstmt=null;
@@ -246,9 +263,10 @@ public class Query {
 	}
 	
 	/**
-	 * this method gets a table name , and returns all the table.
+	 * This method gets a table name , and returns all the table.
+	 * 
 	 * @param tableName
-	 * @return
+	 * @return rs
 	 */
 	public static ResultSet getTableFromDB(String tableName) {
 		PreparedStatement pstmt=null;
@@ -263,6 +281,7 @@ public class Query {
 			return rs;
 	}
 	/**
+	 * This method update column depend of primary key that we get
 	 * 
 	 * @param tableName
 	 * @param columnSet : the name of the column and what we want to set it for example : (isLoggedIn=1)
@@ -280,6 +299,7 @@ public class Query {
 	}
 	
 	/**
+	 * This method inser row to the login table
 	 * 
 	 * @param userName
 	 * @param Password
@@ -379,6 +399,7 @@ public class Query {
 	/**
 	 * This is a query for delete rows before we update the db
 	 * in order to prevent duplicates
+	 * 
 	 * @param supplierId
 	 */
 	public static void deleteDuplicateRowBeforeUpdateDb(String tableName, String condition) {
@@ -394,6 +415,7 @@ public class Query {
 	}
 	
 	/**
+	 * This method inser row into credit card table.
 	 * 
 	 * @param creditCardNumber
 	 * @param expDate
@@ -412,6 +434,7 @@ public class Query {
 	}
 	
 	/**
+	 * This method insert row into customer table.
 	 * 
 	 * @param userID
 	 * @param status
@@ -440,7 +463,8 @@ public class Query {
 	}
 	
 	/**
-	 *  at the beginning we get the w4cCode of the company then we add it to the query.
+	 * At the beginning we get the w4cCode of the company then we add it to the query.
+	 * 
 	 * @param businessCustomer
 	 * @param type
 	 */
@@ -474,8 +498,10 @@ public class Query {
 	}
 	
 	/**
+	 * This method insert row into supplier worker table.
 	 * 
 	 * @param customer
+	 * @return boolean if this supplier worker already imported
 	 */
 	public static boolean insertOneRowIntoSupplierWorkerTable(SupplierWorker supplierWorker) {
 		String query = "INSERT INTO semesterialproject.supplierworker ( userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber, "
@@ -491,13 +517,14 @@ public class Query {
 			return true;
 		}
 		
-		return false;
-				
+		return false;	
 	}
 	
 	/**
 	 * This method gets a company object and insert it into the company table in DB.
+	 * 
 	 * @param company
+	 * @return true if company already imported
 	 */
 	public static boolean insertOneRowIntoCompanyTable(Company company) {
 		String query = "INSERT INTO semesterialproject.company (companyName, companyStatusInSystem, address, email, companyCode) VALUES ('" +company.getCompanyName()
@@ -517,6 +544,8 @@ public class Query {
 	/**
 	 * This method gets a ceo user and insert him into ceoBiteMe table.
 	 * @param ceo
+	 * 
+	 * @return true if ceo already imported
 	 */
 	public static boolean inserOneRowIntoCeoBiteMeTable(CeoBiteMe ceo) {
 		String query = "INSERT INTO semesterialproject.ceobiteme (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + ceo.getUserId()
@@ -534,8 +563,10 @@ public class Query {
 	}
 	
 	/**
-	 * this method gets a branch manager and insert it into branch manager table.
+	 * This method gets a branch manager and insert it into branch manager table.
+	 * 
 	 * @param bm
+	 * @return true if branch manager already imported
 	 */
 	public static boolean insertOneRowIntoBranchManagerTable(BranchManager bm) {
 		String query = "INSERT INTO semesterialproject.branchmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, phoneNumber) VALUES ('" + bm.getUserId()
@@ -554,7 +585,9 @@ public class Query {
 	
 	/**
 	 * This method gets a supplier , and inserts the supplier object into the supplier table in DB.
+	 * 
 	 * @param supplier
+	 * @return true if supplier already imported
 	 */
 	public static boolean insertOneRowIntoSupplierTable(Supplier supplier) {
 		String query = "INSERT INTO semesterialproject.supplier (supplierId, supplierName, homeBranch, email, phoneNumber, revenueFee, statusInSystem ) VALUES ('" + supplier.getSupplierId() 
@@ -572,10 +605,11 @@ public class Query {
 	}
 	
 	/**
-	 * this method gets an object of Hr Manager , and parse the data 
+	 * This method gets an object of Hr Manager , and parse the data 
 	 * to insert a new row into Hr Manager table in DB.
+	 * 
 	 * @param hr
-	 * @return
+	 * @return true if hr already imported
 	 */
 	public static boolean insertOneRowIntoHrManagerTable(HrManager hr) {
 		String query = "INSERT INTO semesterialproject.hrmanager (userID, statusInSystem, firstName, lastName, homeBranch, isLoggedIn, email, "
@@ -594,8 +628,9 @@ public class Query {
 	}
 	
 	/**
-	 * this method gets a table name and condition , and deletes the row according to the condition from DB.
+	 * This method gets a table name and condition , and deletes the row according to the condition from DB.
 	 * condition must be according to table's primary key !
+	 * 
 	 * @param tableName
 	 * @param condition
 	 */
@@ -630,6 +665,7 @@ public class Query {
 	/**
 	 * This method gets all the balance table parameters 
 	 * and inserts a new row into this table in DB.
+	 * 
 	 * @param userId
 	 * @param supplierId
 	 * @param balance
