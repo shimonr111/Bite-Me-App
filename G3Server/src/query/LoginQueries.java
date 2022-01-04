@@ -24,9 +24,6 @@ import users.WorkerPosition;
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Login phase.
- */
-
-/**
  * 
  * @author Mousa, Srour
  * @author Lior, Guzovsky

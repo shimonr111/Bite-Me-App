@@ -26,9 +26,6 @@ import users.UserForRegistration;
  * Class description:
  * This class will contain all the queries to DB and logi
  * that relate to Registration phase.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.

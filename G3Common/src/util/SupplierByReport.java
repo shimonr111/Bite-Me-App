@@ -7,8 +7,7 @@ import java.util.Arrays;
 /**
  * Class description: 
  * This is a which saves relevant data for reports, by supplier.
- */
-/**
+ * 
  * @author Alexander, Martinov.
  * 
  * @version 21/12/2021

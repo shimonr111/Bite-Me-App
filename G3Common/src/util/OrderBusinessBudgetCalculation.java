@@ -9,9 +9,6 @@ import users.BusinessCustomer;
 *  This is a util class for calculating the 
 *  money left for any customer who is at least
 *  a business customer
- */
-
-/**
 * 
 * @author Lior, Guzovsky.
 *  

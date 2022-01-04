@@ -10,9 +10,6 @@ import bitemeserver.BiteMeServerUI;
  * Class description: 
  * This is a class for the connection to the 
  * DB.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * 

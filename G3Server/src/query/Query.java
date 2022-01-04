@@ -28,9 +28,6 @@ import util.SupplierByReport;
 /**
  * Class description:
  * This class will analyze the login feature from the side of the server
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @author Alexander, Martinov.

@@ -13,9 +13,6 @@ import users.BudgetType;
  * This is the scheduler class , it runs immediately after the server connection to DB.
  * we get the date that of connection , every 10 minutes we check the 4 cases below 
  * and we call relevant methods.
- */
-
-/**
  * 
  * @author Mousa, Srour.
  * @author Lior, Guzovsky.

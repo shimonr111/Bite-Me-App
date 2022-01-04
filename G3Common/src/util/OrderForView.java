@@ -5,8 +5,6 @@ import java.io.Serializable;
 /**
 *  Class description:
 *  This is class manages all the order flow values.
-*/
-/**
 * 
 * @author Lior, Guzovsky.
 * @author Mousa, Srour.

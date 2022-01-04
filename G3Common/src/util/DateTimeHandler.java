@@ -8,9 +8,7 @@ import java.util.Date;
 /**
  *  Class description:
  *  This class helps us to handle time and date (DB<->GUI).
- */
-/**
- * 
+ *  
  * @author Ori, Malka.
  *  
  * @version 11/12/2021

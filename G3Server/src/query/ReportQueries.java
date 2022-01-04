@@ -10,9 +10,6 @@ import util.SupplierByReport;
 /**
  * Class description: 
  * This is a class for running relevant queries to prepare reports
- */
-
-/**
  * 
  * @author Alexander, Martinov.
 

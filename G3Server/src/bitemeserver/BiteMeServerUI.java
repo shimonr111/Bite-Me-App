@@ -35,9 +35,6 @@ import util.Constans;
  * Class description: 
  * This is a class that works as an
  * UI for the server.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * 

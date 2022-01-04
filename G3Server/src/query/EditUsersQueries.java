@@ -22,10 +22,7 @@ import users.User;
  * Class description:
  * This class will contain all the queries to DB
  * that relate to Editing users phase.
- */
-
-/**
- * 
+ *  
  * @author Mousa, Srour.
  *
  * @version 13/12/2021

@@ -3,9 +3,6 @@ package guiserver;
 /**
  * Class description: 
  * This class will be user for the observable list to handle the clients.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * 
