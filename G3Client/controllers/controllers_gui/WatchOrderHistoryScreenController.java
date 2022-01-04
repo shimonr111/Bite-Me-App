@@ -35,11 +35,12 @@ import communication.Task;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This class is a controller of the view reports screen.
+ */
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 25/12/2021
  */
@@ -48,55 +49,107 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static WatchOrderHistoryScreenController watchOrderHistoryScreenController;
+	
+	/**
+	 * ArrayList of Order For View that we get as orders from DB and parse into this class
+	 * to display into table view.
+	 */
 	public static ArrayList<OrderForView> ordersForCustomer = new ArrayList<>();
 	
     @FXML 
+    /**
+     * Back Button.
+     */
     private Button backBtn; 
 
     @FXML 
+    /**
+     * Column of Date.
+     */
     private TableColumn<OrderForView,String> dateCol; 
 
     @FXML
+    /**
+     * Exit Button.
+     */
     private Button exitBtn; 
 
     @FXML
+    /**
+     * Help Button.
+     */
     private Button helpBtn; 
     
     @FXML 
+    /**
+     * Confirm Button.
+     */
     private Button confirmBtn; 
     
     @FXML 
+    /**
+     * The customer name text.
+     */
     private Text nameTxt; 
 
     @FXML 
+    /**
+     * Column of order Items+comments.
+     */
     private TableColumn<OrderForView,String> orderDetailsCol; 
 
     @FXML 
+    /**
+     * Table View of the orders.
+     */
     private TableView<OrderForView> ordersTable;
     
     @FXML 
+    /**
+     * Refresh Button.
+     */
     private Button refreshBtn; 
 
     @FXML 
+    /**
+     * Column of restaurant name + branch.
+     */
     private TableColumn<OrderForView,String> resturantNameCol;
 
     @FXML 
+    /**
+     * Column of orders Status.
+     */
     private TableColumn<OrderForView,String> statusCol; 
 
     @FXML
+    /**
+     * Column of order Estimated Date + Time.
+     */
     private TableColumn<OrderForView,String> timeCol; 
     
 
     @FXML
+    /**
+     * Text used to display messages for the user.
+     */
     private Text displayText;
 
 	/**
      * This method calls the method that loads
      * the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -112,7 +165,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
      * delivery type.
      * We will save in that stage the ActualDate according to the course guidelines.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getConfirmBtn(ActionEvent event) {
@@ -146,7 +199,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
      * This method disconnect the specific client,
      * log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -171,7 +224,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	/**
      * This method refreshes the table .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getRefreshBtn(ActionEvent event) {
@@ -216,7 +269,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	/**
 	 * This method loads the private customer portal.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setPrivateCustomerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {
@@ -249,7 +302,7 @@ public class WatchOrderHistoryScreenController extends AbstractBiteMeController 
 	/**
 	 * This method loads the business customer portal
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setBusinessCustomerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

@@ -29,16 +29,19 @@ import javafx.stage.StageStyle;
 import users.BusinessCustomer;
 
 /**
- * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * @author Alexander, Martinov
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * controlling the UI of the restaurant 
  * choosing for the private customer.
  * 
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky
+ * @author Shimon, Rubin
+ * @author Alexander, Martinov
+ * @author Mousa, Srour.
  * @version 15/12/2021
  */
 public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeController implements Initializable{
@@ -46,29 +49,57 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderChooseResturantInOrderScreenController orderChooseResturantInOrderScreenController;
-    /*This array List will help us to get the data we want 
-     * about the restaurants in the specific
-     *  Branch that the user picked*/
+    /**
+     * This array List will help us to get the data we want 
+     *about the restaurants in the specific
+     *  Branch that the user picked
+     *  */
     public static Map<String,String> suppliersList = new HashMap<>(); 
 
     @FXML
+    /**
+     * The ComboBox of available restaurants.
+     */
     private ComboBox<String> chooseResComboBox;
 
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button nextBtn;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text to display messages for the user. 
+     */
     private Text errorText;
 
     /**
@@ -76,7 +107,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * to the previous screen of the customer 
      * w4c identification window.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -119,7 +150,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * we need to pass the Supplier ID and his restaurant name
      * for showing the right menu to the user
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBtnNext(ActionEvent event) {
@@ -148,7 +179,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * This is the function for exiting 
      * the system of Bite me
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -164,7 +195,7 @@ public class OrderChooseResturantInOrderScreenController extends AbstractBiteMeC
      * This is a button for 
      * getting information about the current screen
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {

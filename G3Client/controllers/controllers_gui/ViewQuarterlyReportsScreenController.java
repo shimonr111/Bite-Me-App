@@ -22,14 +22,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import util.SupplierByReport;
-
 /**
-* @author Alexander, Martinov.
-* 
 * Class description: 
 * This is a class for 
 * controlling the UI of viewing quarterly reports 
 * form.
+ */
+/**
+* @author Alexander, Martinov.
 * 
 * @version 14/12/2021
 */
@@ -38,38 +38,74 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static ViewQuarterlyReportsScreenController viewQuarterlyReportsScreenController;
+	
+	/**
+	 * The suppliers reports that we get from DB.
+	 */
 	public static SupplierByReport[][] suppliers=null;
 	
     @FXML
+    /**
+     * ComboBox for Quarter number.
+     */
     private ComboBox<String> ReportQuarter;
 
     @FXML
+    /**
+     * ComboBox  for Year.
+     */
     private ComboBox<String> ReportYear;
 
     @FXML
+    /**
+     * ComboBox of Branches.
+     */
     private ComboBox<String> ReportBranch;
     
 	@FXML
+	/**
+	 * Back Button.
+	 */
 	private Button btnBack;
 
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 
 	@FXML
+	/**
+	 * The text that we use to display messages to the user.
+	 */
 	private Text errorText;
 
 	@FXML
+	/**
+	 * View Report Button.
+	 */
 	private Button viewReportBtn;
 
 	/**
      * Loads the previous screen after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getBackBtn(ActionEvent event) {
@@ -81,7 +117,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	/**
 	 * Clicking on exit button will log out the user then disconnect and exit.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -96,7 +132,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -107,7 +143,7 @@ public class ViewQuarterlyReportsScreenController extends AbstractBiteMeControll
      * This method prepares a report request message
      * based on the requested branch and report year and quarter
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getReport(ActionEvent event) {

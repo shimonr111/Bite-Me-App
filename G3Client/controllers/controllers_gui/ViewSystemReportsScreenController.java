@@ -35,14 +35,17 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+
 /**
- * 
- * @author Alexander, Martinov.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of viewing system reports 
  * form.
+ */
+
+/**
+ * 
+ * @author Alexander, Martinov.
  * 
  * @version 21/12/2021
  */
@@ -51,44 +54,86 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static ViewSystemReportsScreenController viewSystemReportsScreenController;
+	
+	/**
+	 * The List Of suppliers Report that we get from DB.
+	 */
 	public static SupplierByReport[] suppliers=null;
 	
 	@FXML
+	/**
+	 * The Message Label.
+	 */
     private Label MessageLabel;
 
     @FXML
+    /**
+     * ComboBox of monthes.
+     */
     private ComboBox<String> ReportMonth;
 
     @FXML
+    /**
+     * ComboBox of report types.
+     */
     private ComboBox<String> ReportType;
 
     @FXML
+	/**
+	 * ComboBox of years.
+	 */
     private ComboBox<String> ReportYear;
 
     @FXML
+    /**
+     *  Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The text to display messages for the user.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * Quarterly Button.
+     */
     private Button quarterlyBtn;
 
     @FXML
+    /**
+     * View Report Button.
+     */
     private Button viewReportBtn;
 
 	/**
 	 * this method calls the setBranchManagerPortal to get back the previous screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getBackBtn(ActionEvent event) {
@@ -98,7 +143,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 * Clicking on exit button will log out the user then disconnect and exit.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -113,7 +158,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -124,7 +169,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
      * This method prepares a quarterly report request from the server
      * and calls a save to file function if a report was returned from the server
      * 
-     * @param event
+     * @param event ActionEvent of javaFX
      */
     @FXML
     public void getQuarterly(ActionEvent event) {
@@ -168,7 +213,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	/**
 	 * Asks server for selected report by date and type and displays it to the user
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX
 	 */
 	@FXML
 	public void getViewReport(ActionEvent event) {
@@ -245,7 +290,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	 /**
      * Loads the previous screen after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX
      */
 	public void setBranchManagerPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {

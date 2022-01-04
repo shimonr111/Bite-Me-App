@@ -31,14 +31,15 @@ import users.Customer;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Edit Customer that appears immediately after clicking
  * on Edit while selecting Customer.
  * form.
+ */
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 13/12/2021
  */
@@ -47,47 +48,95 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static EditPrivateCustomerInformationScreenController editPrivateCustomerInformationScreenController;
+    
+    /**
+     * The chosen customer for editing.
+     */
     public static Customer customer;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Close Button.
+     */
     private Button btnclose;
 
     @FXML
     private Button btnclose1;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
     
     @FXML
+    /**
+     * The Deny Button.
+     */
     private Button btnSave;
 
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTxtField;
 
     @FXML
+    /**
+     * Last Name Text Field.
+     */
     private TextField lastNameTxtField;
 
     @FXML
+    /**
+     * ID Text Field.
+     */
     private TextField idNumTxtField;
 
     @FXML
+    /**
+     *  Phone Number Text Field.
+     */
     private TextField phoneTxtField;
 
     @FXML
+    /**
+     * E-Mail Text Field.
+     */
     private TextField emailTxtField;
 
     @FXML
+    /**
+     * ComboBox of Branches.
+     */
     private ComboBox<Branch> setHomeBranchCombo;
 
     @FXML
+    /**
+     * ComboBox of statuses.
+     */
     private ComboBox<ConfirmationStatus> setStatusComboBox;
     
     @FXML
+    /***
+     * The empty text to display messages to the user.
+     */
     private Text displayMessage;
 
     /**
@@ -95,7 +144,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
      * it checks if there were any changes to the customer status
      * and if yes it sends a relevant message to the server.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getSaveBtn(ActionEvent event) {
@@ -134,7 +183,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     /**
      * Calls the method that loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -144,7 +193,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
     /**
      * Logout then exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -158,7 +207,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 
     /**
      * Display a message to the customer.
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
@@ -203,7 +252,7 @@ public class EditPrivateCustomerInformationScreenController extends AbstractBite
 	/**
 	 *  This method for the back button , it sets the previous screen.
 	 *  
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setEditCustomerInformationScreen(ActionEvent event) {
 			Platform.runLater(new Runnable() {

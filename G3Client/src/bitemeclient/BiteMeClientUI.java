@@ -5,13 +5,16 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * @author Lior, Guzovsky.
- * @author Ori, Malka.
- * Class description: 
+ *  Class description: 
  * 
  * This class is used for running the app
  * from the customers side
  *
+ */
+
+/**
+ * @author Lior, Guzovsky.
+ * @author Ori, Malka.
  * @version 03/12/2021
  */
 public class BiteMeClientUI extends Application {
@@ -29,11 +32,19 @@ public class BiteMeClientUI extends Application {
 	 */
 	public EntryIPConfirmationFormController ipFormController;
 	
+	/**
+	 * The main to launch the javaFX thread.
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String args[]) throws Exception {
 		launch(args);
 	}
 
 	@Override
+	/**
+	 * Start method to display the first screen.
+	 */
 	public void start(Stage primaryStage) throws Exception {
 		/** 
 		* create controller for first Frame 
@@ -44,7 +55,11 @@ public class BiteMeClientUI extends Application {
 		*/
 		ipFormController.start(primaryStage);
 	}
-
+	
+	/**
+	 * call the biteMeClientController constructor with the ipTxt and the 5555 port.
+	 * @param ipTxt the IP of connection to server.
+	 */
 	public static void startController(String ipTxt) {
 		/**
 		* start running with the given IP from the IP frame entered by the client 

@@ -10,12 +10,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 /**
- * 
- * @author Shimon Rubin
  * Class description: 
- * 
  * This class present the Home Screen and 
  * responsible for the functionality of this screen 
+ */
+/**
+ * 
+ * @author Shimon Rubin
  *
  * @version 02/12/2021
  */
@@ -25,18 +26,31 @@ public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * A private appearance of the current class.
+	 */
 	private LoginScreenController entryLoginScreenFormController = new LoginScreenController();
 	
 	@FXML
+	/**
+	 * The Enter Button.
+	 */
 	private Button btnEnter = null;
 	
 	@FXML
 	private Button importBtn = null;
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button btnExit = null;
 	
 	@FXML
+	/**
+	 * The Help Button. 
+	 */
 	private Button btnHelp = null;
 
 	/**
@@ -44,7 +58,7 @@ public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	 * window and go login 
 	 * screen 
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 * @throw Exception
 	 */
 	public void getEnterBtn(ActionEvent event) throws Exception {
@@ -57,7 +71,7 @@ public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	 * to show instructions for the 
 	 * current screen 
 	 * 
-	 * @param event
+	 * @param event  ActionEvent of javaFX.
 	 * @throw Exception
 	 */
 	public void getHelpBtn(ActionEvent event) throws Exception {
@@ -67,9 +81,9 @@ public class EntryHomeScreenFormController extends AbstractBiteMeController{
 	/**
 	 * Using exit button 
 	 * in order to exit 
-	 * from the App 
+	 * from the App .
 	 * 
-	 * @param event
+	 * @param event  ActionEvent of javaFX.
 	 * @throw Exception
 	 */
 	public void getExitBtn(ActionEvent event) throws Exception {

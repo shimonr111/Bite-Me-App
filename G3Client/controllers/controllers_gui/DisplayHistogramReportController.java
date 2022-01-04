@@ -26,11 +26,13 @@ import javafx.stage.Stage;
 import util.SupplierByReport;
 
 /**
+ *  Class description: This is a class for displaying a quarterly CEO
+ * report
+ */
+
+/**
  * 
  * @author Alexander, Martinov.
- * 
- * Class description: This is a class for displaying a quarterly CEO
- * report
  * 
  * @version 29/12/2021
  */
@@ -39,45 +41,90 @@ public class DisplayHistogramReportController extends AbstractBiteMeController i
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static Stage of the current screen.
+	 */
 	private static Stage Stage;
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static DisplayHistogramReportController displayHistogramReportController;
+	
+	/**
+	 * Static list of suppliers that we get from DB.
+	 */
 	public static SupplierByReport[][] suppliers = null;
 
 	@FXML
+	/**
+	 * The Anchor Pane .
+	 */
 	private AnchorPane anchorPane;
 
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button exitBtn;
 
 	@FXML
+	/**
+	 * The Category Axis.
+	 */
 	private CategoryAxis Category;
 
 	@FXML
+	/**
+	 * The Number Axis.
+	 */
 	private NumberAxis Numbers;
 
 	@FXML
+	/**
+	 * BarChart of Number and String.
+	 */
 	private BarChart<Number, String> reportHistogram;
 
 	@FXML
+	/**
+	 * The text that we display the report name into it.
+	 */
 	private Text reportNameText;
 
 	@FXML
+	/**
+	 * The second Number Axis.
+	 */
 	private NumberAxis Numbers1;
 
 	@FXML
+	/**
+	 * The second Category Axis.
+	 */
 	private CategoryAxis Category1;
 
 	@FXML
+	/**
+	 * BarChart of Number and String.
+	 */
 	private BarChart<Number, String> valueHistogram;
 
 	@FXML
+	/**
+	 * The Text Area that we display the report into it.
+	 */
 	private TextArea reportTextField;
-
+	
 	/**
 	 * This is the initialization function for this screen when switched to.
-	 * 
-	 * @param message
+	 * @param report the reports that we get from the previous screen.
 	 */
 	public void initDisplayReportScreen(SupplierByReport[][] report) {
 		Platform.runLater(new Runnable() {
@@ -111,7 +158,7 @@ public class DisplayHistogramReportController extends AbstractBiteMeController i
 	/**
 	 * clicking the exit button will close the currently viewed report
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -122,7 +169,7 @@ public class DisplayHistogramReportController extends AbstractBiteMeController i
 	 * This method prepares a title, an orders histogram, 
 	 * a monetary value histogram, and an income report, then it displays it
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void showReport(String[] branchAndDate) {
 		Platform.runLater(new Runnable() {

@@ -3,13 +3,15 @@ package users;
 import java.io.Serializable;
 
 /**
+ *  Class description: 
+ * This class is a class which
+ * defines the main attributes and functionalities of a supplier in our
+ * system.
+ */
+/**
  * 
  * @author Lior, Guzovsky.
  * @author Alexander, Martinov.
- * 
- * Class description: This class is a class which
- * defines the main attributes and functionalities of a supplier in our
- * system.
  * 
  * @version 15/12/2021
  */
@@ -50,12 +52,12 @@ public class Supplier implements Serializable{
 	
 	/**
 	 * This is the constructor of the class.
-	 * @param supplierId
-	 * @param supplierName
-	 * @param homeBranch
-	 * @param email
-	 * @param phoneNumber
-	 * @param revenueFee
+	 * @param supplierId Supplier ID.
+	 * @param supplierName Supplier Name.
+	 * @param homeBranch supplier home Branch.
+	 * @param email Supplier Email.
+	 * @param phoneNumber Supplier phone number.
+	 * @param revenueFee Supplier's revenue Fee.
 	 */
 	public Supplier(String supplierId, String supplierName,Branch homeBranch, String email, String phoneNumber, double revenueFee, ConfirmationStatus statusInSystem) {
 		super();

@@ -2,13 +2,14 @@ package orders;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+/**
+ *  Class description:
+ *  This class wraps the item, to add a picture.
+ */
 
 /**
  * 
  * @author Ori, Malka.
- * 
- *  Class description:
- *  This class wraps the item, to add a picture;
  *  
  * @version 26/12/2021
  */

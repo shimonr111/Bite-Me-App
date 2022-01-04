@@ -3,14 +3,16 @@ package users;
 import java.io.Serializable;
 
 /**
- * 
- * @author Lior, Guzovsky.
- * @author Alexander, Martinov.
- * 
  * Class description: 
  * This class is a class that represents
  * a credit card that belongs to a customer \ Business customer
  * HR manger and etc.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
  * 
  * @version 08/12/2021
  */
@@ -37,9 +39,9 @@ public class CreditCard implements Serializable{
 	/**
 	 * Credit card Constructor
 	 * 
-	 * @param creditCardNumber
-	 * @param creditCardDateOfExpiration
-	 * @param creditCardCvvCode
+	 * @param creditCardNumber credit card number.
+	 * @param creditCardDateOfExpiration credit card date of expiration.
+	 * @param creditCardCvvCode credit card cvv code.
 	 */
 	public CreditCard(String creditCardNumber, String creditCardDateOfExpiration, String creditCardCvvCode) {
 		super();

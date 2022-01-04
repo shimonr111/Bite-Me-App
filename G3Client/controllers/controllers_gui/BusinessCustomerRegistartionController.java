@@ -34,14 +34,18 @@ import users.CreditCard;
 import users.Login;
 import users.UserForRegistration;
 
+
+/**
+ *  Class description: 
+ * This is a class for 
+ * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
+ * on Business Customer registration from the BusinessCustomerRegistrationScreen form.
+ * 
+ */
+
 /**
  * 
  * @author Mousa, Srour.
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI of PrivateCustomerResitrationScreen that appears immediately after clicking
- * on Private Customer registration from the BusinessCustomerRegistrationScreen form.
  * 
  * @version 11/12/2021
  */
@@ -50,73 +54,151 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static BusinessCustomerRegistartionController businessCustomerRegistrationController;
+    
+    /**
+     * Static ArrayList of companies that we get From the DB.
+     */
     public static ArrayList<String> companies;
+    
+    /**
+     * ArrayList of textfield's so we can check them all into a loop.
+     */
     private ArrayList<TextField> textFields = new ArrayList<>();
+    
+    /**
+     * ArrayList of textfield's that should contain numbers only, so we can check them all into a loop.
+     */
     private ArrayList<TextField> integerFields = new ArrayList<>();
 
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTxtField;
-
+    
+    /**
+     * Last Name Text Field.
+     */
     @FXML
     private TextField lastNameTxtField;
-
+    
+    /**
+     * User ID Text Field.
+     */
     @FXML
     private TextField idNumTxtField;
-
+    
+    /**
+     * Phone Number Text Field.
+     */
     @FXML
     private TextField phoneTxtField;
-
+    
+    /**
+     * Email Text Field.
+     */
     @FXML
     private TextField emailTxtField;
-
+    
+    /**
+     * User Name for login Text Field.
+     */
     @FXML
     private TextField userNameField;
-
+    
+    /**
+     * The Exit Button.
+     */
     @FXML
     private Button btnExit;
-
+    
+    /**
+     * The Save Button.
+     */
     @FXML
     private Button saveBtn;
-
+    
+    /**
+     * The Back Button.
+     */
     @FXML
     private Button btnBack;
-
+    
+    /**
+     * Confirm Email Text Field.
+     */
     @FXML
     private TextField confirmedEmailTxtField;
-
+    
+    /**
+     * ComboBox of Branches.
+     */
     @FXML
     private ComboBox<String> setHomeBranchCombo;
-
+    
+    /**
+     * ComboBox of Companies.
+     */
     @FXML
     private ComboBox<String> companyNameCombo;
-
+    
+    /**
+     * The CVV Numbers of credit card Text Field.
+     */
     @FXML
     private TextField cvvTxtField;
-
+    
+    /**
+     * The Credit Card Number Text Field.
+     */
     @FXML
     private TextField creditNumTxtField;
-
+    
+    /**
+     * The Expiration Date of credit card Text Field.
+     */
     @FXML
     private TextField expirationTxtField;
+    
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The empty text that we display a messages to the customer threw it.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * The User Password for Login Text Field.
+     */
     private TextField passwordField;
 
     @FXML
+    /**
+     * The empty text that we display a messages to the customer threw it.
+     */
     private Text displayMessage;
 
     /**
      * This method loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -126,7 +208,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     /**
      * This method does log out and then exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -141,7 +223,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     /**
      * Displaying a popup message to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -153,7 +235,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
      * it checks if all the fields were correctly filled.
      * and then create a relevant message to the server.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getSaveBtn(ActionEvent event) {
@@ -191,7 +273,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  	/**
  	 * This method sets a message from the listeners to the displayMessage.
  	 * 
- 	 * @param message
+ 	 * @param message The message that we want to display for the user.
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
@@ -240,7 +322,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
     /**
      * This method sets the previous screen .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     public void setUserRegistrationScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -338,7 +420,7 @@ public class BusinessCustomerRegistartionController extends AbstractBiteMeContro
  	/**
  	 * This method checks if the textField contains numbers only.
  	 * 
- 	 * @param txtField
+ 	 * @param txtField the text field that we want to check if it contains numbers only.
  	 * @return true or false according to the input.
  	 */
  	public boolean isInt(TextField txtField) {

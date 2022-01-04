@@ -22,15 +22,17 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
+ *  Class description: 
+ * This is a class for 
+ * controlling the UI IP
+ * form.
+ */
+
+/**
  * @author Lior, Guzovsky.
  * @author Ori, Malka. 
  * @author Mousa, Srour.
  * @author Alexander, Martinov
- * 
- * Class description: 
- * This is a class for 
- * controlling the UI IP
- * form.
  * 
  * @version 06/12/2021
  */
@@ -40,18 +42,27 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	 */
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button btnExit = null;;
 
 	@FXML
+	/**
+	 * The Confirm Button.
+	 */
 	private Button btnConfirmIP = null;;
 
 	@FXML
+	/**
+	 * The Text Field of enter Ip .
+	 */
 	private TextField enterIPTxt;
 
 	/**
 	 * Load the IP form
 	 * 
-	 * @param primaryStage
+	 * @param primaryStage  the Stage of the screen.
 	 * @throws Exception
 	 */
 	public void start(Stage primaryStage) throws Exception {
@@ -90,7 +101,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	 * Button to exit from
 	 * the frame. 
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void exitBtn(ActionEvent event) throws Exception {
 		System.out.println("exit IP server configuration");
@@ -104,7 +115,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	 * that asks for the order
 	 * number.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 * @throws Exception
 	 */
 	public void Confirm(ActionEvent event) throws Exception {
@@ -119,7 +130,7 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	 * This is a function
 	 * for setting the login Form.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 * @throws IOException
 	 */
 	public void setHomeScreen(Stage primaryStage) throws IOException { //should be changed to start method of entry home screen form
@@ -154,9 +165,8 @@ public class EntryIPConfirmationFormController extends AbstractBiteMeController{
 	/**
 	 * This is a function for setting Error 
 	 * to the Client UI 
-	 * TBD: add textfield to IP confirmation screen - ip inccorect
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setErrorToClientUI(ActionEvent event) {
 		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window

@@ -5,14 +5,15 @@ import java.io.Serializable;
 import util.Constans;
 
 /**
+ *  Class description: 
+ *  This Abstract class is a base class
+ *  for supply method.
+ */
+/**
  * 
  * @author Ori, Malka.
  * @author Lior, Guzovsky.
  * @author Shimon, Rubin.
- * 
- *  Class description: 
- *  This Abstract class is a base class
- *  for supply method.
  *  
  * @version 11/12/2021
  */

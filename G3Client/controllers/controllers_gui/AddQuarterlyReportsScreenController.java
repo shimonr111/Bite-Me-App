@@ -26,12 +26,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
+
+/**
+ * Class description: This is a class for controlling the UI of adding
+ * quarterly reports by BM
+ */
+
 /**
  * 
  * @author Alexander, Martinov.
  * 
- * Class description: This is a class for controlling the UI of adding
- * quarterly reports by BM
  * 
  * @version 27/12/2021
  */
@@ -40,33 +44,62 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * Class members description:
 	 */
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static AddQuarterlyReportsScreenController addQuarterlyReportsScreenController;
+	
+	/**
+	 * A static file initialized to null.
+	 */
 	private static File quarterlyPDF = null;
 
 	@FXML
+	/**
+	 * The Back Button.
+	 */
 	private Button btnBack;
 
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
 	private Button btnExit;
-
+	
 	@FXML
+	/**
+	 * The Help Button.
+	 */
 	private Button btnHelp;
 
 	@FXML
+	/**
+	 * The empty text that we display the messages to the user.
+	 */
 	private Text errorText;
 
 	@FXML
+	/**
+	 * The Save Button.
+	 */
 	private Button saveBtn;
 
 	@FXML
+	/**
+	 * The Upload Report Button.
+	 */
 	private Button uploadReportBtn;
 
 	/**
 	 * Calls a function that switches to the previous screen namely the branch
 	 * manager portal
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getBackBtn(ActionEvent event) {
@@ -76,7 +109,7 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * Clicking on exit button will log out the user then disconnect and exit.
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -91,7 +124,7 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * Display a help pop up message.
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -99,10 +132,10 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	}
 
 	/**
-	 * Converts picked report pdf file to byte array and sends to server file is
+	 * Converts picked report PDF file to byte array and sends to server file is
 	 * sent with it's name and branch being uploaded from
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getSaveBtn(ActionEvent event) {
@@ -130,7 +163,7 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	 * allows a user to pick a file to upload by using a file picker saves the file
 	 * for later uploading
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getUploadReport(ActionEvent event) {
@@ -153,7 +186,7 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * Displays a message at the bottom of the screen with the passed string
 	 * 
-	 * @param message
+	 * @param message the message that we want to display to the user.
 	 */
 	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
@@ -167,7 +200,7 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * initializes the previous screen
 	 * 
-	 * @param event
+	 * @param event an ActionEvent of javaFX.
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -200,7 +233,6 @@ public class AddQuarterlyReportsScreenController extends AbstractBiteMeControlle
 	/**
 	 * This is the initialization function for this screen when switched to.
 	 * 
-	 * @param message
 	 */
 	public void initAddQuarterlyReportsScreen() {
 		Platform.runLater(new Runnable() {

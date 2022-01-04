@@ -6,11 +6,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 
- * @author Ori, Malka.
- * 
  *  Class description:
  *  This class helps us to handle time and date (DB<->GUI).
+ */
+/**
+ * 
+ * @author Ori, Malka.
  *  
  * @version 11/12/2021
  */

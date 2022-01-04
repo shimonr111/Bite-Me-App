@@ -33,16 +33,17 @@ import communication.Answer;
 import communication.Message;
 import communication.Task;
 import javafx.fxml.Initializable;
-
 /**
- * 
- * @author Mousa, Srour.
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * controlling the UI of Supplier Registration Screen that appears immediately after clicking
  * on Supplier Registration  from the branch manager portal form.
  * 
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * @version 22/12/2021
  */
 public class SupplierRegistrationScreenController extends AbstractBiteMeController implements Initializable{
@@ -50,51 +51,99 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
 	/**
 	 * class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static SupplierRegistrationScreenController supplierRegistrationScreenController;
+    
+    /**
+     * ArrayList of suppliers waiting for registration that we get from DB.
+     */
     public static ArrayList<Supplier> suppliersWaitingForConfirmation = new ArrayList<>();
     
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button BackBtn;
 
     @FXML
+    /**
+     * The Complete Registration Button.
+     */
     private Button completeRegistrationBtn;
 
     @FXML
+    /**
+     * The Empty text that we display messages to the customer threw it.
+     */
     private Text displayMessage;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button exitBtn;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button helpBtn;
     
     @FXML
+    /**
+     * The text field that we use as a search bar.
+     */
     private TextField searchField;
 
     @FXML
+    /**
+     * The column of supplier ID.
+     */
     private TableColumn<Supplier, String> supllierIdCol;
 
     @FXML
+    /**
+     * The column of supplier Email.
+     */
     private TableColumn<Supplier, String>  supplierEmailCol;
 
     @FXML
+    /**
+     * The column of supplier Name.
+     */
     private TableColumn<Supplier, String>  supplierNameCol;
 
     @FXML
+    /**
+     * The column of supplier Phone Number.
+     */
     private TableColumn<Supplier, String> supplierPhoneCol;
 
     @FXML
+    /**
+     * The column of supplier Revenue Fee.
+     */
     private TableColumn<Supplier, Double> supplierRevenueFeeCol;
 
     @FXML
+    /**
+     * The TableView of suppliers.
+     */
     private TableView<Supplier> suppliersTable;
 
     /**
      * This method will call the method that loads
      * the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -108,7 +157,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
      * so we create a message to the server to change the supplier
      * status.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getCompleteRegistrationBtn(ActionEvent event) {
@@ -131,7 +180,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
      * This method will disconnect the specific client,
      * log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -147,7 +196,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
      * This method display a pop up message 
      * to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void getHelpBtn(ActionEvent event) {
@@ -190,7 +239,7 @@ public class SupplierRegistrationScreenController extends AbstractBiteMeControll
     /**
 	 * This method loads the previous screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setBranchManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

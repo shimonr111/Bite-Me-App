@@ -29,13 +29,18 @@ import communication.Message;
 import communication.Task;
 import javafx.fxml.Initializable;
 
+
 /**
- * 
- * @author Mousa, Srour
  * Class description: 
  * This is a class for 
  * controlling the UI of Company Registration from the HR manager portal
  * after clicking on that button.
+ * 
+ */
+
+/**
+ * 
+ * @author Mousa, Srour
  * 
  * @version 16/12/2021
  */
@@ -44,46 +49,96 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static CompanyRegistartionScreenController companyRegistartionScreenController;
+    
+    /**
+     * A static listener of this screen , so when we finish working on this screen we can stop it.
+     */
     private static AnalyzeClientListener listener;
+    
+    /**
+     * ArrayList of Text Fields so we can check them into a loop.
+     */
     private ArrayList<TextField> textFields = new ArrayList<>();
+    
+    /**
+     * The Chosen company for registration.
+     */
     private Company companyAfterRegistration;
     
     @FXML
+    /**
+     * Company Text Field.
+     */
     private TextField companyNameTxtField;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Save Button.
+     */
     private Button saveBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Company's E-Mail Text Field.
+     */
     private TextField companyEmailTxtField;
 
     @FXML
+    /**
+     * The Company's Address Text Field.
+     */
     private TextField companyAddTxtField;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The Confirm E-mail Text Field.
+     */
     private TextField confirmEmailTxtField;
 
     @FXML
+    /**
+     * The empty text that we show our messages to the user threw it.
+     */
     private Text errorText;
 
     @FXML
+    /**
+     * Company Name Text Field.
+     */
     private TextField companyNameTxtField1;
     
     /**
      * Call the method that loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -94,7 +149,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     /**
      * This method will log out , disconnect and then exist .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -109,7 +164,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
     /**
      * Display relevant pop up message.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -120,7 +175,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
      * This method will check if all the input from textFields were correctly filled in , 
      * and then it sends the relevant message to the server to Add the company to DB.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBtnSave(ActionEvent event) {
@@ -174,7 +229,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  	/**
  	 * This method checks if the textField contains numbers only.
  	 * 
- 	 * @param txtField
+ 	 * @param txtField teh text field that we want to check.
  	 * @return true or false according to the input.
  	 */
  	public boolean isInt(TextField txtField) {
@@ -189,7 +244,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
  	/**
  	 * This method sets a message from the listeners to the displayMessage .
  	 * 
- 	 * @param message
+ 	 * @param message the message that we want to display to the user.
  	 */
  	private void setRelevantTextToDisplayMessageText(String message) {
 		Platform.runLater(new Runnable() {
@@ -238,7 +293,7 @@ public class CompanyRegistartionScreenController extends AbstractBiteMeControlle
 	/**
 	 * this method loads the previous screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setHrManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

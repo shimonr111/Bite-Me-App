@@ -35,12 +35,9 @@ import util.OrderBusinessBudgetCalculation;
 
 /**
  * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * 
- * Class description: 
- * This is a class for the user 
- * to add all his payment to the system (cash / credit card, etc.)
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
  * 
  * @version 31/12/2021
  */
@@ -49,63 +46,133 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		/**
 		 * Class members description:
 		 */
+	
+		/**
+		 * The FXMLLoader of the current screen.
+		 */
 		private static FXMLLoader loader;
+		
+		/**
+		 * A static object of the current class.
+		 */
 	    private static OrderPaymentConfigurationScreenController orderPaymentConfigurationScreenController;
+	    
+	    /**
+	     * Static Order object for the current order flow.
+	     */
 	    private static Order order;
+	    
+	    /**
+	     * The amount of money that the customer has to pay.
+	     */
 	    private double amountLeftToPay;
 
 	    @FXML
+	    /**
+	     * The finish order button.
+	     */
 	    private Button finishOrderBtn;
 
 	    @FXML
+	    /**
+	     * The exit Button.
+	     */
 	    private Button btnExit;
 
 	    @FXML
+	    /**
+	     * The Back Button.
+	     */
 	    private Button btnBack;
 
 	    @FXML
+	    /**
+	     * The Help Button.
+	     */
 	    private Button btnHelp;
 
 	    @FXML
+	    /**
+	     * Account Balance Text Field.
+	     */
 	    private TextField availableAccountBalanceTextField;
 
 	    @FXML
+	    /**
+	     * Label of budget amount.
+	     */
 	    private Label availableBudgetBalanceLabel;
 
 	    @FXML
+	    /**
+	     * Budget Balance Text Field.
+	     */
 	    private TextField availableBudgetBalanceTextField;
 
 	    @FXML
+	    /**
+	     * The Text Field that the user has to enter the amount of money he wants to pay.
+	     */
 	    private TextField enterAmountTextField;
 
 	    @FXML
+	    /**
+	     * The total pay text field.
+	     */
 	    private TextField totalToPayTextField;
 
 	    @FXML
+	    /**
+	     * The empty text that we use to display messages to the user.
+	     */
 	    private Text errorText;
 
 	    @FXML
+	    /**
+	     * The Payment Methods comboBox.
+	     */
 	    private ComboBox<PaymentWay> paymentMethodCombo;
 
 	    @FXML
+	    /**
+	     * Add Amount Button.
+	     */
 	    private Button addAmountBtn;
 
 	    @FXML
+	    /**
+	     * Remove Amount Button.
+	     */
 	    private Button removeAmountBtn;
 
 	    @FXML
+	    /**
+	     * Label of employee budget.
+	     */
 	    private Label employeeBudgetLabel;
 
 	    @FXML
+	    /**
+	     * Already Cash Text Field.
+	     */
 	    private TextField alreadyCashTextField;
 
 	    @FXML
+	    /**
+	     * Already Credit Card Text Field.
+	     */
 	    private TextField alreadyCreditCardTextField;
 
 	    @FXML
+	    /**
+	     * Already Account Balance Text Field.
+	     */
 	    private TextField alreadyAccountBalanceTextField;
 
 	    @FXML
+	    /**
+	     * Already Employee Budget Text Field.
+	     */
 	    private TextField alreadyEmployeeBudgetTextField;
 
 	    /**
@@ -449,7 +516,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	     * This function is called from the previous 
 	     * screen controller.
 	     * 
-	     * @param order
+	     * @param order The current order.
 	     */
 	  public void initPaymentConfigurationScreen(Order order) {
 		  OrderPaymentConfigurationScreenController.order = order;
@@ -485,7 +552,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		/**
 		 * This method loads the customer portal
 		 * 
-		 * @param event
+		 * @param event ActionEvent of javaFX.
 		 */
 		public void setPrivateCustomerPortal(ActionEvent event) {
 				Platform.runLater(new Runnable() {
@@ -518,7 +585,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 		/**
 		 * This method loads the business customer portal
 		 * 
-		 * @param event
+		 * @param event ActionEvent of javaFX.
 		 */
 		public void setBusinessCustomerPortal(ActionEvent event) {
 				Platform.runLater(new Runnable() {
@@ -607,7 +674,7 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	 * the validity of the added amount 
 	 * for the payment methods such as credit card and etc.
 	 * 
-	 * @param paymentWay
+	 * @param paymentWay According to the payment way we check the fields.
 	 * @return boolean, true if valid 
 	 */
 	private boolean isPaymentAmountValidForAddAmount(PaymentWay paymentWay) {
@@ -644,8 +711,8 @@ public class OrderPaymentConfigurationScreenController  extends AbstractBiteMeCo
 	 * the validity of the removed amount 
 	 * from the payment methods such as credit card and etc.
 	 * 
-	 * @param paymentWay
-	 * @return boolean, true if valid 
+	 * @param paymentWay According to the payment way we check the fields.
+	 * @return boolean, true if valid .
 	 */
 	private boolean isPaymentAmountValidForRemoveAmount(PaymentWay paymentWay) {
 		double enteredAmount = Double.parseDouble(enterAmountTextField.getText());		

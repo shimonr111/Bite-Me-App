@@ -30,13 +30,16 @@ import communication.Task;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of ConfirmBusinessASkForDetails that appears immediately after clicking
  * on Confirm button from the BusinessCustomerConfirmation screen from HR Manager .
+ */
+
+
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 29/12/2021
  */
@@ -45,43 +48,81 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 	/**
 	 * class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static ConfirmBusinessAskForDetailsController confirmBusinessAskForDetailsController;
     
     @FXML
+    /**
+     * The Budget Amount Text Field.
+     */
     private TextField budgetAmountTxtField;
 
     @FXML
+    /**
+     * The Customer ID.
+     */
     private TextField workerIdTxtField;
 
     @FXML
+    /**
+     * ComboBox of budget types (daily,weekly,monthly).
+     */
     private ComboBox<BudgetType> budgetTypeCombo;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button exitBtn;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button helpBtn;
 
     @FXML
+    /**
+     * The Confirm Button.
+     */
     private Button completeRegistrationBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button backBtn;
 
     @FXML
+    /**
+     * Customer Last Name Text Field.
+     */
     private TextField workerLastNameTxtField;
 
     @FXML
+    /**
+     * Customer First Name Text Field.
+     */
     private TextField workerFirstNameTxtField;
 
     @FXML
+    /**
+     * The empty text that we show our messages to the user threw it.
+     */
     private Text displayText;
 
     /**
      * Call the method that loads the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -94,7 +135,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
      * were filled correctly , and if yes so we create
      * a new message to server to update those fields.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getCompleterRegistrationBtn(ActionEvent event) {
@@ -127,7 +168,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
      * This function will disconnect the client
      * then log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -142,7 +183,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
     /**
      * This function will display a pop up message to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -152,7 +193,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
  	/**
  	 * This method checks if the textField contains numbers only.
  	 * 
- 	 * @param txtField
+ 	 * @param txtField the text field that we want to check.
  	 * @return true or false according to the input.
  	 */
  	public boolean isInt(TextField txtField) {
@@ -203,7 +244,7 @@ public class ConfirmBusinessAskForDetailsController extends AbstractBiteMeContro
 	/**
 	 * This method loads the previous screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setConfirmationMainScreen(ActionEvent event) {
 			Platform.runLater(new Runnable() {

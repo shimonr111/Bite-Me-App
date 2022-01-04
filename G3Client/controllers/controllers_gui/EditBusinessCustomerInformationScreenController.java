@@ -33,14 +33,16 @@ import users.ConfirmationStatus;
 
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Edit Business Customer that appears immediately after clicking
  * on Edit while selecting Business Customer.
  * form.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 13/12/2021
  */
@@ -50,57 +52,114 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static EditBusinessCustomerInformationScreenController editBusinessCustomerInformationScreenController;
+    
+    /**
+     * The chosen business customer for edit.
+     */
     public static BusinessCustomer businessCustomer;
     
 	@FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Close Button.
+     */
     private Button btnclose;
 
     @FXML
     private Button btnclose1;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
     
     @FXML
+    /**
+     * The Save Button.
+     */
     private Button btnSave;
 
     @FXML
+    /**
+     * First Name Text Field.
+     */
     private TextField firstNameTxtField;
 
     @FXML
+    /**
+     * Last Name Text Field.
+     */
     private TextField lastNameTxtField;
 
     @FXML
+    /**
+     * User ID Text Field.
+     */
     private TextField idNumTxtField;
 
     @FXML
+    /**
+     * Phone Number Text Field.
+     */
     private TextField phoneTxtField;
 
     @FXML
+    /**
+     * Email Text Field.
+     */
     private TextField emailTxtField;
 
     @FXML
+    /**
+     * The monthly maximum budged Text Field.
+     */
     private TextField monthlyMaxBudgedTxtField;
 
 
     @FXML
+    /**
+     * ComboBox of Branches.
+     */
     private ComboBox<Branch> setHomeBranchCombo;
 
     @FXML
+    /**
+     * ComboBox of companies.
+     */
     private ComboBox<String> companyNameCombo;
 
     @FXML
+    /**
+     * ComboBox of budgetTypes (daily,weekly,monthly).
+     */
     private ComboBox<BudgetType> budgetTypeCombo;
 
     @FXML
+    /**
+     * ComboBox of statuses.
+     */
     private ComboBox<ConfirmationStatus> statusComboBox;
     
     @FXML
+    /***
+     * The empty text to display messages to the user.
+     */
     private Text displayMessage;
 
     /**
@@ -110,7 +169,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
      * if yes so we send a message to server asking to 
      * change the status of the customer.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getSaveBtn(ActionEvent event) {
@@ -150,7 +209,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
      * This method will call the method that loads
      * the previous screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -161,7 +220,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
      * This method will disconnect the client and
      * then log out and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -176,7 +235,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
     /**
      * This method will display a pop up message to the user.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -222,7 +281,7 @@ public class EditBusinessCustomerInformationScreenController extends AbstractBit
 	/**
 	 *  This method for the back button , it sets the previous screen.
 	 *  
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	public void setEditCustomerInformationScreen(ActionEvent event) {
 			Platform.runLater(new Runnable() {

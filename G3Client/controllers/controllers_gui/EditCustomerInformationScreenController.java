@@ -36,13 +36,15 @@ import users.User;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of Edit Customer 
  * form.
+ */
+/**
+ * 
+ * @author Mousa, Srour.
+ * 
  * 
  * @version 13/12/2021
  */
@@ -51,54 +53,105 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static EditCustomerInformationScreenController editCustomerInformationScreenController;
+    
+    /**
+     * The arrayList of customers that we get from DB to display into a table.
+     */
     public static ArrayList<User> customersList = new ArrayList<>();
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Save Button.
+     */
     private Button saveBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
     
     @FXML
+    /**
+     * The Edit Button.
+     */
     private Button editCustomerBtn;
 
     @FXML
+    /**
+     * The Remove Button.
+     */
     private Button removeCustomerBtn;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The TableView of customer.
+     */
     private TableView<User> customerListTable;
     
     @FXML
+    /**
+     * The Column that contains the customer ID.
+     */
     private TableColumn<User, String> customerIdCol;
 
     @FXML
+    /**
+     * The Column that contains the customer first name.
+     */
     private TableColumn<User, String> firstNameCol;
 
     @FXML
+    /**
+     * The Column that contains the customer last name.
+     */
     private TableColumn<User, String> lastNameCol;
 
     @FXML
+    /**
+     * The Column that contains the customer type.
+     */
     private TableColumn<User, String> customerTypeCol;
 
     @FXML
+    /**
+     * The Column that contains the customer status.
+     */
     private TableColumn<User, String> customerStatusCol;
 
     @FXML
+    /**
+     * The empty text that we use to display messages to the user.
+     */
     private Text errorText;
     
     /**
      * This method calls the setBranchManagerPortal to get back the previous screen
      * This method works immedietly after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -111,7 +164,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
      * we check if the user is instance of hr manager or business 
      * customer and send message to the server accordingly.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getEditCustomer(ActionEvent event) {
@@ -138,7 +191,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     /**
      * This method does log out and then exit .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -153,7 +206,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
     /**
      * Displays a pop up message to the user .
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -164,7 +217,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
      * This method runs after clicking on remove button, it creates and sends the
      * revelvant message to the server according to the user type.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     void getRemoveBtn(ActionEvent event) {
@@ -231,7 +284,7 @@ public class EditCustomerInformationScreenController extends AbstractBiteMeContr
 	 /**
      * Loads the previous screen after clicking on back button.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	public void setBranchManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {

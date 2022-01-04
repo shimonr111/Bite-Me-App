@@ -3,15 +3,18 @@ package users;
 import java.io.Serializable;
 
 /**
- * 
- * @author Lior, Guzovsky.
- * @author Alexander, Martinov.
- * @author Ori, Malka.
- * 
  *  Class description: This class sets data for
  *  each company in the system.
  *  This class defines the main attributes and functionalities
  *  of a Company in our system.
+ */
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Alexander, Martinov.
+ * @author Ori, Malka.
+ * @author Mousa, Srour.
  *  
  * @version 15/12/2021
  */
@@ -47,11 +50,11 @@ public class Company implements Serializable{
 	/**
 	 * This is the constructor of the class.
 	 * 
-	 * @param companyName
-	 * @param companyStatusInSystem
-	 * @param address
-	 * @param email
-	 * @param companyCode
+	 * @param companyName The Company Name.
+	 * @param companyStatusInSystem The company status.
+	 * @param address The company address.
+	 * @param email The company email.
+	 * @param companyCode the company code.
 	 */
 	public Company(String companyName, ConfirmationStatus companyStatusInSystem, String address, String email, int companyCode) {
 		super();

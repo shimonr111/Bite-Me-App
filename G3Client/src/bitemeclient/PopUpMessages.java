@@ -16,27 +16,24 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * @author Mousa, Srour. 
- * @author Shimon, Rubin.
- * @author Lior, Guzovsky.
- *
  * Class description: 
- * 
  * This is a class for pop
  * up messages to the client.
  *
+ */
+/**
+ * @author Mousa, Srour. 
+ * @author Shimon, Rubin.
+ * @author Lior, Guzovsky.
  * @version 20/12/2021
  */
 public class PopUpMessages {
-	/**
-	 * Class members description:
-	 */
 
 	/**
 	 * This function shows pop
 	 * up messages to the client UI.
 	 * 
-	 * @param message
+	 * @param message the message that we will display .
 	 */
 	public static void helpMessage(String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -58,8 +55,8 @@ public class PopUpMessages {
 	 * this box appears with 2 buttons OK and Cancel
 	 * the method returns Optional<ButtonType> , we have to check if its equals to OK to continue , other wise we do nothing.
 	 * example after calling this method : if(confirmationMessage(message) == ButtonType.OK)
-	 * @param message
-	 * @return
+	 * @param message message the message that we will display .
+	 * @return the option that the user choose .
 	 */
 	public static Optional<ButtonType> confirmationMessage(String message ) {
 		Alert.AlertType type = Alert.AlertType.CONFIRMATION;
@@ -77,8 +74,8 @@ public class PopUpMessages {
 	 * informs him about something (such as finishing the order
 	 * process).
 	 * 
-	 * @param message
-	 * @return
+	 * @param message message the message that we will display .
+	 * @return the option that the user choose .
 	 */
 	public static Optional<ButtonType> updateMessage(String message ){
 		Alert.AlertType type = Alert.AlertType.INFORMATION;
@@ -92,13 +89,13 @@ public class PopUpMessages {
 	
 
 	/**
+	 * 
 	 * Simulation Model for sending Email \ SMS 
 	 * from the Supplier to the client about his 
-	 * Order status
-	 * 
-	 * @param title
-	 * @param message
-	 * @param bodyMessage
+	 * Order status.
+	 * @param title the title of the message we want to display.
+	 * @param Headermessage the header of the message.
+	 * @param bodyMessage the message we want to display.
 	 */
 	public static void simulationMessage(String title ,String Headermessage, String bodyMessage) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -112,6 +109,10 @@ public class PopUpMessages {
 		alert.showAndWait();
 	}
 	
+	/**
+	 * this method is to put the buttons of Alert class in the center.
+	 * @param dialogPane a dialog pane.
+	 */
 	public static void centerButtons(DialogPane dialogPane) {
         Region spacer = new Region();
         ButtonBar.setButtonData(spacer, ButtonBar.ButtonData.BIG_GAP);

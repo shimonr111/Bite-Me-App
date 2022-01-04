@@ -2,24 +2,34 @@ package controllers_gui;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 import util.SupplierByReport;
+
+/**
+ *  Class description: 
+ * This is a class for generating reports from SupplierByReport arrays
+ * 
+ */
+
 /**
  * 
  * @author Alexander, Martinov
- * Class description: 
- * This is a class for generating reports from SupplierByReport arrays
- * 
  * @version 21/12/2021
  */
 public class ReportGenerator {
 	/**
 	 * Class members description:
 	 */
+	/**
+	 * The List of suppliers to generate reports.
+	 */
 	private static SupplierByReport[] suppliers;
+	
+	/**
+	 * The list of quarters according to quarter number.
+	 */
 	private static SupplierByReport[][] quarter;
     /**
      * Returns which report types are currently available

@@ -17,10 +17,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
+ * Class description: 
+ * This is a class for displaying a system report in text format
+ */
+
+/**
  * 
  * @author Alexander, Martinov.
- * 
- * Class description: This is a class for displaying a system report in text format
  * 
  * @version 26/12/2021
  */
@@ -29,22 +32,44 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 	    /**
 	     * Class members description:
 	     */
+	
+		/**
+		 * The String that we put the report into it.
+		 */
 	    private static String report;
+	    
+		/**
+		 * The FXMLLoader of the current screen.
+		 */
 	    private static FXMLLoader loader;
+	    
+		/**
+		 * A static Stage of the current screen.
+		 */
 	    private static Stage Stage;
+	    
+		/**
+		 * The FXMLLoader of the current screen.
+		 */
 	    public static DisplayReportScreenController displayReportScreenController;
 	    
 	    @FXML
+	    /**
+	     * The Text Field .
+	     */
 	    private TextArea TextField;
 	    
 	    @FXML
+	    /**
+	     * The Exit Button.
+	     */
 		private Button btnExit = null;
 		
 		
 		/**
-	     * setter for the report to be displayed
+	     * setter for the report to be displayed.
 	     * 
-	     * @param report report in string format
+	     * @param report report in string format.
 	     */
 		public static void setReport(String report) {
 			DisplayReportScreenController.report = report;
@@ -52,7 +77,7 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 		
 		/**
 	     * Screen initialization method
-	     * calls report text setter
+	     * calls report text setter.
 	     * 
 	     * @param arg0
 	     * @param arg1
@@ -126,7 +151,7 @@ public class DisplayReportScreenController extends AbstractBiteMeController impl
 	 	/**
 	     * This method closes the current report display screen
 	     * 
-	     * @param event
+	     * @param event ActionEvent of javaFX.
 	     * @throw Exception
 	     */
 		public void getExitBtn(ActionEvent event) throws Exception {

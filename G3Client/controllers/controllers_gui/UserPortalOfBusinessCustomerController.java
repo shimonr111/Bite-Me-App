@@ -26,14 +26,15 @@ import users.BusinessCustomer;
 import users.ConfirmationStatus;
 
 /**
- * 
- * @author Mousa, Srour.
- * @author Alexander, Martinov.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of hrManager
  * form.
+ */
+/**
+ * 
+ * @author Mousa, Srour.
+ * @author Alexander, Martinov.
  * 
  * @version 09/12/2021
  */
@@ -42,44 +43,82 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	public static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
 	private static UserPortalOfBusinessCustomerController userPortalOfBusinessCustomerController;
 	
 	@FXML
+	/**
+	 * Exit Button.
+	 */
 	private Button btnExit;
 	
 	@FXML
+	/**
+	 * Log Out Button.
+	 */
 	private Button btnLogout;
 	
 	@FXML
+	/**
+	 * customer Name Label.
+	 */
 	private Label customerNameLabel;
 	
 	@FXML
+	/**
+	 * Help Button.
+	 */
 	private Button btnHelp;
 	
 	@FXML
+	/**
+	 * Start Order Button.
+	 */
 	private Button btnStartOrder;
 
     @FXML
+    /**
+	 * View Orders Button.
+	 */
     private Button viewOrdersBtn;
     
 	@FXML
+	/**
+	 * Company Name Label.
+	 */
 	private Label companyNameLabel;
 	
     @FXML
+    /**
+     * The text to display the company name.
+     */
     private Text companyName;
     
     @FXML
+    /**
+     * The text to display the customer name.
+     */
     private Text businessCustomerName;
     
     @FXML
+    /**
+     * the text to display the customer status.
+     */
     private Text statusText;
     
     /**
      * This method will disconnect the specific client,
      * log out the connected user and exit.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getExitBtn(ActionEvent event) {
@@ -96,7 +135,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
      * This method will log out the connected user,
      * and load the login screen again.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
 	@FXML
 	public void getLogoutBtn(ActionEvent event) {
@@ -109,7 +148,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	/**
 	 * This is pop message for the help button.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	@FXML
 	public void getHelpBtn(ActionEvent event) {
@@ -135,7 +174,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	 * This method will load the
 	 * View Order screen.
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
     @FXML
     public void getViewOrdersBtn(ActionEvent event) {
@@ -147,7 +186,7 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	/**
 	 * Returns to login screen
 	 * 
-	 * @param event
+	 * @param event ActionEvent of javaFX.
 	 */
 	private void setToLoginScreen(ActionEvent event) {
 		Platform.runLater(new Runnable() {
@@ -180,8 +219,8 @@ public class UserPortalOfBusinessCustomerController extends AbstractBiteMeContro
 	 * This is the initialization function for this 
 	 * screen.
 	 * 
-	 * @param primaryStage
-	 * @param fxmlPath
+	 * @param primaryStage The stage of the screen.
+	 * @param fxmlPath The fxml path of the current screen.
 	 */
 	public void initBusinessCustomerUserPortal(Stage primaryStage,String fxmlPath) {
 		Platform.runLater(new Runnable() {

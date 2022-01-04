@@ -2,12 +2,16 @@ package bitemeclient;
 
 import java.io.IOException;
 import communication.Message;
-
 /**
+ * Class Description:
  * This class constructs the UI for a chat client.
  *
+ */
+
+/**
  * @author Ori, Malka.
  * @author Lior, Guzovsky,
+ * @author Mousa, Srour.
  * @version 4/12/2021
  */
 public class BiteMeClientController{

@@ -43,14 +43,18 @@ import orders.Order;
 import users.BusinessCustomer;
 
 /**
- * 
- * @author Lior, Guzovsky
- * @author Shimon, Rubin
- * 
- * Class description: 
+ *  Class description: 
  * This is a class for 
  * controlling the UI of the item 
  * choosing for the private customer.
+ */
+
+
+/**
+ * 
+ * @author Lior, Guzovsky.
+ * @author Shimon, Rubin.
+ * @author Mousa, Srour.
  * 
  * @version 14/12/2021
  */
@@ -59,69 +63,154 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static OrderChooseItemsScreenController orderChooseItemsScreenController;
+    
+    /**
+     * A static String of restaurant ID.
+     */
 	private static String restaurantID;
+	
+	/**
+	 * A Static String of restaurant Name.
+	 */
 	private static String restaurantName;
+	
+	/**
+	 * The ArrayList of Items that we get from DB to display into the menu.
+	 */
 	public static ArrayList<Item> itemListOfMenuFromDB = new ArrayList<>();
-	static Order order = new Order(null,null,null); //create empty order and update it during the process
+	
+	/**
+	 * Static empty order to update it during the process.
+	 */
+	static Order order = new Order(null,null,null);
+	
+	/**
+	 *  Observable List of Items to display into the menu.
+	 */
 	private static ObservableList<Item> itemsForCart = FXCollections.observableArrayList();
 	
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Exit Button.
+     */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button addToCartBtn;
 
     @FXML
+    /**
+     * The TableView of the Cart.
+     */
     private TableView<Item> cartTable;
 
     @FXML
+    /**
+     * Item Name Column for cart.
+     */
     private TableColumn<Item, String> itemCartColumn;
 
     @FXML
+    /**
+     * Item Size Column for cart.
+     */
     private TableColumn<Item, ItemSize> sizeCartColumn;
 
     @FXML
+    /**
+     * Item price column for cart.
+     */
     private TableColumn<Item, Double> priceCartColumn;
 
     @FXML
+    /**
+     * Item comment column for cart.
+     */
     private TableColumn<Item, String> commentCartColumn;
 
     @FXML
+    /**
+     * The Remove Button.
+     */
     private Button removeItemBtn;
 
     @FXML
+    /**
+     * The Menu TableView.
+     */
     private TableView<ItemWithPicture> menuTable;
     
     @FXML
+    /**
+     * The Picture Column.
+     */
     private TableColumn<ItemWithPicture, ImageView> pictureMenuColumn;
     
     @FXML
+    /**
+     * The Category of item column.
+     */
     private TableColumn<ItemWithPicture, ItemCategory> menuCategoryColumn;
 
     @FXML
+    /**
+     * The Price of item column.
+     */
     private TableColumn<ItemWithPicture, String> itemMenuColumn;
 
     @FXML
+    /**
+     * The item size column for menu.
+     */
     private TableColumn<ItemWithPicture, ItemSize> sizeMenuColumn;
-
+    
     @FXML
+    /**
+     * The price column for menu.
+     */
     private TableColumn<ItemWithPicture, Double> priceMenuColumn;
 
     @FXML
+    /**
+     * The total price text field.
+     */
     private TextField totalPriceTxtField;
 
     @FXML
+    /**
+     * The Next Button.
+     */
     private Button nextBtn;
 
     @FXML
+    /**
+     * the text that we use to display message for the customer.
+     */
     private Text errorText;
 
     @FXML
@@ -133,7 +222,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * if he did, add to Cart table view
      * else, print error message using errorText
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getAddToCartBtn(ActionEvent event) {
@@ -179,7 +268,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * Back button for the restaurant
      * picking screen.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -221,7 +310,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
     /**
      * This method move to next screen
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getBtnNext(ActionEvent event) {
@@ -260,7 +349,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * This is a method for getting 
      * information for the user
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -288,7 +377,7 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * and update price and order 
      * Object.
      * 
-     * @param event
+     * @param event ActionEvent of javaFX.
      */
     @FXML
     public void getRemoveItemBtn(ActionEvent event) {
@@ -310,8 +399,8 @@ public class OrderChooseItemsScreenController extends AbstractBiteMeController i
      * This function is called from the previous 
      * screen controller.
      * 
-     * @param pickRestaurantId
-     * @param pickRestaurantName
+     * @param pickRestaurantId The restaurant ID.
+     * @param pickRestaurantName the restaurant name.
      */
     public void initChooseItemsScreen(String pickedRestaurantId, String pickedRestaurntName ) {
     	restaurantID = pickedRestaurantId;

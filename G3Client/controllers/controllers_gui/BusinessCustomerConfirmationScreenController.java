@@ -36,14 +36,16 @@ import communication.Task;
 import javafx.fxml.Initializable;
 
 /**
- * 
- * @author Mousa, Srour.
- * 
  * Class description: 
  * This is a class for 
  * controlling the UI of business customer confirmation
  * from the HR manager portal
  * after clicking on that button.
+ */
+
+/**
+ * 
+ * @author Mousa, Srour.
  * 
  * @version 15/12/2021
  */
@@ -52,45 +54,97 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 	/**
 	 * Class members description:
 	 */
+	
+	/**
+	 * The FXMLLoader of the current screen.
+	 */
 	private static FXMLLoader loader;
+	
+	/**
+	 * A static object of the current class.
+	 */
     private static BusinessCustomerConfirmationScreenController businessCustomerConfirmationScreenController;
+    
+    /**
+     * A static arrayList of business customers that we get from DB .
+     */
     public static ArrayList<BusinessCustomer> businessCustomersWaitingForConfirmation = new ArrayList<>();
+    
+    /**
+     * The chosen customer to confirm.
+     */
 	public static BusinessCustomer businessCustomerForConfirmation;
 	
 	@FXML
+	/**
+	 * The Exit Button.
+	 */
     private Button btnExit;
 
     @FXML
+    /**
+     * The Confirm Button.
+     */
     private Button confirmBtn;
 
     @FXML
+    /**
+     * The Back Button.
+     */
     private Button btnBack;
 
     @FXML
+    /**
+     * The Deny Button.
+     */
     private Button denyBtn;
 
     @FXML
+    /**
+     * The Table that display the customers.
+     */
     private TableView<BusinessCustomer> businessCustomerTable;
 
     @FXML
+    /**
+     * The column that contains the customer ID.
+     */
     private TableColumn<BusinessCustomer,String> employeeIdCol;
 
     @FXML
+    /**
+     * The column that contains the customer's first Name.
+     */
     private TableColumn<BusinessCustomer, String> employeeNameCol;
 
     @FXML
+    /**
+     * The column that contains the customer's last Name.
+     */
     private TableColumn<BusinessCustomer, String> employeeLastNameCol;
 
     @FXML
+    /**
+     * The Help Button.
+     */
     private Button btnHelp;
 
     @FXML
+    /**
+     * The Save Button.
+     */
     private Button saveBtn;
 
     @FXML
+    /**
+     * The Empty text that we display messages to the customer threw it.
+     */
     private Text errorText;
     
     @FXML
+    /**
+     * The text fields that we use as a search bar.
+     */
     private TextField searchField;
     
     /**
@@ -98,7 +152,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
      * after pressing on back button we will call 
      * the method that loads the previous screen.
      * 
-     * @param event
+     * @param event An ActionEvent of javaFX.
      */
     @FXML
     public void getBackBtn(ActionEvent event) {
@@ -110,7 +164,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
      * he will be deleted from the list after confirming him because the list will have
      * only the remaining request to confirm/deny.
      * 
-     * @param event
+     * @param event An ActionEvent of javaFX.
      */
     @FXML
     public void getConfirmBtn(ActionEvent event) {
@@ -131,7 +185,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
      * Denying confirmation request for employee will lead to delete him from the DB
      * and deleting him from the table.
      * 
-     * @param event
+     * @param event An ActionEvent of javaFX.
      */
     @FXML
     public void getDenyBtn(ActionEvent event) {
@@ -153,7 +207,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     /**
      * Clicking on exit button will log out the user then disconnect and exit.
      * 
-     * @param event
+     * @param event An ActionEvent of javaFX.
      */
     @FXML
     public void getExitBtn(ActionEvent event) {
@@ -168,7 +222,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
     /**
      * Display a pop up message.
      * 
-     * @param event
+     * @param event An ActionEvent of javaFX.
      */
     @FXML
     public void getHelpBtn(ActionEvent event) {
@@ -212,7 +266,7 @@ public class BusinessCustomerConfirmationScreenController extends AbstractBiteMe
 	/**
 	 * This method loads the previous screen.
 	 * 
-	 * @param event
+	 * @param event An ActionEvent of javaFX.
 	 */
 	public void setHrManagerPortal(ActionEvent event) {
 			Platform.runLater(new Runnable() {
