@@ -16,9 +16,6 @@ import util.SupplierByReport;
  * This is a class for handling supplier report objects
  * allows creating, storing and retrieving reports
  * also creates a return message when polled from the client
- */
-
-/**
  * 
  * @author Alexander, Martinov.
  * 

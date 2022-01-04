@@ -20,9 +20,6 @@ import reports.ReportsController;
  *  Class description:
  *  This is a class which is a Wrapper for handling
  *  all messages from the client.
- */
-
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

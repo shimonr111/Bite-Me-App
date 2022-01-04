@@ -1,11 +1,8 @@
 package util;
 
 /**
- * 
  * Class description: 
  * This class manages all the system constants
- */
-/**
  * 
  * @author Lior, Guzovsky.
  * @author Mousa, Srour.

@@ -42,9 +42,6 @@ import util.OrderForView;
  * used for getting information 
  * related to the DB in the order 
  * process.
- */
-
-/**
  * 
  * @author Lior, Guzovsky
  * @author Shimon, Rubin
