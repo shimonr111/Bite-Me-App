@@ -41,99 +41,108 @@ public class LoginQueries{
 	 * @throws SQLException
 	 */
 	public static Message createLoginMessageForServer(Message messageFromClient) throws SQLException {
-		Message recivedMessageFromClient = messageFromClient;
-		String userName = ((Login)messageFromClient.getObject()).getUserName();
-		String password = ((Login)messageFromClient.getObject()).getPassword();
-		String userId = null;
-		String userType = null;
-		
-		/**
-		 * Get the row from the DB if 
-		 * possible from the login table.
-		 */
-		ResultSet rs = Query.getRowsFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
-		//If the row doesn't exist in login Table
-		if(!rs.isBeforeFirst()) {
-			recivedMessageFromClient.setObject(null);
-			recivedMessageFromClient = setMessageAccordingly(null,recivedMessageFromClient,null);
+		/*check if the message is null for testing */
+		if(messageFromClient == null) {
+			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.MESSAGE_IS_NULL,null);
+		}
+		if(messageFromClient.getObject() instanceof Login) {
+			Message recivedMessageFromClient = messageFromClient;
+			String userName = ((Login)messageFromClient.getObject()).getUserName();
+			String password = ((Login)messageFromClient.getObject()).getPassword();
+			String userId = null;
+			String userType = null;
+			
+			/**
+			 * Get the row from the DB if 
+			 * possible from the login table.
+			 */
+			ResultSet rs = Query.getRowsFromTableInDB("login","username='"+userName+"' AND password='"+password+"'");
+			//If the row doesn't exist in login Table
+			if(!rs.isBeforeFirst()) {
+				recivedMessageFromClient.setObject(null);
+				recivedMessageFromClient = setMessageAccordingly(null,recivedMessageFromClient,null);
+				return recivedMessageFromClient;
+			}
+			//Get the user Type and ID from the statement
+			if(rs.next()) {
+			userId = rs.getString(3);
+			userType =  rs.getString(4);
+			}
+			rs.close();
+			/**
+			 * Get a row from the 
+			 * DB which is according to the userType table
+			 * For example: "Customer Table.
+			 */
+			rs = Query.getRowsFromTableInDB(userType,"userID='"+userId+"'");
+			switch(userType) {
+			case "customer":
+				/**
+				 * Get a row of customer user
+				 */
+				Customer customerResult = null;
+				//parse data and put in instance.
+				customerResult = LoginQueries.getCustomer(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient,"customer");
+				break;
+			case "ceobiteme":
+				/**
+				 * Get a row of ceo user
+				 */
+				CeoBiteMe ceoResult = null;
+				//parse data and put in instance.
+				ceoResult = LoginQueries.getCeo(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient,"ceobiteme");
+				break;
+			case "hrmanager":
+				/**
+				 * Get a row of hr user
+				 */
+				HrManager hrManagerResult=null;
+				//parse data and put in instance.
+				hrManagerResult=LoginQueries.getHrManager(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient,"hrmanager");
+				break;
+			case "businesscustomer":
+				/**
+				 * Get a row of business customer user
+				 */
+				BusinessCustomer businessCustomerResult = null;
+				//parse data and put in instance.
+				businessCustomerResult = LoginQueries.getBusinessCustomer(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient,"businesscustomer");
+				break;
+			case "supplierworker":
+				/**
+				 * Get a row of supplier worker user
+				 */
+				SupplierWorker supplierResult = null;
+				//parse data and put in instance.
+				supplierResult = LoginQueries.getSupplierWorker(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplierworker");
+				break;
+			case "branchmanager":
+				/**
+				 * Get a row of branch manager user
+				 */
+				BranchManager branchManagerResult = null;
+				//parse data and put in instance.
+				branchManagerResult = LoginQueries.getBranchManager(rs);
+				//set the Message to return to the Client side
+				recivedMessageFromClient = setMessageAccordingly(branchManagerResult,recivedMessageFromClient,"branchmanager");
+			default:
+				break;
+			}
 			return recivedMessageFromClient;
 		}
-		//Get the user Type and ID from the statement
-		if(rs.next()) {
-		userId = rs.getString(3);
-		userType =  rs.getString(4);
+		else {
+			return new Message(Task.PRINT_ERROR_TO_SCREEN,Answer.OBJECT_IS_NOT_LOGIN,null);
 		}
-		rs.close();
-		/**
-		 * Get a row from the 
-		 * DB which is according to the userType table
-		 * For example: "Customer Table.
-		 */
-		rs = Query.getRowsFromTableInDB(userType,"userID='"+userId+"'");
-		switch(userType) {
-		case "customer":
-			/**
-			 * Get a row of customer user
-			 */
-			Customer customerResult = null;
-			//parse data and put in instance.
-			customerResult = LoginQueries.getCustomer(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(customerResult,recivedMessageFromClient,"customer");
-			break;
-		case "ceobiteme":
-			/**
-			 * Get a row of ceo user
-			 */
-			CeoBiteMe ceoResult = null;
-			//parse data and put in instance.
-			ceoResult = LoginQueries.getCeo(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(ceoResult,recivedMessageFromClient,"ceobiteme");
-			break;
-		case "hrmanager":
-			/**
-			 * Get a row of hr user
-			 */
-			HrManager hrManagerResult=null;
-			//parse data and put in instance.
-			hrManagerResult=LoginQueries.getHrManager(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(hrManagerResult,recivedMessageFromClient,"hrmanager");
-			break;
-		case "businesscustomer":
-			/**
-			 * Get a row of business customer user
-			 */
-			BusinessCustomer businessCustomerResult = null;
-			//parse data and put in instance.
-			businessCustomerResult = LoginQueries.getBusinessCustomer(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(businessCustomerResult,recivedMessageFromClient,"businesscustomer");
-			break;
-		case "supplierworker":
-			/**
-			 * Get a row of supplier worker user
-			 */
-			SupplierWorker supplierResult = null;
-			//parse data and put in instance.
-			supplierResult = LoginQueries.getSupplierWorker(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient=setMessageAccordingly(supplierResult,recivedMessageFromClient,"supplierworker");
-			break;
-		case "branchmanager":
-			/**
-			 * Get a row of branch manager user
-			 */
-			BranchManager branchManagerResult = null;
-			//parse data and put in instance.
-			branchManagerResult = LoginQueries.getBranchManager(rs);
-			//set the Message to return to the Client side
-			recivedMessageFromClient = setMessageAccordingly(branchManagerResult,recivedMessageFromClient,"branchmanager");
-		default:
-			break;
-		}
-		return recivedMessageFromClient;
 	}
 	
 	/**

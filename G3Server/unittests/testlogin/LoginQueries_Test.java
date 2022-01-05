@@ -25,7 +25,7 @@ public class LoginQueries_Test {
 	final public static String DEFAULT_DB_USER = "root";
 	
 	/*DB password for specific user*/
-	final public static String DEFAULT_DB_PASSWORD = "S6FW8Ps6fw8p!";
+	final public static String DEFAULT_DB_PASSWORD = "09000772Mm-";
 	
 	/*Create login object*/
 	public Login loginForTest;
@@ -65,12 +65,12 @@ public class LoginQueries_Test {
 	private String passwordHrManager = "intelhr";
 	 
 	/*User name and password for pending approval user account*/
-	private String userNameForPendingApprovalStatusUser = "agadircc";
-	private String passwordForPendingApprovalStatusUser = "agadircc";
+	private String userNameForPendingApprovalStatusUser = "mousa";
+	private String passwordForPendingApprovalStatusUser = "mousa";
 	
 	/*User name and password for Frozen user account*/
-	private String userNameForFrozenStatusUser = "bbbcr";
-	private String passwordForFrozenStatusUser = "bbbcr";
+	private String userNameForFrozenStatusUser = "lior";
+	private String passwordForFrozenStatusUser = "lior";
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -342,7 +342,7 @@ public class LoginQueries_Test {
 	void test_user_frozen() {	
 		
 		/*Expected result from LoginQuery.createLoginMessageForServer(Message messageFromClient)*/
-		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_SUPPLIER;
+		Answer answerExpectedForTest = Answer.CREATE_USER_PORTAL_FOR_CUSTOMER;
 		Answer answerReceived = null;
 		
 		/*Put in the Login object the userName and password for user frozen */
@@ -351,6 +351,62 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
+		
+		try {
+			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*Check if the answer is correct - use Assert true*/
+		assertTrue(answerReceived == answerExpectedForTest);
+	}
+	
+	@Test
+	//Test Description: Check if when sending null message, Answer.ERROR_USER_NOT_CONFIRMED; from the server
+	//Test Input:username = "userNameForNull" , password = "PasswordForNull"
+	//Test Expected Output: Message received with Answer.MESSAGE_IS_NULL
+	void test_message_is_null() {	
+		
+		/*Expected result from LoginQuery.createLoginMessageForServer(Message messageFromClient)*/
+		Answer answerExpectedForTest = Answer.MESSAGE_IS_NULL;
+		Answer answerReceived = null;
+		
+		/*Put in the Login object the userName and password for null message */
+		loginForTest = new Login("userNameForNull","PasswordForNull"); 
+		
+		/*Set the object in the message we send to the class under test LoginQuery in the function
+		 * createLoginMessageForServer()*/
+		messageFromClassUnderTest.setObject(loginForTest);
+		
+		try {
+			answerReceived = (LoginQueries.createLoginMessageForServer(null)).getAnswer();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*Check if the answer is correct - use Assert true*/
+		assertTrue(answerReceived == answerExpectedForTest);
+	}
+	
+	@Test
+	//Test Description: Check if when sending message with object that is not login (ex: null) , Answer.OBJECT_IS_NOT_LOGIN; from the server
+	//Test Input:username = "userNameForNotLogin" , password = "PasswordForNotLogin"
+	//Test Expected Output: Message received with Answer.OBJECT_IS_NOT_LOGIN
+	void test_object_of_message_is_not_login() {	
+		
+		/*Expected result from LoginQuery.createLoginMessageForServer(Message messageFromClient)*/
+		Answer answerExpectedForTest = Answer.OBJECT_IS_NOT_LOGIN;
+		Answer answerReceived = null;
+		
+		/*Put in the Login object the userName and password for non login object */
+		loginForTest = new Login("userNameForNotLogin","PasswordForNotLogin"); 
+		
+		/*Set the object in the message we send to the class under test LoginQuery in the function
+		 * createLoginMessageForServer()*/
+		messageFromClassUnderTest.setObject(null);
 		
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
