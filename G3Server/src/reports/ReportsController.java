@@ -3,8 +3,12 @@ package reports;
 import java.io.ByteArrayInputStream;
 import java.io.ObjectInputStream;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+
 import communication.Answer;
 import communication.Message;
 import query.Query;
@@ -81,9 +85,14 @@ public class ReportsController{
      *@param messageFromClient message received from client
      */
 	public static Message getSuppliersByBranch(Message messageFromClient) {
+		
 		Message returnMessageToClient = messageFromClient;
 		String[] branchAndDate = (String[])messageFromClient.getObject();
-		if(branchAndDate[2].equals("quarterly")) {
+		if(branchAndDate==null||branchAndDate[0]==null||branchAndDate[1]==null||branchAndDate[2]==null||!isDateFormatValid(branchAndDate[1])) {
+			returnMessageToClient.setObject(null);
+			returnMessageToClient.setAnswer(Answer.SENT_REPORT_SUPPLIERS_LIST);
+		}
+		else if(branchAndDate[2].equals("quarterly")) {
 			returnMessageToClient.setObject(getQuarterReports(branchAndDate));
 			returnMessageToClient.setAnswer(Answer.SENT_REPORT_QUARTERLY_LIST);
 		}
@@ -98,6 +107,18 @@ public class ReportsController{
 		}
 		return returnMessageToClient;
 	}
+	
+	private static boolean isDateFormatValid(String date) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date d;
+		try {
+			d = dateFormat.parse(date);
+			return true;
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+
 	private static Object getSupplierIdReport(String[] supplierIdAndDate) {
 		ResultSet rs;
 		int i=0;
