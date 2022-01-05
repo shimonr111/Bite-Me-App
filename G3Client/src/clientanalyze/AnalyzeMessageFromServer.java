@@ -213,6 +213,11 @@ public class AnalyzeMessageFromServer {
 				case ERROR_USER_NOT_CONFIRMED:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.PRINT_ERROR_TO_SCREEN;
+					answerForUnitTest = Answer.ERROR_USER_NOT_CONFIRMED;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientIsNotConfirmed();
 					}

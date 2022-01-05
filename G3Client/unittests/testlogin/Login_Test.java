@@ -88,6 +88,10 @@ public class Login_Test {
 				message.setAnswer(Answer.ERROR_ALREADY_LOGGED_IN);
 				message.setObject(new SupplierWorker());
 			}
+			else if(userNameLogin.equals("nc") && passwordLogin.equals("nc")) {
+				message.setTask(Task.PRINT_ERROR_TO_SCREEN);
+				message.setAnswer(Answer.ERROR_USER_NOT_CONFIRMED);
+			}
 			else {
 				message.setTask(Task.PRINT_ERROR_TO_SCREEN);
 				message.setAnswer(Answer.ERROR_USER_NOT_FOUND);
@@ -285,7 +289,7 @@ public class Login_Test {
 	}
 	
 	@Test
-	//Test Description: Check if a user is already loggedIn in the system 
+	//Test Description: Check if a user is not exist in the system 
 	//Test Input: userName = "li" , password = "li"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to return that the user doesn't exist with the Answer - Answer.ERROR_USER_NOT_FOUND
@@ -301,5 +305,25 @@ public class Login_Test {
 		assertEquals(Task.PRINT_ERROR_TO_SCREEN , AnalyzeMessageFromServer.taskForUnitTest);
 		assertEquals(Answer.ERROR_USER_NOT_FOUND, AnalyzeMessageFromServer.answerForUnitTest);
 	}
+	
+	@Test
+	//Test Description: Check if a user is not confirmed in the system 
+	//Test Input: userName = "nc" , password = "nc"
+	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
+	//to return that the user is not confirmed with the Answer - Answer.ERROR_USER_NOT_CONFIRMED
+	void test_user_not_confirmed_in_the_system() {
+		stubGetLoginDetails.setUserNameLogin("nc");
+		stubGetLoginDetails.setPasswordLogin("nc");
+		loginScreenController = new LoginScreenController(stubGetLoginDetails);
+		/*Call function under test*/
+		boolean resultFromLoginProcess = loginScreenController.doLoginProcess();
+		
+		/*Check if the answer is correct - expected that doLoginProcess will return true - use Assert true*/
+		assertTrue(resultFromLoginProcess);
+		assertEquals(Task.PRINT_ERROR_TO_SCREEN , AnalyzeMessageFromServer.taskForUnitTest);
+		assertEquals(Answer.ERROR_USER_NOT_CONFIRMED, AnalyzeMessageFromServer.answerForUnitTest);
+	}
+	
+	
 	
 }
