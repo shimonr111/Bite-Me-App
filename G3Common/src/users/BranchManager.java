@@ -34,6 +34,10 @@ public class BranchManager extends User implements Serializable{
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn,
 				userEmail, phoneNumber);
 	}
+	
+	public BranchManager() {
+		super();
+	}
 
 	/**
 	 * This is the toString for this class

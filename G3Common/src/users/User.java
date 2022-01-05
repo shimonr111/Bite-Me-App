@@ -61,6 +61,10 @@ public abstract class User implements Serializable{
 	 */
 	protected String phoneNumber;
 	
+	public User() {
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

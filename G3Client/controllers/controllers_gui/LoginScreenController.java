@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import users.IGetLoginDetails;
 import users.Login;
 
 /**
@@ -35,6 +36,17 @@ import users.Login;
  * @version 07/12/2021
  */
 public class LoginScreenController extends AbstractBiteMeController{
+	
+	public LoginScreenController() {
+		iGetLoginDetails = new GetLoginDetails();
+	}
+	
+	
+	/*Used for constructor injection*/
+	public LoginScreenController(IGetLoginDetails getLoginDetail) {
+		iGetLoginDetails = getLoginDetail;
+	}
+	
 	/**
 	 * Class members description:
 	 */
@@ -53,6 +65,11 @@ public class LoginScreenController extends AbstractBiteMeController{
      * The listener for the current form , so when we finish working in this page we stop it.
      */
 	private static AnalyzeClientListener listener;
+	
+	/**
+	 * The class for receiving information from the DB and for unit testing
+	 */
+	public static IGetLoginDetails iGetLoginDetails;
 	
 	@FXML
 	/**
@@ -111,6 +128,55 @@ public class LoginScreenController extends AbstractBiteMeController{
 		System.exit(0);
 	}
 	
+	public class GetLoginDetails implements IGetLoginDetails{
+		
+		/**
+		 * 
+		 * This is a function for setting the userName and password from the user and
+		 * creating Login object
+		 * 
+		 * @param userNameLogin is the users user name
+		 * @param passordLogin is the users password
+		 * @return Login object for the login process 
+		 */
+		public Login getLogin() {
+			passwordField.setStyle(null); userNameField.setStyle(null);
+			return new Login(userNameField.getText(),passwordField.getText());
+		}
+		
+		/**
+		 * This method checks the validity of the data 
+		 * which means that we check for user name and password 
+		 * existence.
+		 * If they are not ok, pop up message accordingly.
+		 * 
+		 * @param login
+		 * @return boolean
+		 */
+		public boolean isLoginDataValidFromUser(Login login) {
+			if(login.getUserName().equals(""))
+				userNameField.setStyle("-fx-border-color: red");
+			if(login.getPassword().equals("")) { // checking if the user didn't enter both username and password.
+				passwordField.setStyle("-fx-border-color: red");
+			}
+			if(login.getUserName().equals("") || login.getPassword().equals("")) {
+				setRelevantTextToErrorLable("Please fill all the required fields (*)!",true);
+				return false;
+			}
+			else
+				return true;
+		}
+
+		/**
+		 * This is a method for 
+		 * sending the information to the server
+		 * 
+		 */
+		public void userReturnDataFromDB(Message message) {
+			sendToClient(message);
+		}
+	}
+	
 	/**
 	 * Using login button hide 
 	 * window and go user portal 
@@ -121,13 +187,23 @@ public class LoginScreenController extends AbstractBiteMeController{
 	// Event Listener on Button[#btnLogin].onAction
 	@FXML
 	public void getLoginBtn(ActionEvent event) {
-		passwordField.setStyle(null); userNameField.setStyle(null);
-		Login login = new Login(userNameField.getText(),passwordField.getText());
+		doLoginProcess();
+	}
+	
+	/**
+	 * This method is used for doing the login process logic
+	 * 
+	 * @return true if the input was ok, else false
+	 */
+	public boolean doLoginProcess() {
+		Login login = iGetLoginDetails.getLogin();
 		//check validity of Login content
-		if(isLoginDataValidFromUser(login)) {
+		if(iGetLoginDetails.isLoginDataValidFromUser(login)) {
 		Message message = new Message (Task.LOGIN,Answer.WAIT_RESPONSE,login);
-		sendToClient(message);
+		iGetLoginDetails.userReturnDataFromDB(message);
+		return true;
 		}
+		return false;
 	}
 	
 	/**
