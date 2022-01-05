@@ -31,6 +31,10 @@ public class CeoBiteMe extends User implements Serializable{
 		super(userId, statusInSystem, userFirstName, userLastName, homeBranch, isLoggedIn, userEmail,
 				phoneNumber);
 	}
+	
+	public CeoBiteMe() {
+		super();
+	}
 
 	/**
 	 * This is the toString for this class

@@ -52,6 +52,10 @@ public class SupplierWorker extends User implements Serializable{
 		this.supplier = supplier;
 		this.workerPosition = workerPosition;
 	}
+	
+	public SupplierWorker() {
+		super();
+	}
 
 	/**
 	 * This section is for the Setters and Getters of the Class SupplierWorker

@@ -118,6 +118,10 @@ public class BusinessCustomer extends Customer implements Serializable{
 		this.isLoggedInAsBusinessAccount = false;
 		this.budgetUsed = 0;
 	}
+	
+	public BusinessCustomer() {
+		super();
+	}
 
 	/**
 	 * This is the section of the setters and getters of the class business

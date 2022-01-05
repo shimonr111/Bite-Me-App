@@ -62,6 +62,11 @@ public class AnalyzeMessageFromServer {
 	 */
 	private static final List<AnalyzeClientListener> clientListeners = new ArrayList<AnalyzeClientListener>();
 	
+	/*Used as received answer for unit testing*/
+	public static Answer answerForUnitTest;
+	
+	/*Used as received task for unit testing*/
+	public static Task taskForUnitTest;
 	
 	/**
 	 * This is a function which analyzes all the messages from the server by Task
@@ -106,6 +111,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_CUSTOMER:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_CUSTOMER;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotCustomerLogin();
 					}
@@ -113,6 +123,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_HR_MANAGER:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_HR_MANAGER;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotHRManagerLogin();
 					}
@@ -120,6 +135,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_BUSINESS_CUSTOMER:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_BUSINESS_CUSTOMER;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotBusinessCustomerLogin();
 					}
@@ -127,6 +147,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_CEO_BITE_ME:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_CEO_BITE_ME;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotCEOLogin();
 					}
@@ -134,6 +159,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_SUPPLIER:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_SUPPLIER;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotSupplierLogin();
 					}
@@ -141,6 +171,11 @@ public class AnalyzeMessageFromServer {
 				case CREATE_USER_PORTAL_FOR_BRANCH_MANAGER:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.CREATE_USER_PORTAL;
+					answerForUnitTest = Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientGotBranchManagerLogin();
 					}
@@ -153,6 +188,12 @@ public class AnalyzeMessageFromServer {
 				case ERROR_USER_NOT_FOUND:
 					/*notify all the listeners that 
 					needs to know about this action*/
+					
+					
+					/*used for unit testing*/
+					taskForUnitTest = Task.PRINT_ERROR_TO_SCREEN;
+					answerForUnitTest = Answer.ERROR_USER_NOT_FOUND;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientNotFoundInSystem();
 					}
@@ -160,6 +201,11 @@ public class AnalyzeMessageFromServer {
 				case ERROR_ALREADY_LOGGED_IN:
 					/*notify all the listeners that 
 					needs to know about this action*/
+
+					/*used for unit testing*/
+					taskForUnitTest = Task.PRINT_ERROR_TO_SCREEN;
+					answerForUnitTest = Answer.ERROR_ALREADY_LOGGED_IN;
+					
 					for (AnalyzeClientListener listener : clientListeners) {
 						listener.clientIsLogedIn();
 					}

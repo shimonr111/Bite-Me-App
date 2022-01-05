@@ -43,6 +43,10 @@ public class HrManager extends User implements Serializable{
 		this.company=company;
 	}
 	
+	public HrManager() {
+		super();
+	}
+	
 	/**
 	 * 
 	 * @return

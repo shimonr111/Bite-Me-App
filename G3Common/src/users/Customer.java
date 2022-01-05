@@ -86,6 +86,10 @@ public class Customer extends User implements Serializable{
 		this.balance = 0.0;
 	}
 	
+	public Customer() {
+		super();
+	}
+	
 	/**
 	 * This section is for the 
 	 * Setters and Getters of the 
