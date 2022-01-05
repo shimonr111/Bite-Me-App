@@ -253,7 +253,7 @@ public class LoginQueries_Test {
 	
 	@Test
 	//Test Description: Check if user that not confirmed return the right answer from the server
-	//Test Input: userNameForPendingApprovalStatusUser = "agadircc" , passwordForPendingApprovalStatusUser = "agadircc"
+	//Test Input: userNameForPendingApprovalStatusUser = "mousa" , passwordForPendingApprovalStatusUser = "mousa"
 	//Test Expected Output: Message received with Answer.ERROR_USER_NOT_CONFIRMED
 	void test_user_pending_approval() {	
 		
@@ -337,7 +337,7 @@ public class LoginQueries_Test {
 	
 	@Test
 	//Test Description: Check if user that has frozen status return Answer.ERROR_USER_NOT_CONFIRMED; from the server
-	//Test Input:userNameForFrozenStatusUser = "bbbcr" , passwordForFrozenStatusUser = "bbbcr"
+	//Test Input:userNameForFrozenStatusUser = "lior" , passwordForFrozenStatusUser = "lior"
 	//Test Expected Output: Message received with Answer.CREATE_USER_PORTAL_FOR_SUPPLIER
 	void test_user_frozen() {	
 		
