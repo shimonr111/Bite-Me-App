@@ -78,7 +78,9 @@ public class AnalyzeMessageFromServer {
 	@SuppressWarnings("unchecked")
 	public static void analyzeMessageFromServer(Object message) throws IOException {
 		if (!(message instanceof Message)) {
-			return;
+			 taskForUnitTest = Task.PRINT_ERROR_TO_SCREEN;
+			 answerForUnitTest = Answer.OBJECT_IS_NOT_MESSAGE;
+			 return;
 		} else {
 			Message recivedMessageFromServer = (Message) message;
 			Task recivedTaskFromServer = recivedMessageFromServer.getTask();

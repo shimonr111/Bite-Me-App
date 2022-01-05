@@ -92,6 +92,9 @@ public class Login_Test {
 				message.setTask(Task.PRINT_ERROR_TO_SCREEN);
 				message.setAnswer(Answer.ERROR_USER_NOT_CONFIRMED);
 			}
+			else if(userNameLogin.equals("mn") && passwordLogin.equals("mn")) {
+				message = null;
+			}
 			else {
 				message.setTask(Task.PRINT_ERROR_TO_SCREEN);
 				message.setAnswer(Answer.ERROR_USER_NOT_FOUND);
@@ -322,6 +325,24 @@ public class Login_Test {
 		assertTrue(resultFromLoginProcess);
 		assertEquals(Task.PRINT_ERROR_TO_SCREEN , AnalyzeMessageFromServer.taskForUnitTest);
 		assertEquals(Answer.ERROR_USER_NOT_CONFIRMED, AnalyzeMessageFromServer.answerForUnitTest);
+	}
+	
+	@Test
+	//Test Description: Check if a message is not instance of Message, for example: null
+	//Test Input: userName = "mn" , password = "mn"
+	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
+	//to return that the message is not instance of Message. the Answer - Answer.OBJECT_IS_NOT_MESSAGE
+	void test_message_is_null() {
+		stubGetLoginDetails.setUserNameLogin("mn");
+		stubGetLoginDetails.setPasswordLogin("mn");
+		loginScreenController = new LoginScreenController(stubGetLoginDetails);
+		/*Call function under test*/
+		boolean resultFromLoginProcess = loginScreenController.doLoginProcess();
+		
+		/*Check if the answer is correct - expected that doLoginProcess will return true - use Assert true*/
+		assertTrue(resultFromLoginProcess);
+		assertEquals(Task.PRINT_ERROR_TO_SCREEN , AnalyzeMessageFromServer.taskForUnitTest);
+		assertEquals(Answer.OBJECT_IS_NOT_MESSAGE, AnalyzeMessageFromServer.answerForUnitTest);
 	}
 	
 	
