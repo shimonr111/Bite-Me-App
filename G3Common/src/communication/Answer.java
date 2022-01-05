@@ -55,6 +55,7 @@ public enum Answer{
 	COMPANY_CODE_ALREADY_EXIST,
 	MESSAGE_IS_NULL,
 	OBJECT_IS_NOT_LOGIN,
+	OBJECT_IS_NOT_MESSAGE,
 	
 	/**
 	 * Answers related to Order
