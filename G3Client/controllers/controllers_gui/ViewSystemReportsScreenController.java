@@ -28,6 +28,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import util.IGetQuarterlyReport;
 import util.SupplierByReport;
 
 import org.apache.pdfbox.pdmodel.PDDocument;  
@@ -47,6 +48,14 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
  * @version 21/12/2021
  */
 public class ViewSystemReportsScreenController extends AbstractBiteMeController implements Initializable{
+	/*Constructor used for normal class creation */
+	public	ViewSystemReportsScreenController() {
+		iGetQuarterlyReport = new getQuarterlyReport();
+	}
+	/*Constructor used for unit testing interface injection */
+	public	ViewSystemReportsScreenController(IGetQuarterlyReport iGetQuarterlyReport) {
+		this.iGetQuarterlyReport = iGetQuarterlyReport;
+	}
 	
 	/**
 	 * Class members description:
@@ -67,6 +76,7 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 	 */
 	public static SupplierByReport[] suppliers=null;
 	
+	public IGetQuarterlyReport iGetQuarterlyReport;
 	@FXML
 	/**
 	 * The Message Label.
@@ -191,20 +201,44 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
     				break;
     		}
 			String[] branchAndDate=new String[3];
-			branchAndDate[0]=connectedUser.getHomeBranch().toString();
+			branchAndDate[0]=iGetQuarterlyReport.setHomeBranchForQuarterlyReport();
 			branchAndDate[1]=date; //prepare message to server, report date and branch
 			branchAndDate[2]="quarterly";
 			Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
-			sendToClient(message);
+			iGetQuarterlyReport.createReportInDb(message);
 			if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
-				setRelevantTextToDisplayMessageText("No quarterly reports found");
+				iGetQuarterlyReport.setMessageToUser("No quarterly reports found");
 			}
 			else {//otherwise primes report generator, and generates reports by selected type
-				ReportGenerator.setSuppliers(suppliers);
-				saveQuarterlyReport(date);
-				setRelevantTextToDisplayMessageText("Report Generated");
-				suppliers=null;
+				iGetQuarterlyReport.savePdfFile(date);
 				}
+    }
+    public class getQuarterlyReport implements IGetQuarterlyReport{
+    	/*sets the home branch  */
+		@Override
+		public String setHomeBranchForQuarterlyReport() {
+			return connectedUser.getHomeBranch().toString();
+		}
+		/*pulls report data for pdf  */
+		@Override
+		public void createReportInDb(Message message) {
+			sendToClient(message);
+		}
+		/*displays message to user  */
+		@Override
+		public void setMessageToUser(String message) {
+			setRelevantTextToDisplayMessageText(message);
+			
+		}
+		/*	creates a pdf file and clears report list */
+		@Override
+		public void savePdfFile(String date) {
+			saveQuarterlyReport(date);
+			setRelevantTextToDisplayMessageText("Report Generated");
+			suppliers=null;
+			
+		}
+    	
     }
     
 	/**
