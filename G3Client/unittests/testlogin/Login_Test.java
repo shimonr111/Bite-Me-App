@@ -31,8 +31,8 @@ public class Login_Test {
 	
 	/*Stub for IGetLoginDetails - we inject it using Constructor injection to the Login controller*/
 	public class StubGetLoginDetails implements IGetLoginDetails{
-		public String userNameLogin = null;
-		public String passwordLogin = null;
+		public String userNameLogin;
+		public String passwordLogin;
 
 		@Override
 		public Login getLogin() {
@@ -41,6 +41,8 @@ public class Login_Test {
 
 		@Override
 		public boolean isLoginDataValidFromUser(Login login) {
+			if(login.getUserName() == null || login.getPassword() == null)
+				return false;
 			if(login.getUserName().equals("") || login.getPassword().equals("")) {
 				return false;
 			}
@@ -157,6 +159,36 @@ public class Login_Test {
 	void test_user_log_in_with_invalid_password() {
 		stubGetLoginDetails.setUserNameLogin("cu");
 		stubGetLoginDetails.setPasswordLogin("");
+		loginScreenController = new LoginScreenController(stubGetLoginDetails);
+		/*Call function under test*/
+		boolean resultFromLoginProcess = loginScreenController.doLoginProcess();
+		
+		/*Check if the answer is correct - expected that doLoginProcess will return false - use Assert false*/
+		assertFalse(resultFromLoginProcess);
+	}
+	
+	@Test
+	//Test Description: Check if the user has entered invalid username and password
+	//Test Input: userName = "" , password = ""
+	//Test Expected Output: return false from the function doLoginProcess()
+	void test_user_log_in_with_invalid_user_and_password() {
+		stubGetLoginDetails.setUserNameLogin("");
+		stubGetLoginDetails.setPasswordLogin("");
+		loginScreenController = new LoginScreenController(stubGetLoginDetails);
+		/*Call function under test*/
+		boolean resultFromLoginProcess = loginScreenController.doLoginProcess();
+		
+		/*Check if the answer is correct - expected that doLoginProcess will return false - use Assert false*/
+		assertFalse(resultFromLoginProcess);
+	}
+	
+	@Test
+	//Test Description: Check if the user has entered null username and password
+	//Test Input: userName = null , password = null
+	//Test Expected Output: return false from the function doLoginProcess()
+	void test_user_log_in_with_null_user_and_password() {
+		stubGetLoginDetails.setUserNameLogin(null);
+		stubGetLoginDetails.setPasswordLogin(null);
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
 		/*Call function under test*/
 		boolean resultFromLoginProcess = loginScreenController.doLoginProcess();
