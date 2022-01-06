@@ -11,5 +11,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/liorfx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mosaFx"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/shimonfx"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

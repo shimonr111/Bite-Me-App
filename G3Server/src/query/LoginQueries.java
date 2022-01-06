@@ -209,6 +209,27 @@ public class LoginQueries{
 	}
 	
 	/**
+	 *  This method gets an message that contains the User as object in the message 
+	 *  we check what is the user type and we send query to update the isLoggedIn status accordingly.
+	 *  
+	 * @param message
+	 */
+	public static void logOutUserWithIdAndType(String type, String userID) {
+		if (type.equals("HR"))
+			Query.updateOneColumnForTableInDbByPrimaryKey("hrmanager","isLoggedIn"+"="+"0", "userID="+userID);
+		else if (type.equals("BC"))
+			Query.updateOneColumnForTableInDbByPrimaryKey("businesscustomer","isLoggedIn"+"="+"0", "userID="+userID);
+		else if (type.equals("RC"))
+			Query.updateOneColumnForTableInDbByPrimaryKey("customer","isLoggedIn"+"="+"0", "userID="+userID);
+		else if (type.equals("CEO"))
+			Query.updateOneColumnForTableInDbByPrimaryKey("ceobiteme","isLoggedIn"+"="+"0", "userID="+userID);
+		else if (type.equals("SW"))
+			Query.updateOneColumnForTableInDbByPrimaryKey("supplierworker","isLoggedIn"+"="+"0", "userID="+userID);
+		else if (type.equals("BM")) 
+			Query.updateOneColumnForTableInDbByPrimaryKey("branchmanager","isLoggedIn"+"="+"0", "userID="+userID);
+	}
+	
+	/**
 	 * This method searches for a customer object by his userId
 	 * and gets all the parameter and creates a new object from these parameters.
 	 * 
