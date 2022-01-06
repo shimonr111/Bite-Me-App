@@ -35,6 +35,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 
 /**
@@ -50,7 +51,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 public class ViewSystemReportsScreenController extends AbstractBiteMeController implements Initializable{
 	/*Constructor used for normal class creation */
 	public	ViewSystemReportsScreenController() {
-		iGetQuarterlyReport = new getQuarterlyReport();
+		iGetQuarterlyReport = new GetQuarterlyReport();
 	}
 	/*Constructor used for unit testing interface injection */
 	public	ViewSystemReportsScreenController(IGetQuarterlyReport iGetQuarterlyReport) {
@@ -180,6 +181,57 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
      */
     @FXML
     public void getQuarterly(ActionEvent event) {
+    	doQuarterlyReportLogic();
+    }
+    
+    public boolean doQuarterlyReportLogic() {
+    	boolean pdfSaved = false;
+		String[] branchAndDate=new String[3];
+		branchAndDate[0]=iGetQuarterlyReport.setHomeBranchForQuarterlyReport();
+		branchAndDate[1]=iGetQuarterlyReport.getPdfDate(); //prepare message to server, report date and branch
+		branchAndDate[2]="quarterly";
+		Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
+		iGetQuarterlyReport.createReportInDb(message);
+		if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
+			iGetQuarterlyReport.setMessageToUser("No quarterly reports found");
+		}
+		else {//otherwise primes report generator, and generates reports by selected type
+			pdfSaved = saveQuarterlyReport(iGetQuarterlyReport.getPdfDate());
+			iGetQuarterlyReport.setMessageToUser("Report Generated");
+			suppliers=null;
+		}
+		return pdfSaved;
+    }
+		
+    public class GetQuarterlyReport implements IGetQuarterlyReport{
+    	/*sets the home branch  */
+		@Override
+		public String setHomeBranchForQuarterlyReport() {
+			return connectedUser.getHomeBranch().toString();
+		}
+		/*pulls report data for pdf  */
+		@Override
+		public void createReportInDb(Message message) {
+			sendToClient(message);
+		}
+		/*displays message to user  */
+		@Override
+		public void setMessageToUser(String message) {
+			setRelevantTextToDisplayMessageText(message);
+			
+		}
+		/*	creates a pdf file and clears report list */
+		@Override
+		public File savePdfFile(String date) {
+		    FileChooser fileChooser = new FileChooser();
+		    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+	        fileChooser.getExtensionFilters().add(extFilter);
+	        fileChooser.setInitialFileName(date+" Quarterly Report.pdf");
+	        Stage stage= new Stage();
+	        return fileChooser.showSaveDialog(stage);
+		}
+		@Override
+		public String getPdfDate() {
     		Year y = Year.now();
     		LocalDate myLocal = LocalDate.now();
     		String date="";
@@ -200,44 +252,9 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
     			default:
     				break;
     		}
-			String[] branchAndDate=new String[3];
-			branchAndDate[0]=iGetQuarterlyReport.setHomeBranchForQuarterlyReport();
-			branchAndDate[1]=date; //prepare message to server, report date and branch
-			branchAndDate[2]="quarterly";
-			Message message = new Message (Task.GET_SYSTEM_REPORTS,Answer.WAIT_RESPONSE,branchAndDate);
-			iGetQuarterlyReport.createReportInDb(message);
-			if(suppliers==null) {//server should respond by now, if no reports are found it is displayed
-				iGetQuarterlyReport.setMessageToUser("No quarterly reports found");
-			}
-			else {//otherwise primes report generator, and generates reports by selected type
-				iGetQuarterlyReport.savePdfFile(date);
-				}
-    }
-    public class getQuarterlyReport implements IGetQuarterlyReport{
-    	/*sets the home branch  */
-		@Override
-		public String setHomeBranchForQuarterlyReport() {
-			return connectedUser.getHomeBranch().toString();
+			return date;
 		}
-		/*pulls report data for pdf  */
-		@Override
-		public void createReportInDb(Message message) {
-			sendToClient(message);
-		}
-		/*displays message to user  */
-		@Override
-		public void setMessageToUser(String message) {
-			setRelevantTextToDisplayMessageText(message);
-			
-		}
-		/*	creates a pdf file and clears report list */
-		@Override
-		public void savePdfFile(String date) {
-			saveQuarterlyReport(date);
-			setRelevantTextToDisplayMessageText("Report Generated");
-			suppliers=null;
-			
-		}
+		
     	
     }
     
@@ -427,9 +444,8 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
      * 
      * @param date date of quarterly report pdf, needed for naming the file
      */
-	public void saveQuarterlyReport(String date) {
+	public boolean saveQuarterlyReport(String date) {
 		DecimalFormat twoPlacesDouble= new DecimalFormat("#0.00");
-		String replacer;
 		try {
 		PDDocument report= new PDDocument();
 		PDPage incomePage = new PDPage();
@@ -444,8 +460,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(25, 700);
 		contentStream.showText("Quarterly Income Report By Supplier");
 		contentStream.newLineAtOffset(0, -15);
+		if(suppliers[0]!=null) {
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
+		}
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
 			contentStream.newLineAtOffset(0, -15);
@@ -469,8 +487,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(25, 700);
 		contentStream.showText("Quarterly Order Report By Supplier");
 		contentStream.newLineAtOffset(0, -15);
+		if(suppliers[0]!=null) {
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
+		}
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
 			contentStream.newLineAtOffset(0, -15);
@@ -496,8 +516,10 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		contentStream.newLineAtOffset(25, 700);
 		contentStream.showText("Quarterly Performance Report By Supplier");
 		contentStream.newLineAtOffset(0, -15);
+		if(suppliers[0]!=null) {
 		contentStream.showText("Issued on: "+suppliers[0].getIssueDate()+"");
 		contentStream.newLineAtOffset(0, -15);
+		}
 		for(SupplierByReport supplier:suppliers) {
 			if(supplier!=null) {
 			contentStream.newLineAtOffset(0, -15);
@@ -515,18 +537,16 @@ public class ViewSystemReportsScreenController extends AbstractBiteMeController 
 		}
 	    contentStream.endText();
 	    contentStream.close();
-	    FileChooser fileChooser = new FileChooser();
-	    FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-        fileChooser.getExtensionFilters().add(extFilter);
-        fileChooser.setInitialFileName(date+" Quarterly Report.pdf");
-        Stage stage= new Stage();
-        File directory = fileChooser.showSaveDialog(stage);
-        if(directory!=null)
+        File directory = iGetQuarterlyReport.savePdfFile(date);
+        if(directory!=null) {
         report.save(directory); 
+        return true;
+        }
 		report.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}  
+		} 
+		return false;
 	}
     /**
      * calculates the bm cut of an income report for a supplier
