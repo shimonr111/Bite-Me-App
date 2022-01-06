@@ -1,5 +1,7 @@
 package util;
 
+import java.io.File;
+
 import communication.Message;
 
 public interface IGetQuarterlyReport {
@@ -9,5 +11,7 @@ public interface IGetQuarterlyReport {
 	
 	public void setMessageToUser(String message);
 	
-	public void savePdfFile(String date);
+	public File savePdfFile(String date);
+	
+	public String getPdfDate();
 }

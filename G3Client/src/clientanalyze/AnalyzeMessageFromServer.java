@@ -472,7 +472,9 @@ public class AnalyzeMessageFromServer {
 					 * we put the reports into the relevant suppliers list.
 					 */
 					ViewQuarterlyReportsScreenController.suppliers=(SupplierByReport[][])recivedMessageFromServer.getObject();
-					ViewSystemReportsScreenController.suppliers=((SupplierByReport[][])recivedMessageFromServer.getObject())[3];
+					if(recivedMessageFromServer.getObject()!=null) {
+						ViewSystemReportsScreenController.suppliers=((SupplierByReport[][])recivedMessageFromServer.getObject())[3];
+					}
 					break;
 					default:
 						break;
