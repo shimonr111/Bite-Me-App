@@ -1,5 +1,6 @@
 package testlogin;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,7 @@ import communication.Task;
 import jdbc.mySqlConnection;
 import query.LoginQueries;
 import query.Query;
+import users.Customer;
 import users.Login;
 
 /*This is the class under test in which we will check the login phase*/
@@ -32,45 +34,52 @@ public class LoginQueries_Test {
 	
 	/*Message received form the test to check assertions*/
 	public Message messageFromClassUnderTest;
-	
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////
 	/**Create all the userName and Password for the testing**/
 	
-	/*User name and Password for regular customer*/
+	/*User name and Password and ID for regular customer*/
 	private String userNameCustomer = "cu";
 	private String passwordCustomer = "cu";
+	private String idForRC = "1000";
 	
-	/*User name and Password for business customer*/
+	/*User name and Password and ID for business customer*/
 	private String userNameBusinessCustomer = "bc";
 	private String passwordBusinessCustomer = "bc";
+	private String idForBC = "1002";
 	
-	/*User name and Password for branch manager*/
+	/*User name and Password and ID for branch manager*/
 	private String userNameBranchManager = "bmn";
 	private String passwordBranchManager = "bmn";
+	private String idForBM = "1041";
 	
-	/*User name and Password for supplier worker*/
+	/*User name and Password and ID for supplier worker*/
 	private String userNameSupplierWorker = "phsw";
 	private String passwordSupplierWorker = "phsw";
+	private String idForSW = "2000";
 	
 	/*User name and Password for supplier worker already logged in*/
 	private String userNameSupplierWorkerLoggedIn = "phsrw";
 	private String passwordSupplierWorkerLoggedIn = "phsrw";
 	
-	/*User name and Password for CEO*/
+	/*User name and Password and ID for CEO*/
 	private String userNameCeo = "ceo";
 	private String passwordCeo = "ceo";
+	private String idForCeo = "1001";
 	
-	/*User name and Password for hrManager*/
+	/*User name and Password and ID for hrManager*/
 	private String userNameHrManager = "intelhr";
 	private String passwordHrManager = "intelhr";
-	 
+	private String idForHR = "1222";
+	
 	/*User name and password for pending approval user account*/
 	private String userNameForPendingApprovalStatusUser = "mousa";
 	private String passwordForPendingApprovalStatusUser = "mousa";
 	
-	/*User name and password for Frozen user account*/
+	/*User name and password and ID for Frozen user account*/
 	private String userNameForFrozenStatusUser = "lior";
 	private String passwordForFrozenStatusUser = "lior";
+	private String idForFrozenStatusUser = "10004";
 	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,7 +109,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
-		
+		LoginQueries.logOutUserWithIdAndType("RC", idForRC);
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
 		} catch (SQLException e) {
@@ -109,7 +118,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -128,6 +137,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
+		LoginQueries.logOutUserWithIdAndType("BC", idForBC);
 		
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
@@ -137,7 +147,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -156,6 +166,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
+		LoginQueries.logOutUserWithIdAndType("BM", idForBM);
 		
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
@@ -165,7 +176,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -184,6 +195,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
+		LoginQueries.logOutUserWithIdAndType("SW", idForSW);
 		
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
@@ -192,7 +204,7 @@ public class LoginQueries_Test {
 			e.printStackTrace();
 		}
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -211,6 +223,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
+		LoginQueries.logOutUserWithIdAndType("CEO", idForCeo);
 		
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
@@ -220,7 +233,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -239,7 +252,7 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
-		
+		LoginQueries.logOutUserWithIdAndType("HR", idForHR);
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
 		} catch (SQLException e) {
@@ -248,7 +261,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -276,7 +289,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -304,7 +317,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -332,7 +345,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -351,16 +364,15 @@ public class LoginQueries_Test {
 		/*Set the object in the message we send to the class under test LoginQuery in the function
 		 * createLoginMessageForServer()*/
 		messageFromClassUnderTest.setObject(loginForTest);
-		
+		LoginQueries.logOutUserWithIdAndType("RC", idForFrozenStatusUser);
 		try {
 			answerReceived = (LoginQueries.createLoginMessageForServer(messageFromClassUnderTest)).getAnswer();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -388,7 +400,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 	
 	@Test
@@ -416,7 +428,7 @@ public class LoginQueries_Test {
 		}
 		
 		/*Check if the answer is correct - use Assert true*/
-		assertTrue(answerReceived == answerExpectedForTest);
+		assertEquals(answerReceived, answerExpectedForTest);
 	}
 		
 }
