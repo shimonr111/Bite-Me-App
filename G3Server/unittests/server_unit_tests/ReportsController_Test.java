@@ -1,21 +1,15 @@
-package testpdfquarter;
+package server_unit_tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.sql.SQLException;
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Before;
+import org.junit.Test;
 import communication.Answer;
 import communication.Message;
 import communication.Task;
 import jdbc.mySqlConnection;
-import query.LoginQueries;
 import query.Query;
 import reports.ReportsController;
-import users.Login;
 import util.SupplierByReport;
 
 public class ReportsController_Test {
@@ -29,7 +23,7 @@ public class ReportsController_Test {
 	final public static String DEFAULT_DB_USER = "root";
 
 	/* DB password for specific user */
-	final public static String DEFAULT_DB_PASSWORD = "password";
+	final public static String DEFAULT_DB_PASSWORD = "09000772Mm-";
 
 	/* Message received form the test to check assertions */
 	public Message messageFromClassUnderTest;
@@ -43,8 +37,8 @@ public class ReportsController_Test {
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* Before each test we will do all those actions for clean start in each test */
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+    public void setUp() throws Exception {
 		sqlConnection.connectToDB(DEFAULT_DB_NAME, DEFAULT_DB_USER, DEFAULT_DB_PASSWORD, false);
 		Query.setConnectionFromServerToDB(sqlConnection.getConnection());
 		/*
@@ -61,7 +55,7 @@ public class ReportsController_Test {
 	// Test Input: branchAndDateTesting[0] = "NORTH", branchAndDateTesting[1] =
 	// "2021-10-01", branchAndDateTesting[2] = null
 	// Test Expected Output: Message received with null object
-	void test_report_type_string_null() {
+    public void test_report_type_string_null() {
 		Message resultFromDb;
 
 		/*
@@ -91,7 +85,7 @@ public class ReportsController_Test {
 	// Test Input: branchAndDateTesting[0] = "NORTH", branchAndDateTesting[1] =
 	// null, branchAndDateTesting[2] = "quarterly"
 	// Test Expected Output: Message received with null object
-	void test_report_date_null() {
+    public void test_report_date_null() {
 		Message resultFromDb;
 
 		/*
@@ -121,7 +115,7 @@ public class ReportsController_Test {
 	// Test Input: branchAndDateTesting[0] = null, branchAndDateTesting[1] =
 	// "2021-10-01", branchAndDateTesting[2] = "quarterly"
 	// Test Expected Output: Message received with null object
-	void test_report_branch_null() {
+    public void test_report_branch_null() {
 		Message resultFromDb;
 
 		/*
@@ -150,7 +144,7 @@ public class ReportsController_Test {
 	// returned
 	// Test Input: branchAndDateTesting=null
 	// Test Expected Output: Message received with null object
-	void test_report_request_string_array_null() {
+    public void test_report_request_string_array_null() {
 		Message resultFromDb;
 
 		/*
@@ -178,7 +172,7 @@ public class ReportsController_Test {
 	// Test Input: branchAndDateTesting[0] = "NORTH", branchAndDateTesting[1] =
 	// null, branchAndDateTesting[2] = "quarterly"
 	// Test Expected Output: Message received with null object
-	void test_report_date_wrong_format() {
+    public void test_report_date_wrong_format() {
 		Message resultFromDb;
 
 		/*
@@ -206,7 +200,7 @@ public class ReportsController_Test {
 	//Test Description: Check if pulled report data is equal to expected report data
 	//Test Input: 	branchAndDateTesting[0] = "NORTH", branchAndDateTesting[1] = "2021-04-01", branchAndDateTesting[2] = "quarterly"
 	//Test Expected Output: both objects have the same values (both supliersTesting, and returned array from db)
-	void test_get_quarterly_report() {
+    public void test_get_quarterly_report() {
 		Message resultFromDb;
 		branchAndDateTesting[0] = "NORTH";
 		branchAndDateTesting[1] = "2021-04-01";
@@ -242,6 +236,5 @@ public class ReportsController_Test {
 		assertEquals(suppliersTesting[0].getLateOrders(), expected[0].getLateOrders());
 		assertEquals(suppliersTesting[0].getAverageSupplyTime(), expected[0].getAverageSupplyTime());
 	}
-	
 
 }

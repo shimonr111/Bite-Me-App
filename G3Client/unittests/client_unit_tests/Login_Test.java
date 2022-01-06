@@ -1,11 +1,11 @@
-package testlogin;
+package client_unit_tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import java.io.IOException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import clientanalyze.AnalyzeMessageFromServer;
 import communication.Answer;
 import communication.Message;
@@ -27,7 +27,7 @@ public class Login_Test {
 	public LoginScreenController loginScreenController;
 	
 	/*This is the Object of the stubbed class*/
-	public StubGetLoginDetails stubGetLoginDetails;
+	public StubGetLoginDetails stubGetLoginDetails =  new StubGetLoginDetails();
 	
 	/*Stub for IGetLoginDetails - we inject it using Constructor injection to the Login controller*/
 	public class StubGetLoginDetails implements IGetLoginDetails{
@@ -130,9 +130,10 @@ public class Login_Test {
 	
 		
 	/*Before each test we will create the Stub object*/
-	@BeforeEach
-	void setUp() throws Exception {	
-		stubGetLoginDetails = new StubGetLoginDetails();
+	@Before
+	public void setUp() throws Exception {	
+		stubGetLoginDetails.setUserNameLogin(null);
+		stubGetLoginDetails.setPasswordLogin(null);
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,7 +142,7 @@ public class Login_Test {
 	//Test Description: Check if the user has entered invalid user name
 	//Test Input: userName = "" , password = "cu"
 	//Test Expected Output: return false from the function doLoginProcess()
-	void test_user_log_in_with_invalid_user_name() {
+	public void test_user_log_in_with_invalid_user_name() {
 		stubGetLoginDetails.setUserNameLogin("");
 		stubGetLoginDetails.setPasswordLogin("cu");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -156,7 +157,7 @@ public class Login_Test {
 	//Test Description: Check if the user has entered invalid password
 	//Test Input: userName = "cu" , password = ""
 	//Test Expected Output: return false from the function doLoginProcess()
-	void test_user_log_in_with_invalid_password() {
+	public void test_user_log_in_with_invalid_password() {
 		stubGetLoginDetails.setUserNameLogin("cu");
 		stubGetLoginDetails.setPasswordLogin("");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -171,7 +172,7 @@ public class Login_Test {
 	//Test Description: Check if the user has entered invalid username and password
 	//Test Input: userName = "" , password = ""
 	//Test Expected Output: return false from the function doLoginProcess()
-	void test_user_log_in_with_invalid_user_and_password() {
+	public void test_user_log_in_with_invalid_username_and_password() {
 		stubGetLoginDetails.setUserNameLogin("");
 		stubGetLoginDetails.setPasswordLogin("");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -186,7 +187,7 @@ public class Login_Test {
 	//Test Description: Check if the user has entered null username and password
 	//Test Input: userName = null , password = null
 	//Test Expected Output: return false from the function doLoginProcess()
-	void test_user_log_in_with_null_user_and_password() {
+	public void test_user_log_in_with_null_user_and_password() {
 		stubGetLoginDetails.setUserNameLogin(null);
 		stubGetLoginDetails.setPasswordLogin(null);
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -202,7 +203,7 @@ public class Login_Test {
 	//Test Input: userName = "ceo" , password = "ceo"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer to create ceo
 	//user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_CEO_BITE_ME
-	void test_user_log_in_with_ceo_user() {
+	public void test_user_log_in_with_ceo_user() {
 		stubGetLoginDetails.setUserNameLogin("ceo");
 		stubGetLoginDetails.setPasswordLogin("ceo");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -220,7 +221,7 @@ public class Login_Test {
 	//Test Input: userName = "cu" , password = "cu"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to create customer user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_CUSTOMER
-	void test_user_log_in_with_customer_user() {
+	public void test_user_log_in_with_customer_user() {
 		stubGetLoginDetails.setUserNameLogin("cu");
 		stubGetLoginDetails.setPasswordLogin("cu");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -238,7 +239,7 @@ public class Login_Test {
 	//Test Input: userName = "bc" , password = "bc"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to create business customer user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_BUSINESS_CUSTOMER
-	void test_user_log_in_with_business_customer_user() {
+	public void test_user_log_in_with_business_customer_user() {
 		stubGetLoginDetails.setUserNameLogin("bc");
 		stubGetLoginDetails.setPasswordLogin("bc");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -256,7 +257,7 @@ public class Login_Test {
 	//Test Input: userName = "hrmanager" , password = "hrmanager"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to create business customer user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_HR_MANAGER
-	void test_user_log_in_with_hr_manager_user() {
+	public void test_user_log_in_with_hr_manager_user() {
 		stubGetLoginDetails.setUserNameLogin("hrmanager");
 		stubGetLoginDetails.setPasswordLogin("hrmanager");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -274,7 +275,7 @@ public class Login_Test {
 	//Test Input: userName = "bmn" , password = "bmn"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to create business customer user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_BRANCH_MANAGER
-	void test_user_log_in_with_branch_manager_user() {
+	public void test_user_log_in_with_branch_manager_user() {
 		stubGetLoginDetails.setUserNameLogin("bmn");
 		stubGetLoginDetails.setPasswordLogin("bmn");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -292,7 +293,7 @@ public class Login_Test {
 	//Test Input: userName = "sw" , password = "sw"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to create supplier user portal with the Answer - Answer.CREATE_USER_PORTAL_FOR_SUPPLIER
-	void test_user_log_in_with_supplier_user() {
+	public void test_user_log_in_with_supplier_user() {
 		stubGetLoginDetails.setUserNameLogin("sw");
 		stubGetLoginDetails.setPasswordLogin("sw");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -310,7 +311,7 @@ public class Login_Test {
 	//Test Input: userName = "ta" , password = "fus"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to return that the user is already logged in with the Answer - Answer.ERROR_ALREADY_LOGGED_IN
-	void test_user_loggedIn_in_the_system() {
+	public void test_user_loggedIn_in_the_system() {
 		stubGetLoginDetails.setUserNameLogin("ta");
 		stubGetLoginDetails.setPasswordLogin("fus");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -328,7 +329,7 @@ public class Login_Test {
 	//Test Input: userName = "li" , password = "li"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to return that the user doesn't exist with the Answer - Answer.ERROR_USER_NOT_FOUND
-	void test_user_not_found_in_the_system() {
+	public void test_user_not_found_in_the_system() {
 		stubGetLoginDetails.setUserNameLogin("li");
 		stubGetLoginDetails.setPasswordLogin("li");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -346,7 +347,7 @@ public class Login_Test {
 	//Test Input: userName = "nc" , password = "nc"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to return that the user is not confirmed with the Answer - Answer.ERROR_USER_NOT_CONFIRMED
-	void test_user_not_confirmed_in_the_system() {
+	public void test_user_not_confirmed_in_the_system() {
 		stubGetLoginDetails.setUserNameLogin("nc");
 		stubGetLoginDetails.setPasswordLogin("nc");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);
@@ -364,7 +365,7 @@ public class Login_Test {
 	//Test Input: userName = "mn" , password = "mn"
 	//Test Expected Output: return true from the function doLoginProcess() in addition expect AnalyzeMessageFromServer
 	//to return that the message is not instance of Message. the Answer - Answer.OBJECT_IS_NOT_MESSAGE
-	void test_message_is_null() {
+	public void test_message_is_null() {
 		stubGetLoginDetails.setUserNameLogin("mn");
 		stubGetLoginDetails.setPasswordLogin("mn");
 		loginScreenController = new LoginScreenController(stubGetLoginDetails);

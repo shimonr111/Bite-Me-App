@@ -1,27 +1,18 @@
-package testpdfquarter;
+package client_unit_tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
+import static org.junit.Assert.assertFalse;
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import clientanalyze.AnalyzeMessageFromServer;
 import communication.Answer;
 import communication.Message;
-import communication.Task;
-import controllers_gui.LoginScreenController;
 import controllers_gui.ViewSystemReportsScreenController;
-import javafx.event.ActionEvent;
-import testlogin.Login_Test.StubGetLoginDetails;
 import util.IGetQuarterlyReport;
 import util.SupplierByReport;
 
@@ -107,22 +98,22 @@ public class ViewSystemReportsScreenController_Test {
     }
     
 	/*Before each test we will create the Stub object*/
-	@BeforeEach
-	void setUp() throws Exception {	
+	@Before
+   public void setUp() throws Exception {	
 		stubGetQuarterlyReport = new StubGetQuarterlyReport();
 	}
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+   public void tearDown() throws Exception {
 		File testPdf = new File ("C://G3BiteMe//test.pdf");
 		testPdf.delete();
 	}
 	
 	
 	@Test
-	//Test Description: check null reports object returned from db handling
+	//Test Description: check null reports object returned from db handling - 2D Array is null
 	//Test Input: branchName= "NORTH", returnDate="2021-03-01", returnedReportFromDb=null;
 	//Test Expected Output: "No quarterly reports found" printed
-	void test_null_suppliers_returned_from_db() {
+public void test_null_suppliers_returned_from_db() {
 		stubGetQuarterlyReport.setReturnedReportFromDb(null);	
 		stubGetQuarterlyReport.setBranchName("NORTH");
 		stubGetQuarterlyReport.setReturnDate("2021-03-01");
@@ -132,10 +123,10 @@ public class ViewSystemReportsScreenController_Test {
 	}
 	
 	@Test
-	//Test Description: check null reports array returned from db handling
+	//Test Description: check null reports array returned from db handling - all quarterly reports are null.
 	//Test Input: branchName= "NORTH", returnDate="2021-03-01", returnedReportFromDb[3]=null;
 	//Test Expected Output: "No quarterly reports found" printed
-	void test_null_reports_array_returned() {
+public void test_null_reports_array_returned() {
 		SupplierByReport[][] testReport = new SupplierByReport[4][];
 		testReport[3]= null;
 		stubGetQuarterlyReport.setReturnedReportFromDb(testReport);	
@@ -150,7 +141,7 @@ public class ViewSystemReportsScreenController_Test {
 	//Test Description: check if text in created pdf equals expected test when making report array manually
 	//Test Input: branchName= "NORTH", returnDate="2021-04-01", returnedReportFromDb[3]=testReport;
 	//Test Expected Output: expecteTextInPdf equals text read from pdf into resultTextInPdf
-	void test_check_created_pdf_content() {
+public void test_check_created_pdf_content() {
 		
 		String resultTextInPdf="";
 		String expectedTextInPdf = ("Quarterly Income Report By Supplier\r\n"
@@ -176,7 +167,10 @@ public class ViewSystemReportsScreenController_Test {
 				+ "Late Orders percentage: 42.9\r\n"
 				+ "Average Supply Time: 00:42:34\r\n");
 		SupplierByReport[][] testReport = new SupplierByReport[4][];
-		testReport[3]= new SupplierByReport[1];
+		
+		testReport[3]= new SupplierByReport[1]; //here we create the quarterly report.
+		
+		//here we put all the required information to generate the report into the object.
 		testReport[3][0]= new SupplierByReport();
 		testReport[3][0].setSupplierId("1112");
 		testReport[3][0].setSupplierName("Domino's Pizza");
@@ -189,12 +183,18 @@ public class ViewSystemReportsScreenController_Test {
 		testReport[3][0].setTotalOrders(7);
 		testReport[3][0].setLateOrders(3);
 		testReport[3][0].setAverageSupplyTime("00:42:34");
+		
+		//here we init the expected result of the server
 		stubGetQuarterlyReport.setReturnedReportFromDb(testReport);	
 		stubGetQuarterlyReport.setBranchName("NORTH");
 		stubGetQuarterlyReport.setReturnDate("2021-04-01");
 		stubGetQuarterlyReport.setTestFileDirectory(new File ("C://G3BiteMe//test.pdf"));
+		
 		viewSystemReportsScreenController = new ViewSystemReportsScreenController(stubGetQuarterlyReport);
+		
+		//here we call the actual logic of the controller (act) - generate the report. 
 		viewSystemReportsScreenController.doQuarterlyReportLogic();
+		
 		try {
 			PDDocument doc;
 			doc = PDDocument.load(stubGetQuarterlyReport.getTestFileDirectory());
@@ -208,11 +208,12 @@ public class ViewSystemReportsScreenController_Test {
 		assertEquals(resultTextInPdf,expectedTextInPdf);
 	}
 	
+	
 	@Test
-	//Test Description: check if text in created pdf equals expected test when making report array manually
+	//Test Description: check null object return from server - no information in quarterly report
 	//Test Input: branchName= "NORTH", returnDate="2021-04-01", returnedReportFromDb[3]=testReport, testReport[3][0]= null
 	//Test Expected Output: expecteTextInPdf equals text read from pdf into resultTextInPdf, no exceptions thrown
-	void test_check_null_report_pdf_content() {
+public void test_check_null_report_pdf_content() {
 		String resultTextInPdf="";
 		String expectedTextInPdf = ("Quarterly Income Report By Supplier\r\n"
 				+ "Quarterly Order Report By Supplier\r\n"
@@ -239,10 +240,10 @@ public class ViewSystemReportsScreenController_Test {
 	}
 	
 	@Test
-	//Test Description: check if text in created pdf equals expected test when making report array manually
+	//Test Description: check null directory path
 	//Test Input: branchName= "NORTH", returnDate="2021-04-01", returnedReportFromDb[3]=testReport, testReport[3][0]= null
 	//Test Expected Output: expecteTextInPdf equals text read from pdf into resultTextInPdf, no exceptions thrown
-	void test_check_null_directory() {
+public void test_check_null_directory() {
 		String resultTextInPdf="";
 		String expectedTextInPdf = ("Quarterly Income Report By Supplier\r\n"
 				+ "Quarterly Order Report By Supplier\r\n"
