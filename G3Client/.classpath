@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="pdfbox"/>
 	<classpathentry kind="src" path="guidoc"/>
 	<classpathentry kind="src" path="controllers"/>
-	<classpathentry kind="src" path="unittests"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/liorfx">
 		<attributes>
 			<attribute name="module" value="true"/>
