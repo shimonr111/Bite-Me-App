@@ -9,6 +9,5 @@ BiteMe is a client-server desktop application written in Java, designed to strea
 - **Customer and Supplier Registration:** Seamlessly register and manage customer and supplier information.
 - **Reports:** Generate and view reports for better insights.
 - **Java FX UI:** User-friendly interface built with Java FX for an intuitive user experience.
+- **Database Integration:** BiteMe utilizes SQL and MySQL for robust data storage, ensuring secure and efficient handling of information.
 - **Unit Testing:** Ensure code reliability and correctness with included Java unit tests.
-
-
